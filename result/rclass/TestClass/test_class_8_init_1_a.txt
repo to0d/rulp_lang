@@ -1,0 +1,75 @@
+name=o1, lvl=1, ref=1/1, parent=class1, frame=4(subject-1), final=false, mbrs=4
+==========================================================================================================================
+Name                 : Access   Final    Static   Ref  Type       Value
+--------------------------------------------------------------------------------------------------------------------------
+?value               : DEFAULT  false    false    1    var        int:0
+get                  : DEFAULT  false    false    1    func       (get) : frame=subject-1, type=lambda
+init                 : DEFAULT  false    false    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
+                                                  1    func       (init) : frame=subject-1, type=lambda
+                                                  1    func       (init nil) : frame=subject-1, type=lambda
+                                                  1    func       (init nil nil) : frame=subject-1, type=lambda
+this                 : DEFAULT  false    false    1    instance   o1
+==========================================================================================================================
+
+name=class1, lvl=0, ref=1/1, parent=null, frame=3(subject-0), final=false, mbrs=3
+==========================================================================================================================
+Name                 : Access   Final    Static   Ref  Type       Value
+--------------------------------------------------------------------------------------------------------------------------
+?value               : DEFAULT  false    false    1    var        null
+get                  : DEFAULT  false    false    1    func       (get) : frame=main
+init                 : DEFAULT  false    false    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
+                                                  3    func       (init) : frame=main
+                                                  2    func       (init nil) : frame=main
+                                                  1    func       (init nil nil) : frame=main
+==========================================================================================================================
+
+name=o2, lvl=1, ref=1/1, parent=class1, frame=5(subject-2), final=false, mbrs=4
+==========================================================================================================================
+Name                 : Access   Final    Static   Ref  Type       Value
+--------------------------------------------------------------------------------------------------------------------------
+?value               : DEFAULT  false    false    1    var        int:1
+get                  : DEFAULT  false    false    1    func       (get) : frame=subject-2, type=lambda
+init                 : DEFAULT  false    false    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
+                                                  1    func       (init) : frame=subject-2, type=lambda
+                                                  1    func       (init nil) : frame=subject-2, type=lambda
+                                                  1    func       (init nil nil) : frame=subject-2, type=lambda
+this                 : DEFAULT  false    false    1    instance   o2
+==========================================================================================================================
+
+name=class1, lvl=0, ref=1/1, parent=null, frame=3(subject-0), final=false, mbrs=3
+==========================================================================================================================
+Name                 : Access   Final    Static   Ref  Type       Value
+--------------------------------------------------------------------------------------------------------------------------
+?value               : DEFAULT  false    false    1    var        null
+get                  : DEFAULT  false    false    1    func       (get) : frame=main
+init                 : DEFAULT  false    false    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
+                                                  3    func       (init) : frame=main
+                                                  2    func       (init nil) : frame=main
+                                                  1    func       (init nil nil) : frame=main
+==========================================================================================================================
+
+name=o3, lvl=1, ref=1/1, parent=class1, frame=6(subject-3), final=false, mbrs=4
+==========================================================================================================================
+Name                 : Access   Final    Static   Ref  Type       Value
+--------------------------------------------------------------------------------------------------------------------------
+?value               : DEFAULT  false    false    1    var        int:3
+get                  : DEFAULT  false    false    1    func       (get) : frame=subject-3, type=lambda
+init                 : DEFAULT  false    false    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
+                                                  1    func       (init) : frame=subject-3, type=lambda
+                                                  1    func       (init nil) : frame=subject-3, type=lambda
+                                                  1    func       (init nil nil) : frame=subject-3, type=lambda
+this                 : DEFAULT  false    false    1    instance   o3
+==========================================================================================================================
+
+name=class1, lvl=0, ref=1/1, parent=null, frame=3(subject-0), final=false, mbrs=3
+==========================================================================================================================
+Name                 : Access   Final    Static   Ref  Type       Value
+--------------------------------------------------------------------------------------------------------------------------
+?value               : DEFAULT  false    false    1    var        null
+get                  : DEFAULT  false    false    1    func       (get) : frame=main
+init                 : DEFAULT  false    false    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
+                                                  3    func       (init) : frame=main
+                                                  2    func       (init nil) : frame=main
+                                                  1    func       (init nil nil) : frame=main
+==========================================================================================================================
+

@@ -1,0 +1,96 @@
+Global Info:
+
+Total runtime info:
+==========================================================================================================================
+                          Name:     info
+--------------------------------------------------------------------------------------------------------------------------
+     Interpreter call id/level:       45        0
+             CPS support/count:    false        0
+               Frame max level:        4
+                  Frame max id:        6
+           Frame free id count:        1
+==========================================================================================================================
+
+Expression compute count:
+==========================================================================================================================
+     RType:    Count
+--------------------------------------------------------------------------------------------------------------------------
+    factor:       60
+      func:       18
+==========================================================================================================================
+
+Callable stats info: callId=45, row=17, column=46(1), value-max=1, value-unit=1^x
+==========================================================================================================================
+   Frame    RType  Count  Ref Object                         .111111111111111111111111113132333233323332333 max=4, unit=2^x
+--------------------------------------------------------------------------------------------------------------------------
+    root   factor     14    0 defun                                  1111111111 11  1 1                    
+    root   factor     13    0 return                                                      1 111 111 111 111
+  system   member      8    0 set::_set_has                                                  11  11  11  11
+    main   member      8    0 set1::has                                                      11  11  11  11
+    root   factor      6    0 alias                           111111                                       
+  system   member      5    0 set::_set_size_of                                           1 1   1   1   1  
+    main   member      5    0 set1::size-of                                               1 1   1   1   1  
+  system   member      4    0 set::_set_add                                                1   1   1   1   
+    main   member      4    0 set1::add                                                    1   1   1   1   
+    root   factor      4    0 defclass                                            11 1 1                   
+    root   factor      1    0 setq                                                      1                  
+  system   member      1    0 set::_set_init                                            1                  
+    main   member      1    0 set1::init                                                1                  
+    root   factor      1    0 new                                                       1                  
+    root   factor      1    0 name-of                                                    1                 
+    root   factor      1    0 defvar                                1                                      
+    root   factor      1    0 defmacro                                         1                           
+==========================================================================================================================
+
+Object create count:
+==========================================================================================================================
+       RType:       Create       Delete
+--------------------------------------------------------------------------------------------------------------------------
+        atom:          374            0
+      string:           22            0
+        list:            3            0
+        expr:          220            0
+         var:           27           12
+        func:           34            0
+       macro:            1            0
+    instance:            2            0
+       class:            4            0
+      member:           65            0
+       frame:           20           18
+ interpreter:            1            0
+  frameEntry:          172            0
+      lambda:            4            0
+==========================================================================================================================
+
+Global frame list: total=2
+
+id=2, name=main, lvl=2, ref=1/1, pid=1(system), entry=4, subject=main, thread=null
+==========================================================================================================================
+Name(alias)          : EntryId  FrameId  Ref  Type       Value               
+--------------------------------------------------------------------------------------------------------------------------
+root                 : 1        2        0    frame      root                
+system               : 2        2        0    frame      system              
+main                 : 3        2        1    frame      main                
+set1                 : 5        2        1    instance   set1                
+==========================================================================================================================
+
+
+id=3, name=subject-0, lvl=2, ref=2/2, pid=1(system), entry=0, subject=set, thread=null
+
+id=4, name=subject-1, lvl=3, ref=5/6, pid=3(subject-0), entry=0, subject=set1, thread=null
+
+Global Subject list:
+
+name=set1, lvl=1, ref=1/1, parent=set, frame=4(subject-1), final=false, mbrs=6
+==========================================================================================================================
+Name                 : Access   Final    Static   Ref  Type       Value
+--------------------------------------------------------------------------------------------------------------------------
+?impl                : PRIVATE  false    false    1    var        instance:null
+add                  : DEFAULT  true     false    1    func       (add nil) : frame=subject-1, type=lambda
+has                  : DEFAULT  true     false    1    func       (has nil) : frame=subject-1, type=lambda
+init                 : DEFAULT  true     false    1    func       (init) : frame=subject-1, type=lambda
+size-of              : DEFAULT  true     false    1    func       (size-of) : frame=subject-1, type=lambda
+this                 : DEFAULT  false    false    1    instance   set1
+==========================================================================================================================
+
+

@@ -1,0 +1,19 @@
+(defclass class1 (set))
+;err:
+Can't inherit final class: set
+at main: (defclass class1 (set))
+;eof
+
+(defvar set::?v2 0)
+;err:
+can't define member<set::?v2> for final subject: set
+at main: (defvar set::?v2 0)
+;eof
+
+
+(defun set::fun () ())
+;err:
+can't define member<fun> for final subject: set
+at main: (defun set::fun () ())
+;eof
+

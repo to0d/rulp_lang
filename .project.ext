@@ -1,0 +1,14 @@
++++
+date = "2019-05-28"
+!outline = "en_1"
+!outline_level = 3
+!top = ""
+!mark = ""
+tags = [
+    "$RULP"
+]
+!template = md2.template
+domain = "RULP"
++++
+
+- $RULP (name=Rule-based Lisp Processer, ptag=Project, Lisp Style Rule Reason Language ) @TAG(Term, Lisp, $RULE, My)

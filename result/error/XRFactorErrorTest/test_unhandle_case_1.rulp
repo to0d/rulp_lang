@@ -1,0 +1,12 @@
+(try (error e1 "msg1") (e2 (print e2)))
+;err:
+error: e1, msg1
+at TRY: (error e1 "msg1")
+at main: (try (error e1 "msg1") (e2 (print e2)))
+;eof
+
+(try (try (error e1 "msg1") (e2 (print e2))) (?e (print ?e)))
+;=>nil
+;out:
+error: e1, msg1
+;eof

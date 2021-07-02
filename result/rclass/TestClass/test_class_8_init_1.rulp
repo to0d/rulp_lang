@@ -1,0 +1,44 @@
+(defclass class1 ()
+    (defvar ?value)
+    (defun init () (setq ?value 0))
+    (defun init (?x) (setq ?value ?x))
+    (defun init (?x ?y) (setq ?value (+ ?x ?y)))
+    (defun get () (return ?value))
+)
+;=>class1
+(rulp-object-count frame)
+;=>0
+(rulp-object-count instance)
+;=>0
+(new class1 o1)
+;=>o1
+(o1::get)
+;=>0
+(new class1 o2 '(1))
+;=>o2
+(o2::get)
+;=>1
+(new class1 o3 '(1 2))
+;=>o3
+(o3::get)
+;=>3
+(out-to-file "result/rclass/TestClass/test_class_8_init_1_a.txt" 
+    (do
+        (print-subject o1 -1)
+        (print-subject o2 -1)
+        (print-subject o3 -1)
+    )
+)
+;=>nil
+(rulp-object-count frame)
+;=>4
+(rulp-object-count instance)
+;=>3
+(delete o1)
+(delete o2)
+(delete o3)
+;=>nil nil nil
+(rulp-object-count frame)
+;=>1
+(rulp-object-count instance)
+;=>0

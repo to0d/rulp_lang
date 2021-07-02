@@ -1,0 +1,13 @@
+(defun fun1 (?v) (return (+ ?v 1)))
+;=>fun1
+(name-of fun1)
+;=>"(fun1 nil)"
+(fun1 1)
+;=>2
+(do
+    (defun fun1 (?v) (return (+ ?v 2)))    
+    (out-to-file "result/factor/XRFactorDefunTest/test_fun_3_overload_cross_frame_1_override_a.txt" (print-subject 2))
+    (fun1 1)
+)
+;=>3
+

@@ -1,0 +1,7 @@
+TYPE:PROJECT
+NAME:RULP_BASE
+LIBP:irulp_base
+VERS:0.0.1
+# Projects
+DEPP:CHAR
+# Libraries

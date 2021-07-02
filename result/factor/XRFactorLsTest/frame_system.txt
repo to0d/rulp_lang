@@ -1,0 +1,37 @@
+id=1, name=system, lvl=1, ref=0/0, pid=0(root), entry=19, subject=system, thread=null
+==========================================================================================================================
+Name(alias)          : EntryId  FrameId  Ref  Type       Value               
+--------------------------------------------------------------------------------------------------------------------------
+parent               : -156     1        0    frame      root                
+type#socket          : -148     1        0    atom       type#socket         
+socket               : -147     1        1    class      socket              
+type#map             : -146     1        0    atom       type#map            
+map                  : -145     1        1    class      map                 
+type#set             : -144     1        0    atom       type#set            
+set                  : -143     1        1    class      set                 
+type#namespace       : -142     1        0    atom       type#namespace      
+namespace            : -141     1        1    class      namespace           
+ls-print             : -140     1        1    funcList   '((ls-print nil nil) (ls-print nil)) : frame=null, type=list
+                                         1    func       (ls-print nil nil) : frame=system
+                                         1    func       (ls-print nil) : frame=system
+print-list           : -139     1        1    macro      print-list          
+get                  : -138     1        1    funcList   '((get array int int) (get array int) (get list int)) : frame=null, type=list
+                                         1    func       (get list int) : frame=system
+                                         1    func       (get array int) : frame=system
+                                         1    func       (get array int int) : frame=system
+cmp                  : -137     1        1    func       (cmp nil nil) : frame=system
+equal                : -136     1        1    funcList   '((equal nil nil) (equal string string)) : frame=null, type=list
+                                         1    func       (equal nil nil) : frame=system
+                                         1    func       (equal string string) : frame=system
+length-of            : -135     1        1    func       (length-of string) : frame=system
+size-of              : -134     1        1    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#map) (size-of type#set)) : frame=null, type=list
+                                         1    func       (size-of list) : frame=system
+                                         1    func       (size-of array) : frame=system
+                                         1    func       (size-of array int) : frame=system
+                                         1    func       (size-of type#set) : frame=system
+                                         1    func       (size-of type#map) : frame=system
+?load-paths          : -133     1        1    var        list:'()            
+system               : -3       1        0    frame      system              
+root                 : -2       1        0    frame      root                
+==========================================================================================================================
+

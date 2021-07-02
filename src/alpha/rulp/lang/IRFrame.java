@@ -1,0 +1,49 @@
+/* Copyright Prolog                                  */
+/*                                                   */
+/* RULP(Run a Lisp Processer) on Java                */
+/* 													 */
+/* Copyright (C) 2020 Todd (to0d@outlook.com)        */
+/* This program comes with ABSOLUTELY NO WARRANTY;   */
+/* This is free software, and you are welcome to     */
+/* redistribute it under certain conditions.         */
+
+package alpha.rulp.lang;
+
+import java.util.List;
+
+import alpha.rulp.runtime.IRThreadContext;
+
+public interface IRFrame extends IRObject, IRSubject {
+
+	public IRVar addVar(String name) throws RException;
+
+	public IRFrameEntry createFrameEntry(String name, IRObject object);
+
+	public IRFrameEntry getEntry(String name) throws RException;
+
+	public int getFrameId();
+
+	public String getFrameName();
+
+	public IRObject getObject(String name) throws RException;
+
+	public IRFrame getParentFrame();
+
+	public IRSubject getSubject();
+
+	public IRThreadContext getThreadContext();
+
+	public List<IRFrameEntry> listEntries();
+
+	public void release() throws RException;
+
+	public IRFrameEntry removeEntry(String name) throws RException;
+
+	public void setEntry(String name, IRObject obj) throws RException;
+
+	public void setEntryAliasName(IRFrameEntry entry, String aliasName) throws RException;
+
+	public void setThreadContext(IRThreadContext context);
+
+	public void addFrameReleaseListener(IRListener<IRFrame> listener);
+}

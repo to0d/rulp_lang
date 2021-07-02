@@ -1,0 +1,41 @@
+(defclass class1 ()
+    (defvar ?v1 0)
+    (defvar ?v2 0 static)
+)
+;=>class1
+
+(new class1 o1)
+;=>o1
+
+(value-of o1::?v1)
+;=>0
+
+(value-of o1::?v2)
+;=>0
+
+(setq class1::?v1 1)
+;=>&?v1
+
+(setq class1::?v2 2)
+;=>&?v2
+
+(value-of o1::?v1)
+;=>0
+
+(value-of o1::?v2)
+;=>2
+
+(ls-print class1)
+;=>nil
+;out:
+mbr=?v1, name=?v1, type=var, property='(default), value="1"
+mbr=?v2, name=?v2, type=var, property='(default static), value="2"
+;eof
+
+(ls-print o1)
+;=>nil
+;out:
+mbr=?v1, name=?v1, type=var, property='(default), value="0"
+mbr=?v2, name=?v2, type=var, property='(default static), value="2"
+mbr=this, name=o1, type=instance, property='(default), instance-class=class1
+;eof

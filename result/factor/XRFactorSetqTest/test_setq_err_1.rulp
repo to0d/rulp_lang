@@ -1,0 +1,11 @@
+(setq x 10)
+;err:
+var not found: x
+at main: (setq x 10)
+;eof
+
+(setq x)
+;err:
+Invalid parameters: (setq x)
+at main: (setq x)
+;eof

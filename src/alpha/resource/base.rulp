@@ -1,0 +1,132 @@
+(alias int INTEGER)
+(alias float FLOAT)
+(alias bool BOOL)
+(alias string STRING)
+(alias list LIST)
+(alias expr EXPRESSION)
+
+(defvar ?load-paths '())
+
+(defun size-of ((?l list)) (return (size-of-list ?l)))
+(defun size-of ((?arr array)) (return (size-of-array ?arr)))
+(defun size-of ((?arr array) (?dim int)) (return (size-of-array ?arr ?dim)))
+
+(defun length-of ((?l string)) (return (str-length ?l)))
+
+(defun equal (?l ?2) (return (equal_def ?l ?2)))
+(defun equal ((?l string) (?2 string)) (return (str-equal ?l ?2)))
+
+(defun cmp (?l ?2) (return (cmp_def ?l ?2)))
+
+(defun get ((?l list) (?i int)) (return (get-of-list ?l ?i)))
+(defun get ((?arr array) (?i1 int)) (return (get-of-array ?arr ?i1)))
+(defun get ((?arr array) (?i1 int) (?i2 int)) (return (get-of-array ?arr ?i1 ?i2)))
+
+(defmacro print-list (?list) 
+    (loop for ?e in ?list do 
+        (print ?e "\n")
+    )
+)
+
+(defun ls-print (?subject ?type) 
+    (if (equal ?subject local)
+    
+        (ls-print (value-of (:: (value-of local::parent) parent)) ?type)
+        
+        (loop for ?mbr in (ls ?subject) do 
+            (if (and (not (equal ?type nil)) 
+                     (not (equal ?type (type-of $(value-of (value-of ?mbr))))))
+                (continue)
+            )
+        
+            (print "mbr=" (name-of $(value-of ?mbr))
+            )
+            
+            (if (not (access $(value-of ?mbr)))
+                (do
+                    (print ", access deny\n")
+                    (continue)
+                )
+            )                
+            
+            (print ", name=" (name-of $(value-of (value-of ?mbr)))
+                   ", type=" (type-of $(value-of (value-of ?mbr)))
+                   ", property=" (property-of $(value-of ?mbr))
+            )
+            
+            (if (equal (type-of $(value-of (value-of ?mbr))) class)
+                (print ", class-property=" (property-of $(value-of (value-of ?mbr)))))
+            
+            (if (equal (type-of $(value-of (value-of ?mbr))) instance)
+                (print ", instance-class=" (class-of $(value-of (value-of ?mbr)))))
+            
+            (if (equal (type-of $(value-of (value-of ?mbr))) var)
+                (print ", value=\"" $(value-of (value-of ?mbr)) "\""))
+            
+            (print "\n")
+        )
+    )
+)
+
+(defun ls-print (?subject)
+    (ls-print ?subject nil)
+)
+
+
+(defclass namespace ())
+
+(defclass set () final
+    
+    (defvar ?impl nil private)
+    
+    (defun init ()
+        (setq ?impl (set::_set_init)) final)
+    
+    (defun add (?v)
+        (set::_set_add ?impl ?v) final)
+    
+    (defun has (?v)
+        (return (set::_set_has ?impl ?v)) final)
+    
+    (defun size-of ()
+        (return (set::_set_size_of ?impl)) final)
+)
+
+(defun size-of ((?set set)) (return (?set::size-of)))
+
+(defclass map () final
+    
+    (defvar ?impl nil private)
+    
+    (defun init ()
+        (setq ?impl (map::_map_init)) final)
+    
+    (defun put (?k ?v)
+        (map::_map_put ?impl ?k ?v) final)
+    
+    (defun get (?k)
+        (return (map::_map_get ?impl ?k)) final)
+    
+    (defun size-of ()
+        (return (map::_map_size_of ?impl)) final)
+)
+
+(defun size-of ((?map map)) (return (?map::size-of)))
+
+
+(defclass socket () final
+
+    (defvar ?impl nil private)
+    
+    (defun init (?addr ?port)
+        (setq ?impl (socket::_socket_init ?addr ?port)) final)
+        
+    (defun open ()
+        (socket::_socket_open ?impl) final)        
+   
+    (defun close ()
+        (socket::_socket_close ?impl) final)   
+
+    (defun write (?val)
+        (socket::_socket_write ?impl ?val) final)
+)
