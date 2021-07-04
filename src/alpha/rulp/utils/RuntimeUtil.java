@@ -72,9 +72,9 @@ public final class RuntimeUtil {
 
 	private static void _checkObject(IRObject obj) throws RException {
 
-		if (obj == null) {
-			System.out.println();
-		}
+//		if (obj == null) {
+//			System.out.println();
+//		}
 
 		/***************************************************/
 		// Check object ref
