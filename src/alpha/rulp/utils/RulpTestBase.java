@@ -285,6 +285,9 @@ public class RulpTestBase {
 					}
 
 					if (output == null) {
+						if (exception != null) {
+							exception.printStackTrace();
+						}
 						fail(String.format("no output found, line=%d, input=%s, expect=%s", index, input, output));
 					}
 
