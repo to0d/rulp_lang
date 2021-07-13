@@ -35,6 +35,17 @@ public class FileUtil {
 		return filePreName;
 	}
 
+	public static String getFileSubffix(String fileName) {
+
+		String fileSubffix = null;
+		int pos = fileName.lastIndexOf('.');
+		if (pos != -1) {
+			fileSubffix = fileName.substring(pos + 1).trim();
+		}
+
+		return fileSubffix;
+	}
+
 	public static boolean isAbsPath(String path) {
 
 		if (path == null) {
