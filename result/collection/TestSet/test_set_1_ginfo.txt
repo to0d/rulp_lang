@@ -50,19 +50,19 @@ Object create count:
       string:           22            0
         list:            3            0
         expr:          220            0
-         var:           27           12
+         var:           27           14
         func:           34            0
        macro:            1            0
     instance:            2            0
        class:            4            0
       member:           65            0
-       frame:           20           18
+       frame:           20           22
  interpreter:            1            0
-  frameEntry:          172            0
+  frameEntry:          173            0
       lambda:            4            0
 ==========================================================================================================================
 
-Global frame list: total=2
+Global frame list: total=0
 
 id=2, name=main, lvl=2, ref=1/1, pid=1(system), entry=4, subject=main, thread=null
 ==========================================================================================================================
@@ -74,10 +74,6 @@ main                 : 3        2        1    frame      main
 set1                 : 5        2        1    instance   set1                
 ==========================================================================================================================
 
-
-id=3, name=subject-0, lvl=2, ref=2/2, pid=1(system), entry=0, subject=set, thread=null
-
-id=4, name=subject-1, lvl=3, ref=5/6, pid=3(subject-0), entry=0, subject=set1, thread=null
 
 Global Subject list:
 

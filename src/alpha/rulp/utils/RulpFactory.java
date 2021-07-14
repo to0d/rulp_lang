@@ -83,6 +83,7 @@ import alpha.rulp.ximpl.factor.XRFactorArithmetic.ArithmeticType;
 import alpha.rulp.ximpl.factor.XRFactorBoolAnd;
 import alpha.rulp.ximpl.factor.XRFactorBoolNot;
 import alpha.rulp.ximpl.factor.XRFactorBoolOr;
+import alpha.rulp.ximpl.factor.XRFactorCanCast;
 import alpha.rulp.ximpl.factor.XRFactorCompare;
 import alpha.rulp.ximpl.factor.XRFactorComparison;
 import alpha.rulp.ximpl.factor.XRFactorComparison.ComparisonType;
@@ -623,6 +624,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_LE, ComparisonType.SmallerOrEqual));// <=
 
 		RulpUtil.addFrameObject(rootFrame, new XRFactorCompare(F_CMP_DEF));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorCanCast(F_CAN_CAST));
 
 		// Macro & Function
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefmacro(F_DEFMACRO));
@@ -929,9 +931,9 @@ public final class RulpFactory {
 			if (globalFramePool2.get(pool2Index) == null) {
 				throw new RException("Frame id not found: " + frameId);
 			}
-			
+
 			globalFramePool2.set(pool2Index, null);
-		
+
 		}
 
 		globalFreeFrameIdList.push(frameId);

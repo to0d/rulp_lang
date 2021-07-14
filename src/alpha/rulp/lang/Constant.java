@@ -139,6 +139,8 @@ public interface Constant {
 
 	String F_BREAK = "break";
 
+	String F_CAN_CAST = "can-cast";
+
 	String F_CLASS_OF = "class-of";
 
 	String F_CMP = "cmp";
@@ -181,9 +183,9 @@ public interface Constant {
 
 	String F_FOREACH = "foreach";
 
-	String F_GET_OF_LIST = "get-of-list";
-
 	String F_GET_OF_ARRAY = "get-of-array";
+
+	String F_GET_OF_LIST = "get-of-list";
 
 	String F_IF = "if";
 
@@ -267,9 +269,9 @@ public interface Constant {
 
 	String F_SETQ = "setq";
 
-	String F_SIZE_OF_LIST = "size-of-list";
-	
 	String F_SIZE_OF_ARRAY = "size-of-array";
+
+	String F_SIZE_OF_LIST = "size-of-list";
 
 	String F_SORT = "sort";
 
