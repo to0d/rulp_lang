@@ -434,15 +434,16 @@ public class TraceUtil {
 		/***********************************************/
 		sb.append("Object create count:\n");
 		sb.append(SEP_LINE1);
-		sb.append(String.format("%12s: %12s %12s\n", "RType", "Create", "Delete"));
+		sb.append(String.format("%12s: %12s %12s %12s\n", "RType", "Create", "Delete", "Exist"));
 		sb.append(SEP_LINE2);
 		for (RType t : RType.ALL_RTYPE) {
 			int createCount = RulpFactory.getObjectCreateCount(t);
 			if (createCount == 0) {
 				continue;
 			}
-			sb.append(String.format("%12s: %12d %12d\n", _toTypeString(t), createCount,
-					RulpFactory.getObjectDeleteCount(t)));
+
+			int deleteCount = RulpFactory.getObjectDeleteCount(t);
+			sb.append(String.format("%12s: %12d %12d %12d\n", _toTypeString(t), createCount, deleteCount, createCount -deleteCount));
 		}
 
 		sb.append(String.format("%12s: %12d %12d\n", "interpreter", RulpFactory.getInterpreterCount(), 0));

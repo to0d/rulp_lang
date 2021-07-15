@@ -46,19 +46,19 @@ Callable stats info: callId=48, row=18, column=49(1), value-max=1, value-unit=1^
 
 Object create count:
 ==========================================================================================================================
-       RType:       Create       Delete
+       RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          416            0
-      string:           20            0
-        list:            7            0
-        expr:          230            0
-         var:           19            4
-        func:           38            4
-       macro:            1            0
-    instance:            1            1
-       class:            5            0
-      member:           60            0
-       frame:           10            9
+        atom:          416            0          416
+      string:           20            0           20
+        list:            7            0            7
+        expr:          230            0          230
+         var:           19            4           15
+        func:           38            4           34
+       macro:            1            0            1
+    instance:            1            1            0
+       class:            5            0            5
+      member:           60            0           60
+       frame:           10            9            1
  interpreter:            1            0
   frameEntry:          166            0
       lambda:            4            0
