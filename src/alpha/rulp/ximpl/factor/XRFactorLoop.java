@@ -124,10 +124,9 @@ public class XRFactorLoop extends AbsRFactorAdapter implements IRFactor {
 		}
 
 		IRFrame loopFrame = RulpFactory.createFrame(frame, "LOOP");
+		RulpUtil.incRef(loopFrame);
 
 		try {
-
-			RulpUtil.incRef(loopFrame);
 
 			if (RulpUtil.isAtom(args.get(1), F_FOR)) {
 
