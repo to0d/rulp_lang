@@ -91,6 +91,7 @@ root::print-subject
 root::private
 root::property-of
 root::public
+root::random
 root::ref
 root::remove
 root::return

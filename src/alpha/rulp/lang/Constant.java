@@ -150,6 +150,8 @@ public interface Constant {
 	String F_CONTINUE = "continue";
 
 	String F_DATE = "date";
+	
+	String F_RANDOM = "random";
 
 	String F_DEFCLASS = "defclass";
 

@@ -1,17 +1,18 @@
-id=0, name=root, lvl=0, ref=0/0, pid=-1(null), entry=138, subject=root, thread=null
+id=0, name=root, lvl=0, ref=0/0, pid=-1(null), entry=139, subject=root, thread=null
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?os.version          : -156     0        1    var        string:10.0         
-?os.name             : -155     0        1    var        string:Windows 10   
-?path.separator      : -154     0        1    var        string:;            
-?file.separator      : -153     0        1    var        string:\            
-?user.dir            : -152     0        1    var        string:C:\data\itool\irulp_base
-?user.name           : -151     0        1    var        string:921511672    
-?user.home           : -150     0        1    var        string:C:\Users\YANLIU
-rulp-object-count    : -133     0        0    factor     rulp-object-count   
-sys-time             : -132     0        0    factor     sys-time            
-sys-gc               : -131     0        0    factor     sys-gc              
+?os.version          : -157     0        1    var        string:10.0         
+?os.name             : -156     0        1    var        string:Windows 10   
+?path.separator      : -155     0        1    var        string:;            
+?file.separator      : -154     0        1    var        string:\            
+?user.dir            : -153     0        1    var        string:C:\data\itool\irulp_base
+?user.name           : -152     0        1    var        string:921511672    
+?user.home           : -151     0        1    var        string:C:\Users\YANLIU
+rulp-object-count    : -134     0        0    factor     rulp-object-count   
+sys-time             : -133     0        0    factor     sys-time            
+sys-gc               : -132     0        0    factor     sys-gc              
+random               : -131     0        0    factor     random              
 date                 : -130     0        0    factor     date                
 do-p                 : -129     0        0    factor     do-p                
 sleep                : -128     0        0    factor     sleep               

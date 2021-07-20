@@ -129,6 +129,7 @@ import alpha.rulp.ximpl.lang.XRMacro;
 import alpha.rulp.ximpl.lang.XRNative;
 import alpha.rulp.ximpl.lang.XRString;
 import alpha.rulp.ximpl.lang.XRVar;
+import alpha.rulp.ximpl.math.XRFactorRandom;
 import alpha.rulp.ximpl.network.XRSocket;
 import alpha.rulp.ximpl.optimize.XRFactorMakeCPS;
 import alpha.rulp.ximpl.rclass.XRDefClass;
@@ -668,6 +669,9 @@ public final class RulpFactory {
 
 		// Time
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDate(F_DATE));
+
+		// Math
+		RulpUtil.addFrameObject(rootFrame, new XRFactorRandom(F_RANDOM));
 
 		// System
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemGC(F_SYS_GC));
