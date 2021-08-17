@@ -114,6 +114,7 @@ root::str-index-of
 root::str-last-index-of
 root::str-length
 root::str-match
+root::str-split
 root::str-start-with
 root::str-substr
 root::str-trim
