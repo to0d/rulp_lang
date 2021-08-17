@@ -79,11 +79,6 @@ public class XRFunctionLambda extends AbsRefCallableAdapter implements IRFunctio
 	}
 
 	@Override
-	public String getDescription() {
-		return null;
-	}
-
-	@Override
 	public IRExpr getFunBody() {
 		return func.getFunBody();
 	}

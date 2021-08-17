@@ -3,8 +3,8 @@ id=3, name=DO, lvl=3, ref=1/1, pid=2(main), entry=1, subject=DO, thread=null
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
 fun1                 : 6        3        1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
-                                         2    func       (fun1 nil nil) : frame=main, des=rf2
-                                         1    func       (fun1 nil) : frame=DO, des=mf1
+                                         2    func       (fun1 nil nil) : frame=main
+                                         1    func       (fun1 nil) : frame=DO
 ==========================================================================================================================
 
 id=2, name=main, lvl=2, ref=2/2, pid=1(system), entry=4, subject=main, thread=null
@@ -15,7 +15,7 @@ root                 : 1        2        0    frame      root
 system               : 2        2        0    frame      system              
 main                 : 3        2        2    frame      main                
 fun1                 : 4        2        1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
-                                         1    func       (fun1 nil) : frame=main, des=rf1
-                                         2    func       (fun1 nil nil) : frame=main, des=rf2
+                                         1    func       (fun1 nil) : frame=main
+                                         2    func       (fun1 nil nil) : frame=main
 ==========================================================================================================================
 

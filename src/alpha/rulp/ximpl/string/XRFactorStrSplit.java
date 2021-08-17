@@ -12,7 +12,6 @@ package alpha.rulp.ximpl.string;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
-import alpha.rulp.lang.IRString;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;

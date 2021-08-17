@@ -36,8 +36,6 @@ public class XRFunction extends AbsRefCallableAdapter implements IRFunction {
 
 	protected IRFrame defineFrame;
 
-	protected String description;
-
 	protected IRExpr funBody;
 
 	protected Boolean isStable = null;
@@ -50,15 +48,13 @@ public class XRFunction extends AbsRefCallableAdapter implements IRFunction {
 
 	protected String signature;
 
-	public XRFunction(IRFrame defineFrame, String name, List<IRParaAttr> paraAttrList, IRExpr funBody,
-			String description) {
+	public XRFunction(IRFrame defineFrame, String name, List<IRParaAttr> paraAttrList, IRExpr funBody) {
 
 		this.defineFrame = defineFrame;
 		this.name = name;
 		this.paraAttrList = new ArrayList<>(paraAttrList);
 		this.paraCount = paraAttrList.size();
 		this.funBody = funBody;
-		this.description = description;
 	}
 
 	protected void _matchTypeList(IRList args) throws RException {
@@ -146,11 +142,6 @@ public class XRFunction extends AbsRefCallableAdapter implements IRFunction {
 	@Override
 	public IRFrame getDefineFrame() {
 		return defineFrame;
-	}
-
-	@Override
-	public String getDescription() {
-		return description;
 	}
 
 	@Override

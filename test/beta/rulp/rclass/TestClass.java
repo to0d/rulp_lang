@@ -133,4 +133,10 @@ public class TestClass extends RulpTestBase {
 		_test_script("result/rclass/TestClass/test_class_9_delete_2.rulp");
 		_gInfo("result/rclass/TestClass/test_class_9_delete_2_ginfo.txt");
 	}
+	
+	@Test
+	public void test_class_a_extend_body() {
+		_setup();
+		_test_script("result/rclass/TestClass/test_class_a_extend_body.rulp");
+	}
 }

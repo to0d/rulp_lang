@@ -16,6 +16,7 @@ import static alpha.rulp.lang.Constant.S_QUESTION_C;
 import static alpha.rulp.lang.Constant.T_Instance;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -409,11 +410,20 @@ public class RulpUtil {
 		return sb.toString();
 	}
 
-	public static void addAll(List<IRObject> l1, IRList l2) throws RException {
-
-		IRIterator<? extends IRObject> it = l2.iterator();
+	public static void addAll(Collection<IRObject> l1, IRIterator<? extends IRObject> it) throws RException {
 		while (it.hasNext()) {
 			l1.add(it.next());
+		}
+	}
+
+	public static void addAll(Collection<IRObject> l1, IRList l2) throws RException {
+		addAll(l1, l2.iterator());
+	}
+
+	public static void addAll(Collection<IRObject> l1, IRList l2, int begin, int end) throws RException {
+
+		for (int i = begin; i < end; ++i) {
+			l1.add(l2.get(i));
 		}
 	}
 

@@ -43,7 +43,7 @@ public class XRFactorComparison extends AbsRFactorAdapter implements IRFactor {
 
 		RType rt = MathUtil.getConvertType(at, bt);
 		if (rt == null) {
-			throw new RException(String.format("Invalid op types: %s %s", a.toString(), b.toString()));
+			throw new RException(String.format("Invalid op types: %s %s %s", op, a.toString(), b.toString()));
 		}
 
 		switch (rt) {

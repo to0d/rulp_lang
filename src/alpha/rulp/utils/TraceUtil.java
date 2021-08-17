@@ -66,10 +66,6 @@ public class TraceUtil {
 			IRFunction func = RulpUtil.asFunction(obj);
 			String out = func.getSignature() + " : frame=" + func.getDefineFrame();
 
-			if (func.getDescription() != null) {
-				out += ", des=" + func.getDescription();
-			}
-
 			if (func.isList()) {
 				out += ", type=list";
 			}
@@ -443,7 +439,8 @@ public class TraceUtil {
 			}
 
 			int deleteCount = RulpFactory.getObjectDeleteCount(t);
-			sb.append(String.format("%12s: %12d %12d %12d\n", _toTypeString(t), createCount, deleteCount, createCount -deleteCount));
+			sb.append(String.format("%12s: %12d %12d %12d\n", _toTypeString(t), createCount, deleteCount,
+					createCount - deleteCount));
 		}
 
 		sb.append(String.format("%12s: %12d %12d\n", "interpreter", RulpFactory.getInterpreterCount(), 0));

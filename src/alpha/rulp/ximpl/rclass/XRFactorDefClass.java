@@ -16,9 +16,11 @@ import static alpha.rulp.lang.Constant.A_PUBLIC;
 import static alpha.rulp.lang.Constant.A_STATIC;
 import static alpha.rulp.lang.Constant.F_DEFUN;
 import static alpha.rulp.lang.Constant.F_DEFVAR;
+import static alpha.rulp.lang.Constant.F_DO;
 import static alpha.rulp.lang.Constant.F_MBR_SUPER;
 import static alpha.rulp.lang.Constant.O_Nil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import alpha.rulp.lang.IRAtom;
@@ -52,8 +54,6 @@ public class XRFactorDefClass extends AbsRFactorAdapter implements IRFactor {
 
 		IRMember mbr = null;
 
-		int mbrExprSize = mbrExpr.size();
-
 		/*****************************************************/
 		// Function parameter list
 		/*****************************************************/
@@ -62,19 +62,31 @@ public class XRFactorDefClass extends AbsRFactorAdapter implements IRFactor {
 		/*****************************************************/
 		// Function body
 		/*****************************************************/
-		IRExpr funBody = RulpUtil.asExpression(mbrExpr.get(3));
-
-		/*****************************************************/
-		// Function Description
-		/*****************************************************/
-		String funDescription = null;
-		if (mbrExprSize > 4) {
-			if (mbrExpr.get(mbrExprSize - 1).getType() == RType.STRING) {
-				funDescription = RulpUtil.asString(mbrExpr.get(mbrExprSize - 1)).asString();
-				mbrExprSize--;
-			}
+		int mbrExprSize = mbrExpr.size();
+		int bodyEndIndex = 3;
+		while (bodyEndIndex < mbrExprSize && mbrExpr.get(bodyEndIndex).getType() == RType.EXPR) {
+			++bodyEndIndex;
 		}
 
+		IRExpr funBody = null;
+		if (bodyEndIndex <= 3) {
+			throw new RException("no mbr body found: " + mbrExpr);
+
+		} else if (bodyEndIndex == 4) {
+			funBody = RulpUtil.asExpression(mbrExpr.get(3));
+
+		} else {
+
+			ArrayList<IRObject> newExpr = new ArrayList<>();
+			newExpr.add(RulpFactory.createAtom(F_DO));
+			RulpUtil.addAll(newExpr, mbrExpr, 3, bodyEndIndex);
+
+			funBody = RulpFactory.createExpression(newExpr);
+		}
+
+		/*****************************************************/
+		// Member
+		/*****************************************************/
 		IRMember oldMbr = sub.getMember(mbrName);
 		if (oldMbr != null) {
 
@@ -97,7 +109,7 @@ public class XRFactorDefClass extends AbsRFactorAdapter implements IRFactor {
 			}
 		}
 
-		IRFunction newFunc = RulpFactory.createFunction(frame, mbrName, paraAttrs, funBody, funDescription);
+		IRFunction newFunc = RulpFactory.createFunction(frame, mbrName, paraAttrs, funBody);
 		if (oldMbr != null) {
 
 			IRFunction oldFunc = (IRFunction) oldMbr.getValue();
@@ -138,7 +150,7 @@ public class XRFactorDefClass extends AbsRFactorAdapter implements IRFactor {
 		/*****************************************************/
 		// Process modifier
 		/*****************************************************/
-		processModifier(mbr, mbrExpr, 4, mbrExprSize - 1);
+		processModifier(mbr, mbrExpr, bodyEndIndex, mbrExprSize);
 
 		sub.setMember(mbrName, mbr);
 
@@ -164,7 +176,7 @@ public class XRFactorDefClass extends AbsRFactorAdapter implements IRFactor {
 		/*****************************************************/
 		// Process modifier
 		/*****************************************************/
-		processModifier(mbr, mbrExpr, 3, mbrExprSize - 1);
+		processModifier(mbr, mbrExpr, 3, mbrExprSize);
 
 		sub.setMember(mbrName, mbr);
 	}
@@ -175,7 +187,7 @@ public class XRFactorDefClass extends AbsRFactorAdapter implements IRFactor {
 		boolean bFinal = false;
 		boolean bStatic = false;
 
-		for (int i = fromIdx; i <= endIdx; ++i) {
+		for (int i = fromIdx; i < endIdx; ++i) {
 
 			switch (RulpUtil.asAtom(mbrExpr.get(i)).getName()) {
 			case A_PUBLIC:

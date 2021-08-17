@@ -422,10 +422,9 @@ public final class RulpFactory {
 	}
 
 	public static IRFunction createFunction(IRFrame defineFrame, String funName, List<IRParaAttr> paraAttrs,
-			IRExpr funBody, String description) {
-
+			IRExpr funBody) {
 		RType.FUNC.incCreateCount();
-		return new XRFunction(defineFrame, funName, paraAttrs, funBody, description);
+		return new XRFunction(defineFrame, funName, paraAttrs, funBody);
 	}
 
 	public static IRFunction createFunctionLambda(IRFunction func, IRFrame definedFrame) throws RException {

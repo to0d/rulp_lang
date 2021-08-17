@@ -13,6 +13,16 @@ import alpha.rulp.utils.RulpUtil;
 class XRFactorDefunTest extends RulpTestBase {
 
 	@Test
+	void test_fun_0_invalid_type() {
+
+		_setup();
+
+		_test_error("(defun fun2 ((?x Expr)) (print ?x))",
+				"Undefined para type: Expr\n" + "at main: (defun fun2 ((?x Expr)) (print ?x))");
+
+	}
+
+	@Test
 	void test_fun_1() {
 		_setup();
 		_test("(defun fun1 (?v1 ?v2) (return (?v1 ?v2 3))) (fun1 + 1)", "fun1 4");
@@ -90,6 +100,24 @@ class XRFactorDefunTest extends RulpTestBase {
 	}
 
 	@Test
+	void test_fun_3_overload_cross_frame_1_override() {
+		_setup();
+		_test_script("result/factor/XRFactorDefunTest/test_fun_3_overload_cross_frame_1_override.rulp");
+	}
+
+	@Test
+	void test_fun_3_overload_cross_frame_1_override2() {
+		_setup();
+		_test_script("result/factor/XRFactorDefunTest/test_fun_3_overload_cross_frame_1_override2.rulp");
+	}
+
+	@Test
+	void test_fun_3_overload_cross_frame_2() {
+		_setup();
+		_test_script("result/factor/XRFactorDefunTest/test_fun_3_overload_cross_frame_2.rulp");
+	}
+
+	@Test
 	void test_fun_3_overload_null_arg() {
 
 		_setup();
@@ -113,24 +141,6 @@ class XRFactorDefunTest extends RulpTestBase {
 		_test("(fun1 1 3)", "4");
 		_test("(fun1 (get-null) 3)", "4");
 		_test("(out-to-file \"result/factor/XRFactorDefunTest/test_fun_3_overload_null_arg_frame_1.txt\" (print-subject))");
-	}
-
-	@Test
-	void test_fun_3_overload_cross_frame_1_override() {
-		_setup();
-		_test_script("result/factor/XRFactorDefunTest/test_fun_3_overload_cross_frame_1_override.rulp");
-	}
-
-	@Test
-	void test_fun_3_overload_cross_frame_1_override2() {
-		_setup();
-		_test_script("result/factor/XRFactorDefunTest/test_fun_3_overload_cross_frame_1_override2.rulp");
-	}
-
-	@Test
-	void test_fun_3_overload_cross_frame_2() {
-		_setup();
-		_test_script("result/factor/XRFactorDefunTest/test_fun_3_overload_cross_frame_2.rulp");
 	}
 
 	@Test
@@ -171,13 +181,8 @@ class XRFactorDefunTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_fun_0_invalid_type() {
-
+	void test_fun_6_extend_body() {
 		_setup();
-
-		_test_error("(defun fun2 ((?x Expr)) (print ?x))",
-				"Undefined para type: Expr\n" + "at main: (defun fun2 ((?x Expr)) (print ?x))");
-
+		_test_script("result/factor/XRFactorDefunTest/test_fun_6_extend_body.rulp");
 	}
-
 }

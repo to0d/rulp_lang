@@ -10,6 +10,7 @@
 package alpha.rulp.ximpl.runtime;
 
 import static alpha.rulp.lang.Constant.A_LAMBDA;
+import static alpha.rulp.lang.Constant.F_DO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class XRFactorLambda extends AbsRFactorAdapter implements IRFactor {
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() != 3) {
+		if (args.size() < 3) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
@@ -55,12 +56,27 @@ public class XRFactorLambda extends AbsRFactorAdapter implements IRFactor {
 		}
 
 		/*****************************************************/
-		// Fun body
+		// Function body
 		/*****************************************************/
-		IRExpr funBody = RulpUtil.asExpression(args.get(2));
+		IRExpr funBody = null;
+		if (args.size() == 3) {
 
-		return RulpFactory.createFunctionLambda(RulpFactory.createFunction(frame, A_LAMBDA, paraAttrs, funBody, null),
-				frame);
+			funBody = RulpUtil.asExpression(args.get(2));
+
+		} else if (args.size() > 3) {
+
+			ArrayList<IRObject> newExpr = new ArrayList<>();
+			newExpr.add(RulpFactory.createAtom(F_DO));
+			RulpUtil.addAll(newExpr, args.listIterator(2));
+
+			funBody = RulpFactory.createExpression(newExpr);
+
+		} else {
+
+			throw new RException("Invalid args size: " + args.size());
+		}
+
+		return RulpFactory.createFunctionLambda(RulpFactory.createFunction(frame, A_LAMBDA, paraAttrs, funBody), frame);
 	}
 
 	public boolean isThreadSafe() {

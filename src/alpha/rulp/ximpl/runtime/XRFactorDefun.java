@@ -9,6 +9,9 @@
 
 package alpha.rulp.ximpl.runtime;
 
+import static alpha.rulp.lang.Constant.F_DO;
+
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -117,8 +120,23 @@ public class XRFactorDefun extends AbsRFactorAdapter implements IRFactor {
 		/*****************************************************/
 		// Function body
 		/*****************************************************/
-		IRExpr funBody = RulpUtil.asExpression(args.get(3));
-		
+		IRExpr funBody = null;
+		if (args.size() == 4) {
+
+			funBody = RulpUtil.asExpression(args.get(3));
+
+		} else if (args.size() > 4) {
+
+			ArrayList<IRObject> newExpr = new ArrayList<>();
+			newExpr.add(RulpFactory.createAtom(F_DO));
+			RulpUtil.addAll(newExpr, args.listIterator(3));
+
+			funBody = RulpFactory.createExpression(newExpr);
+
+		} else {
+			throw new RException("Invalid args size: " + args.size());
+		}
+
 		if (RuntimeUtil.isSupportOpCPS()) {
 			// recursive function
 			if (CPSUtils.findCPSCallee(funBody, frame).contains(funName)) {
@@ -126,15 +144,7 @@ public class XRFactorDefun extends AbsRFactorAdapter implements IRFactor {
 			}
 		}
 
-		/*****************************************************/
-		// Function Description
-		/*****************************************************/
-		String funDescription = null;
-		if (args.size() > 4) {
-			funDescription = RulpUtil.asString(interpreter.compute(frame, args.get(4))).asString();
-		}
-
-		IRFunction newFun = RulpFactory.createFunction(frame, funName, paraAttrs, funBody, funDescription);
+		IRFunction newFun = RulpFactory.createFunction(frame, funName, paraAttrs, funBody);
 
 		/*****************************************************/
 		// Function
@@ -233,7 +243,7 @@ public class XRFactorDefun extends AbsRFactorAdapter implements IRFactor {
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() != 4 && args.size() != 5) {
+		if (args.size() < 4) {
 			throw new RException("Invalid parameters: " + args);
 		}
 

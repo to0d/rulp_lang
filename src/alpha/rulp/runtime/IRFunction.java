@@ -23,8 +23,6 @@ public interface IRFunction extends IRObject, IRCallable {
 
 	public IRFrame getDefineFrame();
 
-	public String getDescription();
-
 	public IRExpr getFunBody();
 
 	public String getName();

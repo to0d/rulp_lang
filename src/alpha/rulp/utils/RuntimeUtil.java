@@ -286,12 +286,11 @@ public final class RuntimeUtil {
 
 	public static IRObject compute(IRObject obj, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		_checkFrame(frame);
-		_checkObject(obj);
-
 		if (obj == null) {
 			return O_Nil;
 		}
+		_checkFrame(frame);
+		_checkObject(obj);
 
 		try {
 
