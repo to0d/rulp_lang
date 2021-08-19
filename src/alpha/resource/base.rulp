@@ -113,6 +113,46 @@
 
 (defun size-of ((?map map)) (return (?map::size-of)))
 
+(defclass queue () final
+    
+    (defvar ?impl nil private)
+    
+    (defun init ()
+        (setq ?impl (queue::_queue_init)) final)
+    
+    (defun push (?e)
+        (queue::_queue_push_back ?impl ?e) final)
+        
+    (defun push_back (?e)
+        (queue::_queue_push_back ?impl ?e) final)
+        
+    (defun push_front (?e)
+        (queue::_queue_push_front ?impl ?e) final)
+    
+    (defun pop ()
+        (return (queue::_queue_pop_front ?impl)) final)
+
+    (defun pop_back ()
+        (return (queue::_queue_pop_back ?impl)) final)
+    
+    (defun pop_front ()
+        (return (queue::_queue_pop_front ?impl)) final)
+    
+    (defun peek (?k)
+        (return (queue::_queue_peek_front ?impl)) final)
+
+    (defun peek_back ()
+        (return (queue::_queue_peek_back ?impl)) final)
+
+    (defun peek_front ()
+        (return (queue::_queue_peek_front ?impl)) final)
+
+    (defun size-of ()
+        (return (queue::_queue_size_of ?impl)) final)
+)
+
+(defun size-of ((?queue queue)) (return (?queue::size-of)))
+
 
 (defclass socket () final
 

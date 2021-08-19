@@ -69,6 +69,7 @@ import alpha.rulp.ximpl.collection.XRFactorSort;
 import alpha.rulp.ximpl.collection.XRFactorUnion;
 import alpha.rulp.ximpl.collection.XRFactorUniq;
 import alpha.rulp.ximpl.collection.XRMap;
+import alpha.rulp.ximpl.collection.XRQueue;
 import alpha.rulp.ximpl.collection.XRSet;
 import alpha.rulp.ximpl.error.XRError;
 import alpha.rulp.ximpl.error.XRFactorBreak;
@@ -452,6 +453,11 @@ public final class RulpFactory {
 		return new XRSet(RuntimeUtil.getNoClass(interpreter));
 	}
 
+	public static IRInstance createInstanceOfQueue(IRInterpreter interpreter) throws RException {
+		RType.INSTANCE.incCreateCount();
+		return new XRQueue(RuntimeUtil.getNoClass(interpreter));
+	}
+
 	public static IRInstance createInstanceOfSocket(String addr, int port) {
 		RType.INSTANCE.incCreateCount();
 		return new XRSocket(addr, port);
@@ -688,6 +694,7 @@ public final class RulpFactory {
 		XRSet.init(interpreter, systemFrame);
 		XRMap.init(interpreter, systemFrame);
 		XRSocket.init(interpreter, systemFrame);
+		XRQueue.init(interpreter, systemFrame);
 
 		/******************************************************/
 		// Load JVM object

@@ -7,6 +7,7 @@ system::ls-print
 system::map
 system::namespace
 system::print-list
+system::queue
 system::root
 system::set
 system::size-of
@@ -14,5 +15,6 @@ system::socket
 system::system
 system::type#map
 system::type#namespace
+system::type#queue
 system::type#set
 system::type#socket

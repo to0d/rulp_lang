@@ -1,0 +1,105 @@
+Global Info:
+
+Total runtime info:
+==========================================================================================================================
+                          Name:     info
+--------------------------------------------------------------------------------------------------------------------------
+     Interpreter call id/level:       49        0
+             CPS support/count:    false        0
+               Frame max level:        4
+                  Frame max id:        6
+           Frame free id count:        1
+==========================================================================================================================
+
+Expression compute count:
+==========================================================================================================================
+     RType:    Count
+--------------------------------------------------------------------------------------------------------------------------
+    factor:       64
+      func:       20
+==========================================================================================================================
+
+Callable stats info: callId=49, row=23, column=50(1), value-max=1, value-unit=1^x
+==========================================================================================================================
+   Frame    RType  Count  Ref Object                         .1111111111111111111111111111313223333223333223333 max=4, unit=2^x
+--------------------------------------------------------------------------------------------------------------------------
+    root   factor     15    0 defun                                  1111111111 11  1 1 1                      
+    root   factor     13    0 return                                                        1  1111  1111  1111
+  system   member      7    0 queue::_queue_size_of                                         1  1  1  1  1  1  1
+    main   member      7    0 q1::size-of                                                   1  1  1  1  1  1  1
+    root   factor      6    0 alias                           111111                                           
+    root   factor      5    0 defclass                                            11 1 1 1                     
+  system   member      4    0 queue::_queue_push_back                                        11    11          
+  system   member      4    0 queue::_queue_pop_front                                           11          11 
+  system   member      2    0 queue::_queue_push_front                                                   11    
+  system   member      2    0 queue::_queue_pop_back                                                  11       
+    main   member      2    0 q1::push_front                                                             11    
+    main   member      2    0 q1::push_back                                                        11          
+    main   member      2    0 q1::push                                                       11                
+    main   member      2    0 q1::pop_front                                                                 11 
+    main   member      2    0 q1::pop_back                                                            11       
+    main   member      2    0 q1::pop                                                           11             
+    root   factor      1    0 setq                                                        1                    
+  system   member      1    0 queue::_queue_init                                          1                    
+    main   member      1    0 q1::init                                                    1                    
+    root   factor      1    0 new                                                         1                    
+    root   factor      1    0 name-of                                                      1                   
+    root   factor      1    0 defvar                                1                                          
+    root   factor      1    0 defmacro                                         1                               
+==========================================================================================================================
+
+Object create count:
+==========================================================================================================================
+       RType:       Create       Delete        Exist
+--------------------------------------------------------------------------------------------------------------------------
+        atom:          454            0          454
+      string:           19            0           19
+        expr:          257            0          257
+         var:           22            6           16
+        func:           50            0           50
+       macro:            1            0            1
+    instance:            2            0            2
+       class:            5            0            5
+      member:          103            0          103
+       frame:           22           20            2
+ interpreter:            1            0
+  frameEntry:          171            0
+      lambda:            8            0
+==========================================================================================================================
+
+Global frame list: total=2
+
+id=2, name=main, lvl=2, ref=1/1, pid=1(system), entry=4, subject=main, thread=null
+==========================================================================================================================
+Name(alias)          : EntryId  FrameId  Ref  Type       Value               
+--------------------------------------------------------------------------------------------------------------------------
+root                 : 1        2        0    frame      root                
+system               : 2        2        0    frame      system              
+main                 : 3        2        1    frame      main                
+q1                   : 5        2        1    instance   q1                  
+==========================================================================================================================
+
+
+id=3, name=subject-0, lvl=2, ref=2/2, pid=1(system), entry=0, subject=queue, thread=null
+
+id=4, name=subject-1, lvl=3, ref=9/10, pid=3(subject-0), entry=0, subject=q1, thread=null
+
+Global Subject list:
+
+name=q1, lvl=1, ref=1/1, parent=queue, frame=4(subject-1), final=false, mbrs=10
+==========================================================================================================================
+Name                 : Access   Final    Static   Ref  Type       Value
+--------------------------------------------------------------------------------------------------------------------------
+?impl                : PRIVATE  false    false    1    var        instance:null
+init                 : DEFAULT  true     false    1    func       (init) : frame=subject-1, type=lambda
+pop                  : DEFAULT  true     false    1    func       (pop) : frame=subject-1, type=lambda
+pop_back             : DEFAULT  true     false    1    func       (pop_back) : frame=subject-1, type=lambda
+pop_front            : DEFAULT  true     false    1    func       (pop_front) : frame=subject-1, type=lambda
+push                 : DEFAULT  true     false    1    func       (push nil) : frame=subject-1, type=lambda
+push_back            : DEFAULT  true     false    1    func       (push_back nil) : frame=subject-1, type=lambda
+push_front           : DEFAULT  true     false    1    func       (push_front nil) : frame=subject-1, type=lambda
+size-of              : DEFAULT  true     false    1    func       (size-of) : frame=subject-1, type=lambda
+this                 : DEFAULT  false    false    1    instance   q1
+==========================================================================================================================
+
+

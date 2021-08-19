@@ -93,6 +93,8 @@ public interface Constant {
 
 	String A_PUBLIC = "public";
 
+	String A_QUEUE = "queue";
+
 	String A_ROOT = "root";
 
 	String A_SET = "set";
@@ -150,8 +152,6 @@ public interface Constant {
 	String F_CONTINUE = "continue";
 
 	String F_DATE = "date";
-
-	String F_RANDOM = "random";
 
 	String F_DEFCLASS = "defclass";
 
@@ -256,6 +256,8 @@ public interface Constant {
 	String F_PRINT_SUBJECT = "print-subject";
 
 	String F_PROPERTY_OF = "property-of";
+
+	String F_RANDOM = "random";
 
 	String F_REF = "ref";
 

@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       29        0
+     Interpreter call id/level:       31        0
              CPS support/count:    false        0
                Frame max level:        4
                   Frame max id:        5
@@ -15,41 +15,41 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:       32
+    factor:       34
       func:        2
 ==========================================================================================================================
 
-Callable stats info: callId=29, row=10, column=30(1), value-max=2, value-unit=2^x
+Callable stats info: callId=31, row=10, column=32(1), value-max=2, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         .11111111111111111111111111114 max=5, unit=2^x
+   Frame    RType  Count  Ref Object                         .1111111111111111111111111111114 max=5, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     15    0 defun                                  1111111111 11  1 1 1  
-    root   factor      6    0 alias                           111111                       
-    root   factor      4    0 defclass                                            11 1 1   
-    root   factor      2    0 return                                                      2
-    root   factor      1    0 name-of                                                    1 
-    root   factor      1    0 lambda                                                      1
-    main     func      1    1 (fun1 nil)                                                  1
-    root   factor      1    0 defvar                                1                      
-    root   factor      1    0 defmacro                                         1           
-    root   factor      1    0 *                                                           1
+    root   factor     16    0 defun                                  1111111111 11  1 1 1 1  
+    root   factor      6    0 alias                           111111                         
+    root   factor      5    0 defclass                                            11 1 1 1   
+    root   factor      2    0 return                                                        2
+    root   factor      1    0 name-of                                                      1 
+    root   factor      1    0 lambda                                                        1
+    main     func      1    1 (fun1 nil)                                                    1
+    root   factor      1    0 defvar                                1                        
+    root   factor      1    0 defmacro                                         1             
+    root   factor      1    0 *                                                             1
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          358            0          358
+        atom:          442            0          442
       string:           19            0           19
-        expr:          198            0          198
-         var:           15            1           14
-        func:           33            1           32
+        expr:          239            0          239
+         var:           16            1           15
+        func:           45            1           44
        macro:            1            0            1
-       class:            4            0            4
-      member:           42            0           42
+       class:            5            0            5
+      member:           74            0           74
        frame:            2            2            0
  interpreter:            1            0
-  frameEntry:          163            0
+  frameEntry:          165            0
       lambda:            1            0
 ==========================================================================================================================
 
