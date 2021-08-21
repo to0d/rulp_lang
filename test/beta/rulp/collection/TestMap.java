@@ -49,7 +49,7 @@ public class TestMap extends RulpTestBase {
 
 		_setup();
 		_test("(ls map)",
-				"'(map::?impl map::_map_get map::_map_init map::_map_put map::_map_size_of map::get map::init map::put map::size-of)");
+				"'(map::?impl map::_map_clear map::_map_get map::_map_init map::_map_is_empty map::_map_put map::_map_size_of map::clear map::get map::init map::is-empty map::put map::size-of)");
 
 		_test("(new map map1)", "map1");
 		_test("(ls map1)", "'(map1::?impl map1::init map1::this)");
@@ -87,5 +87,19 @@ public class TestMap extends RulpTestBase {
 		} catch (RException | IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Test
+	void test_map_5_clear_and_is_empty() {
+
+		_setup();
+		_test("(new map map1)", "map1");
+		_test("(map1::is-empty)", "true");
+		_test("(map1::put 1 2)", "nil");
+		_test("(is-empty map1)", "false");
+		_test("(map1::clear)", "nil");
+		_test("(clear map1)", "nil");
+		_test("(is-empty map1)", "true");
+
 	}
 }

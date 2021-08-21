@@ -1,5 +1,8 @@
 mbr=?impl, access deny
+mbr=_queue_clear, access deny
+mbr=_queue_get, access deny
 mbr=_queue_init, access deny
+mbr=_queue_is_empty, access deny
 mbr=_queue_peek_back, access deny
 mbr=_queue_peek_front, access deny
 mbr=_queue_pop_back, access deny
@@ -7,8 +10,12 @@ mbr=_queue_pop_front, access deny
 mbr=_queue_push_back, access deny
 mbr=_queue_push_front, access deny
 mbr=_queue_size_of, access deny
+mbr=_queue_to_list, access deny
+mbr=clear, name=(clear), type=func, property='(default final)
+mbr=get, name=(get nil), type=func, property='(default final)
 mbr=init, name=(init), type=func, property='(default final)
-mbr=peek, name=(peek nil), type=func, property='(default final)
+mbr=is-empty, name=(is-empty), type=func, property='(default final)
+mbr=peek, name=(peek), type=func, property='(default final)
 mbr=peek_back, name=(peek_back), type=func, property='(default final)
 mbr=peek_front, name=(peek_front), type=func, property='(default final)
 mbr=pop, name=(pop), type=func, property='(default final)
@@ -18,3 +25,4 @@ mbr=push, name=(push nil), type=func, property='(default final)
 mbr=push_back, name=(push_back nil), type=func, property='(default final)
 mbr=push_front, name=(push_front nil), type=func, property='(default final)
 mbr=size-of, name=(size-of), type=func, property='(default final)
+mbr=to-list, name=(to-list), type=func, property='(default final)

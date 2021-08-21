@@ -18,8 +18,10 @@ import alpha.rulp.lang.IRInstance;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 
@@ -33,19 +35,45 @@ public class XRFactorNew extends AbsRFactorAdapter implements IRFactor {
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		// (new class1 o3 '(1 2))
-		if (args.size() != 3 && args.size() != 4) {
+		// (new class1 o3))
+		// (new class1 '(1 2))
+		// (new class1)
+		if (args.size() > 4) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRClass rClass = RulpUtil.asClass(interpreter.compute(frame, args.get(1)));
-		String instanceName = RulpUtil.asAtom(args.get(2)).getName();
+		int argIndex = 1;
+		IRObject argObj = null;
+		/******************************************/
+		// Class
+		/******************************************/
+		IRClass rClass = RulpUtil.asClass(interpreter.compute(frame, args.get(argIndex++)));
 
 		/******************************************/
-		// Check instance exist
+		// Instance Name
 		/******************************************/
-		IRFrameEntry oldEntry = frame.getEntry(instanceName);
-		if (oldEntry != null) {
-			throw new RException(String.format("duplicate object<%s> found: %s", instanceName, oldEntry.getObject()));
+		String instanceName = null;
+		if (argIndex < args.size()) {
+
+			argObj = args.get(argIndex);
+			if (argObj.getType() == RType.ATOM) {
+				instanceName = RulpUtil.asAtom(argObj).getName();
+				++argIndex;
+			}
+		}
+
+		/******************************************/
+		// argument list
+		/******************************************/
+		IRList initArgs = null;
+		if (argIndex < args.size()) {
+			initArgs = RulpUtil.asList(interpreter.compute(frame, args.get(argIndex++)));
+
+			if (argIndex != args.size()) {
+				throw new RException("Invalid parameters: " + args);
+			}
+		} else {
+			initArgs = RulpFactory.createList();
 		}
 
 		/******************************************/
@@ -53,12 +81,26 @@ public class XRFactorNew extends AbsRFactorAdapter implements IRFactor {
 		/******************************************/
 		IRInstance instance = rClass.newInstance(instanceName, args, interpreter, frame);
 		RulpUtil.setMember(instance, F_MBR_THIS, instance);
-		instance.init(args, interpreter, frame);
+
+		/******************************************/
+		// Call Initialization member
+		/******************************************/
+		instance.init(initArgs, interpreter, frame);
 
 		/******************************************/
 		// Add into frame
 		/******************************************/
-		frame.setEntry(instanceName, instance);
+		if (instanceName != null) {
+
+			// Check instance exist
+			IRFrameEntry oldEntry = frame.getEntry(instanceName);
+			if (oldEntry != null) {
+				throw new RException(
+						String.format("duplicate object<%s> found: %s", instanceName, oldEntry.getObject()));
+			}
+
+			frame.setEntry(instanceName, instance);
+		}
 
 		return instance;
 	}

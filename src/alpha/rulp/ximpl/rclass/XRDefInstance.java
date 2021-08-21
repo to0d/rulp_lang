@@ -33,8 +33,8 @@ public class XRDefInstance extends AbsRInstance {
 		IRMember member = getMember(F_MBR_INIT);
 		if (member == null) {
 
-			// has paramemter
-			if (args.size() > 3) {
+			// has argument parameter
+			if (args != null && args.size() > 0) {
 				throw new RException(String.format("not init defined for class<%s>: arg=%s", this, args));
 			}
 
@@ -42,7 +42,7 @@ public class XRDefInstance extends AbsRInstance {
 
 			ArrayList<IRObject> initArgs = new ArrayList<>();
 			initArgs.add(member);
-			RulpUtil.addAll(initArgs, RulpUtil.asList(args.get(3)));
+			RulpUtil.addAll(initArgs, args);
 
 			IRList expr = RuntimeUtil.rebuildFuncExpr(RulpUtil.asFunction(member.getValue()),
 					RulpFactory.createExpression(initArgs), interpreter, frame);

@@ -1,12 +1,9 @@
 package alpha.rulp.ximpl.collection;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_QUEUE;
 import static alpha.rulp.lang.Constant.O_Nil;
 
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
 
 import alpha.rulp.lang.IRClass;
 import alpha.rulp.lang.IRFrame;
@@ -20,9 +17,15 @@ import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 import alpha.rulp.ximpl.rclass.AbsRInstance;
 
-public class XRQueue extends AbsRInstance {
+public class XRQueue extends AbsRInstance implements IRCollection {
+
+	static final String F_MBR_QUEUE_CLEAR = "_queue_clear";
+
+	static final String F_MBR_QUEUE_GET = "_queue_get";
 
 	static final String F_MBR_QUEUE_INIT = "_queue_init";
+
+	static final String F_MBR_QUEUE_IS_EMTPY = "_queue_is_empty";
 
 	static final String F_MBR_QUEUE_PEEK_BACK = "_queue_peek_back";
 
@@ -37,6 +40,8 @@ public class XRQueue extends AbsRInstance {
 	static final String F_MBR_QUEUE_PUSH_FRONT = "_queue_push_front";
 
 	static final String F_MBR_QUEUE_SIZE_OF = "_queue_size_of";
+
+	static final String F_MBR_QUEUE_TO_LIST = "_queue_to_list";
 
 	static XRQueue asQueue(IRObject obj) throws RException {
 
@@ -76,9 +81,9 @@ public class XRQueue extends AbsRInstance {
 					throw new RException("Invalid parameters: " + args);
 				}
 
-				XRQueue set = asQueue(interpreter.compute(frame, args.get(1)));
+				XRQueue queue = asQueue(interpreter.compute(frame, args.get(1)));
 				IRObject obj = interpreter.compute(frame, args.get(2));
-				set.push_back(obj);
+				queue.push_back(obj);
 
 				return O_Nil;
 			}
@@ -98,9 +103,9 @@ public class XRQueue extends AbsRInstance {
 					throw new RException("Invalid parameters: " + args);
 				}
 
-				XRQueue set = asQueue(interpreter.compute(frame, args.get(1)));
+				XRQueue queue = asQueue(interpreter.compute(frame, args.get(1)));
 				IRObject obj = interpreter.compute(frame, args.get(2));
-				set.push_front(obj);
+				queue.push_front(obj);
 
 				return O_Nil;
 			}
@@ -183,6 +188,27 @@ public class XRQueue extends AbsRInstance {
 			}
 		}, RAccessType.PRIVATE);
 
+		RulpUtil.setMember(queueClass, F_MBR_QUEUE_GET, new AbsRFactorAdapter(F_MBR_QUEUE_GET) {
+
+			@Override
+			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+				if (args.size() != 3) {
+					throw new RException("Invalid parameters: " + args);
+				}
+
+				XRQueue queue = asQueue(interpreter.compute(frame, args.get(1)));
+				int index = RulpUtil.asInteger(interpreter.compute(frame, args.get(2))).asInteger();
+
+				return queue.get(index);
+			}
+
+			@Override
+			public boolean isThreadSafe() {
+				return true;
+			}
+		}, RAccessType.PRIVATE);
+
 		RulpUtil.setMember(queueClass, F_MBR_QUEUE_SIZE_OF, new AbsRFactorAdapter(F_MBR_QUEUE_SIZE_OF) {
 
 			@Override
@@ -200,6 +226,62 @@ public class XRQueue extends AbsRInstance {
 				return true;
 			}
 		}, RAccessType.PRIVATE);
+
+		RulpUtil.setMember(queueClass, F_MBR_QUEUE_IS_EMTPY, new AbsRFactorAdapter(F_MBR_QUEUE_IS_EMTPY) {
+
+			@Override
+			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+				if (args.size() != 2) {
+					throw new RException("Invalid parameters: " + args);
+				}
+
+				return RulpFactory.createBoolean(asQueue(interpreter.compute(frame, args.get(1))).isEmpty());
+			}
+
+			@Override
+			public boolean isThreadSafe() {
+				return true;
+			}
+		}, RAccessType.PRIVATE);
+
+		RulpUtil.setMember(queueClass, F_MBR_QUEUE_CLEAR, new AbsRFactorAdapter(F_MBR_QUEUE_CLEAR) {
+
+			@Override
+			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+				if (args.size() != 2) {
+					throw new RException("Invalid parameters: " + args);
+				}
+
+				asQueue(interpreter.compute(frame, args.get(1))).clear();
+
+				return O_Nil;
+			}
+
+			@Override
+			public boolean isThreadSafe() {
+				return true;
+			}
+		}, RAccessType.PRIVATE);
+
+		RulpUtil.setMember(queueClass, F_MBR_QUEUE_TO_LIST, new AbsRFactorAdapter(F_MBR_QUEUE_TO_LIST) {
+
+			@Override
+			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+				if (args.size() != 2) {
+					throw new RException("Invalid parameters: " + args);
+				}
+
+				return asQueue(interpreter.compute(frame, args.get(1))).toList();
+			}
+
+			@Override
+			public boolean isThreadSafe() {
+				return true;
+			}
+		}, RAccessType.PRIVATE);
 	}
 
 	private LinkedList<IRObject> elementList = new LinkedList<>();
@@ -207,6 +289,26 @@ public class XRQueue extends AbsRInstance {
 	public XRQueue(IRClass noClass) {
 		super(noClass, null, null);
 
+	}
+
+	@Override
+	public void clear() {
+		elementList.clear();
+	}
+
+	public IRObject get(int index) throws RException {
+
+		IRObject obj = elementList.get(index);
+		if (obj != O_Nil) {
+			RulpUtil.decRef(obj);
+		}
+
+		return obj;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return elementList.isEmpty();
 	}
 
 	public IRObject peek_back() throws RException {
@@ -263,4 +365,7 @@ public class XRQueue extends AbsRInstance {
 		return elementList.size();
 	}
 
+	public IRList toList() {
+		return RulpFactory.createList(elementList);
+	}
 }

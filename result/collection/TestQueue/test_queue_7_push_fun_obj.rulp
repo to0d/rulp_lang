@@ -1,0 +1,12 @@
+(new queue q1)
+;=>q1
+(q1::push (lambda (?v) (print "action1:" ?v "\n")))
+;=>nil
+(q1::push (lambda (?v) (print "action2:" ?v "\n")))
+;=>nil
+(loop for ?action in (to-list q1) do (?action 1))
+;=>nil
+;out:
+action1:1
+action2:1
+;eof

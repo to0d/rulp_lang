@@ -3,6 +3,7 @@ package alpha.rulp.ximpl.collection;
 import static alpha.rulp.lang.Constant.A_SET;
 import static alpha.rulp.lang.Constant.O_Nil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,15 +19,21 @@ import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 import alpha.rulp.ximpl.rclass.AbsRInstance;
 
-public class XRSet extends AbsRInstance {
+public class XRSet extends AbsRInstance implements IRCollection {
 
 	static final String F_MBR_SET_ADD = "_set_add";
+
+	static final String F_MBR_SET_CLEAR = "_set_clear";
 
 	static final String F_MBR_SET_HAS = "_set_has";
 
 	static final String F_MBR_SET_INIT = "_set_init";
 
+	static final String F_MBR_SET_IS_EMPTY = "_set_is_empty";
+
 	static final String F_MBR_SET_SIZE_OF = "_set_size_of";
+
+	static final String F_MBR_SET_TO_LIST = "_set_to_list";
 
 	static XRSet asSet(IRObject obj) throws RException {
 
@@ -109,9 +116,7 @@ public class XRSet extends AbsRInstance {
 					throw new RException("Invalid parameters: " + args);
 				}
 
-				XRSet set = asSet(interpreter.compute(frame, args.get(1)));
-
-				return RulpFactory.createInteger(set.size());
+				return RulpFactory.createInteger(asSet(interpreter.compute(frame, args.get(1))).size());
 			}
 
 			@Override
@@ -119,6 +124,62 @@ public class XRSet extends AbsRInstance {
 				return true;
 			}
 		}, RAccessType.PRIVATE);
+
+		RulpUtil.setMember(setClass, F_MBR_SET_IS_EMPTY, new AbsRFactorAdapter(F_MBR_SET_IS_EMPTY) {
+
+			@Override
+			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+				if (args.size() != 2) {
+					throw new RException("Invalid parameters: " + args);
+				}
+
+				return RulpFactory.createBoolean(asSet(interpreter.compute(frame, args.get(1))).isEmpty());
+			}
+
+			@Override
+			public boolean isThreadSafe() {
+				return true;
+			}
+		}, RAccessType.PRIVATE);
+
+		RulpUtil.setMember(setClass, F_MBR_SET_CLEAR, new AbsRFactorAdapter(F_MBR_SET_CLEAR) {
+
+			@Override
+			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+				if (args.size() != 2) {
+					throw new RException("Invalid parameters: " + args);
+				}
+
+				asSet(interpreter.compute(frame, args.get(1))).clear();
+				return O_Nil;
+			}
+
+			@Override
+			public boolean isThreadSafe() {
+				return true;
+			}
+		}, RAccessType.PRIVATE);
+		
+		RulpUtil.setMember(setClass, F_MBR_SET_TO_LIST, new AbsRFactorAdapter(F_MBR_SET_TO_LIST) {
+
+			@Override
+			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+				if (args.size() != 2) {
+					throw new RException("Invalid parameters: " + args);
+				}
+
+				return asSet(interpreter.compute(frame, args.get(1))).toList();
+			}
+
+			@Override
+			public boolean isThreadSafe() {
+				return true;
+			}
+		}, RAccessType.PRIVATE);
+
 	}
 
 	private Map<String, IRObject> uniqMap = new HashMap<>();
@@ -140,17 +201,31 @@ public class XRSet extends AbsRInstance {
 		}
 
 		uniqMap.put(key, newObj);
-		
+
 		RulpUtil.incRef(newObj);
 		RulpUtil.decRef(oldObj);
+	}
+
+	@Override
+	public void clear() {
+		uniqMap.clear();
 	}
 
 	public boolean has(IRObject obj) throws RException {
 		return uniqMap.containsKey(RulpUtil.toUniqString(obj));
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return uniqMap.isEmpty();
+	}
+
 	public int size() {
 		return uniqMap.size();
+	}
+
+	public IRList toList() {
+		return RulpFactory.createList(new ArrayList<>(uniqMap.values()));
 	}
 
 }

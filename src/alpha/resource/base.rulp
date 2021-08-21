@@ -22,6 +22,9 @@
 (defun get ((?arr array) (?i1 int)) (return (get-of-array ?arr ?i1)))
 (defun get ((?arr array) (?i1 int) (?i2 int)) (return (get-of-array ?arr ?i1 ?i2)))
 
+(defun is-empty ((?l list)) (return (equal (size-of-list ?l) 0)))
+(defun to-list ((?l list)) (return ?l))
+
 (defmacro print-list (?list) 
     (loop for ?e in ?list do 
         (print ?e "\n")
@@ -90,9 +93,21 @@
     
     (defun size-of ()
         (return (set::_set_size_of ?impl)) final)
+        
+    (defun is-empty ()
+        (return (set::_set_is_empty ?impl)) final)
+        
+    (defun clear ()
+        (set::_set_clear ?impl) final)
+        
+    (defun to-list ()
+        (return (set::_set_to_list ?impl)) final)
 )
 
-(defun size-of ((?set set)) (return (?set::size-of)))
+(defun size-of  ((?set set)) (return (?set::size-of)))
+(defun is-empty ((?set set)) (return (?set::is-empty)))
+(defun clear    ((?set set)) (return (?set::clear)))
+(defun to-list  ((?set set)) (return (?set::to-list)))
 
 (defclass map () final
     
@@ -109,9 +124,18 @@
     
     (defun size-of ()
         (return (map::_map_size_of ?impl)) final)
+        
+    (defun is-empty ()
+        (return (map::_map_is_empty ?impl)) final)
+        
+    (defun clear ()
+        (map::_map_clear ?impl) final)
+
 )
 
-(defun size-of ((?map map)) (return (?map::size-of)))
+(defun size-of  ((?map map))    (return (?map::size-of)))
+(defun is-empty ((?map map))    (return (?map::is-empty)))
+(defun clear    ((?map map))    (return (?map::clear)))
 
 (defclass queue () final
     
@@ -138,7 +162,7 @@
     (defun pop_front ()
         (return (queue::_queue_pop_front ?impl)) final)
     
-    (defun peek (?k)
+    (defun peek ()
         (return (queue::_queue_peek_front ?impl)) final)
 
     (defun peek_back ()
@@ -147,12 +171,61 @@
     (defun peek_front ()
         (return (queue::_queue_peek_front ?impl)) final)
 
+    (defun get (?k)
+        (return (queue::_queue_get ?impl ?k)) final)
+
     (defun size-of ()
         (return (queue::_queue_size_of ?impl)) final)
+        
+    (defun is-empty ()
+        (return (queue::_queue_is_empty ?impl)) final)
+
+    (defun clear ()
+        (queue::_queue_clear ?impl) final)
+        
+    (defun to-list ()
+        (return (queue::_queue_to_list ?impl)) final)
 )
 
-(defun size-of ((?queue queue)) (return (?queue::size-of)))
+(defun size-of  ((?queue queue))            (return (?queue::size-of)))
+(defun get      ((?queue queue) (?i1 int))  (return (?queue::get ?i1)))
+(defun is-empty ((?queue queue))            (return (?queue::is-empty)))
+(defun clear    ((?queue queue))            (?queue::clear))
+(defun to-list  ((?queue queue))            (return (?queue::to-list)))
 
+(defclass stack () final
+    
+    (defvar ?impl nil private)
+    
+    (defun init ()
+        (setq ?impl (new queue)) final)
+    
+    (defun push (?e)
+        (?impl::push_back ?e) final)
+
+    (defun pop ()
+        (return (?impl::pop_back)) final)
+    
+    (defun peek ()
+        (return (?impl::peek_back)) final)
+
+    (defun size-of ()
+        (return (?impl::size-of)) final)
+        
+    (defun is-empty ()
+        (return (?impl::is-empty)) final)
+        
+    (defun clear ()
+        (?impl::clear) final)
+        
+    (defun to-list ()
+        (return (?impl::to-list)) final)
+)
+
+(defun size-of  ((?stack stack)) (return (?stack::size-of)))
+(defun is-empty ((?stack stack)) (return (?stack::is-empty)))
+(defun clear    ((?stack stack)) (return (?stack::clear)))
+(defun to-list  ((?stack stack)) (return (?stack::to-list)))
 
 (defclass socket () final
 

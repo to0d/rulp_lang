@@ -26,7 +26,7 @@ import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 import alpha.rulp.ximpl.rclass.XRDefInstance;
 
-public class XRMap extends XRDefInstance {
+public class XRMap extends XRDefInstance implements IRCollection {
 
 	static class RMapEntry implements Entry<IRObject, IRObject> {
 
@@ -163,6 +163,10 @@ public class XRMap extends XRDefInstance {
 
 	static final String F_MBR_MAP_SIZE_OF = "_map_size_of";
 
+	static final String F_MBR_MAP_IS_EMPTY = "_map_is_empty";
+
+	static final String F_MBR_MAP_CLEAR = "_map_clear";
+
 	public static boolean TRACE = false;
 
 	public static void init(IRInterpreter interpreter, IRFrame systemFrame) throws RException {
@@ -239,17 +243,55 @@ public class XRMap extends XRDefInstance {
 					throw new RException("Invalid parameters: " + args);
 				}
 
-				XRMap map = RulpUtil.asMap(interpreter.compute(frame, args.get(1)));
-				return RulpFactory.createInteger(map.size());
+				return RulpFactory.createInteger(RulpUtil.asMap(interpreter.compute(frame, args.get(1))).size());
 			}
 
 			@Override
 			public boolean isThreadSafe() {
 				return true;
 			}
-		
+
 		}, RAccessType.PRIVATE);
 
+		RulpUtil.setMember(mapClass, F_MBR_MAP_IS_EMPTY, new AbsRFactorAdapter(F_MBR_MAP_IS_EMPTY) {
+
+			@Override
+			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+				if (args.size() != 2) {
+					throw new RException("Invalid parameters: " + args);
+				}
+
+				return RulpFactory.createBoolean(RulpUtil.asMap(interpreter.compute(frame, args.get(1))).isEmpty());
+			}
+
+			@Override
+			public boolean isThreadSafe() {
+				return true;
+			}
+
+		}, RAccessType.PRIVATE);
+
+		RulpUtil.setMember(mapClass, F_MBR_MAP_CLEAR, new AbsRFactorAdapter(F_MBR_MAP_CLEAR) {
+
+			@Override
+			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+				if (args.size() != 2) {
+					throw new RException("Invalid parameters: " + args);
+				}
+
+				RulpUtil.asMap(interpreter.compute(frame, args.get(1))).clear();
+
+				return O_Nil;
+			}
+
+			@Override
+			public boolean isThreadSafe() {
+				return true;
+			}
+
+		}, RAccessType.PRIVATE);
 	}
 
 	public static IRMap toImplMap(IRInstance instance) throws RException {
@@ -299,6 +341,16 @@ public class XRMap extends XRDefInstance {
 
 	public int size() {
 		return uniqMap.size();
+	}
+
+	@Override
+	public void clear() {
+		uniqMap.clear();
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return uniqMap.isEmpty();
 	}
 
 }

@@ -85,7 +85,7 @@ public class TestSet extends RulpTestBase {
 
 		_setup();
 		_test("(ls set)",
-				"'(set::?impl set::_set_add set::_set_has set::_set_init set::_set_size_of set::add set::has set::init set::size-of)");
+				"'(set::?impl set::_set_add set::_set_clear set::_set_has set::_set_init set::_set_is_empty set::_set_size_of set::_set_to_list set::add set::clear set::has set::init set::is-empty set::size-of set::to-list)");
 
 		_test("(new set set1)", "set1");
 		_test("(ls set1)", "'(set1::?impl set1::init set1::this)");
@@ -127,4 +127,28 @@ public class TestSet extends RulpTestBase {
 		_gInfo("result/collection/TestSet/test_set_8_ref_a_ginfo_2.txt");
 	}
 
+	@Test
+	void test_set_9() {
+
+		_setup();
+		_test("(new set set1)", "set1");
+		_test("(set1::is-empty)", "true");
+
+		_test("(set1::add 1)", "nil");
+		_test("(set1::add 2)", "nil");
+		_test("(set1::add 3)", "nil");
+
+		// to-list
+		_test("(sort (set1::to-list))", "'(1 2 3)");
+		_test("(sort (to-list set1))", "'(1 2 3)");
+
+		// is-empty
+		_test("(is-empty set1)", "false");
+
+		// clear
+		_test("(set1::clear)", "nil");
+		_test("(clear set1)", "nil");
+		_test("(is-empty set1)", "true");
+
+	}
 }
