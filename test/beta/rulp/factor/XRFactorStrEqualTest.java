@@ -8,6 +8,7 @@ class XRFactorStrEqualTest extends RulpTestBase {
 
 	@Test
 	void test() {
+		_setup();
 		_test("(str-equal \"\" \"\")", "true");
 		_test("(str-equal \"\" nil)", "false");
 		_test("(str-equal \"abc\" \"abc\")", "true");

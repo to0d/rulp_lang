@@ -8,6 +8,7 @@ class XRFactorStrCharAtTest extends RulpTestBase {
 
 	@Test
 	void test() {
+		_setup();
 		_test("(str-char-at \"abc5\" 0)", "97");
 	}
 }

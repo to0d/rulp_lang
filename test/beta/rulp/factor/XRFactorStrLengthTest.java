@@ -8,6 +8,7 @@ class XRFactorStrLengthTest extends RulpTestBase {
 
 	@Test
 	void test() {
+		_setup();
 		_test("(str-length \"abc5\")", "4");
 		_test("(length-of \"abc5\")", "4");
 	}

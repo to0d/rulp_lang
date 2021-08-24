@@ -322,6 +322,8 @@ public interface Constant {
 	String F_TO_ATOM = "to-atom";
 
 	String F_TO_INT = "to-int";
+	
+	String F_TO_NAMED_LIST = "to-named-list";
 
 	String F_TO_STRING = "to-string";
 

@@ -126,6 +126,7 @@ root::sys-gc
 root::sys-time
 root::to-atom
 root::to-int
+root::to-named-list
 root::to-string
 root::true
 root::try

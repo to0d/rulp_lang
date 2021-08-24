@@ -8,6 +8,7 @@ class XRFactorStrSubStrTest extends RulpTestBase {
 
 	@Test
 	void test() {
+		_setup();
 		_test("(str-substr \"abc5\" 0)", "\"abc5\"");
 		_test("(str-substr \"abc5\" 1)", "\"bc5\"");
 		_test("(str-substr \"abc5\" 5)", "\"\"");

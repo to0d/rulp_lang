@@ -18,50 +18,35 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 
-public class XRFactorToInteger extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorToNamedList extends AbsRFactorAdapter implements IRFactor {
 
-	public XRFactorToInteger(String factorName) {
+	public XRFactorToNamedList(String factorName) {
 		super(factorName);
 	}
 
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() != 2) {
+		if (args.size() != 3) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRObject obj = interpreter.compute(frame, args.get(1));
-		int val = 0;
-		if (obj != null) {
+		IRObject nameObj = interpreter.compute(frame, args.get(1));
+		IRList list = RulpUtil.asList(interpreter.compute(frame, args.get(2)));
 
-			switch (obj.getType()) {
-			case INT:
-				return obj;
-
-			case STRING:
-				val = Integer.valueOf(RulpUtil.asString(obj).asString());
-				break;
-
-			case LONG:
-				val = (int) RulpUtil.asLong(obj).asLong();
-				break;
-
-			case FLOAT:
-				val = (int) RulpUtil.asFloat(obj).asFloat();
-				break;
-
-			case DOUBLE:
-				val = (int) RulpUtil.asDouble(obj).asDouble();
-				break;
-
-			default:
-				throw new RException("Can't conver to integer: " + obj);
-
-			}
+		String name = null;
+		switch (nameObj.getType()) {
+		case ATOM:
+			name = RulpUtil.asAtom(nameObj).getName();
+			break;
+		case STRING:
+			name = RulpUtil.asString(nameObj).asString();
+			break;
+		default:
+			throw new RException("Invalid parameters: " + args);
 		}
 
-		return RulpFactory.createInteger(val);
+		return RulpFactory.createNamedList(list.iterator(), name);
 	}
 
 	@Override

@@ -8,6 +8,7 @@ class XRFactorStrTrimTest extends RulpTestBase {
 
 	@Test
 	void test() {
+		_setup();
 		_test("(str-trim \"\")", "\"\"");
 		_test("(str-trim \"abc\")", "\"abc\"");
 		_test("(str-trim \"abc \")", "\"abc\"");

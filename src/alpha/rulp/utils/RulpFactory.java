@@ -101,6 +101,7 @@ import alpha.rulp.ximpl.factor.XRFactorRef;
 import alpha.rulp.ximpl.factor.XRFactorSetq;
 import alpha.rulp.ximpl.factor.XRFactorToAtom;
 import alpha.rulp.ximpl.factor.XRFactorToInteger;
+import alpha.rulp.ximpl.factor.XRFactorToNamedList;
 import alpha.rulp.ximpl.factor.XRFactorToString;
 import alpha.rulp.ximpl.factor.XRFactorTypeOf;
 import alpha.rulp.ximpl.factor.XRFactorValueOf;
@@ -669,6 +670,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSort(F_SORT));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorReverse(F_REVERSE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorGetOfArray(F_GET_OF_ARRAY));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorToNamedList(F_TO_NAMED_LIST));
 
 		// Thread
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSleep(F_T_SLEEP));

@@ -8,6 +8,7 @@ class XRFactorStrSplitTest extends RulpTestBase {
 
 	@Test
 	void test() {
+		_setup();
 		_test("(str-split \"\" \" \")", "'()");
 		_test("(str-split \"abc\" \" \")", "'(\"abc\")");
 		_test("(str-split \"abc \" \" \")", "'(\"abc\")");

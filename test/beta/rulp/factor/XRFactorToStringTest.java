@@ -8,6 +8,7 @@ class XRFactorToStringTest extends RulpTestBase {
 
 	@Test
 	void test() {
+		_setup();
 		_test("(to-string 123)", "\"123\"");
 		_test("(to-string \"123\")", "\"123\"");
 	}

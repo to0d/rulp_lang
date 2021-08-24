@@ -8,6 +8,7 @@ class XRFactorToIntegerTest extends RulpTestBase {
 
 	@Test
 	void test() {
+		_setup();
 		_test("(to-int 123)", "123");
 		_test("(to-int \"123\")", "123");
 		_test("(to-int 1.1)", "1");
