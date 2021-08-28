@@ -156,6 +156,7 @@ public abstract class AbsRSubject extends AbsRefObject implements IRSubject {
 			throw new RException("Can't set class");
 
 		default:
+
 		}
 
 		if (mbr == null) {

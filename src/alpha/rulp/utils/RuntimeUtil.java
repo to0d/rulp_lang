@@ -70,20 +70,6 @@ public final class RuntimeUtil {
 
 	private static StaticVar varSupportOpStable = new StaticVar(A_OP_STABLE, O_False);
 
-	private static void _checkObject(IRObject obj) throws RException {
-
-//		if (obj == null) {
-//			System.out.println();
-//		}
-
-		/***************************************************/
-		// Check object ref
-		/***************************************************/
-		if (obj.getRef() < 0) {
-			throw new RException(obj, String.format("ref=%d, obj=%s", obj.getRef(), obj.toString()));
-		}
-	}
-
 	private static void _checkFrame(IRFrame frame) throws RException {
 
 		/***************************************************/
@@ -111,6 +97,20 @@ public final class RuntimeUtil {
 			if (lvl > frameMaxLevel.get()) {
 				frameMaxLevel.getAndSet(lvl);
 			}
+		}
+	}
+
+	private static void _checkObject(IRObject obj) throws RException {
+
+//		if (obj == null) {
+//			System.out.println();
+//		}
+
+		/***************************************************/
+		// Check object ref
+		/***************************************************/
+		if (obj.getRef() < 0) {
+			throw new RException(obj, String.format("ref=%d, obj=%s", obj.getRef(), obj.toString()));
 		}
 	}
 
@@ -289,6 +289,7 @@ public final class RuntimeUtil {
 		if (obj == null) {
 			return O_Nil;
 		}
+
 		_checkFrame(frame);
 		_checkObject(obj);
 
@@ -328,11 +329,14 @@ public final class RuntimeUtil {
 
 			case ATOM: {
 
-				IRAtom atom = (IRAtom) obj;
-				IRFrameEntry entry = frame.getEntry(atom.getName());
-				IRObject rst = entry == null ? obj : entry.getObject();
+				IRFrameEntry entry = lookupFrameEntry((IRAtom) obj, interpreter, frame);
+				if (entry == null) {
+					return obj;
+				}
 
-				if (rst != null && rst.getType() == RType.VAR) {
+				IRObject rst = entry.getObject();
+
+				if (rst.getType() == RType.VAR) {
 					return ((IRVar) rst).getValue();
 				}
 
@@ -709,6 +713,10 @@ public final class RuntimeUtil {
 		return false;
 	}
 
+	public static boolean isSupportOpCPS() throws RException {
+		return varSupportOpCPS.getBoolValue();
+	}
+
 //	public static boolean _findCallee(IRObject obj, Set<String> calleeNames, IRFrame frame, boolean tailCall)
 //			throws RException {
 //
@@ -720,12 +728,32 @@ public final class RuntimeUtil {
 //		return true;
 //	}
 
-	public static boolean isSupportOpCPS() throws RException {
-		return varSupportOpCPS.getBoolValue();
-	}
-
 	public static boolean isSupportOpStable() throws RException {
 		return varSupportOpStable.getBoolValue();
+	}
+
+	public static IRFrameEntry lookupFrameEntry(IRAtom atom, IRInterpreter interpreter, IRFrame frame)
+			throws RException {
+
+		String atomName = atom.getName();
+
+		// Searching the current frame firstly
+		IRFrameEntry entry = frame.getEntry(atomName);
+		if (entry != null) {
+			return entry;
+		}
+
+		// Searching the using name space if it was specified
+		IRSubject usingNameSpace = RulpUtil.getUsingNameSpace(frame);
+		if (usingNameSpace != null) {
+			IRFrame nsFrame = usingNameSpace.getSubjectFrame();
+			entry = nsFrame.getEntry(atomName);
+			if (entry != null) {
+				return entry;
+			}
+		}
+
+		return null;
 	}
 
 	public static IRList rebuildFuncExpr(IRFunction fun, IRList expr, IRInterpreter interpreter, IRFrame frame)

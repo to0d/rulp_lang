@@ -60,7 +60,7 @@ public class TestClass extends RulpTestBase {
 		_test("(ls o1)", "'(o1::this o1::var1)");
 
 		_test("(value-of var1)", "0");
-		_test("(value-of o1::var1)", "1");
+		_test("(value-of (value-of o1::var1))", "1");
 	}
 
 	@Test

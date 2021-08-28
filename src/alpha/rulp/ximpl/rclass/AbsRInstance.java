@@ -155,6 +155,7 @@ public abstract class AbsRInstance extends AbsRSubject implements IRInstance {
 				objMbr.setAccessType(classMbr.getAccessType());
 				objMbr.setFinal(classMbr.isFinal());
 				objMbr.setStatic(classMbr.isStatic());
+				objMbr.setInherit(true);
 
 				this.setMember(name, objMbr);
 			}

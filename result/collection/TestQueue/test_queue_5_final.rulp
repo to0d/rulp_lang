@@ -6,7 +6,7 @@ at main: (defclass class1 (queue))
 
 (defvar queue::?v2 0)
 ;err:
-can't define member<queue::?v2> for final subject: queue
+can't define member variable<?v2> for final subject: queue
 at main: (defvar queue::?v2 0)
 ;eof
 

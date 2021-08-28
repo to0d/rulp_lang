@@ -10,6 +10,7 @@
 package alpha.rulp.utils;
 
 import static alpha.rulp.lang.Constant.A_NIL;
+import static alpha.rulp.lang.Constant.A_USING_NS;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.S_QUESTION;
 import static alpha.rulp.lang.Constant.S_QUESTION_C;
@@ -1173,5 +1174,23 @@ public class RulpUtil {
 		default:
 			throw new RException("unsupport type: " + obj.getType());
 		}
+	}
+
+	public static void removeUsingNameSpace(IRFrame frame) throws RException {
+		frame.removeEntry(A_USING_NS);
+	}
+
+	public static void setUsingNameSpace(IRFrame frame, IRSubject ns) throws RException {
+		frame.setEntry(A_USING_NS, ns);
+	}
+
+	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
+
+		IRObject nsObj = frame.getObject(A_USING_NS);
+		if (nsObj == null) {
+			return null;
+		}
+
+		return RulpUtil.asSubject(nsObj);
 	}
 }

@@ -177,7 +177,7 @@ public class XRFunctionList extends AbsRefCallableAdapter implements IRFunctionL
 		int newFrameId = newFrame.getFrameId();
 
 		if (oldFrameId == newFrameId) {
-			throw new RException(String.format("Duplicate funcion: %s", oldFun.getSignature()));
+			throw new RException(String.format("duplicate funcion: %s", oldFun.getSignature()));
 		}
 
 		if (oldFrameId > newFrameId) {

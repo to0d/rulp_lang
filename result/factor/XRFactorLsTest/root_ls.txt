@@ -122,6 +122,7 @@ root::str-trim-head
 root::str-trim-tail
 root::strcat
 root::string
+root::subject-of
 root::sys-gc
 root::sys-time
 root::to-atom

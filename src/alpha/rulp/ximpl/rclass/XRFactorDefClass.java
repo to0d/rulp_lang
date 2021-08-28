@@ -18,7 +18,6 @@ import static alpha.rulp.lang.Constant.F_DEFUN;
 import static alpha.rulp.lang.Constant.F_DEFVAR;
 import static alpha.rulp.lang.Constant.F_DO;
 import static alpha.rulp.lang.Constant.F_MBR_SUPER;
-import static alpha.rulp.lang.Constant.O_Nil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +47,40 @@ import alpha.rulp.ximpl.runtime.XRFactorDefun;
 import alpha.rulp.ximpl.runtime.XRFunctionList;
 
 public class XRFactorDefClass extends AbsRFactorAdapter implements IRFactor {
+
+	public static IRMember createMemberVar(IRSubject sub, String mbrName, IRObject varValue) throws RException {
+
+		/*****************************************************/
+		// Check the variable whether be defined
+		/*****************************************************/
+		IRMember oldMbr = sub.getMember(mbrName);
+		if (oldMbr != null) {
+
+			if (oldMbr.getValue().getType() != RType.VAR) {
+				throw new RException(String.format("can't redefine member<%s> type from %s to %s", oldMbr,
+						oldMbr.getValue().getType(), RType.VAR));
+			}
+
+			if (oldMbr.isFinal()) {
+				throw new RException("can't redefine final member variable: " + oldMbr);
+			}
+
+			if (!oldMbr.isInherit()) {
+				throw new RException("duplicate member variable: " + oldMbr);
+			}
+		}
+
+		if (sub.isFinal()) {
+			throw new RException("can't define member variable<" + mbrName + "> for final subject: " + sub);
+		}
+
+		IRVar var = RulpFactory.createVar(mbrName);
+		if (varValue != null) {
+			var.setValue(varValue);
+		}
+
+		return RulpFactory.createMember(sub, mbrName, var);
+	}
 
 	public static IRMember defineClassMemberFun(IRSubject sub, String mbrName, IRList mbrExpr,
 			IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -157,21 +190,27 @@ public class XRFactorDefClass extends AbsRFactorAdapter implements IRFactor {
 		return mbr;
 	}
 
-	public static void defineClassMemberVar(IRSubject sub, IRList mbrExpr, IRInterpreter interpreter, IRFrame frame)
+	public static void defineSubjectMemberVar(IRSubject sub, IRList mbrExpr, IRInterpreter interpreter, IRFrame frame)
 			throws RException {
 
-		IRObject varValue = null;
-
+		/*****************************************************/
+		// name
+		/*****************************************************/
 		String mbrName = RulpUtil.asAtom(mbrExpr.get(1)).getName();
-		int mbrExprSize = mbrExpr.size();
 
+		/*****************************************************/
+		// value
+		/*****************************************************/
+		IRObject varValue = null;
+		int mbrExprSize = mbrExpr.size();
 		if (mbrExprSize >= 3) {
 			varValue = interpreter.compute(frame, mbrExpr.get(2));
 		}
 
-		IRVar var = RulpFactory.createVar(mbrName);
-		var.setValue(varValue == null ? O_Nil : varValue);
-		IRMember mbr = RulpFactory.createMember(sub, mbrName, var);
+		/*****************************************************/
+		// member
+		/*****************************************************/
+		IRMember mbr = createMemberVar(sub, mbrName, varValue);
 
 		/*****************************************************/
 		// Process modifier
@@ -331,9 +370,7 @@ public class XRFactorDefClass extends AbsRFactorAdapter implements IRFactor {
 
 				switch (((IRAtom) e0).getName()) {
 				case F_DEFVAR:
-
-					defineClassMemberVar(defClass, mbrExpr, interpreter, frame);
-
+					defineSubjectMemberVar(defClass, mbrExpr, interpreter, frame);
 					break;
 
 				case F_DEFUN:
@@ -344,7 +381,6 @@ public class XRFactorDefClass extends AbsRFactorAdapter implements IRFactor {
 
 					defineClassMemberFun(defClass, RulpUtil.asAtom(mbrExpr.get(1)).getName(), mbrExpr, interpreter,
 							frame);
-
 					break;
 
 				default:

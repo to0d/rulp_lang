@@ -24,6 +24,8 @@ public class XRMember extends AbsRefObject implements IRMember {
 
 	private boolean bFinal = false;
 
+	private boolean bInherit = false;
+
 	private boolean bStatic = false;
 
 	private String name;
@@ -80,6 +82,11 @@ public class XRMember extends AbsRefObject implements IRMember {
 	}
 
 	@Override
+	public boolean isInherit() {
+		return bInherit;
+	}
+
+	@Override
 	public boolean isStatic() {
 		return bStatic;
 	}
@@ -92,6 +99,11 @@ public class XRMember extends AbsRefObject implements IRMember {
 	@Override
 	public void setFinal(boolean bFinal) {
 		this.bFinal = bFinal;
+	}
+
+	@Override
+	public void setInherit(boolean bInherit) throws RException {
+		this.bInherit = bInherit;
 	}
 
 	@Override

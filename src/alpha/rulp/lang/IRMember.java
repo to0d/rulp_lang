@@ -12,11 +12,15 @@ public interface IRMember extends IRObject {
 
 	public boolean isFinal();
 
+	public boolean isInherit();
+
 	public boolean isStatic();
 
 	public void setAccessType(RAccessType accessType) throws RException;
 
 	public void setFinal(boolean bFinal) throws RException;
 	
+	public void setInherit(boolean bInherit) throws RException;
+
 	public void setStatic(boolean bStatic) throws RException;
 }

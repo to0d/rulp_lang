@@ -19,9 +19,14 @@ class XRFactorDefvarTest extends RulpTestBase {
 	@Test
 	void test2() {
 
-		// defvar does assignment only once
 		_setup();
+
 		_test("(defvar x 10) x", "&x 10");
-		_test("(defvar x 9) x", "&x 10");
+
+		// Can't redefine
+		_test_error("(defvar x 9) x", "duplicate local variable: x\n" + "at main: (defvar x 9)");
+
+		_test("(defun fun1 () (defvar x 11) (return x))");
+		_test("(fun1)", "11");
 	}
 }

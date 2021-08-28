@@ -11,7 +11,6 @@ class XRFactorDoTest extends RulpTestBase {
 
 		_setup();
 		_test("(defvar x 10) (print x)", "&x nil", "10");
-		_test("(defvar x 10) (print x)", "&x nil", "10");
 
 		_setup();
 		_test("(do (defvar x 10) (print x))", "nil", "10");

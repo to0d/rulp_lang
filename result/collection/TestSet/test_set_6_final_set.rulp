@@ -6,7 +6,7 @@ at main: (defclass class1 (set))
 
 (defvar set::?v2 0)
 ;err:
-can't define member<set::?v2> for final subject: set
+can't define member variable<?v2> for final subject: set
 at main: (defvar set::?v2 0)
 ;eof
 

@@ -26,8 +26,14 @@ mbr=super, name=class1, type=class, property='(default), class-property='()
 (new class1 o1)
 ;=>o1
 
+(o1::get)
+;=>0
+
 (new class2 o2)
 ;=>o2
+
+(o1::get)
+;=>0
 
 (o1::add 1)
 ;=>nil
@@ -40,3 +46,32 @@ mbr=super, name=class1, type=class, property='(default), class-property='()
 
 (o2::get)
 ;=>2
+
+(defclass class3 (class1)
+    (defvar ?value 1)
+)
+;=>class3
+
+(new class3 o3)
+;=>o3
+
+(o3::get)
+;=>1
+
+(defclass class4 (class1)
+    (defvar ?value 2)
+    (defvar ?value 2)
+)
+;err:
+duplicate member variable: class4::?value
+at main: (defclass class4 (class1) (defvar ?value 2) (defvar ?value 2))
+;eof
+
+(defclass class5 (class1)
+    (defun get () (return ?value))
+    (defun get () (return ?value))
+)
+;err:
+duplicate funcion: (get)
+at main: (defclass class5 (class1) (defun get () (return ?value)) (defun get () (retur...
+;eof

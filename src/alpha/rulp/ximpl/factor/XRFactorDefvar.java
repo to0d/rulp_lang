@@ -22,16 +22,17 @@ import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.rclass.XRFactorDefClass;
 
 public class XRFactorDefvar extends AbsRFactorAdapter implements IRFactor {
 
 	private boolean allowRedefine;
 
-	private boolean rtVar;
+	private boolean returnVar;
 
 	public XRFactorDefvar(String factorName, boolean rtVar, boolean allowRedefine) {
 		super(factorName);
-		this.rtVar = rtVar;
+		this.returnVar = rtVar;
 		this.allowRedefine = allowRedefine;
 	}
 
@@ -56,44 +57,21 @@ public class XRFactorDefvar extends AbsRFactorAdapter implements IRFactor {
 		throw new RException("Invalid var type, : " + args);
 	}
 
-	public IRObject defMemberVar(IRMember mbr, IRObject valObj, IRInterpreter interpreter, IRFrame frame)
+	public IRObject defMemberVar(IRMember mbrObj, IRObject val, IRInterpreter interpreter, IRFrame frame)
 			throws RException {
 
-		IRObject subObj = interpreter.compute(frame, mbr.getSubject());
+		IRObject subObj = interpreter.compute(frame, mbrObj.getSubject());
 		IRSubject sub = RulpUtil.asSubject(subObj);
+		String varName = mbrObj.getName();
 
-		String varName = mbr.getName();
-		IRVar var = null;
-		IRMember actMbr = sub.getMember(mbr.getName());
-		if (actMbr != null) {
-
-			if (actMbr.getValue().getType() != RType.VAR) {
-				throw new RException("can't redefine member<" + actMbr + "> to var");
-			}
-
-			if (actMbr.isFinal()) {
-				throw new RException("can't redefine final member: " + actMbr);
-			}
-
-			var = RulpUtil.asVar(actMbr.getValue());
-
-		} else {
-
-			if (sub.isFinal()) {
-				throw new RException("can't define member<" + mbr + "> for final subject: " + sub);
-			}
-
-			var = RulpFactory.createVar(varName);
-			sub.setMember(varName, RulpFactory.createMember(sub, varName, var));
+		if (val != null) {
+			val = interpreter.compute(frame, val);
 		}
 
-		IRObject val = var.getValue();
-		if (valObj != null) {
-			val = interpreter.compute(frame, valObj);
-			var.setValue(val);
-		}
+		IRMember mbr = XRFactorDefClass.createMemberVar(sub, varName, val);
+		sub.setMember(varName, mbr);
 
-		return rtVar ? var : val;
+		return returnVar ? mbr.getValue() : val;
 	}
 
 	public IRObject defVar(String varName, IRObject valObj, IRInterpreter interpreter, IRFrame frame)
@@ -101,8 +79,8 @@ public class XRFactorDefvar extends AbsRFactorAdapter implements IRFactor {
 
 		if (!allowRedefine) {
 			IRFrameEntry entry = frame.getEntry(varName);
-			if (entry != null) {
-				return RulpUtil.asVar(entry.getObject());
+			if (entry != null && entry.getFrame() == frame) {
+				throw new RException("duplicate local variable: " + varName);
 			}
 		}
 
@@ -115,7 +93,7 @@ public class XRFactorDefvar extends AbsRFactorAdapter implements IRFactor {
 			var.setValue(val);
 		}
 
-		return rtVar ? var : val;
+		return returnVar ? var : val;
 	}
 
 	@Override

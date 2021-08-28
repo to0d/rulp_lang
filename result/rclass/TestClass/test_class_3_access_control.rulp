@@ -50,7 +50,6 @@ at main: (o1::sub 2)
 (value-of o1::?value)
 ;err:
 Can't access member<o1::?value> in frame<main>
-at main: o1::?value
 at main: (value-of o1::?value)
 ;eof
 
@@ -64,7 +63,6 @@ at main: (class1::sub 2)
 (value-of class1::?value)
 ;err:
 Can't access member<class1::?value> in frame<main>
-at main: class1::?value
 at main: (value-of class1::?value)
 ;eof
 

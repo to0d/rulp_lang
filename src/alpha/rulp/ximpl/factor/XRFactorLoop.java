@@ -43,23 +43,30 @@ public class XRFactorLoop extends AbsRFactorAdapter implements IRFactor {
 
 		IRIterator<? extends IRObject> valIter = values.iterator();
 		OUT_LOOP: while (valIter.hasNext()) {
+
 			loopFrame.setEntry(indexName, valIter.next());
 			IRIterator<? extends IRObject> argIter = args.listIterator(6);
-			while (argIter.hasNext()) {
 
-				IRObject expr = argIter.next();
-				if (expr.getType() != RType.EXPR) {
-					throw new RException("Invalid expr in loop: " + expr);
+			IRFrame loopDoFrame = RulpFactory.createFrame(loopFrame, "LOOP-DO");
+			RulpUtil.incRef(loopDoFrame);
+
+			try {
+
+				while (argIter.hasNext()) {
+					IRObject expr = argIter.next();
+					if (expr.getType() != RType.EXPR) {
+						throw new RException("Invalid expr in loop: " + expr);
+					}
+					interpreter.compute(loopDoFrame, expr);
 				}
 
-				try {
-					interpreter.compute(loopFrame, expr);
-				} catch (RBreak r) {
-					break OUT_LOOP;
-				} catch (RContinue c) {
-					continue OUT_LOOP;
-				}
-
+			} catch (RBreak r) {
+				break OUT_LOOP;
+			} catch (RContinue c) {
+				continue OUT_LOOP;
+			} finally {
+				loopDoFrame.release();
+				RulpUtil.decRef(loopDoFrame);
 			}
 		}
 	}
@@ -71,22 +78,31 @@ public class XRFactorLoop extends AbsRFactorAdapter implements IRFactor {
 		int toIndex = MathUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, args.get(6))));
 
 		OUT_LOOP: for (int i = fromIndex; i <= toIndex; ++i) {
+
 			loopFrame.setEntry(indexName, RulpFactory.createInteger(i));
 			IRIterator<? extends IRObject> iter = args.listIterator(8);
-			while (iter.hasNext()) {
 
-				IRObject expr = iter.next();
-				if (expr.getType() != RType.EXPR) {
-					throw new RException("Invalid expr in loop: " + expr);
+			IRFrame loopDoFrame = RulpFactory.createFrame(loopFrame, "LOOP-DO");
+			RulpUtil.incRef(loopDoFrame);
+
+			try {
+
+				while (iter.hasNext()) {
+
+					IRObject expr = iter.next();
+					if (expr.getType() != RType.EXPR) {
+						throw new RException("Invalid expr in loop: " + expr);
+					}
+					interpreter.compute(loopDoFrame, expr);
 				}
 
-				try {
-					interpreter.compute(loopFrame, expr);
-				} catch (RBreak r) {
-					break OUT_LOOP;
-				} catch (RContinue c) {
-					continue OUT_LOOP;
-				}
+			} catch (RBreak r) {
+				break OUT_LOOP;
+			} catch (RContinue c) {
+				continue OUT_LOOP;
+			} finally {
+				loopDoFrame.release();
+				RulpUtil.decRef(loopDoFrame);
 			}
 		}
 	}
@@ -95,25 +111,47 @@ public class XRFactorLoop extends AbsRFactorAdapter implements IRFactor {
 
 		IRIterator<? extends IRObject> iter = null;
 
-		OUT_LOOP: while (true) {
+		IRFrame loopDoFrame = null;
 
-			if (iter == null || !iter.hasNext()) {
-				iter = args.listIterator(1); // skip head
+		try {
+
+			OUT_LOOP: while (true) {
+
+				if (iter == null || !iter.hasNext()) {
+
+					iter = args.listIterator(1); // skip head
+
+					if (loopDoFrame != null) {
+						loopDoFrame.release();
+						RulpUtil.decRef(loopDoFrame);
+					}
+
+					loopDoFrame = RulpFactory.createFrame(loopFrame, "LOOP-DO");
+					RulpUtil.incRef(loopDoFrame);
+				}
+
+				IRObject expr = iter.next();
+				if (expr.getType() != RType.EXPR) {
+					throw new RException("Invalid expr in loop: " + expr);
+				}
+
+				try {
+					interpreter.compute(loopDoFrame, expr);
+				} catch (RBreak r) {
+					break OUT_LOOP;
+				} catch (RContinue c) {
+					continue OUT_LOOP;
+				}
 			}
 
-			IRObject expr = iter.next();
-			if (expr.getType() != RType.EXPR) {
-				throw new RException("Invalid expr in loop: " + expr);
-			}
+		} finally {
 
-			try {
-				interpreter.compute(loopFrame, expr);
-			} catch (RBreak r) {
-				break OUT_LOOP;
-			} catch (RContinue c) {
-				continue OUT_LOOP;
+			if (loopDoFrame != null) {
+				loopDoFrame.release();
+				RulpUtil.decRef(loopDoFrame);
 			}
 		}
+
 	}
 
 	@Override
@@ -156,6 +194,7 @@ public class XRFactorLoop extends AbsRFactorAdapter implements IRFactor {
 			}
 
 		} finally {
+
 			loopFrame.release();
 			RulpUtil.decRef(loopFrame);
 		}

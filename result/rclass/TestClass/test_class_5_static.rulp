@@ -8,9 +8,15 @@
 ;=>o1
 
 (value-of o1::?v1)
+;=>&?v1
+
+(type-of $(value-of o1::?v1))
+;=>var
+
+(value-of (value-of o1::?v1))
 ;=>0
 
-(value-of o1::?v2)
+(value-of (value-of o1::?v2))
 ;=>0
 
 (setq class1::?v1 1)
@@ -19,10 +25,10 @@
 (setq class1::?v2 2)
 ;=>&?v2
 
-(value-of o1::?v1)
+(value-of (value-of o1::?v1))
 ;=>0
 
-(value-of o1::?v2)
+(value-of (value-of o1::?v2))
 ;=>2
 
 (ls-print class1)

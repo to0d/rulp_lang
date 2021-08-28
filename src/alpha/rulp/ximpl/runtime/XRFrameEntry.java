@@ -20,13 +20,13 @@ public class XRFrameEntry extends AbsAtomObject implements IRMember, IRFrameEntr
 
 	private List<String> aliasNames = null;
 
+	private int entryId;
+
 	private IRFrame frame;
 
 	private String name;
 
 	private IRObject object;
-
-	private int entryId;
 
 	public XRFrameEntry(int entryId, IRFrame frame, String name, IRObject object) {
 		super();
@@ -107,6 +107,11 @@ public class XRFrameEntry extends AbsAtomObject implements IRMember, IRFrameEntr
 	}
 
 	@Override
+	public boolean isInherit() {
+		return false;
+	}
+
+	@Override
 	public boolean isStatic() {
 		return false;
 	}
@@ -119,6 +124,11 @@ public class XRFrameEntry extends AbsAtomObject implements IRMember, IRFrameEntr
 	@Override
 	public void setFinal(boolean bFinal) throws RException {
 		throw new RException("unable to set final for frame entry");
+	}
+
+	@Override
+	public void setInherit(boolean bInherit) throws RException {
+		throw new RException("unable to set inherit for frame entry");
 	}
 
 	public void setObject(IRObject object) {

@@ -99,6 +99,7 @@ import alpha.rulp.ximpl.factor.XRFactorLoop;
 import alpha.rulp.ximpl.factor.XRFactorNameOf;
 import alpha.rulp.ximpl.factor.XRFactorRef;
 import alpha.rulp.ximpl.factor.XRFactorSetq;
+import alpha.rulp.ximpl.factor.XRFactorSubjectOf;
 import alpha.rulp.ximpl.factor.XRFactorToAtom;
 import alpha.rulp.ximpl.factor.XRFactorToInteger;
 import alpha.rulp.ximpl.factor.XRFactorToNamedList;
@@ -132,6 +133,7 @@ import alpha.rulp.ximpl.lang.XRNative;
 import alpha.rulp.ximpl.lang.XRString;
 import alpha.rulp.ximpl.lang.XRVar;
 import alpha.rulp.ximpl.math.XRFactorRandom;
+import alpha.rulp.ximpl.namespace.XRFactorBodyUseNameSpace;
 import alpha.rulp.ximpl.network.XRSocket;
 import alpha.rulp.ximpl.optimize.XRFactorMakeCPS;
 import alpha.rulp.ximpl.rclass.XRDefClass;
@@ -144,7 +146,6 @@ import alpha.rulp.ximpl.rclass.XRFactorGetMbr;
 import alpha.rulp.ximpl.rclass.XRFactorLs;
 import alpha.rulp.ximpl.rclass.XRFactorNew;
 import alpha.rulp.ximpl.rclass.XRFactorPropertyOf;
-import alpha.rulp.ximpl.rclass.XRFactorUse;
 import alpha.rulp.ximpl.rclass.XRMember;
 import alpha.rulp.ximpl.rclass.XRNoClass;
 import alpha.rulp.ximpl.rclass.XRSubjectFrame;
@@ -563,6 +564,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorToAtom(F_TO_ATOM));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSizeOfList(F_SIZE_OF_LIST));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSizeOfArray(F_SIZE_OF_ARRAY));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorSubjectOf(F_SUBJECT_OF));
 
 		// Class
 		RulpUtil.addFrameObject(rootFrame, new XRNoClass(A_NOCLASS, rootFrame));
@@ -573,8 +575,10 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDelete(F_DELETE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefClass(F_DEFCLASS));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorGetMbr(F_O_MBR));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorUse(F_USE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorLs(F_LS));
+
+		// Name space
+		RulpUtil.addFactor(rootFrame, F_USE, A_NAMESPACE, new XRFactorBodyUseNameSpace());
 
 		// IO
 		RulpUtil.addFrameObject(rootFrame, new XRFactorPrint(F_PRINT));

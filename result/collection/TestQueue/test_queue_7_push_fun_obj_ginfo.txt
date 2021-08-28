@@ -57,9 +57,9 @@ Object create count:
     instance:            2            0            2
        class:            6            0            6
       member:          137            0          137
-       frame:           10            8            2
+       frame:           12           10            2
  interpreter:            1            0
-  frameEntry:          177            0
+  frameEntry:          178            0
       lambda:            5            0
 ==========================================================================================================================
 

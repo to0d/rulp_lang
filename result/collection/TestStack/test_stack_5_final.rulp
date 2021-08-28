@@ -6,7 +6,7 @@ at main: (defclass class1 (stack))
 
 (defvar stack::?v2 0)
 ;err:
-can't define member<stack::?v2> for final subject: stack
+can't define member variable<?v2> for final subject: stack
 at main: (defvar stack::?v2 0)
 ;eof
 

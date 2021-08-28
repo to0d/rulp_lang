@@ -73,6 +73,8 @@ public interface Constant {
 
 	String A_MEMBER = "member";
 
+	String A_NAMESPACE = "namespace";
+
 	String A_NAN = "nan";
 
 	String A_NATIVE = "native";
@@ -110,6 +112,8 @@ public interface Constant {
 	String A_TRACE = "?trace";
 
 	String A_TRUE = "true";
+
+	String A_USING_NS = "?using_ns";
 
 	String A_VALUES = "values";
 
@@ -322,7 +326,7 @@ public interface Constant {
 	String F_TO_ATOM = "to-atom";
 
 	String F_TO_INT = "to-int";
-	
+
 	String F_TO_NAMED_LIST = "to-named-list";
 
 	String F_TO_STRING = "to-string";
@@ -336,6 +340,8 @@ public interface Constant {
 	String F_USE = "use";
 
 	String F_VALUE_OF = "value-of";
+
+	String F_SUBJECT_OF = "subject-of";
 
 	String F_VALUE_TYPE_OF = "value-type-of";
 

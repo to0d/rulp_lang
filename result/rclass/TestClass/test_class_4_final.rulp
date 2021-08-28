@@ -29,7 +29,7 @@ at main: (defun class1::add (?x) (setq ?value (+ ?value ?x 1)))
 
 (defun class1::sub (?x) (setq ?value (- ?value ?x 1)))
 ;err:
-Duplicate funcion: (sub nil)
+duplicate funcion: (sub nil)
 at main: (defun class1::sub (?x) (setq ?value (- ?value ?x 1)))
 ;eof
 
