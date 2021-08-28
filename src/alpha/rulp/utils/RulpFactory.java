@@ -578,7 +578,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorLs(F_LS));
 
 		// Name space
-		RulpUtil.addFactor(rootFrame, F_USE, A_NAMESPACE, new XRFactorBodyUseNameSpace());
+		RulpUtil.addTemplate(rootFrame, F_USE, A_NAMESPACE, new XRFactorBodyUseNameSpace());
 
 		// IO
 		RulpUtil.addFrameObject(rootFrame, new XRFactorPrint(F_PRINT));

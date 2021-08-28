@@ -11,7 +11,7 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpTestBase;
 import alpha.rulp.utils.RulpUtil;
 
-public class TestFactor2 extends RulpTestBase {
+public class TestTemplate extends RulpTestBase {
 
 	@Test
 	public void test_1() {
@@ -19,10 +19,10 @@ public class TestFactor2 extends RulpTestBase {
 		_setup();
 
 		try {
-			RulpUtil.addFactor(_getInterpreter().getMainFrame(), "f1", "a", (_args, _interpreter, _frame) -> {
+			RulpUtil.addTemplate(_getInterpreter().getMainFrame(), "f1", "a", (_args, _interpreter, _frame) -> {
 				return RulpFactory.createAtom("A" + _args.get(2).asString());
 			});
-			RulpUtil.addFactor(_getInterpreter().getMainFrame(), "f1", "b", (_args, _interpreter, _frame) -> {
+			RulpUtil.addTemplate(_getInterpreter().getMainFrame(), "f1", "b", (_args, _interpreter, _frame) -> {
 				return RulpFactory.createAtom("B" + _args.get(3).asString());
 			});
 		} catch (RException | IOException e) {
@@ -33,6 +33,6 @@ public class TestFactor2 extends RulpTestBase {
 		_test("(f1 a x y)", "Ax");
 		_test("(f1 b x y)", "By");
 
-		_gInfo("result/runtime/TestFactor2/test_1_ginfo.txt");
+		_gInfo("result/runtime/TestTemplate/test_1_ginfo.txt");
 	}
 }

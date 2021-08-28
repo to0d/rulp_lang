@@ -19,11 +19,8 @@ import static alpha.rulp.lang.Constant.T_Instance;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import alpha.rulp.lang.IRArray;
 import alpha.rulp.lang.IRAtom;
@@ -60,65 +57,12 @@ import alpha.rulp.runtime.RName;
 import alpha.rulp.ximpl.collection.XRMap;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 import alpha.rulp.ximpl.network.XRSocket;
+import alpha.rulp.ximpl.runtime.XRFactorTemplate;
 
 public class RulpUtil {
 
 	static interface IRFormater {
 		public void format(StringBuffer sb, IRObject obj) throws RException;
-	}
-
-	static class XRFactor2 extends AbsRFactorAdapter implements IRFactor {
-
-		private Map<String, IRFactorBody> subFactorMap = new HashMap<>();
-
-		public XRFactor2(String factorName) {
-			super(factorName);
-		}
-
-		public void addBody(String bodyName, IRFactorBody body) throws RException {
-
-			if (subFactorMap.containsKey(bodyName)) {
-				throw new RException(
-						String.format("duplicate body name: factor=%s, body=%s", this.getName(), bodyName));
-			}
-
-			subFactorMap.put(bodyName, body);
-		}
-
-		@Override
-		public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
-
-			if (args.size() < 2) {
-				throw new RException("Invalid parameters: " + args);
-			}
-
-			String subName = interpreter.compute(frame, args.get(1)).asString();
-			IRFactorBody factorBody = subFactorMap.get(subName);
-			if (factorBody == null) {
-				throw new RException("factor body not found: " + subName);
-			}
-
-			return factorBody.compute(args, interpreter, frame);
-		}
-
-		public String toString() {
-
-			StringBuffer sb = new StringBuffer();
-			sb.append(this.getName());
-			sb.append(":");
-
-			ArrayList<String> subNames = new ArrayList<>(subFactorMap.keySet());
-			Collections.sort(subNames);
-
-			for (int i = 0; i < subNames.size(); ++i) {
-				if (i != 0) {
-					sb.append(',');
-				}
-				sb.append(subNames.get(i));
-			}
-
-			return sb.toString();
-		}
 	}
 
 	static class XRFactorWrapper extends AbsRFactorAdapter implements IRFactor {
@@ -438,22 +382,6 @@ public class RulpUtil {
 		frame.setEntry(factorName, new XRFactorWrapper(factorName, factorBody, threadSafe));
 	}
 
-	public static void addFactor(IRFrame frame, String factorName, String bodyName, IRFactorBody factorBody)
-			throws RException {
-
-		XRFactor2 factor = null;
-
-		IRFrameEntry entry = frame.getEntry(factorName);
-		if (entry == null) {
-			factor = new XRFactor2(factorName);
-			frame.setEntry(factorName, factor);
-		} else {
-			factor = (XRFactor2) RulpUtil.asFactor(entry.getValue());
-		}
-
-		factor.addBody(bodyName, factorBody);
-	}
-
 	public static void addFrameObject(IRFrame frame, IRObject obj) throws RException {
 
 		switch (obj.getType()) {
@@ -487,6 +415,22 @@ public class RulpUtil {
 			throw new RException("Invalid object: " + obj);
 		}
 
+	}
+
+	public static void addTemplate(IRFrame frame, String factorName, String bodyName, IRFactorBody factorBody)
+			throws RException {
+
+		XRFactorTemplate template = null;
+
+		IRFrameEntry entry = frame.getEntry(factorName);
+		if (entry == null) {
+			template = new XRFactorTemplate(factorName);
+			frame.setEntry(factorName, template);
+		} else {
+			template = (XRFactorTemplate) RulpUtil.asFactor(entry.getValue());
+		}
+
+		template.addBody(bodyName, factorBody);
 	}
 
 	public static IRArray asArray(IRObject obj) throws RException {
