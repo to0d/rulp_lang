@@ -1,4 +1,4 @@
-package beta.rulp.factor;
+package beta.rulp.runtime;
 
 import static org.junit.Assert.fail;
 
@@ -71,7 +71,7 @@ class XRFactorDefunTest extends RulpTestBase {
 		_test("(name-of fun)", "\"'((fun nil nil) (fun nil))\"");
 		_test("(fun 1 2)", "3");
 
-		_test("(out-to-file \"result/factor/XRFactorDefunTest/test_fun_3_overload_arg_number_frame_1.txt\" (print-subject))");
+		_test("(out-to-file \"result/runtime/XRFactorDefunTest/test_fun_3_overload_arg_number_frame_1.txt\" (print-subject))");
 	}
 
 	@Test
@@ -79,8 +79,8 @@ class XRFactorDefunTest extends RulpTestBase {
 
 		_setup();
 
-		_test_script("result/factor/XRFactorDefunTest/test_fun_overload_arg_type_1.rulp");
-		_test("(out-to-file \"result/factor/XRFactorDefunTest/test_fun_3_overload_arg_type_1_frame_1.txt\" (print-subject))");
+		_test_script("result/runtime/XRFactorDefunTest/test_fun_overload_arg_type_1.rulp");
+		_test("(out-to-file \"result/runtime/XRFactorDefunTest/test_fun_3_overload_arg_type_1_frame_1.txt\" (print-subject))");
 
 	}
 
@@ -96,25 +96,25 @@ class XRFactorDefunTest extends RulpTestBase {
 		_test("(fun1 2 3)", "5");
 		_test("(fun1 2 3.1)", "5.1");
 		_test("(fun1 2.1 3.1)", "-1.0");
-		_test("(out-to-file \"result/factor/XRFactorDefunTest/test_fun_3_overload_arg_type_2_frame_1.txt\" (print-subject))");
+		_test("(out-to-file \"result/runtime/XRFactorDefunTest/test_fun_3_overload_arg_type_2_frame_1.txt\" (print-subject))");
 	}
 
 	@Test
 	void test_fun_3_overload_cross_frame_1_override() {
 		_setup();
-		_test_script("result/factor/XRFactorDefunTest/test_fun_3_overload_cross_frame_1_override.rulp");
+		_test_script("result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_1_override.rulp");
 	}
 
 	@Test
 	void test_fun_3_overload_cross_frame_1_override2() {
 		_setup();
-		_test_script("result/factor/XRFactorDefunTest/test_fun_3_overload_cross_frame_1_override2.rulp");
+		_test_script("result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_1_override2.rulp");
 	}
 
 	@Test
 	void test_fun_3_overload_cross_frame_2() {
 		_setup();
-		_test_script("result/factor/XRFactorDefunTest/test_fun_3_overload_cross_frame_2.rulp");
+		_test_script("result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_2.rulp");
 	}
 
 	@Test
@@ -140,7 +140,7 @@ class XRFactorDefunTest extends RulpTestBase {
 		_test("(fun1 a b)", "b");
 		_test("(fun1 1 3)", "4");
 		_test("(fun1 (get-null) 3)", "4");
-		_test("(out-to-file \"result/factor/XRFactorDefunTest/test_fun_3_overload_null_arg_frame_1.txt\" (print-subject))");
+		_test("(out-to-file \"result/runtime/XRFactorDefunTest/test_fun_3_overload_null_arg_frame_1.txt\" (print-subject))");
 	}
 
 	@Test
@@ -183,6 +183,6 @@ class XRFactorDefunTest extends RulpTestBase {
 	@Test
 	void test_fun_6_extend_body() {
 		_setup();
-		_test_script("result/factor/XRFactorDefunTest/test_fun_6_extend_body.rulp");
+		_test_script("result/runtime/XRFactorDefunTest/test_fun_6_extend_body.rulp");
 	}
 }

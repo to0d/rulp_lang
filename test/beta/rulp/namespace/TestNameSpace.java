@@ -120,4 +120,10 @@ public class TestNameSpace extends RulpTestBase {
 		_setup();
 		_test_script("result/namespace/TestNameSpace/test_namespace_3.rulp");
 	}
+
+	@Test
+	public void test_namespace_4() {
+
+		_test_error("(use namespace ns1)", "namespace not found: ns1\n" + "at main: (use namespace ns1)");
+	}
 }

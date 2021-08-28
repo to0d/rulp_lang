@@ -22,9 +22,9 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 
-public class XRFactorDefmacro extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorDefMacro extends AbsRFactorAdapter implements IRFactor {
 
-	public XRFactorDefmacro(String factorName) {
+	public XRFactorDefMacro(String factorName) {
 		super(factorName);
 	}
 

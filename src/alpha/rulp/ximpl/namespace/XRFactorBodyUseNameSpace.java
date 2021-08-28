@@ -9,14 +9,18 @@
 
 package alpha.rulp.ximpl.namespace;
 
+import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRFrame;
+import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactorBody;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.utils.RuntimeUtil;
 
 public class XRFactorBodyUseNameSpace implements IRFactorBody {
 
@@ -27,9 +31,19 @@ public class XRFactorBodyUseNameSpace implements IRFactorBody {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRSubject nameSpace = RulpUtil.asSubject(interpreter.compute(frame, args.get(2)));
-		RulpUtil.setUsingNameSpace(frame, nameSpace);
+		IRObject obj = args.get(2);
+		if (obj.getType() == RType.ATOM) {
 
+			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry((IRAtom) obj, interpreter, frame);
+			if (entry == null) {
+				throw new RException("namespace not found: " + obj);
+			}
+
+			obj = entry.getValue();
+		}
+
+		IRSubject nameSpace = RulpUtil.asNameSpace(interpreter.compute(frame, obj));
+		RulpUtil.setUsingNameSpace(frame, nameSpace);
 		return nameSpace;
 	}
 }

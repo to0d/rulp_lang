@@ -9,6 +9,7 @@
 
 package alpha.rulp.utils;
 
+import static alpha.rulp.lang.Constant.A_NAMESPACE;
 import static alpha.rulp.lang.Constant.A_NIL;
 import static alpha.rulp.lang.Constant.A_USING_NS;
 import static alpha.rulp.lang.Constant.O_Nil;
@@ -663,6 +664,19 @@ public class RulpUtil {
 		return (IRMember) obj;
 	}
 
+	public static IRSubject asNameSpace(IRObject obj) throws RException {
+
+		if (obj.getType() == RType.FRAME) {
+			return (IRSubject) obj;
+		}
+
+		if (obj instanceof IRInstance && ((IRInstance) obj).getParent().getSubjectName().equals(A_NAMESPACE)) {
+			return (IRSubject) obj;
+		}
+
+		throw new RException("Can't convert to namespace: " + obj);
+	}
+
 	@SuppressWarnings("unchecked")
 	public static <T> T asNative(IRObject obj, Class<T> c) throws RException {
 
@@ -873,6 +887,16 @@ public class RulpUtil {
 		return valAtom;
 	}
 
+	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
+
+		IRObject nsObj = frame.getObject(A_USING_NS);
+		if (nsObj == null) {
+			return null;
+		}
+
+		return RulpUtil.asSubject(nsObj);
+	}
+
 	public static void incRef(IRObject obj) throws RException {
 
 		if (obj == null) {
@@ -1021,6 +1045,10 @@ public class RulpUtil {
 		return getObjectType(valObj) == typeAtom;
 	}
 
+	public static void removeUsingNameSpace(IRFrame frame) throws RException {
+		frame.removeEntry(A_USING_NS);
+	}
+
 	public static void setMember(IRSubject subject, String name, IRObject obj) throws RException {
 		setMember(subject, name, obj, null);
 	}
@@ -1033,6 +1061,10 @@ public class RulpUtil {
 			mbr.setAccessType(accessType);
 		}
 		subject.setMember(name, mbr);
+	}
+
+	public static void setUsingNameSpace(IRFrame frame, IRSubject ns) throws RException {
+		frame.setEntry(A_USING_NS, ns);
 	}
 
 	public static ArrayList<IRObject> toArray(IRList list) throws RException {
@@ -1174,23 +1206,5 @@ public class RulpUtil {
 		default:
 			throw new RException("unsupport type: " + obj.getType());
 		}
-	}
-
-	public static void removeUsingNameSpace(IRFrame frame) throws RException {
-		frame.removeEntry(A_USING_NS);
-	}
-
-	public static void setUsingNameSpace(IRFrame frame, IRSubject ns) throws RException {
-		frame.setEntry(A_USING_NS, ns);
-	}
-
-	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
-
-		IRObject nsObj = frame.getObject(A_USING_NS);
-		if (nsObj == null) {
-			return null;
-		}
-
-		return RulpUtil.asSubject(nsObj);
 	}
 }
