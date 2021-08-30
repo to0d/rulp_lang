@@ -34,7 +34,7 @@ public class XRFactorBodyUseNameSpace implements IRFactorBody {
 		IRObject obj = args.get(2);
 		if (obj.getType() == RType.ATOM) {
 
-			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry((IRAtom) obj, interpreter, frame);
+			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry((IRAtom) obj, frame);
 			if (entry == null) {
 				throw new RException("namespace not found: " + obj);
 			}

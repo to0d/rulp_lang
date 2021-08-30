@@ -1,16 +1,16 @@
-(deftemplate (ask teacher (?question expr)) (print "teacher say: yes, I know " ?question ".") (return (value-of question)))
+(deftemplate ask (teacher (?question expr)) (print "teacher say: yes, I know " ?question ".") (return (value-of question)))
 ;=>ask
-(deftemplate (ask student (?question expr)) (print "student say: no, I don't know " ?question "."))
+(deftemplate ask (student (?question expr)) (print "student say: no, I don't know " ?question "."))
 ;=>ask
-(ask teacher "1+1")
+(ask teacher (+ 1 1))
 ;=>Nio
 ;out:
 ;eof
-(ask student "1+1")
+(ask student (+ 1 1))
 ;=>3
 ;out:
 ;eof
-(ask other "1+1")
+(ask other (+ 1 1))
 ;=>3
 ;out:
 ;eof

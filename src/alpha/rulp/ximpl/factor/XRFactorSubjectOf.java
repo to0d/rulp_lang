@@ -34,7 +34,7 @@ public class XRFactorSubjectOf extends AbsRFactorAdapter implements IRFactor {
 
 		case ATOM:
 
-			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry((IRAtom) obj, interpreter, frame);
+			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry((IRAtom) obj, frame);
 			if (entry == null) {
 				return O_Nil;
 			}

@@ -60,6 +60,8 @@ public final class RuntimeUtil {
 
 	private static AtomicInteger exprComputeFuncCount = new AtomicInteger(0);
 
+	private static AtomicInteger exprComputeTemplateCount = new AtomicInteger(0);
+
 	private static AtomicInteger exprComputeMacroCount = new AtomicInteger(0);
 
 	private static AtomicInteger exprComputeMemberCount = new AtomicInteger(0);
@@ -307,6 +309,7 @@ public final class RuntimeUtil {
 			case INSTANCE:
 			case NATIVE:
 			case FACTOR:
+			case TEMPLATE:
 			case FUNC:
 			case FRAME:
 			case ARRAY:
@@ -329,7 +332,7 @@ public final class RuntimeUtil {
 
 			case ATOM: {
 
-				IRFrameEntry entry = lookupFrameEntry((IRAtom) obj, interpreter, frame);
+				IRFrameEntry entry = lookupFrameEntry((IRAtom) obj, frame);
 				if (entry == null) {
 					return obj;
 				}
@@ -371,6 +374,9 @@ public final class RuntimeUtil {
 						rst = CPSUtils.computeCPSExpr((IRExpr) rst, interpreter, frame);
 					}
 					return rst;
+
+				case TEMPLATE:
+					return RuntimeUtil.computeCallable((IRCallable) e0, expr, interpreter, frame);
 
 				case MEMBER:
 					exprComputeMemberCount.getAndIncrement();
@@ -580,6 +586,9 @@ public final class RuntimeUtil {
 		case FUNC:
 			return exprComputeFuncCount.get();
 
+		case TEMPLATE:
+			return exprComputeTemplateCount.get();
+
 		case MACRO:
 			return exprComputeMacroCount.get();
 
@@ -668,6 +677,7 @@ public final class RuntimeUtil {
 		case STRING:
 		case NIL:
 		case FACTOR:
+		case TEMPLATE:
 		case FUNC:
 		case ARRAY:
 			return false;
@@ -732,8 +742,7 @@ public final class RuntimeUtil {
 		return varSupportOpStable.getBoolValue();
 	}
 
-	public static IRFrameEntry lookupFrameEntry(IRAtom atom, IRInterpreter interpreter, IRFrame frame)
-			throws RException {
+	public static IRFrameEntry lookupFrameEntry(IRAtom atom, IRFrame frame) throws RException {
 
 		String atomName = atom.getName();
 
@@ -825,6 +834,7 @@ public final class RuntimeUtil {
 		exprComputeFactorCount.getAndSet(0);
 		exprComputeMacroCount.getAndSet(0);
 		exprComputeFuncCount.getAndSet(0);
+		exprComputeTemplateCount.getAndSet(0);
 		exprComputeMemberCount.getAndSet(0);
 		frameMaxLevel.getAndSet(0);
 		callStatsId.incrementAndGet();

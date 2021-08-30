@@ -26,5 +26,4 @@ public interface IRCallable extends IRObject {
 	public void incCallCount(int statsId, int callId);
 
 	public boolean isThreadSafe();
-
 }

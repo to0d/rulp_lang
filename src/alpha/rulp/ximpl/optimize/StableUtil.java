@@ -35,6 +35,7 @@ public class StableUtil {
 			return paraVarNames != null && paraVarNames.contains(RulpUtil.asVar(obj).getName());
 
 		case FACTOR:
+		case TEMPLATE:
 		case MACRO:
 			return ((IRCallable) obj).isStable();
 

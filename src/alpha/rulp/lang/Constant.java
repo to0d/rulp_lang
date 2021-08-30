@@ -35,6 +35,8 @@ public interface Constant {
 
 	String A_FACTOR = "factor";
 
+	String A_TEMPLATE = "template";
+
 	String A_FALSE = "false";
 
 	String A_FINAL = "final";
@@ -414,6 +416,8 @@ public interface Constant {
 	IRAtom T_Func = RulpFactory.createAtom(A_FUNCTION);
 
 	IRAtom T_Instance = RulpFactory.createAtom(A_INSTANCE);
+
+	IRAtom T_Template = RulpFactory.createAtom(A_TEMPLATE);
 
 	IRAtom T_Int = RulpFactory.createAtom(A_INTEGER);
 

@@ -19,19 +19,21 @@ public class TestTemplate extends RulpTestBase {
 		_setup();
 
 		try {
-			RulpUtil.addTemplate(_getInterpreter().getMainFrame(), "f1", "a", (_args, _interpreter, _frame) -> {
+			RulpUtil.addTemplate(_getInterpreter().getMainFrame(), "f1", (_args, _interpreter, _frame) -> {
 				return RulpFactory.createAtom("A" + _args.get(2).asString());
-			});
-			RulpUtil.addTemplate(_getInterpreter().getMainFrame(), "f1", "b", (_args, _interpreter, _frame) -> {
-				return RulpFactory.createAtom("B" + _args.get(3).asString());
-			});
+			}, 3, "a");
+
+			RulpUtil.addTemplate(_getInterpreter().getMainFrame(), "f1", (_args, _interpreter, _frame) -> {
+				return RulpFactory.createAtom("B" + _args.get(2).asString());
+			}, 3, "b");
+
 		} catch (RException | IOException e) {
 			e.printStackTrace();
 			fail(e.toString());
 		}
 
-		_test("(f1 a x y)", "Ax");
-		_test("(f1 b x y)", "By");
+		_test("(f1 a 3)", "A3");
+		_test("(f1 b 3)", "B3");
 
 		_gInfo("result/runtime/TestTemplate/test_1_ginfo.txt");
 	}

@@ -52,6 +52,7 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRMacro;
 import alpha.rulp.runtime.IRObjectLoader;
 import alpha.rulp.runtime.IRParser;
+import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.runtime.IRThreadContext;
 import alpha.rulp.runtime.IRTokener;
 import alpha.rulp.runtime.RName;
@@ -162,6 +163,7 @@ import alpha.rulp.ximpl.runtime.XRFunctionList;
 import alpha.rulp.ximpl.runtime.XRInterpreter;
 import alpha.rulp.ximpl.runtime.XRParaAttr;
 import alpha.rulp.ximpl.runtime.XRParser;
+import alpha.rulp.ximpl.runtime.XRTemplate;
 import alpha.rulp.ximpl.runtime.XRThreadContext;
 import alpha.rulp.ximpl.runtime.XRTokener;
 import alpha.rulp.ximpl.string.XRFactorStrCat;
@@ -430,6 +432,11 @@ public final class RulpFactory {
 		return new XRFunction(defineFrame, funName, paraAttrs, funBody);
 	}
 
+	public static IRTemplate createTemplate(String templateName) {
+		RType.TEMPLATE.incCreateCount();
+		return new XRTemplate(templateName);
+	}
+
 	public static IRFunction createFunctionLambda(IRFunction func, IRFrame definedFrame) throws RException {
 		RType.FUNC.incCreateCount();
 		return new XRFunctionLambda(func, definedFrame, lambdaCount.getAndIncrement());
@@ -450,14 +457,14 @@ public final class RulpFactory {
 		return new XRMap(RuntimeUtil.getNoClass(interpreter));
 	}
 
-	public static IRInstance createInstanceOfSet(IRInterpreter interpreter) throws RException {
-		RType.INSTANCE.incCreateCount();
-		return new XRSet(RuntimeUtil.getNoClass(interpreter));
-	}
-
 	public static IRInstance createInstanceOfQueue(IRInterpreter interpreter) throws RException {
 		RType.INSTANCE.incCreateCount();
 		return new XRQueue(RuntimeUtil.getNoClass(interpreter));
+	}
+
+	public static IRInstance createInstanceOfSet(IRInterpreter interpreter) throws RException {
+		RType.INSTANCE.incCreateCount();
+		return new XRSet(RuntimeUtil.getNoClass(interpreter));
 	}
 
 	public static IRInstance createInstanceOfSocket(String addr, int port) {
@@ -577,9 +584,6 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorGetMbr(F_O_MBR));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorLs(F_LS));
 
-		// Name space
-		RulpUtil.addTemplate(rootFrame, F_USE, A_NAMESPACE, new XRFactorBodyUseNameSpace());
-
 		// IO
 		RulpUtil.addFrameObject(rootFrame, new XRFactorPrint(F_PRINT));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorLoad(F_LOAD));
@@ -695,6 +699,9 @@ public final class RulpFactory {
 
 		// Load base script
 		LoadUtil.loadRulpFromJar(interpreter, systemFrame, "alpha/resource/base.rulp", "utf-8");
+
+		// Name space
+		RulpUtil.addTemplate(systemFrame, F_USE, new XRFactorBodyUseNameSpace(), 3, A_NAMESPACE);
 
 		// Native Class Initialization
 		XRSet.init(interpreter, systemFrame);

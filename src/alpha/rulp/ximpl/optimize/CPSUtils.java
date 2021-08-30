@@ -410,6 +410,7 @@ public class CPSUtils {
 				switch (e0.getType()) {
 				case FACTOR:
 				case MACRO:
+				case TEMPLATE:
 					rst = RuntimeUtil.computeCallable((IRCallable) e0, newExpr, interpreter, frame);
 					break;
 

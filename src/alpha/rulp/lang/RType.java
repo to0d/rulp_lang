@@ -19,7 +19,7 @@ import static alpha.rulp.lang.Constant.A_FACTOR;
 import static alpha.rulp.lang.Constant.A_FLOAT;
 import static alpha.rulp.lang.Constant.A_FRAME;
 import static alpha.rulp.lang.Constant.A_FUNCTION;
-import static alpha.rulp.lang.Constant.A_INSTANCE;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.A_INTEGER;
 import static alpha.rulp.lang.Constant.A_LIST;
 import static alpha.rulp.lang.Constant.A_LONG;
@@ -28,6 +28,7 @@ import static alpha.rulp.lang.Constant.A_MEMBER;
 import static alpha.rulp.lang.Constant.A_NATIVE;
 import static alpha.rulp.lang.Constant.A_NULL;
 import static alpha.rulp.lang.Constant.A_STRING;
+import static alpha.rulp.lang.Constant.A_TEMPLATE;
 import static alpha.rulp.lang.Constant.A_VAR;
 import static alpha.rulp.lang.Constant.O_Nan;
 import static alpha.rulp.lang.Constant.T_Array;
@@ -69,17 +70,18 @@ public enum RType {
 	VAR(11, A_VAR), //
 	FACTOR(12, A_FACTOR), //
 	FUNC(13, A_FUNCTION), //
-	MACRO(14, A_MACRO), //
-	INSTANCE(15, A_INSTANCE), //
-	CLASS(16, A_CLASS), //
-	NATIVE(17, A_NATIVE), //
-	MEMBER(18, A_MEMBER), //
-	FRAME(19, A_FRAME); //
+	TEMPLATE(14, A_TEMPLATE), //
+	MACRO(15, A_MACRO), //
+	INSTANCE(16, A_INSTANCE), //
+	CLASS(17, A_CLASS), //
+	NATIVE(18, A_NATIVE), //
+	MEMBER(19, A_MEMBER), //
+	FRAME(20, A_FRAME); //
 
 	public static final RType ALL_RTYPE[] = { NIL, ATOM, BOOL, INT, LONG, FLOAT, DOUBLE, STRING, LIST, EXPR, ARRAY, VAR,
-			FACTOR, FUNC, MACRO, INSTANCE, CLASS, NATIVE, MEMBER, FRAME };
+			FACTOR, FUNC, TEMPLATE, MACRO, INSTANCE, CLASS, NATIVE, MEMBER, FRAME };
 
-	public static final int TYPE_NUM = 20;
+	public static final int TYPE_NUM = 21;
 
 	public static IRAtom toObject(RType type) {
 
@@ -143,6 +145,8 @@ public enum RType {
 
 		case FRAME:
 			return T_Frame;
+		case TEMPLATE:
+			return T_Template;
 
 		default:
 			return O_Nan;
@@ -211,6 +215,9 @@ public enum RType {
 
 		case A_ARRAY:
 			return ARRAY;
+			
+		case A_TEMPLATE:
+			return TEMPLATE;
 
 		default:
 			return null;

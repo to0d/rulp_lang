@@ -12,7 +12,7 @@ package alpha.rulp.utils;
 import static alpha.rulp.lang.Constant.A_NAMESPACE;
 import static alpha.rulp.lang.Constant.A_NIL;
 import static alpha.rulp.lang.Constant.A_USING_NS;
-import static alpha.rulp.lang.Constant.O_Nil;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.S_QUESTION;
 import static alpha.rulp.lang.Constant.S_QUESTION_C;
 import static alpha.rulp.lang.Constant.T_Instance;
@@ -44,20 +44,22 @@ import alpha.rulp.lang.IRString;
 import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RAccessType;
-import alpha.rulp.lang.RException;
+import alpha.rulp.lang.*;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRFactorBody;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRFunctionList;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.runtime.*;
 import alpha.rulp.runtime.IRMacro;
+import alpha.rulp.runtime.IRTemplate.TemplatePara;
+import alpha.rulp.runtime.IRTemplate.TemplateParaEntry;
 import alpha.rulp.runtime.RName;
 import alpha.rulp.ximpl.collection.XRMap;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 import alpha.rulp.ximpl.network.XRSocket;
-import alpha.rulp.ximpl.runtime.XRFactorTemplate;
+import alpha.rulp.ximpl.runtime.XRTemplate;
 
 public class RulpUtil {
 
@@ -131,6 +133,10 @@ public class RulpUtil {
 
 			case FACTOR:
 				sb.append(((IRFactor) obj).getName());
+				break;
+
+			case TEMPLATE:
+				sb.append(((IRTemplate) obj).getName());
 				break;
 
 			case FUNC:
@@ -232,6 +238,8 @@ public class RulpUtil {
 	private static final String R_CLASS_PRE = "$$c_";
 
 	private static final String R_FACTOR_PRE = "$$ff_";
+
+	private static final String R_TEMPALTE_PRE = "$$tp_";
 
 	private static final String R_FLOAT_PRE = "$$f_";
 
@@ -398,6 +406,10 @@ public class RulpUtil {
 			frame.setEntry(((IRFactor) obj).getName(), obj);
 			break;
 
+		case TEMPLATE:
+			frame.setEntry(((IRTemplate) obj).getName(), obj);
+			break;
+
 		case INSTANCE:
 			frame.setEntry(((IRInstance) obj).getInstanceName(), obj);
 			break;
@@ -417,20 +429,59 @@ public class RulpUtil {
 
 	}
 
-	public static void addTemplate(IRFrame frame, String factorName, String bodyName, IRFactorBody factorBody)
-			throws RException {
+	public static void addTemplate(IRFrame frame, String templateName, IRCallable templateBody, int totalParaCount,
+			String... fixedParaNames) throws RException {
 
-		XRFactorTemplate template = null;
+		IRTemplate template = null;
 
-		IRFrameEntry entry = frame.getEntry(factorName);
+		// Create template
+		IRFrameEntry entry = frame.getEntry(templateName);
 		if (entry == null) {
-			template = new XRFactorTemplate(factorName);
-			frame.setEntry(factorName, template);
+			template = RulpFactory.createTemplate(templateName);
+			frame.setEntry(templateName, template);
 		} else {
-			template = (XRFactorTemplate) RulpUtil.asFactor(entry.getValue());
+			template = RulpUtil.asTemplate(entry.getValue());
 		}
 
-		template.addBody(bodyName, factorBody);
+		int fixedParaCount = fixedParaNames.length;
+
+		// Add entry
+		TemplateParaEntry paraEntry = new TemplateParaEntry();
+		paraEntry.body = templateBody;
+		paraEntry.isVary = totalParaCount > (fixedParaCount + 1);
+		paraEntry.fixedParaCount = fixedParaCount;
+
+		if (fixedParaCount > 0) {
+
+			paraEntry.fixedParas = new TemplatePara[fixedParaCount];
+
+			for (int i = 0; i < fixedParaCount; ++i) {
+				TemplatePara tp = new TemplatePara();
+				tp.isVar = false;
+
+				IRAtom fixPara = RulpFactory.createAtom(fixedParaNames[i]);
+				IRFrameEntry fixParaEntry = RuntimeUtil.lookupFrameEntry(fixPara, frame);
+				if (fixParaEntry != null) {
+
+					IRObject fixParaObj = fixParaEntry.getObject();
+					tp.paraType = RulpUtil.getObjectType(fixParaObj);
+					tp.paraValue = fixParaObj;
+				} else {
+					tp.paraType = T_Atom;
+					tp.paraValue = RulpFactory.createAtom(fixedParaNames[i]);
+				}
+
+				paraEntry.fixedParas[i] = tp;
+			}
+		}
+
+		template.addEntry(paraEntry);
+	}
+
+	public static void addTemplate(IRFrame frame, String templateName, IRFactorBody templateBody, int totalParaCount,
+			String... fixedParaNames) throws RException {
+		addTemplate(frame, templateName, new XRFactorWrapper(templateName, templateBody, false), totalParaCount,
+				fixedParaNames);
 	}
 
 	public static IRArray asArray(IRObject obj) throws RException {
@@ -663,6 +714,15 @@ public class RulpUtil {
 		}
 
 		return (IRSubject) obj;
+	}
+
+	public static IRTemplate asTemplate(IRObject obj) throws RException {
+
+		if (obj.getType() != RType.TEMPLATE) {
+			throw new RException("Can't convert to factor: " + obj);
+		}
+
+		return (IRTemplate) obj;
 	}
 
 	public static IRVar asVar(IRObject obj) throws RException {
@@ -979,14 +1039,14 @@ public class RulpUtil {
 		return var.length() > 1 && var.charAt(0) == S_QUESTION_C;
 	}
 
-	public static boolean matchType(IRAtom typeAtom, IRObject valObj) throws RException {
+	public static boolean matchType(IRAtom typeAtom, IRObject obj) throws RException {
 
 		// Match any object
 		if (typeAtom == O_Nil) {
 			return true;
 		}
 
-		return getObjectType(valObj) == typeAtom;
+		return getObjectType(obj) == typeAtom;
 	}
 
 	public static void removeUsingNameSpace(IRFrame frame) throws RException {
@@ -1130,6 +1190,9 @@ public class RulpUtil {
 
 		case FACTOR:
 			return R_FACTOR_PRE + ((IRFactor) obj).getName();
+
+		case TEMPLATE:
+			return R_TEMPALTE_PRE + ((IRTemplate) obj).getName();
 
 		case LIST:
 			return "'(" + _uniqStringIterator(((IRList) obj).iterator()) + ")";

@@ -58,6 +58,9 @@ public class XRFactorNameOf extends AbsRFactorAdapter implements IRFactor {
 		case FACTOR:
 			return RulpFactory.createString(RulpUtil.asFactor(obj).getName());
 
+		case TEMPLATE:
+			return RulpFactory.createString(RulpUtil.asTemplate(obj).getName());
+
 		case FUNC:
 			return RulpFactory.createString(RulpUtil.asFunction(obj).getSignature());
 
