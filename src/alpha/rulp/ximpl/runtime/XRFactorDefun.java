@@ -183,7 +183,6 @@ public class XRFactorDefun extends AbsRFactorAdapter implements IRFactor {
 			}
 			// Copy function
 			else {
-
 				frame.setEntry(funName, oldFunc);
 			}
 		}

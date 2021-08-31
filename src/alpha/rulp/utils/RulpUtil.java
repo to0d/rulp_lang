@@ -12,9 +12,10 @@ package alpha.rulp.utils;
 import static alpha.rulp.lang.Constant.A_NAMESPACE;
 import static alpha.rulp.lang.Constant.A_NIL;
 import static alpha.rulp.lang.Constant.A_USING_NS;
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.S_QUESTION;
 import static alpha.rulp.lang.Constant.S_QUESTION_C;
+import static alpha.rulp.lang.Constant.T_Atom;
 import static alpha.rulp.lang.Constant.T_Instance;
 
 import java.util.ArrayList;
@@ -44,22 +45,23 @@ import alpha.rulp.lang.IRString;
 import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RAccessType;
-import alpha.rulp.lang.*;
+import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
+import alpha.rulp.runtime.IRCallable;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRFactorBody;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRFunctionList;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.runtime.*;
+import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRMacro;
+import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.runtime.IRTemplate.TemplatePara;
 import alpha.rulp.runtime.IRTemplate.TemplateParaEntry;
 import alpha.rulp.runtime.RName;
 import alpha.rulp.ximpl.collection.XRMap;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 import alpha.rulp.ximpl.network.XRSocket;
-import alpha.rulp.ximpl.runtime.XRTemplate;
 
 public class RulpUtil {
 

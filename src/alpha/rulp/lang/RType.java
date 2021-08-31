@@ -19,7 +19,7 @@ import static alpha.rulp.lang.Constant.A_FACTOR;
 import static alpha.rulp.lang.Constant.A_FLOAT;
 import static alpha.rulp.lang.Constant.A_FRAME;
 import static alpha.rulp.lang.Constant.A_FUNCTION;
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_INSTANCE;
 import static alpha.rulp.lang.Constant.A_INTEGER;
 import static alpha.rulp.lang.Constant.A_LIST;
 import static alpha.rulp.lang.Constant.A_LONG;
@@ -50,6 +50,7 @@ import static alpha.rulp.lang.Constant.T_Member;
 import static alpha.rulp.lang.Constant.T_Native;
 import static alpha.rulp.lang.Constant.T_Null;
 import static alpha.rulp.lang.Constant.T_String;
+import static alpha.rulp.lang.Constant.T_Template;
 import static alpha.rulp.lang.Constant.T_Var;
 
 import java.util.concurrent.atomic.AtomicInteger;

@@ -144,7 +144,7 @@ class XRFactorDefunTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_fun_4_scope() {
+	void test_fun_4_scope_a() {
 
 		_setup();
 
@@ -153,6 +153,27 @@ class XRFactorDefunTest extends RulpTestBase {
 		_test("(defvar x 10) x", "&x 10");
 		_test("(fun1)");
 		_test("x", "11");
+	}
+
+	@Test
+	void test_fun_4_scope_b() {
+
+		_setup();
+		_test_script("result/runtime/XRFactorDefunTest/test_fun_4_scope_b.rulp");
+	}
+
+	@Test
+	void test_fun_4_scope_c() {
+
+		_setup();
+		_test_script("result/runtime/XRFactorDefunTest/test_fun_4_scope_c.rulp");
+	}
+
+	@Test
+	void test_fun_4_scope_d() {
+
+		_setup();
+		_test_script("result/runtime/XRFactorDefunTest/test_fun_4_scope_d.rulp");
 	}
 
 	@Test

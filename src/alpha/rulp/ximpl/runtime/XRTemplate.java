@@ -1,24 +1,17 @@
 package alpha.rulp.ximpl.runtime;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import static alpha.rulp.lang.Constant.T_Expr;
 
-import alpha.rulp.lang.IRAtom;
+import java.util.ArrayList;
+
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
-import alpha.rulp.runtime.IRCallable;
-import alpha.rulp.runtime.IRFactor;
-import alpha.rulp.runtime.IRFactorBody;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
-import static alpha.rulp.lang.Constant.*;
 
 public class XRTemplate extends AbsAtomCallableAdapter implements IRTemplate {
 
