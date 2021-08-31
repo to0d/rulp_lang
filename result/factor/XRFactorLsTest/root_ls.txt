@@ -39,6 +39,7 @@ root::date
 root::default
 root::defclass
 root::defmacro
+root::deftemplate
 root::defun
 root::defvar
 root::delete
@@ -135,7 +136,6 @@ root::type#noclass
 root::type-of
 root::union
 root::uniq
-root::use
 root::value-of
 root::value-type-of
 root::var

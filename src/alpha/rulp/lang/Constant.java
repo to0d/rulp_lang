@@ -35,8 +35,6 @@ public interface Constant {
 
 	String A_FACTOR = "factor";
 
-	String A_TEMPLATE = "template";
-
 	String A_FALSE = "false";
 
 	String A_FINAL = "final";
@@ -111,6 +109,8 @@ public interface Constant {
 
 	String A_SYSTEM = "system";
 
+	String A_TEMPLATE = "template";
+
 	String A_TRACE = "?trace";
 
 	String A_TRUE = "true";
@@ -163,6 +163,8 @@ public interface Constant {
 
 	String F_DEFMACRO = "defmacro";
 
+	String F_DEFTEMPLATE = "deftemplate";
+	
 	String F_DEFUN = "defun";
 
 	String F_DEFVAR = "defvar";
@@ -317,6 +319,8 @@ public interface Constant {
 
 	String F_STRCAT = "strcat";
 
+	String F_SUBJECT_OF = "subject-of";
+
 	String F_SYS_GC = "sys-gc";
 
 	String F_SYS_TIME = "sys-time";
@@ -342,8 +346,6 @@ public interface Constant {
 	String F_USE = "use";
 
 	String F_VALUE_OF = "value-of";
-
-	String F_SUBJECT_OF = "subject-of";
 
 	String F_VALUE_TYPE_OF = "value-type-of";
 
@@ -417,8 +419,6 @@ public interface Constant {
 
 	IRAtom T_Instance = RulpFactory.createAtom(A_INSTANCE);
 
-	IRAtom T_Template = RulpFactory.createAtom(A_TEMPLATE);
-
 	IRAtom T_Int = RulpFactory.createAtom(A_INTEGER);
 
 	IRAtom T_List = RulpFactory.createAtom(A_LIST);
@@ -434,6 +434,8 @@ public interface Constant {
 	IRAtom T_Null = RulpFactory.createAtom(A_NULL);
 
 	IRAtom T_String = RulpFactory.createAtom(A_STRING);
+
+	IRAtom T_Template = RulpFactory.createAtom(A_TEMPLATE);
 
 	IRAtom T_Var = RulpFactory.createAtom(A_VAR);
 

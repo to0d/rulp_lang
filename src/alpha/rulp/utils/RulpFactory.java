@@ -151,6 +151,7 @@ import alpha.rulp.ximpl.rclass.XRMember;
 import alpha.rulp.ximpl.rclass.XRNoClass;
 import alpha.rulp.ximpl.rclass.XRSubjectFrame;
 import alpha.rulp.ximpl.runtime.XRFactorDefMacro;
+import alpha.rulp.ximpl.runtime.XRFactorDefTemplate;
 import alpha.rulp.ximpl.runtime.XRFactorDefun;
 import alpha.rulp.ximpl.runtime.XRFactorLambda;
 import alpha.rulp.ximpl.runtime.XRFactorRulpObjectCount;
@@ -646,6 +647,7 @@ public final class RulpFactory {
 		// Macro & Function
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefMacro(F_DEFMACRO));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefun(F_DEFUN));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorDefTemplate(F_DEFTEMPLATE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorMakeCPS(F_MAKE_CPS));
 
 		// Lambda

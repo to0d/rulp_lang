@@ -19,5 +19,8 @@ public class XRFactorDefTemplate extends AbsRFactorAdapter implements IRFactor {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	public boolean isThreadSafe() {
+		return true;
+	}
 }

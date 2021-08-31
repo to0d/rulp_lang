@@ -46,6 +46,7 @@ public class XRFactorLs extends AbsRFactorAdapter implements IRFactor {
 		if (args.size() >= 2) {
 			sub = RulpUtil.asSubject(interpreter.compute(frame, args.get(1)));
 		}
+
 		if (args.size() >= 3) {
 			type = RType.toType(RulpUtil.asAtom(args.get(2)).getName());
 			if (type == null) {

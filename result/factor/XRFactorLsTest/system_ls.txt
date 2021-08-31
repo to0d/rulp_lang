@@ -23,3 +23,4 @@ system::type#queue
 system::type#set
 system::type#socket
 system::type#stack
+system::use

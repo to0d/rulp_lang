@@ -30,6 +30,7 @@ public class XRFactorLsTest extends RulpTestBase {
 		_test("(print-list (ls root))", "nil", _load("result/factor/XRFactorLsTest/root_ls.txt") + "\n");
 		_test("(print-list (ls system))", "nil", _load("result/factor/XRFactorLsTest/system_ls.txt") + "\n");
 		_test_match("(ls-print root)", "nil", "result/factor/XRFactorLsTest/root_ls_print.txt");
+		_test_match("(ls-print system)", "nil", "result/factor/XRFactorLsTest/system_ls_print.txt");
 	}
 
 	@Test

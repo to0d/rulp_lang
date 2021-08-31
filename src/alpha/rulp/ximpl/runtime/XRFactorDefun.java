@@ -247,13 +247,13 @@ public class XRFactorDefun extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRObject funObj = args.get(1);
+		IRObject funName = args.get(1);
 
-		if (funObj.getType() == RType.ATOM) {
+		if (funName.getType() == RType.ATOM) {
 			return defFun(args, interpreter, frame);
 		}
 
-		if (funObj.getType() == RType.MEMBER) {
+		if (funName.getType() == RType.MEMBER) {
 			return defMemberFun(args, interpreter, frame);
 		}
 
