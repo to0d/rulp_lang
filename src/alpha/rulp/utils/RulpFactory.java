@@ -908,9 +908,9 @@ public final class RulpFactory {
 		return new XRString(value);
 	}
 
-	public static IRTemplate createTemplate(String templateName) {
+	public static IRTemplate createTemplate(String templateName, IRFrame defineFrame) {
 		RType.TEMPLATE.incCreateCount();
-		return new XRTemplate(templateName);
+		return new XRTemplate(templateName, defineFrame);
 	}
 
 	public static IRThreadContext createThreadContext() {

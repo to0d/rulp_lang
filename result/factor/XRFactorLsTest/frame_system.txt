@@ -3,7 +3,7 @@ id=1, name=system, lvl=1, ref=0/0, pid=0(root), entry=27, subject=system, thread
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
 parent               : -169     1        0    frame      root                
-use                  : -161     1        0    template   use                 
+use                  : -161     1        0    template   (use '('(namespace class) ?...)) : frame=system
 type#socket          : -160     1        0    atom       type#socket         
 socket               : -159     1        1    class      socket              
 type#stack           : -158     1        0    atom       type#stack          

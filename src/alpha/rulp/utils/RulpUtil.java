@@ -241,8 +241,6 @@ public class RulpUtil {
 
 	private static final String R_FACTOR_PRE = "$$ff_";
 
-	private static final String R_TEMPALTE_PRE = "$$tp_";
-
 	private static final String R_FLOAT_PRE = "$$f_";
 
 	private static final String R_INT_PRE = "$$i_";
@@ -250,6 +248,8 @@ public class RulpUtil {
 	private static final String R_NAME_NIL = "$$nil";
 
 	private static final String R_NAME_NULL = "$$null";
+
+	private static final String R_TEMPALTE_PRE = "$$tp_";
 
 	private static final String R_VAR_PRE = "$$v_";
 
@@ -431,25 +431,6 @@ public class RulpUtil {
 
 	}
 
-	public static IRTemplate addTemplate(IRFrame frame, String templateName, TemplateParaEntry paraEntry)
-			throws RException {
-
-		IRTemplate template = null;
-
-		// Create template
-		IRFrameEntry entry = frame.getEntry(templateName);
-		if (entry == null) {
-			template = RulpFactory.createTemplate(templateName);
-			frame.setEntry(templateName, template);
-		} else {
-			template = RulpUtil.asTemplate(entry.getValue());
-		}
-
-		template.addEntry(paraEntry);
-
-		return template;
-	}
-
 	public static IRTemplate addTemplate(IRFrame frame, String templateName, IRCallable templateBody,
 			int totalParaCount, String... fixedParaNames) throws RException {
 
@@ -493,6 +474,25 @@ public class RulpUtil {
 
 		return addTemplate(frame, templateName, new XRFactorWrapper(templateName, templateBody, false), totalParaCount,
 				fixedParaNames);
+	}
+
+	public static IRTemplate addTemplate(IRFrame frame, String templateName, TemplateParaEntry paraEntry)
+			throws RException {
+
+		IRTemplate template = null;
+
+		// Create template
+		IRFrameEntry entry = frame.getEntry(templateName);
+		if (entry == null) {
+			template = RulpFactory.createTemplate(templateName, frame);
+			frame.setEntry(templateName, template);
+		} else {
+			template = RulpUtil.asTemplate(entry.getValue());
+		}
+
+		template.addEntry(paraEntry);
+
+		return template;
 	}
 
 	public static IRArray asArray(IRObject obj) throws RException {

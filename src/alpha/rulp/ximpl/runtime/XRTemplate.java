@@ -3,6 +3,7 @@ package alpha.rulp.ximpl.runtime;
 import static alpha.rulp.lang.Constant.T_Expr;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
@@ -17,12 +18,13 @@ public class XRTemplate extends AbsAtomCallableAdapter implements IRTemplate {
 
 	static class InputData {
 
-		public IRInterpreter interpreter;
+		public IRObject[] actualValues;
+
 		public IRFrame frame;
 
 		public IRList inputArgs;
 
-		public IRObject[] actualValues;
+		public IRInterpreter interpreter;
 
 		public InputData(IRList inputArgs, IRInterpreter interpreter, IRFrame frame) throws RException {
 			super();
@@ -97,12 +99,17 @@ public class XRTemplate extends AbsAtomCallableAdapter implements IRTemplate {
 		}
 	}
 
-	public ArrayList<TemplateParaEntry> templateParaEntryList = new ArrayList<>();
+	protected IRFrame defineFrame;
+
+	protected String signature = null;
 
 	protected String templateName;
 
-	public XRTemplate(String templateName) {
+	protected ArrayList<TemplateParaEntry> templateParaEntryList = new ArrayList<>();
+
+	public XRTemplate(String templateName, IRFrame defineFrame) {
 		this.templateName = templateName;
+		this.defineFrame = defineFrame;
 	}
 
 	@Override
@@ -112,7 +119,8 @@ public class XRTemplate extends AbsAtomCallableAdapter implements IRTemplate {
 			throw new RException("invalid entry");
 		}
 
-		templateParaEntryList.add(entry);
+		this.templateParaEntryList.add(entry);
+		this.signature = null;
 	}
 
 	@Override
@@ -148,8 +156,39 @@ public class XRTemplate extends AbsAtomCallableAdapter implements IRTemplate {
 	}
 
 	@Override
+	public IRFrame getDefineFrame() {
+		return defineFrame;
+	}
+
+	@Override
 	public String getName() {
 		return templateName;
+	}
+
+	@Override
+	public String getSignature() throws RException {
+
+		if (signature == null) {
+
+			ArrayList<String> allSignatures = new ArrayList<>();
+			for (TemplateParaEntry tpEntry : templateParaEntryList) {
+				allSignatures.add(tpEntry.toString());
+			}
+			Collections.sort(allSignatures);
+
+			StringBuilder sb = new StringBuilder();
+			sb.append("(");
+			sb.append(templateName);
+			for (String sig : allSignatures) {
+				sb.append(' ');
+				sb.append(sig);
+			}
+
+			sb.append(')');
+			signature = sb.toString();
+		}
+
+		return signature;
 	}
 
 	@Override

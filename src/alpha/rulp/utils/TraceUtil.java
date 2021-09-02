@@ -23,6 +23,7 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.runtime.IRThreadContext;
 import alpha.rulp.ximpl.optimize.CPSUtils;
 
@@ -75,6 +76,10 @@ public class TraceUtil {
 			}
 
 			return out;
+
+		case TEMPLATE:
+			IRTemplate tp = RulpUtil.asTemplate(obj);
+			return tp.getSignature() + " : frame=" + tp.getDefineFrame();
 
 		default:
 			return obj.toString();
