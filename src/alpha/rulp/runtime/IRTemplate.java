@@ -2,6 +2,8 @@ package alpha.rulp.runtime;
 
 import static alpha.rulp.lang.Constant.O_Nil;
 
+import java.util.List;
+
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRObject;
@@ -79,4 +81,6 @@ public interface IRTemplate extends IRObject, IRCallable {
 	public String getName();
 
 	public String getSignature() throws RException;
+
+	public List<TemplateParaEntry> getTemplateParaEntryList();
 }

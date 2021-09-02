@@ -1,0 +1,26 @@
+(deftemplate ask (teacher (?question expr)) (print "teacher say: yes, I know " ?question ", answer is " (value-of $(value-of ?question)) ". "))
+;=>ask
+(out-to-file "result/runtime/XRFactorDefTemplateTest/test_3_scope_a_1.txt" (print-subject 1))
+;=>nil
+(do
+    (deftemplate ask (student (?question expr)) (print "student say: no, I don't know " ?question "."))
+    (out-to-file "result/runtime/XRFactorDefTemplateTest/test_3_scope_a_2.txt" (print-subject 2))
+    (ask teacher (+ 1 1))
+    (ask student (+ 1 1))
+)
+;=>nil
+;out:
+teacher say: yes, I know (+ 1 1), answer is 2. student say: no, I don't know (+ 1 1).
+;eof
+(ask teacher (+ 1 1))
+;=>nil
+;out:
+teacher say: yes, I know (+ 1 1), answer is 2. 
+;eof
+(ask student (+ 1 1))
+;err:
+no template match
+at main: (ask student (+ 1 1))
+;eof
+(out-to-file "result/runtime/XRFactorDefTemplateTest/test_3_scope_a_3.txt" (print-subject 1))
+;=>nil

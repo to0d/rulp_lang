@@ -486,8 +486,22 @@ public class RulpUtil {
 		if (entry == null) {
 			template = RulpFactory.createTemplate(templateName, frame);
 			frame.setEntry(templateName, template);
+
 		} else {
+
 			template = RulpUtil.asTemplate(entry.getValue());
+
+			// Copy template
+			if (template.getDefineFrame() != frame) {
+
+				List<TemplateParaEntry> oldTpEntrys = template.getTemplateParaEntryList();
+				template = RulpFactory.createTemplate(templateName, frame);
+				for (TemplateParaEntry tpEntry : oldTpEntrys) {
+					template.addEntry(tpEntry);
+				}
+
+				frame.setEntry(templateName, template);
+			}
 		}
 
 		template.addEntry(paraEntry);

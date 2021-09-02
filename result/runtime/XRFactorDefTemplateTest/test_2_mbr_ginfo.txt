@@ -46,7 +46,7 @@ Object create count:
     template:            2            0            2
        macro:            1            0            1
        class:            6            0            6
-      member:          130            0          130
+      member:          131            0          131
        frame:            2            2            0
  interpreter:            1            0
   frameEntry:          176            0

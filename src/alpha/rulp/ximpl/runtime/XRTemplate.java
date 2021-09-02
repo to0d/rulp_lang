@@ -4,6 +4,7 @@ import static alpha.rulp.lang.Constant.T_Expr;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
@@ -107,6 +108,11 @@ public class XRTemplate extends AbsAtomCallableAdapter implements IRTemplate {
 
 	protected ArrayList<TemplateParaEntry> templateParaEntryList = new ArrayList<>();
 
+	@Override
+	public List<TemplateParaEntry> getTemplateParaEntryList() {
+		return templateParaEntryList;
+	}
+
 	public XRTemplate(String templateName, IRFrame defineFrame) {
 		this.templateName = templateName;
 		this.defineFrame = defineFrame;
@@ -174,7 +180,6 @@ public class XRTemplate extends AbsAtomCallableAdapter implements IRTemplate {
 			for (TemplateParaEntry tpEntry : templateParaEntryList) {
 				allSignatures.add(tpEntry.toString());
 			}
-			Collections.sort(allSignatures);
 
 			StringBuilder sb = new StringBuilder();
 			sb.append("(");
