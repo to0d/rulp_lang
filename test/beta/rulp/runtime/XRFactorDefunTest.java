@@ -13,13 +13,22 @@ import alpha.rulp.utils.RulpUtil;
 class XRFactorDefunTest extends RulpTestBase {
 
 	@Test
-	void test_fun_0_invalid_type() {
-
+	void test_fun_0_bad_para_1_undfine_type_1() {
 		_setup();
-
 		_test_error("(defun fun2 ((?x Expr)) (print ?x))",
 				"Undefined para type: Expr\n" + "at main: (defun fun2 ((?x Expr)) (print ?x))");
+		_test_error("(defun main::fun2 ((?x Expr)) (print ?x))",
+				"Undefined para type: Expr\n" + "at main: (defun main::fun2 ((?x Expr)) (print ?x))");
 
+	}
+
+	@Test
+	void test_fun_0_bad_para_1_dup_para_1() {
+		_setup();
+		_test_error("(defun fun2 (?x ?x) (print ?x))",
+				"duplicate parameter: ?x\n" + "at main: (defun fun2 (?x ?x) (print ?x))");
+		_test_error("(defun main::fun2 (?x ?x) (print ?x))",
+				"duplicate parameter: ?x\n" + "at main: (defun main::fun2 (?x ?x) (print ?x))");
 	}
 
 	@Test

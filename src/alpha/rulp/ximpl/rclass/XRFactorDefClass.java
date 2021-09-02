@@ -20,7 +20,9 @@ import static alpha.rulp.lang.Constant.F_DO;
 import static alpha.rulp.lang.Constant.F_MBR_SUPER;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRClass;
@@ -91,6 +93,17 @@ public class XRFactorDefClass extends AbsRFactorAdapter implements IRFactor {
 		// Function parameter list
 		/*****************************************************/
 		List<IRParaAttr> paraAttrs = XRFactorDefun.buildAttrList(mbrExpr.get(2), interpreter, frame);
+
+		// Check duplicate parameters
+		if (paraAttrs.size() > 1) {
+			Set<String> paraNames = new HashSet<>();
+			for (IRParaAttr pa : paraAttrs) {
+				if (paraNames.contains(pa.getParaName())) {
+					throw new RException("duplicate parameter: " + pa.getParaName());
+				}
+				paraNames.add(pa.getParaName());
+			}
+		}
 
 		/*****************************************************/
 		// Function body

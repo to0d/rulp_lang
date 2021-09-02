@@ -1,4 +1,4 @@
-package beta.rulp.factor.string;
+package beta.rulp.string;
 
 import org.junit.jupiter.api.Test;
 

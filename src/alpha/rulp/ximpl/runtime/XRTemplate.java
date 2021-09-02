@@ -69,19 +69,18 @@ public class XRTemplate extends AbsAtomCallableAdapter implements IRTemplate {
 
 					// Check type
 					if (!matchType(tp, i + 1)) {
-						continue;
+						return false;
 					}
 
 					// Check value
 					if (!tp.isVar && !RulpUtil.equal(tp.paraValue, getActualValue(i + 1))) {
-						continue;
+						return false;
 					}
 
-					return true;
 				}
 			}
 
-			return false;
+			return true;
 		}
 
 		public boolean matchType(TemplatePara tp, int index) throws RException {

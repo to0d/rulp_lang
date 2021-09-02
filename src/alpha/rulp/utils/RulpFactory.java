@@ -236,6 +236,8 @@ public final class RulpFactory {
 
 	private static AtomicInteger interpreterCount = new AtomicInteger(0);
 
+	private static AtomicInteger uniqNameCount = new AtomicInteger(0);
+
 	private static AtomicInteger lambdaCount = new AtomicInteger(0);
 
 	private static final Set<Class<? extends IRObjectLoader>> loaderClasses = new HashSet<>();
@@ -431,11 +433,6 @@ public final class RulpFactory {
 			IRExpr funBody) {
 		RType.FUNC.incCreateCount();
 		return new XRFunction(defineFrame, funName, paraAttrs, funBody);
-	}
-
-	public static IRTemplate createTemplate(String templateName) {
-		RType.TEMPLATE.incCreateCount();
-		return new XRTemplate(templateName);
 	}
 
 	public static IRFunction createFunctionLambda(IRFunction func, IRFrame definedFrame) throws RException {
@@ -883,6 +880,10 @@ public final class RulpFactory {
 		return new XRIteratorAdatper<T>(iter);
 	}
 
+	public static IRString createString() {
+		return EMPTY_STR;
+	}
+
 //	public static IRClass createNoClass() {
 //		IRClass noClass = new XRDefClass(A_NOCLASS);
 //		try {
@@ -892,10 +893,6 @@ public final class RulpFactory {
 //		}
 //		return noClass;
 //	}
-
-	public static IRString createString() {
-		return EMPTY_STR;
-	}
 
 	public static IRString createString(String value) {
 
@@ -911,12 +908,21 @@ public final class RulpFactory {
 		return new XRString(value);
 	}
 
+	public static IRTemplate createTemplate(String templateName) {
+		RType.TEMPLATE.incCreateCount();
+		return new XRTemplate(templateName);
+	}
+
 	public static IRThreadContext createThreadContext() {
 		return new XRThreadContext();
 	}
 
 	public static IRTokener createTokener() {
 		return new XRTokener();
+	}
+
+	public static String createUniqName(String name) {
+		return name + uniqNameCount.getAndIncrement();
 	}
 
 	public static IRVar createVar(String name) {
@@ -1046,6 +1052,7 @@ public final class RulpFactory {
 		frameEntryProtectedMaxId.set(0);
 		interpreterCount.set(0);
 		lambdaCount.set(0);
+		uniqNameCount.set(0);
 	}
 
 }

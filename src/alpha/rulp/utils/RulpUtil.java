@@ -431,8 +431,8 @@ public class RulpUtil {
 
 	}
 
-	public static void addTemplate(IRFrame frame, String templateName, IRCallable templateBody, int totalParaCount,
-			String... fixedParaNames) throws RException {
+	public static IRTemplate addTemplate(IRFrame frame, String templateName, TemplateParaEntry paraEntry)
+			throws RException {
 
 		IRTemplate template = null;
 
@@ -444,6 +444,14 @@ public class RulpUtil {
 		} else {
 			template = RulpUtil.asTemplate(entry.getValue());
 		}
+
+		template.addEntry(paraEntry);
+
+		return template;
+	}
+
+	public static IRTemplate addTemplate(IRFrame frame, String templateName, IRCallable templateBody,
+			int totalParaCount, String... fixedParaNames) throws RException {
 
 		int fixedParaCount = fixedParaNames.length;
 
@@ -458,13 +466,13 @@ public class RulpUtil {
 			paraEntry.fixedParas = new TemplatePara[fixedParaCount];
 
 			for (int i = 0; i < fixedParaCount; ++i) {
+
 				TemplatePara tp = new TemplatePara();
 				tp.isVar = false;
 
 				IRAtom fixPara = RulpFactory.createAtom(fixedParaNames[i]);
 				IRFrameEntry fixParaEntry = RuntimeUtil.lookupFrameEntry(fixPara, frame);
 				if (fixParaEntry != null) {
-
 					IRObject fixParaObj = fixParaEntry.getObject();
 					tp.paraType = RulpUtil.getObjectType(fixParaObj);
 					tp.paraValue = fixParaObj;
@@ -477,12 +485,13 @@ public class RulpUtil {
 			}
 		}
 
-		template.addEntry(paraEntry);
+		return addTemplate(frame, templateName, paraEntry);
 	}
 
-	public static void addTemplate(IRFrame frame, String templateName, IRFactorBody templateBody, int totalParaCount,
-			String... fixedParaNames) throws RException {
-		addTemplate(frame, templateName, new XRFactorWrapper(templateName, templateBody, false), totalParaCount,
+	public static IRTemplate addTemplate(IRFrame frame, String templateName, IRFactorBody templateBody,
+			int totalParaCount, String... fixedParaNames) throws RException {
+
+		return addTemplate(frame, templateName, new XRFactorWrapper(templateName, templateBody, false), totalParaCount,
 				fixedParaNames);
 	}
 

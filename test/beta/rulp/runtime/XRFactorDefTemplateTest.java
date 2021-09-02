@@ -11,6 +11,7 @@ class XRFactorDefTemplateTest extends RulpTestBase {
 
 		_setup();
 		_test_script("result/runtime/XRFactorDefTemplateTest/test_1.rulp");
+		_gInfo("result/runtime/XRFactorDefTemplateTest/test_1_ginfo.txt");
 	}
 
 }
