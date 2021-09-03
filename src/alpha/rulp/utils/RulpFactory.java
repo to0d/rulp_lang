@@ -177,6 +177,7 @@ import alpha.rulp.ximpl.string.XRFactorStrIndexOf;
 import alpha.rulp.ximpl.string.XRFactorStrLastIndexOf;
 import alpha.rulp.ximpl.string.XRFactorStrLength;
 import alpha.rulp.ximpl.string.XRFactorStrMatch;
+import alpha.rulp.ximpl.string.XRFactorStrReplace;
 import alpha.rulp.ximpl.string.XRFactorStrSplit;
 import alpha.rulp.ximpl.string.XRFactorStrStartsWith;
 import alpha.rulp.ximpl.string.XRFactorStrSubStr;
@@ -616,6 +617,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorStrFormat(F_STR_FORMAT));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorStrCharAt(F_STR_CHAR_AT));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorStrSplit(F_STR_SPLIT));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorStrReplace(F_STR_REPLACE));
 
 		// Arithmetic
 		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_ADD, ArithmeticType.ADD));

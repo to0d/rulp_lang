@@ -164,7 +164,7 @@ public interface Constant {
 	String F_DEFMACRO = "defmacro";
 
 	String F_DEFTEMPLATE = "deftemplate";
-	
+
 	String F_DEFUN = "defun";
 
 	String F_DEFVAR = "defvar";
@@ -292,6 +292,8 @@ public interface Constant {
 	String F_STR_END_WITH = "str-end-with";
 
 	String F_STR_EQUAL = "str-equal";
+
+	String F_STR_REPLACE = "str-replace";
 
 	String F_STR_EQUAL_NOCASE = "str-equal-nocase";
 

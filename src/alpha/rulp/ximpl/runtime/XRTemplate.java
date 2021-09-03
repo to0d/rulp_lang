@@ -3,7 +3,6 @@ package alpha.rulp.ximpl.runtime;
 import static alpha.rulp.lang.Constant.T_Expr;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import alpha.rulp.lang.IRFrame;
