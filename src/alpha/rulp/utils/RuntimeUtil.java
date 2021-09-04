@@ -746,17 +746,16 @@ public final class RuntimeUtil {
 
 		String atomName = atom.getName();
 
-		// Searching the current frame firstly
-		IRFrameEntry entry = frame.getEntry(atomName);
-		if (entry != null) {
-			return entry;
+		List<IRSubject> usingSubject = frame.getUsingSubjectList();
+		if (usingSubject == null) {
+			return frame.getEntry(atomName);
 		}
 
 		// Searching the using name space if it was specified
-		IRSubject usingNameSpace = RulpUtil.getUsingNameSpace(frame);
-		if (usingNameSpace != null) {
-			IRFrame nsFrame = usingNameSpace.getSubjectFrame();
-			entry = nsFrame.getEntry(atomName);
+
+		for (IRSubject sub : usingSubject) {
+			IRFrame subFrame = sub.getType() == RType.FRAME ? (IRFrame) sub : sub.getSubjectFrame();
+			IRFrameEntry entry = subFrame.getEntry(atomName);
 			if (entry != null) {
 				return entry;
 			}

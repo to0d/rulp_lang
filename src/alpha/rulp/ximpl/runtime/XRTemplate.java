@@ -1,8 +1,10 @@
 package alpha.rulp.ximpl.runtime;
 
+import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.T_Expr;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import alpha.rulp.lang.IRFrame;
@@ -10,11 +12,14 @@ import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
+import alpha.rulp.runtime.IRCallable;
+import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.utils.RuntimeUtil;
 
-public class XRTemplate extends AbsAtomCallableAdapter implements IRTemplate {
+public class XRTemplate extends AbsRefCallableAdapter implements IRTemplate {
 
 	static class InputData {
 
@@ -69,16 +74,29 @@ public class XRTemplate extends AbsAtomCallableAdapter implements IRTemplate {
 
 					TemplatePara tp = tpEntry.fixedParas[i];
 
-					// Check type
-					if (!matchType(tp, i + 1)) {
-						return false;
-					}
+					if (!tp.isVar && tp.paraType == O_Nil) {
 
-					// Check value
-					if (!tp.isVar && !RulpUtil.equal(tp.paraValue, getActualValue(i + 1))) {
-						return false;
-					}
+						IRObject inputPara = inputArgs.get(i + 1);
+						if (inputPara.getType() != RType.ATOM) {
+							return false;
+						}
 
+						if (!RulpUtil.equal(tp.paraValue, inputPara)) {
+							return false;
+						}
+
+					} else {
+
+						// Check type
+						if (!matchType(tp, i + 1)) {
+							return false;
+						}
+
+						// Check value
+						if (!tp.isVar && !RulpUtil.equal(tp.paraValue, getActualValue(i + 1))) {
+							return false;
+						}
+					}
 				}
 			}
 
@@ -97,6 +115,7 @@ public class XRTemplate extends AbsAtomCallableAdapter implements IRTemplate {
 			// match result object
 			return RulpUtil.matchType(tp.paraType, getActualValue(index));
 		}
+
 	}
 
 	protected IRFrame defineFrame;
@@ -107,14 +126,22 @@ public class XRTemplate extends AbsAtomCallableAdapter implements IRTemplate {
 
 	protected ArrayList<TemplateParaEntry> templateParaEntryList = new ArrayList<>();
 
-	@Override
-	public List<TemplateParaEntry> getTemplateParaEntryList() {
-		return templateParaEntryList;
-	}
-
 	public XRTemplate(String templateName, IRFrame defineFrame) {
 		this.templateName = templateName;
 		this.defineFrame = defineFrame;
+	}
+
+	@Override
+	protected void _delete() throws RException {
+
+		Iterator<TemplateParaEntry> it = templateParaEntryList.iterator();
+		while (it.hasNext()) {
+			IRCallable body = it.next().body;
+			it.remove();
+			RulpUtil.decRef(body);
+		}
+
+		super._delete();
 	}
 
 	@Override
@@ -125,6 +152,7 @@ public class XRTemplate extends AbsAtomCallableAdapter implements IRTemplate {
 		}
 
 		this.templateParaEntryList.add(entry);
+		RulpUtil.incRef(entry.body);
 		this.signature = null;
 	}
 
@@ -157,7 +185,12 @@ public class XRTemplate extends AbsAtomCallableAdapter implements IRTemplate {
 			throw new RException("no template match");
 		}
 
-		return matchedTpEntry.body.compute(args, interpreter, frame);
+		if (matchedTpEntry.body.getType() == RType.FUNC) {
+			return RuntimeUtil.computeFun((IRFunction) matchedTpEntry.body, args, interpreter, frame);
+
+		} else {
+			return RuntimeUtil.computeCallable(matchedTpEntry.body, args, interpreter, frame);
+		}
 	}
 
 	@Override
@@ -193,6 +226,11 @@ public class XRTemplate extends AbsAtomCallableAdapter implements IRTemplate {
 		}
 
 		return signature;
+	}
+
+	@Override
+	public List<TemplateParaEntry> getTemplateParaEntryList() {
+		return templateParaEntryList;
 	}
 
 	@Override

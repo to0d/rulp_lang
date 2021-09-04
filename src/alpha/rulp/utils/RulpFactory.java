@@ -134,7 +134,6 @@ import alpha.rulp.ximpl.lang.XRNative;
 import alpha.rulp.ximpl.lang.XRString;
 import alpha.rulp.ximpl.lang.XRVar;
 import alpha.rulp.ximpl.math.XRFactorRandom;
-import alpha.rulp.ximpl.namespace.XRFactorBodyUseNameSpace;
 import alpha.rulp.ximpl.network.XRSocket;
 import alpha.rulp.ximpl.optimize.XRFactorMakeCPS;
 import alpha.rulp.ximpl.rclass.XRDefClass;
@@ -150,10 +149,13 @@ import alpha.rulp.ximpl.rclass.XRFactorPropertyOf;
 import alpha.rulp.ximpl.rclass.XRMember;
 import alpha.rulp.ximpl.rclass.XRNoClass;
 import alpha.rulp.ximpl.rclass.XRSubjectFrame;
+import alpha.rulp.ximpl.runtime.XRFactorBodyUsingSubject;
 import alpha.rulp.ximpl.runtime.XRFactorDefMacro;
 import alpha.rulp.ximpl.runtime.XRFactorDefTemplate;
 import alpha.rulp.ximpl.runtime.XRFactorDefun;
+import alpha.rulp.ximpl.runtime.XRFactorFrameOf;
 import alpha.rulp.ximpl.runtime.XRFactorLambda;
+import alpha.rulp.ximpl.runtime.XRFactorParentOf;
 import alpha.rulp.ximpl.runtime.XRFactorRulpObjectCount;
 import alpha.rulp.ximpl.runtime.XRFrame;
 import alpha.rulp.ximpl.runtime.XRFrameEntry;
@@ -571,6 +573,8 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSizeOfList(F_SIZE_OF_LIST));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSizeOfArray(F_SIZE_OF_ARRAY));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSubjectOf(F_SUBJECT_OF));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorFrameOf(F_FREAME_OF));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorParentOf(F_PARENT_OF));
 
 		// Class
 		RulpUtil.addFrameObject(rootFrame, new XRNoClass(A_NOCLASS, rootFrame));
@@ -702,7 +706,8 @@ public final class RulpFactory {
 		LoadUtil.loadRulpFromJar(interpreter, systemFrame, "alpha/resource/base.rulp", "utf-8");
 
 		// Name space
-		RulpUtil.addTemplate(systemFrame, F_USE, new XRFactorBodyUseNameSpace(), 3, A_NAMESPACE);
+		RulpUtil.addFrameObject(rootFrame, new XRFactorBodyUsingSubject(F_ADD_USING_SUBJECT));
+//		RulpUtil.addTemplate(systemFrame, F_USE, new XRFactorBodyUsingSubject(), 3, A_NAMESPACE);
 
 		// Native Class Initialization
 		XRSet.init(interpreter, systemFrame);

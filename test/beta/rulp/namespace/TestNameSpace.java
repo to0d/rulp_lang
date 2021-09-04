@@ -62,9 +62,9 @@ public class TestNameSpace extends RulpTestBase {
 		_test("(defvar var3 4)", "&var3");
 		_test("(defun f3 () (return 4))", "f3");
 
-		// the local item has higher priority
-		_test("(value-of var1)", "1");
-		_test("(f1)", "1");
+		// the latest name space higher priority
+		_test("(value-of var1)", "2");
+		_test("(f1)", "2");
 
 		// Can find items when specify the using the name space
 		_test("(value-of var2)", "3");
@@ -82,9 +82,8 @@ public class TestNameSpace extends RulpTestBase {
 		_test("(ns1::f1)", "2");
 		_test("(ns1::f2)", "3");
 		_test("(f3)", "4");
-		_test_error("(value-of var2)", "object not found: var2\n" + "at main: (value-of var2)");
-		_test_error("(f2)", "factor not found: (f2)\n" + "at main: (f2)");
-
+		
+		_gInfo("result/namespace/TestNameSpace/test_namespace_1_ginfo.txt");
 	}
 
 	@Test
@@ -109,9 +108,11 @@ public class TestNameSpace extends RulpTestBase {
 		_test("(value-of var1)", "2");
 		_test("(f1)", "2");
 
-		_test("(use namespace main)", "main");
-		_test_error("(value-of var1)", "object not found: var1\n" + "at main: (value-of var1)");
-		_test_error("(f1)", "factor not found: (f1)\n" + "at main: (f1)");
+		_test("(use namespace ns1)", "ns1");
+		_test("(value-of var1)", "1");
+		_test("(f1)", "1");
+		
+		_gInfo("result/namespace/TestNameSpace/test_namespace_2_ginfo.txt");
 	}
 
 	@Test
@@ -119,11 +120,15 @@ public class TestNameSpace extends RulpTestBase {
 
 		_setup();
 		_test_script("result/namespace/TestNameSpace/test_namespace_3.rulp");
+		_gInfo("result/namespace/TestNameSpace/test_namespace_3_ginfo.txt");
 	}
 
 	@Test
 	public void test_namespace_4() {
 
-		_test_error("(use namespace ns1)", "namespace not found: ns1\n" + "at main: (use namespace ns1)");
+		_test_error("(use namespace ns1)",
+				"error: bad-type, namespace not found: ns1\n"
+						+ "at _$fun$_use: (error bad-type (strcat \"namespace not found: \" (to-string ?ns)))\n"
+						+ "at main: (use namespace ns1)");
 	}
 }

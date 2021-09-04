@@ -115,8 +115,6 @@ public interface Constant {
 
 	String A_TRUE = "true";
 
-	String A_USING_NS = "?using_ns";
-
 	String A_VALUES = "values";
 
 	String A_VAR = "var";
@@ -136,6 +134,8 @@ public interface Constant {
 	String F_ADD = "add";
 
 	String F_ADD_ALL = "add-all";
+
+	String F_ADD_USING_SUBJECT = "add_using_subject";
 
 	String F_ALIAS = "alias";
 
@@ -293,8 +293,6 @@ public interface Constant {
 
 	String F_STR_EQUAL = "str-equal";
 
-	String F_STR_REPLACE = "str-replace";
-
 	String F_STR_EQUAL_NOCASE = "str-equal-nocase";
 
 	String F_STR_FORMAT = "str-format";
@@ -306,6 +304,8 @@ public interface Constant {
 	String F_STR_LENGTH = "str-length";
 
 	String F_STR_MATCH = "str-match";
+
+	String F_STR_REPLACE = "str-replace";
 
 	String F_STR_SPLIT = "str-split";
 
@@ -340,6 +340,10 @@ public interface Constant {
 	String F_TO_STRING = "to-string";
 
 	String F_TYPE_OF = "type-of";
+
+	String F_FREAME_OF = "frame-of";
+
+	String F_PARENT_OF = "parent-of";
 
 	String F_UNION = "union";
 

@@ -101,7 +101,7 @@ public class XRFactorDefTemplate extends AbsRFactorAdapter implements IRFactor {
 
 					} else if (paraType == T_Atom) {
 
-						paraType = T_Atom;
+						paraType = O_Nil;
 						paraValue = RulpFactory.createAtom(paraName);
 
 					} else {

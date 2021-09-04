@@ -11,7 +11,6 @@ package alpha.rulp.utils;
 
 import static alpha.rulp.lang.Constant.A_NAMESPACE;
 import static alpha.rulp.lang.Constant.A_NIL;
-import static alpha.rulp.lang.Constant.A_USING_NS;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.S_QUESTION;
 import static alpha.rulp.lang.Constant.S_QUESTION_C;
@@ -916,15 +915,15 @@ public class RulpUtil {
 		return valAtom;
 	}
 
-	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
-
-		IRObject nsObj = frame.getObject(A_USING_NS);
-		if (nsObj == null) {
-			return null;
-		}
-
-		return RulpUtil.asSubject(nsObj);
-	}
+//	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
+//
+//		IRObject nsObj = frame.getObject(A_USING_NS);
+//		if (nsObj == null) {
+//			return null;
+//		}
+//
+//		return RulpUtil.asSubject(nsObj);
+//	}
 
 	public static void incRef(IRObject obj) throws RException {
 
@@ -1074,10 +1073,6 @@ public class RulpUtil {
 		return getObjectType(obj) == typeAtom;
 	}
 
-	public static void removeUsingNameSpace(IRFrame frame) throws RException {
-		frame.removeEntry(A_USING_NS);
-	}
-
 	public static void setMember(IRSubject subject, String name, IRObject obj) throws RException {
 		setMember(subject, name, obj, null);
 	}
@@ -1090,10 +1085,6 @@ public class RulpUtil {
 			mbr.setAccessType(accessType);
 		}
 		subject.setMember(name, mbr);
-	}
-
-	public static void setUsingNameSpace(IRFrame frame, IRSubject ns) throws RException {
-		frame.setEntry(A_USING_NS, ns);
 	}
 
 	public static ArrayList<IRObject> toArray(IRList list) throws RException {

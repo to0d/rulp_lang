@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       63        0
+     Interpreter call id/level:       66        0
              CPS support/count:    false        0
                Frame max level:        4
                   Frame max id:        6
@@ -15,43 +15,44 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:       78
+    factor:       81
       func:       18
 ==========================================================================================================================
 
-Callable stats info: callId=63, row=17, column=64(1), value-max=1, value-unit=1^x
+Callable stats info: callId=66, row=18, column=34(2), value-max=2, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         .111111111111111111111111111111111111111111113132333233323332333 max=4, unit=2^x
+   Frame    RType  Count  Ref Object                         1222222222222222222222224444444443 max=6, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     30    0 defun                                  111111111111 11  1111 111 11111 1111                    
-    root   factor     13    0 return                                                                        1 111 111 111 111
-  system   member      8    0 set::_set_has                                                                    11  11  11  11
-    main   member      8    0 set1::has                                                                        11  11  11  11
-    root   factor      6    0 defclass                                              11    1   1     1    1                   
-    root   factor      6    0 alias                           111111                                                         
-  system   member      5    0 set::_set_size_of                                                             1 1   1   1   1  
-    main   member      5    0 set1::size-of                                                                 1 1   1   1   1  
-  system   member      4    0 set::_set_add                                                                  1   1   1   1   
-    main   member      4    0 set1::add                                                                      1   1   1   1   
-    root   factor      1    0 setq                                                                        1                  
-  system   member      1    0 set::_set_init                                                              1                  
-    main   member      1    0 set1::init                                                                  1                  
-    root   factor      1    0 new                                                                         1                  
-    root   factor      1    0 name-of                                                                      1                 
-    root   factor      1    0 defvar                                1                                                        
-    root   factor      1    0 defmacro                                           1                                           
+    root   factor     30    0 defun                              222222112212122121            
+    root   factor     13    0 return                                                  121212121
+  system   member      8    0 set::_set_has                                            11111111
+    main   member      8    0 set1::has                                                11111111
+    root   factor      6    0 defclass                                  1  1 1  1 11           
+    root   factor      6    0 alias                          1221                              
+  system   member      5    0 set::_set_size_of                                       11 1 1 1 
+    main   member      5    0 set1::size-of                                           11 1 1 1 
+  system   member      4    0 set::_set_add                                           1 1 1 1  
+    main   member      4    0 set1::add                                               1 1 1 1  
+    root   factor      3    0 deftemplate                                          12          
+    root   factor      1    0 setq                                                   1         
+  system   member      1    0 set::_set_init                                         1         
+    main   member      1    0 set1::init                                             1         
+    root   factor      1    0 new                                                    1         
+    root   factor      1    0 name-of                                                1         
+    root   factor      1    0 defvar                            1                              
+    root   factor      1    0 defmacro                                 1                       
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          655            0          655
-      string:           22            0           22
+        atom:          686            0          686
+      string:           23            0           23
         list:            3            0            3
-        expr:          385            0          385
+        expr:          402            0          402
          var:           29           12           17
-        func:           81            0           81
+        func:           84            0           84
     template:            1            0            1
        macro:            1            0            1
     instance:            2            0            2
@@ -59,7 +60,7 @@ Object create count:
       member:          153            0          153
        frame:           20           18            2
  interpreter:            1            0
-  frameEntry:          186            0
+  frameEntry:          189            0
       lambda:            4            0
 ==========================================================================================================================
 

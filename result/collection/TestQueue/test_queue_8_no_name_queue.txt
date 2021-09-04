@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       62        0
+     Interpreter call id/level:       65        0
              CPS support/count:    false        0
                Frame max level:        4
                   Frame max id:        7
@@ -15,44 +15,45 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:       81
+    factor:       84
       func:       21
 ==========================================================================================================================
 
-Callable stats info: callId=62, row=19, column=63(1), value-max=2, value-unit=2^x
+Callable stats info: callId=65, row=20, column=33(2), value-max=3, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         .11111111111111111111111111111111111111111111312112232232213123 max=4, unit=2^x
+   Frame    RType  Count  Ref Object                         122222222222222222222222433434344 max=6, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     30    0 defun                                  111111111111 11  1111 111 11111 1111                   
-    root   factor     13    0 return                                                                        1  11211 11 2  2
-    root   factor      6    0 defclass                                              11    1   1     1    1                  
-    root   factor      6    0 alias                           111111                                                        
-  system   member      4    0 queue::_queue_size_of                                                         1  1   1 1      
-    root   factor      3    0 setq                                                                        1         2       
-  system   member      3    0 queue::_queue_push_back                                                        11        1    
-  system   member      3    0 queue::_queue_is_empty                                                                  1 1  1
-  system   member      2    0 queue::_queue_init                                                          1         1       
-  system   member      2    0 queue::_queue_get                                                                 11          
-  system   member      2    0 queue::_queue_clear                                                                        11 
-    root   factor      2    0 new                                                                         1         1       
-  system funcList      2    1 is-empty                                                                                  1  1
-    root   factor      2    0 defvar                                1                                     1                 
-  system   member      1    0 queue::_queue_pop_front                                                             1         
-    root   factor      1    0 name-of                                                                      1                
-  system funcList      1    1 get                                                                                1          
-    root   factor      1    0 defmacro                                           1                                          
-  system funcList      1    1 clear                                                                                       1 
+    root   factor     30    0 defun                              222222112212122121           
+    root   factor     13    0 return                                                  11321122
+    root   factor      6    0 defclass                                  1  1 1  1 11          
+    root   factor      6    0 alias                          1221                             
+  system   member      4    0 queue::_queue_size_of                                   11 11   
+    root   factor      3    0 setq                                                   1    2   
+  system   member      3    0 queue::_queue_push_back                                 11   1  
+  system   member      3    0 queue::_queue_is_empty                                       111
+    root   factor      3    0 deftemplate                                          12         
+  system   member      2    0 queue::_queue_init                                     1    1   
+  system   member      2    0 queue::_queue_get                                         2     
+  system   member      2    0 queue::_queue_clear                                           11
+    root   factor      2    0 new                                                    1    1   
+  system funcList      2    1 is-empty                                                      11
+    root   factor      2    0 defvar                            1                    1        
+  system   member      1    0 queue::_queue_pop_front                                    1    
+    root   factor      1    0 name-of                                                1        
+  system funcList      1    1 get                                                       1     
+    root   factor      1    0 defmacro                                 1                      
+  system funcList      1    1 clear                                                          1
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          656            0          656
-      string:           19            0           19
-        expr:          384            0          384
+        atom:          687            0          687
+      string:           20            0           20
+        expr:          401            0          401
          var:           29           11           18
-        func:           87            5           82
+        func:           90            5           85
     template:            1            0            1
        macro:            1            0            1
     instance:            4            2            2
@@ -60,7 +61,7 @@ Object create count:
       member:          155            0          155
        frame:           24           22            2
  interpreter:            1            0
-  frameEntry:          185            0
+  frameEntry:          188            0
       lambda:           10            0
 ==========================================================================================================================
 

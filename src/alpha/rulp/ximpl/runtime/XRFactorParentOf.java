@@ -7,21 +7,20 @@
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-package alpha.rulp.ximpl.factor;
+package alpha.rulp.ximpl.runtime;
 
 import alpha.rulp.lang.IRFrame;
-import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
-import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 
-public class XRFactorTypeOf extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorParentOf extends AbsRFactorAdapter implements IRFactor {
 
-	public XRFactorTypeOf(String factorName) {
+	public XRFactorParentOf(String factorName) {
 		super(factorName);
 	}
 
@@ -32,25 +31,7 @@ public class XRFactorTypeOf extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRObject obj = args.get(1);
-		RType type = obj.getType();
-
-		switch (type) {
-		case ATOM:
-			IRFrameEntry entry = frame.getEntry(RulpUtil.asAtom(obj).getName());
-			if (entry != null) {
-				type = entry.getObject().getType();
-			}
-
-			break;
-
-//		case CLASS:
-//			return RulpFactory.createString(RulpUtility.asClass(obj).getClassName());
-
-		default:
-		}
-
-		return RType.toObject(type);
+		return RulpUtil.asSubject(interpreter.compute(frame, args.get(1))).getParent();
 	}
 
 	@Override

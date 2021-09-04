@@ -2,7 +2,7 @@ id=3, name=DO, lvl=3, ref=1/1, pid=2(main), entry=1, subject=DO, thread=null
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-ask                  : 5        3        0    template   (ask '('(teacher atom) '(? expr)) '('(student atom) '(? expr))) : frame=DO
+ask                  : 5        3        1    template   (ask '('(teacher atom) '(? expr)) '('(student atom) '(? expr))) : frame=DO
 ==========================================================================================================================
 
 id=2, name=main, lvl=2, ref=2/2, pid=1(system), entry=4, subject=main, thread=null
@@ -12,6 +12,6 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
 main                 : 3        2        2    frame      main                
-ask                  : 4        2        0    template   (ask '('(teacher atom) '(? expr))) : frame=main
+ask                  : 4        2        1    template   (ask '('(teacher atom) '(? expr))) : frame=main
 ==========================================================================================================================
 

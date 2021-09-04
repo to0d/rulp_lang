@@ -15,6 +15,10 @@ import alpha.rulp.runtime.IRThreadContext;
 
 public interface IRFrame extends IRObject, IRSubject {
 
+	public void addFrameReleaseListener(IRListener<IRFrame> listener);
+
+	public void addUsingSubject(IRSubject sub);
+
 	public IRVar addVar(String name) throws RException;
 
 	public IRFrameEntry createFrameEntry(String name, IRObject object);
@@ -33,6 +37,8 @@ public interface IRFrame extends IRObject, IRSubject {
 
 	public IRThreadContext getThreadContext();
 
+	public List<IRSubject> getUsingSubjectList();
+
 	public List<IRFrameEntry> listEntries();
 
 	public void release() throws RException;
@@ -44,6 +50,4 @@ public interface IRFrame extends IRObject, IRSubject {
 	public void setEntryAliasName(IRFrameEntry entry, String aliasName) throws RException;
 
 	public void setThreadContext(IRThreadContext context);
-
-	public void addFrameReleaseListener(IRListener<IRFrame> listener);
 }

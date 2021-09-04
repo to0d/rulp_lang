@@ -16,6 +16,7 @@ import static alpha.rulp.lang.Constant.I_FRAME_NULL_ID;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -63,6 +64,8 @@ public class XRFrame extends AbsRefObject implements IRFrame {
 	protected IRFrame parentFrame = null;
 
 	protected IRThreadContext threadContext;
+
+	protected List<IRSubject> usingSubjectList = null;
 
 	@Override
 	protected void _delete() throws RException {
@@ -160,6 +163,34 @@ public class XRFrame extends AbsRefObject implements IRFrame {
 		if (!frameReleaeListenerList.contains(listener)) {
 			frameReleaeListenerList.add(listener);
 		}
+	}
+
+	@Override
+	public void addUsingSubject(IRSubject sub) {
+
+		if (sub == null) {
+			return;
+		}
+
+		if (usingSubjectList == null) {
+			usingSubjectList = new LinkedList<>();
+			usingSubjectList.add(this);
+
+		} else {
+
+			// Remove old subject
+			Iterator<IRSubject> it = usingSubjectList.iterator();
+			while (it.hasNext()) {
+
+				IRSubject existSub = it.next();
+				if (existSub == sub) {
+					it.remove();
+					break;
+				}
+			}
+		}
+
+		usingSubjectList.add(0, sub);
 	}
 
 	@Override
@@ -301,6 +332,11 @@ public class XRFrame extends AbsRefObject implements IRFrame {
 	}
 
 	@Override
+	public List<IRSubject> getUsingSubjectList() {
+		return usingSubjectList;
+	}
+
+	@Override
 	public boolean isFinal() {
 		return bFinal;
 	}
@@ -313,6 +349,7 @@ public class XRFrame extends AbsRefObject implements IRFrame {
 		}
 
 		_entryCacheList = new LinkedList<>();
+
 		for (Entry<String, IRFrameEntry> e : entryMap.entrySet()) {
 
 			String name = e.getKey();

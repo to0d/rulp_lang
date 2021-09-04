@@ -76,8 +76,6 @@
 )
 
 
-(defclass namespace ())
-
 (defclass set () final
     
     (defvar ?impl nil private)
@@ -242,4 +240,18 @@
 
     (defun write (?val)
         (socket::_socket_write ?impl ?val) final)
+)
+
+(defclass namespace ())
+
+(deftemplate use ((namespace atom) (?ns namespace))
+    (return (add_using_subject parent ?ns))
+)
+
+(deftemplate use ((namespace atom) (?ns frame))
+    (return (add_using_subject parent ?ns))
+)
+
+(deftemplate use (namespace ?ns)
+    (error bad-type (strcat "namespace not found: " (to-string ?ns)))
 )

@@ -24,6 +24,7 @@ root::^
 root::access
 root::add
 root::add-all
+root::add_using_subject
 root::alias
 root::and
 root::array

@@ -37,3 +37,13 @@ var1: value=1, subject=main
 var2: value=3, subject=main
 var1: value=2, subject=DO
 ;eof
+(use namespace ns1)
+;=>ns1
+(fun)
+;=>nil
+;out:
+var2: value=3, subject=main
+var1: value=1, subject=main
+var2: value=3, subject=main
+var1: value=2, subject=DO
+;eof

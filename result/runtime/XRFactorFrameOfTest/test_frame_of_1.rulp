@@ -1,0 +1,62 @@
+(defvar var1 1)
+;=>&var1
+(new namespace ns1)
+;=>ns1
+(defclass class1 ()
+    (defvar ?value 0)
+    (defun add (?x) (setq ?value (+ ?value ?x)))
+)
+;=>class1
+(new class1 o1)
+;=>o1
+(frame-of var1)
+;=>main
+(frame-of ns1)
+;=>main
+(frame-of class1)
+;=>main
+(frame-of o1)
+;=>main
+(do
+    (print (frame-of var1) "\n")
+    (print (frame-of ns1) "\n")
+    (print (frame-of class1) "\n")
+    (print (frame-of o1) "\n") 
+)
+;=>nil
+;out:
+main
+main
+main
+main
+;eof
+(do
+    (defvar var1 1)
+    (print (frame-of var1) "\n")
+    (print (frame-of ns1) "\n")
+    (print (frame-of class1) "\n")
+    (print (frame-of o1) "\n") 
+)
+;=>nil
+;out:
+DO
+main
+main
+main
+;eof
+(frame-of var2)
+;=>nil
+(frame-of o1::?value)
+;=>subject-2
+(parent-of (frame-of o1::?value))
+;=>subject-1
+(parent-of (parent-of (frame-of o1::?value)))
+;=>main
+(defvar ns1::var3)
+;=>&var3
+(frame-of ns1::var3)
+;=>subject-3
+(parent-of (frame-of ns1::var3))
+;=>subject-0
+(parent-of (parent-of (frame-of ns1::var3)))
+;=>system
