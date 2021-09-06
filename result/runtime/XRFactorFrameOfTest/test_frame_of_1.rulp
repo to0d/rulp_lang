@@ -47,16 +47,16 @@ main
 (frame-of var2)
 ;=>nil
 (frame-of o1::?value)
-;=>subject-2
+;=>SF-o1-2
 (parent-of (frame-of o1::?value))
-;=>subject-1
+;=>SF-class1-1
 (parent-of (parent-of (frame-of o1::?value)))
 ;=>main
 (defvar ns1::var3)
 ;=>&var3
 (frame-of ns1::var3)
-;=>subject-3
+;=>SF-ns1-3
 (parent-of (frame-of ns1::var3))
-;=>subject-0
+;=>SF-namespace-0
 (parent-of (parent-of (frame-of ns1::var3)))
 ;=>system

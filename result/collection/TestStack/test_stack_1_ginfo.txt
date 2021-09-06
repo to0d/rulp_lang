@@ -69,13 +69,13 @@ Object create count:
       member:          161            0          161
        frame:           44           40            4
  interpreter:            1            0
-  frameEntry:          192            0
+  frameEntry:          193            0
       lambda:           14            0
 ==========================================================================================================================
 
 Global frame list: total=4
 
-id=2, name=main, lvl=2, ref=1/2, pid=1(system), entry=4, subject=main, thread=null
+id=2, name=main, lvl=2, ref=1/2, entry=4, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -86,29 +86,29 @@ s1                   : 6        2        1    instance   s1
 ==========================================================================================================================
 
 
-id=3, name=subject-0, lvl=2, ref=2/2, pid=1(system), entry=0, subject=stack, thread=null
+id=3, name=SF-stack-0, lvl=2, ref=2/2, entry=0, pid=1(system), subject=stack
 
-id=4, name=subject-1, lvl=3, ref=8/9, pid=3(subject-0), entry=0, subject=s1, thread=null
+id=4, name=SF-s1-1, lvl=3, ref=8/9, entry=0, pid=3(SF-stack-0), subject=s1
 
-id=6, name=subject-2, lvl=2, ref=2/2, pid=1(system), entry=0, subject=queue, thread=null
+id=6, name=SF-queue-2, lvl=2, ref=2/2, entry=0, pid=1(system), subject=queue
 
-id=7, name=subject-3, lvl=3, ref=8/9, pid=6(subject-2), entry=0, subject=null, thread=null
+id=7, name=SF-null-3, lvl=3, ref=8/9, entry=0, pid=6(SF-queue-2), subject=null
 
 Global Subject list:
 
-name=s1, lvl=1, ref=1/2, parent=stack, frame=4(subject-1), final=false, mbrs=9
+name=s1, lvl=1, ref=1/2, parent=stack, frame=4(SF-s1-1), final=false, mbrs=9
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?impl                : PRIVATE  false    false    1    var        instance:null
-clear                : DEFAULT  true     false    1    func       (clear) : frame=subject-1, type=lambda
-init                 : DEFAULT  true     false    1    func       (init) : frame=subject-1, type=lambda
-is-empty             : DEFAULT  true     false    1    func       (is-empty) : frame=subject-1, type=lambda
-pop                  : DEFAULT  true     false    1    func       (pop) : frame=subject-1, type=lambda
-push                 : DEFAULT  true     false    1    func       (push nil) : frame=subject-1, type=lambda
-size-of              : DEFAULT  true     false    1    func       (size-of) : frame=subject-1, type=lambda
+clear                : DEFAULT  true     false    1    func       (clear) : frame=SF-s1-1, type=lambda
+init                 : DEFAULT  true     false    1    func       (init) : frame=SF-s1-1, type=lambda
+is-empty             : DEFAULT  true     false    1    func       (is-empty) : frame=SF-s1-1, type=lambda
+pop                  : DEFAULT  true     false    1    func       (pop) : frame=SF-s1-1, type=lambda
+push                 : DEFAULT  true     false    1    func       (push nil) : frame=SF-s1-1, type=lambda
+size-of              : DEFAULT  true     false    1    func       (size-of) : frame=SF-s1-1, type=lambda
 this                 : DEFAULT  false    false    1    instance   s1
-to-list              : DEFAULT  true     false    1    func       (to-list) : frame=subject-1, type=lambda
+to-list              : DEFAULT  true     false    1    func       (to-list) : frame=SF-s1-1, type=lambda
 ==========================================================================================================================
 
 

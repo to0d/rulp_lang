@@ -135,7 +135,7 @@ public interface Constant {
 
 	String F_ADD_ALL = "add-all";
 
-	String F_ADD_USING_SUBJECT = "add_using_subject";
+	String F_ADD_SEARCH_FRAME = "add_search_frame";
 
 	String F_ALIAS = "alias";
 
@@ -264,6 +264,8 @@ public interface Constant {
 	String F_PRINT_SUBJECT = "print-subject";
 
 	String F_PROPERTY_OF = "property-of";
+
+	String F_SEARCH_FRAME_OF = "search-frame-of";
 
 	String F_RANDOM = "random";
 

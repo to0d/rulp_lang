@@ -56,13 +56,13 @@ Object create count:
       member:          141            0          141
        frame:            9            4            5
  interpreter:            1            0
-  frameEntry:          185            0
+  frameEntry:          186            0
       lambda:            3            0
 ==========================================================================================================================
 
 Global frame list: total=5
 
-id=2, name=main, lvl=2, ref=2/2, pid=1(system), entry=6, subject=main, thread=null
+id=2, name=main, lvl=2, ref=2/2, entry=6, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -75,30 +75,30 @@ s1                   : 7        2        2    instance   s1
 ==========================================================================================================================
 
 
-id=3, name=subject-0, lvl=2, ref=2/2, pid=1(system), entry=0, subject=set, thread=null
+id=3, name=SF-set-0, lvl=2, ref=2/2, entry=0, pid=1(system), subject=set
 
-id=4, name=subject-1, lvl=3, ref=3/4, pid=3(subject-0), entry=0, subject=s1, thread=null
+id=4, name=SF-s1-1, lvl=3, ref=3/4, entry=0, pid=3(SF-set-0), subject=s1
 
-id=5, name=_$fun$_fun_add, lvl=3, ref=1/3, pid=2(main), entry=1, subject=_$fun$_fun_add, thread=null
+id=5, name=_$fun$_fun_add, lvl=3, ref=1/3, entry=1, pid=2(main), subject=_$fun$_fun_add
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
 ?set                 : 8        5        1    var        instance:s1         
 ==========================================================================================================================
 
-id=7, name=subject-2, lvl=5, ref=1/2, pid=5(_$fun$_fun_add), entry=0, subject=class1, thread=null
+id=7, name=SF-class1-2, lvl=5, ref=1/2, entry=0, pid=5(_$fun$_fun_add), subject=class1
 
-id=8, name=subject-3, lvl=6, ref=2/3, pid=7(subject-2), entry=0, subject=o1, thread=null
+id=8, name=SF-o1-3, lvl=6, ref=2/3, entry=0, pid=7(SF-class1-2), subject=o1
 
 Global Subject list:
 
-name=s1, lvl=1, ref=2/2, parent=set, frame=4(subject-1), final=false, mbrs=4
+name=s1, lvl=1, ref=2/2, parent=set, frame=4(SF-s1-1), final=false, mbrs=4
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?impl                : PRIVATE  false    false    1    var        instance:null
-add                  : DEFAULT  true     false    1    func       (add nil) : frame=subject-1, type=lambda
-init                 : DEFAULT  true     false    1    func       (init) : frame=subject-1, type=lambda
+add                  : DEFAULT  true     false    1    func       (add nil) : frame=SF-s1-1, type=lambda
+init                 : DEFAULT  true     false    1    func       (init) : frame=SF-s1-1, type=lambda
 this                 : DEFAULT  false    false    2    instance   s1
 ==========================================================================================================================
 

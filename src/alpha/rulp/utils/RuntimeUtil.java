@@ -1,8 +1,10 @@
 package alpha.rulp.utils;
 
+import static alpha.rulp.lang.Constant.A_LOCAL;
 import static alpha.rulp.lang.Constant.A_NOCLASS;
 import static alpha.rulp.lang.Constant.A_OP_CPS;
 import static alpha.rulp.lang.Constant.A_OP_STABLE;
+import static alpha.rulp.lang.Constant.A_PARENT;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_O_ADD;
 import static alpha.rulp.lang.Constant.F_O_BY;
@@ -742,20 +744,33 @@ public final class RuntimeUtil {
 		return varSupportOpStable.getBoolValue();
 	}
 
+	public static boolean isForceLocalEntryName(String name) {
+
+		switch (name) {
+		case A_LOCAL:
+		case A_PARENT:
+			return true;
+		}
+
+		return false;
+	}
+
 	public static IRFrameEntry lookupFrameEntry(IRAtom atom, IRFrame frame) throws RException {
 
 		String atomName = atom.getName();
+		if (isForceLocalEntryName(atomName)) {
+			return frame.getEntry(atomName);
+		}
 
-		List<IRSubject> usingSubject = frame.getUsingSubjectList();
-		if (usingSubject == null) {
+		List<IRFrame> searchFrameList = frame.getSearchFrameList();
+		if (searchFrameList == null) {
 			return frame.getEntry(atomName);
 		}
 
 		// Searching the using name space if it was specified
 
-		for (IRSubject sub : usingSubject) {
-			IRFrame subFrame = sub.getType() == RType.FRAME ? (IRFrame) sub : sub.getSubjectFrame();
-			IRFrameEntry entry = subFrame.getEntry(atomName);
+		for (IRFrame searchFrame : searchFrameList) {
+			IRFrameEntry entry = searchFrame.getEntry(atomName);
 			if (entry != null) {
 				return entry;
 			}

@@ -5,7 +5,7 @@
 (new namespace ns1)
 ;=>ns1
 (use namespace main)
-;=>main
+;=>nil
 (defvar var2 3) ; define in main frame
 ;=>&var2
 (value-of var2)
@@ -38,7 +38,7 @@ var2: value=3, subject=main
 var1: value=2, subject=DO
 ;eof
 (use namespace ns1)
-;=>ns1
+;=>nil
 (fun)
 ;=>nil
 ;out:

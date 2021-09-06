@@ -4,85 +4,82 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       59        0
+     Interpreter call id/level:       58        0
              CPS support/count:    false        0
-               Frame max level:        5
-                  Frame max id:        8
-           Frame free id count:        3
+               Frame max level:        3
+                  Frame max id:        6
+           Frame free id count:        1
 ==========================================================================================================================
 
 Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      109
-      func:        3
+    factor:       64
 ==========================================================================================================================
 
-Callable stats info: callId=59, row=15, column=60(1), value-max=5, value-unit=2^x
+Callable stats info: callId=58, row=14, column=59(1), value-max=2, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         .11111111111111111111111111111111111111111111111111211161636 max=19, unit=2^x
+   Frame    RType  Count  Ref Object                         .1111111111111111111111111111111111111111111111111113114121 max=5, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     31    0 defun                                  111111111111 11 1111 111 11111 1111           1     
-    root   factor     19    0 value-of                                                                        1   1 41414
-    root   factor     12    0 subject-of                                                                            3 3 3
-    root   factor     12    0 print                                                                                 3 3 3
-    root   factor      6    0 defvar                                1                                        1   1  1 1 1
-    root   factor      6    0 defclass                                              1    1   1     1    11               
-    root   factor      6    0 alias                           111111                                                     
-  system template      5    1 use                                                                               1   1 111
-    root   factor      5    0 add_search_frame                                                                  1   1 111
-    root   factor      4    0 frame-of                                                                              1 111
-    main     func      3    1 (fun)                                                                                 1 1 1
-    root   factor      3    0 do                                                                                    1 1 1
-    root   factor      3    0 deftemplate                                                                 111            
-    root   factor      1    0 new                                                                              1         
-    root   factor      1    0 defmacro                                           1                                       
+    root   factor     30    0 defun                                  111111111111 11 1111 111 11111 1111                
+    root   factor      9    0 search-frame-of                                                                111  1121 1
+    root   factor      6    0 defclass                                              1    1   1     1    11              
+    root   factor      6    0 alias                           111111                                                    
+    root   factor      3    0 deftemplate                                                                 111           
+  system template      2    1 use                                                                                1    1 
+    root   factor      2    0 print                                                                                 2   
+    root   factor      2    0 add_search_frame                                                                   1    1 
+    root   factor      1    0 value-of                                                                           1      
+    root   factor      1    0 new                                                                               1       
+    root   factor      1    0 frame-of                                                                           1      
+    root   factor      1    0 do                                                                                    1   
+    root   factor      1    0 defvar                                1                                                   
+    root   factor      1    0 defmacro                                           1                                      
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          708            0          708
-      string:           31            0           31
-        expr:          406            0          406
-         var:           31           13           18
-        func:           81            0           81
+        atom:          686            0          686
+      string:           21            0           21
+        list:            5            0            5
+        expr:          388            0          388
+         var:           20            4           16
+        func:           80            0           80
     template:            1            0            1
        macro:            1            0            1
     instance:            1            0            1
        class:            6            0            6
       member:          131            0          131
-       frame:           13           11            2
+       frame:            5            3            2
  interpreter:            1            0
-  frameEntry:          198            0
+  frameEntry:          186            0
       lambda:            0            0
 ==========================================================================================================================
 
 Global frame list: total=2
 
-id=2, name=main, lvl=2, ref=1/4, entry=7, pid=1(system), subject=main, search=[SF-ns1-1, main]
+id=2, name=main, lvl=2, ref=1/4, entry=5, pid=1(system), subject=main, search=[main, SF-ns1-1]
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
 main                 : 3        2        1    frame      main                
-var1                 : 4        2        1    var        int:1               
+local                : 4        2        1    frame      main                
 ns1                  : 5        2        1    instance   ns1                 
-var2                 : 9        2        1    var        int:3               
-fun                  : 10       2        1    func       (fun) : frame=main  
 ==========================================================================================================================
 
 
 id=3, name=SF-namespace-0, lvl=2, ref=2/2, entry=0, pid=1(system), subject=namespace
 
-id=7, name=SF-ns1-1, lvl=3, ref=1/1, entry=0, pid=3(SF-namespace-0), subject=ns1
+id=5, name=SF-ns1-1, lvl=3, ref=1/1, entry=0, pid=3(SF-namespace-0), subject=ns1
 
 Global Subject list:
 
-name=ns1, lvl=1, ref=1/2, parent=namespace, frame=7(SF-ns1-1), final=false, mbrs=1
+name=ns1, lvl=1, ref=1/2, parent=namespace, frame=5(SF-ns1-1), final=false, mbrs=1
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

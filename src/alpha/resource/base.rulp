@@ -245,11 +245,11 @@
 (defclass namespace ())
 
 (deftemplate use ((namespace atom) (?ns namespace))
-    (return (add_using_subject parent ?ns))
+    (add_search_frame parent (frame-of $(value-of ?ns)))
 )
 
 (deftemplate use ((namespace atom) (?ns frame))
-    (return (add_using_subject parent ?ns))
+    (add_search_frame parent ?ns)
 )
 
 (deftemplate use (namespace ?ns)

@@ -1,4 +1,4 @@
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(subject-0), final=false, mbrs=1
+name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=1
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

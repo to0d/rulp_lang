@@ -1,14 +1,14 @@
-name=o1, lvl=1, ref=1/1, parent=class1, frame=4(subject-1), final=false, mbrs=2
+name=o1, lvl=1, ref=1/1, parent=class1, frame=4(SF-o1-1), final=false, mbrs=2
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 fun1                 : DEFAULT  false    false    1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
-                                                  1    func       (fun1 nil) : frame=subject-1, type=lambda
-                                                  1    func       (fun1 nil nil) : frame=subject-1, type=lambda
+                                                  1    func       (fun1 nil) : frame=SF-o1-1, type=lambda
+                                                  1    func       (fun1 nil nil) : frame=SF-o1-1, type=lambda
 this                 : DEFAULT  false    false    1    instance   o1
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(subject-0), final=false, mbrs=1
+name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=1
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

@@ -1,16 +1,16 @@
-name=o1, lvl=1, ref=1/1, parent=class1, frame=4(subject-1), final=false, mbrs=6
+name=o1, lvl=1, ref=1/1, parent=class1, frame=4(SF-o1-1), final=false, mbrs=6
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?value               : DEFAULT  false    false    1    var        int:4
-add                  : DEFAULT  false    false    1    func       (add nil) : frame=subject-1, type=lambda
-get                  : DEFAULT  false    false    1    func       (get) : frame=subject-1, type=lambda
-set                  : DEFAULT  false    false    1    func       (set nil) : frame=subject-1, type=lambda
-sub                  : DEFAULT  false    false    1    func       (sub nil) : frame=subject-1, type=lambda
+add                  : DEFAULT  false    false    1    func       (add nil) : frame=SF-o1-1, type=lambda
+get                  : DEFAULT  false    false    1    func       (get) : frame=SF-o1-1, type=lambda
+set                  : DEFAULT  false    false    1    func       (set nil) : frame=SF-o1-1, type=lambda
+sub                  : DEFAULT  false    false    1    func       (sub nil) : frame=SF-o1-1, type=lambda
 this                 : DEFAULT  false    false    1    instance   o1
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(subject-0), final=false, mbrs=5
+name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=5
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

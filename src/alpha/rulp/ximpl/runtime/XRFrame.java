@@ -63,9 +63,9 @@ public class XRFrame extends AbsRefObject implements IRFrame {
 
 	protected IRFrame parentFrame = null;
 
-	protected IRThreadContext threadContext;
+	protected List<IRFrame> searchFrameList = null;
 
-	protected List<IRSubject> usingSubjectList = null;
+	protected IRThreadContext threadContext;
 
 	@Override
 	protected void _delete() throws RException {
@@ -166,31 +166,42 @@ public class XRFrame extends AbsRefObject implements IRFrame {
 	}
 
 	@Override
-	public void addUsingSubject(IRSubject sub) {
+	public void addSearchFrame(IRFrame frame) {
 
-		if (sub == null) {
+		if (frame == null) {
 			return;
 		}
 
-		if (usingSubjectList == null) {
-			usingSubjectList = new LinkedList<>();
-			usingSubjectList.add(this);
+		if (searchFrameList == null) {
 
-		} else {
+			// No need to create the frame list
+			if (this == frame) {
+				return;
+			}
 
-			// Remove old subject
-			Iterator<IRSubject> it = usingSubjectList.iterator();
-			while (it.hasNext()) {
+			searchFrameList = new LinkedList<>();
+			searchFrameList.add(frame); // new added frame has higher priority
+			searchFrameList.add(this);
+			return;
+		}
 
-				IRSubject existSub = it.next();
-				if (existSub == sub) {
-					it.remove();
-					break;
-				}
+		// No need to update the frame list
+		if (searchFrameList.get(0) == frame) {
+			return;
+		}
+
+		// Remove old subject
+		Iterator<IRFrame> it = searchFrameList.iterator();
+		while (it.hasNext()) {
+
+			IRSubject oldFrame = it.next();
+			if (oldFrame == frame) {
+				it.remove();
+				break;
 			}
 		}
 
-		usingSubjectList.add(0, sub);
+		searchFrameList.add(0, frame);
 	}
 
 	@Override
@@ -297,6 +308,11 @@ public class XRFrame extends AbsRefObject implements IRFrame {
 	}
 
 	@Override
+	public List<IRFrame> getSearchFrameList() {
+		return searchFrameList;
+	}
+
+	@Override
 	public IRSubject getSubject() {
 
 		if (_subject == null) {
@@ -329,11 +345,6 @@ public class XRFrame extends AbsRefObject implements IRFrame {
 	@Override
 	public RType getType() {
 		return RType.FRAME;
-	}
-
-	@Override
-	public List<IRSubject> getUsingSubjectList() {
-		return usingSubjectList;
 	}
 
 	@Override

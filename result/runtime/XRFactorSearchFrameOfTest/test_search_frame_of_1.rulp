@@ -1,0 +1,29 @@
+(search-frame-of local)
+;=>'()
+(search-frame-of main)
+;=>'()
+(search-frame-of system)
+;=>'()
+(new namespace ns1)
+;=>ns1
+(use namespace ns1)
+;=>nil
+(search-frame-of main)
+;=>'(SF-ns1-1 main)
+(search-frame-of local)
+;=>'(SF-ns1-1 main)
+(do
+    (print (search-frame-of local) "\n")
+    (print (search-frame-of parent) "\n")
+)
+;=>nil
+;out:
+'()
+'(SF-ns1-1 main)
+;eof
+(search-frame-of)
+;=>'(SF-ns1-1 main)
+(use namespace local)
+;=>nil
+(search-frame-of)
+;=>'(main SF-ns1-1)

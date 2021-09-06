@@ -49,13 +49,13 @@ Object create count:
       member:          131            0          131
        frame:            2            2            0
  interpreter:            1            0
-  frameEntry:          180            0
+  frameEntry:          181            0
       lambda:            0            0
 ==========================================================================================================================
 
 Global frame list: total=0
 
-id=2, name=main, lvl=2, ref=1/2, pid=1(system), entry=4, subject=main, thread=null
+id=2, name=main, lvl=2, ref=1/2, entry=4, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------

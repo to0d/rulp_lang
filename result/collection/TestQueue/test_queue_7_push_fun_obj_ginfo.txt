@@ -61,13 +61,13 @@ Object create count:
       member:          137            0          137
        frame:           12           10            2
  interpreter:            1            0
-  frameEntry:          183            0
+  frameEntry:          184            0
       lambda:            5            0
 ==========================================================================================================================
 
 Global frame list: total=2
 
-id=2, name=main, lvl=2, ref=3/5, pid=1(system), entry=4, subject=main, thread=null
+id=2, name=main, lvl=2, ref=3/5, entry=4, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -78,21 +78,21 @@ q1                   : 5        2        1    instance   q1
 ==========================================================================================================================
 
 
-id=3, name=subject-0, lvl=2, ref=2/2, pid=1(system), entry=0, subject=queue, thread=null
+id=3, name=SF-queue-0, lvl=2, ref=2/2, entry=0, pid=1(system), subject=queue
 
-id=4, name=subject-1, lvl=3, ref=4/5, pid=3(subject-0), entry=0, subject=q1, thread=null
+id=4, name=SF-q1-1, lvl=3, ref=4/5, entry=0, pid=3(SF-queue-0), subject=q1
 
 Global Subject list:
 
-name=q1, lvl=1, ref=1/2, parent=queue, frame=4(subject-1), final=false, mbrs=5
+name=q1, lvl=1, ref=1/2, parent=queue, frame=4(SF-q1-1), final=false, mbrs=5
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?impl                : PRIVATE  false    false    1    var        instance:null
-init                 : DEFAULT  true     false    1    func       (init) : frame=subject-1, type=lambda
-push                 : DEFAULT  true     false    1    func       (push nil) : frame=subject-1, type=lambda
+init                 : DEFAULT  true     false    1    func       (init) : frame=SF-q1-1, type=lambda
+push                 : DEFAULT  true     false    1    func       (push nil) : frame=SF-q1-1, type=lambda
 this                 : DEFAULT  false    false    1    instance   q1
-to-list              : DEFAULT  true     false    1    func       (to-list) : frame=subject-1, type=lambda
+to-list              : DEFAULT  true     false    1    func       (to-list) : frame=SF-q1-1, type=lambda
 ==========================================================================================================================
 
 

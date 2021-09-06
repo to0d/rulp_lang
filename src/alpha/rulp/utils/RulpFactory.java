@@ -149,7 +149,7 @@ import alpha.rulp.ximpl.rclass.XRFactorPropertyOf;
 import alpha.rulp.ximpl.rclass.XRMember;
 import alpha.rulp.ximpl.rclass.XRNoClass;
 import alpha.rulp.ximpl.rclass.XRSubjectFrame;
-import alpha.rulp.ximpl.runtime.XRFactorBodyUsingSubject;
+import alpha.rulp.ximpl.runtime.XRFactorAddSearchFrame;
 import alpha.rulp.ximpl.runtime.XRFactorDefMacro;
 import alpha.rulp.ximpl.runtime.XRFactorDefTemplate;
 import alpha.rulp.ximpl.runtime.XRFactorDefun;
@@ -157,6 +157,7 @@ import alpha.rulp.ximpl.runtime.XRFactorFrameOf;
 import alpha.rulp.ximpl.runtime.XRFactorLambda;
 import alpha.rulp.ximpl.runtime.XRFactorParentOf;
 import alpha.rulp.ximpl.runtime.XRFactorRulpObjectCount;
+import alpha.rulp.ximpl.runtime.XRFactorSearchFrameOf;
 import alpha.rulp.ximpl.runtime.XRFrame;
 import alpha.rulp.ximpl.runtime.XRFrameEntry;
 import alpha.rulp.ximpl.runtime.XRFrameProtected;
@@ -239,8 +240,6 @@ public final class RulpFactory {
 
 	private static AtomicInteger interpreterCount = new AtomicInteger(0);
 
-	private static AtomicInteger uniqNameCount = new AtomicInteger(0);
-
 	private static AtomicInteger lambdaCount = new AtomicInteger(0);
 
 	private static final Set<Class<? extends IRObjectLoader>> loaderClasses = new HashSet<>();
@@ -248,6 +247,8 @@ public final class RulpFactory {
 	private static final List<IRObjectLoader> rulpLoaders = new LinkedList<>();
 
 	private static final XRBoolean True = new XRBoolean(true);
+
+	private static AtomicInteger uniqNameCount = new AtomicInteger(0);
 
 	static {
 		EMPTY_LIST = new XRListList(Collections.<IRObject>emptyList(), RType.LIST, null, false);
@@ -396,7 +397,7 @@ public final class RulpFactory {
 	public static IRFrame createFrame(IRFrame parentFrame, String name) throws RException {
 
 		if (name == null) {
-			name = String.format("frame-%d", frameUnNameCount.getAndIncrement());
+			name = String.format("F-%d", frameUnNameCount.getAndIncrement());
 		}
 
 		XRFrame frame = new XRFrame();
@@ -424,11 +425,9 @@ public final class RulpFactory {
 		XRSubjectFrame frame = new XRSubjectFrame();
 		frame.setParentFrame(parentFrame);
 		frame.setSubject(subject);
-		frame.setFrameName(String.format("subject-%d", frameUnNameCount.getAndIncrement()));
+		frame.setFrameName(String.format("SF-%s-%d", subject.getSubjectName(), frameUnNameCount.getAndIncrement()));
 		frame.setThreadContext(parentFrame.getThreadContext());
-
 		_allocateFrameId(frame);
-
 		return frame;
 	}
 
@@ -575,6 +574,8 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSubjectOf(F_SUBJECT_OF));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorFrameOf(F_FREAME_OF));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorParentOf(F_PARENT_OF));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorAddSearchFrame(F_ADD_SEARCH_FRAME));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorSearchFrameOf(F_SEARCH_FRAME_OF));
 
 		// Class
 		RulpUtil.addFrameObject(rootFrame, new XRNoClass(A_NOCLASS, rootFrame));
@@ -704,10 +705,6 @@ public final class RulpFactory {
 
 		// Load base script
 		LoadUtil.loadRulpFromJar(interpreter, systemFrame, "alpha/resource/base.rulp", "utf-8");
-
-		// Name space
-		RulpUtil.addFrameObject(rootFrame, new XRFactorBodyUsingSubject(F_ADD_USING_SUBJECT));
-//		RulpUtil.addTemplate(systemFrame, F_USE, new XRFactorBodyUsingSubject(), 3, A_NAMESPACE);
 
 		// Native Class Initialization
 		XRSet.init(interpreter, systemFrame);

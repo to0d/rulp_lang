@@ -17,7 +17,7 @@ public interface IRFrame extends IRObject, IRSubject {
 
 	public void addFrameReleaseListener(IRListener<IRFrame> listener);
 
-	public void addUsingSubject(IRSubject sub);
+	public void addSearchFrame(IRFrame frame);
 
 	public IRVar addVar(String name) throws RException;
 
@@ -37,7 +37,7 @@ public interface IRFrame extends IRObject, IRSubject {
 
 	public IRThreadContext getThreadContext();
 
-	public List<IRSubject> getUsingSubjectList();
+	public List<IRFrame> getSearchFrameList();
 
 	public List<IRFrameEntry> listEntries();
 

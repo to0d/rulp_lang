@@ -24,7 +24,7 @@ root::^
 root::access
 root::add
 root::add-all
-root::add_using_subject
+root::add_search_frame
 root::alias
 root::and
 root::array
@@ -59,6 +59,7 @@ root::final
 root::float
 root::foreach
 root::frame
+root::frame-of
 root::from
 root::func
 root::get-of-array
@@ -88,6 +89,7 @@ root::null
 root::open-txt-file
 root::or
 root::out-to-file
+root::parent-of
 root::print
 root::print-subject
 root::private
@@ -101,6 +103,7 @@ root::reverse
 root::root
 root::rulp-object-count
 root::save-txt-file
+root::search-frame-of
 root::setq
 root::size-of-array
 root::size-of-list

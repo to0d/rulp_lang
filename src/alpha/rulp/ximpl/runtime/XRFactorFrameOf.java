@@ -44,7 +44,7 @@ public class XRFactorFrameOf extends AbsRFactorAdapter implements IRFactor {
 				return entry.getFrame();
 			}
 			break;
-		
+
 		case MEMBER:
 			IRMember mbr = RuntimeUtil.getActualMember((IRMember) obj, interpreter, frame);
 			if (!RuntimeUtil.canAccess(mbr, interpreter, frame)) {
@@ -52,6 +52,9 @@ public class XRFactorFrameOf extends AbsRFactorAdapter implements IRFactor {
 			}
 
 			return RulpUtil.asSubject(mbr.getSubject()).getSubjectFrame();
+
+		case INSTANCE:
+			return RulpUtil.asInstance(obj).getSubjectFrame();
 
 		default:
 		}

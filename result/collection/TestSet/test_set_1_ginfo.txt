@@ -60,13 +60,13 @@ Object create count:
       member:          153            0          153
        frame:           20           18            2
  interpreter:            1            0
-  frameEntry:          189            0
+  frameEntry:          190            0
       lambda:            4            0
 ==========================================================================================================================
 
 Global frame list: total=2
 
-id=2, name=main, lvl=2, ref=1/1, pid=1(system), entry=4, subject=main, thread=null
+id=2, name=main, lvl=2, ref=1/1, entry=4, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -77,21 +77,21 @@ set1                 : 5        2        1    instance   set1
 ==========================================================================================================================
 
 
-id=3, name=subject-0, lvl=2, ref=2/2, pid=1(system), entry=0, subject=set, thread=null
+id=3, name=SF-set-0, lvl=2, ref=2/2, entry=0, pid=1(system), subject=set
 
-id=4, name=subject-1, lvl=3, ref=5/6, pid=3(subject-0), entry=0, subject=set1, thread=null
+id=4, name=SF-set1-1, lvl=3, ref=5/6, entry=0, pid=3(SF-set-0), subject=set1
 
 Global Subject list:
 
-name=set1, lvl=1, ref=1/1, parent=set, frame=4(subject-1), final=false, mbrs=6
+name=set1, lvl=1, ref=1/1, parent=set, frame=4(SF-set1-1), final=false, mbrs=6
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?impl                : PRIVATE  false    false    1    var        instance:null
-add                  : DEFAULT  true     false    1    func       (add nil) : frame=subject-1, type=lambda
-has                  : DEFAULT  true     false    1    func       (has nil) : frame=subject-1, type=lambda
-init                 : DEFAULT  true     false    1    func       (init) : frame=subject-1, type=lambda
-size-of              : DEFAULT  true     false    1    func       (size-of) : frame=subject-1, type=lambda
+add                  : DEFAULT  true     false    1    func       (add nil) : frame=SF-set1-1, type=lambda
+has                  : DEFAULT  true     false    1    func       (has nil) : frame=SF-set1-1, type=lambda
+init                 : DEFAULT  true     false    1    func       (init) : frame=SF-set1-1, type=lambda
+size-of              : DEFAULT  true     false    1    func       (size-of) : frame=SF-set1-1, type=lambda
 this                 : DEFAULT  false    false    1    instance   set1
 ==========================================================================================================================
 

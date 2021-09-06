@@ -57,13 +57,13 @@ Object create count:
       member:          165            0          165
        frame:           20           19            1
  interpreter:            1            0
-  frameEntry:          195            0
+  frameEntry:          196            0
       lambda:           24            0
 ==========================================================================================================================
 
 Global frame list: total=1
 
-id=2, name=main, lvl=2, ref=2/3, pid=1(system), entry=5, subject=main, thread=null
+id=2, name=main, lvl=2, ref=2/3, entry=5, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -75,11 +75,11 @@ type#class1          : 5        2        0    atom       type#class1
 ==========================================================================================================================
 
 
-id=3, name=subject-0, lvl=3, ref=1/7, pid=2(main), entry=0, subject=class1, thread=null
+id=3, name=SF-class1-0, lvl=3, ref=1/7, entry=0, pid=2(main), subject=class1
 
 Global Subject list:
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(subject-0), final=false, mbrs=3
+name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=3
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

@@ -13,6 +13,7 @@ public class TestNameSpace extends RulpTestBase {
 		_test("(new namespace ns1)", "ns1");
 		_test("(defvar var1 1)", "&var1");
 		_test("(defun f1 () (return 1))", "f1");
+		_test("(search-frame-of)", "'()");
 
 		// define variable in name space
 		_test("(defvar ns1::var1 2)", "&var1");
@@ -49,7 +50,8 @@ public class TestNameSpace extends RulpTestBase {
 		_test("(ls ns1)", "'(ns1::f1 ns1::f2 ns1::this ns1::var1 ns1::var2)");
 
 		// Search item in a name space
-		_test("(use namespace ns1)", "ns1");
+		_test("(use namespace ns1)");
+		_test("(search-frame-of)", "'(SF-ns1-1 main)");
 		_test("(value-of (value-of main::var1))", "1");
 		_test("(value-of (value-of ns1::var1))", "2");
 		_test("(value-of (value-of ns1::var2))", "3");
@@ -71,7 +73,8 @@ public class TestNameSpace extends RulpTestBase {
 		_test("(f2)", "3");
 
 		// change back, everything should work fine
-		_test("(use namespace main)", "main");
+		_test("(use namespace main)");
+		_test("(search-frame-of)", "'(main SF-ns1-1)");
 		_test("(value-of var1)", "1");
 		_test("(value-of (value-of main::var1))", "1");
 		_test("(value-of (value-of ns1::var1))", "2");
@@ -82,7 +85,7 @@ public class TestNameSpace extends RulpTestBase {
 		_test("(ns1::f1)", "2");
 		_test("(ns1::f2)", "3");
 		_test("(f3)", "4");
-		
+
 		_gInfo("result/namespace/TestNameSpace/test_namespace_1_ginfo.txt");
 	}
 
@@ -100,18 +103,18 @@ public class TestNameSpace extends RulpTestBase {
 		_test("(defvar ns2::var1 2)", "&var1");
 		_test("(defun ns2::f1 () (return 2))", "ns2::f1");
 
-		_test("(use namespace ns1)", "ns1");
+		_test("(use namespace ns1)", "nil");
 		_test("(value-of var1)", "1");
 		_test("(f1)", "1");
 
-		_test("(use namespace ns2)", "ns2");
+		_test("(use namespace ns2)", "nil");
 		_test("(value-of var1)", "2");
 		_test("(f1)", "2");
 
-		_test("(use namespace ns1)", "ns1");
+		_test("(use namespace ns1)", "nil");
 		_test("(value-of var1)", "1");
 		_test("(f1)", "1");
-		
+
 		_gInfo("result/namespace/TestNameSpace/test_namespace_2_ginfo.txt");
 	}
 

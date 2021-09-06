@@ -1,17 +1,17 @@
-name=o1, lvl=1, ref=1/1, parent=class1, frame=4(subject-1), final=false, mbrs=4
+name=o1, lvl=1, ref=1/1, parent=class1, frame=4(SF-o1-1), final=false, mbrs=4
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?value               : DEFAULT  false    false    1    var        int:0
-get                  : DEFAULT  false    false    1    func       (get) : frame=subject-1, type=lambda
+get                  : DEFAULT  false    false    1    func       (get) : frame=SF-o1-1, type=lambda
 init                 : DEFAULT  false    false    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
-                                                  1    func       (init) : frame=subject-1, type=lambda
-                                                  1    func       (init nil) : frame=subject-1, type=lambda
-                                                  1    func       (init nil nil) : frame=subject-1, type=lambda
+                                                  1    func       (init) : frame=SF-o1-1, type=lambda
+                                                  1    func       (init nil) : frame=SF-o1-1, type=lambda
+                                                  1    func       (init nil nil) : frame=SF-o1-1, type=lambda
 this                 : DEFAULT  false    false    1    instance   o1
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(subject-0), final=false, mbrs=3
+name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=3
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -23,20 +23,20 @@ init                 : DEFAULT  false    false    1    funcList   '((init nil ni
                                                   1    func       (init nil nil) : frame=main
 ==========================================================================================================================
 
-name=o2, lvl=1, ref=1/1, parent=class1, frame=5(subject-2), final=false, mbrs=4
+name=o2, lvl=1, ref=1/1, parent=class1, frame=5(SF-o2-2), final=false, mbrs=4
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?value               : DEFAULT  false    false    1    var        int:1
-get                  : DEFAULT  false    false    1    func       (get) : frame=subject-2, type=lambda
+get                  : DEFAULT  false    false    1    func       (get) : frame=SF-o2-2, type=lambda
 init                 : DEFAULT  false    false    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
-                                                  1    func       (init) : frame=subject-2, type=lambda
-                                                  1    func       (init nil) : frame=subject-2, type=lambda
-                                                  1    func       (init nil nil) : frame=subject-2, type=lambda
+                                                  1    func       (init) : frame=SF-o2-2, type=lambda
+                                                  1    func       (init nil) : frame=SF-o2-2, type=lambda
+                                                  1    func       (init nil nil) : frame=SF-o2-2, type=lambda
 this                 : DEFAULT  false    false    1    instance   o2
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(subject-0), final=false, mbrs=3
+name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=3
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -48,20 +48,20 @@ init                 : DEFAULT  false    false    1    funcList   '((init nil ni
                                                   1    func       (init nil nil) : frame=main
 ==========================================================================================================================
 
-name=o3, lvl=1, ref=1/1, parent=class1, frame=6(subject-3), final=false, mbrs=4
+name=o3, lvl=1, ref=1/1, parent=class1, frame=6(SF-o3-3), final=false, mbrs=4
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?value               : DEFAULT  false    false    1    var        int:3
-get                  : DEFAULT  false    false    1    func       (get) : frame=subject-3, type=lambda
+get                  : DEFAULT  false    false    1    func       (get) : frame=SF-o3-3, type=lambda
 init                 : DEFAULT  false    false    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
-                                                  1    func       (init) : frame=subject-3, type=lambda
-                                                  1    func       (init nil) : frame=subject-3, type=lambda
-                                                  1    func       (init nil nil) : frame=subject-3, type=lambda
+                                                  1    func       (init) : frame=SF-o3-3, type=lambda
+                                                  1    func       (init nil) : frame=SF-o3-3, type=lambda
+                                                  1    func       (init nil nil) : frame=SF-o3-3, type=lambda
 this                 : DEFAULT  false    false    1    instance   o3
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(subject-0), final=false, mbrs=3
+name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=3
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -73,20 +73,20 @@ init                 : DEFAULT  false    false    1    funcList   '((init nil ni
                                                   1    func       (init nil nil) : frame=main
 ==========================================================================================================================
 
-name=null, lvl=1, ref=1/1, parent=class1, frame=7(subject-4), final=false, mbrs=4
+name=null, lvl=1, ref=1/1, parent=class1, frame=7(SF-null-4), final=false, mbrs=4
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?value               : DEFAULT  false    false    1    var        int:0
-get                  : DEFAULT  false    false    1    func       (get) : frame=subject-4, type=lambda
+get                  : DEFAULT  false    false    1    func       (get) : frame=SF-null-4, type=lambda
 init                 : DEFAULT  false    false    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
-                                                  1    func       (init) : frame=subject-4, type=lambda
-                                                  1    func       (init nil) : frame=subject-4, type=lambda
-                                                  1    func       (init nil nil) : frame=subject-4, type=lambda
+                                                  1    func       (init) : frame=SF-null-4, type=lambda
+                                                  1    func       (init nil) : frame=SF-null-4, type=lambda
+                                                  1    func       (init nil nil) : frame=SF-null-4, type=lambda
 this                 : DEFAULT  false    false    1    instance   null
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(subject-0), final=false, mbrs=3
+name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=3
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -98,20 +98,20 @@ init                 : DEFAULT  false    false    1    funcList   '((init nil ni
                                                   1    func       (init nil nil) : frame=main
 ==========================================================================================================================
 
-name=null, lvl=1, ref=1/1, parent=class1, frame=8(subject-5), final=false, mbrs=4
+name=null, lvl=1, ref=1/1, parent=class1, frame=8(SF-null-5), final=false, mbrs=4
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?value               : DEFAULT  false    false    1    var        int:4
-get                  : DEFAULT  false    false    1    func       (get) : frame=subject-5, type=lambda
+get                  : DEFAULT  false    false    1    func       (get) : frame=SF-null-5, type=lambda
 init                 : DEFAULT  false    false    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
-                                                  1    func       (init) : frame=subject-5, type=lambda
-                                                  1    func       (init nil) : frame=subject-5, type=lambda
-                                                  1    func       (init nil nil) : frame=subject-5, type=lambda
+                                                  1    func       (init) : frame=SF-null-5, type=lambda
+                                                  1    func       (init nil) : frame=SF-null-5, type=lambda
+                                                  1    func       (init nil nil) : frame=SF-null-5, type=lambda
 this                 : DEFAULT  false    false    1    instance   null
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(subject-0), final=false, mbrs=3
+name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=3
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -123,20 +123,20 @@ init                 : DEFAULT  false    false    1    funcList   '((init nil ni
                                                   1    func       (init nil nil) : frame=main
 ==========================================================================================================================
 
-name=null, lvl=1, ref=1/1, parent=class1, frame=9(subject-6), final=false, mbrs=4
+name=null, lvl=1, ref=1/1, parent=class1, frame=9(SF-null-6), final=false, mbrs=4
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?value               : DEFAULT  false    false    1    var        int:5
-get                  : DEFAULT  false    false    1    func       (get) : frame=subject-6, type=lambda
+get                  : DEFAULT  false    false    1    func       (get) : frame=SF-null-6, type=lambda
 init                 : DEFAULT  false    false    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
-                                                  1    func       (init) : frame=subject-6, type=lambda
-                                                  1    func       (init nil) : frame=subject-6, type=lambda
-                                                  1    func       (init nil nil) : frame=subject-6, type=lambda
+                                                  1    func       (init) : frame=SF-null-6, type=lambda
+                                                  1    func       (init nil) : frame=SF-null-6, type=lambda
+                                                  1    func       (init nil nil) : frame=SF-null-6, type=lambda
 this                 : DEFAULT  false    false    1    instance   null
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(subject-0), final=false, mbrs=3
+name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=3
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

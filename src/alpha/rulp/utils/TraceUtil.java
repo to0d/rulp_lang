@@ -246,21 +246,36 @@ public class TraceUtil {
 
 		StringBuffer sb = new StringBuffer();
 
-		IRFrame frameParent = frame.getParentFrame();
 		List<IRFrameEntry> frameEntries = new ArrayList<>(frame.listEntries());
 		Collections.sort(frameEntries, (f1, f2) -> {
 			return f1.getEntryId() - f2.getEntryId();
 		});
 
-		IRSubject frameSubject = frame.getSubject();
-		IRThreadContext frameThreadContext = frame.getThreadContext();
+		sb.append(String.format("id=%d, name=%s, lvl=%d, ref=%d/%d, entry=%d", frame.getFrameId(), frame.getFrameName(),
+				frame.getLevel(), frame.getRef(), frame.getMaxRef(), frameEntries.size()));
 
-		sb.append(String.format("id=%d, name=%s, lvl=%d, ref=%d/%d, pid=%d(%s), entry=%d, subject=%s, thread=%s\n",
-				frame.getFrameId(), frame.getFrameName(), frame.getLevel(), frame.getRef(), frame.getMaxRef(),
-				frameParent == null ? -1 : frameParent.getFrameId(),
-				frameParent == null ? "null" : frameParent.getFrameName(), frameEntries.size(),
-				frameSubject == null ? "null" : frameSubject.getSubjectName(), frameThreadContext == null ? "null"
-						: "" + frameThreadContext.isCompleted() + "/" + frameThreadContext.getResultCount()));
+		IRFrame frameParent = frame.getParentFrame();
+		if (frameParent != null) {
+			sb.append(String.format(", pid=%d(%s)", frameParent.getFrameId(), frameParent.getFrameName()));
+		}
+
+		IRSubject frameSubject = frame.getSubject();
+		if (frameSubject != null) {
+			sb.append(String.format(", subject=%s", frameSubject.getSubjectName()));
+		}
+
+		IRThreadContext frameThreadContext = frame.getThreadContext();
+		if (frameThreadContext != null) {
+			sb.append(String.format(", thread=%s",
+					"" + frameThreadContext.isCompleted() + "/" + frameThreadContext.getResultCount()));
+		}
+
+		List<IRFrame> searchFrameList = frame.getSearchFrameList();
+		if (searchFrameList != null) {
+			sb.append(String.format(", search=%s", "" + searchFrameList));
+		}
+
+		sb.append("\n");
 
 		if (!frameEntries.isEmpty()) {
 

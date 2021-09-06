@@ -51,13 +51,13 @@ Object create count:
       member:          143            0          143
        frame:            6            2            4
  interpreter:            1            0
-  frameEntry:          181            0
+  frameEntry:          182            0
       lambda:            0            0
 ==========================================================================================================================
 
 Global frame list: total=4
 
-id=2, name=main, lvl=2, ref=2/3, pid=1(system), entry=8, subject=main, thread=null
+id=2, name=main, lvl=2, ref=2/3, entry=8, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -72,17 +72,17 @@ o1                   : 8        2        1    instance   o1
 ==========================================================================================================================
 
 
-id=3, name=subject-0, lvl=2, ref=2/2, pid=1(system), entry=0, subject=namespace, thread=null
+id=3, name=SF-namespace-0, lvl=2, ref=2/2, entry=0, pid=1(system), subject=namespace
 
-id=4, name=subject-1, lvl=3, ref=2/2, pid=2(main), entry=0, subject=class1, thread=null
+id=4, name=SF-class1-1, lvl=3, ref=2/2, entry=0, pid=2(main), subject=class1
 
-id=5, name=subject-2, lvl=4, ref=1/1, pid=4(subject-1), entry=0, subject=o1, thread=null
+id=5, name=SF-o1-2, lvl=4, ref=1/1, entry=0, pid=4(SF-class1-1), subject=o1
 
-id=6, name=subject-3, lvl=3, ref=1/1, pid=3(subject-0), entry=0, subject=ns1, thread=null
+id=6, name=SF-ns1-3, lvl=3, ref=1/1, entry=0, pid=3(SF-namespace-0), subject=ns1
 
 Global Subject list:
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=4(subject-1), final=false, mbrs=2
+name=class1, lvl=0, ref=1/1, parent=null, frame=4(SF-class1-1), final=false, mbrs=2
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -90,7 +90,7 @@ Name                 : Access   Final    Static   Ref  Type       Value
 add                  : DEFAULT  false    false    1    func       (add nil) : frame=main
 ==========================================================================================================================
 
-name=ns1, lvl=1, ref=1/1, parent=namespace, frame=6(subject-3), final=false, mbrs=2
+name=ns1, lvl=1, ref=1/1, parent=namespace, frame=6(SF-ns1-3), final=false, mbrs=2
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -98,7 +98,7 @@ this                 : DEFAULT  false    false    1    instance   ns1
 var3                 : DEFAULT  false    false    1    var        null
 ==========================================================================================================================
 
-name=o1, lvl=1, ref=1/1, parent=class1, frame=5(subject-2), final=false, mbrs=2
+name=o1, lvl=1, ref=1/1, parent=class1, frame=5(SF-o1-2), final=false, mbrs=2
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
