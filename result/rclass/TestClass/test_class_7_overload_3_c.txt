@@ -1,4 +1,4 @@
-name=o2, lvl=2, ref=1/1, parent=class2, frame=6(SF-o2-3), final=false, mbrs=2
+name=o2, lvl=2, ref=1/1, parent=class2, final=false, mbrs=2, frame=null
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -6,7 +6,7 @@ fun1                 : DEFAULT  false    true     2    func       (fun1 nil) : f
 this                 : DEFAULT  false    false    1    instance   o2
 ==========================================================================================================================
 
-name=class2, lvl=1, ref=1/1, parent=class1, frame=3(SF-class2-0), final=false, mbrs=2
+name=class2, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=4(SF-class2-1)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -14,7 +14,7 @@ fun1                 : DEFAULT  false    true     2    func       (fun1 nil) : f
 super                : DEFAULT  false    false    2    class      class1
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=2/2, parent=null, frame=4(SF-class1-1), final=false, mbrs=1
+name=class1, lvl=0, ref=2/2, parent=null, final=false, mbrs=1, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

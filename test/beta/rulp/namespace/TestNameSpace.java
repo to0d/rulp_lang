@@ -134,4 +134,20 @@ public class TestNameSpace extends RulpTestBase {
 						+ "at _$fun$_use: (error bad-type (strcat \"namespace not found: \" (to-string ?ns)))\n"
 						+ "at main: (use namespace ns1)");
 	}
+
+	@Test
+	public void test_namespace_5_err_duplicate_ns() {
+
+		_setup();
+		_test("(new namespace ns1)", "ns1");
+		_test_error("(new namespace ns1)", "duplicate object<ns1> found: ns1\n" + "at main: (new namespace ns1)");
+	}
+	
+	@Test
+	public void test_namespace_6_nested_1() {
+
+		_setup();
+		_test_script("result/namespace/TestNameSpace/test_namespace_6_nested_1.rulp");
+		_gInfo("result/namespace/TestNameSpace/test_namespace_6_nested_1_ginfo.txt");
+	}
 }

@@ -145,4 +145,11 @@ public class TestClass extends RulpTestBase {
 		_setup();
 		_test_script("result/rclass/TestClass/test_class_b_bad_para.rulp");
 	}
+	
+	@Test
+	public void test_class_c_mbr() {
+		_setup();
+		_test_script("result/rclass/TestClass/test_class_c_mbr.rulp");
+		_gInfo("result/rclass/TestClass/test_class_c_mbr_ginfo.txt");
+	}
 }

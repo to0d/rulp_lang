@@ -32,4 +32,5 @@ public final class XRDefClass extends AbsRClass implements IRClass {
 			throws RException {
 		return RulpFactory.createInstanceOfDefault(this, instanceName, this.getSubjectFrame());
 	}
+
 }

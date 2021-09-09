@@ -69,6 +69,11 @@ public final class XRNoClass extends AbsAtomObject implements IRClass {
 	}
 
 	@Override
+	public boolean hasSubjectFrame() {
+		return true;
+	}
+
+	@Override
 	public String getSubjectName() {
 		return className;
 	}

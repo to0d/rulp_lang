@@ -1,0 +1,18 @@
+(new namespace ns1)
+;=>ns1
+(new namespace ns1::ns2)
+;=>ns2
+(use namespace ns1)
+;=>nil
+(use namespace ns2)
+;=>nil
+(new namespace ns2::ns3)
+;=>ns3
+(use namespace ns3)
+;=>nil
+(search-frame-of)
+;=>'(SF-ns3-2 SF-ns2-1 SF-ns1-0 main)
+(type-of ns3)
+;=>instance
+(frame-of ns3)
+;=>ns3

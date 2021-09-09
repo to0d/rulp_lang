@@ -80,7 +80,7 @@ Global frame tree:
 
 Global Subject list:
 
-name=ns1, lvl=1, ref=1/1, parent=namespace, frame=3(SF-ns1-0), final=false, mbrs=2
+name=ns1, lvl=1, ref=1/1, parent=namespace, final=false, mbrs=2, frame=3(SF-ns1-0)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

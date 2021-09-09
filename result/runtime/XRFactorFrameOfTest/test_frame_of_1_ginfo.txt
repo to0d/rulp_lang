@@ -88,7 +88,7 @@ Global frame tree:
 
 Global Subject list:
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=2
+name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=2, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -96,7 +96,7 @@ Name                 : Access   Final    Static   Ref  Type       Value
 add                  : DEFAULT  false    false    1    func       (add nil) : frame=main
 ==========================================================================================================================
 
-name=ns1, lvl=1, ref=1/1, parent=namespace, frame=5(SF-ns1-2), final=false, mbrs=2
+name=ns1, lvl=1, ref=1/1, parent=namespace, final=false, mbrs=2, frame=5(SF-ns1-2)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -104,7 +104,7 @@ this                 : DEFAULT  false    false    1    instance   ns1
 var3                 : DEFAULT  false    false    1    var        null
 ==========================================================================================================================
 
-name=o1, lvl=1, ref=1/1, parent=class1, frame=4(SF-o1-1), final=false, mbrs=2
+name=o1, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=4(SF-o1-1)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

@@ -125,6 +125,11 @@ public abstract class AbsRSubject extends AbsRefObject implements IRSubject {
 	}
 
 	@Override
+	public boolean hasSubjectFrame() {
+		return subjectFrame != null;
+	}
+
+	@Override
 	public boolean isFinal() {
 		return bFinal;
 	}

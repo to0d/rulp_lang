@@ -90,7 +90,7 @@ Global frame tree:
 
 Global Subject list:
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=5
+name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=5, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

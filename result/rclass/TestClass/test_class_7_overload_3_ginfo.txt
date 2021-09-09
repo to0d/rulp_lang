@@ -7,8 +7,8 @@ Total runtime info:
      Interpreter call id/level:       55        0
              CPS support/count:    false        0
                Frame max level:        3
-                  Frame max id:        7
-           Frame free id count:        0
+                  Frame max id:        6
+           Frame free id count:        1
 ==========================================================================================================================
 
 Expression compute count:
@@ -54,13 +54,13 @@ Object create count:
     instance:            2            0            2
        class:            7            0            7
       member:          139            0          139
-       frame:            6            2            4
+       frame:            4            2            2
  interpreter:            1            0
   frameEntry:          184            0
       lambda:            0            0
 ==========================================================================================================================
 
-Global frame list: total=4
+Global frame list: total=2
 
 id=2, name=main, lvl=2, ref=3/4, entry=9, pid=1(system), subject=main
 ==========================================================================================================================
@@ -78,33 +78,27 @@ o2                   : 10       2        1    instance   o2
 ==========================================================================================================================
 
 
-id=3, name=SF-class2-0, lvl=3, ref=2/2, entry=0, pid=2(main), subject=class2
+id=3, name=SF-class1-0, lvl=3, ref=1/1, entry=0, pid=2(main), subject=class1
 
-id=4, name=SF-class1-1, lvl=3, ref=2/2, entry=0, pid=2(main), subject=class1
-
-id=5, name=SF-o1-2, lvl=4, ref=1/1, entry=0, pid=4(SF-class1-1), subject=o1
-
-id=6, name=SF-o2-3, lvl=4, ref=1/1, entry=0, pid=3(SF-class2-0), subject=o2
+id=4, name=SF-class2-1, lvl=3, ref=1/1, entry=0, pid=2(main), subject=class2
 
 Global frame tree:
 
 ->FRAME(system): id=1, lvl=1, subject=system
     ->FRAME(main): id=2, lvl=2, subject=main
-        ->FRAME(SF-class2-0): id=3, lvl=3, subject=class2
-            ->FRAME(SF-o2-3): id=6, lvl=4, subject=o2
-        ->FRAME(SF-class1-1): id=4, lvl=3, subject=class1
-            ->FRAME(SF-o1-2): id=5, lvl=4, subject=o1
+        ->FRAME(SF-class1-0): id=3, lvl=3, subject=class1
+        ->FRAME(SF-class2-1): id=4, lvl=3, subject=class2
 
 Global Subject list:
 
-name=class1, lvl=0, ref=2/2, parent=null, frame=4(SF-class1-1), final=false, mbrs=1
+name=class1, lvl=0, ref=2/2, parent=null, final=false, mbrs=1, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 fun1                 : DEFAULT  false    true     2    func       (fun1 nil) : frame=main
 ==========================================================================================================================
 
-name=class2, lvl=1, ref=1/1, parent=class1, frame=3(SF-class2-0), final=false, mbrs=2
+name=class2, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=4(SF-class2-1)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -112,7 +106,7 @@ fun1                 : DEFAULT  false    true     2    func       (fun1 nil) : f
 super                : DEFAULT  false    false    2    class      class1
 ==========================================================================================================================
 
-name=o1, lvl=1, ref=1/1, parent=class1, frame=5(SF-o1-2), final=false, mbrs=2
+name=o1, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=null
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -120,7 +114,7 @@ fun1                 : DEFAULT  false    true     2    func       (fun1 nil) : f
 this                 : DEFAULT  false    false    1    instance   o1
 ==========================================================================================================================
 
-name=o2, lvl=2, ref=1/1, parent=class2, frame=6(SF-o2-3), final=false, mbrs=2
+name=o2, lvl=2, ref=1/1, parent=class2, final=false, mbrs=2, frame=null
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

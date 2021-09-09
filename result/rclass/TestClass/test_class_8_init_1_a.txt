@@ -1,4 +1,4 @@
-name=o1, lvl=1, ref=1/1, parent=class1, frame=4(SF-o1-1), final=false, mbrs=4
+name=o1, lvl=1, ref=1/1, parent=class1, final=false, mbrs=4, frame=4(SF-o1-1)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -11,7 +11,7 @@ init                 : DEFAULT  false    false    1    funcList   '((init nil ni
 this                 : DEFAULT  false    false    1    instance   o1
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=3
+name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ init                 : DEFAULT  false    false    1    funcList   '((init nil ni
                                                   1    func       (init nil nil) : frame=main
 ==========================================================================================================================
 
-name=o2, lvl=1, ref=1/1, parent=class1, frame=5(SF-o2-2), final=false, mbrs=4
+name=o2, lvl=1, ref=1/1, parent=class1, final=false, mbrs=4, frame=5(SF-o2-2)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -36,7 +36,7 @@ init                 : DEFAULT  false    false    1    funcList   '((init nil ni
 this                 : DEFAULT  false    false    1    instance   o2
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=3
+name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -48,7 +48,7 @@ init                 : DEFAULT  false    false    1    funcList   '((init nil ni
                                                   1    func       (init nil nil) : frame=main
 ==========================================================================================================================
 
-name=o3, lvl=1, ref=1/1, parent=class1, frame=6(SF-o3-3), final=false, mbrs=4
+name=o3, lvl=1, ref=1/1, parent=class1, final=false, mbrs=4, frame=6(SF-o3-3)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -61,7 +61,7 @@ init                 : DEFAULT  false    false    1    funcList   '((init nil ni
 this                 : DEFAULT  false    false    1    instance   o3
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=3
+name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ init                 : DEFAULT  false    false    1    funcList   '((init nil ni
                                                   1    func       (init nil nil) : frame=main
 ==========================================================================================================================
 
-name=null, lvl=1, ref=1/1, parent=class1, frame=7(SF-null-4), final=false, mbrs=4
+name=null, lvl=1, ref=1/1, parent=class1, final=false, mbrs=4, frame=7(SF-null-4)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ init                 : DEFAULT  false    false    1    funcList   '((init nil ni
 this                 : DEFAULT  false    false    1    instance   null
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=3
+name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -98,7 +98,7 @@ init                 : DEFAULT  false    false    1    funcList   '((init nil ni
                                                   1    func       (init nil nil) : frame=main
 ==========================================================================================================================
 
-name=null, lvl=1, ref=1/1, parent=class1, frame=8(SF-null-5), final=false, mbrs=4
+name=null, lvl=1, ref=1/1, parent=class1, final=false, mbrs=4, frame=8(SF-null-5)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -111,7 +111,7 @@ init                 : DEFAULT  false    false    1    funcList   '((init nil ni
 this                 : DEFAULT  false    false    1    instance   null
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=3
+name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -123,7 +123,7 @@ init                 : DEFAULT  false    false    1    funcList   '((init nil ni
                                                   1    func       (init nil nil) : frame=main
 ==========================================================================================================================
 
-name=null, lvl=1, ref=1/1, parent=class1, frame=9(SF-null-6), final=false, mbrs=4
+name=null, lvl=1, ref=1/1, parent=class1, final=false, mbrs=4, frame=9(SF-null-6)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -136,7 +136,7 @@ init                 : DEFAULT  false    false    1    funcList   '((init nil ni
 this                 : DEFAULT  false    false    1    instance   null
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=3
+name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

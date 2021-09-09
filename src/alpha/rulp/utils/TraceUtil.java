@@ -52,6 +52,11 @@ public class TraceUtil {
 		if (frameSubject != null) {
 			sb.append(String.format(", subject=%s", frameSubject.getSubjectName()));
 		}
+		List<IRFrame> searchFrameList = frame.getSearchFrameList();
+		if (searchFrameList != null) {
+			sb.append(String.format(", search=%s", "" + searchFrameList));
+		}
+
 		sb.append("\n");
 
 		Set<IRFrame> childFrames = frameTreeMap.get(frame);
@@ -619,17 +624,24 @@ public class TraceUtil {
 		StringBuffer sb = new StringBuffer();
 
 		IRSubject subParent = subject.getParent();
-		IRFrame subFrame = subject.getSubjectFrame();
+		IRFrame subFrame = subject.hasSubjectFrame() ? subject.getSubjectFrame() : null;
 
 		ArrayList<IRMember> mbrs = new ArrayList<>(subject.listMembers());
 		Collections.sort(mbrs, (m1, m2) -> {
 			return m1.getName().compareTo(m2.getName());
 		});
 
-		sb.append(String.format("name=%s, lvl=%d, ref=%d/%d, parent=%s, frame=%d(%s), final=%s, mbrs=%d\n",
-				subject.getSubjectName(), subject.getLevel(), subject.getRef(), subject.getMaxRef(),
-				subParent == null ? "null" : subParent.getSubjectName(), subFrame.getFrameId(), subFrame.getFrameName(),
-				subject.isFinal(), mbrs.size()));
+		sb.append(String.format("name=%s, lvl=%d, ref=%d/%d, parent=%s, final=%s, mbrs=%d", subject.getSubjectName(),
+				subject.getLevel(), subject.getRef(), subject.getMaxRef(),
+				subParent == null ? "null" : subParent.getSubjectName(), subject.isFinal(), mbrs.size()));
+
+		if (subFrame != null) {
+			sb.append(String.format(", frame=%d(%s)", subFrame.getFrameId(), subFrame.getFrameName()));
+		} else {
+			sb.append(", frame=null");
+		}
+
+		sb.append("\n");
 		sb.append(SEP_LINE1);
 		sb.append(String.format("%-20s : %-8s %-8s %-8s %-4s %-10s %s\n", "Name", "Access", "Final", "Static", "Ref",
 				"Type", "Value"));

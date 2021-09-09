@@ -348,6 +348,11 @@ public class XRFrame extends AbsRefObject implements IRFrame {
 	}
 
 	@Override
+	public boolean hasSubjectFrame() {
+		return parentFrame != null;
+	}
+
+	@Override
 	public boolean isFinal() {
 		return bFinal;
 	}

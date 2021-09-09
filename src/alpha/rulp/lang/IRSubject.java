@@ -10,6 +10,8 @@ public interface IRSubject extends IRObject {
 
 	public IRSubject getParent();
 
+	public boolean hasSubjectFrame();
+
 	public IRFrame getSubjectFrame() throws RException;
 
 	public String getSubjectName();

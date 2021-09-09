@@ -16,13 +16,16 @@ import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRInstance;
 import alpha.rulp.lang.IRList;
+import alpha.rulp.lang.IRMember;
 import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 
 public class XRFactorNew extends AbsRFactorAdapter implements IRFactor {
@@ -44,6 +47,8 @@ public class XRFactorNew extends AbsRFactorAdapter implements IRFactor {
 
 		int argIndex = 1;
 		IRObject argObj = null;
+		IRFrame definedFrame = frame;
+
 		/******************************************/
 		// Class
 		/******************************************/
@@ -54,10 +59,25 @@ public class XRFactorNew extends AbsRFactorAdapter implements IRFactor {
 		/******************************************/
 		String instanceName = null;
 		if (argIndex < args.size()) {
-
 			argObj = args.get(argIndex);
+
 			if (argObj.getType() == RType.ATOM) {
 				instanceName = RulpUtil.asAtom(argObj).getName();
+				++argIndex;
+			}
+			// Create instance in the frame of the specified subject
+			else if (argObj.getType() == RType.MEMBER) {
+
+				IRMember mbr = RulpUtil.asMember(argObj);
+
+				IRObject subObj = RuntimeUtil.compute(mbr.getSubject(), interpreter, frame);
+				if (subObj == null) {
+					throw new RException("subject<" + mbr.getSubject() + "> not found");
+				}
+
+				IRSubject sub = RulpUtil.asSubject(subObj);
+				definedFrame = sub.getSubjectFrame();
+				instanceName = mbr.getName();
 				++argIndex;
 			}
 		}
@@ -93,13 +113,13 @@ public class XRFactorNew extends AbsRFactorAdapter implements IRFactor {
 		if (instanceName != null) {
 
 			// Check instance exist
-			IRFrameEntry oldEntry = frame.getEntry(instanceName);
-			if (oldEntry != null) {
+			IRFrameEntry oldEntry = definedFrame.getEntry(instanceName);
+			if (oldEntry != null && oldEntry.getFrame() == definedFrame) {
 				throw new RException(
 						String.format("duplicate object<%s> found: %s", instanceName, oldEntry.getObject()));
 			}
 
-			frame.setEntry(instanceName, instance);
+			definedFrame.setEntry(instanceName, instance);
 		}
 
 		return instance;
