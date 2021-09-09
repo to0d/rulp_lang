@@ -94,6 +94,15 @@ id=6, name=SF-queue-2, lvl=2, ref=2/2, entry=0, pid=1(system), subject=queue
 
 id=7, name=SF-null-3, lvl=3, ref=8/9, entry=0, pid=6(SF-queue-2), subject=null
 
+Global frame tree:
+
+->FRAME(system): id=1, lvl=1, subject=system
+    ->FRAME(main): id=2, lvl=2, subject=main
+    ->FRAME(SF-stack-0): id=3, lvl=2, subject=stack
+        ->FRAME(SF-s1-1): id=4, lvl=3, subject=s1
+    ->FRAME(SF-queue-2): id=6, lvl=2, subject=queue
+        ->FRAME(SF-null-3): id=7, lvl=3, subject=null
+
 Global Subject list:
 
 name=s1, lvl=1, ref=1/2, parent=stack, frame=4(SF-s1-1), final=false, mbrs=9

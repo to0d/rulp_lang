@@ -75,6 +75,12 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 ?v                   : 6        3        1    var        int:2               
 ==========================================================================================================================
 
+Global frame tree:
+
+->FRAME(system): id=1, lvl=1, subject=system
+    ->FRAME(main): id=2, lvl=2, subject=main
+        ->FRAME(_$fun$_fun1): id=3, lvl=3, subject=_$fun$_fun1
+
 Global Subject list:
 
 

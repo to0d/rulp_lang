@@ -90,6 +90,16 @@ id=7, name=SF-class1-2, lvl=5, ref=1/2, entry=0, pid=5(_$fun$_fun_add), subject=
 
 id=8, name=SF-o1-3, lvl=6, ref=2/3, entry=0, pid=7(SF-class1-2), subject=o1
 
+Global frame tree:
+
+->FRAME(system): id=1, lvl=1, subject=system
+    ->FRAME(main): id=2, lvl=2, subject=main
+        ->FRAME(_$fun$_fun_add): id=5, lvl=3, subject=_$fun$_fun_add
+            ->FRAME(SF-class1-2): id=7, lvl=5, subject=class1
+                ->FRAME(SF-o1-3): id=8, lvl=6, subject=o1
+    ->FRAME(SF-set-0): id=3, lvl=2, subject=set
+        ->FRAME(SF-s1-1): id=4, lvl=3, subject=s1
+
 Global Subject list:
 
 name=s1, lvl=1, ref=2/2, parent=set, frame=4(SF-s1-1), final=false, mbrs=4

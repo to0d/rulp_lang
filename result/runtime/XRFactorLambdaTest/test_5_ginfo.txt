@@ -78,6 +78,13 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 
 id=4, name=DO, lvl=4, ref=1/2, entry=0, pid=3(_$fun$_fun1), subject=DO
 
+Global frame tree:
+
+->FRAME(system): id=1, lvl=1, subject=system
+    ->FRAME(main): id=2, lvl=2, subject=main
+        ->FRAME(_$fun$_fun1): id=3, lvl=3, subject=_$fun$_fun1
+            ->FRAME(DO): id=4, lvl=4, subject=DO
+
 Global Subject list:
 
 

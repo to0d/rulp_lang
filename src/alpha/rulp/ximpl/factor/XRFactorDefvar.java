@@ -12,9 +12,7 @@ package alpha.rulp.ximpl.factor;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
-import alpha.rulp.lang.IRMember;
 import alpha.rulp.lang.IRObject;
-import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
@@ -22,7 +20,7 @@ import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.rclass.XRFactorDefClass;
+import alpha.rulp.utils.SubjectUtil;
 
 public class XRFactorDefvar extends AbsRFactorAdapter implements IRFactor {
 
@@ -51,27 +49,11 @@ public class XRFactorDefvar extends AbsRFactorAdapter implements IRFactor {
 		}
 
 		if (varObj.getType() == RType.MEMBER) {
-			return defMemberVar(RulpUtil.asMember(varObj), valObj, interpreter, frame);
+			IRVar var = SubjectUtil.defineMemberVar(RulpUtil.asMember(varObj), valObj, interpreter, frame);
+			return returnVar ? var : var.getValue();
 		}
 
 		throw new RException("Invalid var type, : " + args);
-	}
-
-	public IRObject defMemberVar(IRMember mbrObj, IRObject val, IRInterpreter interpreter, IRFrame frame)
-			throws RException {
-
-		IRObject subObj = interpreter.compute(frame, mbrObj.getSubject());
-		IRSubject sub = RulpUtil.asSubject(subObj);
-		String varName = mbrObj.getName();
-
-		if (val != null) {
-			val = interpreter.compute(frame, val);
-		}
-
-		IRMember mbr = XRFactorDefClass.createMemberVar(sub, varName, val);
-		sub.setMember(varName, mbr);
-
-		return returnVar ? mbr.getValue() : val;
 	}
 
 	public IRObject defVar(String varName, IRObject valObj, IRInterpreter interpreter, IRFrame frame)

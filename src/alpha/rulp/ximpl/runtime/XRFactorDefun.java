@@ -37,9 +37,9 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
+import alpha.rulp.utils.SubjectUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 import alpha.rulp.ximpl.optimize.CPSUtils;
-import alpha.rulp.ximpl.rclass.XRFactorDefClass;
 
 public class XRFactorDefun extends AbsRFactorAdapter implements IRFactor {
 
@@ -244,7 +244,7 @@ public class XRFactorDefun extends AbsRFactorAdapter implements IRFactor {
 		IRMember funMbr = RulpUtil.asMember(args.get(1));
 		IRSubject sub = RulpUtil.asSubject(interpreter.compute(frame, funMbr.getSubject()));
 
-		return XRFactorDefClass.defineClassMemberFun(sub, funMbr.getName(), args, interpreter, frame);
+		return SubjectUtil.defineMemberFun(sub, funMbr.getName(), args, interpreter, frame);
 
 	}
 

@@ -84,6 +84,11 @@ fun4b                : 13       2        1    func       (fun4b nil) : frame=mai
 ==========================================================================================================================
 
 
+Global frame tree:
+
+->FRAME(system): id=1, lvl=1, subject=system
+    ->FRAME(main): id=2, lvl=2, subject=main
+
 Global Subject list:
 
 

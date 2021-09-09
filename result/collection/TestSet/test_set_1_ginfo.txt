@@ -81,6 +81,13 @@ id=3, name=SF-set-0, lvl=2, ref=2/2, entry=0, pid=1(system), subject=set
 
 id=4, name=SF-set1-1, lvl=3, ref=5/6, entry=0, pid=3(SF-set-0), subject=set1
 
+Global frame tree:
+
+->FRAME(system): id=1, lvl=1, subject=system
+    ->FRAME(main): id=2, lvl=2, subject=main
+    ->FRAME(SF-set-0): id=3, lvl=2, subject=set
+        ->FRAME(SF-set1-1): id=4, lvl=3, subject=set1
+
 Global Subject list:
 
 name=set1, lvl=1, ref=1/1, parent=set, frame=4(SF-set1-1), final=false, mbrs=6

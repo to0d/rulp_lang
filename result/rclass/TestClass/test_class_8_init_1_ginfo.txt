@@ -77,6 +77,12 @@ type#class1          : 5        2        0    atom       type#class1
 
 id=3, name=SF-class1-0, lvl=3, ref=1/7, entry=0, pid=2(main), subject=class1
 
+Global frame tree:
+
+->FRAME(system): id=1, lvl=1, subject=system
+    ->FRAME(main): id=2, lvl=2, subject=main
+        ->FRAME(SF-class1-0): id=3, lvl=3, subject=class1
+
 Global Subject list:
 
 name=class1, lvl=0, ref=1/1, parent=null, frame=3(SF-class1-0), final=false, mbrs=3

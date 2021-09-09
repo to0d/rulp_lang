@@ -21,11 +21,19 @@ class XRFactorDefTemplateTest extends RulpTestBase {
 		_test_script("result/runtime/XRFactorDefTemplateTest/test_2_mbr.rulp");
 		_gInfo("result/runtime/XRFactorDefTemplateTest/test_2_mbr_ginfo.txt");
 	}
-	
+
 	@Test
 	public void test_3_scope_a() {
 
 		_setup();
 		_test_script("result/runtime/XRFactorDefTemplateTest/test_3_scope_a.rulp");
+	}
+
+	@Test
+	public void test_4_ns() {
+
+		_setup();
+		_test_script("result/runtime/XRFactorDefTemplateTest/test_4_ns.rulp");
+		_gInfo("result/runtime/XRFactorDefTemplateTest/test_4_ns_ginfo.txt");
 	}
 }

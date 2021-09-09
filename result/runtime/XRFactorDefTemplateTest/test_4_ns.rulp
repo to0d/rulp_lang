@@ -1,0 +1,26 @@
+(new namespace ns1)
+;=>ns1
+(deftemplate ask (teacher (?question expr)) (print "teacher say: yes, I know " ?question ", answer is " (value-of $(value-of ?question))))
+;=>ask
+(deftemplate ns1::ask (student (?question expr)) (print "student say: no, I don't know " ?question "."))
+;=>ask
+(ask teacher (+ 1 1))
+;=>nil
+;out:
+teacher say: yes, I know (+ 1 1), answer is 2
+;eof
+(ask student (+ 1 1))
+;err:
+no template match
+at main: (ask student (+ 1 1))
+;eof
+(ns1::ask student (+ 1 1))
+;=>nil
+;out:
+student say: no, I don't know (+ 1 1).
+;eof
+(ns1::ask teacher (+ 1 1))
+;err:
+no template match
+at main: (ns1::ask teacher (+ 1 1))
+;eof

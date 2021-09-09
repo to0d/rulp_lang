@@ -1,15 +1,17 @@
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.A_TRACE;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.MAX_COUNTER_SIZE;
 import static alpha.rulp.lang.Constant.O_False;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
@@ -36,6 +38,38 @@ public class TraceUtil {
 	static final String SEP_LINE3 = "..........................................................................................................................\n";
 
 	private static StaticVar varTrace = new StaticVar(A_TRACE, O_False);
+
+	private static void _printFrameTree(StringBuffer sb, IRFrame frame, Map<IRFrame, Set<IRFrame>> frameTreeMap,
+			int level) throws RException {
+
+		for (int i = 0; i < level; i++) {
+			sb.append("    ");
+		}
+
+		sb.append(String.format("->FRAME(%s): id=%d, lvl=%d", frame.getFrameName(), frame.getFrameId(),
+				frame.getLevel()));
+		IRSubject frameSubject = frame.getSubject();
+		if (frameSubject != null) {
+			sb.append(String.format(", subject=%s", frameSubject.getSubjectName()));
+		}
+		sb.append("\n");
+
+		Set<IRFrame> childFrames = frameTreeMap.get(frame);
+		if (childFrames == null) {
+			return;
+		}
+
+		ArrayList<IRFrame> childFrameList = new ArrayList<>(childFrames);
+		Collections.sort(childFrameList, (f1, f2) -> {
+			return f1.getFrameId() - f2.getFrameId();
+		});
+
+		for (IRFrame child : childFrameList) {
+			_printFrameTree(sb, child, frameTreeMap, level + 1);
+		}
+
+		frameTreeMap.remove(frame);
+	}
 
 	private static String _toRefString(IRObject obj) throws RException {
 
@@ -474,6 +508,7 @@ public class TraceUtil {
 		// Global frame list
 		/***********************************************/
 		Set<IRObject> frameObjs = new HashSet<>();
+
 		List<IRFrame> globalFrames = RulpFactory.listGlobalFrames();
 		sb.append(String.format("Global frame list: total=%d\n", globalFrames.size()));
 		sb.append("\n");
@@ -484,6 +519,55 @@ public class TraceUtil {
 		for (IRFrame frame : globalFrames) {
 			sb.append("\n");
 			sb.append(printFrame(frame, frameObjs));
+		}
+
+		/***********************************************/
+		// Frame tree
+		/***********************************************/
+		Map<IRFrame, Set<IRFrame>> frameTreeMap = new HashMap<>();
+		Set<IRFrame> unreleasedFrames = new HashSet<>();
+		Set<IRFrame> allFrames = new HashSet<>(globalFrames);
+		IRFrame systemFrame = interpreter.getMainFrame().getParentFrame();
+		allFrames.add(interpreter.getMainFrame());
+
+		for (IRFrame frame : allFrames) {
+			IRFrame parentFrame = frame.getParentFrame();
+			Set<IRFrame> frames = frameTreeMap.get(parentFrame);
+			if (frames == null) {
+				frames = new HashSet<>();
+				frameTreeMap.put(parentFrame, frames);
+			}
+			frames.add(frame);
+		}
+
+		if (!unreleasedFrames.isEmpty()) {
+
+			ArrayList<IRFrame> unfreeFrames = new ArrayList<>(unreleasedFrames);
+			Collections.sort(unfreeFrames, (f1, f2) -> {
+				return f1.getFrameId() - f2.getFrameId();
+			});
+
+			sb.append("\n");
+			sb.append(
+					String.format("Unfree frame list: total=%d, frames=%s\n", unfreeFrames.size(), "" + unfreeFrames));
+			sb.append("\n");
+		}
+
+		/***********************************************/
+		// Frame tree
+		/***********************************************/
+		sb.append("\n");
+		sb.append(String.format("Global frame tree:\n"));
+		sb.append("\n");
+		_printFrameTree(sb, systemFrame, frameTreeMap, 0);
+
+		if (!frameTreeMap.isEmpty()) {
+
+			sb.append(String.format("Unlinked frame tree:\n"));
+			while (!frameTreeMap.isEmpty()) {
+				IRFrame aFrame = frameTreeMap.entrySet().iterator().next().getKey();
+				_printFrameTree(sb, aFrame, frameTreeMap, 0);
+			}
 		}
 
 		/***********************************************/

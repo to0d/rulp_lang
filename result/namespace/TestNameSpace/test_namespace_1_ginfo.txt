@@ -85,6 +85,13 @@ id=3, name=SF-namespace-0, lvl=2, ref=2/2, entry=0, pid=1(system), subject=names
 
 id=5, name=SF-ns1-1, lvl=3, ref=1/1, entry=0, pid=3(SF-namespace-0), subject=ns1
 
+Global frame tree:
+
+->FRAME(system): id=1, lvl=1, subject=system
+    ->FRAME(main): id=2, lvl=2, subject=main
+    ->FRAME(SF-namespace-0): id=3, lvl=2, subject=namespace
+        ->FRAME(SF-ns1-1): id=5, lvl=3, subject=ns1
+
 Global Subject list:
 
 name=ns1, lvl=1, ref=1/2, parent=namespace, frame=5(SF-ns1-1), final=false, mbrs=5

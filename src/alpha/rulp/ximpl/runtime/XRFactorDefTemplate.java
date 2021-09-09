@@ -17,6 +17,7 @@ import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRMember;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRParaAttr;
+import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
@@ -29,10 +30,6 @@ import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 
 public class XRFactorDefTemplate extends AbsRFactorAdapter implements IRFactor {
-
-	public XRFactorDefTemplate(String factorName) {
-		super(factorName);
-	}
 
 	static final String TP_TMP_VAR_NAME = "?_TTVN_";
 
@@ -158,6 +155,10 @@ public class XRFactorDefTemplate extends AbsRFactorAdapter implements IRFactor {
 		return RulpUtil.addTemplate(frame, templateName, paraEntry);
 	}
 
+	public XRFactorDefTemplate(String factorName) {
+		super(factorName);
+	}
+
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
@@ -174,7 +175,14 @@ public class XRFactorDefTemplate extends AbsRFactorAdapter implements IRFactor {
 		if (nameObj.getType() == RType.MEMBER) {
 
 			IRMember funMbr = RulpUtil.asMember(args.get(1));
-			IRFrame templateFrame = RulpUtil.asFrame(interpreter.compute(frame, funMbr.getSubject()));
+			IRSubject sub = RulpUtil.asSubject(interpreter.compute(frame, funMbr.getSubject()));
+
+			IRFrame templateFrame;
+			if (sub.getType() == RType.FRAME) {
+				templateFrame = RulpUtil.asFrame(sub);
+			} else {
+				templateFrame = sub.getSubjectFrame();
+			}
 
 			return defTemplate(args, funMbr.getName(), interpreter, templateFrame);
 		}

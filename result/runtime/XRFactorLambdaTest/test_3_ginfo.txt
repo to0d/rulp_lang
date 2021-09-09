@@ -68,6 +68,11 @@ fun1                 : 4        2        1    func       (fun1 nil) : frame=main
 ==========================================================================================================================
 
 
+Global frame tree:
+
+->FRAME(system): id=1, lvl=1, subject=system
+    ->FRAME(main): id=2, lvl=2, subject=main
+
 Global Subject list:
 
 
