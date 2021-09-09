@@ -51,7 +51,7 @@ public class TestNameSpace extends RulpTestBase {
 
 		// Search item in a name space
 		_test("(use namespace ns1)");
-		_test("(search-frame-of)", "'(SF-ns1-1 main)");
+		_test("(search-frame-of)", "'(SF-ns1-0 main)");
 		_test("(value-of (value-of main::var1))", "1");
 		_test("(value-of (value-of ns1::var1))", "2");
 		_test("(value-of (value-of ns1::var2))", "3");
@@ -74,7 +74,7 @@ public class TestNameSpace extends RulpTestBase {
 
 		// change back, everything should work fine
 		_test("(use namespace main)");
-		_test("(search-frame-of)", "'(main SF-ns1-1)");
+		_test("(search-frame-of)", "'(main SF-ns1-0)");
 		_test("(value-of var1)", "1");
 		_test("(value-of (value-of main::var1))", "1");
 		_test("(value-of (value-of ns1::var1))", "2");

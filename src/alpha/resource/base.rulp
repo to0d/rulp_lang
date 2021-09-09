@@ -242,7 +242,8 @@
         (socket::_socket_write ?impl ?val) final)
 )
 
-(defclass namespace ())
+;(defclass namespace ())
+;
 
 (deftemplate use ((namespace atom) (?ns namespace))
     (add_search_frame parent (frame-of $(value-of ?ns)))

@@ -265,7 +265,7 @@ public interface Constant {
 
 	String F_PROPERTY_OF = "property-of";
 
-	String F_SEARCH_FRAME_OF = "search-frame-of";
+	String F_SEARCH_FRAEM_OF = "search-frame-of";
 
 	String F_RANDOM = "random";
 

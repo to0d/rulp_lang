@@ -1,6 +1,6 @@
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_TRACE;
 import static alpha.rulp.lang.Constant.MAX_COUNTER_SIZE;
 import static alpha.rulp.lang.Constant.O_False;
 

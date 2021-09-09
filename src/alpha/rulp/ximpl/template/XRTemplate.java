@@ -1,4 +1,4 @@
-package alpha.rulp.ximpl.runtime;
+package alpha.rulp.ximpl.template;
 
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.T_Expr;
@@ -18,6 +18,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
+import alpha.rulp.ximpl.runtime.AbsRefCallableAdapter;
 
 public class XRTemplate extends AbsRefCallableAdapter implements IRTemplate {
 

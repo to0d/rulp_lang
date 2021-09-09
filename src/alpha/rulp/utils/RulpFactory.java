@@ -50,6 +50,7 @@ import alpha.rulp.runtime.IRFunctionList;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRMacro;
+import alpha.rulp.runtime.IRNameSpace;
 import alpha.rulp.runtime.IRObjectLoader;
 import alpha.rulp.runtime.IRParser;
 import alpha.rulp.runtime.IRTemplate;
@@ -134,6 +135,8 @@ import alpha.rulp.ximpl.lang.XRNative;
 import alpha.rulp.ximpl.lang.XRString;
 import alpha.rulp.ximpl.lang.XRVar;
 import alpha.rulp.ximpl.math.XRFactorRandom;
+import alpha.rulp.ximpl.namespace.XRNameSpace;
+import alpha.rulp.ximpl.namespace.XRNameSpaceClass;
 import alpha.rulp.ximpl.network.XRSocket;
 import alpha.rulp.ximpl.optimize.XRFactorMakeCPS;
 import alpha.rulp.ximpl.rclass.XRDefClass;
@@ -151,7 +154,6 @@ import alpha.rulp.ximpl.rclass.XRNoClass;
 import alpha.rulp.ximpl.rclass.XRSubjectFrame;
 import alpha.rulp.ximpl.runtime.XRFactorAddSearchFrame;
 import alpha.rulp.ximpl.runtime.XRFactorDefMacro;
-import alpha.rulp.ximpl.runtime.XRFactorDefTemplate;
 import alpha.rulp.ximpl.runtime.XRFactorDefun;
 import alpha.rulp.ximpl.runtime.XRFactorFrameOf;
 import alpha.rulp.ximpl.runtime.XRFactorLambda;
@@ -167,7 +169,6 @@ import alpha.rulp.ximpl.runtime.XRFunctionList;
 import alpha.rulp.ximpl.runtime.XRInterpreter;
 import alpha.rulp.ximpl.runtime.XRParaAttr;
 import alpha.rulp.ximpl.runtime.XRParser;
-import alpha.rulp.ximpl.runtime.XRTemplate;
 import alpha.rulp.ximpl.runtime.XRThreadContext;
 import alpha.rulp.ximpl.runtime.XRTokener;
 import alpha.rulp.ximpl.string.XRFactorStrCat;
@@ -190,6 +191,8 @@ import alpha.rulp.ximpl.string.XRFactorStrTrimTail;
 import alpha.rulp.ximpl.system.XRFactorDate;
 import alpha.rulp.ximpl.system.XRFactorSystemGC;
 import alpha.rulp.ximpl.system.XRFactorSystemTime;
+import alpha.rulp.ximpl.template.XRFactorDefTemplate;
+import alpha.rulp.ximpl.template.XRTemplate;
 import alpha.rulp.ximpl.thread.XRFactorDoParallel;
 import alpha.rulp.ximpl.thread.XRFactorSleep;
 
@@ -223,6 +226,8 @@ public final class RulpFactory {
 	private static final XRBoolean False = new XRBoolean(false);
 
 	private static final int FRAME_POOL_1_MAX = 256;
+
+	static String FRAME_PRE_SUBJECT = "SF";
 
 	private static AtomicInteger frameEntryDefaultMaxId = new AtomicInteger(0);
 
@@ -425,7 +430,8 @@ public final class RulpFactory {
 		XRSubjectFrame frame = new XRSubjectFrame();
 		frame.setParentFrame(parentFrame);
 		frame.setSubject(subject);
-		frame.setFrameName(String.format("SF-%s-%d", subject.getSubjectName(), frameUnNameCount.getAndIncrement()));
+		frame.setFrameName(String.format("%s-%s-%d", FRAME_PRE_SUBJECT, subject.getSubjectName(),
+				frameUnNameCount.getAndIncrement()));
 		frame.setThreadContext(parentFrame.getThreadContext());
 		_allocateFrameId(frame);
 		return frame;
@@ -575,7 +581,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorFrameOf(F_FREAME_OF));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorParentOf(F_PARENT_OF));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorAddSearchFrame(F_ADD_SEARCH_FRAME));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSearchFrameOf(F_SEARCH_FRAME_OF));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorSearchFrameOf(F_SEARCH_FRAEM_OF));
 
 		// Class
 		RulpUtil.addFrameObject(rootFrame, new XRNoClass(A_NOCLASS, rootFrame));
@@ -587,6 +593,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefClass(F_DEFCLASS));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorGetMbr(F_O_MBR));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorLs(F_LS));
+		RulpUtil.addFrameObject(rootFrame, new XRNameSpaceClass(A_NAMESPACE, rootFrame));
 
 		// IO
 		RulpUtil.addFrameObject(rootFrame, new XRFactorPrint(F_PRINT));
@@ -847,6 +854,11 @@ public final class RulpFactory {
 	public static IRList createNamedList(String name, IRObject... elements) {
 		RType.LIST.incCreateCount();
 		return new XRListArray(elements, RType.LIST, name);
+	}
+
+	public static IRNameSpace createNameSpace(String name, IRClass rclass, IRFrame frame) throws RException {
+		RType.INSTANCE.incCreateCount();
+		return new XRNameSpace(name, rclass, frame);
 	}
 
 	public static IRNative createNative(Object obj) {

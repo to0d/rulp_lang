@@ -20,7 +20,6 @@ at main: (ask student (+ 1 1))
 student say: no, I don't know (+ 1 1).
 ;eof
 (ns1::ask teacher (+ 1 1))
-;err:
-no template match
-at main: (ns1::ask teacher (+ 1 1))
+;out:
+teacher say: yes, I know (+ 1 1), answer is 2
 ;eof

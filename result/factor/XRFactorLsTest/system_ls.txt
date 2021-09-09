@@ -7,7 +7,6 @@ system::is-empty
 system::length-of
 system::ls-print
 system::map
-system::namespace
 system::print-list
 system::queue
 system::root
@@ -18,7 +17,6 @@ system::stack
 system::system
 system::to-list
 system::type#map
-system::type#namespace
 system::type#queue
 system::type#set
 system::type#socket

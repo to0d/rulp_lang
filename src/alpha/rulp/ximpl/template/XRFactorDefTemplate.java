@@ -1,4 +1,4 @@
-package alpha.rulp.ximpl.runtime;
+package alpha.rulp.ximpl.template;
 
 import static alpha.rulp.lang.Constant.F_DO;
 import static alpha.rulp.lang.Constant.O_Nil;
@@ -28,6 +28,7 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.runtime.XRFactorDefun;
 
 public class XRFactorDefTemplate extends AbsRFactorAdapter implements IRFactor {
 

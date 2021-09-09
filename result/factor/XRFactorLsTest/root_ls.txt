@@ -79,6 +79,7 @@ root::macro
 root::make-cps
 root::member
 root::name-of
+root::namespace
 root::nan
 root::native
 root::new
@@ -137,6 +138,7 @@ root::to-named-list
 root::to-string
 root::true
 root::try
+root::type#namespace
 root::type#noclass
 root::type-of
 root::union
