@@ -31,6 +31,100 @@ import alpha.rulp.ximpl.optimize.CPSUtils;
 
 public class TraceUtil {
 
+	static class FrameTree {
+
+		Set<IRFrame> allFrames;
+		Map<IRFrame, Set<IRFrame>> frameTreeMap = new HashMap<>();
+		IRInterpreter interpreter;
+		StringBuilder sb = new StringBuilder();
+
+		public FrameTree(List<IRFrame> globalFrames, IRInterpreter interpreter) {
+
+			this.allFrames = new HashSet<>(globalFrames);
+			this.allFrames.add(interpreter.getMainFrame()); // main frame
+			this.allFrames.add(interpreter.getMainFrame().getParentFrame()); // system frame
+			this.allFrames.add(interpreter.getMainFrame().getParentFrame().getParentFrame()); // root frame
+			this.interpreter = interpreter;
+		}
+
+		public void _printFrame(IRFrame frame, int level) throws RException {
+
+			for (int i = 0; i < level; i++) {
+				sb.append("    ");
+			}
+
+			sb.append(String.format("->FRAME(%s): id=%d, lvl=%d", frame.getFrameName(), frame.getFrameId(),
+					frame.getLevel()));
+			IRSubject frameSubject = frame.getSubject();
+			if (frameSubject != null) {
+				sb.append(String.format(", subject=%s", frameSubject.getSubjectName()));
+			}
+			List<IRFrame> searchFrameList = frame.getSearchFrameList();
+			if (searchFrameList != null) {
+				sb.append(String.format(", search=%s", "" + searchFrameList));
+			}
+
+			sb.append("\n");
+
+			Set<IRFrame> childFrames = frameTreeMap.get(frame);
+			if (childFrames == null) {
+				return;
+			}
+
+			ArrayList<IRFrame> childFrameList = new ArrayList<>(childFrames);
+			Collections.sort(childFrameList, (f1, f2) -> {
+				return f1.getFrameId() - f2.getFrameId();
+			});
+
+			for (IRFrame child : childFrameList) {
+				_printFrame(child, level + 1);
+			}
+
+			frameTreeMap.remove(frame);
+		}
+
+		public String output() throws RException {
+
+			for (IRFrame frame : allFrames) {
+
+				IRFrame parentFrame = frame.getParentFrame();
+				if (parentFrame == null) {
+
+					Set<IRFrame> childFrames = frameTreeMap.get(frame);
+					if (childFrames == null) {
+						childFrames = new HashSet<>();
+						frameTreeMap.put(frame, childFrames);
+					}
+
+				} else if (!allFrames.contains(parentFrame)) {
+
+					throw new RException(String.format("Unlinked frame: frame=%s, parent=%s", frame, parentFrame));
+
+				} else {
+
+					Set<IRFrame> childFrames = frameTreeMap.get(parentFrame);
+					if (childFrames == null) {
+						childFrames = new HashSet<>();
+						frameTreeMap.put(parentFrame, childFrames);
+					}
+
+					childFrames.add(frame);
+				}
+			}
+
+			_printFrame(interpreter.getMainFrame().getParentFrame().getParentFrame(), 0);
+			if (!frameTreeMap.isEmpty()) {
+				while (!frameTreeMap.isEmpty()) {
+					IRFrame aFrame = frameTreeMap.entrySet().iterator().next().getKey();
+					_printFrame(aFrame, 0);
+				}
+			}
+
+			return sb.toString();
+		}
+
+	}
+
 	static final String SEP_LINE1 = "==========================================================================================================================\n";
 
 	static final String SEP_LINE2 = "--------------------------------------------------------------------------------------------------------------------------\n";
@@ -38,43 +132,6 @@ public class TraceUtil {
 	static final String SEP_LINE3 = "..........................................................................................................................\n";
 
 	private static StaticVar varTrace = new StaticVar(A_TRACE, O_False);
-
-	private static void _printFrameTree(StringBuffer sb, IRFrame frame, Map<IRFrame, Set<IRFrame>> frameTreeMap,
-			int level) throws RException {
-
-		for (int i = 0; i < level; i++) {
-			sb.append("    ");
-		}
-
-		sb.append(String.format("->FRAME(%s): id=%d, lvl=%d", frame.getFrameName(), frame.getFrameId(),
-				frame.getLevel()));
-		IRSubject frameSubject = frame.getSubject();
-		if (frameSubject != null) {
-			sb.append(String.format(", subject=%s", frameSubject.getSubjectName()));
-		}
-		List<IRFrame> searchFrameList = frame.getSearchFrameList();
-		if (searchFrameList != null) {
-			sb.append(String.format(", search=%s", "" + searchFrameList));
-		}
-
-		sb.append("\n");
-
-		Set<IRFrame> childFrames = frameTreeMap.get(frame);
-		if (childFrames == null) {
-			return;
-		}
-
-		ArrayList<IRFrame> childFrameList = new ArrayList<>(childFrames);
-		Collections.sort(childFrameList, (f1, f2) -> {
-			return f1.getFrameId() - f2.getFrameId();
-		});
-
-		for (IRFrame child : childFrameList) {
-			_printFrameTree(sb, child, frameTreeMap, level + 1);
-		}
-
-		frameTreeMap.remove(frame);
-	}
 
 	private static String _toRefString(IRObject obj) throws RException {
 
@@ -275,6 +332,11 @@ public class TraceUtil {
 
 	public static boolean isTrace() throws RException {
 		return varTrace.getBoolValue();
+	}
+
+	public static String outputFrameTree(IRInterpreter interpreter) throws RException {
+
+		return new FrameTree(RulpFactory.listGlobalFrames(), interpreter).output();
 	}
 
 	public static String printFrame(IRFrame frame) throws RException {
@@ -529,51 +591,10 @@ public class TraceUtil {
 		/***********************************************/
 		// Frame tree
 		/***********************************************/
-		Map<IRFrame, Set<IRFrame>> frameTreeMap = new HashMap<>();
-		Set<IRFrame> unreleasedFrames = new HashSet<>();
-		Set<IRFrame> allFrames = new HashSet<>(globalFrames);
-		IRFrame systemFrame = interpreter.getMainFrame().getParentFrame();
-		allFrames.add(interpreter.getMainFrame());
-
-		for (IRFrame frame : allFrames) {
-			IRFrame parentFrame = frame.getParentFrame();
-			Set<IRFrame> frames = frameTreeMap.get(parentFrame);
-			if (frames == null) {
-				frames = new HashSet<>();
-				frameTreeMap.put(parentFrame, frames);
-			}
-			frames.add(frame);
-		}
-
-		if (!unreleasedFrames.isEmpty()) {
-
-			ArrayList<IRFrame> unfreeFrames = new ArrayList<>(unreleasedFrames);
-			Collections.sort(unfreeFrames, (f1, f2) -> {
-				return f1.getFrameId() - f2.getFrameId();
-			});
-
-			sb.append("\n");
-			sb.append(
-					String.format("Unfree frame list: total=%d, frames=%s\n", unfreeFrames.size(), "" + unfreeFrames));
-			sb.append("\n");
-		}
-
-		/***********************************************/
-		// Frame tree
-		/***********************************************/
 		sb.append("\n");
 		sb.append(String.format("Global frame tree:\n"));
 		sb.append("\n");
-		_printFrameTree(sb, systemFrame, frameTreeMap, 0);
-
-		if (!frameTreeMap.isEmpty()) {
-
-			sb.append(String.format("Unlinked frame tree:\n"));
-			while (!frameTreeMap.isEmpty()) {
-				IRFrame aFrame = frameTreeMap.entrySet().iterator().next().getKey();
-				_printFrameTree(sb, aFrame, frameTreeMap, 0);
-			}
-		}
+		sb.append(outputFrameTree(interpreter));
 
 		/***********************************************/
 		// Global Subject list

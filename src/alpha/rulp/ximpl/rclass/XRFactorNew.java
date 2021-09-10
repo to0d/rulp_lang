@@ -30,12 +30,7 @@ import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 
 public class XRFactorNew extends AbsRFactorAdapter implements IRFactor {
 
-	public XRFactorNew(String factorName) {
-		super(factorName);
-	}
-
-	@Override
-	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+	public static IRObject newInstance(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		// (new class1 o3 '(1 2))
 		// (new class1 o3))
@@ -101,7 +96,9 @@ public class XRFactorNew extends AbsRFactorAdapter implements IRFactor {
 		/******************************************/
 		IRInstance instance = rClass.newInstance(instanceName, args, interpreter, frame);
 		RulpUtil.setMember(instance, F_MBR_THIS, instance);
-
+//		instance.addLoader((sub) -> {
+//			RulpUtil.setMember(sub, F_MBR_THIS, sub);
+//		});
 		/******************************************/
 		// Call Initialization member
 		/******************************************/
@@ -123,6 +120,15 @@ public class XRFactorNew extends AbsRFactorAdapter implements IRFactor {
 		}
 
 		return instance;
+	}
+
+	public XRFactorNew(String factorName) {
+		super(factorName);
+	}
+
+	@Override
+	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+		return newInstance(args, interpreter, frame);
 	}
 
 	public boolean isThreadSafe() {

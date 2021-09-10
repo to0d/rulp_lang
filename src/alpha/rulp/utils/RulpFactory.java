@@ -114,6 +114,7 @@ import alpha.rulp.ximpl.io.XRFactorLoad;
 import alpha.rulp.ximpl.io.XRFactorOpenTxtFile;
 import alpha.rulp.ximpl.io.XRFactorOutToFile;
 import alpha.rulp.ximpl.io.XRFactorPrint;
+import alpha.rulp.ximpl.io.XRFactorPrintFrameTree;
 import alpha.rulp.ximpl.io.XRFactorPrintSubject;
 import alpha.rulp.ximpl.io.XRFactorSaveTxtFile;
 import alpha.rulp.ximpl.lang.XRArray;
@@ -151,7 +152,6 @@ import alpha.rulp.ximpl.rclass.XRFactorNew;
 import alpha.rulp.ximpl.rclass.XRFactorPropertyOf;
 import alpha.rulp.ximpl.rclass.XRMember;
 import alpha.rulp.ximpl.rclass.XRNoClass;
-import alpha.rulp.ximpl.rclass.XRSubjectFrame;
 import alpha.rulp.ximpl.runtime.XRFactorAddSearchFrame;
 import alpha.rulp.ximpl.runtime.XRFactorDefMacro;
 import alpha.rulp.ximpl.runtime.XRFactorDefun;
@@ -188,6 +188,7 @@ import alpha.rulp.ximpl.string.XRFactorStrSubStr;
 import alpha.rulp.ximpl.string.XRFactorStrTrim;
 import alpha.rulp.ximpl.string.XRFactorStrTrimHead;
 import alpha.rulp.ximpl.string.XRFactorStrTrimTail;
+import alpha.rulp.ximpl.subject.XRSubjectFrame;
 import alpha.rulp.ximpl.system.XRFactorDate;
 import alpha.rulp.ximpl.system.XRFactorSystemGC;
 import alpha.rulp.ximpl.system.XRFactorSystemTime;
@@ -600,6 +601,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorOpenTxtFile(F_OPEN_TXT_FILE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSaveTxtFile(F_SAVE_TXT_FILE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorPrintSubject(F_PRINT_SUBJECT));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorPrintFrameTree(F_PRINT_FRAME_TREE));
 
 		// Variable, Value & Expression
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefvar(F_DEFVAR, true, false));

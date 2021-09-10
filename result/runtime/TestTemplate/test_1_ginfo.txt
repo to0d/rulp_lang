@@ -45,7 +45,7 @@ Object create count:
        class:            5            0            5
       member:          130            0          130
  interpreter:            1            0
-  frameEntry:          177            0
+  frameEntry:          178            0
       lambda:            0            0
 ==========================================================================================================================
 
@@ -64,8 +64,9 @@ f1                   : 4        2        1    template   (f1 '('(a atom) ?...) '
 
 Global frame tree:
 
-->FRAME(system): id=1, lvl=1, subject=system
-    ->FRAME(main): id=2, lvl=2, subject=main
+->FRAME(root): id=0, lvl=0, subject=root
+    ->FRAME(system): id=1, lvl=1, subject=system
+        ->FRAME(main): id=2, lvl=2, subject=main
 
 Global Subject list:
 

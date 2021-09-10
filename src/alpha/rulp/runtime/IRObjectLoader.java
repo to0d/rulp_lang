@@ -16,5 +16,5 @@ import alpha.rulp.lang.RException;
 
 public interface IRObjectLoader {
 
-	public void load(IRInterpreter interpreter, IRFrame systemFrame) throws RException, IOException;
+	public void load(IRInterpreter interpreter, IRFrame frame) throws RException, IOException;
 }

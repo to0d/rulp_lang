@@ -19,11 +19,11 @@ public interface IRCallable extends IRObject {
 
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException;
 
-	public boolean isStable() throws RException;
-
 	public DeCounter getCallCount(int statsId);
 
 	public void incCallCount(int statsId, int callId);
+
+	public boolean isStable() throws RException;
 
 	public boolean isThreadSafe();
 }

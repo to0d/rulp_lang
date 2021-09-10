@@ -51,7 +51,7 @@ Object create count:
       member:          130            0          130
        frame:            4            2            2
  interpreter:            1            0
-  frameEntry:          179            0
+  frameEntry:          180            0
       lambda:            1            0
 ==========================================================================================================================
 
@@ -80,10 +80,11 @@ id=4, name=DO, lvl=4, ref=1/2, entry=0, pid=3(_$fun$_fun1), subject=DO
 
 Global frame tree:
 
-->FRAME(system): id=1, lvl=1, subject=system
-    ->FRAME(main): id=2, lvl=2, subject=main
-        ->FRAME(_$fun$_fun1): id=3, lvl=3, subject=_$fun$_fun1
-            ->FRAME(DO): id=4, lvl=4, subject=DO
+->FRAME(root): id=0, lvl=0, subject=root
+    ->FRAME(system): id=1, lvl=1, subject=system
+        ->FRAME(main): id=2, lvl=2, subject=main
+            ->FRAME(_$fun$_fun1): id=3, lvl=3, subject=_$fun$_fun1
+                ->FRAME(DO): id=4, lvl=4, subject=DO
 
 Global Subject list:
 

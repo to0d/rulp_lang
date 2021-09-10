@@ -15,6 +15,7 @@ import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.runtime.ISubjectLoader;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.ximpl.lang.AbsAtomObject;
 
@@ -31,6 +32,11 @@ public final class XRNoClass extends AbsAtomObject implements IRClass {
 		this.className = className;
 		this.definedFrame = definedFrame;
 		this.classTypeAtom = RulpFactory.createAtom(P_TYPE + className);
+	}
+
+	@Override
+	public void addLoader(ISubjectLoader loader) throws RException {
+		throw new RException("Can't operation");
 	}
 
 	@Override
@@ -69,11 +75,6 @@ public final class XRNoClass extends AbsAtomObject implements IRClass {
 	}
 
 	@Override
-	public boolean hasSubjectFrame() {
-		return true;
-	}
-
-	@Override
 	public String getSubjectName() {
 		return className;
 	}
@@ -86,6 +87,11 @@ public final class XRNoClass extends AbsAtomObject implements IRClass {
 	@Override
 	public RType getType() {
 		return RType.CLASS;
+	}
+
+	@Override
+	public boolean hasSubjectFrame() {
+		return true;
 	}
 
 	@Override

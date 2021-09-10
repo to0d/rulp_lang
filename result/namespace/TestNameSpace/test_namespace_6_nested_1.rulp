@@ -12,7 +12,17 @@
 ;=>nil
 (search-frame-of)
 ;=>'(SF-ns3-2 SF-ns2-1 SF-ns1-0 main)
-(type-of ns3)
+(type-of $(value-of ns3))
 ;=>instance
-(frame-of ns3)
-;=>ns3
+(frame-of $(value-of ns3))
+;=>SF-ns3-2
+(print-frame-tree)
+;=>nil
+;out:
+->FRAME(root): id=0, lvl=0, subject=root
+    ->FRAME(system): id=1, lvl=1, subject=system
+        ->FRAME(main): id=2, lvl=2, subject=main, search=[SF-ns3-2, SF-ns2-1, SF-ns1-0, main]
+            ->FRAME(SF-ns1-0): id=3, lvl=3, subject=ns1
+            ->FRAME(SF-ns2-1): id=5, lvl=3, subject=ns2
+            ->FRAME(SF-ns3-2): id=6, lvl=3, subject=ns3
+;eof

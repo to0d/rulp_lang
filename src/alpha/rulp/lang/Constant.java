@@ -193,6 +193,8 @@ public interface Constant {
 
 	String F_FOREACH = "foreach";
 
+	String F_FREAME_OF = "frame-of";
+
 	String F_GET_OF_ARRAY = "get-of-array";
 
 	String F_GET_OF_LIST = "get-of-list";
@@ -259,13 +261,15 @@ public interface Constant {
 
 	String F_OUT_TO_FILE = "out-to-file";
 
+	String F_PARENT_OF = "parent-of";
+
 	String F_PRINT = "print";
+
+	String F_PRINT_FRAME_TREE = "print-frame-tree";
 
 	String F_PRINT_SUBJECT = "print-subject";
 
 	String F_PROPERTY_OF = "property-of";
-
-	String F_SEARCH_FRAEM_OF = "search-frame-of";
 
 	String F_RANDOM = "random";
 
@@ -280,6 +284,8 @@ public interface Constant {
 	String F_RULP_OBJ_COUNT = "rulp-object-count";
 
 	String F_SAVE_TXT_FILE = "save-txt-file";
+
+	String F_SEARCH_FRAEM_OF = "search-frame-of";
 
 	String F_SETQ = "setq";
 
@@ -342,10 +348,6 @@ public interface Constant {
 	String F_TO_STRING = "to-string";
 
 	String F_TYPE_OF = "type-of";
-
-	String F_FREAME_OF = "frame-of";
-
-	String F_PARENT_OF = "parent-of";
 
 	String F_UNION = "union";
 

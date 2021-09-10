@@ -2,49 +2,49 @@ id=1, name=system, lvl=1, ref=0/0, entry=25, pid=0(root), subject=system
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-parent               : -174     1        0    frame      root                
-use                  : -166     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=system
-type#socket          : -165     1        0    atom       type#socket         
-socket               : -164     1        1    class      socket              
-type#stack           : -163     1        0    atom       type#stack          
-stack                : -162     1        1    class      stack               
-type#queue           : -161     1        0    atom       type#queue          
-queue                : -160     1        1    class      queue               
-type#map             : -159     1        0    atom       type#map            
-map                  : -158     1        1    class      map                 
-clear                : -157     1        1    funcList   '((clear type#map) (clear type#queue) (clear type#set) (clear type#stack)) : frame=null, type=list
+parent               : -175     1        0    frame      root                
+use                  : -167     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=system
+type#socket          : -166     1        0    atom       type#socket         
+socket               : -165     1        1    class      socket              
+type#stack           : -164     1        0    atom       type#stack          
+stack                : -163     1        1    class      stack               
+type#queue           : -162     1        0    atom       type#queue          
+queue                : -161     1        1    class      queue               
+type#map             : -160     1        0    atom       type#map            
+map                  : -159     1        1    class      map                 
+clear                : -158     1        1    funcList   '((clear type#map) (clear type#queue) (clear type#set) (clear type#stack)) : frame=null, type=list
                                          1    func       (clear type#set) : frame=system
                                          1    func       (clear type#map) : frame=system
                                          1    func       (clear type#queue) : frame=system
                                          1    func       (clear type#stack) : frame=system
-type#set             : -156     1        0    atom       type#set            
-set                  : -155     1        1    class      set                 
-ls-print             : -154     1        1    funcList   '((ls-print nil nil) (ls-print nil)) : frame=null, type=list
+type#set             : -157     1        0    atom       type#set            
+set                  : -156     1        1    class      set                 
+ls-print             : -155     1        1    funcList   '((ls-print nil nil) (ls-print nil)) : frame=null, type=list
                                          1    func       (ls-print nil nil) : frame=system
                                          1    func       (ls-print nil) : frame=system
-print-list           : -153     1        1    macro      print-list          
-to-list              : -152     1        1    funcList   '((to-list list) (to-list type#queue) (to-list type#set) (to-list type#stack)) : frame=null, type=list
+print-list           : -154     1        1    macro      print-list          
+to-list              : -153     1        1    funcList   '((to-list list) (to-list type#queue) (to-list type#set) (to-list type#stack)) : frame=null, type=list
                                          1    func       (to-list list) : frame=system
                                          1    func       (to-list type#set) : frame=system
                                          1    func       (to-list type#queue) : frame=system
                                          1    func       (to-list type#stack) : frame=system
-is-empty             : -151     1        1    funcList   '((is-empty list) (is-empty type#map) (is-empty type#queue) (is-empty type#set) (is-empty type#stack)) : frame=null, type=list
+is-empty             : -152     1        1    funcList   '((is-empty list) (is-empty type#map) (is-empty type#queue) (is-empty type#set) (is-empty type#stack)) : frame=null, type=list
                                          1    func       (is-empty list) : frame=system
                                          1    func       (is-empty type#set) : frame=system
                                          1    func       (is-empty type#map) : frame=system
                                          1    func       (is-empty type#queue) : frame=system
                                          1    func       (is-empty type#stack) : frame=system
-get                  : -150     1        1    funcList   '((get array int int) (get array int) (get list int) (get type#queue int)) : frame=null, type=list
+get                  : -151     1        1    funcList   '((get array int int) (get array int) (get list int) (get type#queue int)) : frame=null, type=list
                                          1    func       (get list int) : frame=system
                                          1    func       (get array int) : frame=system
                                          1    func       (get array int int) : frame=system
                                          1    func       (get type#queue int) : frame=system
-cmp                  : -149     1        1    func       (cmp nil nil) : frame=system
-equal                : -148     1        1    funcList   '((equal nil nil) (equal string string)) : frame=null, type=list
+cmp                  : -150     1        1    func       (cmp nil nil) : frame=system
+equal                : -149     1        1    funcList   '((equal nil nil) (equal string string)) : frame=null, type=list
                                          1    func       (equal nil nil) : frame=system
                                          1    func       (equal string string) : frame=system
-length-of            : -147     1        1    func       (length-of string) : frame=system
-size-of              : -146     1        1    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#map) (size-of type#queue) (size-of type#set) (size-of type#stack)) : frame=null, type=list
+length-of            : -148     1        1    func       (length-of string) : frame=system
+size-of              : -147     1        1    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#map) (size-of type#queue) (size-of type#set) (size-of type#stack)) : frame=null, type=list
                                          1    func       (size-of list) : frame=system
                                          1    func       (size-of array) : frame=system
                                          1    func       (size-of array int) : frame=system
@@ -52,7 +52,7 @@ size-of              : -146     1        1    funcList   '((size-of array int) (
                                          1    func       (size-of type#map) : frame=system
                                          1    func       (size-of type#queue) : frame=system
                                          1    func       (size-of type#stack) : frame=system
-?load-paths          : -145     1        1    var        list:'()            
+?load-paths          : -146     1        1    var        list:'()            
 system               : -3       1        0    frame      system              
 root                 : -2       1        0    frame      root                
 ==========================================================================================================================

@@ -7,13 +7,15 @@
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-package alpha.rulp.ximpl.rclass;
+package alpha.rulp.ximpl.subject;
 
 import static alpha.rulp.lang.Constant.M_CLASS;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import alpha.rulp.lang.IRFrame;
@@ -21,6 +23,7 @@ import alpha.rulp.lang.IRMember;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.runtime.ISubjectLoader;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.lang.AbsRefObject;
@@ -32,6 +35,8 @@ public abstract class AbsRSubject extends AbsRefObject implements IRSubject {
 	protected boolean bFinal = false;
 
 	protected IRFrame definedFrame;
+
+	protected List<ISubjectLoader> loaderList = null;
 
 	protected Map<String, IRMember> memberMap = null;
 
@@ -92,6 +97,29 @@ public abstract class AbsRSubject extends AbsRefObject implements IRSubject {
 		RulpUtil.incRef(obj);
 	}
 
+	protected void _load() throws RException {
+
+		if (loaderList == null) {
+			return;
+		}
+
+		for (ISubjectLoader loader : loaderList) {
+			loader.load(this);
+		}
+
+		loaderList = null;
+	}
+
+	@Override
+	public void addLoader(ISubjectLoader loader) {
+
+		if (loaderList == null) {
+			loaderList = new LinkedList<>();
+		}
+
+		loaderList.add(loader);
+	}
+
 	@Override
 	public int getLevel() {
 
@@ -110,6 +138,7 @@ public abstract class AbsRSubject extends AbsRefObject implements IRSubject {
 
 	@Override
 	public IRMember getMember(String name) throws RException {
+		_load();
 		return (name == null || memberMap == null) ? null : memberMap.get(name);
 	}
 

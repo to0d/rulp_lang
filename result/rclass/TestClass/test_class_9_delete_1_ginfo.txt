@@ -53,7 +53,7 @@ Object create count:
       member:          137            0          137
        frame:            6            6            0
  interpreter:            1            0
-  frameEntry:          182            0
+  frameEntry:          183            0
       lambda:            2            0
 ==========================================================================================================================
 
@@ -72,8 +72,9 @@ main                 : 3        2        1    frame      main
 
 Global frame tree:
 
-->FRAME(system): id=1, lvl=1, subject=system
-    ->FRAME(main): id=2, lvl=2, subject=main
+->FRAME(root): id=0, lvl=0, subject=root
+    ->FRAME(system): id=1, lvl=1, subject=system
+        ->FRAME(main): id=2, lvl=2, subject=main
 
 Global Subject list:
 

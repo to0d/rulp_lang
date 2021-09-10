@@ -24,6 +24,7 @@ import alpha.rulp.runtime.IRFunctionList;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.subject.AbsRSubject;
 
 public abstract class AbsRInstance extends AbsRSubject implements IRInstance {
 

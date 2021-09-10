@@ -54,6 +54,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRMacro;
 import alpha.rulp.runtime.IRNameSpace;
+import alpha.rulp.runtime.IRObjectLoader;
 import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.runtime.IRTemplate.TemplatePara;
 import alpha.rulp.runtime.IRTemplate.TemplateParaEntry;
@@ -925,16 +926,6 @@ public class RulpUtil {
 		return valAtom;
 	}
 
-//	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
-//
-//		IRObject nsObj = frame.getObject(A_USING_NS);
-//		if (nsObj == null) {
-//			return null;
-//		}
-//
-//		return RulpUtil.asSubject(nsObj);
-//	}
-
 	public static void incRef(IRObject obj) throws RException {
 
 		if (obj == null) {
@@ -947,6 +938,16 @@ public class RulpUtil {
 
 		obj.incRef();
 	}
+
+//	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
+//
+//		IRObject nsObj = frame.getObject(A_USING_NS);
+//		if (nsObj == null) {
+//			return null;
+//		}
+//
+//		return RulpUtil.asSubject(nsObj);
+//	}
 
 	public static boolean isAnonymousVar(String var) {
 		return var.equals(S_QUESTION);
@@ -1081,6 +1082,17 @@ public class RulpUtil {
 		}
 
 		return getObjectType(obj) == typeAtom;
+	}
+
+	public static void registerNameSpaceLoader(IRInterpreter interpreter, IRFrame frame, String nsName,
+			IRObjectLoader loader) throws RException {
+
+		if (nsName == null || (nsName = nsName.trim()).isEmpty() || nsName.startsWith("/")) {
+			throw new RException("invalid namespace name: " + nsName);
+		}
+
+		IRFrame mainFrame = interpreter.getMainFrame();
+
 	}
 
 	public static void setMember(IRSubject subject, String name, IRObject obj) throws RException {

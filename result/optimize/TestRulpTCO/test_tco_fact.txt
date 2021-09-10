@@ -58,7 +58,7 @@ Object create count:
       member:          130            0          130
        frame:           28           28            0
  interpreter:            1            0
-  frameEntry:          200            0
+  frameEntry:          201            0
       lambda:            0            0
 ==========================================================================================================================
 
@@ -86,8 +86,9 @@ fun4b                : 13       2        1    func       (fun4b nil) : frame=mai
 
 Global frame tree:
 
-->FRAME(system): id=1, lvl=1, subject=system
-    ->FRAME(main): id=2, lvl=2, subject=main
+->FRAME(root): id=0, lvl=0, subject=root
+    ->FRAME(system): id=1, lvl=1, subject=system
+        ->FRAME(main): id=2, lvl=2, subject=main
 
 Global Subject list:
 

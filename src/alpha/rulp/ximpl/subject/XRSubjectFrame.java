@@ -7,7 +7,7 @@
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-package alpha.rulp.ximpl.rclass;
+package alpha.rulp.ximpl.subject;
 
 import java.util.HashMap;
 import java.util.Map;

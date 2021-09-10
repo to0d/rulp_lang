@@ -2,7 +2,11 @@ package alpha.rulp.lang;
 
 import java.util.Collection;
 
+import alpha.rulp.runtime.ISubjectLoader;
+
 public interface IRSubject extends IRObject {
+
+	public void addLoader(ISubjectLoader loader) throws RException;
 
 	public int getLevel();
 
@@ -10,11 +14,11 @@ public interface IRSubject extends IRObject {
 
 	public IRSubject getParent();
 
-	public boolean hasSubjectFrame();
-
 	public IRFrame getSubjectFrame() throws RException;
 
 	public String getSubjectName();
+
+	public boolean hasSubjectFrame();
 
 	public boolean isFinal();
 

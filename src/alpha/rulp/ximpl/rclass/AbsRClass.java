@@ -17,6 +17,7 @@ import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.RType;
 import alpha.rulp.utils.RulpFactory;
+import alpha.rulp.ximpl.subject.AbsRSubject;
 
 public abstract class AbsRClass extends AbsRSubject implements IRClass {
 

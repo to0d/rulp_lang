@@ -36,6 +36,7 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRNameSpace;
 import alpha.rulp.runtime.IRThreadContext;
+import alpha.rulp.runtime.ISubjectLoader;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.lang.AbsRefObject;
@@ -167,6 +168,11 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 		if (!frameReleaeListenerList.contains(listener)) {
 			frameReleaeListenerList.add(listener);
 		}
+	}
+
+	@Override
+	public void addLoader(ISubjectLoader loader) throws RException {
+		throw new RException("not support operation");
 	}
 
 	@Override

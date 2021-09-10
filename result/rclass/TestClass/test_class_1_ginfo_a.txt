@@ -63,7 +63,7 @@ Object create count:
       member:          148            0          148
        frame:           10            8            2
  interpreter:            1            0
-  frameEntry:          183            0
+  frameEntry:          184            0
       lambda:            4            0
 ==========================================================================================================================
 
@@ -88,10 +88,11 @@ id=4, name=SF-o1-1, lvl=4, ref=5/6, entry=0, pid=3(SF-class1-0), subject=o1
 
 Global frame tree:
 
-->FRAME(system): id=1, lvl=1, subject=system
-    ->FRAME(main): id=2, lvl=2, subject=main
-        ->FRAME(SF-class1-0): id=3, lvl=3, subject=class1
-            ->FRAME(SF-o1-1): id=4, lvl=4, subject=o1
+->FRAME(root): id=0, lvl=0, subject=root
+    ->FRAME(system): id=1, lvl=1, subject=system
+        ->FRAME(main): id=2, lvl=2, subject=main
+            ->FRAME(SF-class1-0): id=3, lvl=3, subject=class1
+                ->FRAME(SF-o1-1): id=4, lvl=4, subject=o1
 
 Global Subject list:
 
