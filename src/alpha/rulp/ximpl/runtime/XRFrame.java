@@ -22,8 +22,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import alpha.rulp.lang.IRClass;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
+import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRListener;
 import alpha.rulp.lang.IRMember;
 import alpha.rulp.lang.IRObject;
@@ -31,12 +33,14 @@ import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
+import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.runtime.IRNameSpace;
 import alpha.rulp.runtime.IRThreadContext;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.lang.AbsRefObject;
 
-public class XRFrame extends AbsRefObject implements IRFrame {
+public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 
 	static class EntryNode {
 		IRFrameEntry entry = null;
@@ -222,6 +226,11 @@ public class XRFrame extends AbsRefObject implements IRFrame {
 	}
 
 	@Override
+	public void delete(IRInterpreter interpreter, IRFrame frame) throws RException {
+		throw new RException("not support operation");
+	}
+
+	@Override
 	public synchronized IRFrameEntry getEntry(String name) throws RException {
 
 		EntryNode entryNode = _findNode(name);
@@ -271,6 +280,11 @@ public class XRFrame extends AbsRefObject implements IRFrame {
 	}
 
 	@Override
+	public String getInstanceName() {
+		return frameName;
+	}
+
+	@Override
 	public int getLevel() {
 
 		if (_frameLevel == -1) {
@@ -305,6 +319,11 @@ public class XRFrame extends AbsRefObject implements IRFrame {
 	@Override
 	public IRFrame getParentFrame() {
 		return parentFrame;
+	}
+
+	@Override
+	public IRClass getRClass() {
+		return null;
 	}
 
 	@Override
@@ -350,6 +369,11 @@ public class XRFrame extends AbsRefObject implements IRFrame {
 	@Override
 	public boolean hasSubjectFrame() {
 		return parentFrame != null;
+	}
+
+	@Override
+	public void init(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+		throw new RException("not support operation");
 	}
 
 	@Override

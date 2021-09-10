@@ -9,7 +9,6 @@
 
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.A_NAMESPACE;
 import static alpha.rulp.lang.Constant.A_NIL;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.S_QUESTION;
@@ -54,6 +53,7 @@ import alpha.rulp.runtime.IRFunctionList;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRMacro;
+import alpha.rulp.runtime.IRNameSpace;
 import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.runtime.IRTemplate.TemplatePara;
 import alpha.rulp.runtime.IRTemplate.TemplateParaEntry;
@@ -479,12 +479,26 @@ public class RulpUtil {
 			throws RException {
 
 		IRTemplate template = null;
+		IRObject obj = null;
 
 		// Create template
 		IRFrameEntry entry = frame.getEntry(templateName);
 		if (entry == null) {
+
 			template = RulpFactory.createTemplate(templateName, frame);
 			frame.setEntry(templateName, template);
+
+		} else if ((obj = entry.getValue()).getType() != RType.TEMPLATE) {
+
+			if (entry.getFrame() != frame) {
+
+				template = RulpFactory.createTemplate(templateName, frame);
+				frame.setEntry(templateName, template);
+
+			} else {
+
+				throw new RException(String.format("Can't redifine <%s:%s> as a template", obj, obj.getType()));
+			}
 
 		} else {
 
@@ -683,17 +697,13 @@ public class RulpUtil {
 		return (IRMember) obj;
 	}
 
-	public static IRSubject asNameSpace(IRObject obj) throws RException {
+	public static IRNameSpace asNameSpace(IRObject obj) throws RException {
 
-		if (obj.getType() == RType.FRAME) {
-			return (IRSubject) obj;
+		if (!(obj instanceof IRNameSpace)) {
+			throw new RException("Can't convert object to namespace: " + obj);
 		}
 
-		if (obj instanceof IRInstance && ((IRInstance) obj).getParent().getSubjectName().equals(A_NAMESPACE)) {
-			return (IRSubject) obj;
-		}
-
-		throw new RException("Can't convert to namespace: " + obj);
+		return (IRNameSpace) obj;
 	}
 
 	@SuppressWarnings("unchecked")

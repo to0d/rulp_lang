@@ -2,9 +2,7 @@ package alpha.rulp.utils;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.HashMap;
@@ -59,15 +57,14 @@ public class JVMUtil {
 			URL url = jarFile.toURI().toURL();
 			method.invoke(classLoader, url);
 
-		} catch (MalformedURLException | IllegalAccessException | IllegalArgumentException
-				| InvocationTargetException e) {
+		} catch (Exception e) {
 
 			e.printStackTrace();
-			
+
 			throw new RException(e.toString());
 
 		} finally {
-			
+
 			method.setAccessible(accessible);
 		}
 

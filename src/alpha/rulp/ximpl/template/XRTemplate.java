@@ -1,6 +1,7 @@
 package alpha.rulp.ximpl.template;
 
 import static alpha.rulp.lang.Constant.O_Nil;
+import static alpha.rulp.lang.Constant.T_Atom;
 import static alpha.rulp.lang.Constant.T_Expr;
 
 import java.util.ArrayList;
@@ -75,7 +76,7 @@ public class XRTemplate extends AbsRefCallableAdapter implements IRTemplate {
 
 					TemplatePara tp = tpEntry.fixedParas[i];
 
-					if (!tp.isVar && tp.paraType == O_Nil) {
+					if (!tp.isVar && (tp.paraType == O_Nil || tp.paraType == T_Atom)) {
 
 						IRObject inputPara = inputArgs.get(i + 1);
 						if (inputPara.getType() != RType.ATOM) {
