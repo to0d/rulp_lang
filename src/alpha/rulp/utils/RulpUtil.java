@@ -9,13 +9,14 @@
 
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.A_NIL;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.S_QUESTION;
 import static alpha.rulp.lang.Constant.S_QUESTION_C;
 import static alpha.rulp.lang.Constant.T_Atom;
 import static alpha.rulp.lang.Constant.T_Instance;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
@@ -62,6 +63,7 @@ import alpha.rulp.runtime.RName;
 import alpha.rulp.ximpl.collection.XRMap;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 import alpha.rulp.ximpl.network.XRSocket;
+import alpha.rulp.ximpl.rclass.XRFactorNew;
 
 public class RulpUtil {
 
@@ -1091,8 +1093,19 @@ public class RulpUtil {
 			throw new RException("invalid namespace name: " + nsName);
 		}
 
-		IRFrame mainFrame = interpreter.getMainFrame();
+		// (new namespace ns)
+		IRList args = RulpFactory.createList(RulpFactory.createAtom(F_NEW), RulpFactory.createAtom(A_NAMESPACE),
+				RulpFactory.createAtom(nsName));
 
+		IRInstance instance = RulpUtil.asInstance(XRFactorNew.newInstance(args, interpreter, frame));
+		instance.addLoader((sub) -> {
+			try {
+				loader.load(interpreter, sub.getSubjectFrame());
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RException(e.toString());
+			}
+		});
 	}
 
 	public static void setMember(IRSubject subject, String name, IRObject obj) throws RException {

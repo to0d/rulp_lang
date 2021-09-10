@@ -96,9 +96,7 @@ public class XRFactorNew extends AbsRFactorAdapter implements IRFactor {
 		/******************************************/
 		IRInstance instance = rClass.newInstance(instanceName, args, interpreter, frame);
 		RulpUtil.setMember(instance, F_MBR_THIS, instance);
-//		instance.addLoader((sub) -> {
-//			RulpUtil.setMember(sub, F_MBR_THIS, sub);
-//		});
+
 		/******************************************/
 		// Call Initialization member
 		/******************************************/

@@ -11,6 +11,7 @@ package alpha.rulp.ximpl.subject;
 
 import static alpha.rulp.lang.Constant.M_CLASS;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -103,11 +104,12 @@ public abstract class AbsRSubject extends AbsRefObject implements IRSubject {
 			return;
 		}
 
-		for (ISubjectLoader loader : loaderList) {
+		List<ISubjectLoader> localLoaders = new LinkedList<>(loaderList);
+		loaderList = null;
+
+		for (ISubjectLoader loader : localLoaders) {
 			loader.load(this);
 		}
-
-		loaderList = null;
 	}
 
 	@Override
@@ -138,8 +140,18 @@ public abstract class AbsRSubject extends AbsRefObject implements IRSubject {
 
 	@Override
 	public IRMember getMember(String name) throws RException {
-		_load();
-		return (name == null || memberMap == null) ? null : memberMap.get(name);
+
+		if (name == null) {
+			return null;
+		}
+
+		IRMember mbr = memberMap == null ? null : memberMap.get(name);
+		if (mbr == null && loaderList != null) {
+			_load();
+			mbr = getMember(name);
+		}
+
+		return mbr;
 	}
 
 	@Override

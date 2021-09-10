@@ -51,14 +51,14 @@ Object create count:
       string:           23            0           23
         list:            3            0            3
         expr:          401            0          401
-         var:           29           14           15
+         var:           29           12           17
         func:           84            0           84
     template:            1            0            1
        macro:            1            0            1
     instance:            2            0            2
        class:            5            0            5
       member:          153            0          153
-       frame:           20           22           -2
+       frame:           20           18            2
  interpreter:            1            0
   frameEntry:          191            0
       lambda:            4            0
