@@ -92,6 +92,7 @@ root::or
 root::out-to-file
 root::parent-of
 root::print
+root::print-frame-tree
 root::print-subject
 root::private
 root::property-of
