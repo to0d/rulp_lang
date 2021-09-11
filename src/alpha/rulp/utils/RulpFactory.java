@@ -312,8 +312,7 @@ public final class RulpFactory {
 		RType.FRAME.incCreateCount();
 	}
 
-	public static IRArray createArray(List<? extends IRObject> elements) {
-
+	public static IRArray createArray(List<? extends IRObject> elements) throws RException {
 		RType.ARRAY.incCreateCount();
 		return XRArray.buildArray(elements);
 	}

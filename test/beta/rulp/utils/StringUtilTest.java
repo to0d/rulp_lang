@@ -1,4 +1,4 @@
-package beta.rulp.utility;
+package beta.rulp.utils;
 
 import static org.junit.Assert.assertEquals;
 

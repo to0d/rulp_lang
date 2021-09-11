@@ -33,7 +33,7 @@ public class XRFactorGetOfArray extends AbsRFactorAdapter implements IRFactor {
 		}
 
 		IRArray array = RulpUtil.asArray(interpreter.compute(frame, args.get(1)));
-		int dim = array.dimension();
+		int dim = array.getDimension();
 		if (dim != (args.size() - 2)) {
 			throw new RException(String.format("Unmatch dimension: expect=%d, actual=%d", args.size() - 2, dim));
 		}

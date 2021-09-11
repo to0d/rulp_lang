@@ -51,6 +51,9 @@ class XRFactorSizeOfTest extends RulpTestBase {
 		_test("(size-of {{a, b, c}, x} 0)", "2");
 		_test("(size-of {{a, b, c}, x} 1)", "3");
 		_test("(size-of {{a, b, c}, x} 2)", "0");
-		_test_error("(size-of {{a, b, c}, x} -1)", "err");
+		_test_error("(size-of {{a, b, c}, x} -1)",
+				"Invalid dim: -1\n" + "at _$fun$_size-of: (size-of-array ?arr ?dim)\n"
+						+ "at _$fun$_size-of: (return (size-of-array ?arr ?dim))\n"
+						+ "at main: (size-of {{a,b,c},x} -1)");
 	}
 }

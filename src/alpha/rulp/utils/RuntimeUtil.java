@@ -372,7 +372,9 @@ public final class RuntimeUtil {
 				case FUNC:
 					exprComputeFuncCount.getAndIncrement();
 					IRObject rst = RuntimeUtil.computeFun((IRFunction) e0, expr, interpreter, frame);
-					if (rst.getType() == RType.EXPR && RuntimeUtil.isSupportOpCPS()) {
+					if (rst == null) {
+						return O_Nil;
+					} else if (rst.getType() == RType.EXPR && RuntimeUtil.isSupportOpCPS()) {
 						rst = CPSUtils.computeCPSExpr((IRExpr) rst, interpreter, frame);
 					}
 					return rst;

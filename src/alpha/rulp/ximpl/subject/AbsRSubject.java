@@ -11,7 +11,6 @@ package alpha.rulp.ximpl.subject;
 
 import static alpha.rulp.lang.Constant.M_CLASS;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;

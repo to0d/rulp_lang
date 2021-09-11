@@ -9,7 +9,9 @@
 
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_NAMESPACE;
+import static alpha.rulp.lang.Constant.A_NIL;
+import static alpha.rulp.lang.Constant.F_NEW;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.S_QUESTION;
 import static alpha.rulp.lang.Constant.S_QUESTION_C;
@@ -293,8 +295,8 @@ public class RulpUtil {
 		case ARRAY:
 
 			IRArray arr = (IRArray) obj;
-			if (arr.dimension() != 1) {
-				throw new RException("high dimension: " + arr.dimension());
+			if (arr.getDimension() > 2) {
+				throw new RException("invalid dimension: " + arr.getDimension());
 			}
 
 			sb.append("{");
