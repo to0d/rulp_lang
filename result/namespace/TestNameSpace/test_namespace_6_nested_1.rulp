@@ -10,6 +10,8 @@
 ;=>ns3
 (use namespace ns3)
 ;=>nil
+(defvar ns3::var3 1)
+;=>&var3
 (search-frame-of)
 ;=>'(SF-ns3-2 SF-ns2-1 SF-ns1-0 main)
 (type-of $(value-of ns3))
@@ -26,3 +28,5 @@
             ->FRAME(SF-ns2-1): id=5, lvl=3, subject=ns2
             ->FRAME(SF-ns3-2): id=6, lvl=3, subject=ns3
 ;eof
+(+ main::ns1::ns2::ns3::var3)
+;=>

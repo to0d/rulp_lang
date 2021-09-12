@@ -47,7 +47,7 @@ public class TraceUtil {
 			this.interpreter = interpreter;
 		}
 
-		public void _printFrame(IRFrame frame, int level) throws RException {
+		private void _printFrame(IRFrame frame, int level) throws RException {
 
 			for (int i = 0; i < level; i++) {
 				sb.append("    ");
