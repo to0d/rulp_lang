@@ -22,9 +22,13 @@ class StringUtilTest {
 
 	@Test
 	public void test_addEscapeString() {
-
 		assertEquals("", StringUtil.addEscapeString(""));
 		assertEquals("123", StringUtil.addEscapeString("123"));
 		assertEquals("a\\\\b", StringUtil.addEscapeString("a\\b"));
+	}
+
+	@Test
+	public void test_splitStringByStr() {
+		assertEquals("[a, b, c]", StringUtil.splitStringByStr("a::b::c", "::").toString());
 	}
 }

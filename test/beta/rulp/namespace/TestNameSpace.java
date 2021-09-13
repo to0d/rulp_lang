@@ -142,7 +142,7 @@ public class TestNameSpace extends RulpTestBase {
 		_test("(new namespace ns1)", "ns1");
 		_test_error("(new namespace ns1)", "duplicate object<ns1> found: ns1\n" + "at main: (new namespace ns1)");
 	}
-	
+
 	@Test
 	public void test_namespace_6_nested_1() {
 
@@ -150,4 +150,12 @@ public class TestNameSpace extends RulpTestBase {
 		_test_script("result/namespace/TestNameSpace/test_namespace_6_nested_1.rulp");
 		_gInfo("result/namespace/TestNameSpace/test_namespace_6_nested_1_ginfo.txt");
 	}
+
+//	@Test
+//	public void test_namespace_6_nested_2() {
+//
+//		_setup();
+//		_test_script("result/namespace/TestNameSpace/test_namespace_6_nested_2.rulp");
+//		_gInfo("result/namespace/TestNameSpace/test_namespace_6_nested_2_ginfo.txt");
+//	}
 }

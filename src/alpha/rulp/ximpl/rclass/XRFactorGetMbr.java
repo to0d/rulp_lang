@@ -15,6 +15,7 @@ import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
@@ -36,7 +37,12 @@ public class XRFactorGetMbr extends AbsRFactorAdapter implements IRFactor {
 		IRSubject sub = RulpUtil.asSubject(interpreter.compute(frame, args.get(1)));
 		IRAtom name = RulpUtil.asAtom(args.get(2));
 
-		return sub.getMember(name.getName());
+		IRObject rst = sub.getMember(name.getName()).getValue();
+		if (rst.getType() == RType.VAR) {
+			rst = RulpUtil.asVar(rst).getValue();
+		}
+
+		return rst;
 	}
 
 	@Override

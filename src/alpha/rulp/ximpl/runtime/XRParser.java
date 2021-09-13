@@ -9,7 +9,7 @@
 
 package alpha.rulp.ximpl.runtime;
 
-import static alpha.rulp.lang.Constant.A_FALSE;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.A_TRUE;
 import static alpha.rulp.lang.Constant.O_False;
 import static alpha.rulp.lang.Constant.O_Nil;
@@ -21,6 +21,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import alpha.rulp.lang.IRAtom;
+import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRParser;
@@ -842,11 +844,27 @@ public class XRParser implements IRParser {
 					}
 
 					// class::member
-					int mPos = atomName.indexOf("::");
+					int mPos = atomName.indexOf(F_O_MBR);
 					if (mPos > 0 && mPos < (atomName.length() - 2)) {
-						String subName = atomName.substring(0, mPos);
-						String valName = atomName.substring(mPos + 2);
-						return RulpFactory.createMember(RulpFactory.createAtom(subName), valName, null);
+
+						List<String> names = StringUtil.splitStringByStr(atomName, F_O_MBR);
+						if (names.size() == 2) {
+							return RulpFactory.createMember(RulpFactory.createAtom(names.get(0)), names.get(1), null);
+						}
+						// a::b::c ==>(:: (:: a b) c)
+						else {
+
+							int mbrSize = names.size();
+							IRAtom getMbr = RulpFactory.createAtom(F_O_MBR);
+							IRExpr mbrExpr = RulpFactory.createExpression(getMbr, RulpFactory.createAtom(names.get(0)),
+									RulpFactory.createAtom(names.get(1)));
+							for (int i = 2; i < mbrSize; ++i) {
+								mbrExpr = RulpFactory.createExpression(getMbr, mbrExpr,
+										RulpFactory.createAtom(names.get(i)));
+							}
+
+							return mbrExpr;
+						}
 					}
 
 					// pre:name

@@ -823,6 +823,35 @@ public class StringUtil {
 		return newPath.isEmpty() ? "" + File.separatorChar : newPath;
 	}
 
+	public static List<String> splitStringByStr(String input, String sep) {
+
+		if (input == null) {
+			return Collections.<String>emptyList();
+		}
+
+		ArrayList<String> subStrs = new ArrayList<>();
+		if (sep == null || sep.length() == 0 || input.isEmpty()) {
+			subStrs.add(input);
+			return subStrs;
+		}
+
+		String line = input;
+		int sep_len = sep.length();
+
+		while (!line.isEmpty()) {
+			int mPos = line.indexOf(sep);
+			if (mPos > 0) {
+				subStrs.add(line.substring(0, mPos));
+				line = line.substring(mPos + sep_len);
+			} else {
+				subStrs.add(line);
+				line = "";
+			}
+		}
+
+		return subStrs;
+	}
+
 	public static List<String> splitStringByChar(String input, char... s) {
 
 		if (input == null) {

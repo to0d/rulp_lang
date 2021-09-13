@@ -179,6 +179,7 @@ public class XRParserTest extends RulpTestBase {
 
 		_setup();
 
+		_test_parse_line("a::b::c", "(:: (:: a b) c)");
 		_test_parse_line("obj::mbr1");
 		_test_parse_line("(:: obj mbr1)");
 		_test_parse_line("(+ 1 2 3)");
