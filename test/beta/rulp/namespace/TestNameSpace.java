@@ -151,11 +151,11 @@ public class TestNameSpace extends RulpTestBase {
 		_gInfo("result/namespace/TestNameSpace/test_namespace_6_nested_1_ginfo.txt");
 	}
 
-//	@Test
-//	public void test_namespace_6_nested_2() {
-//
-//		_setup();
-//		_test_script("result/namespace/TestNameSpace/test_namespace_6_nested_2.rulp");
-//		_gInfo("result/namespace/TestNameSpace/test_namespace_6_nested_2_ginfo.txt");
-//	}
+	@Test
+	public void test_namespace_6_nested_2() {
+
+		_setup();
+		_test_script("result/namespace/TestNameSpace/test_namespace_6_nested_2.rulp");
+		_gInfo("result/namespace/TestNameSpace/test_namespace_6_nested_2_ginfo.txt");
+	}
 }

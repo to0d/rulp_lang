@@ -9,9 +9,10 @@
 
 package alpha.rulp.ximpl.rclass;
 
-import static alpha.rulp.lang.Constant.F_MBR_THIS;
+import static alpha.rulp.lang.Constant.*;
 
 import alpha.rulp.lang.IRClass;
+import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRInstance;
@@ -54,27 +55,51 @@ public class XRFactorNew extends AbsRFactorAdapter implements IRFactor {
 		/******************************************/
 		String instanceName = null;
 		if (argIndex < args.size()) {
+
 			argObj = args.get(argIndex);
 
-			if (argObj.getType() == RType.ATOM) {
+			switch (argObj.getType()) {
+			case ATOM:
 				instanceName = RulpUtil.asAtom(argObj).getName();
 				++argIndex;
-			}
+				break;
+
 			// Create instance in the frame of the specified subject
-			else if (argObj.getType() == RType.MEMBER) {
+			case MEMBER:
 
 				IRMember mbr = RulpUtil.asMember(argObj);
 
 				IRObject subObj = RuntimeUtil.compute(mbr.getSubject(), interpreter, frame);
 				if (subObj == null) {
 					throw new RException("subject<" + mbr.getSubject() + "> not found");
+				} else {
+					IRSubject sub = RulpUtil.asSubject(subObj);
+					definedFrame = sub.getSubjectFrame();
+					instanceName = mbr.getName();
+					++argIndex;
 				}
 
-				IRSubject sub = RulpUtil.asSubject(subObj);
-				definedFrame = sub.getSubjectFrame();
-				instanceName = mbr.getName();
-				++argIndex;
+				break;
+
+			// Create instance in member expression: '(:: sub mbr)
+			case EXPR:
+
+				IRExpr subExpr = RulpUtil.asExpression(argObj);
+				IRObject e0 = subExpr.get(0);
+
+				if (e0.asString().equals(F_O_MBR) && subExpr.size() == 3
+						&& (e0.getType() == RType.ATOM || e0.getType() == RType.FACTOR)
+						&& subExpr.get(2).getType() == RType.ATOM) {
+
+					IRSubject sub = RulpUtil.asSubject(interpreter.compute(frame, subExpr.get(1)));
+					definedFrame = sub.getSubjectFrame();
+					instanceName = RulpUtil.asAtom(subExpr.get(2)).getName();
+					++argIndex;
+				}
+
+				break;
 			}
+
 		}
 
 		/******************************************/
