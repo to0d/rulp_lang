@@ -9,8 +9,9 @@
 
 package alpha.rulp.ximpl.runtime;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_FALSE;
 import static alpha.rulp.lang.Constant.A_TRUE;
+import static alpha.rulp.lang.Constant.F_O_MBR;
 import static alpha.rulp.lang.Constant.O_False;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.O_True;

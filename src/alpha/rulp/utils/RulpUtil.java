@@ -11,7 +11,7 @@ package alpha.rulp.utils;
 
 import static alpha.rulp.lang.Constant.A_NAMESPACE;
 import static alpha.rulp.lang.Constant.A_NIL;
-import static alpha.rulp.lang.Constant.F_NEW;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.S_QUESTION;
 import static alpha.rulp.lang.Constant.S_QUESTION_C;
@@ -1088,6 +1088,15 @@ public class RulpUtil {
 		return getObjectType(obj) == typeAtom;
 	}
 
+	public static IRInstance newInstance(String className, String instanceName, IRInterpreter interpreter,
+			IRFrame frame) throws RException {
+
+		// (new class name)
+		return XRFactorNew.newInstance(
+				RulpFactory.createList(O_New, RulpFactory.createAtom(className), RulpFactory.createAtom(instanceName)),
+				interpreter, frame);
+	}
+
 	public static void registerNameSpaceLoader(IRInterpreter interpreter, IRFrame frame, String nsName,
 			IRObjectLoader loader) throws RException {
 
@@ -1095,11 +1104,7 @@ public class RulpUtil {
 			throw new RException("invalid namespace name: " + nsName);
 		}
 
-		// (new namespace ns)
-		IRList args = RulpFactory.createList(RulpFactory.createAtom(F_NEW), RulpFactory.createAtom(A_NAMESPACE),
-				RulpFactory.createAtom(nsName));
-
-		IRInstance instance = RulpUtil.asInstance(XRFactorNew.newInstance(args, interpreter, frame));
+		IRInstance instance = RulpUtil.newInstance(A_NAMESPACE, nsName, interpreter, frame);
 		instance.addLoader((sub) -> {
 			try {
 				loader.load(interpreter, sub.getSubjectFrame());

@@ -9,7 +9,8 @@
 
 package alpha.rulp.ximpl.rclass;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.F_MBR_THIS;
+import static alpha.rulp.lang.Constant.F_O_MBR;
 
 import alpha.rulp.lang.IRClass;
 import alpha.rulp.lang.IRExpr;
@@ -31,7 +32,7 @@ import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 
 public class XRFactorNew extends AbsRFactorAdapter implements IRFactor {
 
-	public static IRObject newInstance(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+	public static IRInstance newInstance(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		// (new class1 o3 '(1 2))
 		// (new class1 o3))

@@ -387,6 +387,8 @@ public interface Constant {
 
 	IRAtom O_Nan = RulpFactory.createAtom(A_NAN);
 
+	IRAtom O_New = RulpFactory.createAtom(F_NEW);
+
 //	IRClass O_NoClass = RulpFactory.createNoClass();
 
 	IRAtom O_Nil = RulpFactory.createNil();
