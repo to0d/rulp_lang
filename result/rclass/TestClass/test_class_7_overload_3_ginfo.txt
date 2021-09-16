@@ -73,8 +73,8 @@ class1               : 4        2        2    class      class1
 type#class1          : 5        2        0    atom       type#class1         
 class2               : 6        2        1    class      class2              
 type#class2          : 7        2        0    atom       type#class2         
-o1                   : 8        2        1    instance   o1                  
-o2                   : 10       2        1    instance   o2                  
+o1                   : 8        2        1    instance   o1 : class=class1   
+o2                   : 10       2        1    instance   o2 : class=class2   
 ==========================================================================================================================
 
 
@@ -112,7 +112,7 @@ name=o1, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=null
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 fun1                 : DEFAULT  false    true     2    func       (fun1 nil) : frame=main
-this                 : DEFAULT  false    false    1    instance   o1
+this                 : DEFAULT  false    false    1    instance   o1 : class=class1
 ==========================================================================================================================
 
 name=o2, lvl=2, ref=1/1, parent=class2, final=false, mbrs=2, frame=null
@@ -120,7 +120,7 @@ name=o2, lvl=2, ref=1/1, parent=class2, final=false, mbrs=2, frame=null
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 fun1                 : DEFAULT  false    true     2    func       (fun1 nil) : frame=main
-this                 : DEFAULT  false    false    1    instance   o2
+this                 : DEFAULT  false    false    1    instance   o2 : class=class2
 ==========================================================================================================================
 
 

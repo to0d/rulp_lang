@@ -69,7 +69,7 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
 main                 : 3        2        2    frame      main                
-ns1                  : 4        2        1    instance   ns1                 
+ns1                  : 4        2        1    instance   ns1 : class=namespace
 ==========================================================================================================================
 
 
@@ -94,24 +94,24 @@ name=ns1, lvl=1, ref=1/1, parent=namespace, final=false, mbrs=2, frame=3(SF-ns1-
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-ns2                  : DEFAULT  false    false    1    instance   ns2
-this                 : DEFAULT  false    false    1    instance   ns1
+ns2                  : DEFAULT  false    false    1    instance   ns2 : class=namespace
+this                 : DEFAULT  false    false    1    instance   ns1 : class=namespace
 ==========================================================================================================================
 
 name=ns2, lvl=1, ref=1/1, parent=namespace, final=false, mbrs=2, frame=4(SF-ns2-1)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-ns3                  : DEFAULT  false    false    1    instance   ns3
-this                 : DEFAULT  false    false    1    instance   ns2
+ns3                  : DEFAULT  false    false    1    instance   ns3 : class=namespace
+this                 : DEFAULT  false    false    1    instance   ns2 : class=namespace
 ==========================================================================================================================
 
 name=ns3, lvl=1, ref=1/2, parent=namespace, final=false, mbrs=2, frame=6(SF-ns3-2)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-this                 : DEFAULT  false    false    1    instance   ns3
-var3                 : DEFAULT  false    false    1    var        int:1
+this                 : DEFAULT  false    false    1    instance   ns3 : class=namespace
+var3                 : DEFAULT  false    false    1    var        1 : type=int
 ==========================================================================================================================
 
 

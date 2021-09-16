@@ -74,7 +74,7 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
 main                 : 3        2        3    frame      main                
-q1                   : 5        2        1    instance   q1                  
+q1                   : 5        2        1    instance   q1 : class=queue    
 ==========================================================================================================================
 
 
@@ -96,10 +96,10 @@ name=q1, lvl=1, ref=1/2, parent=queue, final=false, mbrs=5, frame=4(SF-q1-1)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE  false    false    1    var        instance:null
+?impl                : PRIVATE  false    false    1    var        null : type=instance
 init                 : DEFAULT  true     false    1    func       (init) : frame=SF-q1-1, type=lambda
 push                 : DEFAULT  true     false    1    func       (push nil) : frame=SF-q1-1, type=lambda
-this                 : DEFAULT  false    false    1    instance   q1
+this                 : DEFAULT  false    false    1    instance   q1 : class=queue
 to-list              : DEFAULT  true     false    1    func       (to-list) : frame=SF-q1-1, type=lambda
 ==========================================================================================================================
 

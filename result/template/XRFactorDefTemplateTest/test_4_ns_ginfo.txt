@@ -65,7 +65,7 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
 main                 : 3        2        2    frame      main                
-ns1                  : 4        2        1    instance   ns1                 
+ns1                  : 4        2        1    instance   ns1 : class=namespace
 ask                  : 5        2        1    template   (ask '('(teacher atom) '(? expr))) : frame=main
 ==========================================================================================================================
 
@@ -86,7 +86,7 @@ name=ns1, lvl=1, ref=1/1, parent=namespace, final=false, mbrs=2, frame=3(SF-ns1-
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ask                  : DEFAULT  false    false    1    template   (ask '('(teacher atom) '(? expr)) '('(student atom) '(? expr))) : frame=SF-ns1-0
-this                 : DEFAULT  false    false    1    instance   ns1
+this                 : DEFAULT  false    false    1    instance   ns1 : class=namespace
 ==========================================================================================================================
 
 

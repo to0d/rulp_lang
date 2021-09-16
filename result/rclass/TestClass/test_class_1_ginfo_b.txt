@@ -94,7 +94,7 @@ name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=5, frame=3(SF-class1
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?value               : DEFAULT  false    false    1    var        int:0
+?value               : DEFAULT  false    false    1    var        0 : type=int
 add                  : DEFAULT  false    false    1    func       (add nil) : frame=main
 get                  : DEFAULT  false    false    1    func       (get) : frame=main
 set                  : DEFAULT  false    false    1    func       (set nil) : frame=main

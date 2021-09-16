@@ -60,10 +60,10 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
 main                 : 3        2        3    frame      main                
-ns1                  : 4        2        1    instance   ns1                 
+ns1                  : 4        2        1    instance   ns1 : class=namespace
 class1               : 5        2        1    class      class1              
 type#class1          : 6        2        0    atom       type#class1         
-o1                   : 7        2        1    instance   o1                  
+o1                   : 7        2        1    instance   o1 : class=class1   
 ==========================================================================================================================
 
 
@@ -92,22 +92,22 @@ name=ns1, lvl=1, ref=1/1, parent=namespace, final=false, mbrs=2, frame=4(SF-ns1-
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-o1                   : DEFAULT  false    false    1    instance   o1
-this                 : DEFAULT  false    false    1    instance   ns1
+o1                   : DEFAULT  false    false    1    instance   o1 : class=class1
+this                 : DEFAULT  false    false    1    instance   ns1 : class=namespace
 ==========================================================================================================================
 
 name=o1, lvl=1, ref=1/1, parent=class1, final=false, mbrs=1, frame=null
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-this                 : DEFAULT  false    false    1    instance   o1
+this                 : DEFAULT  false    false    1    instance   o1 : class=class1
 ==========================================================================================================================
 
 name=o1, lvl=1, ref=1/1, parent=class1, final=false, mbrs=1, frame=null
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-this                 : DEFAULT  false    false    1    instance   o1
+this                 : DEFAULT  false    false    1    instance   o1 : class=class1
 ==========================================================================================================================
 
 

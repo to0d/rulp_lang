@@ -16,8 +16,10 @@ import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
 
+import alpha.rulp.lang.IRClass;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
+import alpha.rulp.lang.IRInstance;
 import alpha.rulp.lang.IRMember;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRSubject;
@@ -156,7 +158,7 @@ public class TraceUtil {
 				return _toTypeString(valueObj);
 			}
 
-			return _toTypeString(valueObj) + ":" + valueObj;
+			return valueObj + " : type=" + _toTypeString(valueObj);
 
 		case FUNC:
 
@@ -176,6 +178,11 @@ public class TraceUtil {
 		case TEMPLATE:
 			IRTemplate tp = RulpUtil.asTemplate(obj);
 			return tp.getSignature() + " : frame=" + tp.getDefineFrame();
+
+		case INSTANCE:
+			IRInstance instance = RulpUtil.asInstance(obj);
+			IRClass rclass = instance.getRClass();
+			return instance.getInstanceName() + " : class=" + (rclass == null ? "null" : rclass.getClassName());
 
 		default:
 			return obj.toString();

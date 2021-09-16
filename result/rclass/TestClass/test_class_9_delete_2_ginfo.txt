@@ -67,7 +67,7 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
 main                 : 3        2        2    frame      main                
-?dx                  : 4        2        1    var        int:1               
+?dx                  : 4        2        1    var        1 : type=int        
 class1               : 5        2        1    class      class1              
 type#class1          : 6        2        0    atom       type#class1         
 ==========================================================================================================================

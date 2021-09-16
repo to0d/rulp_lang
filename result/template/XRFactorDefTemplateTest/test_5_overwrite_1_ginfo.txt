@@ -69,8 +69,8 @@ system               : 2        2        0    frame      system
 main                 : 3        2        3    frame      main                
 class1               : 4        2        1    class      class1              
 type#class1          : 5        2        0    atom       type#class1         
-?o1                  : 6        2        1    instance   ?o1                 
-ns1                  : 8        2        1    instance   ns1                 
+?o1                  : 6        2        1    instance   ?o1 : class=class1  
+ns1                  : 8        2        1    instance   ns1 : class=namespace
 ==========================================================================================================================
 
 
@@ -95,17 +95,17 @@ name=?o1, lvl=1, ref=1/2, parent=class1, final=false, mbrs=4, frame=4(SF-?o1-1)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?v1                  : DEFAULT  false    false    1    var        int:1
+?v1                  : DEFAULT  false    false    1    var        1 : type=int
 get                  : DEFAULT  false    false    1    func       (get) : frame=SF-?o1-1, type=lambda
 inc                  : DEFAULT  false    false    1    func       (inc nil) : frame=SF-?o1-1, type=lambda
-this                 : DEFAULT  false    false    1    instance   ?o1
+this                 : DEFAULT  false    false    1    instance   ?o1 : class=class1
 ==========================================================================================================================
 
 name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?v1                  : DEFAULT  false    false    1    var        int:0
+?v1                  : DEFAULT  false    false    1    var        0 : type=int
 get                  : DEFAULT  false    false    1    func       (get) : frame=main
 inc                  : DEFAULT  false    false    1    func       (inc nil) : frame=main
 ==========================================================================================================================
@@ -115,7 +115,7 @@ name=ns1, lvl=1, ref=1/1, parent=namespace, final=false, mbrs=2, frame=5(SF-ns1-
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 set                  : DEFAULT  false    false    1    template   (set '('(_class atom) '(? type#class1))) : frame=SF-ns1-2
-this                 : DEFAULT  false    false    1    instance   ns1
+this                 : DEFAULT  false    false    1    instance   ns1 : class=namespace
 ==========================================================================================================================
 
 

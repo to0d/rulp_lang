@@ -52,7 +52,7 @@ size-of              : -147     1        1    funcList   '((size-of array int) (
                                          1    func       (size-of type#map) : frame=system
                                          1    func       (size-of type#queue) : frame=system
                                          1    func       (size-of type#stack) : frame=system
-?load-paths          : -146     1        1    var        list:'()            
+?load-paths          : -146     1        1    var        '() : type=list     
 system               : -3       1        0    frame      system              
 root                 : -2       1        0    frame      root                
 ==========================================================================================================================

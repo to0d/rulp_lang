@@ -71,9 +71,9 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
 main                 : 3        2        2    frame      main                
-var1                 : 4        2        1    var        int:1               
-ns1                  : 5        2        1    instance   ns1                 
-var2                 : 9        2        1    var        int:3               
+var1                 : 4        2        1    var        1 : type=int        
+ns1                  : 5        2        1    instance   ns1 : class=namespace
+var2                 : 9        2        1    var        3 : type=int        
 fun1                 : 10       2        1    func       (fun1) : frame=main 
 fun2                 : 11       2        1    func       (fun2) : frame=main 
 fun3                 : 12       2        1    func       (fun3) : frame=main 
@@ -95,7 +95,7 @@ name=ns1, lvl=1, ref=1/2, parent=namespace, final=false, mbrs=1, frame=5(SF-ns1-
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-this                 : DEFAULT  false    false    1    instance   ns1
+this                 : DEFAULT  false    false    1    instance   ns1 : class=namespace
 ==========================================================================================================================
 
 

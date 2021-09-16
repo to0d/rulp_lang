@@ -2,19 +2,19 @@ name=o1, lvl=1, ref=1/1, parent=class1, final=false, mbrs=6, frame=4(SF-o1-1)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?value               : DEFAULT  false    false    1    var        int:4
+?value               : DEFAULT  false    false    1    var        4 : type=int
 add                  : DEFAULT  false    false    1    func       (add nil) : frame=SF-o1-1, type=lambda
 get                  : DEFAULT  false    false    1    func       (get) : frame=SF-o1-1, type=lambda
 set                  : DEFAULT  false    false    1    func       (set nil) : frame=SF-o1-1, type=lambda
 sub                  : DEFAULT  false    false    1    func       (sub nil) : frame=SF-o1-1, type=lambda
-this                 : DEFAULT  false    false    1    instance   o1
+this                 : DEFAULT  false    false    1    instance   o1 : class=class1
 ==========================================================================================================================
 
 name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=5, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?value               : DEFAULT  false    false    1    var        int:0
+?value               : DEFAULT  false    false    1    var        0 : type=int
 add                  : DEFAULT  false    false    1    func       (add nil) : frame=main
 get                  : DEFAULT  false    false    1    func       (get) : frame=main
 set                  : DEFAULT  false    false    1    func       (set nil) : frame=main

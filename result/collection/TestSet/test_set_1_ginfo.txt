@@ -73,7 +73,7 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
 main                 : 3        2        1    frame      main                
-set1                 : 5        2        1    instance   set1                
+set1                 : 5        2        1    instance   set1 : class=set    
 ==========================================================================================================================
 
 
@@ -95,12 +95,12 @@ name=set1, lvl=1, ref=1/1, parent=set, final=false, mbrs=6, frame=4(SF-set1-1)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE  false    false    1    var        instance:null
+?impl                : PRIVATE  false    false    1    var        null : type=instance
 add                  : DEFAULT  true     false    1    func       (add nil) : frame=SF-set1-1, type=lambda
 has                  : DEFAULT  true     false    1    func       (has nil) : frame=SF-set1-1, type=lambda
 init                 : DEFAULT  true     false    1    func       (init) : frame=SF-set1-1, type=lambda
 size-of              : DEFAULT  true     false    1    func       (size-of) : frame=SF-set1-1, type=lambda
-this                 : DEFAULT  false    false    1    instance   set1
+this                 : DEFAULT  false    false    1    instance   set1 : class=set
 ==========================================================================================================================
 
 

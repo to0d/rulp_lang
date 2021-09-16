@@ -2,13 +2,13 @@ id=0, name=root, lvl=0, ref=0/0, entry=150, subject=root
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?os.version          : -174     0        1    var        string:10.0         
-?os.name             : -173     0        1    var        string:Windows 10   
-?path.separator      : -172     0        1    var        string:;            
-?file.separator      : -171     0        1    var        string:\            
-?user.dir            : -170     0        1    var        string:C:\data\itool\irulp_base
-?user.name           : -169     0        1    var        string:921511672    
-?user.home           : -168     0        1    var        string:C:\Users\YANLIU
+?os.version          : -174     0        1    var        10.0 : type=string  
+?os.name             : -173     0        1    var        Windows 10 : type=string
+?path.separator      : -172     0        1    var        ; : type=string     
+?file.separator      : -171     0        1    var        \ : type=string     
+?user.dir            : -170     0        1    var        C:\data\itool\irulp_base : type=string
+?user.name           : -169     0        1    var        921511672 : type=string
+?user.home           : -168     0        1    var        C:\Users\YANLIU : type=string
 rulp-object-count    : -145     0        0    factor     rulp-object-count   
 sys-time             : -144     0        0    factor     sys-time            
 sys-gc               : -143     0        0    factor     sys-gc              
@@ -118,9 +118,9 @@ value-type-of        : -40      0        0    factor     value-type-of
 value-of             : -39      0        0    factor     value-of            
 type-of              : -38      0        0    factor     type-of             
 name-of              : -37      0        0    factor     name-of             
-?trace               : -36      0        1    var        bool:false          
-?op-stable           : -35      0        1    var        bool:false          
-?op-cps              : -34      0        1    var        bool:false          
+?trace               : -36      0        1    var        false : type=bool   
+?op-stable           : -35      0        1    var        false : type=bool   
+?op-cps              : -34      0        1    var        false : type=bool   
 frame                : -33      0        0    atom       frame               
 member               : -32      0        0    atom       member              
 native               : -31      0        0    atom       native              
