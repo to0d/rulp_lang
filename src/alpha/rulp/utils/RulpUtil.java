@@ -11,7 +11,7 @@ package alpha.rulp.utils;
 
 import static alpha.rulp.lang.Constant.A_NAMESPACE;
 import static alpha.rulp.lang.Constant.A_NIL;
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.O_New;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.S_QUESTION;
 import static alpha.rulp.lang.Constant.S_QUESTION_C;

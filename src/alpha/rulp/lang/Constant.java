@@ -247,6 +247,8 @@ public interface Constant {
 
 	String F_O_MBR = "::";
 
+	String F_HAS_MBR = "has-member";
+
 	String F_O_MOD = "%";
 
 	String F_O_NE = "!=";

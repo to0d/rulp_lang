@@ -18,6 +18,8 @@ public interface IRSubject extends IRObject {
 
 	public String getSubjectName();
 
+	public boolean hasMember(String name) throws RException;
+
 	public boolean hasSubjectFrame();
 
 	public boolean isFinal();

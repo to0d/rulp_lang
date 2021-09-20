@@ -64,6 +64,7 @@ root::from
 root::func
 root::get-of-array
 root::get-of-list
+root::has-member
 root::if
 root::instance
 root::int

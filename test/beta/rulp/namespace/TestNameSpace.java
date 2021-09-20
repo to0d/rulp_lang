@@ -24,6 +24,7 @@ public class TestNameSpace extends RulpTestBase {
 		_test("(value-of (value-of ns1::var2))", "3");
 		_test("(ls)", "'(main::f1 main::main main::ns1 main::root main::system main::var1)");
 		_test("(ls ns1)", "'(ns1::this ns1::var1 ns1::var2)");
+		_test("(has-member ns1 var1)", "true");
 
 		// define function in name space
 		_test("(defun ns1::f1 () (return 2))", "ns1::f1");

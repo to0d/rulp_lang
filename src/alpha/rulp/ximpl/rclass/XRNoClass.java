@@ -120,4 +120,9 @@ public final class XRNoClass extends AbsAtomObject implements IRClass {
 		throw new RException("Can't operation");
 	}
 
+	@Override
+	public boolean hasMember(String name) throws RException {
+		return false;
+	}
+
 }

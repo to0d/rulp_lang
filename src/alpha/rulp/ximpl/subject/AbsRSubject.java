@@ -138,6 +138,16 @@ public abstract class AbsRSubject extends AbsRefObject implements IRSubject {
 	}
 
 	@Override
+	public boolean hasMember(String name) throws RException {
+
+		if (name == null || memberMap == null) {
+			return false;
+		}
+
+		return memberMap.containsKey(name);
+	}
+
+	@Override
 	public IRMember getMember(String name) throws RException {
 
 		if (name == null) {

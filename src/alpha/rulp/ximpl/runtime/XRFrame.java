@@ -140,6 +140,16 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 		return entryNode;
 	}
 
+	@Override
+	public boolean hasMember(String name) throws RException {
+
+		if (name == null || _nodeCatchMap == null) {
+			return false;
+		}
+
+		return _nodeCatchMap.containsKey(name);
+	}
+
 	protected IRFrameEntry _insertEntry(String name, IRObject obj) throws RException {
 
 		IRFrameEntry localEntry = createFrameEntry(name, obj);
@@ -545,4 +555,5 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 	public String toString() {
 		return frameName;
 	}
+
 }
