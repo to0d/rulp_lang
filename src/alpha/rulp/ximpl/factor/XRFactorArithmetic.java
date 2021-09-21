@@ -19,6 +19,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.MathUtil;
 import alpha.rulp.utils.RulpFactory;
+import alpha.rulp.utils.RulpUtil;
 
 public class XRFactorArithmetic extends AbsRFactorAdapter implements IRFactor {
 
@@ -206,11 +207,35 @@ public class XRFactorArithmetic extends AbsRFactorAdapter implements IRFactor {
 		}
 
 		IRIterator<? extends IRObject> it = args.listIterator(1);
-
 		IRObject rst = interpreter.compute(frame, it.next());
-		while (it.hasNext()) {
-			IRObject next = interpreter.compute(frame, it.next());
-			rst = calculate(type, rst, next);
+
+		if (type == ArithmeticType.ADD && rst.getType() == RType.STRING) {
+
+			if (!it.hasNext()) {
+				return rst;
+			}
+
+			StringBuffer sb = new StringBuffer();
+			sb.append(rst.asString());
+
+			while (it.hasNext()) {
+
+				IRObject next = interpreter.compute(frame, it.next());
+				if (next.getType() == RType.STRING) {
+					sb.append(RulpUtil.asString(next).asString());
+				} else {
+					sb.append(RulpUtil.toString(next));
+				}
+			}
+
+			rst = RulpFactory.createString(sb.toString());
+
+		} else {
+
+			while (it.hasNext()) {
+				IRObject next = interpreter.compute(frame, it.next());
+				rst = calculate(type, rst, next);
+			}
 		}
 
 		return rst;
