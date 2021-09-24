@@ -347,6 +347,8 @@ public interface Constant {
 
 	String F_TO_NAMED_LIST = "to-named-list";
 
+	String F_TO_NONAMED_LIST = "to-nonamed-list";
+
 	String F_TO_STRING = "to-string";
 
 	String F_TYPE_OF = "type-of";

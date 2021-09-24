@@ -1088,6 +1088,58 @@ public class RulpUtil {
 		return getObjectType(obj) == typeAtom;
 	}
 
+	public static String nameOf(IRObject obj, IRFrame frame) throws RException {
+
+		if (obj == null) {
+			return null;
+		}
+
+		switch (obj.getType()) {
+
+		case ATOM:
+			IRFrameEntry entry = frame.getEntry(RulpUtil.asAtom(obj).getName());
+			if (entry != null && entry.getObject() != obj) {
+				return nameOf(entry.getObject(), frame);
+			}
+
+			return RulpUtil.asAtom(obj).getName();
+
+		case INSTANCE:
+			return RulpUtil.asInstance(obj).getInstanceName();
+
+		case CLASS:
+			return RulpUtil.asClass(obj).getClassName();
+
+		case FACTOR:
+			return RulpUtil.asFactor(obj).getName();
+
+		case TEMPLATE:
+			return RulpUtil.asTemplate(obj).getName();
+
+		case FUNC:
+			return RulpUtil.asFunction(obj).getSignature();
+
+		case MACRO:
+			return RulpUtil.asMacro(obj).getName();
+
+		case VAR:
+			return RulpUtil.asVar(obj).getName();
+
+		case MEMBER:
+			return RulpUtil.asMember(obj).getName();
+
+		case FRAME:
+			return RulpUtil.asFrame(obj).getFrameName();
+
+		case LIST:
+			return RulpUtil.asList(obj).getNamedName();
+
+		case NIL:
+		default:
+			return null;
+		}
+	}
+
 	public static IRInstance newInstance(String className, String instanceName, IRInterpreter interpreter,
 			IRFrame frame) throws RException {
 

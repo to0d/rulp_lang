@@ -9,8 +9,6 @@
 
 package alpha.rulp.ximpl.factor;
 
-import static alpha.rulp.lang.Constant.O_Nil;
-
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -20,9 +18,9 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 
-public class XRFactorNameOf extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorToNoNamedList extends AbsRFactorAdapter implements IRFactor {
 
-	public XRFactorNameOf(String factorName) {
+	public XRFactorToNoNamedList(String factorName) {
 		super(factorName);
 	}
 
@@ -33,9 +31,12 @@ public class XRFactorNameOf extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		String name = RulpUtil.nameOf(args.get(1), frame);
+		IRList list = RulpUtil.asList(interpreter.compute(frame, args.get(1)));
+		if (list.getNamedName() != null) {
+			list = RulpFactory.createList(list.iterator());
+		}
 
-		return name == null ? O_Nil : RulpFactory.createString(name);
+		return list;
 	}
 
 	@Override
@@ -46,4 +47,5 @@ public class XRFactorNameOf extends AbsRFactorAdapter implements IRFactor {
 	public boolean isThreadSafe() {
 		return true;
 	}
+
 }
