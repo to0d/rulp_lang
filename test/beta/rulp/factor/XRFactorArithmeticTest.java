@@ -36,4 +36,5 @@ class XRFactorArithmeticTest extends RulpTestBase {
 		_test("(^ 1.1 2)", "1.21");
 		_test("(^ 1.1D 2)", "1.2100000000000002D");
 	}
+
 }

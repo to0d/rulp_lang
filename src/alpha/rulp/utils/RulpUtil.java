@@ -46,7 +46,9 @@ import alpha.rulp.lang.IRString;
 import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RAccessType;
+import alpha.rulp.lang.RArithmeticOperator;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RRelationalOperator;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRCallable;
 import alpha.rulp.runtime.IRFactor;
@@ -800,6 +802,277 @@ public class RulpUtil {
 		return a.asString().compareTo(b.asString());
 	}
 
+	public static IRObject computeArithmeticExpression(RArithmeticOperator op, IRObject a, IRObject b)
+			throws RException {
+
+		RType at = a.getType();
+		RType bt = b.getType();
+
+		RType rt = MathUtil.getConvertType(at, bt);
+		if (rt == null) {
+			throw new RException(String.format("Invalid op types: %s %s", a.toString(), b.toString()));
+		}
+
+		switch (rt) {
+		case FLOAT: {
+
+			float av = MathUtil.toFloat(a);
+			float bv = MathUtil.toFloat(b);
+
+			switch (op) {
+			case ADD:
+				av += bv;
+				break;
+
+			case BY:
+				av *= bv;
+				break;
+
+			case SUB:
+				av -= bv;
+				break;
+
+			case DIV:
+				av /= bv;
+				break;
+
+			case MOD:
+				av %= bv;
+				break;
+
+			case POWER:
+				av = (float) Math.pow(av, bv);
+				break;
+
+			default:
+				throw new RException(String.format("Not support op: %s", op));
+			}
+
+			return RulpFactory.createFloat(av);
+		}
+
+		case DOUBLE: {
+
+			double av = MathUtil.toDouble(a);
+			double bv = MathUtil.toDouble(b);
+
+			switch (op) {
+			case ADD:
+				av += bv;
+				break;
+
+			case BY:
+				av *= bv;
+				break;
+
+			case SUB:
+				av -= bv;
+				break;
+
+			case DIV:
+				av /= bv;
+				break;
+
+			case MOD:
+				av %= bv;
+				break;
+
+			case POWER:
+				av = Math.pow(av, bv);
+				break;
+
+			default:
+				throw new RException(String.format("Not support op: %s", op));
+			}
+
+			return RulpFactory.createDouble(av);
+		}
+
+		case INT: {
+
+			int av = MathUtil.toInt(a);
+			int bv = MathUtil.toInt(b);
+
+			switch (op) {
+			case ADD:
+				av += bv;
+				break;
+
+			case BY:
+				av *= bv;
+				break;
+
+			case SUB:
+				av -= bv;
+				break;
+
+			case DIV:
+				av /= bv;
+				break;
+
+			case MOD:
+				av %= bv;
+				break;
+
+			case POWER:
+				av = (int) Math.pow(av, bv);
+				break;
+
+			default:
+				throw new RException(String.format("Not support op: %s", op));
+			}
+
+			return RulpFactory.createInteger(av);
+		}
+
+		case LONG: {
+
+			long av = MathUtil.toLong(a);
+			long bv = MathUtil.toLong(b);
+
+			switch (op) {
+			case ADD:
+				av += bv;
+				break;
+
+			case BY:
+				av *= bv;
+				break;
+
+			case SUB:
+				av -= bv;
+				break;
+
+			case DIV:
+				av /= bv;
+				break;
+
+			case MOD:
+				av %= bv;
+				break;
+
+			case POWER:
+				av = (long) Math.pow(av, bv);
+				break;
+
+			default:
+				throw new RException(String.format("Not support op: %s", op));
+			}
+
+			return RulpFactory.createLong(av);
+		}
+
+		default:
+		}
+
+		throw new RException(
+				String.format("Invalid arithmetic expression: (%s %s %s)", op, a.toString(), b.toString()));
+
+	}
+
+	public static boolean computeRelationalExpression(RRelationalOperator op, IRObject a, IRObject b)
+			throws RException {
+
+		switch (op) {
+		case EQ:
+			return RulpUtil.equal(a, b);
+
+		case NE:
+			return !RulpUtil.equal(a, b);
+
+		default:
+		}
+
+		RType at = a.getType();
+		RType bt = b.getType();
+
+		RType rt = MathUtil.getConvertType(at, bt);
+		if (rt == null) {
+			throw new RException(String.format("Invalid op types: %s %s %s", op, a.toString(), b.toString()));
+		}
+
+		switch (rt) {
+
+		case FLOAT: {
+
+			float av = MathUtil.toFloat(a);
+			float bv = MathUtil.toFloat(b);
+
+			switch (op) {
+
+			case GT: // Greater than
+				return av > bv;
+
+			case GE: // Greater than or equal
+				return av >= bv;
+
+			case LT: // Less than
+				return av < bv;
+
+			case LE: // Less than or equal
+				return av <= bv;
+
+			default:
+			}
+
+			break;
+		}
+
+		case INT: {
+			int av = MathUtil.toInt(a);
+			int bv = MathUtil.toInt(b);
+
+			switch (op) {
+
+			case GT: // Greater than
+				return av > bv;
+
+			case GE: // Greater than or equal
+				return av >= bv;
+
+			case LT: // Less than
+				return av < bv;
+
+			case LE: // Less than or equal
+				return av <= bv;
+
+			default:
+			}
+			break;
+		}
+
+		case LONG: {
+
+			long av = MathUtil.toLong(a);
+			long bv = MathUtil.toLong(b);
+
+			switch (op) {
+
+			case GT: // Greater than
+				return av > bv;
+
+			case GE: // Greater than or equal
+				return av >= bv;
+
+			case LT: // Less than
+				return av < bv;
+
+			case LE: // Less than or equal
+				return av <= bv;
+
+			default:
+			}
+
+			break;
+		}
+
+		default:
+
+		}
+
+		throw new RException(String.format("Invalid rational expression: (%s %s %s)", op, a.toString(), b.toString()));
+	}
+
 	public static void decRef(IRObject obj) throws RException {
 
 		if (obj == null) {
@@ -920,6 +1193,16 @@ public class RulpUtil {
 		}
 	}
 
+//	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
+//
+//		IRObject nsObj = frame.getObject(A_USING_NS);
+//		if (nsObj == null) {
+//			return null;
+//		}
+//
+//		return RulpUtil.asSubject(nsObj);
+//	}
+
 	public static IRAtom getObjectType(IRObject valObj) throws RException {
 
 		IRAtom valAtom = RType.toObject(valObj.getType());
@@ -942,16 +1225,6 @@ public class RulpUtil {
 
 		obj.incRef();
 	}
-
-//	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
-//
-//		IRObject nsObj = frame.getObject(A_USING_NS);
-//		if (nsObj == null) {
-//			return null;
-//		}
-//
-//		return RulpUtil.asSubject(nsObj);
-//	}
 
 	public static boolean isAnonymousVar(String var) {
 		return var.equals(S_QUESTION);
@@ -1324,4 +1597,5 @@ public class RulpUtil {
 			throw new RException("unsupport type: " + obj.getType());
 		}
 	}
+
 }

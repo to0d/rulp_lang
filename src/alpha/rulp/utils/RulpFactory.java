@@ -43,7 +43,9 @@ import alpha.rulp.lang.IRParaAttr;
 import alpha.rulp.lang.IRString;
 import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.IRVar;
+import alpha.rulp.lang.RArithmeticOperator;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RRelationalOperator;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRFunctionList;
@@ -82,14 +84,12 @@ import alpha.rulp.ximpl.error.XRFactorReturn;
 import alpha.rulp.ximpl.error.XRFactorTry;
 import alpha.rulp.ximpl.factor.XRFactorAlias;
 import alpha.rulp.ximpl.factor.XRFactorArithmetic;
-import alpha.rulp.ximpl.factor.XRFactorArithmetic.ArithmeticType;
 import alpha.rulp.ximpl.factor.XRFactorBoolAnd;
 import alpha.rulp.ximpl.factor.XRFactorBoolNot;
 import alpha.rulp.ximpl.factor.XRFactorBoolOr;
 import alpha.rulp.ximpl.factor.XRFactorCanCast;
 import alpha.rulp.ximpl.factor.XRFactorCompare;
 import alpha.rulp.ximpl.factor.XRFactorComparison;
-import alpha.rulp.ximpl.factor.XRFactorComparison.ComparisonType;
 import alpha.rulp.ximpl.factor.XRFactorDefvar;
 import alpha.rulp.ximpl.factor.XRFactorDo;
 import alpha.rulp.ximpl.factor.XRFactorDoWhenObjDeleted;
@@ -634,12 +634,12 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorStrReplace(F_STR_REPLACE));
 
 		// Arithmetic
-		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_ADD, ArithmeticType.ADD));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_SUB, ArithmeticType.SUB));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_BY, ArithmeticType.BY));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_DIV, ArithmeticType.DIV));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_MOD, ArithmeticType.MOD));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_POWER, ArithmeticType.POWER));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_ADD, RArithmeticOperator.ADD));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_SUB, RArithmeticOperator.SUB));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_BY, RArithmeticOperator.BY));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_DIV, RArithmeticOperator.DIV));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_MOD, RArithmeticOperator.MOD));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_POWER, RArithmeticOperator.POWER));
 
 		// Boolean
 		RulpUtil.addFrameObject(rootFrame, new XRFactorBoolNot(F_B_NOT));
@@ -647,12 +647,12 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorBoolOr(F_B_OR));
 
 		// Relational
-		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_EQ, ComparisonType.Equal)); // =
-		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_NE, ComparisonType.NotEqual)); // =
-		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_GT, ComparisonType.Bigger)); // >
-		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_LT, ComparisonType.Smaller)); // <
-		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_GE, ComparisonType.BiggerOrEqual)); // >=
-		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_LE, ComparisonType.SmallerOrEqual));// <=
+		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_EQ, RRelationalOperator.EQ)); // =
+		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_NE, RRelationalOperator.NE)); // =
+		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_GT, RRelationalOperator.GT)); // >
+		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_LT, RRelationalOperator.LT)); // <
+		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_GE, RRelationalOperator.GE)); // >=
+		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_LE, RRelationalOperator.LE));// <=
 
 		RulpUtil.addFrameObject(rootFrame, new XRFactorCompare(F_CMP_DEF));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorCanCast(F_CAN_CAST));
