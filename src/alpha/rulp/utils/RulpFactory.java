@@ -59,14 +59,16 @@ import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.runtime.IRThreadContext;
 import alpha.rulp.runtime.IRTokener;
 import alpha.rulp.runtime.RName;
-import alpha.rulp.ximpl.collection.XRFactorAdd;
-import alpha.rulp.ximpl.collection.XRFactorAddAll;
+import alpha.rulp.ximpl.collection.XRFactorAddArrayToList;
+import alpha.rulp.ximpl.collection.XRFactorAddListToArray;
+import alpha.rulp.ximpl.collection.XRFactorAddListToList;
 import alpha.rulp.ximpl.collection.XRFactorForeach;
 import alpha.rulp.ximpl.collection.XRFactorGetOfArray;
 import alpha.rulp.ximpl.collection.XRFactorGetOfList;
 import alpha.rulp.ximpl.collection.XRFactorJoin;
 import alpha.rulp.ximpl.collection.XRFactorRemove;
 import alpha.rulp.ximpl.collection.XRFactorReverse;
+import alpha.rulp.ximpl.collection.XRFactorSeta;
 import alpha.rulp.ximpl.collection.XRFactorSizeOfArray;
 import alpha.rulp.ximpl.collection.XRFactorSizeOfList;
 import alpha.rulp.ximpl.collection.XRFactorSort;
@@ -684,8 +686,8 @@ public final class RulpFactory {
 		// Collection
 		RulpUtil.addFrameObject(rootFrame, new XRFactorForeach(F_FOREACH));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorGetOfList(F_GET_OF_LIST));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorAdd(F_ADD));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorAddAll(F_ADD_ALL));
+//		RulpUtil.addFrameObject(rootFrame, new XRFactorAddToList(F_ADD_TO_LIST));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorAddListToList(F_ADD_LIST_TO_LIST));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorRemove(F_REMOVE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorJoin(F_JOIN));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorUnion(F_UNION));
@@ -695,6 +697,9 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorGetOfArray(F_GET_OF_ARRAY));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorToNamedList(F_TO_NAMED_LIST));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorToNoNamedList(F_TO_NONAMED_LIST));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorAddListToArray(F_ADD_LIST_TO_ARRAY));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorAddArrayToList(F_ADD_ARRAY_TO_LIST));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorSeta(F_SETA));
 
 		// Thread
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSleep(F_T_SLEEP));

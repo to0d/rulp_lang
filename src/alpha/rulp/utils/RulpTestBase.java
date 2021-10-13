@@ -12,6 +12,7 @@ package alpha.rulp.utils;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +42,10 @@ public class RulpTestBase {
 		public void out(String line) {
 			sb.append(line);
 		}
+	}
+
+	protected void _test_script() {
+		_test_script(getCachePath() + ".rulp");
 	}
 
 	protected static String _load(String path) {
@@ -215,6 +220,47 @@ public class RulpTestBase {
 			e.printStackTrace();
 			fail(e.toString());
 		}
+	}
+
+	protected String getPackageName() {
+		return this.getClass().getPackage().getName();
+	}
+
+	static String BETA_RULP_PRE = "beta.rulp.";
+
+	protected static String getClassPathName(Class<?> c, int tailIndex) {
+
+		if (c == null || tailIndex < 0) {
+			return null;
+		}
+
+		String fullName = c.getCanonicalName();
+		if (fullName == null) {
+			return null;
+		}
+
+		String[] names = fullName.split("\\.");
+		if (names == null || tailIndex >= names.length) {
+			return null;
+		}
+
+		return names[names.length - tailIndex - 1];
+	}
+
+	protected String getCachePath() {
+
+		String packageName = getPackageName();
+
+		if (!packageName.startsWith(BETA_RULP_PRE)) {
+			throw new RuntimeException("Invalid package: " + packageName);
+		}
+
+		String packageShortName = packageName.substring(BETA_RULP_PRE.length());
+		String className = getClassPathName(this.getClass(), 0);
+		String methodName = Thread.currentThread().getStackTrace()[3].getMethodName();
+
+		return "result" + File.separator + packageShortName + File.separator + className + File.separator + methodName;
+
 	}
 
 	protected void _test_script(String scriptPath) {

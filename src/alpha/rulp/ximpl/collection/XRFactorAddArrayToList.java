@@ -9,38 +9,52 @@
 
 package alpha.rulp.ximpl.collection;
 
+import static alpha.rulp.lang.Constant.O_Nil;
+
 import java.util.ArrayList;
 
+import alpha.rulp.lang.IRArray;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 
-public class XRFactorAddAll extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorAddArrayToList extends AbsRFactorAdapter implements IRFactor {
 
-	public XRFactorAddAll(String factorName) {
+	public XRFactorAddArrayToList(String factorName) {
 		super(factorName);
 	}
 
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() < 3) {
+		if (args.size() != 3) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		ArrayList<IRObject> rstList = new ArrayList<>();
-		RulpUtil.addAll(rstList, RulpUtil.asList(interpreter.compute(frame, args.get(1))));
+		IRList l1 = RulpUtil.asList(interpreter.compute(frame, args.get(1)));
+		IRArray arr2 = RulpUtil.asArray(interpreter.compute(frame, args.get(2)));
 
-		IRIterator<? extends IRObject> it = args.listIterator(2);
-		while (it.hasNext()) {
-			RulpUtil.addAll(rstList, RulpUtil.asList(interpreter.compute(frame,it.next())));
+		if (arr2.isEmpty()) {
+			return l1;
+		}
+
+		ArrayList<IRObject> rstList = new ArrayList<>();
+		RulpUtil.addAll(rstList, l1);
+
+		int size = arr2.size();
+		for (int i = 0; i < size; ++i) {
+			IRObject obj = arr2.get(i);
+			if (obj == null) {
+				obj = O_Nil;
+			}
+			
+			rstList.add(obj);
 		}
 
 		return RulpFactory.createList(rstList);

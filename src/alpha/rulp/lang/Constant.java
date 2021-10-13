@@ -131,9 +131,11 @@ public interface Constant {
 
 	String F_ACCESS = "access";
 
-	String F_ADD = "add";
+	String F_ADD_ARRAY_TO_LIST = "add-array-to-list";
+	
+	String F_ADD_LIST_TO_ARRAY = "add-list-to-array";
 
-	String F_ADD_ALL = "add-all";
+	String F_ADD_LIST_TO_LIST = "add-list-to-list";
 
 	String F_ADD_SEARCH_FRAME = "add_search_frame";
 
@@ -199,6 +201,8 @@ public interface Constant {
 
 	String F_GET_OF_LIST = "get-of-list";
 
+	String F_HAS_MBR = "has-member";
+
 	String F_IF = "if";
 
 	String F_IN = "in";
@@ -247,8 +251,6 @@ public interface Constant {
 
 	String F_O_MBR = "::";
 
-	String F_HAS_MBR = "has-member";
-
 	String F_O_MOD = "%";
 
 	String F_O_NE = "!=";
@@ -288,6 +290,8 @@ public interface Constant {
 	String F_SAVE_TXT_FILE = "save-txt-file";
 
 	String F_SEARCH_FRAEM_OF = "search-frame-of";
+
+	String F_SETA = "seta";
 
 	String F_SETQ = "setq";
 

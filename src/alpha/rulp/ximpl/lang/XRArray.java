@@ -3,6 +3,7 @@ package alpha.rulp.ximpl.lang;
 import static alpha.rulp.lang.Constant.MAX_TOSTRING_LEN;
 import static alpha.rulp.lang.Constant.O_Nil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import alpha.rulp.lang.IRArray;
@@ -13,17 +14,13 @@ import alpha.rulp.utils.RulpUtil;
 
 public class XRArray extends AbsAtomObject implements IRArray {
 
-	static final XRArray emptyArray = new XRArray();
+//	static final XRArray emptyArray = new XRArray();
 
 	public static XRArray buildArray(List<? extends IRObject> elements) throws RException {
 
 		int size = elements.size();
-		if (size == 0) {
-			return emptyArray;
-		}
 
 		XRArray array = new XRArray();
-		array.elements = new IRObject[size];
 		array.elementCount = 0;
 		array.arrayDimension = 1;
 		array.arraySize = new int[1];
@@ -38,7 +35,7 @@ public class XRArray extends AbsAtomObject implements IRArray {
 				continue;
 			}
 
-			array.elements[i] = ei;
+			array.elements.add(ei);
 			array.elementCount++;
 
 			if (ei.getType() == RType.ARRAY) {
@@ -49,7 +46,7 @@ public class XRArray extends AbsAtomObject implements IRArray {
 				}
 
 				if (array.getElementCount() == 0) {
-					array.elements[i] = null;
+					array.elements.set(i, null);
 					array.elementCount--;
 					continue NEXT;
 				}
@@ -75,13 +72,13 @@ public class XRArray extends AbsAtomObject implements IRArray {
 		return array;
 	}
 
-	private int arrayDimension;
+	protected int arrayDimension;
 
-	private int arraySize[];
+	protected int arraySize[];
 
-	private int elementCount;
+	protected int elementCount;
 
-	private IRObject elements[];
+	protected List<IRObject> elements = new ArrayList<>();
 
 	public XRArray() {
 
@@ -89,17 +86,6 @@ public class XRArray extends AbsAtomObject implements IRArray {
 
 		arrayDimension = 0;
 		elementCount = 0;
-	}
-
-	@Override
-	public String asString() {
-
-		try {
-			return RulpUtil.toString(this);
-		} catch (RException e) {
-			e.printStackTrace();
-			return e.toString();
-		}
 	}
 
 	protected IRObject _get(IRObject arrayObj, int[] indexs, final int from) throws RException {
@@ -131,6 +117,34 @@ public class XRArray extends AbsAtomObject implements IRArray {
 	}
 
 	@Override
+	public void add(IRObject obj) throws RException {
+
+		if (obj.getType() == RType.ARRAY || arrayDimension != 1) {
+			throw new RException("Invalid element: " + obj);
+		}
+
+		arraySize[0]++;
+
+		if (obj == null || obj.getType() == RType.NIL) {
+			elements.add(null);
+		} else {
+			elements.add(obj);
+			elementCount++;
+		}
+	}
+
+	@Override
+	public String asString() {
+
+		try {
+			return RulpUtil.toString(this);
+		} catch (RException e) {
+			e.printStackTrace();
+			return e.toString();
+		}
+	}
+
+	@Override
 	public IRObject get(int... indexs) throws RException {
 
 		if (indexs.length == 1) {
@@ -140,7 +154,7 @@ public class XRArray extends AbsAtomObject implements IRArray {
 				throw new RException("Invalid index: " + index);
 			}
 
-			return index < elements.length ? elements[index] : null;
+			return index < elements.size() ? elements.get(index) : null;
 
 		} else {
 
@@ -167,6 +181,24 @@ public class XRArray extends AbsAtomObject implements IRArray {
 	@Override
 	public boolean isEmpty() throws RException {
 		return arrayDimension == 0 || size() == 0;
+	}
+
+	@Override
+	public void set(int index, IRObject obj) throws RException {
+
+		if (index < 0 || index >= size()) {
+			throw new RException("invalid index: " + index);
+		}
+
+		int on = elements.get(index) == null ? 0 : 1;
+		int nn = 0;
+
+		if (obj != null && obj.getType() != RType.NIL) {
+			nn = 1;
+		}
+
+		elements.set(index, nn == 1 ? obj : null);
+		elementCount += nn - on;
 	}
 
 	@Override

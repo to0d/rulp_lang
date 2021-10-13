@@ -11,19 +11,34 @@
 (defun size-of ((?arr array)) (return (size-of-array ?arr)))
 (defun size-of ((?arr array) (?dim int)) (return (size-of-array ?arr ?dim)))
 
+(defun is-empty ((?l list)) (return (equal (size-of-list ?l) 0)))
+(defun is-empty ((?arr array)) (return (equal (size-of-array ?arr) 0)))
+
+(defun to-list ((?l list)) (return ?l))
+(defun to-list  ((?arr array)) (return (add-array-to-list '() ?arr)))
+
+(defun to-array  ((?l list)) (return (add-list-to-array {} ?l)))
+
+(defun add ((?l list) ?e0) (return (add-list-to-list ?l '(?e0))))
+(defun add ((?l list) ?e0 ?e1) (return (add-list-to-list ?l '(?e0 ?e1))))
+(defun add ((?l list) ?e0 ?e1 ?e2) (return (add-list-to-list ?l '(?e0 ?e1 ?e2))))
+(defun add ((?a array) ?e0) (return (add-list-to-array ?a '(?e0))))
+(defun add ((?a array) ?e0 ?e1) (return (add-list-to-array ?a '(?e0 ?e1))))
+(defun add ((?a array) ?e0 ?e1 ?e2) (return (add-list-to-array ?a '(?e0 ?e1 ?e2))))
+
+(defun add-all ((?l1 list) (?l2 list)) (return (add-list-to-list ?l1 ?l2)))
+
+
+(defun get ((?l list) (?i int)) (return (get-of-list ?l ?i)))
+(defun get ((?arr array) (?i1 int)) (return (get-of-array ?arr ?i1)))
+(defun get ((?arr array) (?i1 int) (?i2 int)) (return (get-of-array ?arr ?i1 ?i2)))
+
 (defun length-of ((?l string)) (return (str-length ?l)))
 
 (defun equal (?l ?2) (return (equal_def ?l ?2)))
 (defun equal ((?l string) (?2 string)) (return (str-equal ?l ?2)))
 
 (defun cmp (?l ?2) (return (cmp_def ?l ?2)))
-
-(defun get ((?l list) (?i int)) (return (get-of-list ?l ?i)))
-(defun get ((?arr array) (?i1 int)) (return (get-of-array ?arr ?i1)))
-(defun get ((?arr array) (?i1 int) (?i2 int)) (return (get-of-array ?arr ?i1 ?i2)))
-
-(defun is-empty ((?l list)) (return (equal (size-of-list ?l) 0)))
-(defun to-list ((?l list)) (return ?l))
 
 (defmacro print-list (?list) 
     (loop for ?e in ?list do 

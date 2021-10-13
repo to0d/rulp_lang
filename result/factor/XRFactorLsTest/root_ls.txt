@@ -22,8 +22,9 @@ root::?user.home
 root::?user.name
 root::^
 root::access
-root::add
-root::add-all
+root::add-array-to-list
+root::add-list-to-array
+root::add-list-to-list
 root::add_search_frame
 root::alias
 root::and
@@ -107,6 +108,7 @@ root::root
 root::rulp-object-count
 root::save-txt-file
 root::search-frame-of
+root::seta
 root::setq
 root::size-of-array
 root::size-of-list

@@ -16,13 +16,13 @@ class XRFactorGetTest extends RulpTestBase {
 	void test_get_array_1_1() {
 
 		_setup();
-		_test_script("result/collection/XRFactorGetTest/test_get_array_1_1.rulp");
+		_test_script();
 	}
 
 	@Test
 	void test_get_array_2_1() {
 
 		_setup();
-		_test_script("result/collection/XRFactorGetTest/test_get_array_2_1.rulp");
+		_test_script();
 	}
 }
