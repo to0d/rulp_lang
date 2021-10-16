@@ -10,7 +10,6 @@
 package alpha.rulp.ximpl.runtime;
 
 import static alpha.rulp.lang.Constant.A_LAMBDA;
-import static alpha.rulp.lang.Constant.F_DO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,16 +59,10 @@ public class XRFactorLambda extends AbsRFactorAdapter implements IRFactor {
 		/*****************************************************/
 		IRExpr funBody = null;
 		if (args.size() == 3) {
-
 			funBody = RulpUtil.asExpression(args.get(2));
 
 		} else if (args.size() > 3) {
-
-			ArrayList<IRObject> newExpr = new ArrayList<>();
-			newExpr.add(RulpFactory.createAtom(F_DO));
-			RulpUtil.addAll(newExpr, args.listIterator(2));
-
-			funBody = RulpFactory.createExpression(newExpr);
+			funBody = RulpUtil.toDoExpr(args.listIterator(2));
 
 		} else {
 

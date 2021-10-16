@@ -1,10 +1,8 @@
 package alpha.rulp.ximpl.template;
 
-import static alpha.rulp.lang.Constant.F_DO;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.T_Atom;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -136,16 +134,10 @@ public class XRFactorDefTemplate extends AbsRFactorAdapter implements IRFactor {
 		/*****************************************************/
 		IRExpr templateBody = null;
 		if (args.size() == 4) {
-
 			templateBody = RulpUtil.asExpression(args.get(3));
 
 		} else if (args.size() > 4) {
-
-			ArrayList<IRObject> newExpr = new ArrayList<>();
-			newExpr.add(RulpFactory.createAtom(F_DO));
-			RulpUtil.addAll(newExpr, args.listIterator(3));
-
-			templateBody = RulpFactory.createExpression(newExpr);
+			templateBody = RulpUtil.toDoExpr(args.listIterator(3));
 
 		} else {
 			throw new RException("Invalid args size: " + args.size());

@@ -11,6 +11,7 @@ package alpha.rulp.utils;
 
 import static alpha.rulp.lang.Constant.A_NAMESPACE;
 import static alpha.rulp.lang.Constant.A_NIL;
+import static alpha.rulp.lang.Constant.F_DO;
 import static alpha.rulp.lang.Constant.O_New;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.S_QUESTION;
@@ -21,6 +22,7 @@ import static alpha.rulp.lang.Constant.T_Instance;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -380,13 +382,6 @@ public class RulpUtil {
 
 	public static void addAll(Collection<IRObject> l1, IRList l2) throws RException {
 		addAll(l1, l2.iterator());
-	}
-
-	public static void addAll(Collection<IRObject> l1, IRList l2, int begin, int end) throws RException {
-
-		for (int i = begin; i < end; ++i) {
-			l1.add(l2.get(i));
-		}
 	}
 
 	public static void addFactor(IRFrame frame, String factorName, IRFactorBody factorBody) throws RException {
@@ -1203,16 +1198,6 @@ public class RulpUtil {
 		return valAtom;
 	}
 
-//	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
-//
-//		IRObject nsObj = frame.getObject(A_USING_NS);
-//		if (nsObj == null) {
-//			return null;
-//		}
-//
-//		return RulpUtil.asSubject(nsObj);
-//	}
-
 	public static void incRef(IRObject obj) throws RException {
 
 		if (obj == null) {
@@ -1229,6 +1214,16 @@ public class RulpUtil {
 	public static boolean isAnonymousVar(String var) {
 		return var.equals(S_QUESTION);
 	}
+
+//	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
+//
+//		IRObject nsObj = frame.getObject(A_USING_NS);
+//		if (nsObj == null) {
+//			return null;
+//		}
+//
+//		return RulpUtil.asSubject(nsObj);
+//	}
 
 	public static boolean isAtom(IRObject obj) {
 		return obj.getType() == RType.ATOM;
@@ -1454,6 +1449,20 @@ public class RulpUtil {
 		subject.setMember(name, mbr);
 	}
 
+	public static List<IRObject> subList(IRList l1, int begin, int end) throws RException {
+
+		if (begin >= end) {
+			return Collections.emptyList();
+		}
+
+		ArrayList<IRObject> list = new ArrayList<>();
+		for (int i = begin; i < end; ++i) {
+			list.add(l1.get(i));
+		}
+
+		return list;
+	}
+
 	public static List<IRObject> toArray(IRList list) throws RException {
 
 		ArrayList<IRObject> arr = new ArrayList<>();
@@ -1465,20 +1474,20 @@ public class RulpUtil {
 		return arr;
 	}
 
-	public static <T> List<T> toArray2(T[] objs) {
+	public static List<Integer> toArray2(int[] objs) {
 
-		ArrayList<T> list = new ArrayList<>();
-		for (T o : objs) {
+		ArrayList<Integer> list = new ArrayList<>();
+		for (Integer o : objs) {
 			list.add(o);
 		}
 
 		return list;
 	}
 
-	public static List<Integer> toArray2(int[] objs) {
+	public static <T> List<T> toArray2(T[] objs) {
 
-		ArrayList<Integer> list = new ArrayList<>();
-		for (Integer o : objs) {
+		ArrayList<T> list = new ArrayList<>();
+		for (T o : objs) {
 			list.add(o);
 		}
 
@@ -1496,6 +1505,30 @@ public class RulpUtil {
 		default:
 			throw new RException(String.format("Not support type: %s", a.toString()));
 		}
+	}
+
+	public static IRExpr toDoExpr(IRIterator<? extends IRObject> it) throws RException {
+
+		ArrayList<IRObject> newExpr = new ArrayList<>();
+		newExpr.add(RulpFactory.createAtom(F_DO));
+
+		while (it.hasNext()) {
+			newExpr.add(RulpUtil.asExpression(it.next()));
+		}
+
+		return RulpFactory.createExpression(newExpr);
+	}
+
+	public static IRExpr toDoExpr(List<? extends IRObject> exprList) throws RException {
+
+		ArrayList<IRObject> newExpr = new ArrayList<>();
+		newExpr.add(RulpFactory.createAtom(F_DO));
+
+		for (IRObject expr : exprList) {
+			newExpr.add(RulpUtil.asExpression(expr));
+		}
+
+		return RulpFactory.createExpression(newExpr);
 	}
 
 	public static IRMap toImplMap(IRInstance instance) throws RException {

@@ -9,9 +9,6 @@
 
 package alpha.rulp.ximpl.runtime;
 
-import static alpha.rulp.lang.Constant.F_DO;
-
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -135,16 +132,10 @@ public class XRFactorDefun extends AbsRFactorAdapter implements IRFactor {
 		/*****************************************************/
 		IRExpr funBody = null;
 		if (args.size() == 4) {
-
 			funBody = RulpUtil.asExpression(args.get(3));
 
 		} else if (args.size() > 4) {
-
-			ArrayList<IRObject> newExpr = new ArrayList<>();
-			newExpr.add(RulpFactory.createAtom(F_DO));
-			RulpUtil.addAll(newExpr, args.listIterator(3));
-
-			funBody = RulpFactory.createExpression(newExpr);
+			funBody = RulpUtil.toDoExpr(args.listIterator(3));
 
 		} else {
 			throw new RException("Invalid args size: " + args.size());

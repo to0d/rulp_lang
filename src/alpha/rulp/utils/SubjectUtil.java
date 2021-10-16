@@ -5,9 +5,7 @@ import static alpha.rulp.lang.Constant.A_FINAL;
 import static alpha.rulp.lang.Constant.A_PRIVATE;
 import static alpha.rulp.lang.Constant.A_PUBLIC;
 import static alpha.rulp.lang.Constant.A_STATIC;
-import static alpha.rulp.lang.Constant.F_DO;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -166,12 +164,7 @@ public class SubjectUtil {
 			funBody = RulpUtil.asExpression(mbrExpr.get(3));
 
 		} else {
-
-			ArrayList<IRObject> newExpr = new ArrayList<>();
-			newExpr.add(RulpFactory.createAtom(F_DO));
-			RulpUtil.addAll(newExpr, mbrExpr, 3, bodyEndIndex);
-
-			funBody = RulpFactory.createExpression(newExpr);
+			funBody = RulpUtil.toDoExpr(RulpUtil.subList(mbrExpr, 3, bodyEndIndex));
 		}
 
 		/*****************************************************/
