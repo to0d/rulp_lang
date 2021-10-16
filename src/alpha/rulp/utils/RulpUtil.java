@@ -1193,16 +1193,6 @@ public class RulpUtil {
 		}
 	}
 
-//	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
-//
-//		IRObject nsObj = frame.getObject(A_USING_NS);
-//		if (nsObj == null) {
-//			return null;
-//		}
-//
-//		return RulpUtil.asSubject(nsObj);
-//	}
-
 	public static IRAtom getObjectType(IRObject valObj) throws RException {
 
 		IRAtom valAtom = RType.toObject(valObj.getType());
@@ -1212,6 +1202,16 @@ public class RulpUtil {
 
 		return valAtom;
 	}
+
+//	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
+//
+//		IRObject nsObj = frame.getObject(A_USING_NS);
+//		if (nsObj == null) {
+//			return null;
+//		}
+//
+//		return RulpUtil.asSubject(nsObj);
+//	}
 
 	public static void incRef(IRObject obj) throws RException {
 
@@ -1454,14 +1454,35 @@ public class RulpUtil {
 		subject.setMember(name, mbr);
 	}
 
-	public static ArrayList<IRObject> toArray(IRList list) throws RException {
+	public static List<IRObject> toArray(IRList list) throws RException {
 
 		ArrayList<IRObject> arr = new ArrayList<>();
 		IRIterator<? extends IRObject> iter = list.iterator();
 		while (iter.hasNext()) {
 			arr.add(iter.next());
 		}
+
 		return arr;
+	}
+
+	public static <T> List<T> toArray2(T[] objs) {
+
+		ArrayList<T> list = new ArrayList<>();
+		for (T o : objs) {
+			list.add(o);
+		}
+
+		return list;
+	}
+
+	public static List<Integer> toArray2(int[] objs) {
+
+		ArrayList<Integer> list = new ArrayList<>();
+		for (Integer o : objs) {
+			list.add(o);
+		}
+
+		return list;
 	}
 
 	public static boolean toBoolean(IRObject a) throws RException {
