@@ -1,6 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.F_DO;
+import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_MAKE_CPS;
 import static alpha.rulp.lang.Constant.F_O_ADD;
@@ -155,7 +155,7 @@ public class CPSUtils {
 		IRIterator<? extends IRObject> it = null;
 
 		switch (RulpUtil.asAtom(e0).getName()) {
-		case F_DO: {
+		case A_DO: {
 			it = expr.listIterator(1);
 			while (it.hasNext()) {
 				IRObject e = it.next();
@@ -266,7 +266,7 @@ public class CPSUtils {
 		}
 
 		switch (RulpUtil.asAtom(e0).getName()) {
-		case F_DO: {
+		case A_DO: {
 
 			ArrayList<IRObject> newExpr = new ArrayList<>();
 			newExpr.add(e0);

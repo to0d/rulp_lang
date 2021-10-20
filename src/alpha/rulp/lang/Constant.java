@@ -27,6 +27,8 @@ public interface Constant {
 
 	String A_DEFAULT = "default";
 
+	String A_DO = "do";
+
 	String A_DOUBLE = "double";
 
 	String A_ERROR = "error";
@@ -130,9 +132,9 @@ public interface Constant {
 	String C_HANDLE_ANY = "_$handle$any$_";
 
 	String F_ACCESS = "access";
-
-	String F_ADD_ARRAY_TO_LIST = "add-array-to-list";
 	
+	String F_ADD_ARRAY_TO_LIST = "add-array-to-list";
+
 	String F_ADD_LIST_TO_ARRAY = "add-list-to-array";
 
 	String F_ADD_LIST_TO_LIST = "add-list-to-list";
@@ -172,8 +174,6 @@ public interface Constant {
 	String F_DEFVAR = "defvar";
 
 	String F_DELETE = "delete";
-
-	String F_DO = "do";
 
 	String F_DO_Parallel = "do-p";
 

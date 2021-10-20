@@ -9,9 +9,9 @@
 
 package alpha.rulp.utils;
 
+import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.A_NAMESPACE;
 import static alpha.rulp.lang.Constant.A_NIL;
-import static alpha.rulp.lang.Constant.F_DO;
 import static alpha.rulp.lang.Constant.O_New;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.S_QUESTION;
@@ -1510,7 +1510,7 @@ public class RulpUtil {
 	public static IRExpr toDoExpr(IRIterator<? extends IRObject> it) throws RException {
 
 		ArrayList<IRObject> newExpr = new ArrayList<>();
-		newExpr.add(RulpFactory.createAtom(F_DO));
+		newExpr.add(RulpFactory.createAtom(A_DO));
 
 		while (it.hasNext()) {
 			newExpr.add(RulpUtil.asExpression(it.next()));
@@ -1522,7 +1522,7 @@ public class RulpUtil {
 	public static IRExpr toDoExpr(List<? extends IRObject> exprList) throws RException {
 
 		ArrayList<IRObject> newExpr = new ArrayList<>();
-		newExpr.add(RulpFactory.createAtom(F_DO));
+		newExpr.add(RulpFactory.createAtom(A_DO));
 
 		for (IRObject expr : exprList) {
 			newExpr.add(RulpUtil.asExpression(expr));

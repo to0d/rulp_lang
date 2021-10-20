@@ -9,8 +9,8 @@
 
 package alpha.rulp.ximpl.factor;
 
+import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.A_FROM;
-import static alpha.rulp.lang.Constant.F_DO;
 import static alpha.rulp.lang.Constant.F_FOR;
 import static alpha.rulp.lang.Constant.F_IN;
 import static alpha.rulp.lang.Constant.F_TO;
@@ -171,14 +171,14 @@ public class XRFactorLoop extends AbsRFactorAdapter implements IRFactor {
 				if (args.size() >= 7 && RulpUtil.isAtom(args.get(2))) {
 
 					// (loop for x in '(1 2 3) do (print x))
-					if (RulpUtil.isAtom(args.get(3), F_IN) && RulpUtil.isAtom(args.get(5), F_DO)) {
+					if (RulpUtil.isAtom(args.get(3), F_IN) && RulpUtil.isAtom(args.get(5), A_DO)) {
 						loop1(args, interpreter, loopFrame);
 						return O_Nil;
 					}
 
 					// (loop for x from 1 to 3 do (print x))
 					if (args.size() >= 9 && RulpUtil.isAtom(args.get(3), A_FROM) && RulpUtil.isAtom(args.get(5), F_TO)
-							&& RulpUtil.isAtom(args.get(7), F_DO)) {
+							&& RulpUtil.isAtom(args.get(7), A_DO)) {
 						loop2(args, interpreter, loopFrame);
 						return O_Nil;
 					}

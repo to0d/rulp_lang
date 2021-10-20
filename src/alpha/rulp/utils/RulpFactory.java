@@ -676,7 +676,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorReturn(F_RETURN));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorContinue(F_CONTINUE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorBreak(F_BREAK));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorDo(F_DO));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorDo(A_DO));
 
 		// Exception
 		RulpUtil.addFrameObject(rootFrame, new XRFactorError(F_E_ERROR));
