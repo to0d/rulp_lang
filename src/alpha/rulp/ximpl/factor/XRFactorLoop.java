@@ -98,8 +98,10 @@ public class XRFactorLoop extends AbsRFactorAdapter implements IRFactor {
 
 			} catch (RBreak r) {
 				break OUT_LOOP;
+
 			} catch (RContinue c) {
 				continue OUT_LOOP;
+
 			} finally {
 				loopDoFrame.release();
 				RulpUtil.decRef(loopDoFrame);
