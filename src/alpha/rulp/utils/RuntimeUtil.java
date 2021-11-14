@@ -745,6 +745,10 @@ public final class RuntimeUtil {
 		return varSupportOpCPS.getBoolValue();
 	}
 
+	public static boolean isSupportOpStable() throws RException {
+		return varSupportOpStable.getBoolValue();
+	}
+
 //	public static boolean _findCallee(IRObject obj, Set<String> calleeNames, IRFrame frame, boolean tailCall)
 //			throws RException {
 //
@@ -755,10 +759,6 @@ public final class RuntimeUtil {
 //
 //		return true;
 //	}
-
-	public static boolean isSupportOpStable() throws RException {
-		return varSupportOpStable.getBoolValue();
-	}
 
 	public static IRFrameEntry lookupFrameEntry(IRAtom atom, IRFrame frame) throws RException {
 
@@ -896,6 +896,66 @@ public final class RuntimeUtil {
 		}
 
 		return instance;
+	}
+
+	public static IRObject rebuild(IRObject obj, Map<String, IRObject> replaceMap) throws RException {
+
+		if (obj == null) {
+			return obj;
+		}
+
+		switch (obj.getType()) {
+		case ATOM: {
+			IRAtom atom = (IRAtom) obj;
+			IRObject var = replaceMap.get(atom.getName());
+			return var == null ? obj : var;
+		}
+
+		case EXPR:
+		case LIST:
+
+			ArrayList<IRObject> newList = new ArrayList<>();
+			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
+			while (it.hasNext()) {
+				newList.add(rebuild(it.next(), replaceMap));
+			}
+
+			if (obj.getType() == RType.LIST) {
+				return RulpFactory.createList(newList);
+			}
+
+			IRExpr expr = (IRExpr) obj;
+
+			return expr.isEarly() ? RulpFactory.createExpressionEarly(newList) : RulpFactory.createExpression(newList);
+
+		case MEMBER:
+
+			IRMember mbr = (IRMember) obj;
+			if (mbr.getValue() == null) {
+
+				boolean update = false;
+
+				IRObject sub = mbr.getSubject();
+				String mbrName = mbr.getName();
+
+				if (sub.getType() == RType.ATOM) {
+					IRObject var = replaceMap.get(((IRAtom) sub).getName());
+					if (var != null) {
+						sub = var;
+						update = true;
+					}
+				}
+
+				if (update) {
+					return RulpFactory.createMember(sub, mbrName, null);
+				}
+			}
+
+			return obj;
+
+		default:
+			return obj;
+		}
 	}
 
 	public static IRList rebuildFuncExpr(IRFunction fun, IRList expr, IRInterpreter interpreter, IRFrame frame)
