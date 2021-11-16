@@ -1074,11 +1074,11 @@ public class RulpUtil {
 			return;
 		}
 
-//		if (RulpUtil.toString(obj).equals("&x")) {
-//			System.out.println();
-//		}
-
 		obj.decRef();
+	}
+
+	public static boolean isNil(IRObject a) {
+		return a == null || a.getType() == RType.NIL;
 	}
 
 	public static boolean equal(IRObject a, IRObject b) throws RException {
@@ -1087,11 +1087,11 @@ public class RulpUtil {
 			return true;
 		}
 
-		if (a == null || a == O_Nil) {
-			return b == null || b == O_Nil;
+		if (isNil(a)) {
+			return isNil(b);
 		}
 
-		if (b == null || b == O_Nil) {
+		if (isNil(b)) {
 			return false;
 		}
 
