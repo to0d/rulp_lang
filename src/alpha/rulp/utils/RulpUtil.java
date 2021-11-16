@@ -1087,41 +1087,34 @@ public class RulpUtil {
 			return true;
 		}
 
-		if (a == null) {
-			return b == O_Nil;
+		if (a == null || a == O_Nil) {
+			return b == null || b == O_Nil;
 		}
 
-		if (b == null) {
-			return a == O_Nil;
+		if (b == null || b == O_Nil) {
+			return false;
 		}
 
 		if (a.getType() != b.getType()) {
 			return false;
 		}
 
-		boolean rc = false;
-
 		switch (a.getType()) {
 		case ATOM:
 		case STRING:
-			rc = a.asString().equals(b.asString());
-			break;
+			return a.asString().equals(b.asString());
 
 		case BOOL:
-			rc = ((IRBoolean) a).asBoolean() == ((IRBoolean) b).asBoolean();
-			break;
+			return ((IRBoolean) a).asBoolean() == ((IRBoolean) b).asBoolean();
 
 		case FLOAT:
-			rc = ((IRFloat) a).asFloat() == ((IRFloat) b).asFloat();
-			break;
+			return ((IRFloat) a).asFloat() == ((IRFloat) b).asFloat();
 
 		case INT:
-			rc = ((IRInteger) a).asInteger() == ((IRInteger) b).asInteger();
-			break;
+			return ((IRInteger) a).asInteger() == ((IRInteger) b).asInteger();
 
 		case LONG:
-			rc = ((IRLong) a).asLong() == ((IRLong) b).asLong();
-			break;
+			return ((IRLong) a).asLong() == ((IRLong) b).asLong();
 
 		case NIL:
 			return true;
@@ -1150,8 +1143,6 @@ public class RulpUtil {
 		default:
 			return false;
 		}
-
-		return rc;
 	}
 
 	public static void expectFactorParameterType(List<IRObject> args, RType type) throws RException {
