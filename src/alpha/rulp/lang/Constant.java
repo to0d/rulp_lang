@@ -132,7 +132,7 @@ public interface Constant {
 	String C_HANDLE_ANY = "_$handle$any$_";
 
 	String F_ACCESS = "access";
-	
+
 	String F_ADD_ARRAY_TO_LIST = "add-array-to-list";
 
 	String F_ADD_LIST_TO_ARRAY = "add-list-to-array";
@@ -387,17 +387,27 @@ public interface Constant {
 
 	IRAtom O_Default = RulpFactory.createAtom(A_DEFAULT);
 
+	IRAtom O_EQ = RulpFactory.createAtom(F_O_EQ);
+
 	IRBoolean O_False = RulpFactory.createBoolean(false);
 
 	IRAtom O_Final = RulpFactory.createAtom(A_FINAL);
 
 	IRAtom O_From = RulpFactory.createAtom(A_FROM);
 
+	IRAtom O_GE = RulpFactory.createAtom(F_O_GE);
+
+	IRAtom O_GT = RulpFactory.createAtom(F_O_GT);
+
+	IRAtom O_LE = RulpFactory.createAtom(F_O_LE);
+
+	IRAtom O_LT = RulpFactory.createAtom(F_O_LT);
+
 	IRAtom O_Nan = RulpFactory.createAtom(A_NAN);
 
-	IRAtom O_New = RulpFactory.createAtom(F_NEW);
+	IRAtom O_NE = RulpFactory.createAtom(F_O_NE);
 
-//	IRClass O_NoClass = RulpFactory.createNoClass();
+	IRAtom O_New = RulpFactory.createAtom(F_NEW);
 
 	IRAtom O_Nil = RulpFactory.createNil();
 

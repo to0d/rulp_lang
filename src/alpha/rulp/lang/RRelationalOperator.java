@@ -9,21 +9,21 @@
 
 package alpha.rulp.lang;
 
-import static alpha.rulp.lang.Constant.F_O_EQ;
-import static alpha.rulp.lang.Constant.F_O_GE;
-import static alpha.rulp.lang.Constant.F_O_GT;
-import static alpha.rulp.lang.Constant.F_O_LE;
-import static alpha.rulp.lang.Constant.F_O_LT;
-import static alpha.rulp.lang.Constant.F_O_NE;
+import static alpha.rulp.lang.Constant.O_EQ;
+import static alpha.rulp.lang.Constant.O_GE;
+import static alpha.rulp.lang.Constant.O_GT;
+import static alpha.rulp.lang.Constant.O_LE;
+import static alpha.rulp.lang.Constant.O_LT;
+import static alpha.rulp.lang.Constant.O_NE;
 
 public enum RRelationalOperator {
 
-	EQ, // >, Greater than
-	GE, // >=, Greater than or equal
-	GT, // =, Equal
-	LE, // !=, Not equal
-	LT, // <, Less than
-	NE; // <=, Less than or equal
+	EQ(O_EQ), // >, Greater than
+	GE(O_GE), // >=, Greater than or equal
+	GT(O_GT), // =, Equal
+	LE(O_LE), // !=, Not equal
+	LT(O_LT), // <, Less than
+	NE(O_NE);
 
 	public static RRelationalOperator toOpposite(RRelationalOperator op) {
 
@@ -51,29 +51,16 @@ public enum RRelationalOperator {
 		}
 	}
 
-	public static String toSymbolString(RRelationalOperator op) {
+	private IRAtom atom;
 
-		switch (op) {
-		case EQ:
-			return F_O_EQ;
-
-		case GE:
-			return F_O_GE;
-
-		case GT:
-			return F_O_GT;
-
-		case LE:
-			return F_O_LE;
-
-		case LT:
-			return F_O_LT;
-
-		case NE:
-			return F_O_NE;
-
-		default:
-			return null;
-		}
+	private RRelationalOperator(IRAtom atom) {
+		this.atom = atom;
 	}
+
+	// <=, Less than or equal
+
+	public IRAtom getAtom() {
+		return atom;
+	}
+
 }
