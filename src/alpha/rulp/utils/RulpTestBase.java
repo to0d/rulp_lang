@@ -113,6 +113,10 @@ public class RulpTestBase {
 		}
 	}
 
+	protected void _gInfo() {
+		_gInfo(getCachePath() + ".ginfo.txt");
+	}
+
 	protected void _setup() {
 
 		_interpreter = null;

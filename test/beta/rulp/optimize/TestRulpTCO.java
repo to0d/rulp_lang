@@ -104,7 +104,7 @@ public class TestRulpTCO extends RulpTestBase {
 		_test("(fact 4)", "24");
 		assertEquals(60, CPSUtils.getCPSCount());
 
-		_gInfo("result/optimize/TestRulpTCO/test_tco_fact.txt");
+		_gInfo();
 	}
 
 	@Test
@@ -142,7 +142,7 @@ public class TestRulpTCO extends RulpTestBase {
 		_test("(fun1a 1000)", "500500");
 		assertEquals(6636, CPSUtils.getCPSCount());
 
-		_gInfo("result/optimize/TestRulpTCO/test_tco_fun1a.txt");
+		_gInfo();
 	}
 
 	@Test
@@ -164,7 +164,7 @@ public class TestRulpTCO extends RulpTestBase {
 		_test("(fun1b 1000)", "500500");
 		assertEquals(6636, CPSUtils.getCPSCount());
 
-		_gInfo("result/optimize/TestRulpTCO/test_tco_fun1b.txt");
+		_gInfo();
 	}
 
 	@Test
@@ -208,6 +208,7 @@ public class TestRulpTCO extends RulpTestBase {
 		_test("(cc (fun2 1001))", "45866");
 
 		_gInfo("result/optimize/TestRulpTCO/test_tco_fun2_by_cc.txt");
+		
 	}
 
 	@Test
