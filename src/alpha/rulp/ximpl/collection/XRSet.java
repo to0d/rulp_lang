@@ -161,7 +161,7 @@ public class XRSet extends AbsRInstance implements IRCollection {
 				return true;
 			}
 		}, RAccessType.PRIVATE);
-		
+
 		RulpUtil.setMember(setClass, F_MBR_SET_TO_LIST, new AbsRFactorAdapter(F_MBR_SET_TO_LIST) {
 
 			@Override

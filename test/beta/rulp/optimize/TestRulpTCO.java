@@ -252,6 +252,7 @@ public class TestRulpTCO extends RulpTestBase {
 	public void test_tco_str_1() {
 
 		_setup();
+		_test("(setq ?op-cps true)");
 		_test("(defun fun (?s) (if (> (length-of ?s) 10)(return ?s)) (return (fun (+ \"a\" ?s))))", "fun");
 		_test("(fun \"b\")", "\"aaaaaaaaaab\"");
 		assertEquals(0, CPSUtils.getCPSCount());

@@ -126,26 +126,26 @@ public class TestClass extends RulpTestBase {
 		_test_script("result/rclass/TestClass/test_class_9_delete_1.rulp");
 		_gInfo("result/rclass/TestClass/test_class_9_delete_1_ginfo.txt");
 	}
-	
+
 	@Test
 	public void test_class_9_delete_2() {
 		_setup();
 		_test_script("result/rclass/TestClass/test_class_9_delete_2.rulp");
 		_gInfo("result/rclass/TestClass/test_class_9_delete_2_ginfo.txt");
 	}
-	
+
 	@Test
 	public void test_class_a_extend_body() {
 		_setup();
 		_test_script("result/rclass/TestClass/test_class_a_extend_body.rulp");
 	}
-	
+
 	@Test
 	public void test_class_b_bad_para() {
 		_setup();
 		_test_script("result/rclass/TestClass/test_class_b_bad_para.rulp");
 	}
-	
+
 	@Test
 	public void test_class_c_mbr() {
 		_setup();

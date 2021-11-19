@@ -8,7 +8,7 @@ class XRFactorSleepTest extends RulpTestBase {
 
 	@Test
 	void test() {
-		
+
 		_setup();
 		_test("(defvar t1 (sys-time))", "&t1");
 		_test("(sleep 100)", "nil");

@@ -19,7 +19,7 @@ public interface IRMember extends IRObject {
 	public void setAccessType(RAccessType accessType) throws RException;
 
 	public void setFinal(boolean bFinal) throws RException;
-	
+
 	public void setInherit(boolean bInherit) throws RException;
 
 	public void setStatic(boolean bStatic) throws RException;

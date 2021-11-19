@@ -71,9 +71,9 @@ public class XRFactorTry extends AbsRFactorAdapter implements IRFactor {
 		IRFrame tryFrame = RulpFactory.createFrame(frame, "TRY");
 
 		try {
-			
+
 			RulpUtil.incRef(tryFrame);
-			
+
 			IRIterator<? extends IRObject> iter = args.listIterator(2);
 			while (iter.hasNext()) {
 				defineHandleCase(tryFrame, RulpUtil.asExpression(iter.next()));

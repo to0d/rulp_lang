@@ -8,7 +8,7 @@ class XRFactorToNoNamedListTest extends RulpTestBase {
 
 	@Test
 	void test() {
-		
+
 		_setup();
 		_test("(to-nonamed-list '(b c))", "'(b c)");
 		_test("(to-nonamed-list n1:'(b c))", "'(b c)");

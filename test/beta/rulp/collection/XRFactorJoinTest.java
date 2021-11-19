@@ -14,7 +14,7 @@ class XRFactorJoinTest extends RulpTestBase {
 
 	@Test
 	void test_list() {
-		_test("(join '('(a b c) '(x y z)) '('(x y z)))", "'()"); 
+		_test("(join '('(a b c) '(x y z)) '('(x y z)))", "'()");
 	}
 
 }

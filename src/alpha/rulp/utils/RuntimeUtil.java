@@ -1,7 +1,7 @@
 package alpha.rulp.utils;
 
 import static alpha.rulp.lang.Constant.A_LOCAL;
-import static alpha.rulp.lang.Constant.A_NOCLASS;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.A_OP_CPS;
 import static alpha.rulp.lang.Constant.A_OP_STABLE;
 import static alpha.rulp.lang.Constant.A_PARENT;
@@ -741,13 +741,14 @@ public final class RuntimeUtil {
 		return false;
 	}
 
-	public static boolean isPureFactorName(String name) {
+	public static boolean isPureOperatorName(String name) {
 		switch (name) {
 		case F_O_BY:
 		case F_O_ADD:
 		case F_O_DIV:
 		case F_O_SUB:
 		case F_O_POWER:
+//		case F_STR_LENGTH:
 			return true;
 		default:
 			return false;

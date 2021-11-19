@@ -98,7 +98,7 @@ public class XRSubjectFrame extends XRFrame implements IRFrame {
 			}
 
 			setParentFrame(_frame.getParentFrame());
-		
+
 		});
 
 		super.setParentFrame(parentFrame);

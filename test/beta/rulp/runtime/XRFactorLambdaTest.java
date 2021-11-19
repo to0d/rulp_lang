@@ -53,7 +53,6 @@ class XRFactorLambdaTest extends RulpTestBase {
 		_test("(setq ?f nil)", "&?f");
 		_gInfo("result/runtime/XRFactorLambdaTest/test_5_ginfo_b.txt");
 	}
-	
 
 	@Test
 	void test_6_extend_body() {

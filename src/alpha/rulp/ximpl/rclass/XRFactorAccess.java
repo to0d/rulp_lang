@@ -38,7 +38,7 @@ public class XRFactorAccess extends AbsRFactorAdapter implements IRFactor {
 		case MEMBER:
 			obj = RuntimeUtil.getActualMember((IRMember) obj, interpreter, frame);
 			break;
-		
+
 		default:
 		}
 

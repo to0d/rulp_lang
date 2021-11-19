@@ -235,7 +235,7 @@ public class CPSUtils {
 				}
 
 			case FACTOR:
-				return RuntimeUtil.isPureFactorName(RulpUtil.asFactor(op).getName());
+				return RuntimeUtil.isPureOperatorName(RulpUtil.asFactor(op).getName());
 
 			case FUNC:
 				return true;

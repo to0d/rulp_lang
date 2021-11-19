@@ -65,7 +65,7 @@ public class XRFactorStrMatch extends AbsRFactorAdapter implements IRFactor {
 					if (entry.getObject().getType() != RType.VAR) {
 						throw new RException("not var: " + entry.getObject());
 					}
-					
+
 					outVars.add(RulpUtil.asVar(entry.getObject()));
 
 				} else {

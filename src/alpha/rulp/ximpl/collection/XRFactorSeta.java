@@ -39,7 +39,7 @@ public class XRFactorSeta extends AbsRFactorAdapter implements IRFactor {
 		IRArray arr = RulpUtil.asArray(interpreter.compute(frame, args.get(1)));
 		int index = RulpUtil.asInteger(interpreter.compute(frame, args.get(2))).asInteger();
 		IRObject obj = interpreter.compute(frame, args.get(3));
-		
+
 		arr.set(index, obj);
 
 		return arr;

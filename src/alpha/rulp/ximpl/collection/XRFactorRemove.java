@@ -71,7 +71,7 @@ public class XRFactorRemove extends AbsRFactorAdapter implements IRFactor {
 			if (uniqList == null) {
 				continue;
 			}
-			
+
 			rstList.removeAll(uniqList);
 		}
 

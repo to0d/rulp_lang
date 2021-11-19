@@ -53,7 +53,7 @@ public class XRFactorAddArrayToList extends AbsRFactorAdapter implements IRFacto
 			if (obj == null) {
 				obj = O_Nil;
 			}
-			
+
 			rstList.add(obj);
 		}
 

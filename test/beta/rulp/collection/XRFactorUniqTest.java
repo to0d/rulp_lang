@@ -13,7 +13,7 @@ class XRFactorUniqTest extends RulpTestBase {
 
 		_test("(uniq '(5 4 3 2 1))", "'(5 4 3 2 1)");
 		_test("(uniq '(5 4 3 2 1) (lambda (?v) (return (% ?v 3))))", "'(5 4 3)");
-	
+
 		_test("(uniq '('(a b c) '(x y z)))", "'('(a b c) '(x y z))");
 	}
 

@@ -216,7 +216,7 @@ public enum RType {
 
 		case A_ARRAY:
 			return ARRAY;
-			
+
 		case A_TEMPLATE:
 			return TEMPLATE;
 

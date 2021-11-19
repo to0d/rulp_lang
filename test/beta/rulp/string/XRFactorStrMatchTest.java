@@ -25,7 +25,7 @@ class XRFactorStrMatchTest extends RulpTestBase {
 		_test("v1", "\"abc\"");
 		_test("v2", "\"xyz\"");
 	}
-	
+
 	@Test
 	public void test_str_match_3() {
 
