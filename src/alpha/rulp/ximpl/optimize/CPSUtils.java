@@ -235,17 +235,7 @@ public class CPSUtils {
 				}
 
 			case FACTOR:
-
-				String factorName = RulpUtil.asFactor(op).getName();
-				switch (factorName) {
-				case F_O_BY:
-				case F_O_ADD:
-				case F_O_DIV:
-				case F_O_SUB:
-				case F_O_POWER:
-					return true;
-				default:
-				}
+				return RuntimeUtil.isPureFactorName(RulpUtil.asFactor(op).getName());
 
 			case FUNC:
 				return true;

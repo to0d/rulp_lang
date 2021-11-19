@@ -741,6 +741,19 @@ public final class RuntimeUtil {
 		return false;
 	}
 
+	public static boolean isPureFactorName(String name) {
+		switch (name) {
+		case F_O_BY:
+		case F_O_ADD:
+		case F_O_DIV:
+		case F_O_SUB:
+		case F_O_POWER:
+			return true;
+		default:
+			return false;
+		}
+	}
+
 	public static boolean isSupportOpCPS() throws RException {
 		return varSupportOpCPS.getBoolValue();
 	}

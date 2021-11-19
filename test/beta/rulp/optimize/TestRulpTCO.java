@@ -208,7 +208,7 @@ public class TestRulpTCO extends RulpTestBase {
 		_test("(cc (fun2 1001))", "45866");
 
 		_gInfo("result/optimize/TestRulpTCO/test_tco_fun2_by_cc.txt");
-		
+
 	}
 
 	@Test
@@ -246,5 +246,15 @@ public class TestRulpTCO extends RulpTestBase {
 		_test("(fun4a 3)", "6");
 		_test("(fun4a 100)", "5050");
 		_test("(fun4a 1000)", "24");
+	}
+
+	@Test
+	public void test_tco_str_1() {
+
+		_setup();
+		_test("(defun fun (?s) (if (> (length-of ?s) 10)(return ?s)) (return (fun (+ \"a\" ?s))))", "fun");
+		_test("(fun \"b\")", "\"aaaaaaaaaab\"");
+		assertEquals(0, CPSUtils.getCPSCount());
+		_gInfo();
 	}
 }
