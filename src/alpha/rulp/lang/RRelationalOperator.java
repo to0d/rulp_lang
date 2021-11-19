@@ -18,12 +18,12 @@ import static alpha.rulp.lang.Constant.O_NE;
 
 public enum RRelationalOperator {
 
-	EQ(O_EQ), // >, Greater than
+	EQ(O_EQ), // =, Equal
 	GE(O_GE), // >=, Greater than or equal
-	GT(O_GT), // =, Equal
-	LE(O_LE), // !=, Not equal
+	GT(O_GT), // >, Greater than
+	LE(O_LE), // <=, Less than or equal
 	LT(O_LT), // <, Less than
-	NE(O_NE);
+	NE(O_NE); // !=, Not equal
 
 	public static RRelationalOperator toOpposite(RRelationalOperator op) {
 
