@@ -385,7 +385,13 @@ public interface Constant {
 
 	int MAX_TOSTRING_LEN = 256;
 
+	IRAtom O_ADD = RulpFactory.createAtom(F_O_ADD);
+
+	IRAtom O_BY = RulpFactory.createAtom(F_O_BY);
+
 	IRAtom O_Default = RulpFactory.createAtom(A_DEFAULT);
+
+	IRAtom O_DIV = RulpFactory.createAtom(F_O_DIV);
 
 	IRAtom O_EQ = RulpFactory.createAtom(F_O_EQ);
 
@@ -403,6 +409,8 @@ public interface Constant {
 
 	IRAtom O_LT = RulpFactory.createAtom(F_O_LT);
 
+	IRAtom O_MOD = RulpFactory.createAtom(F_O_MOD);
+
 	IRAtom O_Nan = RulpFactory.createAtom(A_NAN);
 
 	IRAtom O_NE = RulpFactory.createAtom(F_O_NE);
@@ -411,11 +419,15 @@ public interface Constant {
 
 	IRAtom O_Nil = RulpFactory.createNil();
 
+	IRAtom O_POWER = RulpFactory.createAtom(F_O_POWER);
+
 	IRAtom O_Private = RulpFactory.createAtom(A_PRIVATE);
 
 	IRAtom O_Public = RulpFactory.createAtom(A_PUBLIC);
 
 	IRAtom O_Static = RulpFactory.createAtom(A_STATIC);
+
+	IRAtom O_SUB = RulpFactory.createAtom(F_O_SUB);
 
 	IRBoolean O_True = RulpFactory.createBoolean(true);
 

@@ -19,13 +19,18 @@ import static alpha.rulp.lang.Constant.O_NE;
 public enum RRelationalOperator {
 
 	EQ(O_EQ), // =, Equal
+
 	GE(O_GE), // >=, Greater than or equal
+
 	GT(O_GT), // >, Greater than
+
 	LE(O_LE), // <=, Less than or equal
+
 	LT(O_LT), // <, Less than
+
 	NE(O_NE); // !=, Not equal
 
-	public static RRelationalOperator toOpposite(RRelationalOperator op) {
+	public static RRelationalOperator oppositeOf(RRelationalOperator op) {
 
 		switch (op) {
 		case EQ:
@@ -56,8 +61,6 @@ public enum RRelationalOperator {
 	private RRelationalOperator(IRAtom atom) {
 		this.atom = atom;
 	}
-
-	// <=, Less than or equal
 
 	public IRAtom getAtom() {
 		return atom;

@@ -1,7 +1,7 @@
 package alpha.rulp.utils;
 
 import static alpha.rulp.lang.Constant.A_LOCAL;
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_NOCLASS;
 import static alpha.rulp.lang.Constant.A_OP_CPS;
 import static alpha.rulp.lang.Constant.A_OP_STABLE;
 import static alpha.rulp.lang.Constant.A_PARENT;
