@@ -97,6 +97,12 @@ public interface Constant {
 
 	String A_PUBLIC = "public";
 
+	String A_QUESTION = "?";
+
+	char A_QUESTION_C = '?';
+
+	String A_QUESTION_LIST = "?...";
+
 	String A_QUEUE = "queue";
 
 	String A_ROOT = "root";
@@ -425,6 +431,8 @@ public interface Constant {
 
 	IRAtom O_Public = RulpFactory.createAtom(A_PUBLIC);
 
+	IRAtom O_QUESTION = RulpFactory.createAtom(A_QUESTION);
+
 	IRAtom O_Static = RulpFactory.createAtom(A_STATIC);
 
 	IRAtom O_SUB = RulpFactory.createAtom(F_O_SUB);
@@ -432,13 +440,7 @@ public interface Constant {
 	IRBoolean O_True = RulpFactory.createBoolean(true);
 
 	String P_TYPE = "type#";
-
-	String S_QUESTION = "?";
-
-	char S_QUESTION_C = '?';
-
-	String S_QUESTION_LIST = "?...";
-
+	
 	IRAtom T_Array = RulpFactory.createAtom(A_ARRAY);
 
 	IRAtom T_Atom = RulpFactory.createAtom(A_ATOM);

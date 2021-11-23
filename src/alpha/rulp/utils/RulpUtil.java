@@ -12,10 +12,10 @@ package alpha.rulp.utils;
 import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.A_NAMESPACE;
 import static alpha.rulp.lang.Constant.A_NIL;
+import static alpha.rulp.lang.Constant.A_QUESTION;
+import static alpha.rulp.lang.Constant.A_QUESTION_C;
 import static alpha.rulp.lang.Constant.O_New;
 import static alpha.rulp.lang.Constant.O_Nil;
-import static alpha.rulp.lang.Constant.S_QUESTION;
-import static alpha.rulp.lang.Constant.S_QUESTION_C;
 import static alpha.rulp.lang.Constant.T_Atom;
 import static alpha.rulp.lang.Constant.T_Instance;
 
@@ -1203,7 +1203,7 @@ public class RulpUtil {
 	}
 
 	public static boolean isAnonymousVar(String var) {
-		return var.equals(S_QUESTION);
+		return var.equals(A_QUESTION);
 	}
 
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
@@ -1334,7 +1334,7 @@ public class RulpUtil {
 	}
 
 	public static boolean isVarName(String var) {
-		return var.length() > 1 && var.charAt(0) == S_QUESTION_C;
+		return var.length() > 1 && var.charAt(0) == A_QUESTION_C;
 	}
 
 	public static boolean matchType(IRAtom typeAtom, IRObject obj) throws RException {
