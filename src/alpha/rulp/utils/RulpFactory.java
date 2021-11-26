@@ -24,8 +24,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import alpha.rulp.lang.IRArray;
 import alpha.rulp.lang.IRAtom;
+import alpha.rulp.lang.IRBlob;
 import alpha.rulp.lang.IRBoolean;
 import alpha.rulp.lang.IRClass;
+import alpha.rulp.lang.IRConst;
 import alpha.rulp.lang.IRDouble;
 import alpha.rulp.lang.IRError;
 import alpha.rulp.lang.IRExpr;
@@ -86,12 +88,14 @@ import alpha.rulp.ximpl.error.XRFactorReturn;
 import alpha.rulp.ximpl.error.XRFactorTry;
 import alpha.rulp.ximpl.factor.XRFactorAlias;
 import alpha.rulp.ximpl.factor.XRFactorArithmetic;
+import alpha.rulp.ximpl.factor.XRFactorBlobLength;
 import alpha.rulp.ximpl.factor.XRFactorBoolAnd;
 import alpha.rulp.ximpl.factor.XRFactorBoolNot;
 import alpha.rulp.ximpl.factor.XRFactorBoolOr;
 import alpha.rulp.ximpl.factor.XRFactorCanCast;
 import alpha.rulp.ximpl.factor.XRFactorCompare;
 import alpha.rulp.ximpl.factor.XRFactorComparison;
+import alpha.rulp.ximpl.factor.XRFactorDefConst;
 import alpha.rulp.ximpl.factor.XRFactorDefvar;
 import alpha.rulp.ximpl.factor.XRFactorDo;
 import alpha.rulp.ximpl.factor.XRFactorDoWhenObjDeleted;
@@ -100,6 +104,7 @@ import alpha.rulp.ximpl.factor.XRFactorEqual;
 import alpha.rulp.ximpl.factor.XRFactorIf;
 import alpha.rulp.ximpl.factor.XRFactorLet;
 import alpha.rulp.ximpl.factor.XRFactorLoop;
+import alpha.rulp.ximpl.factor.XRFactorMakeBlob;
 import alpha.rulp.ximpl.factor.XRFactorNameOf;
 import alpha.rulp.ximpl.factor.XRFactorRef;
 import alpha.rulp.ximpl.factor.XRFactorSetq;
@@ -121,7 +126,9 @@ import alpha.rulp.ximpl.io.XRFactorPrintSubject;
 import alpha.rulp.ximpl.io.XRFactorSaveTxtFile;
 import alpha.rulp.ximpl.lang.XRArray;
 import alpha.rulp.ximpl.lang.XRAtom;
+import alpha.rulp.ximpl.lang.XRBlob;
 import alpha.rulp.ximpl.lang.XRBoolean;
+import alpha.rulp.ximpl.lang.XRConst;
 import alpha.rulp.ximpl.lang.XRDouble;
 import alpha.rulp.ximpl.lang.XRFloat;
 import alpha.rulp.ximpl.lang.XRInteger;
@@ -331,6 +338,11 @@ public final class RulpFactory {
 		return new XRAtom(name);
 	}
 
+	public static IRBlob createBlob(String name, int len) {
+		RType.BLOB.incCreateCount();
+		return new XRBlob(name, len);
+	}
+
 	public static IRBoolean createBoolean(boolean value) {
 		return value ? True : False;
 	}
@@ -338,6 +350,11 @@ public final class RulpFactory {
 	public static IRClass createClassDefClass(String className, IRFrame definedFrame, IRClass superClass) {
 		RType.CLASS.incCreateCount();
 		return new XRDefClass(className, definedFrame, superClass);
+	}
+
+	public static IRConst createConstant(String name, IRObject value) {
+		RType.CONSTANT.incCreateCount();
+		return new XRConst(name, value);
 	}
 
 	public static IRDouble createDouble(double value) {
@@ -554,10 +571,12 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, T_Float);
 		RulpUtil.addFrameObject(rootFrame, T_Double);
 		RulpUtil.addFrameObject(rootFrame, T_String);
+		RulpUtil.addFrameObject(rootFrame, T_Blob);
 		RulpUtil.addFrameObject(rootFrame, T_List);
 		RulpUtil.addFrameObject(rootFrame, T_Expr);
 		RulpUtil.addFrameObject(rootFrame, T_Array);
 		RulpUtil.addFrameObject(rootFrame, T_Var);
+		RulpUtil.addFrameObject(rootFrame, T_Constant);
 		RulpUtil.addFrameObject(rootFrame, T_Factor);
 		RulpUtil.addFrameObject(rootFrame, T_Func);
 		RulpUtil.addFrameObject(rootFrame, T_Macro);
@@ -613,6 +632,9 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDoWhenVarChanged(F_DO_WHEN_VAR_CHANGED));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDoWhenObjDeleted(F_DO_WHEN_OBJ_DELETED));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorRef(F_REF));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorDefConst(F_DEF_CONST));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorMakeBlob(F_MAKE_BLOB));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorBlobLength(F_BLOB_LENGTH));
 
 		// String
 		RulpUtil.addFrameObject(rootFrame, new XRFactorToString(F_TO_STRING));
@@ -900,14 +922,6 @@ public final class RulpFactory {
 		return new XRParser(createTokener());
 	}
 
-	public static <T> IRIterator<T> createRIterator(Iterator<T> iter) throws RException {
-		return new XRIteratorAdatper<T>(iter);
-	}
-
-	public static IRString createString() {
-		return EMPTY_STR;
-	}
-
 //	public static IRClass createNoClass() {
 //		IRClass noClass = new XRDefClass(A_NOCLASS);
 //		try {
@@ -917,6 +931,14 @@ public final class RulpFactory {
 //		}
 //		return noClass;
 //	}
+
+	public static <T> IRIterator<T> createRIterator(Iterator<T> iter) throws RException {
+		return new XRIteratorAdatper<T>(iter);
+	}
+
+	public static IRString createString() {
+		return EMPTY_STR;
+	}
 
 	public static IRString createString(String value) {
 

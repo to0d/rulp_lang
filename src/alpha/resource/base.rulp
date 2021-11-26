@@ -34,6 +34,7 @@
 (defun get ((?arr array) (?i1 int) (?i2 int)) (return (get-of-array ?arr ?i1 ?i2)))
 
 (defun length-of ((?l string)) (return (str-length ?l)))
+(defun length-of ((?l blob)) (return (blob-length ?l)))
 
 (defun equal (?l ?2) (return (equal_def ?l ?2)))
 (defun equal ((?l string) (?2 string)) (return (str-equal ?l ?2)))

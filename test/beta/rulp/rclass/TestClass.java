@@ -67,89 +67,89 @@ public class TestClass extends RulpTestBase {
 	public void test_class_3_access_control() {
 
 		_setup();
-		_test_script("result/rclass/TestClass/test_class_3_access_control.rulp");
+		_test_script();
 	}
 
 	@Test
 	public void test_class_4_final() {
 
 		_setup();
-		_test_script("result/rclass/TestClass/test_class_4_final.rulp");
+		_test_script();
 	}
 
 	@Test
 	public void test_class_5_static() {
 
 		_setup();
-		_test_script("result/rclass/TestClass/test_class_5_static.rulp");
+		_test_script();
 	}
 
 	@Test
 	public void test_class_6_super() {
 
 		_setup();
-		_test_script("result/rclass/TestClass/test_class_6_super.rulp");
+		_test_script();
 	}
 
 	@Test
 	public void test_class_7_overload_1() {
 
 		_setup();
-		_test_script("result/rclass/TestClass/test_class_7_overload_1.rulp");
+		_test_script();
 	}
 
 	@Test
 	public void test_class_7_overload_2() {
 
 		_setup();
-		_test_script("result/rclass/TestClass/test_class_7_overload_2.rulp");
+		_test_script();
 	}
 
 	@Test
 	public void test_class_7_overload_3_static_fun() {
 
 		_setup();
-		_test_script("result/rclass/TestClass/test_class_7_overload_3.rulp");
-		_gInfo("result/rclass/TestClass/test_class_7_overload_3_ginfo.txt");
+		_test_script();
+		_gInfo();
 	}
 
 	@Test
 	public void test_class_8_init_1() {
 		_setup();
-		_test_script("result/rclass/TestClass/test_class_8_init_1.rulp");
-		_gInfo("result/rclass/TestClass/test_class_8_init_1_ginfo.txt");
+		_test_script();
+		_gInfo();
 	}
 
 	@Test
 	public void test_class_9_delete_1() {
 		_setup();
-		_test_script("result/rclass/TestClass/test_class_9_delete_1.rulp");
-		_gInfo("result/rclass/TestClass/test_class_9_delete_1_ginfo.txt");
+		_test_script();
+		_gInfo();
 	}
 
 	@Test
 	public void test_class_9_delete_2() {
 		_setup();
-		_test_script("result/rclass/TestClass/test_class_9_delete_2.rulp");
-		_gInfo("result/rclass/TestClass/test_class_9_delete_2_ginfo.txt");
+		_test_script();
+		_gInfo();
 	}
 
 	@Test
 	public void test_class_a_extend_body() {
 		_setup();
-		_test_script("result/rclass/TestClass/test_class_a_extend_body.rulp");
+		_test_script();
 	}
 
 	@Test
 	public void test_class_b_bad_para() {
 		_setup();
-		_test_script("result/rclass/TestClass/test_class_b_bad_para.rulp");
+		_test_script();
 	}
 
 	@Test
 	public void test_class_c_mbr() {
 		_setup();
-		_test_script("result/rclass/TestClass/test_class_c_mbr.rulp");
-		_gInfo("result/rclass/TestClass/test_class_c_mbr_ginfo.txt");
+		_test_script();
+		_gInfo();
 	}
 }

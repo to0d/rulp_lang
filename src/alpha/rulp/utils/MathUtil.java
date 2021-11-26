@@ -74,7 +74,7 @@ public class MathUtil {
 			return toLong(a) != 0;
 
 		default:
-			throw new RException(String.format("Not support type: %s", a.toString()));
+			throw new RException(String.format("Not support type: value=%s, type=%s", a.toString(), a.getType()));
 		}
 	}
 

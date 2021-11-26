@@ -17,11 +17,15 @@ public interface Constant {
 
 	String A_ATOM = "atom";
 
+	String A_BLOB = "blob";
+
 	String A_BOOL = "bool";
 
 	String A_CLASS = "class";
 
 	String A_COLUMN = "column";
+
+	String A_CONSTANT = "constant";
 
 	String A_CORE = "core";
 
@@ -155,6 +159,8 @@ public interface Constant {
 
 	String F_B_OR = "or";
 
+	String F_BLOB_LENGTH = "blob-length";
+
 	String F_BREAK = "break";
 
 	String F_CAN_CAST = "can-cast";
@@ -168,6 +174,8 @@ public interface Constant {
 	String F_CONTINUE = "continue";
 
 	String F_DATE = "date";
+
+	String F_DEF_CONST = "defconst";
 
 	String F_DEFCLASS = "defclass";
 
@@ -224,6 +232,8 @@ public interface Constant {
 	String F_LOOP = "loop";
 
 	String F_LS = "ls";
+
+	String F_MAKE_BLOB = "make-blob";
 
 	String F_MAKE_CPS = "make-cps";
 
@@ -440,14 +450,18 @@ public interface Constant {
 	IRBoolean O_True = RulpFactory.createBoolean(true);
 
 	String P_TYPE = "type#";
-	
+
 	IRAtom T_Array = RulpFactory.createAtom(A_ARRAY);
 
 	IRAtom T_Atom = RulpFactory.createAtom(A_ATOM);
 
+	IRAtom T_Blob = RulpFactory.createAtom(A_BLOB);
+
 	IRAtom T_Bool = RulpFactory.createAtom(A_BOOL);
 
 	IRAtom T_Class = RulpFactory.createAtom(A_CLASS);
+
+	IRAtom T_Constant = RulpFactory.createAtom(A_CONSTANT);
 
 	IRAtom T_Double = RulpFactory.createAtom(A_DOUBLE);
 

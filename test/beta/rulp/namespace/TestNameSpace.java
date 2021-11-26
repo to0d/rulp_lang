@@ -87,7 +87,7 @@ public class TestNameSpace extends RulpTestBase {
 		_test("(ns1::f2)", "3");
 		_test("(f3)", "4");
 
-		_gInfo("result/namespace/TestNameSpace/test_namespace_1_ginfo.txt");
+		_gInfo();
 	}
 
 	@Test
@@ -116,15 +116,15 @@ public class TestNameSpace extends RulpTestBase {
 		_test("(value-of var1)", "1");
 		_test("(f1)", "1");
 
-		_gInfo("result/namespace/TestNameSpace/test_namespace_2_ginfo.txt");
+		_gInfo();
 	}
 
 	@Test
 	public void test_namespace_3() {
 
 		_setup();
-		_test_script("result/namespace/TestNameSpace/test_namespace_3.rulp");
-		_gInfo("result/namespace/TestNameSpace/test_namespace_3_ginfo.txt");
+		_test_script();
+		_gInfo();
 	}
 
 	@Test
@@ -148,15 +148,15 @@ public class TestNameSpace extends RulpTestBase {
 	public void test_namespace_6_nested_1() {
 
 		_setup();
-		_test_script("result/namespace/TestNameSpace/test_namespace_6_nested_1.rulp");
-		_gInfo("result/namespace/TestNameSpace/test_namespace_6_nested_1_ginfo.txt");
+		_test_script();
+		_gInfo();
 	}
 
 	@Test
 	public void test_namespace_6_nested_2() {
 
 		_setup();
-		_test_script("result/namespace/TestNameSpace/test_namespace_6_nested_2.rulp");
-		_gInfo("result/namespace/TestNameSpace/test_namespace_6_nested_2_ginfo.txt");
+		_test_script();
+		_gInfo();
 	}
 }

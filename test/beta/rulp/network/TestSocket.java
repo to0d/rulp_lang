@@ -10,6 +10,7 @@ public class TestSocket extends RulpTestBase {
 	void test_1() {
 
 		_setup();
+
 		_test("(property-of socket)", "'(final)");
 		_test("(ls socket)",
 				"'(socket::?impl socket::_socket_close socket::_socket_init socket::_socket_open socket::_socket_write socket::close socket::init socket::open socket::write)");
@@ -19,6 +20,7 @@ public class TestSocket extends RulpTestBase {
 	void test_2() {
 
 		_setup();
+
 		_test("(new socket s1 '(\"127.0.0.1\" 1234))", "s1");
 		_test_error("(s1::open)",
 				"fail to open socket<127.0.0.1:1234>: java.net.ConnectException: Connection refused: connect\n"

@@ -11,8 +11,10 @@ package alpha.rulp.lang;
 
 import static alpha.rulp.lang.Constant.A_ARRAY;
 import static alpha.rulp.lang.Constant.A_ATOM;
+import static alpha.rulp.lang.Constant.A_BLOB;
 import static alpha.rulp.lang.Constant.A_BOOL;
 import static alpha.rulp.lang.Constant.A_CLASS;
+import static alpha.rulp.lang.Constant.A_CONSTANT;
 import static alpha.rulp.lang.Constant.A_DOUBLE;
 import static alpha.rulp.lang.Constant.A_EXPRESSION;
 import static alpha.rulp.lang.Constant.A_FACTOR;
@@ -33,8 +35,10 @@ import static alpha.rulp.lang.Constant.A_VAR;
 import static alpha.rulp.lang.Constant.O_Nan;
 import static alpha.rulp.lang.Constant.T_Array;
 import static alpha.rulp.lang.Constant.T_Atom;
+import static alpha.rulp.lang.Constant.T_Blob;
 import static alpha.rulp.lang.Constant.T_Bool;
 import static alpha.rulp.lang.Constant.T_Class;
+import static alpha.rulp.lang.Constant.T_Constant;
 import static alpha.rulp.lang.Constant.T_Double;
 import static alpha.rulp.lang.Constant.T_Expr;
 import static alpha.rulp.lang.Constant.T_Factor;
@@ -65,24 +69,26 @@ public enum RType {
 	FLOAT(5, A_FLOAT), //
 	DOUBLE(6, A_DOUBLE), //
 	STRING(7, A_STRING), //
-	LIST(8, A_LIST), //
-	EXPR(9, A_EXPRESSION), //
-	ARRAY(10, A_ARRAY), //
-	VAR(11, A_VAR), //
-	FACTOR(12, A_FACTOR), //
-	FUNC(13, A_FUNCTION), //
-	TEMPLATE(14, A_TEMPLATE), //
-	MACRO(15, A_MACRO), //
-	INSTANCE(16, A_INSTANCE), //
-	CLASS(17, A_CLASS), //
-	NATIVE(18, A_NATIVE), //
-	MEMBER(19, A_MEMBER), //
-	FRAME(20, A_FRAME); //
+	BLOB(8, A_BLOB), //
+	LIST(9, A_LIST), //
+	EXPR(10, A_EXPRESSION), //
+	ARRAY(11, A_ARRAY), //
+	VAR(12, A_VAR), //
+	CONSTANT(13, A_CONSTANT), //
+	FACTOR(14, A_FACTOR), //
+	FUNC(15, A_FUNCTION), //
+	TEMPLATE(16, A_TEMPLATE), //
+	MACRO(17, A_MACRO), //
+	INSTANCE(18, A_INSTANCE), //
+	CLASS(19, A_CLASS), //
+	NATIVE(20, A_NATIVE), //
+	MEMBER(21, A_MEMBER), //
+	FRAME(22, A_FRAME); //
 
-	public static final RType ALL_RTYPE[] = { NIL, ATOM, BOOL, INT, LONG, FLOAT, DOUBLE, STRING, LIST, EXPR, ARRAY, VAR,
-			FACTOR, FUNC, TEMPLATE, MACRO, INSTANCE, CLASS, NATIVE, MEMBER, FRAME };
+	public static final RType ALL_RTYPE[] = { NIL, ATOM, BOOL, INT, LONG, FLOAT, DOUBLE, STRING, BLOB, LIST, EXPR,
+			ARRAY, VAR, CONSTANT, FACTOR, FUNC, TEMPLATE, MACRO, INSTANCE, CLASS, NATIVE, MEMBER, FRAME };
 
-	public static final int TYPE_NUM = 21;
+	public static final int TYPE_NUM = 23;
 
 	public static IRAtom toObject(RType type) {
 
@@ -135,8 +141,14 @@ public enum RType {
 		case STRING:
 			return T_String;
 
+		case BLOB:
+			return T_Blob;
+
 		case VAR:
 			return T_Var;
+
+		case CONSTANT:
+			return T_Constant;
 
 		case CLASS:
 			return T_Class;
@@ -146,6 +158,7 @@ public enum RType {
 
 		case FRAME:
 			return T_Frame;
+
 		case TEMPLATE:
 			return T_Template;
 
@@ -202,8 +215,14 @@ public enum RType {
 		case A_STRING:
 			return STRING;
 
+		case A_BLOB:
+			return BLOB;
+
 		case A_VAR:
 			return VAR;
+
+		case A_CONSTANT:
+			return CONSTANT;
 
 		case A_CLASS:
 			return CLASS;

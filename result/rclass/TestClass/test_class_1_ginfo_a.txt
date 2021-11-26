@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       73        0
+     Interpreter call id/level:       74        0
              CPS support/count:    false        0
                Frame max level:        5
                   Frame max id:        6
@@ -15,47 +15,47 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:       78
+    factor:       79
       func:        8
 ==========================================================================================================================
 
-Callable stats info: callId=73, row=20, column=37(2), value-max=2, value-unit=2^x
+Callable stats info: callId=74, row=20, column=38(2), value-max=2, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         1222222222222222222222222222323344333 max=5, unit=2^x
+   Frame    RType  Count  Ref Object                         12222222222222222222222222222323344322 max=5, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     40    0 defun                              22222222222112212122121          
-    root   factor      6    0 ls                                                          111  111
-    root   factor      6    0 defclass                                       1  1 1  1 1 1        
-    root   factor      6    0 alias                          1221                                 
-    root   factor      5    0 return                                                       1 1111 
-    main   member      5    0 o1::get                                                      1 1111 
-    root   factor      3    0 setq                                                          111   
-    root   factor      3    0 deftemplate                                               21        
-    root   factor      1    0 print-subject                                                      1
-    root   factor      1    0 out-to-file                                                        1
-    main   member      1    0 o1::sub                                                         1   
-    main   member      1    0 o1::set                                                       1     
-    main   member      1    0 o1::add                                                        1    
-    root   factor      1    0 new                                                         1       
-    root   factor      1    0 load                                                       1        
-    root   factor      1    0 defvar                            1                                 
-    root   factor      1    0 defmacro                                      1                     
-    root   factor      1    0 ::                                                                1 
-    root   factor      1    0 -                                                               1   
-    root   factor      1    0 +                                                              1    
+    root   factor     41    0 defun                              22222222222121212122122           
+    root   factor      6    0 ls                                                          111   12 
+    root   factor      6    0 defclass                                        1 1 1  1  1 1        
+    root   factor      6    0 alias                          1221                                  
+    root   factor      5    0 return                                                        11111  
+    main   member      5    0 o1::get                                                       11111  
+    root   factor      3    0 setq                                                           111   
+    root   factor      3    0 deftemplate                                               12         
+    root   factor      1    0 print-subject                                                       1
+    root   factor      1    0 out-to-file                                                         1
+    main   member      1    0 o1::sub                                                          1   
+    main   member      1    0 o1::set                                                        1     
+    main   member      1    0 o1::add                                                         1    
+    root   factor      1    0 new                                                          1       
+    root   factor      1    0 load                                                        1        
+    root   factor      1    0 defvar                            1                                  
+    root   factor      1    0 defmacro                                      1                      
+    root   factor      1    0 ::                                                                1  
+    root   factor      1    0 -                                                                1   
+    root   factor      1    0 +                                                               1    
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          814            0          814
+        atom:          821            0          821
       string:           21            0           21
         list:           13            0           13
-        expr:          458            0          458
+        expr:          463            0          463
        array:            1            0            1
          var:           21            3           18
-        func:           99            0           99
+        func:          101            0          101
     template:            1            0            1
        macro:            1            0            1
     instance:            1            0            1
@@ -63,7 +63,7 @@ Object create count:
       member:          148            0          148
        frame:           10            8            2
  interpreter:            1            0
-  frameEntry:          191            0
+  frameEntry:          196            0
       lambda:            4            0
 ==========================================================================================================================
 

@@ -37,6 +37,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRClass;
+import alpha.rulp.lang.IRConst;
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
@@ -335,6 +336,11 @@ public final class RuntimeUtil {
 				throw new RException("var entry not found: " + var);
 			}
 
+			case CONSTANT: {
+				IRConst ct = (IRConst) obj;
+				return ct.getValue();
+			}
+
 			case ATOM: {
 
 				IRFrameEntry entry = lookupFrameEntry((IRAtom) obj, frame);
@@ -344,8 +350,14 @@ public final class RuntimeUtil {
 
 				IRObject rst = entry.getObject();
 
-				if (rst.getType() == RType.VAR) {
-					return ((IRVar) rst).getValue();
+				switch (rst.getType()) {
+				case VAR:
+					rst = ((IRVar) rst).getValue();
+					break;
+				case CONSTANT:
+					rst = ((IRConst) rst).getValue();
+					break;
+				default:
 				}
 
 				return rst;

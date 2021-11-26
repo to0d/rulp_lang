@@ -14,6 +14,7 @@ import static alpha.rulp.lang.Constant.A_NAMESPACE;
 import static alpha.rulp.lang.Constant.A_NIL;
 import static alpha.rulp.lang.Constant.A_QUESTION;
 import static alpha.rulp.lang.Constant.A_QUESTION_C;
+import static alpha.rulp.lang.Constant.MAX_TOSTRING_LEN;
 import static alpha.rulp.lang.Constant.O_New;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.T_Atom;
@@ -28,8 +29,10 @@ import java.util.List;
 
 import alpha.rulp.lang.IRArray;
 import alpha.rulp.lang.IRAtom;
+import alpha.rulp.lang.IRBlob;
 import alpha.rulp.lang.IRBoolean;
 import alpha.rulp.lang.IRClass;
+import alpha.rulp.lang.IRConst;
 import alpha.rulp.lang.IRDouble;
 import alpha.rulp.lang.IRError;
 import alpha.rulp.lang.IRExpr;
@@ -166,6 +169,10 @@ public class RulpUtil {
 			case VAR:
 				sb.append("&");
 				sb.append(((IRVar) obj).getName());
+				break;
+
+			case CONSTANT:
+				sb.append(((IRConst) obj).getName());
 				break;
 
 			case INSTANCE:
@@ -312,6 +319,19 @@ public class RulpUtil {
 				_toString(sb, arr.get(i), formater);
 			}
 			sb.append("}");
+			break;
+
+		case BLOB:
+
+			IRBlob blob = (IRBlob) obj;
+			byte[] bytes = blob.getValue();
+
+			if (bytes.length > MAX_TOSTRING_LEN) {
+				sb.append("[" + EncodeUtil.convertBytesToHexString(bytes, 0, MAX_TOSTRING_LEN) + "...]");
+			} else {
+				sb.append("[" + EncodeUtil.convertBytesToHexString(bytes, 0, bytes.length) + "]");
+			}
+
 			break;
 
 		case EXPR: {
@@ -540,6 +560,15 @@ public class RulpUtil {
 		}
 
 		return (IRAtom) obj;
+	}
+
+	public static IRBlob asBlob(IRObject obj) throws RException {
+
+		if (obj != null && obj.getType() != RType.BLOB) {
+			throw new RException("Can't convert to blob: " + obj);
+		}
+
+		return (IRBlob) obj;
 	}
 
 	public static IRBoolean asBoolean(IRObject obj) throws RException {
