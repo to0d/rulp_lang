@@ -1,0 +1,12 @@
+(new socket s1 '("127.0.0.1" 1234))
+;=>s1
+
+(s1::open)
+;err:
+fail to open socket<127.0.0.1:1234>: java.net.ConnectException: Connection refused: connect
+at _$fun$_open: (socket::_socket_open ?impl)
+at main: (s1::open)
+;eof
+
+(s1::close)
+;=>nil

@@ -5,7 +5,9 @@ import static alpha.rulp.lang.Constant.O_Nil;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 
 import alpha.rulp.lang.IRClass;
 import alpha.rulp.lang.IRFrame;
@@ -29,6 +31,10 @@ public class XRSocket extends AbsRInstance {
 	static final String F_MBR_SOCKET_OPEN = "_socket_open";
 
 	static final String F_MBR_SOCKET_WRITE = "_socket_write";
+
+	static final String F_MBR_SOCKET_GET_LOCALHOST = "_socket_getLocalHost";
+
+	static final String F_MBR_SOCKET_GET_LOCALADDRESS = "_socket_getHostAddress";
 
 	public static boolean TRACE = false;
 
@@ -121,6 +127,52 @@ public class XRSocket extends AbsRInstance {
 			}
 		}, RAccessType.PRIVATE);
 
+		RulpUtil.setMember(mapClass, F_MBR_SOCKET_GET_LOCALHOST, new AbsRFactorAdapter(F_MBR_SOCKET_GET_LOCALHOST) {
+
+			@Override
+			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+				if (args.size() != 1) {
+					throw new RException("Invalid parameters: " + args);
+				}
+
+				try {
+					return RulpFactory.createString(InetAddress.getLocalHost().getHostName());
+				} catch (UnknownHostException e) {
+					e.printStackTrace();
+					throw new RException(e.toString());
+				}
+			}
+
+			@Override
+			public boolean isThreadSafe() {
+				return true;
+			}
+		}, RAccessType.PRIVATE);
+
+		RulpUtil.setMember(mapClass, F_MBR_SOCKET_GET_LOCALADDRESS,
+				new AbsRFactorAdapter(F_MBR_SOCKET_GET_LOCALADDRESS) {
+
+					@Override
+					public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+						if (args.size() != 1) {
+							throw new RException("Invalid parameters: " + args);
+						}
+
+						try {
+							return RulpFactory.createString(InetAddress.getLocalHost().getHostAddress());
+						} catch (UnknownHostException e) {
+							e.printStackTrace();
+							throw new RException(e.toString());
+						}
+					}
+
+					@Override
+					public boolean isThreadSafe() {
+						return true;
+					}
+				}, RAccessType.PRIVATE);
 	}
 
 	public static void write(OutputStream os, byte[] buf, int offset, int len) throws IOException {

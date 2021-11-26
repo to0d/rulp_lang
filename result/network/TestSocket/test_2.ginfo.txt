@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       76        0
+     Interpreter call id/level:       60        0
              CPS support/count:    false        0
                Frame max level:        4
                   Frame max id:        6
@@ -15,54 +15,51 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:       91
-      func:       18
+    factor:       62
+      func:        3
 ==========================================================================================================================
 
-Callable stats info: callId=76, row=18, column=39(2), value-max=2, value-unit=2^x
+Callable stats info: callId=60, row=14, column=61(1), value-max=1, value-unit=1^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         122222222222222222222222222224444444443 max=6, unit=2^x
+   Frame    RType  Count  Ref Object                         .111111111111111111111111111111111111111111111111111111111322 max=4, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     41    0 defun                              22222222222121212122122            
-    root   factor     13    0 return                                                       121212121
-  system   member      8    0 set::_set_has                                                 11111111
-    main   member      8    0 set1::has                                                     11111111
-    root   factor      6    0 alias                          1221                                   
-  system   member      5    0 set::_set_size_of                                            11 1 1 1 
-    main   member      5    0 set1::size-of                                                11 1 1 1 
-    root   factor      5    0 defclass                                        1 1 1  1  1           
-  system   member      4    0 set::_set_add                                                1 1 1 1  
-    main   member      4    0 set1::add                                                    1 1 1 1  
-    root   factor      3    0 deftemplate                                               12          
-    root   factor      1    0 setq                                                        1         
-  system   member      1    0 set::_set_init                                              1         
-    main   member      1    0 set1::init                                                  1         
-    root   factor      1    0 new                                                         1         
-    root   factor      1    0 name-of                                                     1         
-    root   factor      1    0 defvar                            1                                   
-    root   factor      1    0 defmacro                                      1                       
+    root   factor     41    0 defun                                  11111111111111111111111 11 1111 111 11111 1111       
+    root   factor      6    0 alias                           111111                                                      
+    root   factor      5    0 defclass                                                         1    1   1     1    1      
+    root   factor      3    0 deftemplate                                                                           111   
+  system   member      1    0 socket::_socket_open                                                                      1 
+  system   member      1    0 socket::_socket_init                                                                     1  
+  system   member      1    0 socket::_socket_close                                                                      1
+    root   factor      1    0 setq                                                                                     1  
+    main   member      1    0 s1::open                                                                                  1 
+    main   member      1    0 s1::init                                                                                 1  
+    main   member      1    0 s1::close                                                                                  1
+    root   factor      1    0 new                                                                                      1  
+    root   factor      1    0 defvar                                1                                                     
+    root   factor      1    0 defmacro                                                      1                             
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          799            0          799
-      string:           23            0           23
-        list:            9            0            9
-        expr:          464            0          464
+        atom:          776            0          776
+         int:            1            0            1
+      string:           20            0           20
+        list:            7            0            7
+        expr:          438            0          438
        array:            1            0            1
-         var:           29           12           17
-        func:           99            0           99
+         var:           19            2           17
+        func:           98            0           98
     template:            1            0            1
        macro:            1            0            1
     instance:            2            0            2
        class:            5            0            5
-      member:          159            0          159
-       frame:           20           18            2
+      member:          143            0          143
+       frame:            5            3            2
  interpreter:            1            0
-  frameEntry:          203            0
-      lambda:            4            0
+  frameEntry:          193            0
+      lambda:            3            0
 ==========================================================================================================================
 
 Global frame list: total=2
@@ -74,34 +71,33 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
 main                 : 3        2        1    frame      main                
-set1                 : 5        2        1    instance   set1 : class=set    
+s1                   : 7        2        1    instance   s1 : class=socket   
 ==========================================================================================================================
 
 
-id=3, name=SF-set-0, lvl=2, ref=2/2, entry=0, pid=1(system), subject=set
+id=3, name=SF-socket-0, lvl=2, ref=2/2, entry=0, pid=1(system), subject=socket
 
-id=4, name=SF-set1-1, lvl=3, ref=5/6, entry=0, pid=3(SF-set-0), subject=set1
+id=4, name=SF-s1-1, lvl=3, ref=4/5, entry=0, pid=3(SF-socket-0), subject=s1
 
 Global frame tree:
 
 ->FRAME(root): id=0, lvl=0, subject=root
     ->FRAME(system): id=1, lvl=1, subject=system
         ->FRAME(main): id=2, lvl=2, subject=main
-        ->FRAME(SF-set-0): id=3, lvl=2, subject=set
-            ->FRAME(SF-set1-1): id=4, lvl=3, subject=set1
+        ->FRAME(SF-socket-0): id=3, lvl=2, subject=socket
+            ->FRAME(SF-s1-1): id=4, lvl=3, subject=s1
 
 Global Subject list:
 
-name=set1, lvl=1, ref=1/1, parent=set, final=false, mbrs=6, frame=4(SF-set1-1)
+name=s1, lvl=1, ref=1/1, parent=socket, final=false, mbrs=5, frame=4(SF-s1-1)
 ==========================================================================================================================
 Name                 : Access   Final    Static   Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?impl                : PRIVATE  false    false    1    var        null : type=instance
-add                  : DEFAULT  true     false    1    func       (add nil) : frame=SF-set1-1, type=lambda
-has                  : DEFAULT  true     false    1    func       (has nil) : frame=SF-set1-1, type=lambda
-init                 : DEFAULT  true     false    1    func       (init) : frame=SF-set1-1, type=lambda
-size-of              : DEFAULT  true     false    1    func       (size-of) : frame=SF-set1-1, type=lambda
-this                 : DEFAULT  false    false    1    instance   set1 : class=set
+close                : DEFAULT  true     false    1    func       (close) : frame=SF-s1-1, type=lambda
+init                 : DEFAULT  true     false    1    func       (init nil nil) : frame=SF-s1-1, type=lambda
+open                 : DEFAULT  true     false    1    func       (open) : frame=SF-s1-1, type=lambda
+this                 : DEFAULT  false    false    1    instance   s1 : class=socket
 ==========================================================================================================================
 
 
