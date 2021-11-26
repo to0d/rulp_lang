@@ -177,10 +177,6 @@ public class SubjectUtil {
 				throw new RException("can't redefine member<" + oldMbr + "> to fun");
 			}
 
-			if (oldMbr.isFinal()) {
-				throw new RException("can't redefine final member: " + oldMbr);
-			}
-
 			if (oldMbr.isStatic()) {
 				throw new RException("can't redefine static member: " + oldMbr);
 			}
@@ -202,7 +198,13 @@ public class SubjectUtil {
 				// Override
 				/*****************************************************/
 				if (oldFunc.getSignature().contentEquals(newFunc.getSignature())) {
+
+					if (oldMbr.isFinal()) {
+						throw new RException("can't redefine final member: " + oldMbr);
+					}
+
 					XRFunctionList.tryOverride(oldFunc, newFunc);
+				
 				}
 				/*****************************************************/
 				// Create Function List

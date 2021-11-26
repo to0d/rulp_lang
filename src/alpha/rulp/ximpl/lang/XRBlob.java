@@ -18,13 +18,10 @@ import alpha.rulp.utils.RulpUtil;
 
 public class XRBlob extends AbsAtomObject implements IRBlob {
 
-	private final String blobName;
-
 	private byte[] value;
 
-	public XRBlob(String blobName, int size) {
+	public XRBlob(int size) {
 
-		this.blobName = blobName;
 		this.value = new byte[size];
 		for (int i = 0; i < size; ++i) {
 			this.value[i] = 0;

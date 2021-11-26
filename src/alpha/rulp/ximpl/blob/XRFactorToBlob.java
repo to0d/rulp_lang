@@ -7,7 +7,7 @@
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-package alpha.rulp.ximpl.factor;
+package alpha.rulp.ximpl.blob;
 
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
@@ -17,21 +17,29 @@ import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 
-public class XRFactorBlobLength extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorToBlob extends AbsRFactorAdapter implements IRFactor {
 
-	public XRFactorBlobLength(String factorName) {
+	public XRFactorToBlob(String factorName) {
 		super(factorName);
 	}
 
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() != 2) {
+		if (args.size() != 3) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		return RulpFactory.createInteger(RulpUtil.asBlob(interpreter.compute(frame, args.get(1))).length());
+		String blobName = RulpUtil.asAtom(args.get(1)).getName();
+		int blobLen = RulpUtil.asInteger(args.get(2)).asInteger();
+
+		if (blobLen <= 0) {
+			throw new RException("invalid blob length: " + blobLen);
+		}
+
+		return RulpFactory.createBlob(blobLen);
 	}
 
 	@Override

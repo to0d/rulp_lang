@@ -61,6 +61,8 @@ import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.runtime.IRThreadContext;
 import alpha.rulp.runtime.IRTokener;
 import alpha.rulp.runtime.RName;
+import alpha.rulp.ximpl.blob.XRFactorBlobLength;
+import alpha.rulp.ximpl.blob.XRFactorMakeBlob;
 import alpha.rulp.ximpl.collection.XRFactorAddArrayToList;
 import alpha.rulp.ximpl.collection.XRFactorAddListToArray;
 import alpha.rulp.ximpl.collection.XRFactorAddListToList;
@@ -88,7 +90,6 @@ import alpha.rulp.ximpl.error.XRFactorReturn;
 import alpha.rulp.ximpl.error.XRFactorTry;
 import alpha.rulp.ximpl.factor.XRFactorAlias;
 import alpha.rulp.ximpl.factor.XRFactorArithmetic;
-import alpha.rulp.ximpl.factor.XRFactorBlobLength;
 import alpha.rulp.ximpl.factor.XRFactorBoolAnd;
 import alpha.rulp.ximpl.factor.XRFactorBoolNot;
 import alpha.rulp.ximpl.factor.XRFactorBoolOr;
@@ -104,7 +105,6 @@ import alpha.rulp.ximpl.factor.XRFactorEqual;
 import alpha.rulp.ximpl.factor.XRFactorIf;
 import alpha.rulp.ximpl.factor.XRFactorLet;
 import alpha.rulp.ximpl.factor.XRFactorLoop;
-import alpha.rulp.ximpl.factor.XRFactorMakeBlob;
 import alpha.rulp.ximpl.factor.XRFactorNameOf;
 import alpha.rulp.ximpl.factor.XRFactorRef;
 import alpha.rulp.ximpl.factor.XRFactorSetq;
@@ -338,9 +338,9 @@ public final class RulpFactory {
 		return new XRAtom(name);
 	}
 
-	public static IRBlob createBlob(String name, int len) {
+	public static IRBlob createBlob(int len) {
 		RType.BLOB.incCreateCount();
-		return new XRBlob(name, len);
+		return new XRBlob(len);
 	}
 
 	public static IRBoolean createBoolean(boolean value) {
