@@ -7,20 +7,22 @@
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-package alpha.rulp.ximpl.blob;
+package alpha.rulp.ximpl.string;
 
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.IRString;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 
-public class XRFactorToBlob extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorStrUpper extends AbsRFactorAdapter implements IRFactor {
 
-	public XRFactorToBlob(String factorName) {
+	public XRFactorStrUpper(String factorName) {
 		super(factorName);
 	}
 
@@ -31,7 +33,16 @@ public class XRFactorToBlob extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		return RulpUtil.toBlob(interpreter.compute(frame, args.get(1)));
+		IRString rst = RulpUtil.asString(interpreter.compute(frame, args.get(1)));
+
+		String str = rst.asString();
+		String newStr = str.toUpperCase();
+
+		if (str.equals(newStr)) {
+			return rst;
+		}
+
+		return RulpFactory.createString(newStr);
 	}
 
 	@Override

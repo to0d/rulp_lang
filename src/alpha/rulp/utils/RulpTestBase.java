@@ -44,9 +44,7 @@ public class RulpTestBase {
 		}
 	}
 
-	protected void _test_script() {
-		_test_script(getCachePath() + ".rulp");
-	}
+	static String BETA_RULP_PRE = "beta.rulp.";
 
 	protected static String _load(String path) {
 
@@ -70,6 +68,25 @@ public class RulpTestBase {
 		}
 	}
 
+	protected static String getClassPathName(Class<?> c, int tailIndex) {
+
+		if (c == null || tailIndex < 0) {
+			return null;
+		}
+
+		String fullName = c.getCanonicalName();
+		if (fullName == null) {
+			return null;
+		}
+
+		String[] names = fullName.split("\\.");
+		if (names == null || tailIndex >= names.length) {
+			return null;
+		}
+
+		return names[names.length - tailIndex - 1];
+	}
+
 	protected IRInterpreter _interpreter;
 
 	protected IRParser _parser = null;
@@ -89,7 +106,7 @@ public class RulpTestBase {
 		}
 
 		return _interpreter;
-	}
+	};
 
 	protected IRParser _getParser() {
 
@@ -97,7 +114,11 @@ public class RulpTestBase {
 			_parser = RulpFactory.createParser();
 		}
 		return _parser;
-	};
+	}
+
+	protected void _gInfo() {
+		_gInfo(getCachePath() + ".ginfo.txt");
+	}
 
 	protected void _gInfo(String outputPath) {
 
@@ -111,10 +132,6 @@ public class RulpTestBase {
 			e.printStackTrace();
 			fail(e.toString());
 		}
-	}
-
-	protected void _gInfo() {
-		_gInfo(getCachePath() + ".ginfo.txt");
 	}
 
 	protected void _setup() {
@@ -226,45 +243,8 @@ public class RulpTestBase {
 		}
 	}
 
-	protected String getPackageName() {
-		return this.getClass().getPackage().getName();
-	}
-
-	static String BETA_RULP_PRE = "beta.rulp.";
-
-	protected static String getClassPathName(Class<?> c, int tailIndex) {
-
-		if (c == null || tailIndex < 0) {
-			return null;
-		}
-
-		String fullName = c.getCanonicalName();
-		if (fullName == null) {
-			return null;
-		}
-
-		String[] names = fullName.split("\\.");
-		if (names == null || tailIndex >= names.length) {
-			return null;
-		}
-
-		return names[names.length - tailIndex - 1];
-	}
-
-	protected String getCachePath() {
-
-		String packageName = getPackageName();
-
-		if (!packageName.startsWith(BETA_RULP_PRE)) {
-			throw new RuntimeException("Invalid package: " + packageName);
-		}
-
-		String packageShortName = packageName.substring(BETA_RULP_PRE.length());
-		String className = getClassPathName(this.getClass(), 0);
-		String methodName = Thread.currentThread().getStackTrace()[3].getMethodName();
-
-		return "result" + File.separator + packageShortName + File.separator + className + File.separator + methodName;
-
+	protected void _test_script() {
+		_test_script(getCachePath() + ".rulp");
 	}
 
 	protected void _test_script(String scriptPath) {
@@ -417,5 +397,25 @@ public class RulpTestBase {
 			e.printStackTrace();
 			fail(String.format("error found in line: %s, file=%s", input, scriptPath));
 		}
+	}
+
+	protected String getCachePath() {
+
+		String packageName = getPackageName();
+
+		if (!packageName.startsWith(BETA_RULP_PRE)) {
+			throw new RuntimeException("Invalid package: " + packageName);
+		}
+
+		String packageShortName = packageName.substring(BETA_RULP_PRE.length());
+		String className = getClassPathName(this.getClass(), 0);
+		String methodName = Thread.currentThread().getStackTrace()[3].getMethodName();
+
+		return "result" + File.separator + packageShortName + File.separator + className + File.separator + methodName;
+
+	}
+
+	protected String getPackageName() {
+		return this.getClass().getPackage().getName();
 	}
 }

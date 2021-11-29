@@ -36,7 +36,7 @@ public class TestSet extends RulpTestBase {
 		_test("(set1::has '(a))", "true");
 		_test("(set1::has '(b))", "false");
 
-		_gInfo("result/collection/TestSet/test_set_1_ginfo.txt");
+		_gInfo();
 	}
 
 	@Test
@@ -81,26 +81,17 @@ public class TestSet extends RulpTestBase {
 	}
 
 	@Test
-	void test_set_5() {
+	void test_set_5_ls() {
 
 		_setup();
-		_test("(ls set)",
-				"'(set::?impl set::_set_add set::_set_clear set::_set_has set::_set_init set::_set_is_empty set::_set_size_of set::_set_to_list set::add set::clear set::has set::init set::is-empty set::size-of set::to-list)");
-
-		_test("(new set set1)", "set1");
-		_test("(ls set1)", "'(set1::?impl set1::init set1::this)");
-
-		_test("(set1::add 1)", "nil");
-		_test("(ls set1)", "'(set1::?impl set1::add set1::init set1::this)");
-
-		_test("(ls-print set)", "nil", _load("result/collection/TestSet/set_ls_print.txt") + "\n");
+		_test_script();
 	}
 
 	@Test
 	void test_set_6_final() {
 
 		_setup();
-		_test_script("result/collection/TestSet/test_set_6_final_set.rulp");
+		_test_script();
 	}
 
 	@Test

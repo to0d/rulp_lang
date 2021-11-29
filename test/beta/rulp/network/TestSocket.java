@@ -7,7 +7,7 @@ import alpha.rulp.utils.RulpTestBase;
 public class TestSocket extends RulpTestBase {
 
 	@Test
-	void test_1() {
+	void test_socket_1_ls() {
 
 		_setup();
 		_test_script();
@@ -15,11 +15,17 @@ public class TestSocket extends RulpTestBase {
 	}
 
 	@Test
-	void test_2() {
+	void test_socket_2_open() {
 
 		_setup();
 		_test_script();
 		_gInfo();
 	}
 
+	@Test
+	void test_socket_3_getLocalHost() {
+
+		_setup();
+		_test("(socket::getLocalHost)", "&?b1");
+	}
 }

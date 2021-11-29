@@ -63,6 +63,8 @@ import alpha.rulp.runtime.IRTokener;
 import alpha.rulp.runtime.RName;
 import alpha.rulp.ximpl.blob.XRFactorBlobLength;
 import alpha.rulp.ximpl.blob.XRFactorMakeBlob;
+import alpha.rulp.ximpl.blob.XRFactorToBlob;
+import alpha.rulp.ximpl.blob.XRFactorWriteBlob;
 import alpha.rulp.ximpl.collection.XRFactorAddArrayToList;
 import alpha.rulp.ximpl.collection.XRFactorAddListToArray;
 import alpha.rulp.ximpl.collection.XRFactorAddListToList;
@@ -198,6 +200,7 @@ import alpha.rulp.ximpl.string.XRFactorStrSubStr;
 import alpha.rulp.ximpl.string.XRFactorStrTrim;
 import alpha.rulp.ximpl.string.XRFactorStrTrimHead;
 import alpha.rulp.ximpl.string.XRFactorStrTrimTail;
+import alpha.rulp.ximpl.string.XRFactorStrUpper;
 import alpha.rulp.ximpl.string.XRFactorToString;
 import alpha.rulp.ximpl.subject.XRSubjectFrame;
 import alpha.rulp.ximpl.system.XRFactorDate;
@@ -234,6 +237,8 @@ public final class RulpFactory {
 	public static final IRList EMPTY_LIST;
 
 	private static final IRString EMPTY_STR = new XRString("");
+
+	private static final IRBlob emptyBlob = new XRBlob(0);
 
 	private static final XRBoolean False = new XRBoolean(false);
 
@@ -339,8 +344,23 @@ public final class RulpFactory {
 	}
 
 	public static IRBlob createBlob(int len) {
+
+		if (len <= 0) {
+			return emptyBlob;
+		}
+
 		RType.BLOB.incCreateCount();
 		return new XRBlob(len);
+	}
+
+	public static IRBlob createBlob(byte[] buf) {
+
+		if (buf == null || buf.length <= 0) {
+			return emptyBlob;
+		}
+
+		RType.BLOB.incCreateCount();
+		return new XRBlob(buf);
 	}
 
 	public static IRBoolean createBoolean(boolean value) {
@@ -633,8 +653,12 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDoWhenObjDeleted(F_DO_WHEN_OBJ_DELETED));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorRef(F_REF));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefConst(F_DEF_CONST));
+
+		// Blob
 		RulpUtil.addFrameObject(rootFrame, new XRFactorMakeBlob(F_MAKE_BLOB));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorBlobLength(F_BLOB_LENGTH));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorToBlob(F_TO_BLOB));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorWriteBlob(F_WRITE_BLOB));
 
 		// String
 		RulpUtil.addFrameObject(rootFrame, new XRFactorToString(F_TO_STRING));
@@ -656,6 +680,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorStrCharAt(F_STR_CHAR_AT));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorStrSplit(F_STR_SPLIT));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorStrReplace(F_STR_REPLACE));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorStrUpper(F_STR_UPPER));
 
 		// Arithmetic
 		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_ADD, RArithmeticOperator.ADD));

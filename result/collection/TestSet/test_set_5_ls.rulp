@@ -1,0 +1,39 @@
+(print-list (ls set))
+;out:
+set::?impl
+set::_set_add
+set::_set_clear
+set::_set_has
+set::_set_init
+set::_set_is_empty
+set::_set_size_of
+set::_set_to_list
+set::add
+set::clear
+set::has
+set::init
+set::is-empty
+set::size-of
+set::to-list
+;eof
+
+(new set set1)
+;=>set1
+
+(print-list (ls set1))
+;out:
+set1::?impl
+set1::init
+set1::this
+;eof
+
+(set1::add 1)
+;=>nil
+
+(print-list (ls set1))
+;out:
+;eof
+
+(ls-print set)
+;out:
+;eof

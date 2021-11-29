@@ -9,6 +9,7 @@
 
 package alpha.rulp.ximpl.blob;
 
+import alpha.rulp.lang.IRBlob;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -28,18 +29,17 @@ public class XRFactorWriteBlob extends AbsRFactorAdapter implements IRFactor {
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() != 3) {
+		if (args.size() != 6) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		String blobName = RulpUtil.asAtom(args.get(1)).getName();
-		int blobLen = RulpUtil.asInteger(args.get(2)).asInteger();
-
-		if (blobLen <= 0) {
-			throw new RException("invalid blob length: " + blobLen);
-		}
-
-		return RulpFactory.createBlob(blobLen);
+		IRBlob dstBlob = RulpUtil.asBlob(interpreter.compute(frame, args.get(1)));
+		int blobPos = RulpUtil.asInteger(interpreter.compute(frame, args.get(2))).asInteger();
+		IRBlob srcBlob = RulpUtil.asBlob(interpreter.compute(frame, args.get(3)));
+		int srcPos = RulpUtil.asInteger(interpreter.compute(frame, args.get(4))).asInteger();
+		int cpyLen = RulpUtil.asInteger(interpreter.compute(frame, args.get(5))).asInteger();
+		int len = dstBlob.write(blobPos, srcBlob.getValue(), srcPos, cpyLen);
+		return RulpFactory.createInteger(len);
 	}
 
 	@Override

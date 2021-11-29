@@ -1103,11 +1103,11 @@ public class RulpUtil {
 			return;
 		}
 
-		obj.decRef();
-	}
+		if (obj.asString() == null || obj.asString().equals("set1::?impl")) {
+			System.out.println();
+		}
 
-	public static boolean isNil(IRObject a) {
-		return a == null || a.getType() == RType.NIL;
+		obj.decRef();
 	}
 
 	public static boolean equal(IRObject a, IRObject b) throws RException {
@@ -1224,15 +1224,19 @@ public class RulpUtil {
 			return;
 		}
 
-//		if (RulpUtil.toString(obj).equals("DO")) {
-//			System.out.println();
-//		}
+		if (obj.asString() == null || obj.asString().equals("set1::?impl")) {
+			System.out.println();
+		}
 
 		obj.incRef();
 	}
 
 	public static boolean isAnonymousVar(String var) {
 		return var.equals(A_QUESTION);
+	}
+
+	public static boolean isAtom(IRObject obj) {
+		return obj.getType() == RType.ATOM;
 	}
 
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
@@ -1244,10 +1248,6 @@ public class RulpUtil {
 //
 //		return RulpUtil.asSubject(nsObj);
 //	}
-
-	public static boolean isAtom(IRObject obj) {
-		return obj.getType() == RType.ATOM;
-	}
 
 	public static boolean isAtom(IRObject obj, String name) {
 		return obj.getType() == RType.ATOM && ((IRAtom) obj).getName().equals(name);
@@ -1276,6 +1276,10 @@ public class RulpUtil {
 		}
 
 		return ((IRList) obj).getNamedName() != null;
+	}
+
+	public static boolean isNil(IRObject a) {
+		return a == null || a.getType() == RType.NIL;
 	}
 
 	public static boolean isPureAtomList(IRObject obj) throws RException {
@@ -1455,6 +1459,12 @@ public class RulpUtil {
 		});
 	}
 
+	public static void setMember(IRSubject subject, String name, IRFactorBody body, RAccessType accessType)
+			throws RException {
+
+		setMember(subject, name, new XRFactorWrapper(name, body, true), accessType);
+	}
+
 	public static void setMember(IRSubject subject, String name, IRObject obj) throws RException {
 		setMember(subject, name, obj, null);
 	}
@@ -1514,6 +1524,40 @@ public class RulpUtil {
 		return list;
 	}
 
+	public static IRBlob toBlob(IRObject a) throws RException {
+
+		switch (a.getType()) {
+		case BLOB:
+			return (IRBlob) a;
+
+		case INT:
+			IRBlob intBlob = RulpFactory.createBlob(4);
+			EncodeUtil.encode(RulpUtil.asInteger(a).asInteger(), intBlob.getValue(), 0);
+			return intBlob;
+
+		case LONG:
+			IRBlob longBlob = RulpFactory.createBlob(8);
+			EncodeUtil.encode(RulpUtil.asLong(a).asLong(), longBlob.getValue(), 0);
+			return longBlob;
+
+		case FLOAT:
+			IRBlob floatBlob = RulpFactory.createBlob(4);
+			EncodeUtil.encode(RulpUtil.asFloat(a).asFloat(), floatBlob.getValue(), 0);
+			return floatBlob;
+
+		case DOUBLE:
+			IRBlob doubleBlob = RulpFactory.createBlob(8);
+			EncodeUtil.encode(RulpUtil.asDouble(a).asDouble(), doubleBlob.getValue(), 0);
+			return doubleBlob;
+
+		case STRING:
+			return RulpFactory.createBlob(RulpUtil.asString(a).asString().getBytes());
+
+		default:
+			throw new RException(String.format("Not support type: %s", a.toString()));
+		}
+	}
+
 	public static boolean toBoolean(IRObject a) throws RException {
 
 		switch (a.getType()) {
@@ -1563,6 +1607,19 @@ public class RulpUtil {
 		}
 
 		return list;
+	}
+
+	public static long toLong(IRObject a) throws RException {
+
+		switch (a.getType()) {
+		case INT:
+			return ((IRInteger) a).asInteger();
+		case LONG:
+			return ((IRLong) a).asLong();
+
+		default:
+			throw new RException(String.format("Not support type: %s", a.toString()));
+		}
 	}
 
 	public static String toString(IRObject obj) throws RException {

@@ -22,28 +22,17 @@ public class XRBlob extends AbsAtomObject implements IRBlob {
 
 	public XRBlob(int size) {
 
-		this.value = new byte[size];
-		for (int i = 0; i < size; ++i) {
-			this.value[i] = 0;
+		if (size > 0) {
+			this.value = new byte[size];
+			for (int i = 0; i < size; ++i) {
+				this.value[i] = 0;
+			}
 		}
 	}
 
-	@Override
-	public String asString() {
-		try {
-			return RulpUtil.toString(this);
-		} catch (RException e) {
-			e.printStackTrace();
-			return e.toString();
-		}
-	}
-
-	public int read(int blob_pos, byte[] buf, int buf_pos, int length) throws RException {
-		return _copy(blob_pos, buf, buf_pos, length, true);
-	}
-
-	public int write(int blob_pos, byte[] buf, int buf_pos, int length) throws RException {
-		return _copy(blob_pos, buf, buf_pos, length, false);
+	public XRBlob(byte[] buf) {
+		this.value = new byte[buf.length];
+		System.arraycopy(buf, 0, value, 0, buf.length);
 	}
 
 	protected int _copy(int blob_pos, byte[] buf, int buf_pos, int length, boolean read) throws RException {
@@ -75,6 +64,16 @@ public class XRBlob extends AbsAtomObject implements IRBlob {
 	}
 
 	@Override
+	public String asString() {
+		try {
+			return RulpUtil.toString(this);
+		} catch (RException e) {
+			e.printStackTrace();
+			return e.toString();
+		}
+	}
+
+	@Override
 	public byte get(int index) throws RException {
 
 		if (index < 0 || index >= length()) {
@@ -99,6 +98,10 @@ public class XRBlob extends AbsAtomObject implements IRBlob {
 		return value.length;
 	}
 
+	public int read(int blob_pos, byte[] buf, int buf_pos, int length) throws RException {
+		return _copy(blob_pos, buf, buf_pos, length, true);
+	}
+
 	@Override
 	public void set(int index, byte value) throws RException {
 
@@ -118,6 +121,10 @@ public class XRBlob extends AbsAtomObject implements IRBlob {
 			e.printStackTrace();
 			return e.toString();
 		}
+	}
+
+	public int write(int blob_pos, byte[] buf, int buf_pos, int length) throws RException {
+		return _copy(blob_pos, buf, buf_pos, length, false);
 	}
 
 }

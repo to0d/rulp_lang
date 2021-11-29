@@ -1,0 +1,41 @@
+(let ($idx 1) 
+    (loop for ?x in (ls root) do 
+        (if (not (equal (type-of $(value-of (value-of ?x))) var)) 
+            (continue))
+        (print $idx ":"  (type-of $(value-of (value-of ?x))) ", name=" (name-of ?x) "\n") 
+        (setq $idx (+ $idx 1))))
+;=>nil
+;out:
+1:var, name=?file.separator
+2:var, name=?op-cps
+3:var, name=?op-stable
+4:var, name=?os.name
+5:var, name=?os.version
+6:var, name=?path.separator
+7:var, name=?trace
+8:var, name=?user.dir
+9:var, name=?user.home
+10:var, name=?user.name
+;eof
+
+(let ($idx 1) 
+    (loop for ?x in (ls system) do 
+        (if (not (equal (type-of $(value-of (value-of ?x))) var)) 
+            (continue))
+        (print $idx ":"  (type-of $(value-of (value-of ?x))) ", name=" (name-of ?x) "\n") 
+        (setq $idx (+ $idx 1))))
+;=>nil
+;out:
+1:var, name=?load-paths
+;eof
+
+
+(let ($idx 1) 
+    (loop for ?x in (ls main) do 
+        (if (not (equal (type-of $(value-of (value-of ?x))) var)) 
+            (continue))
+        (print $idx ":"  (type-of $(value-of (value-of ?x))) ", name=" (name-of ?x) "\n") 
+        (setq $idx (+ $idx 1))))
+;=>nil
+;out:
+;eof

@@ -58,20 +58,7 @@ public class XRFactorLsTest extends RulpTestBase {
 	public void test_3_env_vars() {
 
 		_setup();
-		_test("(let ($idx 1) (loop for ?x in (ls root) do "
-				+ "(if (not (equal (type-of $(value-of (value-of ?x))) var)) (continue)) "
-				+ "(print $idx \":\"  (type-of $(value-of (value-of ?x))) \", name=\" (name-of ?x) \"\\n\") (setq $idx (+ $idx 1)) ))",
-				"nil", _load("result/factor/XRFactorLsTest/root_ls_var.txt") + "\n");
-
-		_test("(let ($idx 1) (loop for ?x in (ls system) do "
-				+ "(if (not (equal (type-of $(value-of (value-of ?x))) var)) (continue)) "
-				+ "(print $idx \":\"  (type-of $(value-of (value-of ?x))) \", name=\" (name-of ?x) \"\\n\") (setq $idx (+ $idx 1)) ))",
-				"nil", _load("result/factor/XRFactorLsTest/system_ls_var.txt") + "\n");
-
-		_test("(let ($idx 1) (loop for ?x in (ls main) do "
-				+ "(if (not (equal (type-of $(value-of (value-of ?x))) var)) (continue)) "
-				+ "(print $idx \":\"  (type-of $(value-of (value-of ?x))) \", name=\" (name-of ?x) \"\\n\") (setq $idx (+ $idx 1)) ))",
-				"nil", _load("result/factor/XRFactorLsTest/main_ls_var.txt"));
+		_test_script();
 	}
 
 	@Test

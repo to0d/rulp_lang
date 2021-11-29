@@ -257,8 +257,14 @@
     (defun write (?val)
         (socket::_socket_write ?impl ?val) final)
         
-    (defun write ((?blob blob) (?pos int) (?len int))
+    (defun write-blob ((?blob blob) (?pos int) (?len int))
         (socket::_socket_write_blob ?impl ?blob ?pos ?len) final)
+
+    (defun read ((?type atom))
+        (return (socket::_socket_read ?impl ?type)) final)
+    
+    (defun read-blob ((?blob blob) (?pos int) (?len int))
+        (socket::_socket_read_blob ?impl ?blob ?pos ?len) final)
         
     (defun getLocalHost () 
         (return (socket::_socket_getLocalHost)) static)

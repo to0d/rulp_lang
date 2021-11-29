@@ -10,11 +10,6 @@ public class EncodeUtil {
 
 	public final static long LONG_MASK_0_BYTE = 0xff;
 
-	public static int encode(double value, byte[] buf, int offset) {
-		Double.doubleToLongBits(value);
-		return encode(Double.doubleToLongBits(value), buf, offset);
-	}
-
 	public static String convertBytesToHexString(byte[] b, int pos, int len) {
 
 		StringBuilder sb = new StringBuilder();
@@ -31,7 +26,13 @@ public class EncodeUtil {
 		return sb.toString();
 	}
 
+	public static int encode(double value, byte[] buf, int offset) {
+		Double.doubleToLongBits(value);
+		return encode(Double.doubleToLongBits(value), buf, offset);
+	}
+
 	public static int encode(float value, byte[] buf, int offset) {
+
 		return encode(Float.floatToRawIntBits(value), buf, offset);
 	}
 

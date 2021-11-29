@@ -160,6 +160,10 @@ public interface Constant {
 	String F_B_OR = "or";
 
 	String F_BLOB_LENGTH = "blob-length";
+	
+	String F_TO_BLOB = "to-blob";
+	
+	String F_WRITE_BLOB = "write-blob";
 
 	String F_BREAK = "break";
 
@@ -336,6 +340,8 @@ public interface Constant {
 	String F_STR_MATCH = "str-match";
 
 	String F_STR_REPLACE = "str-replace";
+	
+	String F_STR_UPPER = "str-upper";
 
 	String F_STR_SPLIT = "str-split";
 

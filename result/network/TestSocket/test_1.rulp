@@ -1,5 +1,0 @@
-(property-of socket)
-;=>'(final)
-
-(ls socket)
-;=>'(socket::?impl socket::_socket_close socket::_socket_getHostAddress socket::_socket_getLocalHost socket::_socket_init socket::_socket_open socket::_socket_write socket::close socket::getHostAddress socket::getLocalHost socket::init socket::open socket::write)

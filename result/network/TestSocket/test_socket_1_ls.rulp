@@ -1,0 +1,48 @@
+(property-of socket)
+;=>'(final)
+
+(print-list (ls socket))
+;out:
+socket::?impl
+socket::_socket_close
+socket::_socket_getHostAddress
+socket::_socket_getLocalHost
+socket::_socket_init
+socket::_socket_open
+socket::_socket_read
+socket::_socket_read_blob
+socket::_socket_write
+socket::_socket_write_blob
+socket::close
+socket::getHostAddress
+socket::getLocalHost
+socket::init
+socket::open
+socket::read
+socket::read-blob
+socket::write
+socket::write-blob
+;eof
+
+(ls-print socket)
+;out:
+mbr=?impl, access deny
+mbr=_socket_close, access deny
+mbr=_socket_getHostAddress, access deny
+mbr=_socket_getLocalHost, access deny
+mbr=_socket_init, access deny
+mbr=_socket_open, access deny
+mbr=_socket_read, access deny
+mbr=_socket_read_blob, access deny
+mbr=_socket_write, access deny
+mbr=_socket_write_blob, access deny
+mbr=close, name=(close), type=func, property='(default final)
+mbr=getHostAddress, name=(getHostAddress), type=func, property='(default static)
+mbr=getLocalHost, name=(getLocalHost), type=func, property='(default static)
+mbr=init, name=(init nil nil), type=func, property='(default final)
+mbr=open, name=(open), type=func, property='(default final)
+mbr=read, name=(read atom), type=func, property='(default final)
+mbr=read-blob, name=(read-blob blob int int), type=func, property='(default final)
+mbr=write, name=(write nil), type=func, property='(default final)
+mbr=write-blob, name=(write-blob blob int int), type=func, property='(default final)
+;eof

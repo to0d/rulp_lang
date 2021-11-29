@@ -136,12 +136,14 @@ root::str-substr
 root::str-trim
 root::str-trim-head
 root::str-trim-tail
+root::str-upper
 root::strcat
 root::string
 root::subject-of
 root::sys-gc
 root::sys-time
 root::to-atom
+root::to-blob
 root::to-int
 root::to-named-list
 root::to-nonamed-list
@@ -157,3 +159,4 @@ root::value-of
 root::value-type-of
 root::var
 root::when
+root::write-blob
