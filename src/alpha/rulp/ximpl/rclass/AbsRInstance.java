@@ -84,7 +84,7 @@ public abstract class AbsRInstance extends AbsRSubject implements IRInstance {
 				IRObject insMbrVal = null;
 
 				// for static member, use it directly
-				if (classMbr.isStatic()) {
+				if (RulpUtil.isPropertyStatic(classMbr)) {
 
 					switch (classMbrVal.getType()) {
 					case FUNC:
@@ -154,9 +154,8 @@ public abstract class AbsRInstance extends AbsRSubject implements IRInstance {
 
 				objMbr = RulpFactory.createMember(this, name, insMbrVal);
 				objMbr.setAccessType(classMbr.getAccessType());
-				objMbr.setFinal(classMbr.isFinal());
-				objMbr.setStatic(classMbr.isStatic());
-				objMbr.setInherit(true);
+				objMbr.setProperty(classMbr.getProperty());
+				RulpUtil.setPropertyInherit(objMbr, true);
 
 				this.setMember(name, objMbr);
 			}

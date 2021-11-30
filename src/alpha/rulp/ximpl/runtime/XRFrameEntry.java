@@ -87,6 +87,11 @@ public class XRFrameEntry extends AbsAtomObject implements IRMember, IRFrameEntr
 	}
 
 	@Override
+	public int getProperty() {
+		return 0;
+	}
+
+	@Override
 	public IRSubject getSubject() {
 		return frame;
 	}
@@ -102,33 +107,8 @@ public class XRFrameEntry extends AbsAtomObject implements IRMember, IRFrameEntr
 	}
 
 	@Override
-	public boolean isFinal() {
-		return false;
-	}
-
-	@Override
-	public boolean isInherit() {
-		return false;
-	}
-
-	@Override
-	public boolean isStatic() {
-		return false;
-	}
-
-	@Override
 	public void setAccessType(RAccessType accessType) throws RException {
 		throw new RException("unable to update accessType for frame entry");
-	}
-
-	@Override
-	public void setFinal(boolean bFinal) throws RException {
-		throw new RException("unable to set final for frame entry");
-	}
-
-	@Override
-	public void setInherit(boolean bInherit) throws RException {
-		throw new RException("unable to set inherit for frame entry");
 	}
 
 	public void setObject(IRObject object) {
@@ -136,8 +116,8 @@ public class XRFrameEntry extends AbsAtomObject implements IRMember, IRFrameEntr
 	}
 
 	@Override
-	public void setStatic(boolean bStatic) throws RException {
-		throw new RException("unable to set static for frame entry");
+	public void setProperty(int property) throws RException {
+		throw new RException("unable to set property for frame entry");
 	}
 
 	public String toString() {

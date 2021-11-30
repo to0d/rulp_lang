@@ -79,10 +79,10 @@ Global Subject list:
 
 name=ns1, lvl=1, ref=1/1, parent=namespace, final=false, mbrs=2, frame=3(SF-ns1-0)
 ==========================================================================================================================
-Name                 : Access   Final    Static   Ref  Type       Value
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-this                 : DEFAULT  false    false    1    instance   ns1 : class=namespace
-var1                 : DEFAULT  false    false    1    var        1 : type=int
+this                 : DEFAULT                      0    1    instance   ns1 : class=namespace
+var1                 : DEFAULT                      0    1    var        1 : type=int
 ==========================================================================================================================
 
 

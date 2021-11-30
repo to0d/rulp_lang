@@ -1,15 +1,15 @@
 name=o1, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=null
 ==========================================================================================================================
-Name                 : Access   Final    Static   Ref  Type       Value
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-fun1                 : DEFAULT  false    true     2    func       (fun1 nil) : frame=main
-this                 : DEFAULT  false    false    1    instance   o1 : class=class1
+fun1                 : DEFAULT       Y      Y       6    2    func       (fun1 nil) : frame=main
+this                 : DEFAULT                      0    1    instance   o1 : class=class1
 ==========================================================================================================================
 
 name=class1, lvl=0, ref=2/2, parent=null, final=false, mbrs=1, frame=3(SF-class1-0)
 ==========================================================================================================================
-Name                 : Access   Final    Static   Ref  Type       Value
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-fun1                 : DEFAULT  false    true     2    func       (fun1 nil) : frame=main
+fun1                 : DEFAULT       Y              2    2    func       (fun1 nil) : frame=main
 ==========================================================================================================================
 

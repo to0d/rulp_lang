@@ -1,8 +1,8 @@
 name=class2, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=null
 ==========================================================================================================================
-Name                 : Access   Final    Static   Ref  Type       Value
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-fun1                 : DEFAULT  false    true     1    func       (fun1 nil) : frame=main
-super                : DEFAULT  false    false    2    class      class1
+fun1                 : DEFAULT       Y              2    1    func       (fun1 nil) : frame=main
+super                : DEFAULT                      0    2    class      class1
 ==========================================================================================================================
 

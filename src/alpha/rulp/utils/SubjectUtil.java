@@ -42,11 +42,11 @@ public class SubjectUtil {
 						oldMbr.getValue().getType(), RType.VAR));
 			}
 
-			if (oldMbr.isFinal()) {
+			if (RulpUtil.isPropertyFinal(oldMbr)) {
 				throw new RException("can't redefine final member variable: " + oldMbr);
 			}
 
-			if (!oldMbr.isInherit()) {
+			if (!RulpUtil.isPropertyInherit(oldMbr)) {
 				throw new RException("duplicate member variable: " + oldMbr);
 			}
 		}
@@ -116,14 +116,8 @@ public class SubjectUtil {
 			mbr.setAccessType(accessType);
 		}
 
-		if (bFinal) {
-			mbr.setFinal(true);
-		}
-
-		if (bStatic) {
-			mbr.setStatic(true);
-		}
-
+		RulpUtil.setPropertyFinal(mbr, bFinal);
+		RulpUtil.setPropertyStatic(mbr, bStatic);
 	}
 
 	public static IRMember defineMemberFun(IRSubject sub, String mbrName, IRList mbrExpr, IRInterpreter interpreter,
@@ -177,7 +171,7 @@ public class SubjectUtil {
 				throw new RException("can't redefine member<" + oldMbr + "> to fun");
 			}
 
-			if (oldMbr.isStatic()) {
+			if (RulpUtil.isPropertyStatic(oldMbr)) {
 				throw new RException("can't redefine static member: " + oldMbr);
 			}
 
@@ -199,12 +193,12 @@ public class SubjectUtil {
 				/*****************************************************/
 				if (oldFunc.getSignature().contentEquals(newFunc.getSignature())) {
 
-					if (oldMbr.isFinal()) {
+					if (RulpUtil.isPropertyFinal(oldMbr)) {
 						throw new RException("can't redefine final member: " + oldMbr);
 					}
 
 					XRFunctionList.tryOverride(oldFunc, newFunc);
-				
+
 				}
 				/*****************************************************/
 				// Create Function List

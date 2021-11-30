@@ -1,9 +1,9 @@
 name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=1, frame=null
 ==========================================================================================================================
-Name                 : Access   Final    Static   Ref  Type       Value
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-fun1                 : DEFAULT  false    false    1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
-                                                  2    func       (fun1 nil) : frame=main
-                                                  1    func       (fun1 nil nil) : frame=main
+fun1                 : DEFAULT                      0    1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
+                                                         2    func       (fun1 nil) : frame=main
+                                                         1    func       (fun1 nil nil) : frame=main
 ==========================================================================================================================
 

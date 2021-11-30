@@ -46,11 +46,11 @@ public class XRFactorPropertyOf extends AbsRFactorAdapter implements IRFactor {
 			IRMember mbr = RulpUtil.asMember(obj);
 			properties.add(RAccessType.toObject(mbr.getAccessType()));
 
-			if (mbr.isFinal()) {
+			if (RulpUtil.isPropertyFinal(mbr)) {
 				properties.add(O_Final);
 			}
 
-			if (mbr.isStatic()) {
+			if (RulpUtil.isPropertyStatic(mbr)) {
 				properties.add(O_Static);
 			}
 

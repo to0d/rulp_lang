@@ -109,17 +109,17 @@ Global Subject list:
 
 name=s1, lvl=1, ref=1/2, parent=stack, final=false, mbrs=9, frame=4(SF-s1-1)
 ==========================================================================================================================
-Name                 : Access   Final    Static   Ref  Type       Value
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE  false    false    1    var        null : type=instance
-clear                : DEFAULT  true     false    1    func       (clear) : frame=SF-s1-1, type=lambda
-init                 : DEFAULT  true     false    1    func       (init) : frame=SF-s1-1, type=lambda
-is-empty             : DEFAULT  true     false    1    func       (is-empty) : frame=SF-s1-1, type=lambda
-pop                  : DEFAULT  true     false    1    func       (pop) : frame=SF-s1-1, type=lambda
-push                 : DEFAULT  true     false    1    func       (push nil) : frame=SF-s1-1, type=lambda
-size-of              : DEFAULT  true     false    1    func       (size-of) : frame=SF-s1-1, type=lambda
-this                 : DEFAULT  false    false    1    instance   s1 : class=stack
-to-list              : DEFAULT  true     false    1    func       (to-list) : frame=SF-s1-1, type=lambda
+?impl                : PRIVATE              Y       4    1    var        null : type=instance
+clear                : DEFAULT Y            Y       5    1    func       (clear) : frame=SF-s1-1, type=lambda
+init                 : DEFAULT Y            Y       5    1    func       (init) : frame=SF-s1-1, type=lambda
+is-empty             : DEFAULT Y            Y       5    1    func       (is-empty) : frame=SF-s1-1, type=lambda
+pop                  : DEFAULT Y            Y       5    1    func       (pop) : frame=SF-s1-1, type=lambda
+push                 : DEFAULT Y            Y       5    1    func       (push nil) : frame=SF-s1-1, type=lambda
+size-of              : DEFAULT Y            Y       5    1    func       (size-of) : frame=SF-s1-1, type=lambda
+this                 : DEFAULT                      0    1    instance   s1 : class=stack
+to-list              : DEFAULT Y            Y       5    1    func       (to-list) : frame=SF-s1-1, type=lambda
 ==========================================================================================================================
 
 

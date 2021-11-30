@@ -89,14 +89,14 @@ Global Subject list:
 
 name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
 ==========================================================================================================================
-Name                 : Access   Final    Static   Ref  Type       Value
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?value               : DEFAULT  false    false    1    var        null
-get                  : DEFAULT  false    false    1    func       (get) : frame=main
-init                 : DEFAULT  false    false    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
-                                                  3    func       (init) : frame=main
-                                                  2    func       (init nil) : frame=main
-                                                  1    func       (init nil nil) : frame=main
+?value               : DEFAULT                      0    1    var        null
+get                  : DEFAULT                      0    1    func       (get) : frame=main
+init                 : DEFAULT                      0    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
+                                                         3    func       (init) : frame=main
+                                                         2    func       (init nil) : frame=main
+                                                         1    func       (init nil nil) : frame=main
 ==========================================================================================================================
 
 

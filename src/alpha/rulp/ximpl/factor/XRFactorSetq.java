@@ -55,7 +55,7 @@ public class XRFactorSetq extends AbsRFactorAdapter implements IRFactor {
 				throw new RException("Can't access member<" + mbr + "> in frame<" + frame + ">");
 			}
 
-			if (mbr.isFinal()) {
+			if (RulpUtil.isPropertyFinal(mbr)) {
 				throw new RException("Can't update final member: " + mbr);
 			}
 

@@ -96,13 +96,13 @@ Global Subject list:
 
 name=ns1, lvl=1, ref=1/2, parent=namespace, final=false, mbrs=5, frame=4(SF-ns1-0)
 ==========================================================================================================================
-Name                 : Access   Final    Static   Ref  Type       Value
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-f1                   : DEFAULT  false    false    1    func       (f1) : frame=main
-f2                   : DEFAULT  false    false    1    func       (f2) : frame=main
-this                 : DEFAULT  false    false    1    instance   ns1 : class=namespace
-var1                 : DEFAULT  false    false    1    var        2 : type=int
-var2                 : DEFAULT  false    false    1    var        3 : type=int
+f1                   : DEFAULT                      0    1    func       (f1) : frame=main
+f2                   : DEFAULT                      0    1    func       (f2) : frame=main
+this                 : DEFAULT                      0    1    instance   ns1 : class=namespace
+var1                 : DEFAULT                      0    1    var        2 : type=int
+var2                 : DEFAULT                      0    1    var        3 : type=int
 ==========================================================================================================================
 
 

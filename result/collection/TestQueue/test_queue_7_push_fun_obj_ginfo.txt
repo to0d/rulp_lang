@@ -95,13 +95,13 @@ Global Subject list:
 
 name=q1, lvl=1, ref=1/2, parent=queue, final=false, mbrs=5, frame=4(SF-q1-1)
 ==========================================================================================================================
-Name                 : Access   Final    Static   Ref  Type       Value
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE  false    false    1    var        null : type=instance
-init                 : DEFAULT  true     false    1    func       (init) : frame=SF-q1-1, type=lambda
-push                 : DEFAULT  true     false    1    func       (push nil) : frame=SF-q1-1, type=lambda
-this                 : DEFAULT  false    false    1    instance   q1 : class=queue
-to-list              : DEFAULT  true     false    1    func       (to-list) : frame=SF-q1-1, type=lambda
+?impl                : PRIVATE              Y       4    1    var        null : type=instance
+init                 : DEFAULT Y            Y       5    1    func       (init) : frame=SF-q1-1, type=lambda
+push                 : DEFAULT Y            Y       5    1    func       (push nil) : frame=SF-q1-1, type=lambda
+this                 : DEFAULT                      0    1    instance   q1 : class=queue
+to-list              : DEFAULT Y            Y       5    1    func       (to-list) : frame=SF-q1-1, type=lambda
 ==========================================================================================================================
 
 

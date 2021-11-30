@@ -19,6 +19,9 @@ import static alpha.rulp.lang.Constant.O_New;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.T_Atom;
 import static alpha.rulp.lang.Constant.T_Instance;
+import static alpha.rulp.lang.IRMember.MBR_PROP_FINAL;
+import static alpha.rulp.lang.IRMember.MBR_PROP_INHERIT;
+import static alpha.rulp.lang.IRMember.MBR_PROP_STATIC;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -1467,6 +1470,57 @@ public class RulpUtil {
 			mbr.setAccessType(accessType);
 		}
 		subject.setMember(name, mbr);
+	}
+
+	public static boolean isPropertyFinal(IRMember mbr) {
+		return (MBR_PROP_FINAL & mbr.getProperty()) != 0;
+	}
+
+	public static boolean isPropertyInherit(IRMember mbr) {
+		return (MBR_PROP_INHERIT & mbr.getProperty()) != 0;
+	}
+
+	public static boolean isPropertyStatic(IRMember mbr) {
+		return (MBR_PROP_STATIC & mbr.getProperty()) != 0;
+	}
+
+	public static void setPropertyFinal(IRMember mbr, boolean bValue) throws RException {
+
+		if (isPropertyFinal(mbr) == bValue) {
+			return;
+		}
+
+		if (bValue) {
+			mbr.setProperty(mbr.getProperty() | MBR_PROP_FINAL);
+		} else {
+			mbr.setProperty(mbr.getProperty() & ~MBR_PROP_FINAL);
+		}
+	}
+
+	public static void setPropertyInherit(IRMember mbr, boolean bValue) throws RException {
+
+		if (isPropertyInherit(mbr) == bValue) {
+			return;
+		}
+
+		if (bValue) {
+			mbr.setProperty(mbr.getProperty() | MBR_PROP_INHERIT);
+		} else {
+			mbr.setProperty(mbr.getProperty() & ~MBR_PROP_INHERIT);
+		}
+	}
+
+	public static void setPropertyStatic(IRMember mbr, boolean bValue) throws RException {
+
+		if (isPropertyStatic(mbr) == bValue) {
+			return;
+		}
+
+		if (bValue) {
+			mbr.setProperty(mbr.getProperty() | MBR_PROP_STATIC);
+		} else {
+			mbr.setProperty(mbr.getProperty() & ~MBR_PROP_STATIC);
+		}
 	}
 
 	public static List<IRObject> subList(IRList l1, int begin, int end) throws RException {

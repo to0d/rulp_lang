@@ -94,26 +94,26 @@ Global Subject list:
 
 name=ns1, lvl=1, ref=1/2, parent=namespace, final=false, mbrs=2, frame=3(SF-ns1-0)
 ==========================================================================================================================
-Name                 : Access   Final    Static   Ref  Type       Value
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-ns2                  : DEFAULT  false    false    1    instance   ns2 : class=namespace
-this                 : DEFAULT  false    false    1    instance   ns1 : class=namespace
+ns2                  : DEFAULT                      0    1    instance   ns2 : class=namespace
+this                 : DEFAULT                      0    1    instance   ns1 : class=namespace
 ==========================================================================================================================
 
 name=ns2, lvl=1, ref=1/2, parent=namespace, final=false, mbrs=2, frame=5(SF-ns2-1)
 ==========================================================================================================================
-Name                 : Access   Final    Static   Ref  Type       Value
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-ns3                  : DEFAULT  false    false    1    instance   ns3 : class=namespace
-this                 : DEFAULT  false    false    1    instance   ns2 : class=namespace
+ns3                  : DEFAULT                      0    1    instance   ns3 : class=namespace
+this                 : DEFAULT                      0    1    instance   ns2 : class=namespace
 ==========================================================================================================================
 
 name=ns3, lvl=1, ref=1/2, parent=namespace, final=false, mbrs=2, frame=6(SF-ns3-2)
 ==========================================================================================================================
-Name                 : Access   Final    Static   Ref  Type       Value
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-this                 : DEFAULT  false    false    1    instance   ns3 : class=namespace
-var3                 : DEFAULT  false    false    1    var        1 : type=int
+this                 : DEFAULT                      0    1    instance   ns3 : class=namespace
+var3                 : DEFAULT                      0    1    var        1 : type=int
 ==========================================================================================================================
 
 

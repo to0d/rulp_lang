@@ -22,13 +22,9 @@ public class XRMember extends AbsRefObject implements IRMember {
 
 	private RAccessType accessType = RAccessType.DEFAULT;
 
-	private boolean bFinal = false;
-
-	private boolean bInherit = false;
-
-	private boolean bStatic = false;
-
 	private String name;
+
+	private int property = 0;
 
 	private IRObject subject;
 
@@ -77,43 +73,23 @@ public class XRMember extends AbsRefObject implements IRMember {
 	}
 
 	@Override
-	public boolean isFinal() {
-		return bFinal;
-	}
-
-	@Override
-	public boolean isInherit() {
-		return bInherit;
-	}
-
-	@Override
-	public boolean isStatic() {
-		return bStatic;
-	}
-
-	@Override
 	public void setAccessType(RAccessType accessType) throws RException {
 		this.accessType = accessType;
 	}
 
 	@Override
-	public void setFinal(boolean bFinal) {
-		this.bFinal = bFinal;
-	}
-
-	@Override
-	public void setInherit(boolean bInherit) throws RException {
-		this.bInherit = bInherit;
-	}
-
-	@Override
-	public void setStatic(boolean bStatic) throws RException {
-		this.bStatic = bStatic;
-	}
-
-	@Override
 	public String toString() {
 		return asString();
+	}
+
+	@Override
+	public int getProperty() {
+		return property;
+	}
+
+	@Override
+	public void setProperty(int property) {
+		this.property = property;
 	}
 
 }

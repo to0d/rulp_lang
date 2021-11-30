@@ -1,23 +1,23 @@
 name=o2, lvl=2, ref=1/1, parent=class2, final=false, mbrs=2, frame=6(SF-o2-3)
 ==========================================================================================================================
-Name                 : Access   Final    Static   Ref  Type       Value
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-fun1                 : DEFAULT  false    false    1    func       (fun1 nil) : frame=SF-o2-3, type=lambda
-this                 : DEFAULT  false    false    1    instance   o2 : class=class2
+fun1                 : DEFAULT              Y       4    1    func       (fun1 nil) : frame=SF-o2-3, type=lambda
+this                 : DEFAULT                      0    1    instance   o2 : class=class2
 ==========================================================================================================================
 
 name=class2, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=5(SF-class2-2)
 ==========================================================================================================================
-Name                 : Access   Final    Static   Ref  Type       Value
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-fun1                 : DEFAULT  false    false    1    func       (fun1 nil) : frame=main
-super                : DEFAULT  false    false    2    class      class1
+fun1                 : DEFAULT                      0    1    func       (fun1 nil) : frame=main
+super                : DEFAULT                      0    2    class      class1
 ==========================================================================================================================
 
 name=class1, lvl=0, ref=2/2, parent=null, final=false, mbrs=1, frame=3(SF-class1-0)
 ==========================================================================================================================
-Name                 : Access   Final    Static   Ref  Type       Value
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-fun1                 : DEFAULT  false    false    1    func       (fun1 nil) : frame=main
+fun1                 : DEFAULT                      0    1    func       (fun1 nil) : frame=main
 ==========================================================================================================================
 

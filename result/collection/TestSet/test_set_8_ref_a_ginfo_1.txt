@@ -107,12 +107,12 @@ Global Subject list:
 
 name=s1, lvl=1, ref=2/2, parent=set, final=false, mbrs=4, frame=4(SF-s1-1)
 ==========================================================================================================================
-Name                 : Access   Final    Static   Ref  Type       Value
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE  false    false    1    var        null : type=instance
-add                  : DEFAULT  true     false    1    func       (add nil) : frame=SF-s1-1, type=lambda
-init                 : DEFAULT  true     false    1    func       (init) : frame=SF-s1-1, type=lambda
-this                 : DEFAULT  false    false    2    instance   s1 : class=set
+?impl                : PRIVATE              Y       4    1    var        null : type=instance
+add                  : DEFAULT Y            Y       5    1    func       (add nil) : frame=SF-s1-1, type=lambda
+init                 : DEFAULT Y            Y       5    1    func       (init) : frame=SF-s1-1, type=lambda
+this                 : DEFAULT                      0    2    instance   s1 : class=set
 ==========================================================================================================================
 
 
