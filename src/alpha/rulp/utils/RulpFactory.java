@@ -149,7 +149,6 @@ import alpha.rulp.ximpl.lang.XRVar;
 import alpha.rulp.ximpl.math.XRFactorRandom;
 import alpha.rulp.ximpl.namespace.XRNameSpace;
 import alpha.rulp.ximpl.namespace.XRNameSpaceClass;
-import alpha.rulp.ximpl.network.XRSocket;
 import alpha.rulp.ximpl.optimize.XRFactorMakeCPS;
 import alpha.rulp.ximpl.rclass.XRDefClass;
 import alpha.rulp.ximpl.rclass.XRDefInstance;
@@ -512,11 +511,6 @@ public final class RulpFactory {
 		return new XRSet(RuntimeUtil.getNoClass(interpreter));
 	}
 
-	public static IRInstance createInstanceOfSocket(String addr, int port) {
-		RType.INSTANCE.incCreateCount();
-		return new XRSocket(addr, port);
-	}
-
 	public static IRInteger createInteger(int i) {
 
 		if (i >= IntegerCache.low && i <= IntegerCache.high) {
@@ -771,7 +765,6 @@ public final class RulpFactory {
 		// Native Class Initialization
 		XRSet.init(interpreter, systemFrame);
 		XRMap.init(interpreter, systemFrame);
-		XRSocket.init(interpreter, systemFrame);
 		XRQueue.init(interpreter, systemFrame);
 
 		/******************************************************/

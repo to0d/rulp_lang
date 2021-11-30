@@ -14,7 +14,6 @@ system::queue
 system::root
 system::set
 system::size-of
-system::socket
 system::stack
 system::system
 system::to-array
@@ -22,6 +21,5 @@ system::to-list
 system::type#map
 system::type#queue
 system::type#set
-system::type#socket
 system::type#stack
 system::use

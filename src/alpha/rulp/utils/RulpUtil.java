@@ -71,7 +71,6 @@ import alpha.rulp.runtime.IRTemplate.TemplateParaEntry;
 import alpha.rulp.runtime.RName;
 import alpha.rulp.ximpl.collection.XRMap;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
-import alpha.rulp.ximpl.network.XRSocket;
 import alpha.rulp.ximpl.rclass.XRFactorNew;
 
 public class RulpUtil {
@@ -754,15 +753,6 @@ public class RulpUtil {
 		return (T) nativeObj.getObject();
 	}
 
-	public static XRSocket asSocket(IRObject obj) throws RException {
-
-		if (!(obj instanceof XRSocket)) {
-			throw new RException("Can't convert object to Socket: " + obj);
-		}
-
-		return (XRSocket) obj;
-	}
-
 	public static IRString asString(IRObject obj) throws RException {
 
 		if (obj != null && obj.getType() != RType.STRING) {
@@ -1104,7 +1094,7 @@ public class RulpUtil {
 		}
 
 		if (obj.asString() == null || obj.asString().equals("set1::?impl")) {
-			System.out.println();
+			System.out.println("decRef: " + obj);
 		}
 
 		obj.decRef();
@@ -1225,7 +1215,7 @@ public class RulpUtil {
 		}
 
 		if (obj.asString() == null || obj.asString().equals("set1::?impl")) {
-			System.out.println();
+			System.out.println("incRef: " + obj);
 		}
 
 		obj.incRef();

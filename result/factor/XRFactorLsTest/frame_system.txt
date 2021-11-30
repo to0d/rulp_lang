@@ -1,11 +1,9 @@
-id=1, name=system, lvl=1, ref=0/0, entry=28, pid=0(root), subject=system
+id=1, name=system, lvl=1, ref=0/0, entry=26, pid=0(root), subject=system
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-parent               : -190     1        0    frame      root                
-use                  : -182     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=system
-type#socket          : -181     1        0    atom       type#socket         
-socket               : -180     1        1    class      socket              
+parent               : -188     1        0    frame      root                
+use                  : -180     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=system
 type#stack           : -179     1        0    atom       type#stack          
 stack                : -178     1        1    class      stack               
 type#queue           : -177     1        0    atom       type#queue          

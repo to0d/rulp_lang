@@ -241,38 +241,6 @@
 (defun clear    ((?stack stack)) (return (?stack::clear)))
 (defun to-list  ((?stack stack)) (return (?stack::to-list)))
 
-(defclass socket () final
-
-    (defvar ?impl nil private)
-    
-    (defun init (?addr ?port)
-        (setq ?impl (socket::_socket_init ?addr ?port)) final)
-        
-    (defun open ()
-        (socket::_socket_open ?impl) final)        
-   
-    (defun close ()
-        (socket::_socket_close ?impl) final)   
-
-    (defun write (?val)
-        (socket::_socket_write ?impl ?val) final)
-        
-    (defun write-blob ((?blob blob) (?pos int) (?len int))
-        (socket::_socket_write_blob ?impl ?blob ?pos ?len) final)
-
-    (defun read ((?type atom))
-        (return (socket::_socket_read ?impl ?type)) final)
-    
-    (defun read-blob ((?blob blob) (?pos int) (?len int))
-        (socket::_socket_read_blob ?impl ?blob ?pos ?len) final)
-        
-    (defun getLocalHost () 
-        (return (socket::_socket_getLocalHost)) static)
-        
-    (defun getHostAddress () 
-        (return (socket::_socket_getHostAddress)) static)
-)
-
 ;(defclass namespace ())
 ;
 
