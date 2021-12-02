@@ -1,5 +1,6 @@
 package beta.rulp.rclass;
 
+import static alpha.rulp.lang.Constant.MBR_PROP_STATIC;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class TestNativeClass extends RulpTestBase {
 				}
 
 				return RulpFactory.createInteger(1);
-			}, RAccessType.PRIVATE);
+			}, RAccessType.PRIVATE, MBR_PROP_STATIC);
 		}
 	}
 

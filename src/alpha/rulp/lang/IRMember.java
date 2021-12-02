@@ -2,12 +2,6 @@ package alpha.rulp.lang;
 
 public interface IRMember extends IRObject {
 
-	public static int MBR_PROP_FINAL = 0x0001;
-
-	public static int MBR_PROP_INHERIT = 0x0004;
-
-	public static int MBR_PROP_STATIC = 0x0002;
-
 	public RAccessType getAccessType();
 
 	public String getName();

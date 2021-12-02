@@ -15,13 +15,13 @@ import static alpha.rulp.lang.Constant.A_NIL;
 import static alpha.rulp.lang.Constant.A_QUESTION;
 import static alpha.rulp.lang.Constant.A_QUESTION_C;
 import static alpha.rulp.lang.Constant.MAX_TOSTRING_LEN;
+import static alpha.rulp.lang.Constant.MBR_PROP_FINAL;
+import static alpha.rulp.lang.Constant.MBR_PROP_INHERIT;
+import static alpha.rulp.lang.Constant.MBR_PROP_STATIC;
 import static alpha.rulp.lang.Constant.O_New;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.T_Atom;
 import static alpha.rulp.lang.Constant.T_Instance;
-import static alpha.rulp.lang.IRMember.MBR_PROP_FINAL;
-import static alpha.rulp.lang.IRMember.MBR_PROP_INHERIT;
-import static alpha.rulp.lang.IRMember.MBR_PROP_STATIC;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -1275,6 +1275,18 @@ public class RulpUtil {
 		return a == null || a.getType() == RType.NIL;
 	}
 
+	public static boolean isPropertyFinal(IRMember mbr) {
+		return (MBR_PROP_FINAL & mbr.getProperty()) != 0;
+	}
+
+	public static boolean isPropertyInherit(IRMember mbr) {
+		return (MBR_PROP_INHERIT & mbr.getProperty()) != 0;
+	}
+
+	public static boolean isPropertyStatic(IRMember mbr) {
+		return (MBR_PROP_STATIC & mbr.getProperty()) != 0;
+	}
+
 	public static boolean isPureAtomList(IRObject obj) throws RException {
 
 		RType type = obj.getType();
@@ -1454,34 +1466,33 @@ public class RulpUtil {
 
 	public static void setMember(IRSubject subject, String name, IRFactorBody body, RAccessType accessType)
 			throws RException {
+		setMember(subject, name, body, accessType, 0);
+	}
 
-		setMember(subject, name, new XRFactorWrapper(name, body, true), accessType);
+	public static void setMember(IRSubject subject, String name, IRFactorBody body, RAccessType accessType,
+			int property) throws RException {
+		setMember(subject, name, new XRFactorWrapper(name, body, true), accessType, property);
 	}
 
 	public static void setMember(IRSubject subject, String name, IRObject obj) throws RException {
-		setMember(subject, name, obj, null);
+		setMember(subject, name, obj, null, 0);
 	}
 
 	public static void setMember(IRSubject subject, String name, IRObject obj, RAccessType accessType)
+			throws RException {
+		setMember(subject, name, obj, accessType, 0);
+	}
+
+	public static void setMember(IRSubject subject, String name, IRObject obj, RAccessType accessType, int property)
 			throws RException {
 
 		IRMember mbr = RulpFactory.createMember(subject, name, obj);
 		if (accessType != null) {
 			mbr.setAccessType(accessType);
+			mbr.setProperty(property);
 		}
+
 		subject.setMember(name, mbr);
-	}
-
-	public static boolean isPropertyFinal(IRMember mbr) {
-		return (MBR_PROP_FINAL & mbr.getProperty()) != 0;
-	}
-
-	public static boolean isPropertyInherit(IRMember mbr) {
-		return (MBR_PROP_INHERIT & mbr.getProperty()) != 0;
-	}
-
-	public static boolean isPropertyStatic(IRMember mbr) {
-		return (MBR_PROP_STATIC & mbr.getProperty()) != 0;
 	}
 
 	public static void setPropertyFinal(IRMember mbr, boolean bValue) throws RException {

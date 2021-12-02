@@ -160,10 +160,6 @@ public interface Constant {
 	String F_B_OR = "or";
 
 	String F_BLOB_LENGTH = "blob-length";
-	
-	String F_TO_BLOB = "to-blob";
-	
-	String F_WRITE_BLOB = "write-blob";
 
 	String F_BREAK = "break";
 
@@ -340,8 +336,6 @@ public interface Constant {
 	String F_STR_MATCH = "str-match";
 
 	String F_STR_REPLACE = "str-replace";
-	
-	String F_STR_UPPER = "str-upper";
 
 	String F_STR_SPLIT = "str-split";
 
@@ -354,6 +348,8 @@ public interface Constant {
 	String F_STR_TRIM_HEAD = "str-trim-head";
 
 	String F_STR_TRIM_TAIL = "str-trim-tail";
+
+	String F_STR_UPPER = "str-upper";
 
 	String F_STRCAT = "strcat";
 
@@ -368,6 +364,8 @@ public interface Constant {
 	String F_TO = "to";
 
 	String F_TO_ATOM = "to-atom";
+
+	String F_TO_BLOB = "to-blob";
 
 	String F_TO_INT = "to-int";
 
@@ -391,6 +389,8 @@ public interface Constant {
 
 	String F_WHEN = "when";
 
+	String F_WRITE_BLOB = "write-blob";
+
 	int I_FRAME_ID_MIN = 3;
 
 	int I_FRAME_MAIN_ID = 2;
@@ -406,6 +406,12 @@ public interface Constant {
 	int MAX_COUNTER_SIZE = 64;
 
 	int MAX_TOSTRING_LEN = 256;
+
+	int MBR_PROP_FINAL = 0x0001;
+
+	int MBR_PROP_INHERIT = 0x0004;
+
+	int MBR_PROP_STATIC = 0x0002;
 
 	IRAtom O_ADD = RulpFactory.createAtom(F_O_ADD);
 
