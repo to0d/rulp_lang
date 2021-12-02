@@ -1,6 +1,6 @@
 package beta.rulp.rclass;
 
-import static alpha.rulp.lang.Constant.MBR_PROP_STATIC;
+import static alpha.rulp.lang.Constant.P_STATIC;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
@@ -20,30 +20,25 @@ public class TestNativeClass extends RulpTestBase {
 
 	static final String A_CLASS1 = "nclass1";
 
-	static final String A_MBR_FUNC1 = "_fun1";
-
 	static class TestClass1 {
-
-		public static void init(IRInterpreter interpreter, IRFrame frame) throws RException {
-
-			IRClass testClass = RulpUtil.asClass(frame.getEntry(A_CLASS1).getValue());
-
-			RulpUtil.setMember(testClass, A_MBR_FUNC1, (args, _interpreter, _frame) -> {
-				if (args.size() != 1) {
-					throw new RException("Invalid parameters: " + args);
-				}
-
-				return RulpFactory.createInteger(1);
-			}, RAccessType.PRIVATE, MBR_PROP_STATIC);
-		}
 	}
 
-	void _load_class1() {
+	void _load_native_class_1(RAccessType accessType, int property) {
+
+		_setup();
 
 		_test_script("result/rclass/TestNativeClass/native_class_1.rulp");
 		try {
+
 			IRInterpreter interpreter = _getInterpreter();
-			TestClass1.init(interpreter, interpreter.getMainFrame());
+			IRClass testClass = RulpUtil.asClass(interpreter.getMainFrame().getEntry(A_CLASS1).getValue());
+			RulpUtil.setMember(testClass, "_fun1", (args, _interpreter, _frame) -> {
+				if (args.size() != 1) {
+					throw new RException("Invalid parameters: " + args);
+				}
+				return RulpFactory.createInteger(1);
+			}, accessType, property);
+
 		} catch (RException | IOException e) {
 			e.printStackTrace();
 			fail(e.toString());
@@ -54,8 +49,24 @@ public class TestNativeClass extends RulpTestBase {
 	public void test_native_class_1() {
 
 		_setup();
-		_load_class1();
-		_test("(nclass1::fun1)", "1");
+
+		// private, non-static function
+		_load_native_class_1(RAccessType.PRIVATE, 0);
+
+		// should not access from class static public function??? @TODO
+		_test("(nclass1::static_fun1)", "1");
+	}
+
+	@Test
+	public void test_native_class_2() {
+
+		_setup();
+
+		// private, static function
+		_load_native_class_1(RAccessType.PRIVATE, P_STATIC);
+
+		// should can access from class static public function
+		_test("(nclass1::static_fun1)", "1");
 	}
 
 }

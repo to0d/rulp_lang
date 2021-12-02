@@ -127,6 +127,8 @@ public interface Constant {
 
 	String A_TRUE = "true";
 
+	String A_TYPE = "type#";
+
 	String A_VALUES = "values";
 
 	String A_VAR = "var";
@@ -407,12 +409,6 @@ public interface Constant {
 
 	int MAX_TOSTRING_LEN = 256;
 
-	int MBR_PROP_FINAL = 0x0001;
-
-	int MBR_PROP_INHERIT = 0x0004;
-
-	int MBR_PROP_STATIC = 0x0002;
-
 	IRAtom O_ADD = RulpFactory.createAtom(F_O_ADD);
 
 	IRAtom O_BY = RulpFactory.createAtom(F_O_BY);
@@ -461,7 +457,11 @@ public interface Constant {
 
 	IRBoolean O_True = RulpFactory.createBoolean(true);
 
-	String P_TYPE = "type#";
+	int P_FINAL = 0x0001;
+
+	int P_INHERIT = 0x0004;
+
+	int P_STATIC = 0x0002;
 
 	IRAtom T_Array = RulpFactory.createAtom(A_ARRAY);
 

@@ -1,8 +1,8 @@
-name=class2, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=null
+name=class2, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=4(SF-class2-1)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-fun1                 : DEFAULT       Y              2    1    func       (fun1 nil) : frame=main
+fun1                 : DEFAULT       Y              2    1    func       (fun1 nil) : frame=SF-class2-1, type=lambda
 super                : DEFAULT                      0    2    class      class1
 ==========================================================================================================================
 

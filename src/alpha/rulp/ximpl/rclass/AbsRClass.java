@@ -9,7 +9,7 @@
 
 package alpha.rulp.ximpl.rclass;
 
-import static alpha.rulp.lang.Constant.P_TYPE;
+import static alpha.rulp.lang.Constant.A_TYPE;
 
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRClass;
@@ -30,7 +30,7 @@ public abstract class AbsRClass extends AbsRSubject implements IRClass {
 	public AbsRClass(String className, IRFrame definedFrame, IRClass superClass) {
 		super(definedFrame);
 		this.className = className;
-		this.classTypeAtom = RulpFactory.createAtom(P_TYPE + className);
+		this.classTypeAtom = RulpFactory.createAtom(A_TYPE + className);
 		this.superClass = superClass;
 	}
 

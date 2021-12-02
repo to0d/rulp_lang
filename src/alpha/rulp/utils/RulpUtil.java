@@ -15,11 +15,11 @@ import static alpha.rulp.lang.Constant.A_NIL;
 import static alpha.rulp.lang.Constant.A_QUESTION;
 import static alpha.rulp.lang.Constant.A_QUESTION_C;
 import static alpha.rulp.lang.Constant.MAX_TOSTRING_LEN;
-import static alpha.rulp.lang.Constant.MBR_PROP_FINAL;
-import static alpha.rulp.lang.Constant.MBR_PROP_INHERIT;
-import static alpha.rulp.lang.Constant.MBR_PROP_STATIC;
 import static alpha.rulp.lang.Constant.O_New;
 import static alpha.rulp.lang.Constant.O_Nil;
+import static alpha.rulp.lang.Constant.P_FINAL;
+import static alpha.rulp.lang.Constant.P_INHERIT;
+import static alpha.rulp.lang.Constant.P_STATIC;
 import static alpha.rulp.lang.Constant.T_Atom;
 import static alpha.rulp.lang.Constant.T_Instance;
 
@@ -1276,15 +1276,15 @@ public class RulpUtil {
 	}
 
 	public static boolean isPropertyFinal(IRMember mbr) {
-		return (MBR_PROP_FINAL & mbr.getProperty()) != 0;
+		return (P_FINAL & mbr.getProperty()) != 0;
 	}
 
 	public static boolean isPropertyInherit(IRMember mbr) {
-		return (MBR_PROP_INHERIT & mbr.getProperty()) != 0;
+		return (P_INHERIT & mbr.getProperty()) != 0;
 	}
 
 	public static boolean isPropertyStatic(IRMember mbr) {
-		return (MBR_PROP_STATIC & mbr.getProperty()) != 0;
+		return (P_STATIC & mbr.getProperty()) != 0;
 	}
 
 	public static boolean isPureAtomList(IRObject obj) throws RException {
@@ -1502,9 +1502,9 @@ public class RulpUtil {
 		}
 
 		if (bValue) {
-			mbr.setProperty(mbr.getProperty() | MBR_PROP_FINAL);
+			mbr.setProperty(mbr.getProperty() | P_FINAL);
 		} else {
-			mbr.setProperty(mbr.getProperty() & ~MBR_PROP_FINAL);
+			mbr.setProperty(mbr.getProperty() & ~P_FINAL);
 		}
 	}
 
@@ -1515,9 +1515,9 @@ public class RulpUtil {
 		}
 
 		if (bValue) {
-			mbr.setProperty(mbr.getProperty() | MBR_PROP_INHERIT);
+			mbr.setProperty(mbr.getProperty() | P_INHERIT);
 		} else {
-			mbr.setProperty(mbr.getProperty() & ~MBR_PROP_INHERIT);
+			mbr.setProperty(mbr.getProperty() & ~P_INHERIT);
 		}
 	}
 
@@ -1528,9 +1528,9 @@ public class RulpUtil {
 		}
 
 		if (bValue) {
-			mbr.setProperty(mbr.getProperty() | MBR_PROP_STATIC);
+			mbr.setProperty(mbr.getProperty() | P_STATIC);
 		} else {
-			mbr.setProperty(mbr.getProperty() & ~MBR_PROP_STATIC);
+			mbr.setProperty(mbr.getProperty() & ~P_STATIC);
 		}
 	}
 

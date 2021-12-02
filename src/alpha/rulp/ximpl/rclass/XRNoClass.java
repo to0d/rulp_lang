@@ -1,6 +1,6 @@
 package alpha.rulp.ximpl.rclass;
 
-import static alpha.rulp.lang.Constant.P_TYPE;
+import static alpha.rulp.lang.Constant.A_TYPE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -31,7 +31,7 @@ public final class XRNoClass extends AbsAtomObject implements IRClass {
 		super();
 		this.className = className;
 		this.definedFrame = definedFrame;
-		this.classTypeAtom = RulpFactory.createAtom(P_TYPE + className);
+		this.classTypeAtom = RulpFactory.createAtom(A_TYPE + className);
 	}
 
 	@Override

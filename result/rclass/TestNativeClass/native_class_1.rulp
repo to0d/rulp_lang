@@ -1,5 +1,5 @@
 (defclass nclass1 () final  
-    (defun fun1 () 
+    (defun static_fun1 () 
         (return (nclass1::_fun1)) static)
 )
 ;=>nclass1

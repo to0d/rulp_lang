@@ -63,7 +63,8 @@ public class SubjectUtil {
 		return RulpFactory.createMember(sub, mbrName, var);
 	}
 
-	private static void _processModifier(IRMember mbr, IRList mbrExpr, int fromIdx, int endIdx) throws RException {
+	private static IRMember _processModifier(IRMember mbr, IRList mbrExpr, int fromIdx, int endIdx, boolean fun)
+			throws RException {
 
 		RAccessType accessType = null;
 		boolean bFinal = false;
@@ -116,8 +117,18 @@ public class SubjectUtil {
 			mbr.setAccessType(accessType);
 		}
 
+		/****************************************************/
+		// set subject frame for static function
+		/****************************************************/
+		if (fun && bStatic) {
+			mbr = RulpFactory.createMember(mbr.getSubject(), mbr.getName(), RulpFactory.createFunctionLambda(
+					RulpUtil.asFunction(mbr.getValue()), RulpUtil.asSubject(mbr.getSubject()).getSubjectFrame()));
+		}
+
 		RulpUtil.setPropertyFinal(mbr, bFinal);
 		RulpUtil.setPropertyStatic(mbr, bStatic);
+
+		return mbr;
 	}
 
 	public static IRMember defineMemberFun(IRSubject sub, String mbrName, IRList mbrExpr, IRInterpreter interpreter,
@@ -183,6 +194,10 @@ public class SubjectUtil {
 		}
 
 		IRFunction newFunc = RulpFactory.createFunction(frame, mbrName, paraAttrs, funBody);
+//		IRFunction newFunc = RulpFactory.createFunctionLambda(
+//				RulpUtil.asFunction(RulpFactory.createFunction(frame, mbrName, paraAttrs, funBody)),
+//				sub.getSubjectFrame());
+
 		if (oldMbr != null) {
 
 			IRFunction oldFunc = (IRFunction) oldMbr.getValue();
@@ -229,7 +244,7 @@ public class SubjectUtil {
 		/*****************************************************/
 		// Process modifier
 		/*****************************************************/
-		_processModifier(mbr, mbrExpr, bodyEndIndex, mbrExprSize);
+		mbr = _processModifier(mbr, mbrExpr, bodyEndIndex, mbrExprSize, true);
 
 		sub.setMember(mbrName, mbr);
 
@@ -281,7 +296,7 @@ public class SubjectUtil {
 		/*****************************************************/
 		// Process modifier
 		/*****************************************************/
-		_processModifier(mbr, mbrExpr, 3, mbrExprSize);
+		mbr = _processModifier(mbr, mbrExpr, 3, mbrExprSize, false);
 
 		sub.setMember(mbrName, mbr);
 	}
