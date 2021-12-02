@@ -58,11 +58,11 @@ public abstract class AbsRSubject extends AbsRefObject implements IRSubject {
 		}
 
 		IRObject obj = mbr.getValue();
-		if (obj == null || obj == this) {
-			return;
+		if (obj != null && obj != this) {
+			RulpUtil.decRef(obj);
 		}
 
-		RulpUtil.decRef(obj);
+		RulpUtil.decRef(mbr);
 	}
 
 	@Override
@@ -89,12 +89,12 @@ public abstract class AbsRSubject extends AbsRefObject implements IRSubject {
 			return;
 		}
 
-		IRObject obj = mbr.getValue();
-		if (obj == null || obj == this) {
-			return;
-		}
+		RulpUtil.incRef(mbr);
 
-		RulpUtil.incRef(obj);
+		IRObject obj = mbr.getValue();
+		if (obj != null && obj != this) {
+			RulpUtil.incRef(obj);
+		}
 	}
 
 	protected void _load() throws RException {

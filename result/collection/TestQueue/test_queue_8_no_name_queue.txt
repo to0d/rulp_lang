@@ -26,19 +26,19 @@ Callable stats info: callId=74, row=20, column=38(2), value-max=3, value-unit=2^
     root   factor     41    0 defun                              22222222222121212122122           
     root   factor     13    0 return                                                      1 23122 2
     root   factor      6    0 alias                          1221                                  
-  system   member      4    0 queue::_queue_size_of                                       1 1 11   
+  system   member      4    1 queue::_queue_size_of                                       1 1 11   
     root   factor      4    0 defclass                                        1 1 1  1             
     root   factor      3    0 setq                                                       1    2    
-  system   member      3    0 queue::_queue_push_back                                      2    1  
-  system   member      3    0 queue::_queue_is_empty                                           11 1
+  system   member      3    1 queue::_queue_push_back                                      2    1  
+  system   member      3    1 queue::_queue_is_empty                                           11 1
     root   factor      3    0 deftemplate                                               21         
-  system   member      2    0 queue::_queue_init                                         1    1    
-  system   member      2    0 queue::_queue_get                                             11     
-  system   member      2    0 queue::_queue_clear                                                2 
+  system   member      2    1 queue::_queue_init                                         1    1    
+  system   member      2    1 queue::_queue_get                                             11     
+  system   member      2    1 queue::_queue_clear                                                2 
     root   factor      2    0 new                                                        1    1    
   system funcList      2    1 is-empty                                                          1 1
     root   factor      2    0 defvar                            1                        1         
-  system   member      1    0 queue::_queue_pop_front                                        1     
+  system   member      1    1 queue::_queue_pop_front                                        1     
     root   factor      1    0 name-of                                                     1        
   system funcList      1    1 get                                                            1     
     root   factor      1    0 defmacro                                      1                      
@@ -60,7 +60,7 @@ Object create count:
        macro:            1            0            1
     instance:            4            2            2
        class:            4            0            4
-      member:          142            0          142
+      member:          142            7          135
        frame:           24           22            2
  interpreter:            1            0
   frameEntry:          203            0

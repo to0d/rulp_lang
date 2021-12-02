@@ -31,10 +31,10 @@ Callable stats info: callId=65, row=15, column=33(2), value-max=2, value-unit=2^
     root   factor      2    0 setq                                                         11 
     root   factor      2    0 new                                                          11 
     root   factor      2    0 defvar                            1                         1   
-  system   member      1    0 set::_set_init                                               1  
-  system   member      1    0 set::_set_add                                                 1 
-    main   member      1    0 s1::init                                                     1  
-    main   member      1    0 s1::add                                                       1 
+  system   member      1    1 set::_set_init                                               1  
+  system   member      1    1 set::_set_add                                                 1 
+    main   member      1    1 s1::init                                                     1  
+    main   member      1    1 s1::add                                                       1 
     main     func      1    1 (fun_add nil)                                                 1 
     root   factor      1    0 do                                                            1 
     root   factor      1    0 defmacro                                      1                 
@@ -55,7 +55,7 @@ Object create count:
        macro:            1            0            1
     instance:            3            0            3
        class:            5            1            4
-      member:          128            0          128
+      member:          128            3          125
        frame:            9            4            5
  interpreter:            1            0
   frameEntry:          200            0

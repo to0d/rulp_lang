@@ -55,7 +55,7 @@ Object create count:
        macro:            1            0            1
     instance:            6            6            0
        class:            5            0            5
-      member:          152            0          152
+      member:          152           24          128
        frame:           20           19            1
  interpreter:            1            0
   frameEntry:          210            0

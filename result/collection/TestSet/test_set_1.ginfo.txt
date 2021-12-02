@@ -25,18 +25,18 @@ Callable stats info: callId=75, row=18, column=38(2), value-max=2, value-unit=2^
 --------------------------------------------------------------------------------------------------------------------------
     root   factor     41    0 defun                              22222222222121212122122           
     root   factor     13    0 return                                                      112121212
-  system   member      8    0 set::_set_has                                                 2 2 2 2
-    main   member      8    0 set1::has                                                     2 2 2 2
+  system   member      8    1 set::_set_has                                                 2 2 2 2
+    main   member      8    1 set1::has                                                     2 2 2 2
     root   factor      6    0 alias                          1221                                  
-  system   member      5    0 set::_set_size_of                                           11 1 1 1 
-    main   member      5    0 set1::size-of                                               11 1 1 1 
-  system   member      4    0 set::_set_add                                                1 1 1 1 
-    main   member      4    0 set1::add                                                    1 1 1 1 
+  system   member      5    1 set::_set_size_of                                           11 1 1 1 
+    main   member      5    1 set1::size-of                                               11 1 1 1 
+  system   member      4    1 set::_set_add                                                1 1 1 1 
+    main   member      4    1 set1::add                                                    1 1 1 1 
     root   factor      4    0 defclass                                        1 1 1  1             
     root   factor      3    0 deftemplate                                               21         
     root   factor      1    0 setq                                                       1         
-  system   member      1    0 set::_set_init                                             1         
-    main   member      1    0 set1::init                                                 1         
+  system   member      1    1 set::_set_init                                             1         
+    main   member      1    1 set1::init                                                 1         
     root   factor      1    0 new                                                        1         
     root   factor      1    0 name-of                                                     1        
     root   factor      1    0 defvar                            1                                  

@@ -25,34 +25,34 @@ Callable stats info: callId=90, row=36, column=46(2), value-max=4, value-unit=2^
 --------------------------------------------------------------------------------------------------------------------------
     root   factor     41    0 defun                              22222222222121212122122                   
     root   factor     26    0 return                                                      1 322 22 223 13 2
-  system   member      7    0 queue::_queue_size_of                                       1  11 11 11      
-  system   member      7    0 queue::_queue_push_back                                      2   2      21   
-    main   member      7    0 q1::size-of                                                 1  11 11 11      
+  system   member      7    1 queue::_queue_size_of                                       1  11 11 11      
+  system   member      7    1 queue::_queue_push_back                                      2   2      21   
+    main   member      7    1 q1::size-of                                                 1  11 11 11      
     root   factor      6    0 alias                          1221                                          
-    main   member      5    0 q1::push                                                     2          21   
-  system   member      4    0 queue::_queue_pop_front                                        11    11      
-  system   member      4    0 queue::_queue_is_empty                                                 2  1 1
-    main   member      4    0 q1::is-empty                                                           2  1 1
+    main   member      5    1 q1::push                                                     2          21   
+  system   member      4    1 queue::_queue_pop_front                                        11    11      
+  system   member      4    1 queue::_queue_is_empty                                                 2  1 1
+    main   member      4    1 q1::is-empty                                                           2  1 1
     root   factor      4    0 defclass                                        1 1 1  1                     
   system funcList      3    1 is-empty                                                               1  1 1
     root   factor      3    0 deftemplate                                               21                 
-  system   member      2    0 queue::_queue_to_list                                                    11  
-  system   member      2    0 queue::_queue_push_front                                            2        
-  system   member      2    0 queue::_queue_pop_back                                            11         
-  system   member      2    0 queue::_queue_get                                             2              
-  system   member      2    0 queue::_queue_clear                                                        2 
-    main   member      2    0 q1::to-list                                                              11  
-    main   member      2    0 q1::push_front                                                      2        
-    main   member      2    0 q1::push_back                                                    2           
-    main   member      2    0 q1::pop_front                                                        11      
-    main   member      2    0 q1::pop_back                                                      11         
-    main   member      2    0 q1::pop                                                        11            
-    main   member      2    0 q1::get                                                       2              
-    main   member      2    0 q1::clear                                                                  2 
+  system   member      2    1 queue::_queue_to_list                                                    11  
+  system   member      2    1 queue::_queue_push_front                                            2        
+  system   member      2    1 queue::_queue_pop_back                                            11         
+  system   member      2    1 queue::_queue_get                                             2              
+  system   member      2    1 queue::_queue_clear                                                        2 
+    main   member      2    1 q1::to-list                                                              11  
+    main   member      2    1 q1::push_front                                                      2        
+    main   member      2    1 q1::push_back                                                    2           
+    main   member      2    1 q1::pop_front                                                        11      
+    main   member      2    1 q1::pop_back                                                      11         
+    main   member      2    1 q1::pop                                                        11            
+    main   member      2    1 q1::get                                                       2              
+    main   member      2    1 q1::clear                                                                  2 
   system funcList      1    1 to-list                                                                   1  
     root   factor      1    0 setq                                                       1                 
-  system   member      1    0 queue::_queue_init                                         1                 
-    main   member      1    0 q1::init                                                   1                 
+  system   member      1    1 queue::_queue_init                                         1                 
+    main   member      1    1 q1::init                                                   1                 
     root   factor      1    0 new                                                        1                 
     root   factor      1    0 name-of                                                     1                
   system funcList      1    1 get                                                           1              

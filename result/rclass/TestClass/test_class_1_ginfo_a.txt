@@ -27,15 +27,15 @@ Callable stats info: callId=73, row=20, column=37(2), value-max=2, value-unit=2^
     root   factor      6    0 ls                                                          111  111
     root   factor      6    0 alias                          1221                                 
     root   factor      5    0 return                                                       1 1111 
-    main   member      5    0 o1::get                                                      1 1111 
+    main   member      5    1 o1::get                                                      1 1111 
     root   factor      5    0 defclass                                        1 1 1  1   1        
     root   factor      3    0 setq                                                          111   
     root   factor      3    0 deftemplate                                               21        
     root   factor      1    0 print-subject                                                      1
     root   factor      1    0 out-to-file                                                        1
-    main   member      1    0 o1::sub                                                         1   
-    main   member      1    0 o1::set                                                       1     
-    main   member      1    0 o1::add                                                        1    
+    main   member      1    1 o1::sub                                                         1   
+    main   member      1    1 o1::set                                                       1     
+    main   member      1    1 o1::add                                                        1    
     root   factor      1    0 new                                                         1       
     root   factor      1    0 load                                                       1        
     root   factor      1    0 defvar                            1                                 

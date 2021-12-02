@@ -1096,9 +1096,9 @@ public class RulpUtil {
 			return;
 		}
 
-		if (obj.asString() == null || obj.asString().equals("set1::?impl")) {
-			System.out.println("decRef: " + obj);
-		}
+//		if (obj.asString() == null || obj.asString().equals("set1::?impl")) {
+//			System.out.println("decRef: " + obj);
+//		}
 
 		obj.decRef();
 	}
@@ -1217,9 +1217,9 @@ public class RulpUtil {
 			return;
 		}
 
-		if (obj.asString() == null || obj.asString().equals("set1::?impl")) {
-			System.out.println("incRef: " + obj);
-		}
+//		if (obj.asString() == null || obj.asString().equals("set1::?impl")) {
+//			System.out.println("incRef: " + obj);
+//		}
 
 		obj.incRef();
 	}

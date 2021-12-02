@@ -29,12 +29,12 @@ Callable stats info: callId=63, row=13, column=64(1), value-max=1, value-unit=1^
     root   factor      4    0 deftemplate                                                                          111    1  
     root   factor      2    0 return                                                                                    1   1
     root   factor      2    0 new                                                                                      1 1   
-    main   member      2    0 ?o1::get                                                                                  1   1
+    main   member      2    1 ?o1::get                                                                                  1   1
     root   factor      1    0 setq                                                                                         1 
-    main   member      1    0 ns1::set                                                                                     1 
+    main   member      1    1 ns1::set                                                                                     1 
     root   factor      1    0 defvar                                1                                                        
     root   factor      1    0 defmacro                                                      1                                
-    main   member      1    0 ?o1::inc                                                                                     1 
+    main   member      1    1 ?o1::inc                                                                                     1 
     root   factor      1    0 +                                                                                            1 
 ==========================================================================================================================
 
