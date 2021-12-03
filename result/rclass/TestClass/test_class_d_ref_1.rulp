@@ -1,0 +1,21 @@
+(defclass class1 ()
+    (defvar ?value 1 public)
+)
+;=>class1
+;(defun fun1 ()
+;    (return (new class1))
+;)
+;;=>fun1
+(defun fun2 ()
+    (defvar ?var (new class1))
+    (return ?var)
+)
+;=>fun2
+(defun funx (?o)
+    (return ?o::?value)
+)
+;=>funx
+;;(funx (fun1))
+;;;=>&?value
+(funx (fun2))
+;=>&?value

@@ -1,0 +1,14 @@
+(defclass class1 ()
+    (defvar ?value 1 public)
+)
+;=>class1
+(defvar ?arr {})
+;=>&?arr
+(add ?arr (new class1))
+;=>{null}
+(add ?arr (new class1))
+;=>{null,null}
+(loop for ?o in (to-list ?arr) do
+    (print ?o::?value)
+)
+;=>&?value

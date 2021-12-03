@@ -96,6 +96,7 @@ import alpha.rulp.ximpl.factor.XRFactorBoolAnd;
 import alpha.rulp.ximpl.factor.XRFactorBoolNot;
 import alpha.rulp.ximpl.factor.XRFactorBoolOr;
 import alpha.rulp.ximpl.factor.XRFactorCanCast;
+import alpha.rulp.ximpl.factor.XRFactorCase;
 import alpha.rulp.ximpl.factor.XRFactorCompare;
 import alpha.rulp.ximpl.factor.XRFactorComparison;
 import alpha.rulp.ximpl.factor.XRFactorDefConst;
@@ -718,6 +719,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorContinue(F_CONTINUE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorBreak(F_BREAK));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDo(A_DO));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorCase(F_CASE));
 
 		// Exception
 		RulpUtil.addFrameObject(rootFrame, new XRFactorError(F_E_ERROR));

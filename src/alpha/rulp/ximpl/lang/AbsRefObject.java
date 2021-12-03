@@ -84,7 +84,7 @@ public abstract class AbsRefObject implements IRObject {
 	public void incRef() throws RException {
 
 		if (ref < 0) {
-			throw new RException(String.format("Can't incRef: %s, ref=%d", this, ref));
+			throw new RException(String.format("Can't incRef: %s, ref=%d", this.asString(), ref));
 		}
 
 		if (++ref > max_ref) {

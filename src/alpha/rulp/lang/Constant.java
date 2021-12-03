@@ -221,6 +221,8 @@ public interface Constant {
 
 	String F_IF = "if";
 
+	String F_CASE = "case";
+
 	String F_IN = "in";
 
 	String F_JOIN = "join";

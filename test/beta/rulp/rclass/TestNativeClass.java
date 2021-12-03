@@ -8,7 +8,6 @@ import java.io.IOException;
 import org.junit.Test;
 
 import alpha.rulp.lang.IRClass;
-import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.RAccessType;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRInterpreter;
