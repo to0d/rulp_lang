@@ -84,14 +84,14 @@ public class TestSet extends RulpTestBase {
 	void test_set_5_ls() {
 
 		_setup();
-		_test_script();
+		_run_script();
 	}
 
 	@Test
 	void test_set_6_final() {
 
 		_setup();
-		_test_script();
+		_run_script();
 	}
 
 	@Test
@@ -105,7 +105,7 @@ public class TestSet extends RulpTestBase {
 	void test_set_8_ref_a() {
 
 		_setup();
-		_test_script("result/collection/TestSet/test_set_8_ref_a.rulp");
+		_run_script();
 		_test("?x", "0");
 		_test("(rulp-object-count frame)", "5");
 		_test("(rulp-object-count instance)", "3");

@@ -1,9 +1,12 @@
 (rulp-object-count frame)
-;=>0
+;;;
+
 (rulp-object-count instance)
-;=>0
+;;;
+
 (defvar ?x 0)
-;=>&?x
+;;;
+
 (defun fun_add (?set)
     (do
         (defclass class1 ()
@@ -15,8 +18,10 @@
         (?set::add o1)
     )
 )
-;=>fun_add
+;;;
+
 (new set s1)
-;=>s1
+;;;
+
 (fun_add s1)
-;=>nil
+;;;

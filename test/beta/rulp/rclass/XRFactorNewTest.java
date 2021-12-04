@@ -9,13 +9,13 @@ class XRFactorNewTest extends RulpTestBase {
 	@Test
 	public void test_1_err_duplicate_obj() {
 		_setup();
-		_test_script();
+		_run_script();
 	}
 
 	@Test
 	public void test_2_no_instance_name() {
 		_setup();
-		_test_script();
+		_run_script();
 		_gInfo();
 	}
 

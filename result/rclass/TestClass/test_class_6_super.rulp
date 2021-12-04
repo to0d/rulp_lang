@@ -3,75 +3,65 @@
     (defun add (?x) (setq ?value (+ ?value ?x)))
     (defun get ()   (return ?value))
 )
-;=>class1
+;;;
 
 (ls class1)
-;=>'(class1::?value class1::add class1::get)
+;;;
 
 (defclass class2 (class1)
     (defun add (?x) (setq ?value (+ ?value ?x 1)))
 )
-;=>class2
+;;;
 
 (ls class2)
-;=>'(class2::add class2::super)
+;;;
 
 (ls-print class2)
-;=>nil
-;out:
-mbr=add, name=(add nil), type=func, property='(default)
-mbr=super, name=class1, type=class, property='(default), class-property='()
-;eof
+;;;
 
 (new class1 o1)
-;=>o1
+;;;
 
 (o1::get)
-;=>0
+;;;
 
 (new class2 o2)
-;=>o2
+;;;
 
 (o1::get)
-;=>0
+;;;
 
 (o1::add 1)
-;=>nil
+;;;
 
 (o1::get)
-;=>1
+;;;
 
 (o2::add 1)
-;=>nil
+;;;
 
 (o2::get)
-;=>2
+;;;
 
 (defclass class3 (class1)
     (defvar ?value 1)
 )
-;=>class3
+;;;
 
 (new class3 o3)
-;=>o3
+;;;
 
 (o3::get)
-;=>1
+;;;
 
 (defclass class4 (class1)
     (defvar ?value 2)
     (defvar ?value 2)
 )
-;err:
-duplicate member variable: class4::?value
-at main: (defclass class4 (class1) (defvar ?value 2) (defvar ?value 2))
-;eof
+;;;
 
 (defclass class5 (class1)
     (defun get () (return ?value))
     (defun get () (return ?value))
 )
-;err:
-duplicate funcion: (get)
-at main: (defclass class5 (class1) (defun get () (return ?value)) (defun get () (retur...
-;eof
+;;;

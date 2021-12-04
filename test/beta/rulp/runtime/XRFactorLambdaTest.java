@@ -48,7 +48,7 @@ class XRFactorLambdaTest extends RulpTestBase {
 	void test_5() {
 
 		_setup();
-		_test_script("result/runtime/XRFactorLambdaTest/test_5.rulp");
+		_run_script();
 		_gInfo("result/runtime/XRFactorLambdaTest/test_5_ginfo.txt");
 		_test("(setq ?f nil)", "&?f");
 		_gInfo("result/runtime/XRFactorLambdaTest/test_5_ginfo_b.txt");

@@ -123,7 +123,7 @@ public class TestNameSpace extends RulpTestBase {
 	public void test_namespace_3() {
 
 		_setup();
-		_test_script();
+		_run_script();
 		_gInfo();
 	}
 
@@ -148,7 +148,7 @@ public class TestNameSpace extends RulpTestBase {
 	public void test_namespace_6_nested_1() {
 
 		_setup();
-		_test_script();
+		_run_script();
 		_gInfo();
 	}
 
@@ -156,7 +156,7 @@ public class TestNameSpace extends RulpTestBase {
 	public void test_namespace_6_nested_2() {
 
 		_setup();
-		_test_script();
+		_run_script();
 		_gInfo();
 	}
 }

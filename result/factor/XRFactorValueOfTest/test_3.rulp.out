@@ -1,0 +1,24 @@
+(defvar v1 10)
+;=>&v1
+
+(defun f1 (?x) (return (value-of ?x)))
+;=>f1
+
+(f1 v1)
+;=>10
+
+(let (?idx 1) 
+    (loop for ?x in (ls main) do
+        (defvar ?v (value-of (value-of ?x)))
+        (if (not (equal (type-of $(value-of ?v)) var)) 
+            (continue))        
+        (print ?idx ":"  (type-of $(value-of ?v)) ", name=" (name-of ?x) "\n")
+        (setq ?idx (+ ?idx 1))
+    )
+)
+;=>nil
+;out:
+1:var, name=v1
+
+;eof
+

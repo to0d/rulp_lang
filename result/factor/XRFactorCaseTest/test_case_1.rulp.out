@@ -1,0 +1,31 @@
+(defun fun1 (?v)
+    (return (case ?v
+                (1 (return "a"))
+                (2 (return "b")))))
+;=>fun1
+
+(fun1 1)
+;=>"a"
+
+(fun1 3)
+;=>nil
+
+(fun1 a)
+;=>nil
+
+(defun fun2 (?v)
+    (return (case ?v
+                (1 (return "a"))
+                (2 (return "b"))
+                (? (return "x")))))
+;=>fun2
+
+(fun2 1)
+;=>"a"
+
+(fun2 3)
+;=>"x"
+
+(fun2 a)
+;=>"x"
+

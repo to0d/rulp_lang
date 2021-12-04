@@ -1,0 +1,77 @@
+(print-list (ls set))
+;=>nil
+;out:
+set::?impl
+set::_set_add
+set::_set_clear
+set::_set_has
+set::_set_init
+set::_set_is_empty
+set::_set_size_of
+set::_set_to_list
+set::add
+set::clear
+set::has
+set::init
+set::is-empty
+set::size-of
+set::to-list
+
+;eof
+
+(ls-print set)
+;=>nil
+;out:
+mbr=?impl, access deny
+mbr=_set_add, access deny
+mbr=_set_clear, access deny
+mbr=_set_has, access deny
+mbr=_set_init, access deny
+mbr=_set_is_empty, access deny
+mbr=_set_size_of, access deny
+mbr=_set_to_list, access deny
+mbr=add, name=(add nil), type=func, property='(default final)
+mbr=clear, name=(clear), type=func, property='(default final)
+mbr=has, name=(has nil), type=func, property='(default final)
+mbr=init, name=(init), type=func, property='(default final)
+mbr=is-empty, name=(is-empty), type=func, property='(default final)
+mbr=size-of, name=(size-of), type=func, property='(default final)
+mbr=to-list, name=(to-list), type=func, property='(default final)
+
+;eof
+
+(new set set1)
+;=>set1
+
+(print-list (ls set1))
+;=>nil
+;out:
+set1::?impl
+set1::init
+set1::this
+
+;eof
+
+(set1::add 1)
+;=>nil
+
+(print-list (ls set1))
+;=>nil
+;out:
+set1::?impl
+set1::add
+set1::init
+set1::this
+
+;eof
+
+(ls-print set1)
+;=>nil
+;out:
+mbr=?impl, access deny
+mbr=add, name=(add nil), type=func, property='(default final)
+mbr=init, name=(init), type=func, property='(default final)
+mbr=this, name=set1, type=instance, property='(default), instance-class=set
+
+;eof
+

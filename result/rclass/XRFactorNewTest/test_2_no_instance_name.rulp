@@ -1,8 +1,10 @@
 (defclass class1 ())
-;=>class1
+;;;
+
 (defvar o1 (new class1))
-;=>&o1
+;;;
+
 (do 
     (defvar o2 (new class1))
 )
-;=>&o2
+;;;

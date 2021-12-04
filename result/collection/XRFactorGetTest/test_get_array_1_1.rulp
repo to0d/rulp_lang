@@ -1,16 +1,8 @@
 (get {a, b, c} 1)
-;=>b
+;;;
+
 (get {a, b, c} -1)
-;err:
-Invalid index: -1
-at _$fun$_get: (get-of-array ?arr ?i1)
-at _$fun$_get: (return (get-of-array ?arr ?i1))
-at main: (get {a,b,c} -1)
-;eof
+;;;
+
 (get {a, b, c} 3)
-;err:
-Invalid index: 3
-at _$fun$_get: (get-of-array ?arr ?i1)
-at _$fun$_get: (return (get-of-array ?arr ?i1))
-at main: (get {a,b,c} 3)
-;eof
+;;;

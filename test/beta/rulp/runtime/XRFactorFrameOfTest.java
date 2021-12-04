@@ -10,8 +10,8 @@ class XRFactorFrameOfTest extends RulpTestBase {
 	public void test_frame_of_1() {
 
 		_setup();
-		_test_script("result/runtime/XRFactorFrameOfTest/test_frame_of_1.rulp");
-		_gInfo("result/runtime/XRFactorFrameOfTest/test_frame_of_1_ginfo.txt");
+		_run_script();
+		_gInfo();
 	}
 
 }

@@ -9,7 +9,7 @@ class XRFactorCaseTest extends RulpTestBase {
 	@Test
 	void test_case_1() {
 		_setup();
-		_test_script();
+		_run_script();
 	}
 
 }

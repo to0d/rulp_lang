@@ -3,18 +3,24 @@
     (defun inc (?x) (setq ?v1 (+ ?x ?v1)))
     (defun get () (return ?v1))
 )
-;=>class1
+;;;
+
 (new class1 ?o1)
-;=>?o1
+;;;
+
 (?o1::get)
-;=>0
+;;;
+
 (new namespace ns1)
-;=>ns1
+;;;
+
 (deftemplate ns1::set (_class (?o class1))
     (?o::inc 1)
 )
-;=>set
+;;;
+
 (ns1::set _class ?o1)
-;=>nil
+;;;
+
 (?o1::get)
-;=>1
+;;;

@@ -1,15 +1,21 @@
 (defvar var1 1)
-;=>&var1
+;;;
+
 (value-of var1)
-;=>1
+;;;
+
 (new namespace ns1)
-;=>ns1
+;;;
+
 (use namespace main)
-;=>nil
+;;;
+
 (defvar var2 3) ; define in main frame
-;=>&var2
+;;;
+
 (value-of var2)
-;=>3
+;;;
+
 (defun fun1() 
     (print "var1: value=" (value-of var1) ", subject=" (subject-of var1) "\n")
     (print "var2: value=" (value-of var2) ", subject=" (subject-of var2) "\n")    
@@ -26,28 +32,19 @@
     (use namespace ns1)
     (print "var1: value=" (value-of var1) ", subject=" (subject-of var1) "\n")
 )
-;=>fun1 fun2 fun3
+;;;
+
 (fun2)
-;=>nil
-;out:
-var1: value=2, subject=DO
-var2: value=3, subject=main
-var1: value=2, subject=DO
-var2: value=3, subject=main
-;eof
+;;;
+
 (value-of var1)
-;=>1
+;;;
+
 (fun3)
-;=>nil
-;out:
-var1: value=2, subject=DO
-var1: value=1, subject=main
-;eof
+;;;
+
 (use namespace ns1)
-;=>nil
+;;;
+
 (fun3)
-;=>nil
-;out:
-var1: value=2, subject=DO
-var1: value=1, subject=main
-;eof
+;;;

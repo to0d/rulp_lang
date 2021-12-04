@@ -134,6 +134,74 @@ public class RulpTestBase {
 		}
 	}
 
+	protected void _run_script() {
+		_run_script(getCachePath() + ".rulp");
+	}
+
+	protected void _run_script(String inputScriptPath) {
+
+		try {
+
+			ArrayList<String> inputStmts = new ArrayList<>();
+			StringBuffer sb = new StringBuffer();
+
+			for (String line : FileUtil.openTxtFile(inputScriptPath)) {
+				if (line.equals(";;;")) {
+					if (!sb.isEmpty()) {
+						inputStmts.add(sb.toString());
+						sb.setLength(0);
+					}
+				} else {
+					if (!sb.isEmpty()) {
+						sb.append("\n");
+					}
+					sb.append(line);
+				}
+			}
+
+			if (!sb.isEmpty()) {
+				inputStmts.add(sb.toString());
+				sb.setLength(0);
+			}
+
+			IRInterpreter interpreter = _getInterpreter();
+
+			ArrayList<String> outLines = new ArrayList<>();
+
+			for (String inputStmt : inputStmts) {
+
+				try {
+
+					out.clear();
+					outLines.add(inputStmt);
+
+					String result = RulpUtil.toString(interpreter.compute(inputStmt));
+					outLines.add(";=>" + result);
+
+					String output = out.getOut();
+					if (output != null && !output.isEmpty()) {
+						outLines.add(";out:");
+						outLines.add(output);
+						outLines.add(";eof");
+					}
+
+				} catch (Exception e) {
+					outLines.add(";err:");
+					outLines.add(e.getMessage());
+					outLines.add(";eof");
+				}
+
+				outLines.add("");
+			}
+
+			FileUtil.saveTxtFile(inputScriptPath + ".out", outLines);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			fail(String.format("error found in line: %s, file=%s", e.toString(), inputScriptPath));
+		}
+	}
+
 	protected void _setup() {
 
 		_interpreter = null;
@@ -243,11 +311,11 @@ public class RulpTestBase {
 		}
 	}
 
-	protected void _test_script() {
-		_test_script(getCachePath() + ".rulp");
+	protected void _test_script2() {
+		_test_script2(getCachePath() + ".rulp");
 	}
 
-	protected void _test_script(String scriptPath) {
+	protected void _test_script2(String scriptPath) {
 
 		String input = null;
 		String result = null;

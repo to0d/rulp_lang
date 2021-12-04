@@ -58,7 +58,7 @@ public class XRFactorLsTest extends RulpTestBase {
 	public void test_3_env_vars() {
 
 		_setup();
-		_test_script();
+		_run_script();
 	}
 
 	@Test

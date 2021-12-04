@@ -86,7 +86,7 @@ public class TestStack extends RulpTestBase {
 	void test_stack_5_final() {
 
 		_setup();
-		_test_script("result/collection/TestStack/test_stack_5_final.rulp");
+		_run_script();
 	}
 
 }

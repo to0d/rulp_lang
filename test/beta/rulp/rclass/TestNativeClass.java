@@ -26,7 +26,7 @@ public class TestNativeClass extends RulpTestBase {
 
 		_setup();
 
-		_test_script("result/rclass/TestNativeClass/native_class_1.rulp");
+		_run_script("result/rclass/TestNativeClass/native_class_1.rulp");
 		try {
 
 			IRInterpreter interpreter = _getInterpreter();

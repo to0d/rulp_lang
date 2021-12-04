@@ -105,7 +105,7 @@ public class TestQueue extends RulpTestBase {
 	void test_queue_5_final() {
 
 		_setup();
-		_test_script("result/collection/TestQueue/test_queue_5_final.rulp");
+		_run_script();
 	}
 
 	@Test
@@ -119,8 +119,8 @@ public class TestQueue extends RulpTestBase {
 	void test_queue_7_push_fun_obj() {
 
 		_setup();
-		_test_script("result/collection/TestQueue/test_queue_7_push_fun_obj.rulp");
-		_gInfo("result/collection/TestQueue/test_queue_7_push_fun_obj_ginfo.txt");
+		_run_script();
+		_gInfo();
 	}
 
 	@Test

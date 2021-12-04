@@ -1,0 +1,25 @@
+(defun fun1 (?v) (return (+ ?v 1)))
+;=>fun1
+
+(name-of fun1)
+;=>"(fun1 nil)"
+
+(fun1 1.0)
+;=>2.0
+
+(out-to-file "result/runtime/XRFactorDefunTest/test_fun_4_scope_d_1.txt" (print-subject 1))
+;=>nil
+
+(do
+    (defun main::fun1 ((?v float)) (return (+ ?v 2)))    
+    (out-to-file "result/runtime/XRFactorDefunTest/test_fun_4_scope_d_2.txt" (print-subject 2))
+    (fun1 1.0)
+)
+;=>3.0
+
+(fun1 1.0)
+;=>3.0
+
+(out-to-file "result/runtime/XRFactorDefunTest/test_fun_4_scope_d_3.txt" (print-subject 1))
+;=>nil
+

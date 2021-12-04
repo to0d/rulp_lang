@@ -23,6 +23,6 @@ class XRFactorErrorTest extends RulpTestBase {
 	@Test
 	void test_unhandle_case_1() {
 		_setup();
-		_test_script("result/error/XRFactorErrorTest/test_unhandle_case_1.rulp");
+		_run_script();
 	}
 }

@@ -7,55 +7,46 @@
     (defun get ()   (return ?value))
     (defun set (?x) (setq ?value ?x))
 )
-;=>class1
+;;;
 
 (property-of class1::add)
-;=>'(default final)
+;;;
 
 (setq class1::?v1 3)
-;=>&?v1
+;;;
 
 (setq class1::?v2 3)
-;err:
-Can't update final member: class1::?v2
-at main: (setq class1::?v2 3)
-;eof
+;;;
 
 (defun class1::add (?x) (setq ?value (+ ?value ?x 1)))
-;err:
-can't redefine final member: class1::add
-at main: (defun class1::add (?x) (setq ?value (+ ?value ?x 1)))
-;eof
+;;;
 
 (defun class1::sub (?x) (setq ?value (- ?value ?x 1)))
-;err:
-duplicate funcion: (sub nil)
-at main: (defun class1::sub (?x) (setq ?value (- ?value ?x 1)))
-;eof
+;;;
 
 (defun class1::sub (?x ?y) (setq ?value (- ?value ?x ?y)))
-;=>class1::sub
+;;;
 
 (new class1 o1)
-;=>o1
+;;;
 
 (o1::get)
-;=>0
+;;;
 
 (o1::add 5)
-;=>nil
+;;;
 
 (o1::get)
-;=>5
+;;;
 
 (o1::sub 3)
-;=>nil
+;;;
 
 (o1::get)
-;=>2
+;;;
 
 (o1::sub 1 1)
-;=>nil
+;;;
 
 (o1::get)
-;=>0
+;;;

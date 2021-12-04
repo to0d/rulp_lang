@@ -2,10 +2,13 @@
     (return (do 
         (return 
             (lambda () (return (* ?v ?v)))))))
-;=>fun1
+;;;
+
 (defvar ?f (fun1 2))
-;=>&?f
+;;;
+
 (?f)
-;=>4
+;;;
+
 (?f)
-;=>4
+;;;

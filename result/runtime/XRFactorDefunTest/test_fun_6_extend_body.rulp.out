@@ -1,0 +1,19 @@
+(defun fun1 (?v1)
+    (if (> ?v1 10) (return 2))
+    (if (> ?v1 0) (return 1))
+    (return 0)
+)
+;=>fun1
+
+(name-of fun1)
+;=>"(fun1 nil)"
+
+(fun1 0)
+;=>0
+
+(fun1 1)
+;=>1
+
+(fun1 11)
+;=>2
+

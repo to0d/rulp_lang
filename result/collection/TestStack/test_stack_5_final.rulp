@@ -1,19 +1,9 @@
 (defclass class1 (stack))
-;err:
-Can't inherit final class: stack
-at main: (defclass class1 (stack))
-;eof
+;;;
 
 (defvar stack::?v2 0)
-;err:
-can't define member variable<?v2> for final subject: stack
-at main: (defvar stack::?v2 0)
-;eof
-
+;;;
 
 (defun stack::fun () ())
-;err:
-can't define member<fun> for final subject: stack
-at main: (defun stack::fun () ())
-;eof
+;;;
 

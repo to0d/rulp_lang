@@ -1,14 +1,9 @@
 (defclass class1 ()
     (defun fun1 ((?x Expr)) (print ?x))
 )
-;err:
-Undefined para type: Expr
-at main: (defclass class1 () (defun fun1 ((?x Expr)) (print ?x)))
-;eof
+;;;
+
 (defclass class2 ()
     (defun fun1 (?x ?x) (print ?x))
 )
-;err:
-duplicate parameter: ?x
-at main: (defclass class2 () (defun fun1 (?x ?x) (print ?x)))
-;eof
+;;;

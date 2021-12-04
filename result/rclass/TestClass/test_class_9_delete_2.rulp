@@ -1,24 +1,33 @@
 (defvar ?dx 0)
-;=>&?dx
+;;;
+
 (rulp-object-count frame)
-;=>0
+;;;
+
 (rulp-object-count instance)
-;=>0
+;;;
+
 (defclass class1 ()
     (defvar ?value)
     (defun init () (setq ?value 0))
     (defun ~init () (setq ?dx (+ ?dx 1)))
 )
-;=>class1
+;;;
+
 (ls class1)
-;=>'(class1::?value class1::init class1::~init)
+;;;
+
 (new class1 o1)
-;=>o1
+;;;
+
 (delete o1)
-;=>nil
+;;;
+
 (rulp-object-count frame)
-;=>1
+;;;
+
 (rulp-object-count instance)
-;=>0
+;;;
+
 ?dx
-;=>1
+;;;

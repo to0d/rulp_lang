@@ -3,7 +3,4 @@
     (do-when-obj-deleted x (lambda (?obj) (print "obj'" (name-of ?obj) "' was deleted")))
     (out-to-file "result/factor/XRFactorDoWhenObjDeletedTest/test_1_a.txt" (print-subject local))
 )
-;=>nil
-;out:
-obj'x' was deleted
-;eof
+;;;

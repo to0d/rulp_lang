@@ -4,18 +4,25 @@
 (defclass class2 (class1)
     (defun fun1 (?x) (return (+ ?x 2)) static)
 )
-;=>class1 class2
+;;;
+
 (out-to-file "result/rclass/TestClass/test_class_7_overload_3_a.txt" (print-subject class2))
-;=>nil
+;;;
+
 (new class1 o1)
-;=>o1
+;;;
+
 (o1::fun1 1)
-;=>2
+;;;
+
 (out-to-file "result/rclass/TestClass/test_class_7_overload_3_b.txt" (print-subject o1 -1))
-;=>nil
+;;;
+
 (new class2 o2)
-;=>o2
+;;;
+
 (o2::fun1 1)
-;=>3
+;;;
+
 (out-to-file "result/rclass/TestClass/test_class_7_overload_3_c.txt" (print-subject o2 -1))
-;=>nil
+;;;

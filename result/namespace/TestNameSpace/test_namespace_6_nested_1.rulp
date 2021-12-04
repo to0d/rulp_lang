@@ -1,34 +1,38 @@
 (new namespace ns1)
-;=>ns1
+;;;
+
 (new namespace ns1::ns2)
-;=>ns2
+;;;
+
 (use namespace ns1)
-;=>nil
+;;;
+
 (use namespace ns2)
-;=>nil
+;;;
+
 (new namespace ns2::ns3)
-;=>ns3
+;;;
+
 (use namespace ns3)
-;=>nil
+;;;
+
 (defvar ns3::var3 1)
-;=>&var3
+;;;
+
 (search-frame-of)
-;=>'(SF-ns3-2 SF-ns2-1 SF-ns1-0 main)
+;;;
+
 (type-of $(value-of ns3))
-;=>instance
+;;;
+
 (frame-of $(value-of ns3))
-;=>SF-ns3-2
+;;;
+
 (print-frame-tree)
-;=>nil
-;out:
-->FRAME(root): id=0, lvl=0, subject=root
-    ->FRAME(system): id=1, lvl=1, subject=system
-        ->FRAME(main): id=2, lvl=2, subject=main, search=[SF-ns3-2, SF-ns2-1, SF-ns1-0, main]
-            ->FRAME(SF-ns1-0): id=3, lvl=3, subject=ns1
-                ->FRAME(SF-ns2-1): id=5, lvl=4, subject=ns2
-                    ->FRAME(SF-ns3-2): id=6, lvl=5, subject=ns3
-;eof
+;;;
+
 (+ (:: (:: (:: (:: main ns1) ns2) ns3) var3) 1)
-;=>2
+;;;
+
 (+ main::ns1::ns2::ns3::var3 1)
-;=>2
+;;;

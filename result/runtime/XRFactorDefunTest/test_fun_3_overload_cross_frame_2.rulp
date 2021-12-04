@@ -1,22 +1,25 @@
 (defun fun1 (?v) (return (+ ?v 1)))
-;=>fun1
+;;;
+
 (name-of fun1)
-;=>"(fun1 nil)"
+;;;
+
 (fun1 1)
-;=>2
+;;;
+
 (do
     (defun fun1 (?v1 ?v2) (return (+ ?v1 ?v2)))    
     (out-to-file "result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_2_a.txt" (print-subject 2))
     (fun1 1 2)
 )
-;=>3
+;;;
+
 (out-to-file "result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_2_b.txt" (print-subject 1))
-;=>nil
+;;;
+
 (fun1 1 2)
-;err:
-Unexpect argument number in fun<fun1>: expect=1, actual=2
-at main: (fun1 1 2)
-;eof
+;;;
+
 (do
     (defun fun1 (?v1 ?v2) (return (+ ?v1 ?v2)))    
     (out-to-file "result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_2_c.txt" (print-subject 2))
@@ -27,10 +30,7 @@ at main: (fun1 1 2)
     (out-to-file "result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_2_e.txt" (print-subject 2))
     (fun1 1 2 3)
 )
-;err:
-match funcion not found:  expr=(fun1 1 2 3)
-at DO: (fun1 1 2 3)
-at main: (do (defun fun1 (?v1 ?v2) (return (+ ?v1 ?v2))) (out-to-file "result/runtime/...
-;eof
+;;;
+
 (out-to-file "result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_2_f.txt" (print-subject 1))
-;=>nil
+;;;

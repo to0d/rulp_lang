@@ -23,6 +23,6 @@ class XRFactorSetqTest extends RulpTestBase {
 	void test_err_1() {
 
 		_setup();
-		_test_script("result/factor/XRFactorSetqTest/test_setq_err_1.rulp");
+		_run_script();
 	}
 }

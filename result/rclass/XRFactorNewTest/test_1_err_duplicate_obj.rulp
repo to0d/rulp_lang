@@ -1,9 +1,8 @@
 (defclass class1 ())
-;=>class1
+;;;
+
 (new class1 obj1)
-;=>obj1
+;;;
+
 (new class1 obj1)
-;err:
-duplicate object<obj1> found: obj1
-at main: (new class1 obj1)
-;eof
+;;;

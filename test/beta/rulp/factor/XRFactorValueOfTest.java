@@ -45,6 +45,6 @@ class XRFactorValueOfTest extends RulpTestBase {
 	public void test_3() {
 
 		_setup();
-		_test_script("result/factor/XRFactorValueOfTest/test_3.rulp");
+		_run_script();
 	}
 }

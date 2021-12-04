@@ -87,8 +87,7 @@ class XRFactorDefunTest extends RulpTestBase {
 	void test_fun_3_overload_arg_type_1() {
 
 		_setup();
-
-		_test_script("result/runtime/XRFactorDefunTest/test_fun_overload_arg_type_1.rulp");
+		_run_script();
 		_test("(out-to-file \"result/runtime/XRFactorDefunTest/test_fun_3_overload_arg_type_1_frame_1.txt\" (print-subject))");
 
 	}
@@ -111,19 +110,19 @@ class XRFactorDefunTest extends RulpTestBase {
 	@Test
 	void test_fun_3_overload_cross_frame_1_override() {
 		_setup();
-		_test_script("result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_1_override.rulp");
+		_run_script();
 	}
 
 	@Test
 	void test_fun_3_overload_cross_frame_1_override2() {
 		_setup();
-		_test_script("result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_1_override2.rulp");
+		_run_script();
 	}
 
 	@Test
 	void test_fun_3_overload_cross_frame_2() {
 		_setup();
-		_test_script("result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_2.rulp");
+		_run_script();
 	}
 
 	@Test
@@ -168,21 +167,21 @@ class XRFactorDefunTest extends RulpTestBase {
 	void test_fun_4_scope_b() {
 
 		_setup();
-		_test_script("result/runtime/XRFactorDefunTest/test_fun_4_scope_b.rulp");
+		_run_script();
 	}
 
 	@Test
 	void test_fun_4_scope_c() {
 
 		_setup();
-		_test_script("result/runtime/XRFactorDefunTest/test_fun_4_scope_c.rulp");
+		_run_script();
 	}
 
 	@Test
 	void test_fun_4_scope_d() {
 
 		_setup();
-		_test_script("result/runtime/XRFactorDefunTest/test_fun_4_scope_d.rulp");
+		_run_script();
 	}
 
 	@Test
@@ -213,6 +212,6 @@ class XRFactorDefunTest extends RulpTestBase {
 	@Test
 	void test_fun_6_extend_body() {
 		_setup();
-		_test_script("result/runtime/XRFactorDefunTest/test_fun_6_extend_body.rulp");
+		_run_script();
 	}
 }

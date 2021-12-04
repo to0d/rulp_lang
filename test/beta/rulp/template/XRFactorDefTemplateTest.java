@@ -10,38 +10,38 @@ class XRFactorDefTemplateTest extends RulpTestBase {
 	public void test_1() {
 
 		_setup();
-		_test_script("result/template/XRFactorDefTemplateTest/test_1.rulp");
-		_gInfo("result/template/XRFactorDefTemplateTest/test_1_ginfo.txt");
+		_run_script();
+		_gInfo();
 	}
 
 	@Test
 	public void test_2_mbr() {
 
 		_setup();
-		_test_script("result/template/XRFactorDefTemplateTest/test_2_mbr.rulp");
-		_gInfo("result/template/XRFactorDefTemplateTest/test_2_mbr_ginfo.txt");
+		_run_script();
+		_gInfo();
 	}
 
 	@Test
 	public void test_3_scope_a() {
 
 		_setup();
-		_test_script("result/template/XRFactorDefTemplateTest/test_3_scope_a.rulp");
+		_run_script();
 	}
 
 	@Test
 	public void test_4_ns() {
 
 		_setup();
-		_test_script("result/template/XRFactorDefTemplateTest/test_4_ns.rulp");
-		_gInfo("result/template/XRFactorDefTemplateTest/test_4_ns_ginfo.txt");
+		_run_script();
+		_gInfo();
 	}
 
 	@Test
 	public void test_5_overwrite_1() {
 
 		_setup();
-		_test_script("result/template/XRFactorDefTemplateTest/test_5_overwrite_1.rulp");
-		_gInfo("result/template/XRFactorDefTemplateTest/test_5_overwrite_1_ginfo.txt");
+		_run_script();
+		_gInfo();
 	}
 }

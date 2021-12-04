@@ -1,0 +1,18 @@
+(defclass class1 (queue))
+;err:
+Can't inherit final class: queue
+at main: (defclass class1 (queue))
+;eof
+
+(defvar queue::?v2 0)
+;err:
+can't define member variable<?v2> for final subject: queue
+at main: (defvar queue::?v2 0)
+;eof
+
+(defun queue::fun () ())
+;err:
+can't define member<fun> for final subject: queue
+at main: (defun queue::fun () ())
+;eof
+
