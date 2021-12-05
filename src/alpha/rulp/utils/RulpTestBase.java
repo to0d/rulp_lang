@@ -138,19 +138,93 @@ public class RulpTestBase {
 		_run_script(getCachePath() + ".rulp");
 	}
 
+	protected boolean _run_stmt(String inputStmt, Boolean expectError, String expectResult, ArrayList<String> outLines,
+			IRInterpreter interpreter) {
+
+		try {
+
+			out.clear();
+			outLines.add(inputStmt);
+
+			String result = RulpUtil.toString(interpreter.compute(inputStmt));
+			outLines.add(";=>" + result);
+
+			String output = out.getOut();
+			if (output != null && !output.isEmpty()) {
+				outLines.add(";out:");
+				outLines.add(output);
+				outLines.add(";eof");
+			}
+
+			outLines.add("");
+
+			if (expectResult != null && !result.equals(expectResult)) {
+				return false;
+			}
+
+			if (expectError != null && expectError) {
+				return false;
+			}
+
+		} catch (Exception e) {
+
+			outLines.add(";err:");
+			outLines.add(e.getMessage());
+			outLines.add(";eof");
+			outLines.add("");
+
+			if (expectError != null && !expectError) {
+				e.printStackTrace();
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	protected void _run_script(String inputScriptPath) {
 
 		try {
 
-			ArrayList<String> inputStmts = new ArrayList<>();
 			StringBuffer sb = new StringBuffer();
 
-			for (String line : FileUtil.openTxtFile(inputScriptPath)) {
-				if (line.equals(";;;")) {
-					if (!sb.isEmpty()) {
-						inputStmts.add(sb.toString());
-						sb.setLength(0);
+			boolean rc = true;
+
+			List<String> lines = FileUtil.openTxtFile(inputScriptPath);
+			ArrayList<String> outLines = new ArrayList<>();
+
+			int size = lines.size();
+			int index = 0;
+			String inputStmt = null;
+			IRInterpreter interpreter = _getInterpreter();
+
+			TEST: for (; rc && index < size; ++index) {
+
+				String line = lines.get(index);
+
+				if (line.trim().equals(";;;")) {
+					inputStmt = sb.toString();
+					sb.setLength(0);
+					rc = _run_stmt(inputStmt, null, null, outLines, interpreter);
+
+				} else if (line.startsWith(";=>")) {
+
+					inputStmt = sb.toString();
+					sb.setLength(0);
+					String expectResult = line.substring(3);
+					if (expectResult.trim().isEmpty()) {
+						expectResult = null;
 					}
+
+					rc = _run_stmt(inputStmt, false, expectResult, outLines, interpreter);
+
+				} else if (line.trim().equals(";err:")) {
+
+					inputStmt = sb.toString();
+					sb.setLength(0);
+
+					rc = _run_stmt(inputStmt, true, null, outLines, interpreter);
+
 				} else {
 					if (!sb.isEmpty()) {
 						sb.append("\n");
@@ -159,46 +233,21 @@ public class RulpTestBase {
 				}
 			}
 
-			if (!sb.isEmpty()) {
-				inputStmts.add(sb.toString());
+			if (rc && !sb.isEmpty()) {
+				inputStmt = sb.toString();
 				sb.setLength(0);
-			}
-
-			IRInterpreter interpreter = _getInterpreter();
-
-			ArrayList<String> outLines = new ArrayList<>();
-
-			for (String inputStmt : inputStmts) {
-
-				try {
-
-					out.clear();
-					outLines.add(inputStmt);
-
-					String result = RulpUtil.toString(interpreter.compute(inputStmt));
-					outLines.add(";=>" + result);
-
-					String output = out.getOut();
-					if (output != null && !output.isEmpty()) {
-						outLines.add(";out:");
-						outLines.add(output);
-						outLines.add(";eof");
-					}
-
-				} catch (Exception e) {
-					outLines.add(";err:");
-					outLines.add(e.getMessage());
-					outLines.add(";eof");
-				}
-
-				outLines.add("");
+				rc = _run_stmt(inputStmt, false, null, outLines, interpreter);
 			}
 
 			FileUtil.saveTxtFile(inputScriptPath + ".out", outLines);
 
+			if (!rc) {
+				fail(String.format("error found in line: %d, file=%s", index, inputScriptPath));
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
-			fail(String.format("error found in line: %s, file=%s", e.toString(), inputScriptPath));
+			fail(String.format("error found: %s, file=%s", e.toString(), inputScriptPath));
 		}
 	}
 

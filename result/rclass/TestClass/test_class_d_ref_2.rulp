@@ -15,4 +15,4 @@
 (loop for ?o in (to-list ?arr) do
     (print ?o::?value)
 )
-;;;
+;=>
