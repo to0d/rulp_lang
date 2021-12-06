@@ -226,14 +226,14 @@ public class RulpTestBase {
 					rc = _run_stmt(inputStmt, true, null, outLines, interpreter);
 
 				} else {
-					if (!sb.isEmpty()) {
+					if (sb.length() != 0) {
 						sb.append("\n");
 					}
 					sb.append(line);
 				}
 			}
 
-			if (rc && !sb.isEmpty()) {
+			if (rc && sb.length() != 0) {
 				inputStmt = sb.toString();
 				sb.setLength(0);
 				rc = _run_stmt(inputStmt, false, null, outLines, interpreter);
