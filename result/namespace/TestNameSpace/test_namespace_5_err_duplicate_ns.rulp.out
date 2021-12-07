@@ -1,0 +1,9 @@
+(new namespace ns1)
+;=>ns1
+
+(new namespace ns1)
+;err:
+duplicate object<ns1> found: namespace@ns1
+at main: (new namespace ns1)
+;eof
+

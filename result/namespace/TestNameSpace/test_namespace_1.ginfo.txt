@@ -30,8 +30,8 @@ Callable stats info: callId=111, row=19, column=56(2), value-max=4, value-unit=2
     root   factor      6    0 defvar                            1                         111       1       1        
     root   factor      6    0 alias                          1221                                                    
     main     func      5    1 (f1)                                                               2        1       11 
-    main   member      4    1 ns1::f2                                                             1        1  1     1
-    main   member      4    1 ns1::f1                                                             1        1 1     1 
+    main   member      4    1 namespace@ns1::f2                                                   1        1  1     1
+    main   member      4    1 namespace@ns1::f1                                                   1        1 1     1 
     root   factor      4    0 defclass                                        1 1 1  1                               
     root   factor      3    0 search-frame-of                                              1            1      1     
     root   factor      3    0 deftemplate                                               21                           

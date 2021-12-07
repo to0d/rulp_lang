@@ -1,0 +1,173 @@
+(new namespace ns1)
+;=>
+
+(defvar var1 1)
+;=>
+
+(defun f1 () (return 1))
+;=>
+
+(search-frame-of)
+;=>
+
+;;;;; define variable in name space
+(defvar ns1::var1 2)
+;=>
+
+(defvar ns1::var2 3)
+;=>
+
+(value-of var1)
+;=>
+
+(value-of (value-of main::var1))
+;=>
+
+(value-of (value-of ns1::var1))
+;=>
+
+(value-of (value-of ns1::var2))
+;=>
+
+(ls)
+;=>
+
+(ls ns1)
+;=>
+
+(has-member ns1 var1)
+;=>
+
+;;;;; define function in name space
+(defun ns1::f1 () (return 2))
+;=>
+
+(defun ns1::f2 () (return 3))
+;=>
+
+(f1)
+;=>
+
+(main::f1)
+;=>
+
+(ns1::f1)
+;=>
+
+(ns1::f2)
+;=>
+
+(ls)
+;=>
+
+(ls ns1)
+;=>
+
+;;;;; Can't define same name item
+(defvar ns1::var1 1)
+;err:
+
+(defun ns1::f1 () (return 2))
+;err:
+
+(ls)
+;=>
+
+(ls ns1)
+;=>
+
+;;;;; Can't find item if the using the name space is not specified
+(value-of var2)
+;err:
+
+(f2)
+;err:
+
+(ls)
+;=>
+
+(ls ns1)
+;=>
+
+;;;;  Search item in a name space
+(use namespace ns1)
+;;;
+
+(search-frame-of)
+;=>
+
+(value-of (value-of main::var1))
+;=>
+
+(value-of (value-of ns1::var1))
+;=>
+
+(value-of (value-of ns1::var2))
+;=>
+
+(main::f1)
+;=>
+
+(ns1::f1)
+;=>
+
+(ns1::f2)
+;=>
+
+;;;;; Item will be only define in the current frame if the using the name space is not specified
+(defvar var3 4)
+;=>
+
+(defun f3 () (return 4))
+;=>
+
+;;;;; the latest name space higher priority
+(value-of var1)
+;=>
+
+(f1)
+;=>
+
+;;;;; change back, everything should work fine
+(value-of var2)
+;=>
+
+(f2)
+;=>
+
+(use namespace main)
+;;;
+
+(search-frame-of)
+;=>
+
+(value-of var1)
+;=>
+
+(value-of (value-of main::var1))
+;=>
+
+(value-of (value-of ns1::var1))
+;=>
+
+(value-of (value-of ns1::var2))
+;=>
+
+(value-of var3)
+;=>
+
+(f1)
+;=>
+
+(main::f1)
+;=>
+
+(ns1::f1)
+;=>
+
+(ns1::f2)
+;=>
+
+(f3)
+;=>
+

@@ -28,7 +28,7 @@ Callable stats info: callId=63, row=12, column=64(1), value-max=2, value-unit=2^
     root   factor      4    0 value-of                                                                                   2  2
     root   factor      4    0 defclass                                                         1    1   1     1              
     root   factor      3    0 print                                                                                      1 11
-    main   member      2    1 ns1::ask                                                                                     11
+    main   member      2    1 namespace@ns1::ask                                                                           11
     main template      2    1 ask                                                                                        11  
     root   factor      2    0 +                                                                                          1  1
     root   factor      1    0 new                                                                                     1      

@@ -28,16 +28,16 @@ Callable stats info: callId=60, row=19, column=61(1), value-max=2, value-unit=2^
     root   factor      4    0 defclass                                                         1    1   1     1           
     root   factor      3    0 deftemplate                                                                          111    
     root   factor      2    0 return                                                                                     2
+    main   member      2    1 queue@q1::push                                                                           11 
   system   member      2    1 queue::_queue_push_back                                                                  11 
-    main   member      2    1 q1::push                                                                                 11 
     root   factor      2    0 print                                                                                      2
     root   factor      2    0 lambda                                                                                   11 
   system funcList      1    1 to-list                                                                                    1
     root   factor      1    0 setq                                                                                    1   
+    main   member      1    1 queue@q1::to-list                                                                          1
+    main   member      1    1 queue@q1::init                                                                          1   
   system   member      1    1 queue::_queue_to_list                                                                      1
   system   member      1    1 queue::_queue_init                                                                      1   
-    main   member      1    1 q1::to-list                                                                                1
-    main   member      1    1 q1::init                                                                                1   
     root   factor      1    0 new                                                                                     1   
     root   factor      1    0 loop                                                                                       1
     root   factor      1    0 defvar                                1                                                     
@@ -97,7 +97,7 @@ name=q1, lvl=1, ref=1/2, parent=queue, final=false, mbrs=5, frame=4(SF-q1-1)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE              Y       4    1    var        null : type=instance
+?impl                : PRIVATE              Y       4    1    var        noclass@un-0 : type=instance
 init                 : DEFAULT Y            Y       5    1    func       (init) : frame=SF-q1-1, type=lambda
 push                 : DEFAULT Y            Y       5    1    func       (push nil) : frame=SF-q1-1, type=lambda
 this                 : DEFAULT                      0    1    instance   q1 : class=queue

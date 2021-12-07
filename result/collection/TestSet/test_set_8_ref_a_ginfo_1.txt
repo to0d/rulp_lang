@@ -31,10 +31,10 @@ Callable stats info: callId=65, row=15, column=33(2), value-max=2, value-unit=2^
     root   factor      2    0 setq                                                         11 
     root   factor      2    0 new                                                          11 
     root   factor      2    0 defvar                            1                         1   
+    main   member      1    1 set@s1::init                                                 1  
+    main   member      1    1 set@s1::add                                                   1 
   system   member      1    1 set::_set_init                                               1  
   system   member      1    1 set::_set_add                                                 1 
-    main   member      1    1 s1::init                                                     1  
-    main   member      1    1 s1::add                                                       1 
     main     func      1    1 (fun_add nil)                                                 1 
     root   factor      1    0 do                                                            1 
     root   factor      1    0 defmacro                                      1                 
@@ -85,7 +85,7 @@ id=5, name=_$fun$_fun_add, lvl=3, ref=1/3, entry=1, pid=2(main), subject=_$fun$_
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?set                 : 8        5        1    var        s1 : type=instance  
+?set                 : 8        5        1    var        set@s1 : type=instance
 ==========================================================================================================================
 
 id=7, name=SF-class1-2, lvl=5, ref=1/2, entry=0, pid=5(_$fun$_fun_add), subject=class1
@@ -109,7 +109,7 @@ name=s1, lvl=1, ref=2/2, parent=set, final=false, mbrs=4, frame=4(SF-s1-1)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE              Y       4    1    var        null : type=instance
+?impl                : PRIVATE              Y       4    1    var        noclass@un-0 : type=instance
 add                  : DEFAULT Y            Y       5    1    func       (add nil) : frame=SF-s1-1, type=lambda
 init                 : DEFAULT Y            Y       5    1    func       (init) : frame=SF-s1-1, type=lambda
 this                 : DEFAULT                      0    2    instance   s1 : class=set

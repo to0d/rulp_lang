@@ -1,0 +1,2 @@
+(use namespace ns1)
+;err:

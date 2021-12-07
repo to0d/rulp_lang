@@ -1,0 +1,5 @@
+(new namespace ns1)
+;=>
+
+(new namespace ns1)
+;err:

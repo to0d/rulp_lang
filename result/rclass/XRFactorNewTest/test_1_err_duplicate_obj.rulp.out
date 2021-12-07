@@ -6,7 +6,7 @@
 
 (new class1 obj1)
 ;err:
-duplicate object<obj1> found: obj1
+duplicate object<obj1> found: class1@obj1
 at main: (new class1 obj1)
 ;eof
 

@@ -65,7 +65,7 @@ system               : 2        2        0    frame      system
 main                 : 3        2        2    frame      main                
 class1               : 4        2        1    class      class1              
 type#class1          : 5        2        0    atom       type#class1         
-o1                   : 6        2        1    var        null : type=instance
+o1                   : 6        2        1    var        class1@un-0 : type=instance
 ==========================================================================================================================
 
 

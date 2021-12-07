@@ -42,14 +42,14 @@
 
 (o1::sub 2)
 ;err:
-Can't access member<o1::sub> in frame<main>
+Can't access member<class1@o1::sub> in frame<main>
 at main: o1::sub
 at main: (o1::sub 2)
 ;eof
 
 (value-of o1::?value)
 ;err:
-Can't access member<o1::?value> in frame<main>
+Can't access member<class1@o1::?value> in frame<main>
 at main: (value-of o1::?value)
 ;eof
 

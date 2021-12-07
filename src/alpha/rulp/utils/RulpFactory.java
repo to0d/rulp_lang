@@ -272,6 +272,8 @@ public final class RulpFactory {
 
 	private static AtomicInteger uniqNameCount = new AtomicInteger(0);
 
+	private static AtomicInteger unusedNameCount = new AtomicInteger(0);
+
 	static {
 		EMPTY_LIST = new XRListList(Collections.<IRObject>emptyList(), RType.LIST, null, false);
 		EMPTY_EXPR = new XRListList(Collections.<IRObject>emptyList(), RType.EXPR, null, false);
@@ -343,16 +345,6 @@ public final class RulpFactory {
 		return new XRAtom(name);
 	}
 
-	public static IRBlob createBlob(int len) {
-
-		if (len <= 0) {
-			return emptyBlob;
-		}
-
-		RType.BLOB.incCreateCount();
-		return new XRBlob(len);
-	}
-
 	public static IRBlob createBlob(byte[] buf) {
 
 		if (buf == null || buf.length <= 0) {
@@ -361,6 +353,16 @@ public final class RulpFactory {
 
 		RType.BLOB.incCreateCount();
 		return new XRBlob(buf);
+	}
+
+	public static IRBlob createBlob(int len) {
+
+		if (len <= 0) {
+			return emptyBlob;
+		}
+
+		RType.BLOB.incCreateCount();
+		return new XRBlob(len);
 	}
 
 	public static IRBoolean createBoolean(boolean value) {
@@ -942,6 +944,10 @@ public final class RulpFactory {
 		return new XRParser(createTokener());
 	}
 
+	public static <T> IRIterator<T> createRIterator(Iterator<T> iter) throws RException {
+		return new XRIteratorAdatper<T>(iter);
+	}
+
 //	public static IRClass createNoClass() {
 //		IRClass noClass = new XRDefClass(A_NOCLASS);
 //		try {
@@ -951,10 +957,6 @@ public final class RulpFactory {
 //		}
 //		return noClass;
 //	}
-
-	public static <T> IRIterator<T> createRIterator(Iterator<T> iter) throws RException {
-		return new XRIteratorAdatper<T>(iter);
-	}
 
 	public static IRString createString() {
 		return EMPTY_STR;
@@ -1058,6 +1060,10 @@ public final class RulpFactory {
 		return lambdaCount.get();
 	}
 
+	public static String getNextUnusedName() {
+		return String.format("un-%d", unusedNameCount.getAndIncrement());
+	}
+
 	public static int getObjectCreateCount(RType type) {
 		return type.getCreateCount();
 	}
@@ -1116,6 +1122,7 @@ public final class RulpFactory {
 		frameUnNameCount.set(0);
 		frameEntryDefaultMaxId.set(0);
 		frameEntryProtectedMaxId.set(0);
+		unusedNameCount.set(0);
 		interpreterCount.set(0);
 		lambdaCount.set(0);
 		uniqNameCount.set(0);

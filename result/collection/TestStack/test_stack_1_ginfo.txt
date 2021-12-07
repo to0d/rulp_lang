@@ -26,25 +26,25 @@ Callable stats info: callId=75, row=27, column=38(2), value-max=5, value-unit=2^
     root   factor     41    0 defun                              22222222222121212122122           
     root   factor     24    0 return                                                      2 334 233
     root   factor      6    0 alias                          1221                                  
-    main   member      5    1 s1::push                                                     2   21  
+    main   member      5    1 stack@s1::push                                               2   21  
   system   member      5    1 queue::_queue_push_back                                      2   21  
     root   factor      4    0 defclass                                        1 1 1  1             
-    main   member      3    1 s1::size-of                                                 1 11     
-    main   member      3    1 s1::is-empty                                                    2   1
+    main   member      3    1 stack@s1::size-of                                           1 11     
+    main   member      3    1 stack@s1::is-empty                                              2   1
   system   member      3    1 queue::_queue_size_of                                       1 11     
   system   member      3    1 queue::_queue_is_empty                                          2   1
     root   factor      3    0 deftemplate                                               21         
+    main   member      2    1 stack@s1::to-list                                                 11 
+    main   member      2    1 stack@s1::pop                                                 11     
+    main   member      2    1 stack@s1::clear                                                    11
     root   factor      2    0 setq                                                       2         
-    main   member      2    1 s1::to-list                                                       11 
-    main   member      2    1 s1::pop                                                       11     
-    main   member      2    1 s1::clear                                                          11
   system   member      2    1 queue::_queue_to_list                                             11 
   system   member      2    1 queue::_queue_pop_back                                        11     
   system   member      2    1 queue::_queue_clear                                                11
     root   factor      2    0 new                                                        2         
   system funcList      2    1 is-empty                                                        1   1
   system funcList      1    1 to-list                                                            1 
-    main   member      1    1 s1::init                                                   1         
+    main   member      1    1 stack@s1::init                                             1         
   system   member      1    1 queue::_queue_init                                         1         
     root   factor      1    0 name-of                                                     1        
     root   factor      1    0 defvar                            1                                  
@@ -93,7 +93,7 @@ id=4, name=SF-s1-1, lvl=3, ref=8/9, entry=0, pid=3(SF-stack-0), subject=s1
 
 id=6, name=SF-queue-2, lvl=2, ref=2/2, entry=0, pid=1(system), subject=queue
 
-id=7, name=SF-null-3, lvl=3, ref=8/9, entry=0, pid=6(SF-queue-2), subject=null
+id=7, name=SF-un-0-3, lvl=3, ref=8/9, entry=0, pid=6(SF-queue-2), subject=un-0
 
 Global frame tree:
 
@@ -103,7 +103,7 @@ Global frame tree:
         ->FRAME(SF-stack-0): id=3, lvl=2, subject=stack
             ->FRAME(SF-s1-1): id=4, lvl=3, subject=s1
         ->FRAME(SF-queue-2): id=6, lvl=2, subject=queue
-            ->FRAME(SF-null-3): id=7, lvl=3, subject=null
+            ->FRAME(SF-un-0-3): id=7, lvl=3, subject=un-0
 
 Global Subject list:
 
@@ -111,7 +111,7 @@ name=s1, lvl=1, ref=1/2, parent=stack, final=false, mbrs=9, frame=4(SF-s1-1)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE              Y       4    1    var        null : type=instance
+?impl                : PRIVATE              Y       4    1    var        queue@un-0 : type=instance
 clear                : DEFAULT Y            Y       5    1    func       (clear) : frame=SF-s1-1, type=lambda
 init                 : DEFAULT Y            Y       5    1    func       (init) : frame=SF-s1-1, type=lambda
 is-empty             : DEFAULT Y            Y       5    1    func       (is-empty) : frame=SF-s1-1, type=lambda

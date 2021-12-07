@@ -33,9 +33,9 @@ Callable stats info: callId=71, row=14, column=36(2), value-max=2, value-unit=2^
     root   factor      3    0 defvar                            1                         11     
     root   factor      3    0 deftemplate                                               21       
     root   factor      3    0 add_search_frame                                              1 11 
-    main   member      2    1 ns1::f1                                                        1  1
     root   factor      2    0 new                                                        11      
-    main   member      1    1 ns2::f1                                                          1 
+    main   member      2    1 namespace@ns1::f1                                              1  1
+    main   member      1    1 namespace@ns2::f1                                                1 
     root   factor      1    0 defmacro                                      1                    
 ==========================================================================================================================
 

@@ -262,10 +262,16 @@ public class RulpTestBase {
 	}
 
 	protected void _test(String input) {
+//		System.out.println(input);
+//		System.out.println(";;;");
+//		System.out.println();
 		_test(input, null, null);
 	}
 
 	protected void _test(String input, String expectResult) {
+//		System.out.println(input);
+//		System.out.println(";=>");
+//		System.out.println();
 		_test(input, expectResult, "");
 	}
 
@@ -294,17 +300,21 @@ public class RulpTestBase {
 	}
 
 	protected void _test_error(String input, String expectError) {
-
-		try {
-
-			IRInterpreter interpreter = _getInterpreter();
-			out.clear();
-			interpreter.compute(input);
-			fail("Should fail: " + input);
-
-		} catch (RException | IOException e) {
-			assertEquals(String.format("input=%s", input), expectError, e.getMessage());
-		}
+		
+		System.out.println(input);
+		System.out.println(";err:");
+		System.out.println();
+		
+//		try {
+//
+//			IRInterpreter interpreter = _getInterpreter();
+//			out.clear();
+//			interpreter.compute(input);
+//			fail("Should fail: " + input);
+//
+//		} catch (RException | IOException e) {
+//			assertEquals(String.format("input=%s", input), expectError, e.getMessage());
+//		}
 	}
 
 	protected void _test_match(String input, String expectResult, String expecFile) {

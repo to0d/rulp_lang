@@ -29,12 +29,12 @@ Callable stats info: callId=63, row=13, column=64(1), value-max=1, value-unit=1^
     root   factor      4    0 deftemplate                                                                          111    1  
     root   factor      2    0 return                                                                                    1   1
     root   factor      2    0 new                                                                                      1 1   
-    main   member      2    1 ?o1::get                                                                                  1   1
+    main   member      2    1 class1@?o1::get                                                                           1   1
     root   factor      1    0 setq                                                                                         1 
-    main   member      1    1 ns1::set                                                                                     1 
+    main   member      1    1 namespace@ns1::set                                                                           1 
     root   factor      1    0 defvar                                1                                                        
     root   factor      1    0 defmacro                                                      1                                
-    main   member      1    1 ?o1::inc                                                                                     1 
+    main   member      1    1 class1@?o1::inc                                                                              1 
     root   factor      1    0 +                                                                                            1 
 ==========================================================================================================================
 
@@ -93,6 +93,15 @@ Global frame tree:
 
 Global Subject list:
 
+name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
+==========================================================================================================================
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
+--------------------------------------------------------------------------------------------------------------------------
+?v1                  : DEFAULT                      0    1    var        0 : type=int
+get                  : DEFAULT                      0    1    func       (get) : frame=main
+inc                  : DEFAULT                      0    1    func       (inc nil) : frame=main
+==========================================================================================================================
+
 name=?o1, lvl=1, ref=1/2, parent=class1, final=false, mbrs=4, frame=4(SF-?o1-1)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
@@ -101,15 +110,6 @@ Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 get                  : DEFAULT              Y       4    1    func       (get) : frame=SF-?o1-1, type=lambda
 inc                  : DEFAULT              Y       4    1    func       (inc nil) : frame=SF-?o1-1, type=lambda
 this                 : DEFAULT                      0    1    instance   ?o1 : class=class1
-==========================================================================================================================
-
-name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
-==========================================================================================================================
-Name                 : Access  Final Static Inherit Prop Ref  Type       Value
---------------------------------------------------------------------------------------------------------------------------
-?v1                  : DEFAULT                      0    1    var        0 : type=int
-get                  : DEFAULT                      0    1    func       (get) : frame=main
-inc                  : DEFAULT                      0    1    func       (inc nil) : frame=main
 ==========================================================================================================================
 
 name=ns1, lvl=1, ref=1/1, parent=namespace, final=false, mbrs=2, frame=5(SF-ns1-2)

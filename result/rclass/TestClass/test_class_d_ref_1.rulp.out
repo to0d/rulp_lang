@@ -24,7 +24,7 @@
 
 (funx (fun2))
 ;err:
-Can't incRef: null, ref=-1
+Can't incRef: class1@un-1, ref=-1
 at main: (funx (fun2))
 ;eof
 

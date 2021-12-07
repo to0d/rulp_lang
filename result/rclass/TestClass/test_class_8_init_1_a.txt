@@ -73,17 +73,17 @@ init                 : DEFAULT                      0    1    funcList   '((init
                                                          1    func       (init nil nil) : frame=main
 ==========================================================================================================================
 
-name=null, lvl=1, ref=1/1, parent=class1, final=false, mbrs=4, frame=7(SF-null-4)
+name=un-0, lvl=1, ref=1/1, parent=class1, final=false, mbrs=4, frame=7(SF-un-0-4)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?value               : DEFAULT              Y       4    1    var        0 : type=int
-get                  : DEFAULT              Y       4    1    func       (get) : frame=SF-null-4, type=lambda
+get                  : DEFAULT              Y       4    1    func       (get) : frame=SF-un-0-4, type=lambda
 init                 : DEFAULT              Y       4    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
-                                                         1    func       (init) : frame=SF-null-4, type=lambda
-                                                         1    func       (init nil) : frame=SF-null-4, type=lambda
-                                                         1    func       (init nil nil) : frame=SF-null-4, type=lambda
-this                 : DEFAULT                      0    1    instance   null : class=class1
+                                                         1    func       (init) : frame=SF-un-0-4, type=lambda
+                                                         1    func       (init nil) : frame=SF-un-0-4, type=lambda
+                                                         1    func       (init nil nil) : frame=SF-un-0-4, type=lambda
+this                 : DEFAULT                      0    1    instance   un-0 : class=class1
 ==========================================================================================================================
 
 name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
@@ -98,17 +98,17 @@ init                 : DEFAULT                      0    1    funcList   '((init
                                                          1    func       (init nil nil) : frame=main
 ==========================================================================================================================
 
-name=null, lvl=1, ref=1/1, parent=class1, final=false, mbrs=4, frame=8(SF-null-5)
+name=un-1, lvl=1, ref=1/1, parent=class1, final=false, mbrs=4, frame=8(SF-un-1-5)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?value               : DEFAULT              Y       4    1    var        4 : type=int
-get                  : DEFAULT              Y       4    1    func       (get) : frame=SF-null-5, type=lambda
+get                  : DEFAULT              Y       4    1    func       (get) : frame=SF-un-1-5, type=lambda
 init                 : DEFAULT              Y       4    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
-                                                         1    func       (init) : frame=SF-null-5, type=lambda
-                                                         1    func       (init nil) : frame=SF-null-5, type=lambda
-                                                         1    func       (init nil nil) : frame=SF-null-5, type=lambda
-this                 : DEFAULT                      0    1    instance   null : class=class1
+                                                         1    func       (init) : frame=SF-un-1-5, type=lambda
+                                                         1    func       (init nil) : frame=SF-un-1-5, type=lambda
+                                                         1    func       (init nil nil) : frame=SF-un-1-5, type=lambda
+this                 : DEFAULT                      0    1    instance   un-1 : class=class1
 ==========================================================================================================================
 
 name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
@@ -123,17 +123,17 @@ init                 : DEFAULT                      0    1    funcList   '((init
                                                          1    func       (init nil nil) : frame=main
 ==========================================================================================================================
 
-name=null, lvl=1, ref=1/1, parent=class1, final=false, mbrs=4, frame=9(SF-null-6)
+name=un-2, lvl=1, ref=1/1, parent=class1, final=false, mbrs=4, frame=9(SF-un-2-6)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?value               : DEFAULT              Y       4    1    var        5 : type=int
-get                  : DEFAULT              Y       4    1    func       (get) : frame=SF-null-6, type=lambda
+get                  : DEFAULT              Y       4    1    func       (get) : frame=SF-un-2-6, type=lambda
 init                 : DEFAULT              Y       4    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
-                                                         1    func       (init) : frame=SF-null-6, type=lambda
-                                                         1    func       (init nil) : frame=SF-null-6, type=lambda
-                                                         1    func       (init nil nil) : frame=SF-null-6, type=lambda
-this                 : DEFAULT                      0    1    instance   null : class=class1
+                                                         1    func       (init) : frame=SF-un-2-6, type=lambda
+                                                         1    func       (init nil) : frame=SF-un-2-6, type=lambda
+                                                         1    func       (init nil nil) : frame=SF-un-2-6, type=lambda
+this                 : DEFAULT                      0    1    instance   un-2 : class=class1
 ==========================================================================================================================
 
 name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)

@@ -7,16 +7,16 @@
 ;=>&?arr
 
 (add ?arr (new class1))
-;=>{null}
+;=>{un-0}
 
 (add ?arr (new class1))
-;=>{null,null}
+;=>{un-0,un-1}
 
 (loop for ?o in (to-list ?arr) do
     (print ?o::?value)
 )
 ;err:
-Can't decRef: null, ref=-1
+Can't decRef: class1@un-0, ref=-1
 at main: (loop for ?o in (to-list ?arr) do (print ?o::?value))
 ;eof
 

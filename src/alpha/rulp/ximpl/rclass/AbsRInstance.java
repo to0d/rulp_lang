@@ -28,18 +28,19 @@ import alpha.rulp.ximpl.subject.AbsRSubject;
 
 public abstract class AbsRInstance extends AbsRSubject implements IRInstance {
 
-	protected String instanceName;
+	protected final String instanceName;
 
 	protected IRClass rClass;
 
 	public AbsRInstance() {
 		super();
+		this.instanceName = RulpFactory.getNextUnusedName();
 	}
 
 	public AbsRInstance(IRClass rClass, String instanceName, IRFrame definedFrame) {
 		super(definedFrame);
 		this.rClass = rClass;
-		this.instanceName = instanceName;
+		this.instanceName = instanceName == null ? RulpFactory.getNextUnusedName() : instanceName;
 	}
 
 	@Override
@@ -189,17 +190,21 @@ public abstract class AbsRInstance extends AbsRSubject implements IRInstance {
 
 	}
 
-	public void setInstanceName(String instanceName) {
-		this.instanceName = instanceName;
-	}
-
 	public void setRClass(IRClass rClass) {
 		this.rClass = rClass;
 	}
 
+	protected String _toString = null;
+
 	@Override
 	public String toString() {
-		return asString();
+
+		if (_toString == null) {
+			String className = (rClass == null ? "nil" : rClass.getClassName());
+			_toString = className + "@" + instanceName;
+		}
+
+		return _toString;
 	}
 
 }

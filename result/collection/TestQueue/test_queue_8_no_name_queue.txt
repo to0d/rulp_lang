@@ -76,13 +76,13 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
 main                 : 3        2        1    frame      main                
-q1                   : 4        2        1    var        null : type=instance
+q1                   : 4        2        1    var        queue@un-2 : type=instance
 ==========================================================================================================================
 
 
 id=3, name=SF-queue-0, lvl=2, ref=2/3, entry=0, pid=1(system), subject=queue
 
-id=6, name=SF-null-2, lvl=3, ref=6/7, entry=0, pid=3(SF-queue-0), subject=null
+id=6, name=SF-un-2-2, lvl=3, ref=6/7, entry=0, pid=3(SF-queue-0), subject=un-2
 
 Global frame tree:
 
@@ -90,7 +90,7 @@ Global frame tree:
     ->FRAME(system): id=1, lvl=1, subject=system
         ->FRAME(main): id=2, lvl=2, subject=main
         ->FRAME(SF-queue-0): id=3, lvl=2, subject=queue
-            ->FRAME(SF-null-2): id=6, lvl=3, subject=null
+            ->FRAME(SF-un-2-2): id=6, lvl=3, subject=un-2
 
 Global Subject list:
 

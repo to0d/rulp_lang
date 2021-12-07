@@ -1,0 +1,185 @@
+(new namespace ns1)
+;=>ns1
+
+(defvar var1 1)
+;=>&var1
+
+(defun f1 () (return 1))
+;=>f1
+
+(search-frame-of)
+;=>'()
+
+;;;;; define variable in name space
+(defvar ns1::var1 2)
+;=>&var1
+
+(defvar ns1::var2 3)
+;=>&var2
+
+(value-of var1)
+;=>1
+
+(value-of (value-of main::var1))
+;=>1
+
+(value-of (value-of ns1::var1))
+;=>2
+
+(value-of (value-of ns1::var2))
+;=>3
+
+(ls)
+;=>'(main::f1 main::main main::ns1 main::root main::system main::var1)
+
+(ls ns1)
+;=>'(ns1::this ns1::var1 ns1::var2)
+
+(has-member ns1 var1)
+;=>true
+
+;;;;; define function in name space
+(defun ns1::f1 () (return 2))
+;=>ns1::f1
+
+(defun ns1::f2 () (return 3))
+;=>ns1::f2
+
+(f1)
+;=>1
+
+(main::f1)
+;=>1
+
+(ns1::f1)
+;=>2
+
+(ns1::f2)
+;=>3
+
+(ls)
+;=>'(main::f1 main::main main::ns1 main::root main::system main::var1)
+
+(ls ns1)
+;=>'(ns1::f1 ns1::f2 ns1::this ns1::var1 ns1::var2)
+
+;;;;; Can't define same name item
+(defvar ns1::var1 1)
+;err:
+duplicate member variable: namespace@ns1::var1
+at main: (defvar ns1::var1 1)
+;eof
+
+(defun ns1::f1 () (return 2))
+;err:
+duplicate funcion: (f1)
+at main: (defun ns1::f1 () (return 2))
+;eof
+
+(ls)
+;=>'(main::f1 main::main main::ns1 main::root main::system main::var1)
+
+(ls ns1)
+;=>'(ns1::f1 ns1::f2 ns1::this ns1::var1 ns1::var2)
+
+;;;;; Can't find item if the using the name space is not specified
+(value-of var2)
+;err:
+object not found: var2
+at main: (value-of var2)
+;eof
+
+(f2)
+;err:
+factor not found: (f2)
+at main: (f2)
+;eof
+
+(ls)
+;=>'(main::f1 main::main main::ns1 main::root main::system main::var1)
+
+(ls ns1)
+;=>'(ns1::f1 ns1::f2 ns1::this ns1::var1 ns1::var2)
+
+;;;;  Search item in a name space
+(use namespace ns1)
+;=>nil
+
+(search-frame-of)
+;=>'(SF-ns1-0 main)
+
+(value-of (value-of main::var1))
+;=>1
+
+(value-of (value-of ns1::var1))
+;=>2
+
+(value-of (value-of ns1::var2))
+;=>3
+
+(main::f1)
+;=>1
+
+(ns1::f1)
+;=>2
+
+(ns1::f2)
+;=>3
+
+;;;;; Item will be only define in the current frame if the using the name space is not specified
+(defvar var3 4)
+;=>&var3
+
+(defun f3 () (return 4))
+;=>f3
+
+;;;;; the latest name space higher priority
+(value-of var1)
+;=>2
+
+(f1)
+;=>2
+
+;;;;; change back, everything should work fine
+(value-of var2)
+;=>3
+
+(f2)
+;=>3
+
+(use namespace main)
+;=>nil
+
+(search-frame-of)
+;=>'(main SF-ns1-0)
+
+(value-of var1)
+;=>1
+
+(value-of (value-of main::var1))
+;=>1
+
+(value-of (value-of ns1::var1))
+;=>2
+
+(value-of (value-of ns1::var2))
+;=>3
+
+(value-of var3)
+;=>4
+
+(f1)
+;=>1
+
+(main::f1)
+;=>1
+
+(ns1::f1)
+;=>2
+
+(ns1::f2)
+;=>3
+
+(f3)
+;=>4
+
