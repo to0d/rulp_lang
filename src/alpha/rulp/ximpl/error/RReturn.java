@@ -9,8 +9,8 @@
 
 package alpha.rulp.ximpl.error;
 
-import static alpha.rulp.lang.Constant.O_Nan;
 import static alpha.rulp.lang.Constant.A_RETURN_VAR;
+import static alpha.rulp.lang.Constant.O_Nan;
 
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRObject;

@@ -10,7 +10,7 @@
 package alpha.rulp.utils;
 
 import static alpha.rulp.lang.Constant.A_DO;
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_NAMESPACE;
 import static alpha.rulp.lang.Constant.A_NIL;
 import static alpha.rulp.lang.Constant.A_QUESTION;
 import static alpha.rulp.lang.Constant.A_QUESTION_C;
@@ -73,7 +73,6 @@ import alpha.rulp.runtime.IRTemplate.TemplatePara;
 import alpha.rulp.runtime.IRTemplate.TemplateParaEntry;
 import alpha.rulp.runtime.RName;
 import alpha.rulp.ximpl.collection.XRMap;
-import alpha.rulp.ximpl.error.RReturn;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 import alpha.rulp.ximpl.rclass.XRFactorNew;
 

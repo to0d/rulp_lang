@@ -12,7 +12,6 @@ package alpha.rulp.utils;
 import static alpha.rulp.lang.Constant.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -250,15 +249,9 @@ public final class RulpFactory {
 
 	private static AtomicInteger frameEntryProtectedMaxId = new AtomicInteger(0);
 
+	private static FramePool framePool = new FramePool(FRAME_POOL_1_MAX);
+
 	private static AtomicInteger frameUnNameCount = new AtomicInteger(0);
-
-	private static int globalFrameMaxId = I_FRAME_ID_MIN;
-
-	private static XRFrame[] globalFramePool1 = new XRFrame[FRAME_POOL_1_MAX];
-
-	private static ArrayList<XRFrame> globalFramePool2 = new ArrayList<>();
-
-	private static LinkedList<Integer> globalFreeFrameIdList = new LinkedList<>();
 
 	private static AtomicInteger interpreterCount = new AtomicInteger(0);
 
@@ -277,57 +270,6 @@ public final class RulpFactory {
 	static {
 		EMPTY_LIST = new XRListList(Collections.<IRObject>emptyList(), RType.LIST, null, false);
 		EMPTY_EXPR = new XRListList(Collections.<IRObject>emptyList(), RType.EXPR, null, false);
-	}
-
-	private static synchronized void _allocateFrameId(XRFrame frame) throws RException {
-
-		int nextFrameId = -1;
-
-		if (!globalFreeFrameIdList.isEmpty()) {
-			nextFrameId = globalFreeFrameIdList.pollLast();
-		} else {
-			nextFrameId = globalFrameMaxId++;
-		}
-
-		/*********************************************/
-		// Allocate from pool1
-		/*********************************************/
-		if (nextFrameId < FRAME_POOL_1_MAX) {
-
-			if (globalFramePool1[nextFrameId] != null) {
-				throw new RException("Global frame pool 1 is not clear at: " + nextFrameId);
-			}
-
-			globalFramePool1[nextFrameId] = frame;
-
-		}
-		/*********************************************/
-		// Allocate from pool2
-		/*********************************************/
-		else {
-
-			int pool2Index = nextFrameId - FRAME_POOL_1_MAX;
-
-			if (pool2Index < globalFramePool2.size()) {
-
-				if (globalFramePool2.get(pool2Index) != null) {
-					throw new RException("Global frame pool 2 is not clear at: " + nextFrameId);
-				}
-
-				globalFramePool2.set(pool2Index, frame);
-
-			} else {
-
-				while (globalFramePool2.size() < pool2Index) {
-					globalFramePool2.add(null);
-				}
-
-				globalFramePool2.add(frame);
-			}
-		}
-
-		frame.setFrameId(nextFrameId);
-		RType.FRAME.incCreateCount();
 	}
 
 	public static IRArray createArray(List<? extends IRObject> elements) throws RException {
@@ -452,7 +394,7 @@ public final class RulpFactory {
 		frame.setParentFrame(parentFrame);
 		frame.setFrameName(name);
 		frame.setThreadContext(parentFrame.getThreadContext());
-		_allocateFrameId(frame);
+		framePool.allocateFrameId(frame);
 		return frame;
 	}
 
@@ -474,7 +416,7 @@ public final class RulpFactory {
 		frame.setFrameName(String.format("%s-%s-%d", FRAME_PRE_SUBJECT, subject.getSubjectName(),
 				frameUnNameCount.getAndIncrement()));
 		frame.setThreadContext(parentFrame.getThreadContext());
-		_allocateFrameId(frame);
+		framePool.allocateFrameId(frame);
 		return frame;
 	}
 
@@ -1004,40 +946,8 @@ public final class RulpFactory {
 		return var;
 	}
 
-	public static synchronized void freeFrameId(int frameId) throws RException {
-
-		/*********************************************/
-		// free to pool1
-		/*********************************************/
-		if (frameId < FRAME_POOL_1_MAX) {
-
-			if (globalFramePool1[frameId] == null) {
-				throw new RException("Frame not found in pool1: " + frameId);
-			}
-
-			globalFramePool1[frameId] = null;
-
-		}
-		/*********************************************/
-		// free to pool2
-		/*********************************************/
-		else {
-
-			int pool2Index = frameId - FRAME_POOL_1_MAX;
-
-			if (pool2Index >= globalFramePool2.size()) {
-				throw new RException("Invalid frame id: " + frameId);
-			}
-
-			if (globalFramePool2.get(pool2Index) == null) {
-				throw new RException("Frame id not found: " + frameId);
-			}
-
-			globalFramePool2.set(pool2Index, null);
-
-		}
-
-		globalFreeFrameIdList.push(frameId);
+	public static void freeFrameId(int frameId) throws RException {
+		framePool.freeFrameId(frameId);
 	}
 
 	public static int getFrameEntryCreateCount() {
@@ -1045,11 +955,11 @@ public final class RulpFactory {
 	}
 
 	public static int getFrameFreeIdCount() {
-		return globalFreeFrameIdList.size();
+		return framePool.getFrameFreeIdCount();
 	}
 
 	public static int getFrameMaxId() {
-		return globalFrameMaxId;
+		return framePool.getFrameMaxId();
 	}
 
 	public static int getInterpreterCount() {
@@ -1072,23 +982,8 @@ public final class RulpFactory {
 		return type.getDeleteCount();
 	}
 
-	public static synchronized List<IRFrame> listGlobalFrames() {
-
-		List<IRFrame> frames = new LinkedList<>();
-
-		for (XRFrame frame : globalFramePool1) {
-			if (frame != null) {
-				frames.add(frame);
-			}
-		}
-
-		for (XRFrame frame : globalFramePool2) {
-			if (frame != null) {
-				frames.add(frame);
-			}
-		}
-
-		return frames;
+	public static List<IRFrame> listGlobalFrames() {
+		return framePool.listGlobalFrames();
 	}
 
 	public static void registerLoader(Class<? extends IRObjectLoader> loaderClass) {
@@ -1113,11 +1008,7 @@ public final class RulpFactory {
 			type.reset();
 		}
 
-		globalFrameMaxId = I_FRAME_ID_MIN;
-
-		globalFramePool1 = new XRFrame[FRAME_POOL_1_MAX];
-		globalFramePool2.clear();
-		globalFreeFrameIdList.clear();
+		framePool = new FramePool(FRAME_POOL_1_MAX);
 
 		frameUnNameCount.set(0);
 		frameEntryDefaultMaxId.set(0);
