@@ -1,0 +1,17 @@
+(defclass class1 ()
+    (defvar ?value 1 public)
+)
+;=>class1
+
+(defvar ?arr {})
+;=>&?arr
+
+(add ?arr (new class1))
+;=>{un-0}
+
+(add ?arr (new class1))
+;=>{un-0,un-1}
+
+(foreach (?a (to-list ?arr)) (return (value-of (value-of ?a::?value))))
+;=>'(1 1)
+
