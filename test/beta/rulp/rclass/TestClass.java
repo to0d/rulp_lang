@@ -153,17 +153,4 @@ public class TestClass extends RulpTestBase {
 		_gInfo();
 	}
 
-	@Test
-	public void test_class_d_ref_1() {
-		_setup();
-		_run_script();
-		_gInfo();
-	}
-
-	@Test
-	public void test_class_d_ref_2() {
-		_setup();
-		_run_script();
-		_gInfo();
-	}
 }
