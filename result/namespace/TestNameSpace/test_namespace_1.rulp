@@ -65,10 +65,10 @@
 
 ;;;;; Can't define same name item
 (defvar ns1::var1 1)
-;err:
+;err
 
 (defun ns1::f1 () (return 2))
-;err:
+;err
 
 (ls)
 ;=>
@@ -78,10 +78,10 @@
 
 ;;;;; Can't find item if the using the name space is not specified
 (value-of var2)
-;err:
+;err
 
 (f2)
-;err:
+;err
 
 (ls)
 ;=>

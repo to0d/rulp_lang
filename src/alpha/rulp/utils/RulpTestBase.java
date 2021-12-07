@@ -138,8 +138,8 @@ public class RulpTestBase {
 		_run_script(getCachePath() + ".rulp");
 	}
 
-	protected boolean _run_stmt(String inputStmt, Boolean expectError, String expectResult, ArrayList<String> outLines,
-			IRInterpreter interpreter) {
+	protected boolean _run_stmt(String inputStmt, Boolean expectError, String expectResult, String expectErrorMessage,
+			ArrayList<String> outLines, IRInterpreter interpreter) {
 
 		try {
 
@@ -177,6 +177,11 @@ public class RulpTestBase {
 				e.printStackTrace();
 				return false;
 			}
+
+			if (expectErrorMessage != null && !expectErrorMessage.equals(e.getMessage())) {
+				e.printStackTrace();
+				return false;
+			}
 		}
 
 		return true;
@@ -205,7 +210,7 @@ public class RulpTestBase {
 				if (line.trim().equals(";;;")) {
 					inputStmt = sb.toString();
 					sb.setLength(0);
-					rc = _run_stmt(inputStmt, null, null, outLines, interpreter);
+					rc = _run_stmt(inputStmt, null, null, null, outLines, interpreter);
 
 				} else if (line.startsWith(";=>")) {
 
@@ -216,16 +221,39 @@ public class RulpTestBase {
 						expectResult = null;
 					}
 
-					rc = _run_stmt(inputStmt, false, expectResult, outLines, interpreter);
+					rc = _run_stmt(inputStmt, false, expectResult, null, outLines, interpreter);
+
+				} else if (line.trim().equals(";err")) {
+
+					inputStmt = sb.toString();
+					sb.setLength(0);
+
+					rc = _run_stmt(inputStmt, true, null, null, outLines, interpreter);
 
 				} else if (line.trim().equals(";err:")) {
 
 					inputStmt = sb.toString();
 					sb.setLength(0);
 
-					rc = _run_stmt(inputStmt, true, null, outLines, interpreter);
+					StringBuffer expectSb = new StringBuffer();
+
+					while (++index < size) {
+
+						String nextLine = lines.get(index);
+						if (nextLine.trim().equals(";eof")) {
+							break;
+						}
+
+						if (expectSb.length() > 0) {
+							expectSb.append('\n');
+						}
+						expectSb.append(nextLine);
+					}
+
+					rc = _run_stmt(inputStmt, true, null, expectSb.toString(), outLines, interpreter);
 
 				} else {
+
 					if (sb.length() != 0) {
 						sb.append("\n");
 					}
@@ -236,7 +264,7 @@ public class RulpTestBase {
 			if (rc && sb.length() != 0) {
 				inputStmt = sb.toString();
 				sb.setLength(0);
-				rc = _run_stmt(inputStmt, false, null, outLines, interpreter);
+				rc = _run_stmt(inputStmt, false, null, null, outLines, interpreter);
 			}
 
 			FileUtil.saveTxtFile(inputScriptPath + ".out", outLines);

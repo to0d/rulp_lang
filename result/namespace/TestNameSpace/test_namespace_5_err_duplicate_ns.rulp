@@ -2,4 +2,4 @@
 ;=>
 
 (new namespace ns1)
-;err:
+;err
