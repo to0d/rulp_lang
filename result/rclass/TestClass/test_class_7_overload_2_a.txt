@@ -1,4 +1,4 @@
-name=class2, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=null
+name=class2, string=class2, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=null
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -6,7 +6,7 @@ fun1                 : DEFAULT                      0    1    func       (fun1 n
 super                : DEFAULT                      0    2    class      class1
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=2/2, parent=null, final=false, mbrs=1, frame=null
+name=class1, string=class1, lvl=0, ref=2/2, parent=null, final=false, mbrs=1, frame=null
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

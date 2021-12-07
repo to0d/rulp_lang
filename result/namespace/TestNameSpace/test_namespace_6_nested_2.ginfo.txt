@@ -91,7 +91,7 @@ Global frame tree:
 
 Global Subject list:
 
-name=ns1, lvl=1, ref=1/1, parent=namespace, final=false, mbrs=2, frame=3(SF-ns1-0)
+name=ns1, string=namespace@ns1, lvl=1, ref=1/1, parent=namespace, final=false, mbrs=2, frame=3(SF-ns1-0)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -99,7 +99,7 @@ ns2                  : DEFAULT                      0    1    instance   ns2 : c
 this                 : DEFAULT                      0    1    instance   ns1 : class=namespace
 ==========================================================================================================================
 
-name=ns2, lvl=1, ref=1/1, parent=namespace, final=false, mbrs=2, frame=4(SF-ns2-1)
+name=ns2, string=namespace@ns2, lvl=1, ref=1/1, parent=namespace, final=false, mbrs=2, frame=4(SF-ns2-1)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -107,7 +107,7 @@ ns3                  : DEFAULT                      0    1    instance   ns3 : c
 this                 : DEFAULT                      0    1    instance   ns2 : class=namespace
 ==========================================================================================================================
 
-name=ns3, lvl=1, ref=1/2, parent=namespace, final=false, mbrs=2, frame=6(SF-ns3-2)
+name=ns3, string=namespace@ns3, lvl=1, ref=1/2, parent=namespace, final=false, mbrs=2, frame=6(SF-ns3-2)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

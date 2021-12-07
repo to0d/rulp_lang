@@ -44,12 +44,10 @@ mbr=to-list, name=(to-list), type=func, property='(default final)
 ;=>set1
 
 (print-list (ls set1))
-;=>nil
-;out:
-set1::?impl
-set1::init
-set1::this
-
+;err:
+Frame not found in pool1: 3
+at main: (loop for ?e in (ls set1) do (print ?e "\\n"))
+at main: (print-list (ls set1))
 ;eof
 
 (set1::add 1)

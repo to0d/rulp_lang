@@ -93,7 +93,7 @@ Global frame tree:
 
 Global Subject list:
 
-name=q1, lvl=1, ref=1/2, parent=queue, final=false, mbrs=5, frame=4(SF-q1-1)
+name=q1, string=queue@q1, lvl=1, ref=1/2, parent=queue, final=false, mbrs=5, frame=4(SF-q1-1)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-name=o2, lvl=2, ref=1/1, parent=class2, final=false, mbrs=2, frame=null
+name=o2, string=class2@o2, lvl=2, ref=1/1, parent=class2, final=false, mbrs=2, frame=null
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -6,7 +6,7 @@ fun1                 : DEFAULT       Y      Y       6    2    func       (fun1 n
 this                 : DEFAULT                      0    1    instance   o2 : class=class2
 ==========================================================================================================================
 
-name=class2, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=4(SF-class2-1)
+name=class2, string=class2, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=4(SF-class2-1)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -14,7 +14,7 @@ fun1                 : DEFAULT       Y              2    2    func       (fun1 n
 super                : DEFAULT                      0    2    class      class1
 ==========================================================================================================================
 
-name=class1, lvl=0, ref=2/2, parent=null, final=false, mbrs=1, frame=3(SF-class1-0)
+name=class1, string=class1, lvl=0, ref=2/2, parent=null, final=false, mbrs=1, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

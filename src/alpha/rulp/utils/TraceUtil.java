@@ -659,8 +659,8 @@ public class TraceUtil {
 			return m1.getName().compareTo(m2.getName());
 		});
 
-		sb.append(String.format("name=%s, lvl=%d, ref=%d/%d, parent=%s, final=%s, mbrs=%d", subject.getSubjectName(),
-				subject.getLevel(), subject.getRef(), subject.getMaxRef(),
+		sb.append(String.format("name=%s, string=%s, lvl=%d, ref=%d/%d, parent=%s, final=%s, mbrs=%d",
+				subject.getSubjectName(), subject.toString(), subject.getLevel(), subject.getRef(), subject.getMaxRef(),
 				subParent == null ? "null" : subParent.getSubjectName(), subject.isFinal(), mbrs.size()));
 
 		if (subFrame != null) {

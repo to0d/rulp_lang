@@ -96,7 +96,7 @@ Global frame tree:
 
 Global Subject list:
 
-name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=5, frame=3(SF-class1-0)
+name=class1, string=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=5, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -107,7 +107,7 @@ set                  : DEFAULT                      0    1    func       (set ni
 sub                  : DEFAULT                      0    1    func       (sub nil) : frame=main
 ==========================================================================================================================
 
-name=o1, lvl=1, ref=1/1, parent=class1, final=false, mbrs=6, frame=4(SF-o1-1)
+name=o1, string=class1@o1, lvl=1, ref=1/1, parent=class1, final=false, mbrs=6, frame=4(SF-o1-1)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

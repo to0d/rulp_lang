@@ -83,21 +83,21 @@ Global frame tree:
 
 Global Subject list:
 
-name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=1, frame=3(SF-class1-0)
+name=class1, string=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=1, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 fun1                 : DEFAULT                      0    1    func       (fun1 nil) : frame=main
 ==========================================================================================================================
 
-name=o1, lvl=1, ref=1/1, parent=class1, final=false, mbrs=1, frame=null
+name=o1, string=class1@o1, lvl=1, ref=1/1, parent=class1, final=false, mbrs=1, frame=null
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 this                 : DEFAULT                      0    1    instance   o1 : class=class1
 ==========================================================================================================================
 
-name=ns1, lvl=1, ref=1/1, parent=namespace, final=false, mbrs=2, frame=4(SF-ns1-1)
+name=ns1, string=namespace@ns1, lvl=1, ref=1/1, parent=namespace, final=false, mbrs=2, frame=4(SF-ns1-1)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -105,7 +105,7 @@ o1                   : DEFAULT                      0    1    instance   o1 : cl
 this                 : DEFAULT                      0    1    instance   ns1 : class=namespace
 ==========================================================================================================================
 
-name=o1, lvl=1, ref=1/1, parent=class1, final=false, mbrs=1, frame=null
+name=o1, string=class1@o1, lvl=1, ref=1/1, parent=class1, final=false, mbrs=1, frame=null
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

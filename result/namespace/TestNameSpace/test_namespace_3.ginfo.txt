@@ -93,7 +93,7 @@ Global frame tree:
 
 Global Subject list:
 
-name=ns1, lvl=1, ref=1/2, parent=namespace, final=false, mbrs=1, frame=5(SF-ns1-0)
+name=ns1, string=namespace@ns1, lvl=1, ref=1/2, parent=namespace, final=false, mbrs=1, frame=5(SF-ns1-0)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

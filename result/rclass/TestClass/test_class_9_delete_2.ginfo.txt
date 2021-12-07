@@ -85,7 +85,7 @@ Global frame tree:
 
 Global Subject list:
 
-name=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
+name=class1, string=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-name=class2, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=4(SF-class2-1)
+name=class2, string=class2, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=4(SF-class2-1)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
