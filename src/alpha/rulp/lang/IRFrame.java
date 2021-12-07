@@ -23,6 +23,8 @@ public interface IRFrame extends IRObject, IRSubject {
 
 	public IRFrameEntry createFrameEntry(String name, IRObject object);
 
+	public IRObject findLocalObject(String name) throws RException;
+
 	public IRFrameEntry getEntry(String name) throws RException;
 
 	public int getFrameId();
@@ -33,11 +35,11 @@ public interface IRFrame extends IRObject, IRSubject {
 
 	public IRFrame getParentFrame();
 
+	public List<IRFrame> getSearchFrameList();
+
 	public IRSubject getSubject();
 
 	public IRThreadContext getThreadContext();
-
-	public List<IRFrame> getSearchFrameList();
 
 	public List<IRFrameEntry> listEntries();
 
@@ -50,4 +52,5 @@ public interface IRFrame extends IRObject, IRSubject {
 	public void setEntryAliasName(IRFrameEntry entry, String aliasName) throws RException;
 
 	public void setThreadContext(IRThreadContext context);
+
 }

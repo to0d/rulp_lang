@@ -2,7 +2,7 @@ id=3, name=DO, lvl=4, ref=1/1, entry=1, pid=4(DO), subject=DO
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-fun1                 : 10       3        1    funcList   '((fun1 nil nil nil) (fun1 nil nil) (fun1 nil)) : frame=null, type=list
+fun1                 : 12       3        1    funcList   '((fun1 nil nil nil) (fun1 nil nil) (fun1 nil)) : frame=null, type=list
                                          3    func       (fun1 nil) : frame=main
                                          2    func       (fun1 nil nil) : frame=DO
                                          1    func       (fun1 nil nil nil) : frame=DO
@@ -12,12 +12,12 @@ id=4, name=DO, lvl=3, ref=2/2, entry=1, pid=2(main), subject=DO
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-fun1                 : 9        4        1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
+fun1                 : 11       4        1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
                                          3    func       (fun1 nil) : frame=main
                                          2    func       (fun1 nil nil) : frame=DO
 ==========================================================================================================================
 
-id=2, name=main, lvl=2, ref=2/2, entry=4, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=2/2, entry=5, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -25,5 +25,6 @@ root                 : 1        2        0    frame      root
 system               : 2        2        0    frame      system              
 main                 : 3        2        2    frame      main                
 fun1                 : 4        2        3    func       (fun1 nil) : frame=main
+?rv                  : 6        2        1    var        2 : type=int        
 ==========================================================================================================================
 

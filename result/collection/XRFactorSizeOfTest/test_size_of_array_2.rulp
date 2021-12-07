@@ -1,0 +1,11 @@
+(size-of {{a, b, c}, x} 0)
+;;;
+
+(size-of {{a, b, c}, x} 1)
+;;;
+
+(size-of {{a, b, c}, x} 2)
+;;;
+
+(size-of {{a, b, c}, x} -1)
+;err:

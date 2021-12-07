@@ -53,7 +53,7 @@ Object create count:
         list:           16            0           16
         expr:          485            0          485
        array:            1            0            1
-         var:           23            4           19
+         var:           24            4           20
         func:           94            0           94
     template:            1            0            1
        macro:            1            0            1
@@ -62,13 +62,13 @@ Object create count:
       member:          146            0          146
        frame:           17           16            1
  interpreter:            1            0
-  frameEntry:          206            0
+  frameEntry:          207            0
       lambda:            0            0
 ==========================================================================================================================
 
 Global frame list: total=1
 
-id=2, name=main, lvl=2, ref=2/5, entry=8, pid=1(system), subject=main, search=[main, SF-ns1-0]
+id=2, name=main, lvl=2, ref=2/5, entry=9, pid=1(system), subject=main, search=[main, SF-ns1-0]
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -78,8 +78,9 @@ main                 : 3        2        2    frame      main
 ns1                  : 4        2        1    instance   ns1 : class=namespace
 var1                 : 5        2        1    var        1 : type=int        
 f1                   : 6        2        1    func       (f1) : frame=main   
-var3                 : 10       2        1    var        4 : type=int        
-f3                   : 11       2        1    func       (f3) : frame=main   
+?rv                  : 7        2        1    var        4 : type=int        
+var3                 : 11       2        1    var        4 : type=int        
+f3                   : 12       2        1    func       (f3) : frame=main   
 ==========================================================================================================================
 
 

@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       62        0
+     Interpreter call id/level:       61        0
              CPS support/count:    false        0
                Frame max level:        4
                   Frame max id:        6
@@ -15,53 +15,56 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:       68
-      func:        4
+    factor:       73
+      func:        3
 ==========================================================================================================================
 
-Callable stats info: callId=62, row=12, column=63(1), value-max=2, value-unit=2^x
+Callable stats info: callId=61, row=15, column=62(1), value-max=4, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         .11111111111111111111111111111111111111111111111111111111111144 max=7, unit=2^x
+   Frame    RType  Count  Ref Object                         .1111111111111111111111111111111111111111111111111111111111335 max=10, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     44    0 defun                                  11111111111111111111111 11 1111 111 11111 1111    111  
-    root   factor      6    0 alias                           111111                                                        
-    root   factor      5    0 defclass                                                         1    1   1     1       1     
-    root   factor      4    0 return                                                                                      22
-    root   factor      3    0 deftemplate                                                                          111      
-    root   factor      2    0 new                                                                                         11
-    main     func      2    1 (funx nil)                                                                                  11
-    root   factor      2    0 defvar                                1                                                      1
-    main     func      1    1 (fun2)                                                                                       1
-    main     func      1    1 (fun1)                                                                                      1 
-    root   factor      1    0 do                                                                                           1
-    root   factor      1    0 defmacro                                                      1                               
+    root   factor     41    0 defun                                  11111111111111111111111 11 1111 111 11111 1111        
+    root   factor      6    0 alias                           111111                                                       
+    root   factor      5    0 defclass                                                         1    1   1     1       1    
+    root   factor      4    0 value-of                                                                                    3
+    root   factor      3    0 return                                                                                    111
+    root   factor      3    0 deftemplate                                                                          111     
+    root   factor      2    0 print                                                                                       2
+    root   factor      2    0 new                                                                                       11 
+    root   factor      2    0 defvar                                1                                                  1   
+    root   factor      2    0 add-list-to-array                                                                         11 
+  system funcList      2    1 add                                                                                       11 
+  system funcList      1    1 to-list                                                                                     1
+    root   factor      1    0 loop                                                                                        1
+    root   factor      1    0 defmacro                                                      1                              
+    root   factor      1    0 add-array-to-list                                                                           1
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          755            0          755
-      string:           19            0           19
-        list:            6            0            6
-        expr:          432            0          432
-       array:            1            0            1
-         var:           22            4           18
-        func:           92            0           92
+        atom:          753            0          753
+      string:           20            0           20
+        list:            9            0            9
+        expr:          428            0          428
+       array:            2            0            2
+         var:           26            6           20
+        func:           89            0           89
     template:            1            0            1
        macro:            1            0            1
-    instance:            2            2            0
+    instance:            2            0            2
        class:            5            0            5
-      member:          123            4          119
-       frame:            6            5            1
+      member:          123            0          123
+       frame:            7            6            1
  interpreter:            1            0
-  frameEntry:          200            0
+  frameEntry:          202            0
       lambda:            0            0
 ==========================================================================================================================
 
 Global frame list: total=1
 
-id=2, name=main, lvl=2, ref=2/3, entry=9, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=2/3, entry=7, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -70,25 +73,23 @@ system               : 2        2        0    frame      system
 main                 : 3        2        2    frame      main                
 class1               : 4        2        1    class      class1              
 type#class1          : 5        2        0    atom       type#class1         
-fun1                 : 6        2        1    func       (fun1) : frame=main 
-fun2                 : 7        2        1    func       (fun2) : frame=main 
-funx                 : 8        2        1    func       (funx nil) : frame=main
-?rv                  : 9        2        1    var        ?value:"1" : type=var
+?arr                 : 6        2        1    var        {un-0,un-1} : type=array
+?rv                  : 9        2        1    var        {un-0,un-1} : type=array
 ==========================================================================================================================
 
 
-id=4, name=SF-class1-0, lvl=3, ref=1/1, entry=0, pid=2(main), subject=class1
+id=3, name=SF-class1-0, lvl=3, ref=1/1, entry=0, pid=2(main), subject=class1
 
 Global frame tree:
 
 ->FRAME(root): id=0, lvl=0, subject=root
     ->FRAME(system): id=1, lvl=1, subject=system
         ->FRAME(main): id=2, lvl=2, subject=main
-            ->FRAME(SF-class1-0): id=4, lvl=3, subject=class1
+            ->FRAME(SF-class1-0): id=3, lvl=3, subject=class1
 
 Global Subject list:
 
-name=class1, string=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=1, frame=4(SF-class1-0)
+name=class1, string=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=1, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

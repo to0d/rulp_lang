@@ -1,7 +1,8 @@
-name=o2, string=class2@o2, lvl=2, ref=1/1, parent=class2, final=false, mbrs=2, frame=6(SF-o2-3)
+name=o2, string=class2@o2, lvl=2, ref=1/1, parent=class2, final=false, mbrs=3, frame=6(SF-o2-3)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
+?rv                  : DEFAULT                      0    1    var        3 : type=int
 fun1                 : DEFAULT              Y       4    1    func       (fun1 nil) : frame=SF-o2-3, type=lambda
 this                 : DEFAULT                      0    1    instance   o2 : class=class2
 ==========================================================================================================================

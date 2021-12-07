@@ -58,7 +58,7 @@
 ;=>3
 
 (ls)
-;=>'(main::f1 main::main main::ns1 main::root main::system main::var1)
+;=>'(main::?rv main::f1 main::main main::ns1 main::root main::system main::var1)
 
 (ls ns1)
 ;=>'(ns1::f1 ns1::f2 ns1::this ns1::var1 ns1::var2)
@@ -77,7 +77,7 @@ at main: (defun ns1::f1 () (return 2))
 ;eof
 
 (ls)
-;=>'(main::f1 main::main main::ns1 main::root main::system main::var1)
+;=>'(main::?rv main::f1 main::main main::ns1 main::root main::system main::var1)
 
 (ls ns1)
 ;=>'(ns1::f1 ns1::f2 ns1::this ns1::var1 ns1::var2)
@@ -96,7 +96,7 @@ at main: (f2)
 ;eof
 
 (ls)
-;=>'(main::f1 main::main main::ns1 main::root main::system main::var1)
+;=>'(main::?rv main::f1 main::main main::ns1 main::root main::system main::var1)
 
 (ls ns1)
 ;=>'(ns1::f1 ns1::f2 ns1::this ns1::var1 ns1::var2)

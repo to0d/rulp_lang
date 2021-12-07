@@ -109,6 +109,8 @@ public interface Constant {
 
 	String A_QUEUE = "queue";
 
+	String A_RETURN_VAR = "?rv";
+
 	String A_ROOT = "root";
 
 	String A_SET = "set";
@@ -167,6 +169,8 @@ public interface Constant {
 
 	String F_CAN_CAST = "can-cast";
 
+	String F_CASE = "case";
+
 	String F_CLASS_OF = "class-of";
 
 	String F_CMP = "cmp";
@@ -220,8 +224,6 @@ public interface Constant {
 	String F_HAS_MBR = "has-member";
 
 	String F_IF = "if";
-
-	String F_CASE = "case";
 
 	String F_IN = "in";
 

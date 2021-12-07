@@ -48,7 +48,7 @@ Object create count:
         list:            6            0            6
         expr:          436            0          436
        array:            1            0            1
-         var:           23            6           17
+         var:           24            6           18
         func:           91            0           91
     template:            1            0            1
        macro:            1            0            1
@@ -57,13 +57,13 @@ Object create count:
       member:          127            0          127
        frame:            8            6            2
  interpreter:            1            0
-  frameEntry:          206            0
+  frameEntry:          207            0
       lambda:            0            0
 ==========================================================================================================================
 
 Global frame list: total=2
 
-id=2, name=main, lvl=2, ref=3/5, entry=5, pid=1(system), subject=main, search=[SF-ns1-0, SF-ns2-1, main]
+id=2, name=main, lvl=2, ref=3/5, entry=6, pid=1(system), subject=main, search=[SF-ns1-0, SF-ns2-1, main]
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -72,6 +72,7 @@ system               : 2        2        0    frame      system
 main                 : 3        2        3    frame      main                
 ns1                  : 4        2        1    instance   ns1 : class=namespace
 ns2                  : 5        2        1    instance   ns2 : class=namespace
+?rv                  : 11       2        1    var        1 : type=int        
 ==========================================================================================================================
 
 

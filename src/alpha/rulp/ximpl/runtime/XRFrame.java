@@ -140,16 +140,6 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 		return entryNode;
 	}
 
-	@Override
-	public boolean hasMember(String name) throws RException {
-
-		if (name == null || _nodeCatchMap == null) {
-			return false;
-		}
-
-		return _nodeCatchMap.containsKey(name);
-	}
-
 	protected IRFrameEntry _insertEntry(String name, IRObject obj) throws RException {
 
 		IRFrameEntry localEntry = createFrameEntry(name, obj);
@@ -244,6 +234,12 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 	@Override
 	public void delete(IRInterpreter interpreter, IRFrame frame) throws RException {
 		throw new RException("not support operation");
+	}
+
+	@Override
+	public IRObject findLocalObject(String name) throws RException {
+		IRFrameEntry localEntry = (entryMap == null ? null : entryMap.get(name));
+		return localEntry == null ? null : localEntry.getObject();
 	}
 
 	@Override
@@ -380,6 +376,16 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 	@Override
 	public RType getType() {
 		return RType.FRAME;
+	}
+
+	@Override
+	public boolean hasMember(String name) throws RException {
+
+		if (name == null || _nodeCatchMap == null) {
+			return false;
+		}
+
+		return _nodeCatchMap.containsKey(name);
 	}
 
 	@Override

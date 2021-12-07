@@ -20,7 +20,7 @@
 ;=>0
 
 (ls o1)
-;=>'(o1::?value o1::get o1::this)
+;=>'(o1::?rv o1::?value o1::get o1::this)
 
 (o1::set 5)
 ;=>nil

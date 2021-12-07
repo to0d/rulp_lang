@@ -8,7 +8,7 @@ Total runtime info:
              CPS support/count:    false        0
                Frame max level:        4
                   Frame max id:        5
-           Frame free id count:        2
+           Frame free id count:        1
 ==========================================================================================================================
 
 Expression compute count:
@@ -45,36 +45,46 @@ Object create count:
         list:            6            0            6
         expr:          423            0          423
        array:            1            0            1
-         var:           16            1           15
-        func:           92            1           91
+         var:           18            0           18
+        func:           92            0           92
     template:            1            0            1
        macro:            1            0            1
        class:            4            0            4
       member:          117            0          117
-       frame:            2            2            0
+       frame:            2            1            1
  interpreter:            1            0
-  frameEntry:          193            0
+  frameEntry:          195            0
       lambda:            1            0
 ==========================================================================================================================
 
-Global frame list: total=0
+Global frame list: total=1
 
-id=2, name=main, lvl=2, ref=1/2, entry=4, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=2/2, entry=5, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
-main                 : 3        2        1    frame      main                
+main                 : 3        2        2    frame      main                
 fun1                 : 4        2        1    func       (fun1 nil) : frame=main
+?rv                  : 6        2        1    var        lambda : type=func  
 ==========================================================================================================================
 
+
+id=3, name=_$fun$_fun1, lvl=3, ref=1/2, entry=2, pid=2(main), subject=_$fun$_fun1
+==========================================================================================================================
+Name(alias)          : EntryId  FrameId  Ref  Type       Value               
+--------------------------------------------------------------------------------------------------------------------------
+?v                   : 5        3        1    var        2 : type=int        
+?rv                  : 7        3        1    var        4 : type=int        
+==========================================================================================================================
 
 Global frame tree:
 
 ->FRAME(root): id=0, lvl=0, subject=root
     ->FRAME(system): id=1, lvl=1, subject=system
         ->FRAME(main): id=2, lvl=2, subject=main
+            ->FRAME(_$fun$_fun1): id=3, lvl=3, subject=_$fun$_fun1
 
 Global Subject list:
 

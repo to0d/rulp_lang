@@ -75,6 +75,17 @@ public class XRSubjectFrame extends XRFrame implements IRFrame {
 	}
 
 	@Override
+	public IRObject findLocalObject(String name) throws RException {
+
+		IRMember mbr = subject.getMember(name);
+		if (mbr == null || mbr.getSubject() != this.subject) {
+			return null;
+		}
+
+		return mbr.getValue();
+	}
+
+	@Override
 	public synchronized void setEntryAliasName(IRFrameEntry entry, String aliasName) throws RException {
 		throw new RException("not support operation");
 	}

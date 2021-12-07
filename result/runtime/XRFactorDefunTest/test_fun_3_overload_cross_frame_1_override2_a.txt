@@ -1,4 +1,4 @@
-id=2, name=main, lvl=2, ref=1/2, entry=4, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=1/2, entry=5, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -8,5 +8,6 @@ main                 : 3        2        1    frame      main
 fun1                 : 4        2        1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
                                          1    func       (fun1 nil) : frame=main
                                          1    func       (fun1 nil nil) : frame=main
+?rv                  : 6        2        1    var        2 : type=int        
 ==========================================================================================================================
 

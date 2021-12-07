@@ -46,7 +46,7 @@ Object create count:
         list:            6            0            6
         expr:          429            0          429
        array:            1            0            1
-         var:           17            2           15
+         var:           19            3           16
         func:           93            1           92
     template:            1            0            1
        macro:            1            0            1
@@ -54,13 +54,13 @@ Object create count:
       member:          117            0          117
        frame:            3            3            0
  interpreter:            1            0
-  frameEntry:          195            0
+  frameEntry:          197            0
       lambda:            1            0
 ==========================================================================================================================
 
 Global frame list: total=0
 
-id=2, name=main, lvl=2, ref=1/4, entry=5, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=1/4, entry=6, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -69,6 +69,7 @@ system               : 2        2        0    frame      system
 main                 : 3        2        1    frame      main                
 fun1                 : 4        2        1    func       (fun1 nil) : frame=main
 fun2                 : 5        2        1    func       (fun2 nil) : frame=main
+?rv                  : 9        2        1    var        2 : type=int        
 ==========================================================================================================================
 
 

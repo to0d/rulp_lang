@@ -28,6 +28,8 @@ import alpha.rulp.ximpl.subject.AbsRSubject;
 
 public abstract class AbsRInstance extends AbsRSubject implements IRInstance {
 
+	protected String _toString = null;
+
 	protected final String instanceName;
 
 	protected IRClass rClass;
@@ -193,8 +195,6 @@ public abstract class AbsRInstance extends AbsRSubject implements IRInstance {
 	public void setRClass(IRClass rClass) {
 		this.rClass = rClass;
 	}
-
-	protected String _toString = null;
 
 	@Override
 	public String toString() {

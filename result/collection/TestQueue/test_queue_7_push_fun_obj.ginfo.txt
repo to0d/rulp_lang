@@ -53,16 +53,16 @@ Object create count:
         list:            7            0            7
         expr:          431            0          431
        array:            1            0            1
-         var:           21            5           16
+         var:           23            6           17
         func:           96            0           96
     template:            1            0            1
        macro:            1            0            1
     instance:            2            0            2
        class:            4            0            4
-      member:          124            0          124
+      member:          125            0          125
        frame:           12           10            2
  interpreter:            1            0
-  frameEntry:          199            0
+  frameEntry:          200            0
       lambda:            5            0
 ==========================================================================================================================
 
@@ -93,11 +93,12 @@ Global frame tree:
 
 Global Subject list:
 
-name=q1, string=queue@q1, lvl=1, ref=1/2, parent=queue, final=false, mbrs=5, frame=4(SF-q1-1)
+name=q1, string=queue@q1, lvl=1, ref=1/2, parent=queue, final=false, mbrs=6, frame=4(SF-q1-1)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?impl                : PRIVATE              Y       4    1    var        noclass@un-0 : type=instance
+?rv                  : DEFAULT                      0    1    var        '(lambda lambda) : type=list
 init                 : DEFAULT Y            Y       5    1    func       (init) : frame=SF-q1-1, type=lambda
 push                 : DEFAULT Y            Y       5    1    func       (push nil) : frame=SF-q1-1, type=lambda
 this                 : DEFAULT                      0    1    instance   q1 : class=queue

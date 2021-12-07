@@ -1,6 +1,6 @@
 id=3, name=DO, lvl=3, ref=1/1, entry=0, pid=2(main), subject=DO
 
-id=2, name=main, lvl=2, ref=2/2, entry=4, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=2/2, entry=5, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -10,5 +10,6 @@ main                 : 3        2        2    frame      main
 fun1                 : 4        2        1    funcList   '((fun1 float) (fun1 nil)) : frame=null, type=list
                                          1    func       (fun1 nil) : frame=main
                                          1    func       (fun1 float) : frame=DO
+?rv                  : 6        2        1    var        2.0 : type=float    
 ==========================================================================================================================
 

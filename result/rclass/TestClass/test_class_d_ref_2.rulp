@@ -13,6 +13,6 @@
 ;;;
 
 (loop for ?o in (to-list ?arr) do
-    (print ?o::?value)
+    (print (value-of (value-of ?o::?value)) " ")
 )
 ;=>

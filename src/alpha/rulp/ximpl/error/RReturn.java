@@ -9,8 +9,14 @@
 
 package alpha.rulp.ximpl.error;
 
+import static alpha.rulp.lang.Constant.O_Nan;
+import static alpha.rulp.lang.Constant.A_RETURN_VAR;
+
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.RException;
+import alpha.rulp.utils.RulpFactory;
+import alpha.rulp.utils.RulpUtil;
 
 public class RReturn extends RIException {
 
@@ -18,13 +24,31 @@ public class RReturn extends RIException {
 
 	private IRObject rtValue;
 
-	public RReturn(IRObject fromObject, IRFrame fromFrame, IRObject rtValue) {
+	public RReturn(IRObject fromObject, IRFrame fromFrame, IRObject rtValue) throws RException {
 		super(fromObject, fromFrame);
 		this.rtValue = rtValue;
+		RulpUtil.incRef(rtValue);
 	}
 
-	public IRObject getReturnValue() {
-		return rtValue;
+	public IRObject returnValue(IRFrame frame) throws RException {
+
+		IRObject returnValue = this.rtValue;
+
+		if (returnValue != null && returnValue != O_Nan) {
+
+			IRObject returnVar = frame.findLocalObject(A_RETURN_VAR);
+			if (returnVar == null) {
+				returnVar = RulpFactory.createVar(A_RETURN_VAR);
+				frame.setEntry(A_RETURN_VAR, returnVar);
+			}
+
+			RulpUtil.asVar(returnVar).setValue(returnValue);
+
+			RulpUtil.decRef(this.rtValue);
+			this.rtValue = null;
+		}
+
+		return returnValue;
 	}
 
 }

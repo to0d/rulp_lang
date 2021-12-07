@@ -6,10 +6,11 @@ fun1                 : DEFAULT       Y      Y       6    2    func       (fun1 n
 this                 : DEFAULT                      0    1    instance   o1 : class=class1
 ==========================================================================================================================
 
-name=class1, string=class1, lvl=0, ref=2/2, parent=null, final=false, mbrs=1, frame=3(SF-class1-0)
+name=class1, string=class1, lvl=0, ref=2/2, parent=null, final=false, mbrs=2, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
+?rv                  : DEFAULT                      0    1    var        2 : type=int
 fun1                 : DEFAULT       Y              2    2    func       (fun1 nil) : frame=SF-class1-0, type=lambda
 ==========================================================================================================================
 

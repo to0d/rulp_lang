@@ -127,7 +127,7 @@ public class XRFunction extends AbsRefCallableAdapter implements IRFunction {
 			return O_Nil;
 
 		} catch (RReturn r) {
-			return r.getReturnValue();
+			return r.returnValue(frame);
 
 		} finally {
 			RulpUtil.decRef(funFrame);

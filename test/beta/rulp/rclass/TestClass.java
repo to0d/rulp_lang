@@ -17,18 +17,18 @@ public class TestClass extends RulpTestBase {
 		_test("(new class1 o1)", "o1");
 		_test("(ls o1)", "'(o1::this)");
 		_test("(o1::get)", "0");
-		_test("(ls o1)", "'(o1::?value o1::get o1::this)");
+		_test("(ls o1)", "'(o1::?rv o1::?value o1::get o1::this)");
 		_test("(o1::set 5)", "nil");
 		_test("(o1::get)", "5");
 		_test("(o1::add 1)", "nil");
 		_test("(o1::get)", "6");
 		_test("(o1::sub 2)", "nil");
 		_test("(o1::get)", "4");
-		_test("(ls o1)", "'(o1::?value o1::add o1::get o1::set o1::sub o1::this)");
+		_test("(ls o1)", "'(o1::?rv o1::?value o1::add o1::get o1::set o1::sub o1::this)");
 		_test("((:: o1 get))", "4");
 
 		_test("(ls class1)", "'(class1::?value class1::add class1::get class1::set class1::sub)");
-		_test("(ls o1)", "'(o1::?value o1::add o1::get o1::set o1::sub o1::this)");
+		_test("(ls o1)", "'(o1::?rv o1::?value o1::add o1::get o1::set o1::sub o1::this)");
 
 		_test("(out-to-file \"result/rclass/TestClass/test_class_1_a.txt\" (print-subject o1 -1))");
 

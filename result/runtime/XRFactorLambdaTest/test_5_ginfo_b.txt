@@ -8,7 +8,7 @@ Total runtime info:
              CPS support/count:    false        0
                Frame max level:        5
                   Frame max id:        6
-           Frame free id count:        3
+           Frame free id count:        1
 ==========================================================================================================================
 
 Expression compute count:
@@ -46,37 +46,54 @@ Object create count:
         list:            6            0            6
         expr:          427            0          427
        array:            1            0            1
-         var:           17            1           16
-        func:           92            1           91
+         var:           19            0           19
+        func:           92            0           92
     template:            1            0            1
        macro:            1            0            1
        class:            4            0            4
       member:          117            0          117
-       frame:            4            4            0
+       frame:            4            2            2
  interpreter:            1            0
-  frameEntry:          194            0
+  frameEntry:          196            0
       lambda:            1            0
 ==========================================================================================================================
 
-Global frame list: total=0
+Global frame list: total=2
 
-id=2, name=main, lvl=2, ref=1/2, entry=5, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=2/2, entry=6, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
-main                 : 3        2        1    frame      main                
+main                 : 3        2        2    frame      main                
 fun1                 : 4        2        1    func       (fun1 nil) : frame=main
 ?f                   : 5        2        1    var        null                
+?rv                  : 7        2        1    var        lambda : type=func  
 ==========================================================================================================================
 
+
+id=3, name=_$fun$_fun1, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$_fun1
+==========================================================================================================================
+Name(alias)          : EntryId  FrameId  Ref  Type       Value               
+--------------------------------------------------------------------------------------------------------------------------
+?v                   : 6        3        1    var        2 : type=int        
+==========================================================================================================================
+
+id=4, name=DO, lvl=4, ref=1/2, entry=1, pid=3(_$fun$_fun1), subject=DO
+==========================================================================================================================
+Name(alias)          : EntryId  FrameId  Ref  Type       Value               
+--------------------------------------------------------------------------------------------------------------------------
+?rv                  : 8        4        1    var        4 : type=int        
+==========================================================================================================================
 
 Global frame tree:
 
 ->FRAME(root): id=0, lvl=0, subject=root
     ->FRAME(system): id=1, lvl=1, subject=system
         ->FRAME(main): id=2, lvl=2, subject=main
+            ->FRAME(_$fun$_fun1): id=3, lvl=3, subject=_$fun$_fun1
+                ->FRAME(DO): id=4, lvl=4, subject=DO
 
 Global Subject list:
 

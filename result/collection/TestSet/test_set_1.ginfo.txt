@@ -52,13 +52,13 @@ Object create count:
         list:            9            0            9
         expr:          445            0          445
        array:            1            0            1
-         var:           28           12           16
+         var:           29           12           17
         func:           93            0           93
     template:            1            0            1
        macro:            1            0            1
     instance:            2            0            2
        class:            4            0            4
-      member:          140            0          140
+      member:          141            0          141
        frame:           20           18            2
  interpreter:            1            0
   frameEntry:          205            0
@@ -92,11 +92,12 @@ Global frame tree:
 
 Global Subject list:
 
-name=set1, string=set@set1, lvl=1, ref=1/1, parent=set, final=false, mbrs=6, frame=4(SF-set1-1)
+name=set1, string=set@set1, lvl=1, ref=1/1, parent=set, final=false, mbrs=7, frame=4(SF-set1-1)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?impl                : PRIVATE              Y       4    1    var        noclass@un-0 : type=instance
+?rv                  : DEFAULT                      0    1    var        false : type=bool
 add                  : DEFAULT Y            Y       5    1    func       (add nil) : frame=SF-set1-1, type=lambda
 has                  : DEFAULT Y            Y       5    1    func       (has nil) : frame=SF-set1-1, type=lambda
 init                 : DEFAULT Y            Y       5    1    func       (init) : frame=SF-set1-1, type=lambda

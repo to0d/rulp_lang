@@ -13,10 +13,10 @@
 ;=>{un-0,un-1}
 
 (loop for ?o in (to-list ?arr) do
-    (print ?o::?value)
+    (print (value-of (value-of ?o::?value)) " ")
 )
-;err:
-Can't decRef: class1@un-0, ref=-1
-at main: (loop for ?o in (to-list ?arr) do (print ?o::?value))
+;=>nil
+;out:
+1 1 
 ;eof
 

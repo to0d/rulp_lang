@@ -12,61 +12,18 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.utils.RulpUtil;
 
-public class XRArray extends AbsAtomObject implements IRArray {
-
-//	static final XRArray emptyArray = new XRArray();
+public class XRArray extends AbsRefObject implements IRArray {
 
 	public static XRArray buildArray(List<? extends IRObject> elements) throws RException {
-
-		int size = elements.size();
 
 		XRArray array = new XRArray();
 		array.elementCount = 0;
 		array.arrayDimension = 1;
 		array.arraySize = new int[1];
-		array.arraySize[0] = size;
+		array.arraySize[0] = 0;
 
-		int elementArraySize = -1;
-
-		NEXT: for (int i = 0; i < size; ++i) {
-
-			IRObject ei = elements.get(i);
-			if (ei == null || ei == O_Nil) {
-				continue;
-			}
-
-			array.elements.add(ei);
-			array.elementCount++;
-
-			if (ei.getType() == RType.ARRAY) {
-
-				IRArray arrayi = RulpUtil.asArray(ei);
-				if (arrayi.getDimension() != 1) {
-					throw new RException("not support array: " + ei);
-				}
-
-				if (array.getElementCount() == 0) {
-					array.elements.set(i, null);
-					array.elementCount--;
-					continue NEXT;
-				}
-
-				int elementSize = arrayi.size();
-				if (elementArraySize < elementSize) {
-					elementArraySize = elementSize;
-				}
-
-				array.elementCount += arrayi.getElementCount() - 1;
-			}
-
-		}
-
-		if (elementArraySize != -1) {
-
-			array.arrayDimension = 2;
-			array.arraySize = new int[2];
-			array.arraySize[0] = size;
-			array.arraySize[1] = elementArraySize;
+		for (IRObject e : elements) {
+			array.add(e);
 		}
 
 		return array;
@@ -117,19 +74,69 @@ public class XRArray extends AbsAtomObject implements IRArray {
 	}
 
 	@Override
+	protected void _delete() throws RException {
+
+		if (elements != null) {
+
+			for (IRObject e : elements) {
+				RulpUtil.decRef(e);
+			}
+
+			elements = null;
+		}
+
+		super._delete();
+	}
+
+	protected void _add(IRObject obj) throws RException {
+		elements.add(obj);
+		arraySize[0]++;
+
+		if (obj != null && obj.getType() != RType.NIL) {
+			elementCount++;
+			RulpUtil.incRef(obj);
+		}
+	}
+
+	@Override
 	public void add(IRObject obj) throws RException {
 
-		if (obj.getType() == RType.ARRAY || arrayDimension != 1) {
+		if (obj == null || obj.getType() == RType.NIL) {
+			_add(obj);
+			return;
+		}
+
+		if (obj.getType() != RType.ARRAY) {
+			_add(obj);
+			return;
+		}
+
+		IRArray ei = RulpUtil.asArray(obj);
+		if (ei.getDimension() != 1) {
 			throw new RException("Invalid element: " + obj);
 		}
 
-		arraySize[0]++;
+		if (ei.getElementCount() == 0) {
+			return;
+		}
 
-		if (obj == null || obj.getType() == RType.NIL) {
-			elements.add(null);
-		} else {
-			elements.add(obj);
-			elementCount++;
+		if (this.arrayDimension > 2) {
+			throw new RException("Invalid array: " + this);
+		}
+
+		if (this.arrayDimension == 1) {
+			int size = this.arraySize[0];
+			this.arraySize = new int[2];
+			this.arraySize[0] = size;
+			this.arraySize[1] = 0;
+			this.arrayDimension = 2;
+		}
+
+		_add(ei);
+
+		int elementSize = ei.size();
+		if (this.arraySize[1] < elementSize) {
+			this.arraySize[1] = elementSize;
 		}
 	}
 
@@ -154,7 +161,7 @@ public class XRArray extends AbsAtomObject implements IRArray {
 				throw new RException("Invalid index: " + index);
 			}
 
-			return index < elements.size() ? elements.get(index) : null;
+			return (elements != null && index < elements.size()) ? elements.get(index) : null;
 
 		} else {
 
@@ -184,21 +191,25 @@ public class XRArray extends AbsAtomObject implements IRArray {
 	}
 
 	@Override
-	public void set(int index, IRObject obj) throws RException {
+	public void set(int index, IRObject newObj) throws RException {
 
 		if (index < 0 || index >= size()) {
 			throw new RException("invalid index: " + index);
 		}
 
-		int on = elements.get(index) == null ? 0 : 1;
+		IRObject oldObj = elements.get(index);
+		int on = oldObj == null ? 0 : 1;
 		int nn = 0;
 
-		if (obj != null && obj.getType() != RType.NIL) {
+		if (newObj != null && newObj.getType() != RType.NIL) {
 			nn = 1;
+			RulpUtil.incRef(newObj);
 		}
 
-		elements.set(index, nn == 1 ? obj : null);
+		elements.set(index, nn == 1 ? newObj : null);
 		elementCount += nn - on;
+
+		RulpUtil.decRef(oldObj);
 	}
 
 	@Override

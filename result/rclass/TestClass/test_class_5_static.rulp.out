@@ -38,6 +38,7 @@
 (ls-print class1)
 ;=>nil
 ;out:
+mbr=?rv, name=?rv, type=var, property='(default), value="1"
 mbr=?v1, name=?v1, type=var, property='(default), value="1"
 mbr=?v2, name=?v2, type=var, property='(default static), value="2"
 mbr=fun1, name=(fun1), type=func, property='(default static)

@@ -18,7 +18,8 @@
 )
 ;=>nil
 ;out:
-1:var, name=v1
+1:var, name=?rv
+2:var, name=v1
 
 ;eof
 

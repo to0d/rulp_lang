@@ -43,7 +43,7 @@ public class XRFactorForeach extends AbsRFactorAdapter implements IRFactor {
 			return rstObj;
 
 		} catch (RReturn r) {
-			return r.getReturnValue();
+			return r.returnValue(factorFrame);
 
 		} catch (RContinue c) {
 			return O_Nan;

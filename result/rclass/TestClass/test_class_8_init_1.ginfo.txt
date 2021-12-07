@@ -49,13 +49,13 @@ Object create count:
         list:           10            0           10
         expr:          479            0          479
        array:            1            0            1
-         var:           31           15           16
+         var:           37           21           16
         func:          125           30           95
     template:            1            0            1
        macro:            1            0            1
     instance:            6            6            0
        class:            5            0            5
-      member:          152           24          128
+      member:          158           30          128
        frame:           20           19            1
  interpreter:            1            0
   frameEntry:          211            0

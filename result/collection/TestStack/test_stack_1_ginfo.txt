@@ -61,22 +61,22 @@ Object create count:
         list:            8            0            8
         expr:          448            0          448
        array:            1            0            1
-         var:           31           14           17
+         var:           34           14           20
         func:          103            0          103
     template:            1            0            1
        macro:            1            0            1
     instance:            3            0            3
        class:            4            0            4
-      member:          148            0          148
+      member:          150            0          150
        frame:           44           40            4
  interpreter:            1            0
-  frameEntry:          208            0
+  frameEntry:          209            0
       lambda:           14            0
 ==========================================================================================================================
 
 Global frame list: total=4
 
-id=2, name=main, lvl=2, ref=1/2, entry=4, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=1/2, entry=5, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -84,6 +84,7 @@ root                 : 1        2        0    frame      root
 system               : 2        2        0    frame      system              
 main                 : 3        2        1    frame      main                
 s1                   : 6        2        1    instance   s1 : class=stack    
+?rv                  : 12       2        1    var        true : type=bool    
 ==========================================================================================================================
 
 
@@ -107,11 +108,12 @@ Global frame tree:
 
 Global Subject list:
 
-name=s1, string=stack@s1, lvl=1, ref=1/2, parent=stack, final=false, mbrs=9, frame=4(SF-s1-1)
+name=s1, string=stack@s1, lvl=1, ref=1/2, parent=stack, final=false, mbrs=10, frame=4(SF-s1-1)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?impl                : PRIVATE              Y       4    1    var        queue@un-0 : type=instance
+?rv                  : DEFAULT                      0    1    var        true : type=bool
 clear                : DEFAULT Y            Y       5    1    func       (clear) : frame=SF-s1-1, type=lambda
 init                 : DEFAULT Y            Y       5    1    func       (init) : frame=SF-s1-1, type=lambda
 is-empty             : DEFAULT Y            Y       5    1    func       (is-empty) : frame=SF-s1-1, type=lambda
