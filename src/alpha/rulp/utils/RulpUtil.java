@@ -82,6 +82,25 @@ public class RulpUtil {
 		public void format(StringBuffer sb, IRObject obj) throws RException;
 	}
 
+	public static class RResultList {
+
+		public List<IRObject> results = new ArrayList<>();
+
+		public void addResult(IRObject rst) throws RException {
+			RulpUtil.incRef(rst);
+			results.add(rst);
+		}
+
+		public void free() throws RException {
+
+			for (IRObject rst : results) {
+				RulpUtil.decRef(rst);
+			}
+
+			results.clear();
+		}
+	}
+
 	static class XRFactorWrapper extends AbsRFactorAdapter implements IRFactor {
 
 		private IRFactorBody factorBody;
@@ -684,7 +703,7 @@ public class RulpUtil {
 	public static IRList asList(IRObject obj) throws RException {
 
 		if (obj == null) {
-			return RulpFactory.EMPTY_LIST;
+			throw new RException("null list: " + obj);
 		}
 
 		if (obj.getType() != RType.LIST) {
@@ -817,6 +836,17 @@ public class RulpUtil {
 		}
 
 		return a.asString().compareTo(b.asString());
+	}
+
+	public static RResultList compute(IRInterpreter interpreter, String input) throws RException {
+
+		RResultList resultList = new RResultList();
+
+		interpreter.compute(input, (rst) -> {
+			resultList.addResult(rst);
+		});
+
+		return resultList;
 	}
 
 	public static IRObject computeArithmeticExpression(RArithmeticOperator op, IRObject a, IRObject b)
@@ -1096,11 +1126,13 @@ public class RulpUtil {
 			return;
 		}
 
-//		if (obj.asString() == null || obj.asString().equals("set1::?impl")) {
-//			System.out.println("decRef: " + obj);
+		obj.decRef();
+
+//		if ("init".equals(obj.toString())) {
+//			System.out.print("decRef: " + obj.getRef() + ", " + obj);
+//			System.out.println();
 //		}
 
-		obj.decRef();
 	}
 
 	public static boolean equal(IRObject a, IRObject b) throws RException {
@@ -1218,6 +1250,12 @@ public class RulpUtil {
 		}
 
 		obj.incRef();
+
+//		if ("init".equals(obj.toString())) {
+//			System.out.print("incRef: " + obj.getRef() + ", " + obj);
+//			System.out.println();
+//		}
+
 	}
 
 	public static boolean isAnonymousVar(String var) {
@@ -1226,6 +1264,10 @@ public class RulpUtil {
 
 	public static boolean isAtom(IRObject obj) {
 		return obj.getType() == RType.ATOM;
+	}
+
+	public static boolean isAtom(IRObject obj, String name) {
+		return obj.getType() == RType.ATOM && ((IRAtom) obj).getName().equals(name);
 	}
 
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
@@ -1237,10 +1279,6 @@ public class RulpUtil {
 //
 //		return RulpUtil.asSubject(nsObj);
 //	}
-
-	public static boolean isAtom(IRObject obj, String name) {
-		return obj.getType() == RType.ATOM && ((IRAtom) obj).getName().equals(name);
-	}
 
 	public static boolean isExpression(IRObject obj) {
 		return obj.getType() == RType.EXPR;
@@ -1460,6 +1498,11 @@ public class RulpUtil {
 		});
 	}
 
+	public static void saveObjList(List<IRObject> list, IRObject obj) throws RException {
+		list.add(obj);
+		incRef(obj);
+	}
+
 	public static void setMember(IRSubject subject, String name, IRFactorBody body, RAccessType accessType)
 			throws RException {
 		setMember(subject, name, body, accessType, 0);
@@ -1644,6 +1687,17 @@ public class RulpUtil {
 		}
 
 		return RulpFactory.createExpression(newExpr);
+	}
+
+	public static IRObject[] toFixArray(Collection<? extends IRObject> list) {
+
+		IRObject[] arr = new IRObject[list.size()];
+		int idx = 0;
+		for (IRObject obj : list) {
+			arr[idx++] = obj;
+		}
+
+		return arr;
 	}
 
 	public static IRMap toImplMap(IRInstance instance) throws RException {

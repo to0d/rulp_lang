@@ -50,8 +50,8 @@ Object create count:
 --------------------------------------------------------------------------------------------------------------------------
         atom:          832            0          832
       string:           19            0           19
-        list:           16            0           16
-        expr:          485            0          485
+        list:           16           10            6
+        expr:          485           16          469
        array:            1            0            1
          var:           24            4           20
         func:           94            0           94
@@ -59,7 +59,7 @@ Object create count:
        macro:            1            0            1
     instance:            1            0            1
        class:            4            0            4
-      member:          146            0          146
+      member:          146            9          137
        frame:           17           16            1
  interpreter:            1            0
   frameEntry:          207            0
@@ -68,14 +68,14 @@ Object create count:
 
 Global frame list: total=1
 
-id=2, name=main, lvl=2, ref=2/5, entry=9, pid=1(system), subject=main, search=[main, SF-ns1-0]
+id=2, name=main, lvl=2, ref=2/6, entry=9, pid=1(system), subject=main, search=[main, SF-ns1-0]
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
 main                 : 3        2        2    frame      main                
-ns1                  : 4        2        1    instance   ns1 : class=namespace
+ns1                  : 4        2        2    instance   ns1 : class=namespace
 var1                 : 5        2        1    var        1 : type=int        
 f1                   : 6        2        1    func       (f1) : frame=main   
 ?rv                  : 7        2        1    var        4 : type=int        
@@ -84,7 +84,7 @@ f3                   : 12       2        1    func       (f3) : frame=main
 ==========================================================================================================================
 
 
-id=4, name=SF-ns1-0, lvl=3, ref=1/1, entry=0, pid=2(main), subject=ns1
+id=4, name=SF-ns1-0, lvl=3, ref=1/2, entry=0, pid=2(main), subject=ns1
 
 Global frame tree:
 
@@ -95,13 +95,13 @@ Global frame tree:
 
 Global Subject list:
 
-name=ns1, string=namespace@ns1, lvl=1, ref=1/2, parent=namespace, final=false, mbrs=5, frame=4(SF-ns1-0)
+name=ns1, string=namespace@ns1, lvl=1, ref=2/4, parent=namespace, final=false, mbrs=5, frame=4(SF-ns1-0)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 f1                   : DEFAULT                      0    1    func       (f1) : frame=main
 f2                   : DEFAULT                      0    1    func       (f2) : frame=main
-this                 : DEFAULT                      0    1    instance   ns1 : class=namespace
+this                 : DEFAULT                      0    2    instance   ns1 : class=namespace
 var1                 : DEFAULT                      0    1    var        2 : type=int
 var2                 : DEFAULT                      0    1    var        3 : type=int
 ==========================================================================================================================

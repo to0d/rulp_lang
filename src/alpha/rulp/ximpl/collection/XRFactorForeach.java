@@ -11,8 +11,6 @@ package alpha.rulp.ximpl.collection;
 
 import static alpha.rulp.lang.Constant.O_Nan;
 
-import java.util.ArrayList;
-
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -74,17 +72,19 @@ public class XRFactorForeach extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		ArrayList<IRObject> rstList = new ArrayList<>();
 		IRList paraObj = (IRList) args.get(1);
 
 		IRFrame factorFrame = RulpFactory.createFrame(frame, "FOREACH");
+		RulpUtil.incRef(factorFrame);
 
 		try {
 
-			RulpUtil.incRef(factorFrame);
+			IRList rstList = RulpFactory.createVaryList();
 
 			IRVar var = factorFrame.addVar(RulpUtil.asAtom(paraObj.get(0)).getName());
+
 			IRObject cond = interpreter.compute(factorFrame, paraObj.get(1));
+			RulpUtil.incRef(cond);
 
 			try {
 
@@ -117,9 +117,11 @@ public class XRFactorForeach extends AbsRFactorAdapter implements IRFactor {
 
 			} catch (RBreak b) {
 				// break the loop
+			} finally {
+				RulpUtil.decRef(cond);
 			}
 
-			return RulpFactory.createList(rstList);
+			return rstList;
 
 		} finally {
 			factorFrame.release();

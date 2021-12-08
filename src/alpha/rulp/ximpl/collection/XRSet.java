@@ -3,7 +3,6 @@ package alpha.rulp.ximpl.collection;
 import static alpha.rulp.lang.Constant.A_SET;
 import static alpha.rulp.lang.Constant.O_Nil;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -224,8 +223,8 @@ public class XRSet extends AbsRInstance implements IRCollection {
 		return uniqMap.size();
 	}
 
-	public IRList toList() {
-		return RulpFactory.createList(new ArrayList<>(uniqMap.values()));
+	public IRList toList() throws RException {
+		return RulpFactory.createList(uniqMap.values());
 	}
 
 }

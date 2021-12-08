@@ -43,7 +43,7 @@ Object create count:
         atom:          742            0          742
       string:           19            0           19
         list:            6            0            6
-        expr:          426            0          426
+        expr:          426            3          423
        array:            1            0            1
          var:           19            0           19
         func:           92            0           92

@@ -114,7 +114,7 @@ public class XRFactorNew extends AbsRFactorAdapter implements IRFactor {
 				throw new RException("Invalid parameters: " + args);
 			}
 		} else {
-			initArgs = RulpFactory.createList();
+			initArgs = RulpFactory.emptyConstList();
 		}
 
 		/******************************************/

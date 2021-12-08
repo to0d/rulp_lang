@@ -8,7 +8,7 @@ Total runtime info:
              CPS support/count:    false        0
                Frame max level:        4
                   Frame max id:        5
-           Frame free id count:        2
+           Frame free id count:        1
 ==========================================================================================================================
 
 Expression compute count:
@@ -46,35 +46,38 @@ Object create count:
         list:            7            0            7
         expr:          422            0          422
        array:            1            0            1
-         var:           16            2           14
-        func:           91            1           90
+         var:           16            1           15
+        func:           91            0           91
     template:            1            0            1
        macro:            1            0            1
        class:            4            0            4
       member:          117            0          117
-       frame:            2            2            0
+       frame:            2            1            1
  interpreter:            1            0
   frameEntry:          194            0
       lambda:            1            0
 ==========================================================================================================================
 
-Global frame list: total=0
+Global frame list: total=1
 
-id=2, name=main, lvl=2, ref=1/2, entry=3, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=2/2, entry=3, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
-main                 : 3        2        1    frame      main                
+main                 : 3        2        2    frame      main                
 ==========================================================================================================================
 
+
+id=3, name=DO, lvl=3, ref=1/3, entry=0, pid=2(main), subject=DO
 
 Global frame tree:
 
 ->FRAME(root): id=0, lvl=0, subject=root
     ->FRAME(system): id=1, lvl=1, subject=system
         ->FRAME(main): id=2, lvl=2, subject=main
+            ->FRAME(DO): id=3, lvl=3, subject=DO
 
 Global Subject list:
 

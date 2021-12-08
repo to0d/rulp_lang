@@ -15,7 +15,7 @@
     (out-to-file "result/runtime/XRFactorDefunTest/test_fun_4_scope_b_2.txt" (print-subject 2))
     (fun1 1)
 )
-;=>3
+;=>nil
 
 (fun1 1)
 ;=>2

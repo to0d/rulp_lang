@@ -44,7 +44,7 @@ Object create count:
         atom:          759            0          759
       string:           20            0           20
         list:            6            0            6
-        expr:          431            0          431
+        expr:          431            2          429
        array:            1            0            1
          var:           18            2           16
         func:           93            4           89

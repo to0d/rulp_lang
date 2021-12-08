@@ -15,7 +15,7 @@
     )
     (new class1 o1)
 )
-;;;
+;=>
 
 (rulp-object-count frame)
 ;;;

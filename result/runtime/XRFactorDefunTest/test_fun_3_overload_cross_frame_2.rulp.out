@@ -12,7 +12,7 @@
     (out-to-file "result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_2_a.txt" (print-subject 2))
     (fun1 1 2)
 )
-;=>3
+;=>nil
 
 (out-to-file "result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_2_b.txt" (print-subject 1))
 ;=>nil

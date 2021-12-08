@@ -54,8 +54,7 @@ public class XRFactorDoWhenObjDeleted extends AbsRFactorAdapter implements IRFac
 		RulpUtil.incRef(fun);
 
 		obj.addObjectDeletedListener((_obj) -> {
-			IRList newArgs = RulpFactory.createList(fun, _obj);
-			RuntimeUtil.computeCallable(fun, newArgs, interpreter, frame);
+			RuntimeUtil.computeCallable(fun, RulpFactory.createList(fun, _obj), interpreter, frame);
 			RulpUtil.decRef(fun);
 		});
 

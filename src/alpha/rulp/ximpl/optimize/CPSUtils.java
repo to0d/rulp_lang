@@ -40,19 +40,35 @@ public class CPSUtils {
 
 	static class CpsNode {
 
-		ArrayList<IRObject> elements = null;
+		private ArrayList<IRObject> elements = null;
 
-		boolean expend = false;
+		private boolean expend = false;
 
-		IRExpr expr;
-		int indexOfParent;
-		CpsNode parrent;
+		private IRExpr expr;
 
-		public CpsNode(CpsNode parrent, int indexOfParent, IRExpr expr) {
+		public IRExpr getExpr() {
+			return expr;
+		}
+
+		public void setExpr(IRExpr newExpr) throws RException {
+
+			IRExpr oldExpr = this.expr;
+			this.expr = newExpr;
+
+			RulpUtil.incRef(newExpr);
+			RulpUtil.decRef(oldExpr);
+		}
+
+		private int indexOfParent;
+
+		private CpsNode parrent;
+
+		public CpsNode(CpsNode parrent, int indexOfParent, IRExpr expr) throws RException {
 			super();
 			this.parrent = parrent;
 			this.indexOfParent = indexOfParent;
-			this.expr = expr;
+
+			setExpr(expr);
 		}
 
 		public String toString() {
@@ -108,13 +124,12 @@ public class CPSUtils {
 
 		case LIST: {
 
-			ArrayList<IRObject> newList = new ArrayList<>();
-
+			IRList newList = RulpFactory.createVaryList();
 			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
 			while (it.hasNext()) {
 				newList.add(rebuildCpsTree(it.next(), frame));
 			}
-			return RulpFactory.createList(newList);
+			return newList;
 		}
 
 		case MEMBER: {
@@ -341,7 +356,7 @@ public class CPSUtils {
 			// not expand
 			if (!topNode.expend) {
 
-				if (topNode.expr.isEmpty()) {
+				if (topNode.getExpr().isEmpty()) {
 
 					cpsQueue.pollLast();
 					topNode.parrent.elements.set(topNode.indexOfParent, O_Nil);
@@ -352,7 +367,7 @@ public class CPSUtils {
 
 					boolean findExpr = false;
 					{
-						IRIterator<? extends IRObject> it = topNode.expr.iterator();
+						IRIterator<? extends IRObject> it = topNode.getExpr().iterator();
 						while (it.hasNext()) {
 							if (it.next().getType() == RType.EXPR) {
 								findExpr = true;
@@ -365,7 +380,7 @@ public class CPSUtils {
 
 						topNode.elements = new ArrayList<>();
 
-						IRIterator<? extends IRObject> it = topNode.expr.iterator();
+						IRIterator<? extends IRObject> it = topNode.getExpr().iterator();
 						while (it.hasNext()) {
 							topNode.elements.add(it.next());
 						}
@@ -388,14 +403,16 @@ public class CPSUtils {
 				cpsQueue.pollLast();
 
 				IRObject rst = null;
-				IRObject e0 = topNode.expr.get(0);
-				IRExpr newExpr = topNode.expr;
+				IRObject e0 = topNode.getExpr().get(0);
+				IRExpr newExpr = topNode.getExpr();
 
 				if (topNode.elements != null) {
 					e0 = topNode.elements.get(0);
-					newExpr = topNode.expr.isEarly() ? RulpFactory.createExpressionEarly(topNode.elements)
+					newExpr = topNode.getExpr().isEarly() ? RulpFactory.createExpressionEarly(topNode.elements)
 							: RulpFactory.createExpression(topNode.elements);
 				}
+
+				topNode.setExpr(null); // dec ref of the expr
 
 				switch (e0.getType()) {
 				case FACTOR:
@@ -417,18 +434,17 @@ public class CPSUtils {
 
 					IRObject e1m = ((IRMember) e0).getValue();
 					if (e1m.getType() != RType.FUNC) {
-						throw new RException("factor not found: " + topNode.expr);
+						throw new RException("factor not found: " + newExpr);
 					}
 
 					rst = RuntimeUtil.computeFun((IRFunction) e1m, newExpr, interpreter, frame);
 					break;
 
 				default:
-					throw new RException("factor not found: " + topNode.expr);
+					throw new RException("factor not found: " + newExpr);
 				}
 
 				if (topNode.parrent != null) {
-
 					if (rst.getType() == RType.EXPR) {
 						cpsQueue.addLast(new CpsNode(topNode.parrent, topNode.indexOfParent, (IRExpr) rst));
 					} else {

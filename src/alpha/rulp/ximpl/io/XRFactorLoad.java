@@ -103,8 +103,10 @@ public class XRFactorLoad extends AbsRFactorAdapter implements IRFactor {
 		// File can only be loaded once
 		/*************************************************/
 		if (loadedFilePaths.contains(path)) {
-			return RulpFactory.createList();
+			return RulpFactory.emptyConstList();
 		}
+		
+		loadedFilePaths.add(path);
 
 		String charset = args.size() == 3 ? RulpUtil.asString(interpreter.compute(frame, args.get(2))).asString()
 				: null;
@@ -113,10 +115,7 @@ public class XRFactorLoad extends AbsRFactorAdapter implements IRFactor {
 			System.out.println("loading: " + path);
 		}
 
-		List<IRObject> rst = LoadUtil.loadRulp(interpreter, path, charset);
-		loadedFilePaths.add(path);
-
-		return RulpFactory.createList(rst);
+		return LoadUtil.loadRulp(interpreter, path, charset);
 	}
 
 	public boolean isThreadSafe() {

@@ -6,6 +6,7 @@ import static alpha.rulp.lang.Constant.F_MBR_UNINIT;
 import java.util.ArrayList;
 
 import alpha.rulp.lang.IRClass;
+import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRMember;
@@ -44,10 +45,20 @@ public class XRDefInstance extends AbsRInstance {
 			initArgs.add(member);
 			RulpUtil.addAll(initArgs, args);
 
-			IRList expr = RuntimeUtil.rebuildFuncExpr(RulpUtil.asFunction(member.getValue()),
-					RulpFactory.createExpression(initArgs), interpreter, frame);
+			IRList expr = RulpFactory.createExpression(initArgs);
+			RulpUtil.incRef(expr);
 
-			interpreter.compute(getSubjectFrame(), expr);
+			IRList newExpr = RuntimeUtil.rebuildFuncExpr(RulpUtil.asFunction(member.getValue()), expr, interpreter,
+					frame);
+			RulpUtil.incRef(newExpr);
+
+			try {
+				interpreter.compute(getSubjectFrame(), newExpr);
+			} finally {
+				RulpUtil.decRef(newExpr);
+				RulpUtil.decRef(expr);
+			}
+
 		}
 
 		this.interpreter = interpreter;

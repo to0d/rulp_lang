@@ -32,7 +32,7 @@ class XRFactorLoadTest extends RulpTestBase {
 	void test_3() {
 
 		_setup();
-		_test("(do (load \"load/load1.rulp\"))", "'(&x1)");
+		_test("(do (load \"load/load1.rulp\"))", "nil");
 		_test("(ls)", "'(main::main main::root main::system main::x1)");
 	}
 }

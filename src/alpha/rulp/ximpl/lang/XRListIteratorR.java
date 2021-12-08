@@ -17,23 +17,21 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.utils.RulpUtil;
 
-public class XRListIteratorR extends AbsRList implements IRList, IRExpr {
-
-	protected ArrayList<IRObject> elements = null;
+public class XRListIteratorR extends AbsRListIterator implements IRList, IRExpr {
 
 	protected IRIterator<? extends IRObject> inputIterator;
 
 	protected int scanSize = 0;
-
-	protected int size = -1;
 
 	public XRListIteratorR(IRIterator<? extends IRObject> iter, RType type, String name) {
 		super(type, name);
 		this.inputIterator = iter;
 	}
 
-	boolean _scanTo(int toIndex) throws RException {
+	@Override
+	protected boolean _scanTo(int toIndex) throws RException {
 
 		if (size != -1) {
 			return toIndex < size;
@@ -53,6 +51,7 @@ public class XRListIteratorR extends AbsRList implements IRList, IRExpr {
 			}
 
 			elements.add(obj);
+			RulpUtil.incRef(obj);
 			++scanSize;
 		}
 
@@ -60,45 +59,13 @@ public class XRListIteratorR extends AbsRList implements IRList, IRExpr {
 	}
 
 	@Override
-	public IRObject get(int index) throws RException {
-
-		_scanTo(index);
-
-		if (size == -1) {
-			return elements.get(index);
-		}
-
-		return (size == -1 || index < size) ? elements.get(index) : null;
+	public void add(IRObject obj) throws RException {
+		throw new RException("Can't add object to const list: " + obj);
 	}
 
 	@Override
-	public boolean isEarly() {
-		return false;
-	}
-
-	@Override
-	public boolean isEmpty() throws RException {
-		_scanTo(0);
-		return size == 0;
-	}
-
-	@Override
-	public IRIterator<IRObject> listIterator(int fromIndex) {
-
-		return new IRIterator<IRObject>() {
-
-			int index = fromIndex;
-
-			@Override
-			public boolean hasNext() throws RException {
-				return _scanTo(index);
-			}
-
-			@Override
-			public IRObject next() throws RException {
-				return get(index++);
-			}
-		};
+	public boolean isConst() {
+		return true;
 	}
 
 	@Override

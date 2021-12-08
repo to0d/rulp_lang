@@ -13,9 +13,13 @@ import alpha.rulp.runtime.IRIterator;
 
 public interface IRList extends IRObject {
 
+	public void add(IRObject obj) throws RException;
+
 	public IRObject get(int index) throws RException;
 
 	public String getNamedName();
+
+	public boolean isConst();
 
 	public boolean isEmpty() throws RException;
 

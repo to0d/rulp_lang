@@ -56,7 +56,7 @@ public class XRFactorLs extends AbsRFactorAdapter implements IRFactor {
 
 		Collection<? extends IRMember> mbrs = sub.listMembers();
 		if (mbrs.isEmpty()) {
-			return RulpFactory.createList();
+			return RulpFactory.emptyConstList();
 		}
 
 		List<IRMember> list = new LinkedList<>();

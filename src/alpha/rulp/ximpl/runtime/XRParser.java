@@ -762,7 +762,7 @@ public class XRParser implements IRParser {
 			List<IRObject> list = matchList();
 			if (list != null) {
 				if (list.isEmpty()) {
-					return RulpFactory.createList();
+					return RulpFactory.emptyConstList();
 				} else {
 					return RulpFactory.createList(list);
 				}

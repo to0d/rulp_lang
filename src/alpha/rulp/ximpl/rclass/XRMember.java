@@ -9,11 +9,15 @@
 
 package alpha.rulp.ximpl.rclass;
 
+import java.util.ArrayList;
+
+import alpha.rulp.lang.IRListener;
 import alpha.rulp.lang.IRMember;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RAccessType;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
+import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.lang.AbsRefObject;
 
 public class XRMember extends AbsRefObject implements IRMember {
@@ -30,11 +34,22 @@ public class XRMember extends AbsRefObject implements IRMember {
 
 	private IRObject value;
 
-	public XRMember(IRObject subject, String name, IRObject value) {
+//	protected void _delete() throws RException {
+//
+//		if (this.value != null) {
+//			RulpUtil.decRef(value);
+//			this.value = null;
+//		}
+//
+//		super._delete();
+//	}
+
+	public XRMember(IRObject subject, String name, IRObject value) throws RException {
 		super();
 		this.subject = subject;
 		this.name = name;
 		this.value = value;
+//		RulpUtil.incRef(value);
 	}
 
 	@Override

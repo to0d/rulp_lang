@@ -36,12 +36,11 @@ public class XRFactorDo extends AbsRFactorAdapter implements IRFactor {
 			RulpUtil.incRef(doFrame);
 
 			IRIterator<? extends IRObject> iter = args.listIterator(1);
-			IRObject rst = O_Nil;
 			while (iter.hasNext()) {
-				rst = interpreter.compute(doFrame, iter.next());
+				interpreter.compute(doFrame, iter.next());
 			}
 
-			return rst;
+			return O_Nil;
 
 		} finally {
 			doFrame.release();

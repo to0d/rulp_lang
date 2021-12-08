@@ -47,7 +47,7 @@ Object create count:
         atom:          764            0          764
       string:           22            0           22
         list:            6            0            6
-        expr:          436            0          436
+        expr:          436            2          434
        array:            1            0            1
          var:           19            2           17
         func:           93            0           93
@@ -94,7 +94,7 @@ Global frame tree:
 
 Global Subject list:
 
-name=class1, string=class1, lvl=0, ref=2/2, parent=null, final=false, mbrs=2, frame=3(SF-class1-0)
+name=class1, string=class1, lvl=0, ref=2/3, parent=null, final=false, mbrs=2, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -102,7 +102,7 @@ Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 fun1                 : DEFAULT       Y              2    2    func       (fun1 nil) : frame=SF-class1-0, type=lambda
 ==========================================================================================================================
 
-name=o1, string=class1@o1, lvl=1, ref=1/1, parent=class1, final=false, mbrs=2, frame=null
+name=o1, string=class1@o1, lvl=1, ref=1/3, parent=class1, final=false, mbrs=2, frame=null
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -110,7 +110,7 @@ fun1                 : DEFAULT       Y      Y       6    2    func       (fun1 n
 this                 : DEFAULT                      0    1    instance   o1 : class=class1
 ==========================================================================================================================
 
-name=class2, string=class2, lvl=1, ref=1/1, parent=class1, final=false, mbrs=3, frame=4(SF-class2-1)
+name=class2, string=class2, lvl=1, ref=1/3, parent=class1, final=false, mbrs=3, frame=4(SF-class2-1)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -119,7 +119,7 @@ fun1                 : DEFAULT       Y              2    2    func       (fun1 n
 super                : DEFAULT                      0    2    class      class1
 ==========================================================================================================================
 
-name=o2, string=class2@o2, lvl=2, ref=1/1, parent=class2, final=false, mbrs=2, frame=null
+name=o2, string=class2@o2, lvl=2, ref=1/3, parent=class2, final=false, mbrs=2, frame=null
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

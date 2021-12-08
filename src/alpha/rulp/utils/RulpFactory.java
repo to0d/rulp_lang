@@ -13,7 +13,6 @@ import static alpha.rulp.lang.Constant.*;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -135,12 +134,12 @@ import alpha.rulp.ximpl.lang.XRDouble;
 import alpha.rulp.ximpl.lang.XRFloat;
 import alpha.rulp.ximpl.lang.XRInteger;
 import alpha.rulp.ximpl.lang.XRIteratorAdatper;
-import alpha.rulp.ximpl.lang.XRListArray;
+import alpha.rulp.ximpl.lang.XRListNative;
 import alpha.rulp.ximpl.lang.XRListBuilderIterator;
-import alpha.rulp.ximpl.lang.XRListEmpty;
+import alpha.rulp.ximpl.lang.XRListConst;
 import alpha.rulp.ximpl.lang.XRListIterator;
 import alpha.rulp.ximpl.lang.XRListIteratorR;
-import alpha.rulp.ximpl.lang.XRListList;
+import alpha.rulp.ximpl.lang.XRListVary;
 import alpha.rulp.ximpl.lang.XRLong;
 import alpha.rulp.ximpl.lang.XRMacro;
 import alpha.rulp.ximpl.lang.XRNative;
@@ -231,9 +230,9 @@ public final class RulpFactory {
 		}
 	}
 
-	public static final IRExpr EMPTY_EXPR;
+	private static IRList EMPTY_CONST_LIST = null;
 
-	public static final IRList EMPTY_LIST;
+	private static IRExpr EMPTY_EXPR;
 
 	private static final IRString EMPTY_STR = new XRString("");
 
@@ -268,8 +267,12 @@ public final class RulpFactory {
 	private static AtomicInteger unusedNameCount = new AtomicInteger(0);
 
 	static {
-		EMPTY_LIST = new XRListList(Collections.<IRObject>emptyList(), RType.LIST, null, false);
-		EMPTY_EXPR = new XRListList(Collections.<IRObject>emptyList(), RType.EXPR, null, false);
+		try {
+			EMPTY_EXPR = new XRListConst(null, RType.EXPR, null, false);
+			EMPTY_CONST_LIST = new XRListConst(null, RType.LIST, null, false);
+		} catch (RException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public static IRArray createArray(List<? extends IRObject> elements) throws RException {
@@ -344,9 +347,9 @@ public final class RulpFactory {
 		return new XRListIteratorR(iter, RType.EXPR, null);
 	}
 
-	public static IRExpr createExpression(IRObject... elements) {
+	public static IRExpr createExpression(IRObject... elements) throws RException {
 		RType.EXPR.incCreateCount();
-		return new XRListArray(elements, RType.EXPR, null);
+		return new XRListConst(elements, RType.EXPR, null, false);
 	}
 
 	public static IRExpr createExpression(Iterator<? extends IRObject> iter) {
@@ -359,24 +362,25 @@ public final class RulpFactory {
 		return new XRListIterator(iter, RType.EXPR, null);
 	}
 
-	public static IRExpr createExpression(List<? extends IRObject> list) {
+	public static IRExpr createExpression(List<? extends IRObject> list) throws RException {
 
 		if (list == null || list.isEmpty()) {
 			return EMPTY_EXPR;
 		}
 
 		RType.EXPR.incCreateCount();
-		return new XRListList(list, RType.EXPR, null, false);
+
+		return new XRListConst(RulpUtil.toFixArray(list), RType.EXPR, null, false);
 	}
 
-	public static IRExpr createExpressionEarly(List<? extends IRObject> list) {
+	public static IRExpr createExpressionEarly(List<? extends IRObject> list) throws RException {
 
 		if (list == null || list.isEmpty()) {
 			return EMPTY_EXPR;
 		}
 
 		RType.EXPR.incCreateCount();
-		return new XRListList(list, RType.EXPR, null, true);
+		return new XRListConst(RulpUtil.toFixArray(list), RType.EXPR, null, true);
 	}
 
 	public static IRFloat createFloat(float value) {
@@ -728,52 +732,55 @@ public final class RulpFactory {
 		return interpreter;
 	}
 
-	public static IRList createList() {
-		return EMPTY_LIST;
+	public static IRList createList(Collection<? extends IRObject> elements) throws RException {
+
+		if (elements == null || elements.isEmpty()) {
+			return EMPTY_CONST_LIST;
+		}
+
+		RType.LIST.incCreateCount();
+		return new XRListConst(RulpUtil.toFixArray(elements), RType.LIST, null, false);
 	}
 
 	public static IRList createList(IRIterator<? extends IRObject> iter) throws RException {
 
 		if (iter == null || !iter.hasNext()) {
-			return EMPTY_LIST;
+			return EMPTY_CONST_LIST;
 		}
 
 		RType.LIST.incCreateCount();
 		return new XRListIteratorR(iter, RType.LIST, null);
 	}
 
-	public static IRList createList(IRObject... elements) {
-
+	public static IRList createList(IRObject... elements) throws RException {
 		RType.LIST.incCreateCount();
-		return new XRListArray(elements, RType.LIST, null);
+		return new XRListConst(elements, RType.LIST, null, false);
+	}
+	
+	public static IRList createNativeList(IRObject... elements) throws RException {
+		RType.LIST.incCreateCount();
+		return new XRListNative(elements, RType.LIST, null, false);
 	}
 
 	public static IRList createList(Iterator<? extends IRObject> iter) {
 
 		if (iter == null || !iter.hasNext()) {
-			return EMPTY_LIST;
+			return EMPTY_CONST_LIST;
 		}
 
 		RType.LIST.incCreateCount();
 		return new XRListIterator(iter, RType.LIST, null);
 	}
 
-	public static IRList createList(List<? extends IRObject> list) {
+	public static IRList createListOfString(Collection<String> elements) {
 
-		if (list == null || list.isEmpty()) {
-			return EMPTY_LIST;
+		if (elements == null || elements.isEmpty()) {
+			return EMPTY_CONST_LIST;
 		}
 
 		RType.LIST.incCreateCount();
-		return new XRListList(list, RType.LIST, null, false);
-	}
-
-	public static IRList createListOfString(Collection<String> collection) {
-
-		RType.LIST.incCreateCount();
-		return new XRListBuilderIterator<String>(collection.iterator(), (str) -> {
+		return new XRListBuilderIterator<String>(elements.iterator(), (str) -> {
 			return RulpFactory.createString(str);
-
 		}, RType.LIST, null);
 	}
 
@@ -787,9 +794,15 @@ public final class RulpFactory {
 		return new XRMacro(macroName, paraNames, macroBody);
 	}
 
-	public static IRMember createMember(IRObject subject, String name, IRObject value) {
+	public static IRMember createMember(IRObject subject, String name, IRObject value) throws RException {
 		RType.MEMBER.incCreateCount();
 		return new XRMember(subject, name, value);
+	}
+
+	public static IRList createNamedList(Collection<? extends IRObject> elements, String name) throws RException {
+
+		RType.LIST.incCreateCount();
+		return new XRListConst(RulpUtil.toFixArray(elements), RType.LIST, name, false);
 	}
 
 	public static IRList createNamedList(IRIterator<? extends IRObject> iter, String name) throws RException {
@@ -799,55 +812,32 @@ public final class RulpFactory {
 		}
 
 		if (iter == null || !iter.hasNext()) {
-			return createNamedList(name);
+			RType.LIST.incCreateCount();
+			return new XRListConst(null, RType.LIST, name, false);
 		}
 
 		RType.LIST.incCreateCount();
 		return new XRListIteratorR(iter, RType.LIST, name);
 	}
 
-	public static IRList createNamedList(Iterator<? extends IRObject> iter, String name) {
+	public static IRList createNamedList(Iterator<? extends IRObject> iter, String name) throws RException {
 
 		if (name != null && name.length() == 0) {
 			return createList(iter);
 		}
 
 		if (iter == null || !iter.hasNext()) {
-			return createNamedList(name);
+			RType.LIST.incCreateCount();
+			return new XRListConst(null, RType.LIST, name, false);
 		}
 
 		RType.LIST.incCreateCount();
 		return new XRListIterator(iter, RType.LIST, name);
 	}
 
-	public static IRList createNamedList(List<? extends IRObject> list, String name) {
-
-		if (name != null && name.length() == 0) {
-			return createList(list);
-		}
-
-		if (list == null || list.isEmpty()) {
-			return createNamedList(name);
-		}
-
+	public static IRList createNamedList(String name, IRObject... elements) throws RException {
 		RType.LIST.incCreateCount();
-		return new XRListList(list, RType.LIST, name, false);
-	}
-
-	public static IRList createNamedList(String name) {
-
-		if (name == null) {
-			return EMPTY_LIST;
-
-		} else {
-			RType.LIST.incCreateCount();
-			return new XRListEmpty(name);
-		}
-	}
-
-	public static IRList createNamedList(String name, IRObject... elements) {
-		RType.LIST.incCreateCount();
-		return new XRListArray(elements, RType.LIST, name);
+		return new XRListConst(elements, RType.LIST, name, false);
 	}
 
 	public static IRNameSpace createNameSpace(String name, IRClass rclass, IRFrame frame) throws RException {
@@ -890,16 +880,6 @@ public final class RulpFactory {
 		return new XRIteratorAdatper<T>(iter);
 	}
 
-//	public static IRClass createNoClass() {
-//		IRClass noClass = new XRDefClass(A_NOCLASS);
-//		try {
-//			RulpUtil.incRef(noClass);
-//		} catch (RException e) {
-//			e.printStackTrace();
-//		}
-//		return noClass;
-//	}
-
 	public static IRString createString() {
 		return EMPTY_STR;
 	}
@@ -927,6 +907,16 @@ public final class RulpFactory {
 		return new XRThreadContext();
 	}
 
+//	public static IRClass createNoClass() {
+//		IRClass noClass = new XRDefClass(A_NOCLASS);
+//		try {
+//			RulpUtil.incRef(noClass);
+//		} catch (RException e) {
+//			e.printStackTrace();
+//		}
+//		return noClass;
+//	}
+
 	public static IRTokener createTokener() {
 		return new XRTokener();
 	}
@@ -944,6 +934,44 @@ public final class RulpFactory {
 		IRVar var = createVar(name);
 		var.setValue(newVal);
 		return var;
+	}
+
+	public static IRList createVaryList() {
+		RType.LIST.incCreateCount();
+		return new XRListVary(RType.LIST, null);
+	}
+
+	public static IRList createVaryList(List<? extends IRObject> elements) throws RException {
+
+		RType.LIST.incCreateCount();
+		XRListVary list = new XRListVary(RType.LIST, null);
+		if (list != null) {
+			for (IRObject element : elements) {
+				list.add(element);
+			}
+		}
+		return list;
+	}
+
+	public static IRList createVaryNamedList(List<? extends IRObject> elements, String name) throws RException {
+
+		RType.LIST.incCreateCount();
+		XRListVary list = new XRListVary(RType.LIST, name);
+		if (list != null) {
+			for (IRObject element : elements) {
+				list.add(element);
+			}
+		}
+		return list;
+	}
+
+	public static IRList createVaryNamedList(String name) {
+		RType.LIST.incCreateCount();
+		return new XRListVary(RType.LIST, name);
+	}
+
+	public static IRList emptyConstList() {
+		return EMPTY_CONST_LIST;
 	}
 
 	public static void freeFrameId(int frameId) throws RException {

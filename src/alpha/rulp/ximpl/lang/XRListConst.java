@@ -12,19 +12,49 @@ package alpha.rulp.ximpl.lang;
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.utils.RulpUtil;
 
-public class XRListArray extends AbsRList implements IRList, IRExpr {
+public class XRListConst extends AbsRList implements IRList, IRExpr {
 
 	protected IRObject elements[];
 
 	protected int size;
 
-	public XRListArray(IRObject elements[], RType type, String name) {
+	protected final boolean earlyExpresion;
+
+	public XRListConst(IRObject elements[], RType type, String name, boolean earlyExpresion) throws RException {
+
 		super(type, name);
 		this.elements = elements;
 		this.size = elements == null ? 0 : elements.length;
+		this.earlyExpresion = earlyExpresion;
+
+		if (elements != null) {
+			for (IRObject e : elements) {
+				if (e != null) {
+					RulpUtil.incRef(e);
+				}
+			}
+		}
+	}
+
+	@Override
+	protected void _delete() throws RException {
+		if (elements != null) {
+			for (IRObject e : elements) {
+				if (e != null) {
+					RulpUtil.decRef(e);
+				}
+			}
+		}
+		super._delete();
+	}
+
+	public void add(IRObject obj) throws RException {
+		throw new RException("Can't add object to const list: " + obj);
 	}
 
 	@Override
@@ -33,8 +63,13 @@ public class XRListArray extends AbsRList implements IRList, IRExpr {
 	}
 
 	@Override
+	public boolean isConst() {
+		return true;
+	}
+
+	@Override
 	public boolean isEarly() {
-		return false;
+		return earlyExpresion;
 	}
 
 	@Override

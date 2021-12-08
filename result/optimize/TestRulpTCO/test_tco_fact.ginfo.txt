@@ -26,7 +26,7 @@ Callable stats info: callId=62, row=16, column=63(1), value-max=9, value-unit=2^
     root   factor     50    0 defun                                  11111111111111111111111 11 1111 111 11111 1111    5    
     root   factor     14    0 return                                                                                    2334
     root   factor     14    0 if                                                                                        2334
-    main     func     14    1 (fact nil)                                                                                2334
+    main     func     14   11 (fact nil)                                                                                2334
     root   factor     14    0 do                                                                                        2334
     root   factor     14    0 <=                                                                                        2334
     root   factor     10    0 make-cps                                                                                  1233
@@ -48,8 +48,8 @@ Object create count:
         atom:          910            0          910
          int:            1            0            1
       string:           20            0           20
-        list:            7            0            7
-        expr:          644            0          644
+        list:            7            1            6
+        expr:          644           44          600
        array:            1            0            1
          var:           30           14           16
         func:           98            0           98
@@ -73,7 +73,7 @@ root                 : 1        2        0    frame      root
 system               : 2        2        0    frame      system              
 main                 : 3        2        1    frame      main                
 findCallee           : 4        2        0    factor     findCallee          
-fact                 : 5        2        1    func       (fact nil) : frame=main
+fact                 : 5        2        11   func       (fact nil) : frame=main
 fact2                : 6        2        1    func       (fact2 nil) : frame=main
 fact3                : 7        2        1    func       (fact3 nil) : frame=main
 fun1a                : 8        2        1    func       (fun1a nil) : frame=main

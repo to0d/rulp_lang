@@ -9,7 +9,7 @@
 Invalid index: -1
 at _$fun$_get: (get-of-array ?arr ?i1 ?i2)
 at _$fun$_get: (return (get-of-array ?arr ?i1 ?i2))
-at main: (get {nil,nil,nil} -1 0)
+at main: (get {{a,b,c},x,y} -1 0)
 ;eof
 
 (get {{a, b, c}, x, y} 3 0)
@@ -17,7 +17,7 @@ at main: (get {nil,nil,nil} -1 0)
 Invalid index: 3
 at _$fun$_get: (get-of-array ?arr ?i1 ?i2)
 at _$fun$_get: (return (get-of-array ?arr ?i1 ?i2))
-at main: (get {nil,nil,nil} 3 0)
+at main: (get {{a,b,c},x,y} 3 0)
 ;eof
 
 (get {{a, b, c}, x, y} 0 -1)
@@ -25,7 +25,7 @@ at main: (get {nil,nil,nil} 3 0)
 Invalid index: -1
 at _$fun$_get: (get-of-array ?arr ?i1 ?i2)
 at _$fun$_get: (return (get-of-array ?arr ?i1 ?i2))
-at main: (get {nil,nil,nil} 0 -1)
+at main: (get {{a,b,c},x,y} 0 -1)
 ;eof
 
 (get {{a, b, c}, x, y} 0 3)
@@ -33,6 +33,6 @@ at main: (get {nil,nil,nil} 0 -1)
 Invalid index: 3
 at _$fun$_get: (get-of-array ?arr ?i1 ?i2)
 at _$fun$_get: (return (get-of-array ?arr ?i1 ?i2))
-at main: (get {nil,nil,nil} 0 3)
+at main: (get {{a,b,c},x,y} 0 3)
 ;eof
 

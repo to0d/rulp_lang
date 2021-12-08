@@ -460,7 +460,7 @@ public final class RuntimeUtil {
 			throws RException {
 
 		if (list == null || list.isEmpty()) {
-			return RulpFactory.createList();
+			return RulpFactory.emptyConstList();
 		}
 
 		LinkedList<IRObject> aList = new LinkedList<>();
@@ -535,10 +535,14 @@ public final class RuntimeUtil {
 					fun.getName(), argCount, expr.size() - 1));
 		}
 
+		RulpUtil.incRef(fun);
+		IRList newExpr = rebuildFuncExpr(fun, expr, interpreter, frame);
+		RulpUtil.incRef(newExpr);
+
 		try {
-			RulpUtil.incRef(fun);
-			return RuntimeUtil.computeCallable(fun, rebuildFuncExpr(fun, expr, interpreter, frame), interpreter, frame);
+			return RuntimeUtil.computeCallable(fun, newExpr, interpreter, frame);
 		} finally {
+			RulpUtil.decRef(newExpr);
 			RulpUtil.decRef(fun);
 		}
 
@@ -549,6 +553,7 @@ public final class RuntimeUtil {
 
 		ArrayList<IRObject> args = new ArrayList<>();
 		args.add(fun);
+
 		for (IRObject obj : objs) {
 			args.add(obj);
 		}
@@ -892,7 +897,7 @@ public final class RuntimeUtil {
 				throw new RException("Invalid parameters: " + args);
 			}
 		} else {
-			initArgs = RulpFactory.createList();
+			initArgs = RulpFactory.emptyConstList();
 		}
 
 		/******************************************/

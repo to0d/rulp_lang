@@ -46,7 +46,7 @@ Object create count:
         atom:          760            0          760
       string:           19            0           19
         list:            6            0            6
-        expr:          436            0          436
+        expr:          436            6          430
        array:            1            0            1
          var:           24            6           18
         func:           91            0           91
@@ -70,8 +70,8 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
 main                 : 3        2        3    frame      main                
-ns1                  : 4        2        1    instance   ns1 : class=namespace
-ns2                  : 5        2        1    instance   ns2 : class=namespace
+ns1                  : 4        2        3    instance   ns1 : class=namespace
+ns2                  : 5        2        2    instance   ns2 : class=namespace
 ?rv                  : 11       2        1    var        1 : type=int        
 ==========================================================================================================================
 
@@ -90,21 +90,21 @@ Global frame tree:
 
 Global Subject list:
 
-name=ns1, string=namespace@ns1, lvl=1, ref=1/2, parent=namespace, final=false, mbrs=3, frame=4(SF-ns1-0)
+name=ns1, string=namespace@ns1, lvl=1, ref=3/5, parent=namespace, final=false, mbrs=3, frame=4(SF-ns1-0)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 f1                   : DEFAULT                      0    1    func       (f1) : frame=main
-this                 : DEFAULT                      0    1    instance   ns1 : class=namespace
+this                 : DEFAULT                      0    3    instance   ns1 : class=namespace
 var1                 : DEFAULT                      0    1    var        1 : type=int
 ==========================================================================================================================
 
-name=ns2, string=namespace@ns2, lvl=1, ref=1/2, parent=namespace, final=false, mbrs=3, frame=5(SF-ns2-1)
+name=ns2, string=namespace@ns2, lvl=1, ref=2/4, parent=namespace, final=false, mbrs=3, frame=5(SF-ns2-1)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 f1                   : DEFAULT                      0    1    func       (f1) : frame=main
-this                 : DEFAULT                      0    1    instance   ns2 : class=namespace
+this                 : DEFAULT                      0    2    instance   ns2 : class=namespace
 var1                 : DEFAULT                      0    1    var        2 : type=int
 ==========================================================================================================================
 

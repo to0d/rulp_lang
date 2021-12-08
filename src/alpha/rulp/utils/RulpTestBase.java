@@ -22,6 +22,7 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IROut;
 import alpha.rulp.runtime.IRParser;
+import alpha.rulp.utils.RulpUtil.RResultList;
 import alpha.rulp.ximpl.optimize.CPSUtils;
 
 public class RulpTestBase {
@@ -141,12 +142,15 @@ public class RulpTestBase {
 	protected boolean _run_stmt(String inputStmt, Boolean expectError, String expectResult, String expectErrorMessage,
 			ArrayList<String> outLines, IRInterpreter interpreter) {
 
+		RResultList rsultList = null;
+
 		try {
 
 			out.clear();
 			outLines.add(inputStmt);
 
-			String result = RulpUtil.toString(interpreter.compute(inputStmt));
+			rsultList = RulpUtil.compute(interpreter, inputStmt);
+			String result = RulpUtil.toString(rsultList.results);
 			outLines.add(";=>" + result);
 
 			String output = out.getOut();
@@ -181,6 +185,16 @@ public class RulpTestBase {
 			if (expectErrorMessage != null && !expectErrorMessage.equals(e.getMessage())) {
 				e.printStackTrace();
 				return false;
+			}
+		} finally {
+
+			if (rsultList != null) {
+				try {
+					rsultList.free();
+				} catch (RException e1) {
+					e1.printStackTrace();
+					fail(e1.toString());
+				}
 			}
 		}
 
@@ -305,16 +319,17 @@ public class RulpTestBase {
 
 	protected void _test(String input, String expectResult, String expectOutput) {
 
+		RResultList rsultList = null;
 		try {
 
 			IRInterpreter interpreter = _getInterpreter();
 			out.clear();
 
-			List<IRObject> result = interpreter.compute(input);
+			rsultList = RulpUtil.compute(interpreter, input);
 			String output = out.getOut();
 
 			if (expectResult != null) {
-				assertEquals(String.format("input=%s", input), expectResult, RulpUtil.toString(result));
+				assertEquals(String.format("input=%s", input), expectResult, RulpUtil.toString(rsultList.results));
 			}
 
 			if (expectOutput != null) {
@@ -322,8 +337,20 @@ public class RulpTestBase {
 			}
 
 		} catch (Exception e) {
+
 			e.printStackTrace();
 			fail(e.toString());
+
+		} finally {
+
+			if (rsultList != null) {
+				try {
+					rsultList.free();
+				} catch (RException e1) {
+					e1.printStackTrace();
+					fail(e1.toString());
+				}
+			}
 		}
 	}
 
@@ -347,16 +374,17 @@ public class RulpTestBase {
 
 	protected void _test_match(String input, String expectResult, String expecFile) {
 
+		RResultList rsultList = null;
 		try {
 
 			IRInterpreter interpreter = _getInterpreter();
 			out.clear();
 
-			List<IRObject> result = interpreter.compute(input);
-			String output = out.getOut();
+			rsultList = RulpUtil.compute(interpreter, input);
 
+			String output = out.getOut();
 			if (expectResult != null) {
-				assertEquals(String.format("input=%s", input), expectResult, RulpUtil.toString(result));
+				assertEquals(String.format("input=%s", input), expectResult, RulpUtil.toString(rsultList.results));
 			}
 
 			if (expecFile != null) {
@@ -393,166 +421,178 @@ public class RulpTestBase {
 			}
 
 		} catch (Exception e) {
+
 			e.printStackTrace();
 			fail(e.toString());
-		}
-	}
 
-	protected void _test_script2() {
-		_test_script2(getCachePath() + ".rulp");
-	}
+		} finally {
 
-	protected void _test_script2(String scriptPath) {
-
-		String input = null;
-		String result = null;
-		String output = null;
-		Exception exception = null;
-
-		try {
-
-			IRInterpreter interpreter = _getInterpreter();
-			out.clear();
-
-			List<String> lines = FileUtil.openTxtFile(scriptPath);
-			int size = lines.size();
-
-			for (int index = 0; index < size; ++index) {
-
-				String line = lines.get(index);
-				if ((line = line.trim()).isEmpty() || line.startsWith(";;")) {
-					continue;
-				}
-
-				if (line.startsWith(";END")) {
-					return;
-				}
-
-				if (line.startsWith(";=>")) {
-
-					if (input == null) {
-						throw new RException("Input not found: " + scriptPath);
-					}
-
-					String expectResult = line.substring(";=>".length());
-					if (result == null) {
-
-						if (exception != null) {
-							exception.printStackTrace();
-						}
-
-						fail(String.format("no result found, line=%d, input=%s, expect=%s", index, input,
-								expectResult));
-					}
-
-					assertEquals(String.format("unexpect result, line=%d, input=%s", index, input), expectResult,
-							result);
-
-				} else if (line.trim().equals(";out:")) {
-
-					if (input == null) {
-						throw new RException("Input not found: " + scriptPath);
-					}
-
-					StringBuffer expectSb = new StringBuffer();
-
-					while (++index < size) {
-
-						String nextLine = lines.get(index);
-						if (nextLine.trim().equals(";eof")) {
-							break;
-						}
-
-						if (expectSb.length() > 0) {
-							expectSb.append('\n');
-						}
-						expectSb.append(nextLine);
-					}
-
-					if (output == null) {
-						if (exception != null) {
-							exception.printStackTrace();
-						}
-						fail(String.format("no output found, line=%d, input=%s, expect=%s", index, input, output));
-					}
-
-					while (output.endsWith("\n")) {
-						output = output.substring(0, output.length() - 1);
-					}
-
-					String expectOut = expectSb.toString();
-					assertEquals(String.format("unexpect out, line=%d, input=%s", index, input), expectOut, output);
-
-				} else if (line.trim().equals(";err:")) {
-
-					if (input == null) {
-						throw new RException("Input not found: " + scriptPath);
-					}
-
-					StringBuffer expectSb = new StringBuffer();
-
-					while (++index < size) {
-
-						String nextLine = lines.get(index);
-						if (nextLine.trim().equals(";eof")) {
-							break;
-						}
-
-						if (expectSb.length() > 0) {
-							expectSb.append('\n');
-						}
-
-						expectSb.append(nextLine);
-					}
-
-					String expectErr = expectSb.toString();
-					if (exception == null) {
-						fail(String.format("no exception found, line=%d, input=%s, expect=%s", index, input,
-								expectErr));
-					}
-
-					assertEquals(String.format("unexpect out, line=%d, input=%s", index, input), expectErr,
-							exception.getMessage());
-					exception = null;
-
-				} else {
-
-					if (exception != null) {
-						exception.printStackTrace();
-						fail("unexpect exception: " + exception.getMessage() + ", input=" + input);
-					}
-
-					input = line;
-					while ((index + 1) < size) {
-
-						String nextLine = lines.get(index + 1);
-						if (nextLine.trim().startsWith(";")) {
-							break;
-						}
-
-						input += "\n" + nextLine;
-						index++;
-					}
-
-					exception = null;
-					output = null;
-					result = null;
-
-					try {
-						out.clear();
-						result = RulpUtil.toString(interpreter.compute(input));
-						output = out.getOut();
-					} catch (Exception e) {
-						exception = e;
-					}
+			if (rsultList != null) {
+				try {
+					rsultList.free();
+				} catch (RException e1) {
+					e1.printStackTrace();
+					fail(e1.toString());
 				}
 			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail(String.format("error found in line: %s, file=%s", input, scriptPath));
 		}
 	}
+
+//	protected void _test_script2() {
+//		_test_script2(getCachePath() + ".rulp");
+//	}
+//
+//	protected void _test_script2(String scriptPath) {
+//
+//		String input = null;
+//		String result = null;
+//		String output = null;
+//		Exception exception = null;
+//
+//		try {
+//
+//			IRInterpreter interpreter = _getInterpreter();
+//			out.clear();
+//
+//			List<String> lines = FileUtil.openTxtFile(scriptPath);
+//			int size = lines.size();
+//
+//			for (int index = 0; index < size; ++index) {
+//
+//				String line = lines.get(index);
+//				if ((line = line.trim()).isEmpty() || line.startsWith(";;")) {
+//					continue;
+//				}
+//
+//				if (line.startsWith(";END")) {
+//					return;
+//				}
+//
+//				if (line.startsWith(";=>")) {
+//
+//					if (input == null) {
+//						throw new RException("Input not found: " + scriptPath);
+//					}
+//
+//					String expectResult = line.substring(";=>".length());
+//					if (result == null) {
+//
+//						if (exception != null) {
+//							exception.printStackTrace();
+//						}
+//
+//						fail(String.format("no result found, line=%d, input=%s, expect=%s", index, input,
+//								expectResult));
+//					}
+//
+//					assertEquals(String.format("unexpect result, line=%d, input=%s", index, input), expectResult,
+//							result);
+//
+//				} else if (line.trim().equals(";out:")) {
+//
+//					if (input == null) {
+//						throw new RException("Input not found: " + scriptPath);
+//					}
+//
+//					StringBuffer expectSb = new StringBuffer();
+//
+//					while (++index < size) {
+//
+//						String nextLine = lines.get(index);
+//						if (nextLine.trim().equals(";eof")) {
+//							break;
+//						}
+//
+//						if (expectSb.length() > 0) {
+//							expectSb.append('\n');
+//						}
+//						expectSb.append(nextLine);
+//					}
+//
+//					if (output == null) {
+//						if (exception != null) {
+//							exception.printStackTrace();
+//						}
+//						fail(String.format("no output found, line=%d, input=%s, expect=%s", index, input, output));
+//					}
+//
+//					while (output.endsWith("\n")) {
+//						output = output.substring(0, output.length() - 1);
+//					}
+//
+//					String expectOut = expectSb.toString();
+//					assertEquals(String.format("unexpect out, line=%d, input=%s", index, input), expectOut, output);
+//
+//				} else if (line.trim().equals(";err:")) {
+//
+//					if (input == null) {
+//						throw new RException("Input not found: " + scriptPath);
+//					}
+//
+//					StringBuffer expectSb = new StringBuffer();
+//
+//					while (++index < size) {
+//
+//						String nextLine = lines.get(index);
+//						if (nextLine.trim().equals(";eof")) {
+//							break;
+//						}
+//
+//						if (expectSb.length() > 0) {
+//							expectSb.append('\n');
+//						}
+//
+//						expectSb.append(nextLine);
+//					}
+//
+//					String expectErr = expectSb.toString();
+//					if (exception == null) {
+//						fail(String.format("no exception found, line=%d, input=%s, expect=%s", index, input,
+//								expectErr));
+//					}
+//
+//					assertEquals(String.format("unexpect out, line=%d, input=%s", index, input), expectErr,
+//							exception.getMessage());
+//					exception = null;
+//
+//				} else {
+//
+//					if (exception != null) {
+//						exception.printStackTrace();
+//						fail("unexpect exception: " + exception.getMessage() + ", input=" + input);
+//					}
+//
+//					input = line;
+//					while ((index + 1) < size) {
+//
+//						String nextLine = lines.get(index + 1);
+//						if (nextLine.trim().startsWith(";")) {
+//							break;
+//						}
+//
+//						input += "\n" + nextLine;
+//						index++;
+//					}
+//
+//					exception = null;
+//					output = null;
+//					result = null;
+//
+//					try {
+//						out.clear();
+//						result = RulpUtil.toString(interpreter.compute(input));
+//						output = out.getOut();
+//					} catch (Exception e) {
+//						exception = e;
+//					}
+//				}
+//			}
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			fail(String.format("error found in line: %s, file=%s", input, scriptPath));
+//		}
+//	}
 
 	protected String getCachePath() {
 

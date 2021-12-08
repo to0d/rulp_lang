@@ -18,6 +18,7 @@ import alpha.rulp.lang.IRBoolean;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRInstance;
+import alpha.rulp.lang.IRListener;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RError;
 import alpha.rulp.lang.RException;
@@ -26,6 +27,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IROut;
 import alpha.rulp.runtime.IRParser;
 import alpha.rulp.utils.RulpFactory;
+import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.error.RIException;
 
@@ -107,7 +109,12 @@ public class XRInterpreter implements IRInterpreter {
 	}
 
 	@Override
-	public List<IRObject> compute(String input) throws RException {
+	public void compute(String input) throws RException {
+		compute(input, null);
+	}
+
+	@Override
+	public void compute(String input, IRListener<IRObject> resultListener) throws RException {
 
 		IRParser _parser = this.getParser();
 		List<IRObject> objs;
@@ -118,13 +125,15 @@ public class XRInterpreter implements IRInterpreter {
 
 		try {
 
-			List<IRObject> rsts = new LinkedList<>();
-
 			for (IRObject obj : objs) {
-				rsts.add(compute(mainFrame, obj));
-			}
+				IRObject rst = compute(mainFrame, obj);
+				RulpUtil.incRef(rst);
 
-			return rsts;
+				if (resultListener != null) {
+					resultListener.doAction(rst);
+				}
+				RulpUtil.decRef(rst);
+			}
 
 		} catch (RIException e) {
 

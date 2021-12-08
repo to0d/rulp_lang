@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import alpha.rulp.lang.IRFrame;
+import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRInterpreter;
@@ -16,9 +17,17 @@ public class LoadUtil {
 
 	static Map<String, String> loadLineMap = new HashMap<>();
 
-	public static List<IRObject> loadRulp(IRInterpreter interpreter, String path, String charset) throws RException {
+	public static IRList loadRulp(IRInterpreter interpreter, String path, String charset) throws RException {
 		try {
-			return interpreter.compute(StringUtil.toOneLine(FileUtil.openTxtFile(path, charset)));
+
+			IRList rstList = RulpFactory.createVaryList();
+
+			interpreter.compute(StringUtil.toOneLine(FileUtil.openTxtFile(path, charset)), (rst) -> {
+				rstList.add(rst);
+			});
+
+			return rstList;
+
 		} catch (IOException e) {
 			throw new RException(e.toString());
 		}

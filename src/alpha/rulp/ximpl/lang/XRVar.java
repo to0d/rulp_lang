@@ -65,7 +65,7 @@ public class XRVar extends AbsRefObject implements IRVar {
 	public String asString() {
 
 		if (_asString == null) {
-			_asString = varName + ":\"" + value.asString() + "\"";
+			_asString = varName + ":\"" + value + "\"";
 		}
 
 		return _asString;

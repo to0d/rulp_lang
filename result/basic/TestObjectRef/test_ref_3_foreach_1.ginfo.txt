@@ -45,8 +45,8 @@ Object create count:
 --------------------------------------------------------------------------------------------------------------------------
         atom:          750            0          750
       string:           19            0           19
-        list:           10            0           10
-        expr:          429            0          429
+        list:           10            2            8
+        expr:          429            3          426
        array:            2            0            2
          var:           27            7           20
         func:           89            0           89
@@ -88,7 +88,7 @@ Global frame tree:
 
 Global Subject list:
 
-name=class1, string=class1, lvl=0, ref=1/1, parent=null, final=false, mbrs=1, frame=3(SF-class1-0)
+name=class1, string=class1, lvl=0, ref=1/3, parent=null, final=false, mbrs=1, frame=3(SF-class1-0)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

@@ -49,7 +49,7 @@ Object create count:
         atom:          789            0          789
       string:           31            0           31
         list:            6            0            6
-        expr:          457            0          457
+        expr:          457            8          449
        array:            1            0            1
          var:           30           13           17
         func:           92            0           92
@@ -66,7 +66,7 @@ Object create count:
 
 Global frame list: total=1
 
-id=2, name=main, lvl=2, ref=2/4, entry=9, pid=1(system), subject=main, search=[SF-ns1-0, main]
+id=2, name=main, lvl=2, ref=2/5, entry=9, pid=1(system), subject=main, search=[SF-ns1-0, main]
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ root                 : 1        2        0    frame      root
 system               : 2        2        0    frame      system              
 main                 : 3        2        2    frame      main                
 var1                 : 4        2        1    var        1 : type=int        
-ns1                  : 5        2        1    instance   ns1 : class=namespace
+ns1                  : 5        2        5    instance   ns1 : class=namespace
 var2                 : 9        2        1    var        3 : type=int        
 fun1                 : 10       2        1    func       (fun1) : frame=main 
 fun2                 : 11       2        1    func       (fun2) : frame=main 
@@ -93,11 +93,11 @@ Global frame tree:
 
 Global Subject list:
 
-name=ns1, string=namespace@ns1, lvl=1, ref=1/2, parent=namespace, final=false, mbrs=1, frame=5(SF-ns1-0)
+name=ns1, string=namespace@ns1, lvl=1, ref=5/7, parent=namespace, final=false, mbrs=1, frame=5(SF-ns1-0)
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-this                 : DEFAULT                      0    1    instance   ns1 : class=namespace
+this                 : DEFAULT                      0    5    instance   ns1 : class=namespace
 ==========================================================================================================================
 
 

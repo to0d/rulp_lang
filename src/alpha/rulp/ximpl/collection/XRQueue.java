@@ -365,7 +365,7 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 		return elementList.size();
 	}
 
-	public IRList toList() {
+	public IRList toList() throws RException {
 		return RulpFactory.createList(elementList);
 	}
 }

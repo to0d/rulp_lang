@@ -18,7 +18,7 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpUtil;
 
-public abstract class AbsRList extends AbsAtomObject implements IRList {
+public abstract class AbsRList extends AbsRefObject implements IRList {
 
 	protected String name;
 

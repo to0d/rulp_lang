@@ -12,5 +12,5 @@
 Invalid dim: -1
 at _$fun$_size-of: (size-of-array ?arr ?dim)
 at _$fun$_size-of: (return (size-of-array ?arr ?dim))
-at main: (size-of {{a, b, c}, x} -1)
+at main: (size-of {{a,b,c},x} -1)
 ;eof

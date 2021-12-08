@@ -76,7 +76,7 @@
 ;;;
 
 (rulp-object-count frame)
-;;;
+;=>1
 
 (rulp-object-count instance)
-;;;
+;=>0

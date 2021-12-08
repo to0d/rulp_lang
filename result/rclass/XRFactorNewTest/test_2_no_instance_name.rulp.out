@@ -7,5 +7,5 @@
 (do 
     (defvar o2 (new class1))
 )
-;=>&o2
+;=>nil
 

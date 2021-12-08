@@ -15,10 +15,11 @@ import java.util.Iterator;
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
-import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.utils.RulpUtil;
 
-public class XRListBuilderIterator<T> extends AbsRList implements IRList, IRExpr {
+public class XRListBuilderIterator<T> extends AbsRListIterator implements IRList, IRExpr {
 
 	public static interface IRObjectBuidler<T> {
 		public IRObject get(T v);
@@ -26,13 +27,9 @@ public class XRListBuilderIterator<T> extends AbsRList implements IRList, IRExpr
 
 	protected IRObjectBuidler<T> builder;
 
-	protected ArrayList<IRObject> elements = null;
-
 	protected Iterator<T> inputIterator;
 
 	protected int scanSize = 0;
-
-	protected int size = -1;
 
 	public XRListBuilderIterator(Iterator<T> iter, IRObjectBuidler<T> builder, RType type, String name) {
 		super(type, name);
@@ -40,7 +37,8 @@ public class XRListBuilderIterator<T> extends AbsRList implements IRList, IRExpr
 		this.builder = builder;
 	}
 
-	protected boolean _scanTo(int toIndex) {
+	@Override
+	protected boolean _scanTo(int toIndex) throws RException {
 
 		if (size != -1) {
 			return toIndex < size;
@@ -60,6 +58,7 @@ public class XRListBuilderIterator<T> extends AbsRList implements IRList, IRExpr
 			}
 
 			elements.add(obj);
+			RulpUtil.incRef(obj);
 			++scanSize;
 		}
 
@@ -67,45 +66,13 @@ public class XRListBuilderIterator<T> extends AbsRList implements IRList, IRExpr
 	}
 
 	@Override
-	public IRObject get(int index) {
-
-		_scanTo(index);
-
-		if (size == -1) {
-			return elements.get(index);
-		}
-
-		return (size == -1 || index < size) ? elements.get(index) : null;
+	public void add(IRObject obj) throws RException {
+		throw new RException("Can't add object to const list: " + obj);
 	}
 
 	@Override
-	public boolean isEarly() {
-		return false;
-	}
-
-	@Override
-	public boolean isEmpty() {
-		_scanTo(0);
-		return size == 0;
-	}
-
-	@Override
-	public IRIterator<IRObject> listIterator(int fromIndex) {
-
-		return new IRIterator<IRObject>() {
-
-			int index = fromIndex;
-
-			@Override
-			public boolean hasNext() {
-				return _scanTo(index);
-			}
-
-			@Override
-			public IRObject next() {
-				return get(index++);
-			}
-		};
+	public boolean isConst() {
+		return true;
 	}
 
 	@Override

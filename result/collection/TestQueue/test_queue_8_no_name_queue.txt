@@ -52,7 +52,7 @@ Object create count:
         atom:          755            0          755
       string:           20            0           20
         list:            6            0            6
-        expr:          444            0          444
+        expr:          444           18          426
        array:            1            0            1
          var:           31           12           19
         func:           99            5           94
@@ -60,7 +60,7 @@ Object create count:
        macro:            1            0            1
     instance:            4            2            2
        class:            4            0            4
-      member:          144            8          136
+      member:          144           15          129
        frame:           24           22            2
  interpreter:            1            0
   frameEntry:          205            0

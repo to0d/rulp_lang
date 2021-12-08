@@ -8,7 +8,7 @@
 /* redistribute it under certain conditions.         */
 
 package alpha.rulp.ximpl.factor;
-
+import static alpha.rulp.lang.Constant.*;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
@@ -51,11 +51,10 @@ public class XRFactorDoWhenVarChanged extends AbsRFactorAdapter implements IRFac
 		}
 
 		var.addVarListener((_var, _old, _new) -> {
-			IRList newArgs = RulpFactory.createList(fun, var, _old, _new);
-			RuntimeUtil.computeCallable(fun, newArgs, interpreter, frame);
+			RuntimeUtil.computeCallable(fun, RulpFactory.createNativeList(fun, var, _old, _new), interpreter, frame);
 		});
 
-		return fun;
+		return O_Nil;
 	}
 
 	@Override
