@@ -1,0 +1,20 @@
+(str-split "" " ")
+;=>
+
+(str-split "abc" " ")
+;=>
+
+(str-split "abc " " ")
+;=>
+
+(str-split "abc  def" " ")
+;=>
+
+(str-split " abc|de f" " |")
+;=>
+
+(str-split "abc\ndef" "\n")
+;=>
+
+(str-split "abc\n\ndef" "\n")
+;=>

@@ -357,4 +357,10 @@ public class XRParserTest extends RulpTestBase {
 		_test_parse_line("{'(a b c),'(x y),z}", "{'(a b c),'(x y),z}");
 		_test_parse_line("{{a,b,c},{x,y},z}", "{{a,b,c},{x,y},z}");
 	}
+
+	@Test
+	public void test_g_escape_string() {
+		_test_parse_line("\"abc\\ndef\"", "\"abc\\\\ndef\"");
+		_test_parse_line("abc\ndef", "abc def");
+	}
 }

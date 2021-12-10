@@ -1,0 +1,21 @@
+(str-split "" " ")
+;=>'()
+
+(str-split "abc" " ")
+;=>'("abc")
+
+(str-split "abc " " ")
+;=>'("abc")
+
+(str-split "abc  def" " ")
+;=>'("abc" "def")
+
+(str-split " abc|de f" " |")
+;=>'("abc" "de" "f")
+
+(str-split "abc\ndef" "\n")
+;=>'("abc" "def")
+
+(str-split "abc\n\ndef" "\n")
+;=>'("abc" "def")
+

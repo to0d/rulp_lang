@@ -2,60 +2,60 @@ id=1, name=system, lvl=1, ref=0/0, entry=26, pid=0(root), subject=system
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-parent               : -189     1        0    frame      root                
-use                  : -181     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=system
-type#stack           : -180     1        0    atom       type#stack          
-stack                : -179     1        1    class      stack               
-type#queue           : -178     1        0    atom       type#queue          
-queue                : -177     1        1    class      queue               
-type#map             : -176     1        0    atom       type#map            
-map                  : -175     1        1    class      map                 
-clear                : -174     1        1    funcList   '((clear type#map) (clear type#queue) (clear type#set) (clear type#stack)) : frame=null, type=list
+parent               : -190     1        0    frame      root                
+use                  : -182     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=system
+type#stack           : -181     1        0    atom       type#stack          
+stack                : -180     1        1    class      stack               
+type#queue           : -179     1        0    atom       type#queue          
+queue                : -178     1        1    class      queue               
+type#map             : -177     1        0    atom       type#map            
+map                  : -176     1        1    class      map                 
+clear                : -175     1        1    funcList   '((clear type#map) (clear type#queue) (clear type#set) (clear type#stack)) : frame=null, type=list
                                          1    func       (clear type#set) : frame=system
                                          1    func       (clear type#map) : frame=system
                                          1    func       (clear type#queue) : frame=system
                                          1    func       (clear type#stack) : frame=system
-type#set             : -173     1        0    atom       type#set            
-set                  : -172     1        1    class      set                 
-ls-print             : -171     1        1    funcList   '((ls-print nil nil) (ls-print nil)) : frame=null, type=list
+type#set             : -174     1        0    atom       type#set            
+set                  : -173     1        1    class      set                 
+ls-print             : -172     1        1    funcList   '((ls-print nil nil) (ls-print nil)) : frame=null, type=list
                                          1    func       (ls-print nil nil) : frame=system
                                          1    func       (ls-print nil) : frame=system
-print-list           : -170     1        1    macro      print-list          
-cmp                  : -169     1        1    func       (cmp nil nil) : frame=system
-equal                : -168     1        1    funcList   '((equal nil nil) (equal string string)) : frame=null, type=list
+print-list           : -171     1        1    macro      print-list          
+cmp                  : -170     1        1    func       (cmp nil nil) : frame=system
+equal                : -169     1        1    funcList   '((equal nil nil) (equal string string)) : frame=null, type=list
                                          1    func       (equal nil nil) : frame=system
                                          1    func       (equal string string) : frame=system
-length-of            : -167     1        1    funcList   '((length-of blob) (length-of string)) : frame=null, type=list
+length-of            : -168     1        1    funcList   '((length-of blob) (length-of string)) : frame=null, type=list
                                          1    func       (length-of string) : frame=system
                                          1    func       (length-of blob) : frame=system
-get                  : -166     1        1    funcList   '((get array int int) (get array int) (get list int) (get type#queue int)) : frame=null, type=list
+get                  : -167     1        1    funcList   '((get array int int) (get array int) (get list int) (get type#queue int)) : frame=null, type=list
                                          1    func       (get list int) : frame=system
                                          1    func       (get array int) : frame=system
                                          1    func       (get array int int) : frame=system
                                          1    func       (get type#queue int) : frame=system
-add-all              : -165     1        1    func       (add-all list list) : frame=system
-add                  : -164     1        1    funcList   '((add array nil nil nil) (add array nil nil) (add array nil) (add list nil nil nil) (add list nil nil) (add list nil)) : frame=null, type=list
+add-all              : -166     1        1    func       (add-all list list) : frame=system
+add                  : -165     1        1    funcList   '((add array nil nil nil) (add array nil nil) (add array nil) (add list nil nil nil) (add list nil nil) (add list nil)) : frame=null, type=list
                                          1    func       (add list nil) : frame=system
                                          1    func       (add list nil nil) : frame=system
                                          1    func       (add list nil nil nil) : frame=system
                                          1    func       (add array nil) : frame=system
                                          1    func       (add array nil nil) : frame=system
                                          1    func       (add array nil nil nil) : frame=system
-to-array             : -163     1        1    func       (to-array list) : frame=system
-to-list              : -162     1        1    funcList   '((to-list array) (to-list list) (to-list type#queue) (to-list type#set) (to-list type#stack)) : frame=null, type=list
+to-array             : -164     1        1    func       (to-array list) : frame=system
+to-list              : -163     1        1    funcList   '((to-list array) (to-list list) (to-list type#queue) (to-list type#set) (to-list type#stack)) : frame=null, type=list
                                          1    func       (to-list list) : frame=system
                                          1    func       (to-list array) : frame=system
                                          1    func       (to-list type#set) : frame=system
                                          1    func       (to-list type#queue) : frame=system
                                          1    func       (to-list type#stack) : frame=system
-is-empty             : -161     1        1    funcList   '((is-empty array) (is-empty list) (is-empty type#map) (is-empty type#queue) (is-empty type#set) (is-empty type#stack)) : frame=null, type=list
+is-empty             : -162     1        1    funcList   '((is-empty array) (is-empty list) (is-empty type#map) (is-empty type#queue) (is-empty type#set) (is-empty type#stack)) : frame=null, type=list
                                          1    func       (is-empty list) : frame=system
                                          1    func       (is-empty array) : frame=system
                                          1    func       (is-empty type#set) : frame=system
                                          1    func       (is-empty type#map) : frame=system
                                          1    func       (is-empty type#queue) : frame=system
                                          1    func       (is-empty type#stack) : frame=system
-size-of              : -160     1        1    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#map) (size-of type#queue) (size-of type#set) (size-of type#stack)) : frame=null, type=list
+size-of              : -161     1        1    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#map) (size-of type#queue) (size-of type#set) (size-of type#stack)) : frame=null, type=list
                                          1    func       (size-of list) : frame=system
                                          1    func       (size-of array) : frame=system
                                          1    func       (size-of array int) : frame=system
@@ -63,7 +63,7 @@ size-of              : -160     1        1    funcList   '((size-of array int) (
                                          1    func       (size-of type#map) : frame=system
                                          1    func       (size-of type#queue) : frame=system
                                          1    func       (size-of type#stack) : frame=system
-?load-paths          : -159     1        1    var        '() : type=list     
+?load-paths          : -160     1        1    var        '() : type=list     
 system               : -3       1        0    frame      system              
 root                 : -2       1        0    frame      root                
 ==========================================================================================================================

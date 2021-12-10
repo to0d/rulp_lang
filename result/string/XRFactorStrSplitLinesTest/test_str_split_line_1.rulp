@@ -1,0 +1,23 @@
+(str-split-line "")
+;=>
+
+(str-split-line "abc")
+;=>
+
+(str-split-line "abc " )
+;=>
+
+(str-split-line "abc  def")
+;=>
+
+(str-split-line "abc\ndef")
+;=>
+
+(str-split-line "abc\n\ndef")
+;=>
+
+(str-split-line "\nabc\n\ndef")
+;=>
+
+(str-split-line "\nabc\n\ndef\n")
+;=>
