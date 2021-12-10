@@ -6,7 +6,6 @@ import static alpha.rulp.lang.Constant.F_MBR_UNINIT;
 import java.util.ArrayList;
 
 import alpha.rulp.lang.IRClass;
-import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRMember;

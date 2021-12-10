@@ -9,10 +9,7 @@
 
 package alpha.rulp.runtime;
 
-import java.util.List;
-
 import alpha.rulp.lang.IRFrame;
-import alpha.rulp.lang.IRListener;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 
@@ -22,9 +19,9 @@ public interface IRInterpreter {
 
 	public IRObject compute(IRFrame frame, IRObject obj) throws RException;
 
-	public void compute(String input, IRListener<IRObject> resultListener) throws RException;
-
 	public void compute(String input) throws RException;
+
+	public void compute(String input, IRListener1<IRObject> resultListener) throws RException;
 
 	public int getCallId();
 

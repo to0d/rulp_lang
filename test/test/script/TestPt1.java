@@ -3,8 +3,6 @@ package test.script;
 import java.io.IOException;
 
 import alpha.rulp.lang.RException;
-import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.utils.RulpFactory;
 
 public class TestPt1 {
 

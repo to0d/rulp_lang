@@ -134,11 +134,11 @@ import alpha.rulp.ximpl.lang.XRDouble;
 import alpha.rulp.ximpl.lang.XRFloat;
 import alpha.rulp.ximpl.lang.XRInteger;
 import alpha.rulp.ximpl.lang.XRIteratorAdatper;
-import alpha.rulp.ximpl.lang.XRListNative;
 import alpha.rulp.ximpl.lang.XRListBuilderIterator;
 import alpha.rulp.ximpl.lang.XRListConst;
 import alpha.rulp.ximpl.lang.XRListIterator;
 import alpha.rulp.ximpl.lang.XRListIteratorR;
+import alpha.rulp.ximpl.lang.XRListNative;
 import alpha.rulp.ximpl.lang.XRListVary;
 import alpha.rulp.ximpl.lang.XRLong;
 import alpha.rulp.ximpl.lang.XRMacro;
@@ -756,11 +756,6 @@ public final class RulpFactory {
 		RType.LIST.incCreateCount();
 		return new XRListConst(elements, RType.LIST, null, false);
 	}
-	
-	public static IRList createNativeList(IRObject... elements) throws RException {
-		RType.LIST.incCreateCount();
-		return new XRListNative(elements, RType.LIST, null, false);
-	}
 
 	public static IRList createList(Iterator<? extends IRObject> iter) {
 
@@ -848,6 +843,16 @@ public final class RulpFactory {
 	public static IRNative createNative(Object obj) {
 		RType.NATIVE.incCreateCount();
 		return new XRNative(obj);
+	}
+
+	public static IRList createNativeList(Collection<? extends IRObject> elements) throws RException {
+		RType.LIST.incCreateCount();
+		return new XRListNative(RulpUtil.toFixArray(elements), RType.LIST, null, false);
+	}
+
+	public static IRList createNativeList(IRObject... elements) throws RException {
+		RType.LIST.incCreateCount();
+		return new XRListNative(elements, RType.LIST, null, false);
 	}
 
 	public static IRAtom createNil() {

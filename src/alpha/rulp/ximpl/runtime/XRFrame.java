@@ -26,7 +26,6 @@ import alpha.rulp.lang.IRClass;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
-import alpha.rulp.lang.IRListener;
 import alpha.rulp.lang.IRMember;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRSubject;
@@ -34,6 +33,7 @@ import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.runtime.IRListener1;
 import alpha.rulp.runtime.IRNameSpace;
 import alpha.rulp.runtime.IRThreadContext;
 import alpha.rulp.runtime.ISubjectLoader;
@@ -64,7 +64,7 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 
 	protected String frameName;
 
-	protected List<IRListener<IRFrame>> frameReleaeListenerList = null;
+	protected List<IRListener1<IRFrame>> frameReleaeListenerList = null;
 
 	protected IRFrame parentFrame = null;
 
@@ -159,7 +159,7 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 	}
 
 	@Override
-	public void addFrameReleaseListener(IRListener<IRFrame> listener) {
+	public void addFrameReleaseListener(IRListener1<IRFrame> listener) {
 
 		if (frameReleaeListenerList == null) {
 			frameReleaeListenerList = new LinkedList<>();
@@ -442,7 +442,7 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 	public void release() throws RException {
 
 		if (frameReleaeListenerList != null) {
-			for (IRListener<IRFrame> listener : frameReleaeListenerList) {
+			for (IRListener1<IRFrame> listener : frameReleaeListenerList) {
 				listener.doAction(this);
 			}
 		}

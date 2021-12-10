@@ -12,7 +12,6 @@ package alpha.rulp.ximpl.io;
 import static alpha.rulp.lang.Constant.A_LOAD_PATHS;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import alpha.rulp.lang.IRFrame;

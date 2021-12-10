@@ -13,15 +13,15 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import alpha.rulp.lang.IRListener;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.runtime.IRListener1;
 
 public abstract class AbsRefObject implements IRObject {
 
 	protected int max_ref = 0;
 
-	protected List<IRListener<IRObject>> objDeletedListenerList = null;
+	protected List<IRListener1<IRObject>> objDeletedListenerList = null;
 
 	protected int ref = 0;
 
@@ -33,10 +33,10 @@ public abstract class AbsRefObject implements IRObject {
 
 		if (objDeletedListenerList != null) {
 
-			ArrayList<IRListener<IRObject>> _tmpListeners = new ArrayList<>(objDeletedListenerList);
+			ArrayList<IRListener1<IRObject>> _tmpListeners = new ArrayList<>(objDeletedListenerList);
 			objDeletedListenerList = null;
 
-			for (IRListener<IRObject> listener : _tmpListeners) {
+			for (IRListener1<IRObject> listener : _tmpListeners) {
 				listener.doAction(this);
 			}
 
@@ -46,7 +46,7 @@ public abstract class AbsRefObject implements IRObject {
 	}
 
 	@Override
-	public void addObjectDeletedListener(IRListener<IRObject> listener) {
+	public void addObjectDeletedListener(IRListener1<IRObject> listener) {
 
 		if (objDeletedListenerList == null) {
 			objDeletedListenerList = new LinkedList<>();

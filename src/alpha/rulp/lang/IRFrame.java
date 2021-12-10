@@ -11,11 +11,12 @@ package alpha.rulp.lang;
 
 import java.util.List;
 
+import alpha.rulp.runtime.IRListener1;
 import alpha.rulp.runtime.IRThreadContext;
 
 public interface IRFrame extends IRObject, IRSubject {
 
-	public void addFrameReleaseListener(IRListener<IRFrame> listener);
+	public void addFrameReleaseListener(IRListener1<IRFrame> listener);
 
 	public void addSearchFrame(IRFrame frame);
 

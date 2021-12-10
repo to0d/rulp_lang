@@ -9,7 +9,6 @@
 
 package alpha.rulp.ximpl.runtime;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -18,12 +17,12 @@ import alpha.rulp.lang.IRBoolean;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRInstance;
-import alpha.rulp.lang.IRListener;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RError;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.runtime.IRListener1;
 import alpha.rulp.runtime.IROut;
 import alpha.rulp.runtime.IRParser;
 import alpha.rulp.utils.RulpFactory;
@@ -114,7 +113,7 @@ public class XRInterpreter implements IRInterpreter {
 	}
 
 	@Override
-	public void compute(String input, IRListener<IRObject> resultListener) throws RException {
+	public void compute(String input, IRListener1<IRObject> resultListener) throws RException {
 
 		IRParser _parser = this.getParser();
 		List<IRObject> objs;

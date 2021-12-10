@@ -1,13 +1,13 @@
 package alpha.rulp.ximpl.lang;
 
-import alpha.rulp.lang.IRListener;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.runtime.IRListener1;
 
 public abstract class AbsAtomObject implements IRObject {
 
 	@Override
-	public void addObjectDeletedListener(IRListener<IRObject> listener) {
+	public void addObjectDeletedListener(IRListener1<IRObject> listener) {
 
 	}
 

@@ -9,9 +9,11 @@
 
 package alpha.rulp.lang;
 
+import alpha.rulp.runtime.IRListener1;
+
 public interface IRObject {
 
-	public void addObjectDeletedListener(IRListener<IRObject> listener);
+	public void addObjectDeletedListener(IRListener1<IRObject> listener);
 
 	public String asString();
 
