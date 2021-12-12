@@ -132,6 +132,7 @@ root::str-length
 root::str-match
 root::str-replace
 root::str-split
+root::str-split-line
 root::str-start-with
 root::str-substr
 root::str-trim

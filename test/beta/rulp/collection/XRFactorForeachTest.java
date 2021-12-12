@@ -7,7 +7,7 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorForeachTest extends RulpTestBase {
 
 	@Test
-	void test1() {
+	void test_foreach_1() {
 
 		_setup();
 		_test("(foreach (?a '(1 2 3)) (+ ?a 1))", "'(2 3 4)");
@@ -19,7 +19,7 @@ class XRFactorForeachTest extends RulpTestBase {
 	}
 
 	@Test
-	void test2() {
+	void test_foreach_2() {
 
 		_setup();
 		_test("(defun fun1 () (return '(1 2 3)))", "fun1");
