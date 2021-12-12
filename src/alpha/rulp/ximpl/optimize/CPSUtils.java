@@ -451,7 +451,12 @@ public class CPSUtils {
 						topNode.parrent.elements.set(topNode.indexOfParent, rst);
 					}
 				} else {
-					return rst;
+
+					if (rst.getType() == RType.EXPR) {
+						cpsQueue.addLast(new CpsNode(null, -1, (IRExpr) rst));
+					} else {
+						return rst;
+					}
 				}
 			}
 		}

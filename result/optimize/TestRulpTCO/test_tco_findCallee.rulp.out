@@ -1,24 +1,27 @@
 (findCallee fact)
-;=>'()
+;=>'("*" "-" "fact")
 
 (findCallee fact2)
-;=>'()
+;=>'("+" "fact2")
 
 (findCallee fact3)
-;=>'()
+;=>'("-" "fact3")
 
 (findCallee fun1a)
-;=>'()
+;=>'("+" "-" "fun1a")
 
 (findCallee fun1b)
-;=>'()
+;=>'("+" "-" "fun1b")
 
 (findCallee fun2)
-;=>'()
+;=>'("+" "-" "/" "fun2")
 
 (findCallee fun4a)
 ;=>'("+" "-" "fun4b")
 
 (findCallee fun4b)
 ;=>'("+" "-" "fun4a")
+
+(findCallee fun5)
+;=>'("+" "fun5")
 

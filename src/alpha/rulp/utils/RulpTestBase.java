@@ -290,6 +290,7 @@ public class RulpTestBase {
 			e.printStackTrace();
 			fail(String.format("error found: %s, file=%s", e.toString(), inputScriptPath));
 		}
+
 	}
 
 	protected void _setup() {
@@ -303,16 +304,16 @@ public class RulpTestBase {
 	}
 
 	protected void _test(String input) {
-		System.out.println(input);
-		System.out.println(";;;");
-		System.out.println();
+//		System.out.println(input);
+//		System.out.println(";;;");
+//		System.out.println();
 		_test(input, null, null);
 	}
 
 	protected void _test(String input, String expectResult) {
-		System.out.println(input);
-		System.out.println(";=>");
-		System.out.println();
+//		System.out.println(input);
+//		System.out.println(";=>");
+//		System.out.println();
 		_test(input, expectResult, "");
 	}
 
@@ -366,8 +367,10 @@ public class RulpTestBase {
 			interpreter.compute(input);
 			fail("Should fail: " + input);
 
-		} catch (RException | IOException e) {
+		} catch (Exception e) {
 			assertEquals(String.format("input=%s", input), expectError, e.getMessage());
+		} catch (Error e) {
+			assertEquals(String.format("input=%s", input), expectError, e.toString());
 		}
 	}
 

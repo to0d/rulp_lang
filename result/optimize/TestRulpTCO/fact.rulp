@@ -14,20 +14,15 @@
     )
 )
 
-;; fact(n) = fact(n-1) = 0 other
-;;           0             when n <= 1
-;;           1             when n <= 0
+
 (defun fact2 (?v)
     (do
-        (if (<= ?v 0)(return 1))
-        (if (<= ?v 1)(return 0))
-        (return (fact2 (- ?v 1)))
+        (if (<= ?v 1)(return 1))
+        (if (> ?v 500)(return ?v))
+        (return (fact2 (+ ?v 1)))
     )
 )
 
-;; fact(n) = fact(fact(n-1)) other
-;;           0               when n <= 1
-;;           1               when n <= 0
 (defun fact3 (?v)
     (do
         (if (<= ?v 0)(return 1))

@@ -22,3 +22,5 @@
 (findCallee fun4b)
 ;=>
 
+(findCallee fun5)
+;=>

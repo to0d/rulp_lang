@@ -42,8 +42,12 @@ public class TestRulpTCO extends RulpTestBase {
 		return ip;
 	}
 
-	protected void _load_fact() {
-		_test("(setq ?op-cps true)");
+	protected void _load_fact(boolean enableCPS) {
+
+		if (enableCPS) {
+			_test("(setq ?op-cps true)");
+		}
+
 		_test("(load \"result/optimize/TestRulpTCO/fact.rulp\")");
 	}
 
@@ -76,7 +80,7 @@ public class TestRulpTCO extends RulpTestBase {
 	public void test_is_stable_fun_1() {
 
 		_setup();
-		_load_fact();
+		_load_fact(true);
 		_test_is_stable_fun("fact", true);
 		_test_is_stable_fun("fact2", true);
 		_test_is_stable_fun("fact3", true);
@@ -86,24 +90,43 @@ public class TestRulpTCO extends RulpTestBase {
 		_test_is_stable_fun("fun3", true);
 		_test_is_stable_fun("fun4a", true);
 		_test_is_stable_fun("fun4b", true);
-
+		_test_is_stable_fun("fun5", true);
 	}
 
 	@Test
 	public void test_tco_fact() {
 
 		_setup();
-		_load_fact();
+		_load_fact(true);
 		_run_script();
 		_gInfo();
 		assertEquals(60, CPSUtils.getCPSCount());
 	}
 
 	@Test
+	public void test_tco_fact2_a() {
+
+		_setup();
+		_load_fact(true);
+		_test("(fact2 2)", "501");
+		_gInfo();
+		assertEquals(1996, CPSUtils.getCPSCount());
+	}
+
+	@Test
+	public void test_tco_fact2_b() {
+
+		_setup();
+		_load_fact(false);
+		_test_error("(fact2 2)", "java.lang.StackOverflowError");
+		_gInfo();
+	}
+
+	@Test
 	public void test_tco_findCallee() {
 
 		_setup();
-		_load_fact();
+		_load_fact(false);
 		_run_script();
 	}
 
@@ -111,7 +134,7 @@ public class TestRulpTCO extends RulpTestBase {
 	public void test_tco_fun1a() {
 
 		_setup();
-		_load_fact();
+		_load_fact(true);
 		_run_script();
 		_gInfo();
 		assertEquals(6636, CPSUtils.getCPSCount());
@@ -121,7 +144,7 @@ public class TestRulpTCO extends RulpTestBase {
 	public void test_tco_fun1b() {
 
 		_setup();
-		_load_fact();
+		_load_fact(true);
 		_run_script();
 		_gInfo();
 		assertEquals(6636, CPSUtils.getCPSCount());
@@ -131,7 +154,7 @@ public class TestRulpTCO extends RulpTestBase {
 	public void test_tco_fun2() {
 
 		_setup();
-		_load_fact();
+		_load_fact(true);
 		_run_script();
 		_gInfo();
 		assertEquals(252432, CPSUtils.getCPSCount());
@@ -149,7 +172,7 @@ public class TestRulpTCO extends RulpTestBase {
 
 		// cc: compute in cache
 
-		_load_fact();
+		_load_fact(true);
 		_test("(cc (fun2 0))", "0");
 		_test("(cc (fun2 1))", "1");
 		_test("(cc (fun2 2))", "3");
@@ -203,9 +226,9 @@ public class TestRulpTCO extends RulpTestBase {
 	public void test_tco_str_1() {
 
 		_setup();
-		_load_fact();
+		_load_fact(true);
 		_run_script();
 		_gInfo();
-		assertEquals(0, CPSUtils.getCPSCount());
+		assertEquals(40, CPSUtils.getCPSCount());
 	}
 }
