@@ -45,8 +45,7 @@ public class XRFactorDelete extends AbsRFactorAdapter implements IRFactor {
 
 		IRObject obj = oldEntry.getObject();
 		if (obj.getType() == RType.INSTANCE && !obj.isDeleted()) {
-			IRInstance instance = RulpUtil.asInstance(obj);
-			instance.delete(interpreter, frame);
+			RulpUtil.asInstance(obj).delete(interpreter, frame);
 		}
 
 		return O_Nil;

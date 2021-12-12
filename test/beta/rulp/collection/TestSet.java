@@ -113,8 +113,8 @@ public class TestSet extends RulpTestBase {
 
 		_test("(delete s1)", "nil", "");
 		_test("?x", "0");
-		_test("(rulp-object-count frame)", "5");
-		_test("(rulp-object-count instance)", "3");
+		_test("(rulp-object-count frame)", "4");
+		_test("(rulp-object-count instance)", "2");
 		_gInfo("result/collection/TestSet/test_set_8_ref_a_ginfo_2.txt");
 	}
 

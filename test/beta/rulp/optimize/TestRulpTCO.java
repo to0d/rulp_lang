@@ -42,6 +42,11 @@ public class TestRulpTCO extends RulpTestBase {
 		return ip;
 	}
 
+	protected void _load_fact() {
+		_test("(setq ?op-cps true)");
+		_test("(load \"result/optimize/TestRulpTCO/fact.rulp\")");
+	}
+
 	private void _test_is_stable_fun(String funName, boolean expectStable) {
 
 		try {
@@ -63,17 +68,15 @@ public class TestRulpTCO extends RulpTestBase {
 	public void test_fun_1() {
 
 		_setup();
-
 		_test("(defun fun1 () ())");
 		_test("(fun1)", "nil");
-
 	}
 
 	@Test
 	public void test_is_stable_fun_1() {
 
 		_setup();
-		_test("(load \"result/optimize/TestRulpTCO/test_tco_fact.rulp\")");
+		_load_fact();
 		_test_is_stable_fun("fact", true);
 		_test_is_stable_fun("fact2", true);
 		_test_is_stable_fun("fact3", true);
@@ -90,99 +93,47 @@ public class TestRulpTCO extends RulpTestBase {
 	public void test_tco_fact() {
 
 		_setup();
-
-		_test("(setq ?op-cps true)");
-
-		// fact(n) = n*fact(n-1)
-		_test("(load \"result/optimize/TestRulpTCO/test_tco_fact.rulp\")");
-
-		_test("(fact 1)", "1");
-		_test("(fact 2)", "2");
-		_test("(fact 3)", "6");
-		assertEquals(36, CPSUtils.getCPSCount());
-
-		_test("(fact 4)", "24");
-		assertEquals(60, CPSUtils.getCPSCount());
-
+		_load_fact();
+		_run_script();
 		_gInfo();
+		assertEquals(60, CPSUtils.getCPSCount());
 	}
 
 	@Test
 	public void test_tco_findCallee() {
 
 		_setup();
-
-		_test("(load \"result/optimize/TestRulpTCO/test_tco_fact.rulp\")");
-		_test("(findCallee fact)", "'(\"*\" \"-\" \"fact\")");
-		_test("(findCallee fact2)", "'(\"-\" \"fact2\")");
-		_test("(findCallee fact3)", "'(\"-\" \"fact3\")");
-		_test("(findCallee fun1a)", "'(\"+\" \"-\" \"fun1a\")");
-		_test("(findCallee fun1b)", "'(\"+\" \"-\" \"fun1b\")");
-		_test("(findCallee fun2)", "'(\"+\" \"-\" \"/\" \"fun2\")");
-		_test("(findCallee fun4a)", "'(\"+\" \"-\" \"fun4b\")");
-		_test("(findCallee fun4b)", "'(\"+\" \"-\" \"fun4a\")");
+		_load_fact();
+		_run_script();
 	}
 
 	@Test
 	public void test_tco_fun1a() {
 
 		_setup();
-
-		_test("(setq ?op-cps true)");
-
-		// fun(n) = n*(n+1)/2
-		_test("(load \"result/optimize/TestRulpTCO/test_tco_fact.rulp\")");
-		_test("(fun1a 0)", "0");
-		_test("(fun1a 1)", "1");
-		_test("(fun1a 2)", "3");
-		_test("(fun1a 3)", "6");
-		_test("(fun1a 100)", "5050");
-		assertEquals(636, CPSUtils.getCPSCount());
-
-		_test("(fun1a 1000)", "500500");
-		assertEquals(6636, CPSUtils.getCPSCount());
-
+		_load_fact();
+		_run_script();
 		_gInfo();
+		assertEquals(6636, CPSUtils.getCPSCount());
 	}
 
 	@Test
 	public void test_tco_fun1b() {
 
 		_setup();
-
-		_test("(setq ?op-cps true)");
-
-		// fun(n) = n*(n+1)/2
-		_test("(load \"result/optimize/TestRulpTCO/test_tco_fact.rulp\")");
-		_test("(fun1b 0)", "0");
-		_test("(fun1b 1)", "1");
-		_test("(fun1b 2)", "3");
-		_test("(fun1b 3)", "6");
-		_test("(fun1b 100)", "5050");
-		assertEquals(636, CPSUtils.getCPSCount());
-
-		_test("(fun1b 1000)", "500500");
-		assertEquals(6636, CPSUtils.getCPSCount());
-
+		_load_fact();
+		_run_script();
 		_gInfo();
+		assertEquals(6636, CPSUtils.getCPSCount());
 	}
 
 	@Test
 	public void test_tco_fun2() {
 
 		_setup();
-
-		_test("(setq ?op-cps true)");
-
-		_test("(load \"result/optimize/TestRulpTCO/test_tco_fact.rulp\")");
-		_test("(fun2 0)", "0");
-		_test("(fun2 1)", "1");
-		_test("(fun2 2)", "3");
-		_test("(fun2 3)", "6");
-		_test("(fun2 11)", "65");
-		assertEquals(132, CPSUtils.getCPSCount());
-
-		_test("(fun2 101)", "132564");
+		_load_fact();
+		_run_script();
+		_gInfo();
 		assertEquals(252432, CPSUtils.getCPSCount());
 
 //		fail("how to optimize");
@@ -198,7 +149,7 @@ public class TestRulpTCO extends RulpTestBase {
 
 		// cc: compute in cache
 
-		_test("(load \"result/optimize/TestRulpTCO/test_tco_fact.rulp\")");
+		_load_fact();
 		_test("(cc (fun2 0))", "0");
 		_test("(cc (fun2 1))", "1");
 		_test("(cc (fun2 2))", "3");
@@ -253,9 +204,8 @@ public class TestRulpTCO extends RulpTestBase {
 
 		_setup();
 		_test("(setq ?op-cps true)");
-		_test("(defun fun (?s) (if (> (length-of ?s) 10)(return ?s)) (return (fun (+ \"a\" ?s))))", "fun");
-		_test("(fun \"b\")", "\"aaaaaaaaaab\"");
-		assertEquals(0, CPSUtils.getCPSCount());
+		_run_script();
 		_gInfo();
+		assertEquals(0, CPSUtils.getCPSCount());
 	}
 }

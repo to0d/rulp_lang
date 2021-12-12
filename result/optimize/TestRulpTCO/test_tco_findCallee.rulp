@@ -1,0 +1,24 @@
+(findCallee fact)
+;=>
+
+(findCallee fact2)
+;=>
+
+(findCallee fact3)
+;=>
+
+(findCallee fun1a)
+;=>
+
+(findCallee fun1b)
+;=>
+
+(findCallee fun2)
+;=>
+
+(findCallee fun4a)
+;=>
+
+(findCallee fun4b)
+;=>
+

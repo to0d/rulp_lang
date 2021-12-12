@@ -52,7 +52,11 @@ public abstract class AbsRInstance extends AbsRSubject implements IRInstance {
 
 	@Override
 	public void delete(IRInterpreter interpreter, IRFrame frame) throws RException {
-		this._delete();
+
+		if (!this.isDeleted()) {
+			this.ref = 0; // force deleted
+			this._delete();
+		}
 	}
 
 	@Override
