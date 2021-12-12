@@ -1,0 +1,9 @@
+(defun fun1 () (return '(1 2 3)))
+;=>fun1
+
+(name-of fun1)
+;=>"(fun1)"
+
+(foreach (?a (fun1)) (+ ?a 1))
+;=>'(2 3 4)
+
