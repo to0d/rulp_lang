@@ -559,7 +559,7 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 	}
 
 	public String toString() {
-		return frameName;
+		return "frame@" + frameName;
 	}
 
 }

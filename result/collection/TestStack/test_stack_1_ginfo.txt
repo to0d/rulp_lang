@@ -80,9 +80,9 @@ id=2, name=main, lvl=2, ref=1/2, entry=5, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-root                 : 1        2        0    frame      root                
-system               : 2        2        0    frame      system              
-main                 : 3        2        1    frame      main                
+root                 : 1        2        0    frame      frame@root          
+system               : 2        2        0    frame      frame@system        
+main                 : 3        2        1    frame      frame@main          
 s1                   : 6        2        1    instance   stack@s1            
 ?rv                  : 12       2        1    var        true : type=bool    
 ==========================================================================================================================
@@ -114,14 +114,14 @@ Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?impl                : PRIVATE              Y       4    1    var        queue@un-0 : type=instance
 ?rv                  : DEFAULT                      0    1    var        true : type=bool
-clear                : DEFAULT Y            Y       5    1    func       (clear) : frame=SF-s1-1, type=lambda
-init                 : DEFAULT Y            Y       5    1    func       (init) : frame=SF-s1-1, type=lambda
-is-empty             : DEFAULT Y            Y       5    1    func       (is-empty) : frame=SF-s1-1, type=lambda
-pop                  : DEFAULT Y            Y       5    1    func       (pop) : frame=SF-s1-1, type=lambda
-push                 : DEFAULT Y            Y       5    1    func       (push nil) : frame=SF-s1-1, type=lambda
-size-of              : DEFAULT Y            Y       5    1    func       (size-of) : frame=SF-s1-1, type=lambda
+clear                : DEFAULT Y            Y       5    1    func       (clear) : frame=frame@SF-s1-1, type=lambda
+init                 : DEFAULT Y            Y       5    1    func       (init) : frame=frame@SF-s1-1, type=lambda
+is-empty             : DEFAULT Y            Y       5    1    func       (is-empty) : frame=frame@SF-s1-1, type=lambda
+pop                  : DEFAULT Y            Y       5    1    func       (pop) : frame=frame@SF-s1-1, type=lambda
+push                 : DEFAULT Y            Y       5    1    func       (push nil) : frame=frame@SF-s1-1, type=lambda
+size-of              : DEFAULT Y            Y       5    1    func       (size-of) : frame=frame@SF-s1-1, type=lambda
 this                 : DEFAULT                      0    1    instance   stack@s1
-to-list              : DEFAULT Y            Y       5    1    func       (to-list) : frame=SF-s1-1, type=lambda
+to-list              : DEFAULT Y            Y       5    1    func       (to-list) : frame=frame@SF-s1-1, type=lambda
 ==========================================================================================================================
 
 

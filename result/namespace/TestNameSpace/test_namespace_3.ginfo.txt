@@ -66,19 +66,19 @@ Object create count:
 
 Global frame list: total=1
 
-id=2, name=main, lvl=2, ref=2/5, entry=9, pid=1(system), subject=main, search=[SF-ns1-0, main]
+id=2, name=main, lvl=2, ref=2/5, entry=9, pid=1(system), subject=main, search=[frame@SF-ns1-0, frame@main]
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-root                 : 1        2        0    frame      root                
-system               : 2        2        0    frame      system              
-main                 : 3        2        2    frame      main                
+root                 : 1        2        0    frame      frame@root          
+system               : 2        2        0    frame      frame@system        
+main                 : 3        2        2    frame      frame@main          
 var1                 : 4        2        1    var        1 : type=int        
 ns1                  : 5        2        5    instance   namespace@ns1       
 var2                 : 9        2        1    var        3 : type=int        
-fun1                 : 10       2        1    func       (fun1) : frame=main 
-fun2                 : 11       2        1    func       (fun2) : frame=main 
-fun3                 : 12       2        1    func       (fun3) : frame=main 
+fun1                 : 10       2        1    func       (fun1) : frame=frame@main
+fun2                 : 11       2        1    func       (fun2) : frame=frame@main
+fun3                 : 12       2        1    func       (fun3) : frame=frame@main
 ==========================================================================================================================
 
 
@@ -88,7 +88,7 @@ Global frame tree:
 
 ->FRAME(root): id=0, lvl=0, subject=root
     ->FRAME(system): id=1, lvl=1, subject=system
-        ->FRAME(main): id=2, lvl=2, subject=main, search=[SF-ns1-0, main]
+        ->FRAME(main): id=2, lvl=2, subject=main, search=[frame@SF-ns1-0, frame@main]
             ->FRAME(SF-ns1-0): id=5, lvl=3, subject=ns1
 
 Global Subject list:

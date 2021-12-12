@@ -63,13 +63,13 @@ Object create count:
 
 Global frame list: total=2
 
-id=2, name=main, lvl=2, ref=3/5, entry=6, pid=1(system), subject=main, search=[SF-ns1-0, SF-ns2-1, main]
+id=2, name=main, lvl=2, ref=3/5, entry=6, pid=1(system), subject=main, search=[frame@SF-ns1-0, frame@SF-ns2-1, frame@main]
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-root                 : 1        2        0    frame      root                
-system               : 2        2        0    frame      system              
-main                 : 3        2        3    frame      main                
+root                 : 1        2        0    frame      frame@root          
+system               : 2        2        0    frame      frame@system        
+main                 : 3        2        3    frame      frame@main          
 ns1                  : 4        2        3    instance   namespace@ns1       
 ns2                  : 5        2        2    instance   namespace@ns2       
 ?rv                  : 11       2        1    var        1 : type=int        
@@ -84,7 +84,7 @@ Global frame tree:
 
 ->FRAME(root): id=0, lvl=0, subject=root
     ->FRAME(system): id=1, lvl=1, subject=system
-        ->FRAME(main): id=2, lvl=2, subject=main, search=[SF-ns1-0, SF-ns2-1, main]
+        ->FRAME(main): id=2, lvl=2, subject=main, search=[frame@SF-ns1-0, frame@SF-ns2-1, frame@main]
             ->FRAME(SF-ns1-0): id=4, lvl=3, subject=ns1
             ->FRAME(SF-ns2-1): id=5, lvl=3, subject=ns2
 
@@ -94,7 +94,7 @@ name=ns1, string=namespace@ns1, lvl=1, ref=3/5, parent=namespace, final=false, m
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-f1                   : DEFAULT                      0    1    func       (f1) : frame=main
+f1                   : DEFAULT                      0    1    func       (f1) : frame=frame@main
 this                 : DEFAULT                      0    3    instance   namespace@ns1
 var1                 : DEFAULT                      0    1    var        1 : type=int
 ==========================================================================================================================
@@ -103,7 +103,7 @@ name=ns2, string=namespace@ns2, lvl=1, ref=2/4, parent=namespace, final=false, m
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-f1                   : DEFAULT                      0    1    func       (f1) : frame=main
+f1                   : DEFAULT                      0    1    func       (f1) : frame=frame@main
 this                 : DEFAULT                      0    2    instance   namespace@ns2
 var1                 : DEFAULT                      0    1    var        2 : type=int
 ==========================================================================================================================

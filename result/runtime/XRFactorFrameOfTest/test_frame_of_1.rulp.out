@@ -49,7 +49,7 @@ main
 )
 ;=>nil
 ;out:
-DO
+do
 main
 main
 main

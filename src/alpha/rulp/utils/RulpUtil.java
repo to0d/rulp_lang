@@ -1128,7 +1128,7 @@ public class RulpUtil {
 
 		obj.decRef();
 
-//		if ("init".equals(obj.toString())) {
+//		if ("frame@_$fun$_fun_add".equals(obj.toString())) {
 //			System.out.print("decRef: " + obj.getRef() + ", " + obj);
 //			System.out.println();
 //		}
@@ -1251,7 +1251,7 @@ public class RulpUtil {
 
 		obj.incRef();
 
-//		if ("init".equals(obj.toString())) {
+//		if ("frame@_$fun$_fun_add".equals(obj.toString())) {
 //			System.out.print("incRef: " + obj.getRef() + ", " + obj);
 //			System.out.println();
 //		}

@@ -64,11 +64,11 @@ id=2, name=main, lvl=2, ref=2/3, entry=5, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-root                 : 1        2        0    frame      root                
-system               : 2        2        0    frame      system              
-main                 : 3        2        2    frame      main                
+root                 : 1        2        0    frame      frame@root          
+system               : 2        2        0    frame      frame@system        
+main                 : 3        2        2    frame      frame@main          
 ns1                  : 4        2        1    instance   namespace@ns1       
-ask                  : 5        2        1    template   (ask '('(teacher atom) '(? expr))) : frame=main
+ask                  : 5        2        1    template   (ask '('(teacher atom) '(? expr))) : frame=frame@main
 ==========================================================================================================================
 
 
@@ -87,7 +87,7 @@ name=ns1, string=namespace@ns1, lvl=1, ref=1/3, parent=namespace, final=false, m
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-ask                  : DEFAULT                      0    1    template   (ask '('(teacher atom) '(? expr)) '('(student atom) '(? expr))) : frame=SF-ns1-0
+ask                  : DEFAULT                      0    1    template   (ask '('(teacher atom) '(? expr)) '('(student atom) '(? expr))) : frame=frame@SF-ns1-0
 this                 : DEFAULT                      0    1    instance   namespace@ns1
 ==========================================================================================================================
 

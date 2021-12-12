@@ -165,6 +165,6 @@ nan                  : -7       0        0    atom       nan
 false                : -6       0        0    bool       false               
 true                 : -5       0        0    bool       true                
 nil                  : -4       0        0    null       nil                 
-root                 : -1       0        0    frame      root                
+root                 : -1       0        0    frame      frame@root          
 ==========================================================================================================================
 

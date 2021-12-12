@@ -35,7 +35,7 @@ at main: (fun1 1 2)
 )
 ;err:
 match funcion not found:  expr=(fun1 1 2 3)
-at DO: (fun1 1 2 3)
+at do: (fun1 1 2 3)
 at main: (do (defun fun1 (?v1 ?v2) (return (+ ?v1 ?v2))) (out-to-file "result/runtime/...
 ;eof
 

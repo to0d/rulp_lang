@@ -69,19 +69,19 @@ id=2, name=main, lvl=2, ref=1/2, entry=14, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-root                 : 1        2        0    frame      root                
-system               : 2        2        0    frame      system              
-main                 : 3        2        1    frame      main                
+root                 : 1        2        0    frame      frame@root          
+system               : 2        2        0    frame      frame@system        
+main                 : 3        2        1    frame      frame@main          
 findCallee           : 4        2        0    factor     findCallee          
-fact                 : 5        2        11   func       (fact nil) : frame=main
-fact2                : 6        2        1    func       (fact2 nil) : frame=main
-fact3                : 7        2        1    func       (fact3 nil) : frame=main
-fun1a                : 8        2        1    func       (fun1a nil) : frame=main
-fun1b                : 9        2        1    func       (fun1b nil) : frame=main
-fun2                 : 10       2        1    func       (fun2 nil) : frame=main
-fun3                 : 11       2        1    func       (fun3 nil) : frame=main
-fun4a                : 12       2        1    func       (fun4a nil) : frame=main
-fun4b                : 13       2        1    func       (fun4b nil) : frame=main
+fact                 : 5        2        11   func       (fact nil) : frame=frame@main
+fact2                : 6        2        1    func       (fact2 nil) : frame=frame@main
+fact3                : 7        2        1    func       (fact3 nil) : frame=frame@main
+fun1a                : 8        2        1    func       (fun1a nil) : frame=frame@main
+fun1b                : 9        2        1    func       (fun1b nil) : frame=frame@main
+fun2                 : 10       2        1    func       (fun2 nil) : frame=frame@main
+fun3                 : 11       2        1    func       (fun3 nil) : frame=frame@main
+fun4a                : 12       2        1    func       (fun4a nil) : frame=frame@main
+fun4b                : 13       2        1    func       (fun4b nil) : frame=frame@main
 ?rv                  : 15       2        1    var        1 : type=int        
 ==========================================================================================================================
 

@@ -66,9 +66,9 @@ id=2, name=main, lvl=2, ref=3/4, entry=7, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-root                 : 1        2        0    frame      root                
-system               : 2        2        0    frame      system              
-main                 : 3        2        3    frame      main                
+root                 : 1        2        0    frame      frame@root          
+system               : 2        2        0    frame      frame@system        
+main                 : 3        2        3    frame      frame@main          
 class1               : 4        2        1    class      class1              
 type#class1          : 5        2        0    atom       type#class1         
 ?o1                  : 6        2        1    instance   class1@?o1          
@@ -98,8 +98,8 @@ name=class1, string=class1, lvl=0, ref=1/3, parent=null, final=false, mbrs=3, fr
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?v1                  : DEFAULT                      0    1    var        0 : type=int
-get                  : DEFAULT                      0    1    func       (get) : frame=main
-inc                  : DEFAULT                      0    1    func       (inc nil) : frame=main
+get                  : DEFAULT                      0    1    func       (get) : frame=frame@main
+inc                  : DEFAULT                      0    1    func       (inc nil) : frame=frame@main
 ==========================================================================================================================
 
 name=?o1, string=class1@?o1, lvl=1, ref=1/3, parent=class1, final=false, mbrs=5, frame=4(SF-?o1-1)
@@ -108,8 +108,8 @@ Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?rv                  : DEFAULT                      0    1    var        1 : type=int
 ?v1                  : DEFAULT              Y       4    1    var        1 : type=int
-get                  : DEFAULT              Y       4    1    func       (get) : frame=SF-?o1-1, type=lambda
-inc                  : DEFAULT              Y       4    1    func       (inc nil) : frame=SF-?o1-1, type=lambda
+get                  : DEFAULT              Y       4    1    func       (get) : frame=frame@SF-?o1-1, type=lambda
+inc                  : DEFAULT              Y       4    1    func       (inc nil) : frame=frame@SF-?o1-1, type=lambda
 this                 : DEFAULT                      0    1    instance   class1@?o1
 ==========================================================================================================================
 
@@ -117,7 +117,7 @@ name=ns1, string=namespace@ns1, lvl=1, ref=1/3, parent=namespace, final=false, m
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-set                  : DEFAULT                      0    1    template   (set '('(_class atom) '(? type#class1))) : frame=SF-ns1-2
+set                  : DEFAULT                      0    1    template   (set '('(_class atom) '(? type#class1))) : frame=frame@SF-ns1-2
 this                 : DEFAULT                      0    1    instance   namespace@ns1
 ==========================================================================================================================
 

@@ -30,7 +30,7 @@ public class XRFactorDo extends AbsRFactorAdapter implements IRFactor {
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		IRFrame doFrame = RulpFactory.createFrame(frame, "DO");
+		IRFrame doFrame = RulpFactory.createFrame(frame, "do");
 
 		try {
 			RulpUtil.incRef(doFrame);

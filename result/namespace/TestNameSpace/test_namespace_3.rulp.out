@@ -37,9 +37,9 @@
 (fun2)
 ;=>nil
 ;out:
-var1: value=2, subject=DO
+var1: value=2, subject=do
 var2: value=3, subject=main
-var1: value=2, subject=DO
+var1: value=2, subject=do
 var2: value=3, subject=main
 
 ;eof
@@ -50,7 +50,7 @@ var2: value=3, subject=main
 (fun3)
 ;=>nil
 ;out:
-var1: value=2, subject=DO
+var1: value=2, subject=do
 var1: value=1, subject=main
 
 ;eof
@@ -61,7 +61,7 @@ var1: value=1, subject=main
 (fun3)
 ;=>nil
 ;out:
-var1: value=2, subject=DO
+var1: value=2, subject=do
 var1: value=1, subject=main
 
 ;eof

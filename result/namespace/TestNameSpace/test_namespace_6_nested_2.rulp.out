@@ -18,7 +18,7 @@
 ;out:
 ->FRAME(root): id=0, lvl=0, subject=root
     ->FRAME(system): id=1, lvl=1, subject=system
-        ->FRAME(main): id=2, lvl=2, subject=main, search=[SF-ns3-2, main]
+        ->FRAME(main): id=2, lvl=2, subject=main, search=[frame@SF-ns3-2, frame@main]
             ->FRAME(SF-ns1-0): id=3, lvl=3, subject=ns1
                 ->FRAME(SF-ns2-1): id=4, lvl=4, subject=ns2
                     ->FRAME(SF-ns3-2): id=6, lvl=5, subject=ns3

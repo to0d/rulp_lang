@@ -71,9 +71,9 @@ id=2, name=main, lvl=2, ref=1/1, entry=4, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-root                 : 1        2        0    frame      root                
-system               : 2        2        0    frame      system              
-main                 : 3        2        1    frame      main                
+root                 : 1        2        0    frame      frame@root          
+system               : 2        2        0    frame      frame@system        
+main                 : 3        2        1    frame      frame@main          
 set1                 : 5        2        1    instance   set@set1            
 ==========================================================================================================================
 
@@ -98,10 +98,10 @@ Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?impl                : PRIVATE              Y       4    1    var        noclass@un-0 : type=instance
 ?rv                  : DEFAULT                      0    1    var        false : type=bool
-add                  : DEFAULT Y            Y       5    1    func       (add nil) : frame=SF-set1-1, type=lambda
-has                  : DEFAULT Y            Y       5    1    func       (has nil) : frame=SF-set1-1, type=lambda
-init                 : DEFAULT Y            Y       5    1    func       (init) : frame=SF-set1-1, type=lambda
-size-of              : DEFAULT Y            Y       5    1    func       (size-of) : frame=SF-set1-1, type=lambda
+add                  : DEFAULT Y            Y       5    1    func       (add nil) : frame=frame@SF-set1-1, type=lambda
+has                  : DEFAULT Y            Y       5    1    func       (has nil) : frame=frame@SF-set1-1, type=lambda
+init                 : DEFAULT Y            Y       5    1    func       (init) : frame=frame@SF-set1-1, type=lambda
+size-of              : DEFAULT Y            Y       5    1    func       (size-of) : frame=frame@SF-set1-1, type=lambda
 this                 : DEFAULT                      0    1    instance   set@set1
 ==========================================================================================================================
 

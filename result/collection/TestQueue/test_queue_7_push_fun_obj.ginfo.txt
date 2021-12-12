@@ -72,9 +72,9 @@ id=2, name=main, lvl=2, ref=3/5, entry=4, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-root                 : 1        2        0    frame      root                
-system               : 2        2        0    frame      system              
-main                 : 3        2        3    frame      main                
+root                 : 1        2        0    frame      frame@root          
+system               : 2        2        0    frame      frame@system        
+main                 : 3        2        3    frame      frame@main          
 q1                   : 5        2        1    instance   queue@q1            
 ==========================================================================================================================
 
@@ -99,10 +99,10 @@ Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?impl                : PRIVATE              Y       4    1    var        noclass@un-0 : type=instance
 ?rv                  : DEFAULT                      0    1    var        '(lambda lambda) : type=list
-init                 : DEFAULT Y            Y       5    1    func       (init) : frame=SF-q1-1, type=lambda
-push                 : DEFAULT Y            Y       5    1    func       (push nil) : frame=SF-q1-1, type=lambda
+init                 : DEFAULT Y            Y       5    1    func       (init) : frame=frame@SF-q1-1, type=lambda
+push                 : DEFAULT Y            Y       5    1    func       (push nil) : frame=frame@SF-q1-1, type=lambda
 this                 : DEFAULT                      0    1    instance   queue@q1
-to-list              : DEFAULT Y            Y       5    1    func       (to-list) : frame=SF-q1-1, type=lambda
+to-list              : DEFAULT Y            Y       5    1    func       (to-list) : frame=frame@SF-q1-1, type=lambda
 ==========================================================================================================================
 
 

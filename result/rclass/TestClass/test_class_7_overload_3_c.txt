@@ -2,7 +2,7 @@ name=o2, string=class2@o2, lvl=2, ref=1/3, parent=class2, final=false, mbrs=2, f
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-fun1                 : DEFAULT       Y      Y       6    2    func       (fun1 nil) : frame=SF-class2-1, type=lambda
+fun1                 : DEFAULT       Y      Y       6    2    func       (fun1 nil) : frame=frame@SF-class2-1, type=lambda
 this                 : DEFAULT                      0    1    instance   class2@o2
 ==========================================================================================================================
 
@@ -11,7 +11,7 @@ name=class2, string=class2, lvl=1, ref=1/3, parent=class1, final=false, mbrs=3, 
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?rv                  : DEFAULT                      0    1    var        3 : type=int
-fun1                 : DEFAULT       Y              2    2    func       (fun1 nil) : frame=SF-class2-1, type=lambda
+fun1                 : DEFAULT       Y              2    2    func       (fun1 nil) : frame=frame@SF-class2-1, type=lambda
 super                : DEFAULT                      0    2    class      class1
 ==========================================================================================================================
 
@@ -20,6 +20,6 @@ name=class1, string=class1, lvl=0, ref=2/3, parent=null, final=false, mbrs=2, fr
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?rv                  : DEFAULT                      0    1    var        2 : type=int
-fun1                 : DEFAULT       Y              2    2    func       (fun1 nil) : frame=SF-class1-0, type=lambda
+fun1                 : DEFAULT       Y              2    2    func       (fun1 nil) : frame=frame@SF-class1-0, type=lambda
 ==========================================================================================================================
 
