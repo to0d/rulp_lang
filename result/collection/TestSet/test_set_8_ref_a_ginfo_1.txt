@@ -73,7 +73,7 @@ system               : 2        2        0    frame      system
 main                 : 3        2        2    frame      main                
 ?x                   : 4        2        1    var        0 : type=int        
 fun_add              : 5        2        1    func       (fun_add nil) : frame=main
-s1                   : 7        2        2    instance   s1 : class=set      
+s1                   : 7        2        2    instance   set@s1              
 ==========================================================================================================================
 
 
@@ -112,7 +112,7 @@ Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 ?impl                : PRIVATE              Y       4    1    var        noclass@un-0 : type=instance
 add                  : DEFAULT Y            Y       5    1    func       (add nil) : frame=SF-s1-1, type=lambda
 init                 : DEFAULT Y            Y       5    1    func       (init) : frame=SF-s1-1, type=lambda
-this                 : DEFAULT                      0    2    instance   s1 : class=set
+this                 : DEFAULT                      0    2    instance   set@s1
 ==========================================================================================================================
 
 

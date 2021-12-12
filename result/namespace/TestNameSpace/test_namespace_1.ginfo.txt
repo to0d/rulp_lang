@@ -75,7 +75,7 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
 main                 : 3        2        2    frame      main                
-ns1                  : 4        2        2    instance   ns1 : class=namespace
+ns1                  : 4        2        2    instance   namespace@ns1       
 var1                 : 5        2        1    var        1 : type=int        
 f1                   : 6        2        1    func       (f1) : frame=main   
 ?rv                  : 7        2        1    var        4 : type=int        
@@ -101,7 +101,7 @@ Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 f1                   : DEFAULT                      0    1    func       (f1) : frame=main
 f2                   : DEFAULT                      0    1    func       (f2) : frame=main
-this                 : DEFAULT                      0    2    instance   ns1 : class=namespace
+this                 : DEFAULT                      0    2    instance   namespace@ns1
 var1                 : DEFAULT                      0    1    var        2 : type=int
 var2                 : DEFAULT                      0    1    var        3 : type=int
 ==========================================================================================================================

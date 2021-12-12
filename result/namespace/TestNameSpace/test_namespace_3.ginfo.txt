@@ -74,7 +74,7 @@ root                 : 1        2        0    frame      root
 system               : 2        2        0    frame      system              
 main                 : 3        2        2    frame      main                
 var1                 : 4        2        1    var        1 : type=int        
-ns1                  : 5        2        5    instance   ns1 : class=namespace
+ns1                  : 5        2        5    instance   namespace@ns1       
 var2                 : 9        2        1    var        3 : type=int        
 fun1                 : 10       2        1    func       (fun1) : frame=main 
 fun2                 : 11       2        1    func       (fun2) : frame=main 
@@ -97,7 +97,7 @@ name=ns1, string=namespace@ns1, lvl=1, ref=5/7, parent=namespace, final=false, m
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-this                 : DEFAULT                      0    5    instance   ns1 : class=namespace
+this                 : DEFAULT                      0    5    instance   namespace@ns1
 ==========================================================================================================================
 
 

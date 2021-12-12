@@ -78,7 +78,7 @@ system               : 2        2        0    frame      system
 main                 : 3        2        2    frame      main                
 class1               : 4        2        1    class      class1              
 type#class1          : 5        2        0    atom       type#class1         
-o1                   : 6        2        1    instance   o1 : class=class1   
+o1                   : 6        2        1    instance   class1@o1           
 ==========================================================================================================================
 
 
@@ -117,7 +117,7 @@ add                  : DEFAULT              Y       4    1    func       (add ni
 get                  : DEFAULT              Y       4    1    func       (get) : frame=SF-o1-1, type=lambda
 set                  : DEFAULT              Y       4    1    func       (set nil) : frame=SF-o1-1, type=lambda
 sub                  : DEFAULT              Y       4    1    func       (sub nil) : frame=SF-o1-1, type=lambda
-this                 : DEFAULT                      0    1    instance   o1 : class=class1
+this                 : DEFAULT                      0    1    instance   class1@o1
 ==========================================================================================================================
 
 

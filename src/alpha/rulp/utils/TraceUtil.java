@@ -179,10 +179,10 @@ public class TraceUtil {
 			IRTemplate tp = RulpUtil.asTemplate(obj);
 			return tp.getSignature() + " : frame=" + tp.getDefineFrame();
 
-		case INSTANCE:
-			IRInstance instance = RulpUtil.asInstance(obj);
-			IRClass rclass = instance.getRClass();
-			return instance.getInstanceName() + " : class=" + (rclass == null ? "null" : rclass.getClassName());
+//		case INSTANCE:
+//			IRInstance instance = RulpUtil.asInstance(obj);
+//			IRClass rclass = instance.getRClass();
+//			return instance.getInstanceName() + " : class=" + (rclass == null ? "null" : rclass.getClassName());
 
 		default:
 			return obj.toString();

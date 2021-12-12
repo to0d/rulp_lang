@@ -6,7 +6,7 @@ Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 fun1                 : DEFAULT              Y       4    1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
                                                          1    func       (fun1 nil) : frame=SF-o1-1, type=lambda
                                                          1    func       (fun1 nil nil) : frame=SF-o1-1, type=lambda
-this                 : DEFAULT                      0    1    instance   o1 : class=class1
+this                 : DEFAULT                      0    1    instance   class1@o1
 ==========================================================================================================================
 
 name=class1, string=class1, lvl=0, ref=1/3, parent=null, final=false, mbrs=1, frame=3(SF-class1-0)

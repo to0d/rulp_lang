@@ -83,7 +83,7 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
 main                 : 3        2        1    frame      main                
-s1                   : 6        2        1    instance   s1 : class=stack    
+s1                   : 6        2        1    instance   stack@s1            
 ?rv                  : 12       2        1    var        true : type=bool    
 ==========================================================================================================================
 
@@ -120,7 +120,7 @@ is-empty             : DEFAULT Y            Y       5    1    func       (is-emp
 pop                  : DEFAULT Y            Y       5    1    func       (pop) : frame=SF-s1-1, type=lambda
 push                 : DEFAULT Y            Y       5    1    func       (push nil) : frame=SF-s1-1, type=lambda
 size-of              : DEFAULT Y            Y       5    1    func       (size-of) : frame=SF-s1-1, type=lambda
-this                 : DEFAULT                      0    1    instance   s1 : class=stack
+this                 : DEFAULT                      0    1    instance   stack@s1
 to-list              : DEFAULT Y            Y       5    1    func       (to-list) : frame=SF-s1-1, type=lambda
 ==========================================================================================================================
 

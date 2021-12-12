@@ -9,7 +9,7 @@ init                 : DEFAULT              Y       4    1    funcList   '((init
                                                          1    func       (init) : frame=SF-o1-1, type=lambda
                                                          1    func       (init nil) : frame=SF-o1-1, type=lambda
                                                          1    func       (init nil nil) : frame=SF-o1-1, type=lambda
-this                 : DEFAULT                      0    1    instance   o1 : class=class1
+this                 : DEFAULT                      0    1    instance   class1@o1
 ==========================================================================================================================
 
 name=class1, string=class1, lvl=0, ref=1/3, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
@@ -35,7 +35,7 @@ init                 : DEFAULT              Y       4    1    funcList   '((init
                                                          1    func       (init) : frame=SF-o2-2, type=lambda
                                                          1    func       (init nil) : frame=SF-o2-2, type=lambda
                                                          1    func       (init nil nil) : frame=SF-o2-2, type=lambda
-this                 : DEFAULT                      0    1    instance   o2 : class=class1
+this                 : DEFAULT                      0    1    instance   class1@o2
 ==========================================================================================================================
 
 name=class1, string=class1, lvl=0, ref=1/3, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
@@ -61,7 +61,7 @@ init                 : DEFAULT              Y       4    1    funcList   '((init
                                                          1    func       (init) : frame=SF-o3-3, type=lambda
                                                          1    func       (init nil) : frame=SF-o3-3, type=lambda
                                                          1    func       (init nil nil) : frame=SF-o3-3, type=lambda
-this                 : DEFAULT                      0    1    instance   o3 : class=class1
+this                 : DEFAULT                      0    1    instance   class1@o3
 ==========================================================================================================================
 
 name=class1, string=class1, lvl=0, ref=1/3, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
@@ -87,7 +87,7 @@ init                 : DEFAULT              Y       4    1    funcList   '((init
                                                          1    func       (init) : frame=SF-un-0-4, type=lambda
                                                          1    func       (init nil) : frame=SF-un-0-4, type=lambda
                                                          1    func       (init nil nil) : frame=SF-un-0-4, type=lambda
-this                 : DEFAULT                      0    1    instance   un-0 : class=class1
+this                 : DEFAULT                      0    1    instance   class1@un-0
 ==========================================================================================================================
 
 name=class1, string=class1, lvl=0, ref=1/3, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
@@ -113,7 +113,7 @@ init                 : DEFAULT              Y       4    1    funcList   '((init
                                                          1    func       (init) : frame=SF-un-1-5, type=lambda
                                                          1    func       (init nil) : frame=SF-un-1-5, type=lambda
                                                          1    func       (init nil nil) : frame=SF-un-1-5, type=lambda
-this                 : DEFAULT                      0    1    instance   un-1 : class=class1
+this                 : DEFAULT                      0    1    instance   class1@un-1
 ==========================================================================================================================
 
 name=class1, string=class1, lvl=0, ref=1/3, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
@@ -139,7 +139,7 @@ init                 : DEFAULT              Y       4    1    funcList   '((init
                                                          1    func       (init) : frame=SF-un-2-6, type=lambda
                                                          1    func       (init nil) : frame=SF-un-2-6, type=lambda
                                                          1    func       (init nil nil) : frame=SF-un-2-6, type=lambda
-this                 : DEFAULT                      0    1    instance   un-2 : class=class1
+this                 : DEFAULT                      0    1    instance   class1@un-2
 ==========================================================================================================================
 
 name=class1, string=class1, lvl=0, ref=1/3, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)

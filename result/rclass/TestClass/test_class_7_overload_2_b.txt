@@ -4,7 +4,7 @@ Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
 ?rv                  : DEFAULT                      0    1    var        2 : type=int
 fun1                 : DEFAULT              Y       4    1    func       (fun1 nil) : frame=SF-o1-1, type=lambda
-this                 : DEFAULT                      0    1    instance   o1 : class=class1
+this                 : DEFAULT                      0    1    instance   class1@o1
 ==========================================================================================================================
 
 name=class1, string=class1, lvl=0, ref=2/3, parent=null, final=false, mbrs=1, frame=3(SF-class1-0)

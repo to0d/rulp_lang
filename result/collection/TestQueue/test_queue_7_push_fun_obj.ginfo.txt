@@ -75,7 +75,7 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      root                
 system               : 2        2        0    frame      system              
 main                 : 3        2        3    frame      main                
-q1                   : 5        2        1    instance   q1 : class=queue    
+q1                   : 5        2        1    instance   queue@q1            
 ==========================================================================================================================
 
 
@@ -101,7 +101,7 @@ Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 ?rv                  : DEFAULT                      0    1    var        '(lambda lambda) : type=list
 init                 : DEFAULT Y            Y       5    1    func       (init) : frame=SF-q1-1, type=lambda
 push                 : DEFAULT Y            Y       5    1    func       (push nil) : frame=SF-q1-1, type=lambda
-this                 : DEFAULT                      0    1    instance   q1 : class=queue
+this                 : DEFAULT                      0    1    instance   queue@q1
 to-list              : DEFAULT Y            Y       5    1    func       (to-list) : frame=SF-q1-1, type=lambda
 ==========================================================================================================================
 
