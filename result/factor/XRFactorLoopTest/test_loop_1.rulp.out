@@ -1,0 +1,43 @@
+(defvar x) (setq x 5)
+;=>&x &x
+
+(loop (setq x (- x 1)) 
+    (print x ",") (when (< x 2) (break)))
+;=>nil
+;out:
+4,3,2,1,
+;eof
+
+(loop for x in '(1 2 3) do 
+    (print x ","))
+;=>nil
+;out:
+1,2,3,
+;eof
+
+(loop for x from 1 to 3 do 
+    (print x ","))
+;=>nil
+;out:
+1,2,3,
+;eof
+
+(loop for x from 3 to 1 do 
+    (print x ","))
+;=>nil
+
+(loop for x from (+ 1 2) to (- 6 2) do 
+    (print x ","))
+;=>nil
+;out:
+3,4,
+;eof
+
+    
+(loop for x from 1 to 3 do 
+    (print x 1))
+;=>nil
+;out:
+112131
+;eof
+
