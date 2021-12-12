@@ -89,3 +89,8 @@
         (return (+ ?v (fun4a (- ?v 1))))
     )
 )
+
+(defun fun5 (?s) 
+    (if (> (length-of ?s) 10)
+        (return ?s)) 
+    (return (fun5 (+ "a" ?s))))

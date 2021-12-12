@@ -1,6 +1,3 @@
-(defun fun (?s) (if (> (length-of ?s) 10)(return ?s)) (return (fun (+ "a" ?s))))
-;=>fun
-
-(fun "b")
-;=>(fun (+ "a" "ab"))
+(fun5 "b")
+;=>(fun5 (+ "a" "ab"))
 

@@ -203,7 +203,7 @@ public class TestRulpTCO extends RulpTestBase {
 	public void test_tco_str_1() {
 
 		_setup();
-		_test("(setq ?op-cps true)");
+		_load_fact();
 		_run_script();
 		_gInfo();
 		assertEquals(0, CPSUtils.getCPSCount());
