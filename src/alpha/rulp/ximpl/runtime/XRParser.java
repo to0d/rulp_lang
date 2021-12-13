@@ -36,30 +36,6 @@ import alpha.rulp.utils.StringUtil;
 import alpha.rulp.ximpl.error.RParseException;
 import alpha.rulp.ximpl.error.RulpIncompleteException;
 
-/* ************************************************************ */
-// RULP rules                                 
-//                                                  
-//    Lists      := List Lists 
-//			      | {empty}
-//
-//    List       := (Expressions) 
-//
-//	  Expressions:= Object Expressions
-//                | {empty}
-//          
-//
-//	  Object     := Atom
-//			      | String
-//			      | List
-//
-// 	  Atom       := [A-Za-z_$]{A-Za-z,0-9,-,_+&}  
-//
-//    String     := "any string"         
-//                                                                      
-//                                     
-// Examples
-//    (a b c)
-/* ************************************************************ */
 public class XRParser implements IRParser {
 
 	static final Token END_TOKEN = new Token(TokenType.TT_9END, null, -1);
@@ -740,6 +716,45 @@ public class XRParser implements IRParser {
 		}
 
 		/******************************************/
+		// Try match hex: 0x1A or 0X001
+		/******************************************/
+		if (token.type == TokenType.TT_3NAM) {
+
+			String value = token.value;
+			int len = value.length();
+
+			if (len >= 3 && (value.startsWith("0x") || value.startsWith("0X"))) {
+
+				boolean isHEX = true;
+				int num = 0;
+
+				for (int i = 2; isHEX && i < len; ++i) {
+
+					char c = value.charAt(i);
+
+					int n = 0;
+					if (c >= '0' && c <= '9') {
+						n = c - '0';
+					} else if (c >= 'a' && c <= 'f') {
+						n = c - 'a' + 10;
+					} else if (c >= 'A' && c <= 'F') {
+						n = c - 'A' + 10;
+					} else {
+						isHEX = false;
+					}
+
+					num = num * 16 + n;
+				}
+
+				if (isHEX) {
+					return RulpFactory.createInteger(num);
+				} else {
+					throw new RException(String.format("[%d, %d]: invalid hex, %s", lineIndex, linePos, token.value));
+				}
+			}
+		}
+
+		/******************************************/
 		// Try match double: float d
 		/******************************************/
 		if (token.type == TokenType.TT_6FLT && (_isNameToken(next, "d") || _isNameToken(next, "D"))) {
@@ -908,7 +923,6 @@ public class XRParser implements IRParser {
 		_pullStack(depth);
 		String sym = "";
 		while (_more() && (token = _curToken()) != null && !_isSeparatorToken(token)) {
-
 			_pushStack(1);
 			sym += token.value;
 		}

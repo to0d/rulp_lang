@@ -52,6 +52,8 @@ public class XRParserTest extends RulpTestBase {
 			if (succ) {
 				e.printStackTrace();
 				fail(e.toString());
+			} else {
+				assertEquals(input, expect, e.getMessage());
 			}
 		}
 	}
@@ -127,7 +129,7 @@ public class XRParserTest extends RulpTestBase {
 	}
 
 	@Test
-	public void test_3_value() {
+	public void test_3_number_1() {
 
 		_setup();
 
@@ -164,6 +166,15 @@ public class XRParserTest extends RulpTestBase {
 		_test_parse_line("1.1d", "1.1D");
 		_test_parse_line("+1.1d", "1.1D");
 		_test_parse_line("-1.1d", "-1.1D");
+	}
+
+	@Test
+	public void test_3_number_2_hex() {
+		_setup();
+		_test_parse_line("0x001", "1");
+		_test_parse_line("0xa", "10");
+		_test_parse_line("0xB1", "177");
+		_test_parse_line("0xG1", "[0, -1]: invalid hex, 0xG1", false);
 	}
 
 	@Test
@@ -360,6 +371,7 @@ public class XRParserTest extends RulpTestBase {
 
 	@Test
 	public void test_g_escape_string() {
+		_setup();
 		_test_parse_line("\"abc\\ndef\"", "\"abc\\\\ndef\"");
 		_test_parse_line("abc\ndef", "abc def");
 	}
