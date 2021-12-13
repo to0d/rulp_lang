@@ -9,6 +9,7 @@
 
 package alpha.rulp.ximpl.factor;
 
+import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.O_Nil;
 
 import alpha.rulp.lang.IRFrame;
@@ -30,7 +31,7 @@ public class XRFactorDo extends AbsRFactorAdapter implements IRFactor {
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		IRFrame doFrame = RulpFactory.createFrame(frame, "do");
+		IRFrame doFrame = RulpFactory.createFrame(frame, A_DO);
 
 		try {
 			RulpUtil.incRef(doFrame);

@@ -9,6 +9,8 @@
 
 package alpha.rulp.ximpl.collection;
 
+import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.F_FOREACH;
 import static alpha.rulp.lang.Constant.O_Nan;
 
 import alpha.rulp.lang.IRFrame;
@@ -29,19 +31,20 @@ import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 
 public class XRFactorForeach extends AbsRFactorAdapter implements IRFactor {
 
-	static IRObject getResultObject(IRList args, IRInterpreter interpreter, IRFrame factorFrame) throws RException {
+	static IRObject getResultObject(IRList args, IRInterpreter interpreter, IRFrame frame, IRFrame rtFrame)
+			throws RException {
 
 		try {
 
 			IRObject rstObj = null;
 			IRIterator<? extends IRObject> iter = args.listIterator(2);
 			while (iter.hasNext()) {
-				rstObj = interpreter.compute(factorFrame, iter.next());
+				rstObj = interpreter.compute(frame, iter.next());
 			}
 			return rstObj;
 
 		} catch (RReturn r) {
-			return r.returnValue(factorFrame);
+			return r.returnValue(rtFrame);
 
 		} catch (RContinue c) {
 			return O_Nan;
@@ -74,7 +77,7 @@ public class XRFactorForeach extends AbsRFactorAdapter implements IRFactor {
 
 		IRList paraObj = (IRList) args.get(1);
 
-		IRFrame factorFrame = RulpFactory.createFrame(frame, "FOREACH");
+		IRFrame factorFrame = RulpFactory.createFrame(frame, F_FOREACH);
 		RulpUtil.incRef(factorFrame);
 
 		try {
@@ -94,9 +97,18 @@ public class XRFactorForeach extends AbsRFactorAdapter implements IRFactor {
 					IRIterator<? extends IRObject> iter = ((IRList) cond).iterator();
 					while (iter.hasNext()) {
 						var.setValue(iter.next());
-						IRObject rst = getResultObject(args, interpreter, factorFrame);
-						if (rst != O_Nan) {
-							rstList.add(rst);
+
+						IRFrame doFrame = RulpFactory.createFrame(factorFrame, A_DO);
+						RulpUtil.incRef(doFrame);
+
+						try {
+							IRObject rst = getResultObject(args, interpreter, doFrame, factorFrame);
+							if (rst != O_Nan) {
+								rstList.add(rst);
+							}
+						} finally {
+							doFrame.release();
+							RulpUtil.decRef(doFrame);
 						}
 					}
 
@@ -104,7 +116,7 @@ public class XRFactorForeach extends AbsRFactorAdapter implements IRFactor {
 
 				case ATOM:
 					var.setValue(cond);
-					IRObject rst = getResultObject(args, interpreter, factorFrame);
+					IRObject rst = getResultObject(args, interpreter, factorFrame, factorFrame);
 					if (rst != O_Nan) {
 						rstList.add(rst);
 					}
