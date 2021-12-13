@@ -425,6 +425,12 @@ public class RulpUtil {
 		addAll(l1, l2.iterator());
 	}
 
+	public static void addAll(IRList list, IRIterator<? extends IRObject> it) throws RException {
+		while (it.hasNext()) {
+			list.add(it.next());
+		}
+	}
+
 	public static void addFactor(IRFrame frame, String factorName, IRFactorBody factorBody) throws RException {
 		addFactor(frame, factorName, factorBody, false);
 	}

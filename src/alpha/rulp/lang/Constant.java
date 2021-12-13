@@ -227,6 +227,8 @@ public interface Constant {
 
 	String F_IN = "in";
 
+	String F_IS_CONST = "is-const";
+
 	String F_JOIN = "join";
 
 	String F_LAMBDA = "lambda";
@@ -242,6 +244,8 @@ public interface Constant {
 	String F_MAKE_BLOB = "make-blob";
 
 	String F_MAKE_CPS = "make-cps";
+
+	String F_MAKE_LIST = "make-list";
 
 	String F_MBR_INIT = "init";
 

@@ -1,0 +1,9 @@
+(defvar x 10) x
+;=>
+
+(defvar y) y
+;=>
+
+(ls)
+;=>
+

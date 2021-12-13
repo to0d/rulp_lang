@@ -1,0 +1,9 @@
+(defvar x 10) x
+;=>&x 10
+
+(defvar y) y
+;=>&y nil
+
+(ls)
+;=>'(main::main main::root main::system main::x main::y)
+

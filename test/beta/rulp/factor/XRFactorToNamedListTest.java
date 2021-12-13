@@ -7,18 +7,20 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorToNamedListTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_to_named_list_1() {
 		_setup();
+		_run_script();
+	}
 
-		_test("(to-named-list a '(b c))", "a:'(b c)");
-		_test("(to-named-list \"a\" '(b c))", "a:'(b c)");
-		_test("(to-named-list a x:'(b c))", "a:'(b c)");
+	@Test
+	void test_to_named_list_2_var() {
+		_setup();
+		_run_script();
+	}
 
-		_test("(defvar ?x a)");
-		_test("(defvar ?y b)");
-		_test("(to-named-list ?x '(?y c))", "a:'(b c)");
-
-		_test("(defun fun (?x ?y) (return (to-named-list ?x '(?y c))))");
-		_test("(fun a b)", "a:'(b c)");
+	@Test
+	void test_to_named_list_3_vary() {
+		_setup();
+		_run_script();
 	}
 }

@@ -1,0 +1,8 @@
+(defvar x 10) x
+;=>
+
+(defvar x 9) ; Can't redefine
+;err
+
+x
+;=>

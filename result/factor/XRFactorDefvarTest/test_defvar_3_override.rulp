@@ -1,0 +1,11 @@
+(defvar x 10) x
+;=>
+
+(defun fun1 () 
+    (defvar x 11) 
+    (return x)
+)
+;=>
+
+(fun1)
+;=>

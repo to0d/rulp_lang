@@ -46,6 +46,16 @@ public class XRFactorToNamedList extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
+		if (list.getNamedName() != null && name.equals(list.getNamedName())) {
+			return list;
+		}
+
+		if (!list.isConst()) {
+			IRList varList = RulpFactory.createVaryNamedList(name);
+			RulpUtil.addAll(varList, list.iterator());
+			return varList;
+		}
+
 		return RulpFactory.createNamedList(list.iterator(), name);
 	}
 

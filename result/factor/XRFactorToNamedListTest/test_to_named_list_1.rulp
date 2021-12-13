@@ -1,0 +1,11 @@
+(to-named-list a '(b c))
+;=>
+
+(to-named-list "a" '(b c))
+;=>
+
+(to-named-list a x:'(b c))
+;=>
+
+(to-named-list x x:'(b c))
+;=>

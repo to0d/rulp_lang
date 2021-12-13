@@ -7,26 +7,23 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorDefvarTest extends RulpTestBase {
 
 	@Test
-	void test1() {
+	void test_defvar_1() {
 
 		_setup();
-		_test("(defvar x 10) x", "&x 10");
-		_test("(defvar y) y", "&y nil");
-		_test("(ls)", "'(main::main main::root main::system main::x main::y)");
-
+		_run_script();
 	}
 
 	@Test
-	void test2() {
+	void test_defvar_2_redefine() {
 
 		_setup();
+		_run_script();
+	}
 
-		_test("(defvar x 10) x", "&x 10");
+	@Test
+	void test_defvar_3_override() {
 
-		// Can't redefine
-		_test_error("(defvar x 9) x", "duplicate local variable: x\n" + "at main: (defvar x 9)");
-
-		_test("(defun fun1 () (defvar x 11) (return x))");
-		_test("(fun1)", "11");
+		_setup();
+		_run_script();
 	}
 }

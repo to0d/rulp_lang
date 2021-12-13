@@ -5,10 +5,11 @@ import static alpha.rulp.lang.Constant.O_AND;
 import static alpha.rulp.lang.Constant.O_BY;
 import static alpha.rulp.lang.Constant.O_DIV;
 import static alpha.rulp.lang.Constant.O_MOD;
+import static alpha.rulp.lang.Constant.O_NOT;
 import static alpha.rulp.lang.Constant.O_OR;
 import static alpha.rulp.lang.Constant.O_POWER;
 import static alpha.rulp.lang.Constant.O_SUB;
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.O_XOR;
 
 public enum RArithmeticOperator {
 

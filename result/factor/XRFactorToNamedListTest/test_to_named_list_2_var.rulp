@@ -1,0 +1,10 @@
+(defvar ?x a)
+(defvar ?y b)
+(defun fun (?x ?y) (return (to-named-list ?x '(?y c))))
+;=>
+
+(to-named-list ?x '(?y c))
+;=>
+
+(fun a b)
+;=>

@@ -1,0 +1,11 @@
+(defvar x)
+;=>
+
+(ls local)
+;=>
+
+(let (a 5) (+ a 1))
+;=>
+
+(ls local) ; no global var created
+;=>

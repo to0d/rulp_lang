@@ -1,0 +1,2 @@
+(to-named-list x (make-list a b c))
+;=>

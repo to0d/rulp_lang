@@ -1,0 +1,9 @@
+(make-list)
+;=>'()
+
+(make-list a b c)
+;=>'(a b c)
+
+(make-list 1 2 3)
+;=>'(1 2 3)
+

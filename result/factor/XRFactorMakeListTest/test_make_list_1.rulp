@@ -1,0 +1,8 @@
+(make-list)
+;=>
+
+(make-list a b c)
+;=>
+
+(make-list 1 2 3)
+;=>
