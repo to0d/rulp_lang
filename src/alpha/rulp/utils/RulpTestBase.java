@@ -416,7 +416,8 @@ public class RulpTestBase {
 					String expectLine = expectLines.get(i);
 					String outputLine = outputLines.get(i);
 					if (!StringUtil.matchFormat(expectLine, outputLine)) {
-						assertEquals(String.format("input=%s", input), StringUtil.toOneLine(expectLines), output);
+						assertEquals(String.format("%d: input=%s, expect=%s, out=%s", i, input, expectLine, outputLine),
+								StringUtil.toOneLine(expectLines), output);
 					}
 				}
 

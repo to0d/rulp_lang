@@ -8,6 +8,7 @@ import static alpha.rulp.lang.Constant.A_PARENT;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_MBR_THIS;
 import static alpha.rulp.lang.Constant.F_O_ADD;
+import static alpha.rulp.lang.Constant.F_O_AND;
 import static alpha.rulp.lang.Constant.F_O_BY;
 import static alpha.rulp.lang.Constant.F_O_DIV;
 import static alpha.rulp.lang.Constant.F_O_EQ;
@@ -18,8 +19,11 @@ import static alpha.rulp.lang.Constant.F_O_LT;
 import static alpha.rulp.lang.Constant.F_O_MBR;
 import static alpha.rulp.lang.Constant.F_O_MOD;
 import static alpha.rulp.lang.Constant.F_O_NE;
+import static alpha.rulp.lang.Constant.F_O_NOT;
+import static alpha.rulp.lang.Constant.F_O_OR;
 import static alpha.rulp.lang.Constant.F_O_POWER;
 import static alpha.rulp.lang.Constant.F_O_SUB;
+import static alpha.rulp.lang.Constant.F_O_XOR;
 import static alpha.rulp.lang.Constant.F_RETURN;
 import static alpha.rulp.lang.Constant.O_False;
 import static alpha.rulp.lang.Constant.O_Nil;
@@ -149,6 +153,10 @@ public final class RuntimeUtil {
 		case F_O_DIV:
 		case F_O_MOD:
 		case F_O_POWER:
+		case F_O_AND:
+		case F_O_NOT:
+		case F_O_OR:
+		case F_O_XOR:
 		case F_O_GT:
 		case F_O_GE:
 		case F_O_LT:
@@ -765,6 +773,10 @@ public final class RuntimeUtil {
 		case F_O_DIV:
 		case F_O_SUB:
 		case F_O_POWER:
+		case F_O_AND:
+		case F_O_OR:
+		case F_O_NOT:
+		case F_O_XOR:
 //		case F_STR_LENGTH:
 			return true;
 		default:

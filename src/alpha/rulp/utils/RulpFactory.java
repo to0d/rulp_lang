@@ -90,6 +90,7 @@ import alpha.rulp.ximpl.error.XRFactorReturn;
 import alpha.rulp.ximpl.error.XRFactorTry;
 import alpha.rulp.ximpl.factor.XRFactorAlias;
 import alpha.rulp.ximpl.factor.XRFactorArithmetic;
+import alpha.rulp.ximpl.factor.XRFactorBitNot;
 import alpha.rulp.ximpl.factor.XRFactorBoolAnd;
 import alpha.rulp.ximpl.factor.XRFactorBoolNot;
 import alpha.rulp.ximpl.factor.XRFactorBoolOr;
@@ -634,6 +635,10 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_DIV, RArithmeticOperator.DIV));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_MOD, RArithmeticOperator.MOD));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_POWER, RArithmeticOperator.POWER));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_AND, RArithmeticOperator.AND));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_OR, RArithmeticOperator.OR));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_XOR, RArithmeticOperator.XOR));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorBitNot(F_O_NOT));
 
 		// Boolean
 		RulpUtil.addFrameObject(rootFrame, new XRFactorBoolNot(F_B_NOT));

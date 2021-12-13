@@ -1,65 +1,69 @@
-id=0, name=root, lvl=0, ref=0/0, entry=164, subject=root
+id=0, name=root, lvl=0, ref=0/0, entry=168, subject=root
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?os.version          : -189     0        1    var        10.0 : type=string  
-?os.name             : -188     0        1    var        Windows 10 : type=string
-?path.separator      : -187     0        1    var        ; : type=string     
-?file.separator      : -186     0        1    var        \ : type=string     
-?user.dir            : -185     0        1    var        C:\data\itool\irulp_base : type=string
-?user.name           : -184     0        1    var        921511672 : type=string
-?user.home           : -183     0        1    var        C:\Users\YANLIU : type=string
-rulp-object-count    : -159     0        0    factor     rulp-object-count   
-sys-time             : -158     0        0    factor     sys-time            
-sys-gc               : -157     0        0    factor     sys-gc              
-random               : -156     0        0    factor     random              
-date                 : -155     0        0    factor     date                
-do-p                 : -154     0        0    factor     do-p                
-sleep                : -153     0        0    factor     sleep               
-seta                 : -152     0        0    factor     seta                
-add-array-to-list    : -151     0        0    factor     add-array-to-list   
-add-list-to-array    : -150     0        0    factor     add-list-to-array   
-to-nonamed-list      : -149     0        0    factor     to-nonamed-list     
-to-named-list        : -148     0        0    factor     to-named-list       
-get-of-array         : -147     0        0    factor     get-of-array        
-reverse              : -146     0        0    factor     reverse             
-sort                 : -145     0        0    factor     sort                
-uniq                 : -144     0        0    factor     uniq                
-union                : -143     0        0    factor     union               
-join                 : -142     0        0    factor     join                
-remove               : -141     0        0    factor     remove              
-add-list-to-list     : -140     0        0    factor     add-list-to-list    
-get-of-list          : -139     0        0    factor     get-of-list         
-foreach              : -138     0        0    factor     foreach             
-try                  : -137     0        0    factor     try                 
-error-value          : -136     0        0    factor     error-value         
-error                : -135     0        0    factor     error               
-case                 : -134     0        0    factor     case                
-do                   : -133     0        0    factor     do                  
-break                : -132     0        0    factor     break               
-continue             : -131     0        0    factor     continue            
-return               : -130     0        0    factor     return              
-loop                 : -129     0        0    factor     loop                
-when                 : -128     0        0    factor     when                
-if                   : -127     0        0    factor     if                  
-lambda               : -126     0        0    factor     lambda              
-let                  : -125     0        0    factor     let                 
-make-cps             : -124     0        0    factor     make-cps            
-deftemplate          : -123     0        0    factor     deftemplate         
-defun                : -122     0        0    factor     defun               
-defmacro             : -121     0        0    factor     defmacro            
-can-cast             : -120     0        0    factor     can-cast            
-cmp_def              : -119     0        0    factor     cmp_def             
-<=                   : -118     0        0    factor     <=                  
->=                   : -117     0        0    factor     >=                  
-<                    : -116     0        0    factor     <                   
->                    : -115     0        0    factor     >                   
-!=                   : -114     0        0    factor     !=                  
-=                    : -113     0        0    factor     =                   
-or                   : -112     0        0    factor     or                  
-and                  : -111     0        0    factor     and                 
-not                  : -110     0        0    factor     not                 
-^                    : -109     0        0    factor     ^                   
+?os.version          : -193     0        1    var        10.0 : type=string  
+?os.name             : -192     0        1    var        Windows 10 : type=string
+?path.separator      : -191     0        1    var        ; : type=string     
+?file.separator      : -190     0        1    var        \ : type=string     
+?user.dir            : -189     0        1    var        C:\data\itool\irulp_base : type=string
+?user.name           : -188     0        1    var        921511672 : type=string
+?user.home           : -187     0        1    var        C:\Users\YANLIU : type=string
+rulp-object-count    : -163     0        0    factor     rulp-object-count   
+sys-time             : -162     0        0    factor     sys-time            
+sys-gc               : -161     0        0    factor     sys-gc              
+random               : -160     0        0    factor     random              
+date                 : -159     0        0    factor     date                
+do-p                 : -158     0        0    factor     do-p                
+sleep                : -157     0        0    factor     sleep               
+seta                 : -156     0        0    factor     seta                
+add-array-to-list    : -155     0        0    factor     add-array-to-list   
+add-list-to-array    : -154     0        0    factor     add-list-to-array   
+to-nonamed-list      : -153     0        0    factor     to-nonamed-list     
+to-named-list        : -152     0        0    factor     to-named-list       
+get-of-array         : -151     0        0    factor     get-of-array        
+reverse              : -150     0        0    factor     reverse             
+sort                 : -149     0        0    factor     sort                
+uniq                 : -148     0        0    factor     uniq                
+union                : -147     0        0    factor     union               
+join                 : -146     0        0    factor     join                
+remove               : -145     0        0    factor     remove              
+add-list-to-list     : -144     0        0    factor     add-list-to-list    
+get-of-list          : -143     0        0    factor     get-of-list         
+foreach              : -142     0        0    factor     foreach             
+try                  : -141     0        0    factor     try                 
+error-value          : -140     0        0    factor     error-value         
+error                : -139     0        0    factor     error               
+case                 : -138     0        0    factor     case                
+do                   : -137     0        0    factor     do                  
+break                : -136     0        0    factor     break               
+continue             : -135     0        0    factor     continue            
+return               : -134     0        0    factor     return              
+loop                 : -133     0        0    factor     loop                
+when                 : -132     0        0    factor     when                
+if                   : -131     0        0    factor     if                  
+lambda               : -130     0        0    factor     lambda              
+let                  : -129     0        0    factor     let                 
+make-cps             : -128     0        0    factor     make-cps            
+deftemplate          : -127     0        0    factor     deftemplate         
+defun                : -126     0        0    factor     defun               
+defmacro             : -125     0        0    factor     defmacro            
+can-cast             : -124     0        0    factor     can-cast            
+cmp_def              : -123     0        0    factor     cmp_def             
+<=                   : -122     0        0    factor     <=                  
+>=                   : -121     0        0    factor     >=                  
+<                    : -120     0        0    factor     <                   
+>                    : -119     0        0    factor     >                   
+!=                   : -118     0        0    factor     !=                  
+=                    : -117     0        0    factor     =                   
+or                   : -116     0        0    factor     or                  
+and                  : -115     0        0    factor     and                 
+not                  : -114     0        0    factor     not                 
+~                    : -113     0        0    factor     ~                   
+^                    : -112     0        0    factor     ^                   
+|                    : -111     0        0    factor     |                   
+&                    : -110     0        0    factor     &                   
+power                : -109     0        0    factor     power               
 %                    : -108     0        0    factor     %                   
 /                    : -107     0        0    factor     /                   
 *                    : -106     0        0    factor     *                   

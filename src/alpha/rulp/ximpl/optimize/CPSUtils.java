@@ -4,10 +4,14 @@ import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_MAKE_CPS;
 import static alpha.rulp.lang.Constant.F_O_ADD;
+import static alpha.rulp.lang.Constant.F_O_AND;
 import static alpha.rulp.lang.Constant.F_O_BY;
 import static alpha.rulp.lang.Constant.F_O_DIV;
+import static alpha.rulp.lang.Constant.F_O_NOT;
+import static alpha.rulp.lang.Constant.F_O_OR;
 import static alpha.rulp.lang.Constant.F_O_POWER;
 import static alpha.rulp.lang.Constant.F_O_SUB;
+import static alpha.rulp.lang.Constant.F_O_XOR;
 import static alpha.rulp.lang.Constant.F_RETURN;
 import static alpha.rulp.lang.Constant.O_Nil;
 
@@ -88,6 +92,10 @@ public class CPSUtils {
 		cps_op.add(F_O_DIV);
 		cps_op.add(F_O_SUB);
 		cps_op.add(F_O_POWER);
+		cps_op.add(F_O_AND);
+		cps_op.add(F_O_OR);
+		cps_op.add(F_O_NOT);
+		cps_op.add(F_O_XOR);
 	}
 
 	private static IRObject _compute(IRObject obj, IRFrame frame) throws RException {

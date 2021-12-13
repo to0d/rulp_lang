@@ -16,10 +16,8 @@ import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Set;
 
-import alpha.rulp.lang.IRClass;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
-import alpha.rulp.lang.IRInstance;
 import alpha.rulp.lang.IRMember;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRSubject;

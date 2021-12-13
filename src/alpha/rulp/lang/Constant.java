@@ -257,6 +257,8 @@ public interface Constant {
 
 	String F_O_ADD = "+";
 
+	String F_O_AND = "&";
+
 	String F_O_BY = "*";
 
 	String F_O_DIV = "/";
@@ -277,11 +279,17 @@ public interface Constant {
 
 	String F_O_NE = "!=";
 
-	String F_O_POWER = "^";
+	String F_O_NOT = "~";
+
+	String F_O_OR = "|";
+
+	String F_O_POWER = "power";
 
 	String F_O_REF = "&";
 
 	String F_O_SUB = "-";
+
+	String F_O_XOR = "^";
 
 	String F_OPEN_TXT_FILE = "open-txt-file";
 
@@ -417,6 +425,8 @@ public interface Constant {
 
 	IRAtom O_ADD = RulpFactory.createAtom(F_O_ADD);
 
+	IRAtom O_AND = RulpFactory.createAtom(F_O_AND);
+
 	IRAtom O_BY = RulpFactory.createAtom(F_O_BY);
 
 	IRAtom O_Default = RulpFactory.createAtom(A_DEFAULT);
@@ -449,6 +459,10 @@ public interface Constant {
 
 	IRAtom O_Nil = RulpFactory.createNil();
 
+	IRAtom O_NOT = RulpFactory.createAtom(F_O_NOT);
+
+	IRAtom O_OR = RulpFactory.createAtom(F_O_OR);
+
 	IRAtom O_POWER = RulpFactory.createAtom(F_O_POWER);
 
 	IRAtom O_Private = RulpFactory.createAtom(A_PRIVATE);
@@ -462,6 +476,8 @@ public interface Constant {
 	IRAtom O_SUB = RulpFactory.createAtom(F_O_SUB);
 
 	IRBoolean O_True = RulpFactory.createBoolean(true);
+
+	IRAtom O_XOR = RulpFactory.createAtom(F_O_XOR);
 
 	int P_FINAL = 0x0001;
 

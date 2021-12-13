@@ -1,5 +1,6 @@
 root::!=
 root::%
+root::&
 root::*
 root::+
 root::-
@@ -99,6 +100,7 @@ root::open-txt-file
 root::or
 root::out-to-file
 root::parent-of
+root::power
 root::print
 root::print-frame-tree
 root::print-subject
@@ -162,3 +164,5 @@ root::value-type-of
 root::var
 root::when
 root::write-blob
+root::|
+root::~

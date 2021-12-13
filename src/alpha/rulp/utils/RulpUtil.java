@@ -965,6 +965,18 @@ public class RulpUtil {
 				av = (int) Math.pow(av, bv);
 				break;
 
+			case AND:
+				av = av & bv;
+				break;
+
+			case OR:
+				av = av | bv;
+				break;
+
+			case XOR:
+				av = av ^ bv;
+				break;
+
 			default:
 				throw new RException(String.format("Not support op: %s", op));
 			}
@@ -1000,6 +1012,18 @@ public class RulpUtil {
 
 			case POWER:
 				av = (long) Math.pow(av, bv);
+				break;
+
+			case AND:
+				av = av & bv;
+				break;
+
+			case OR:
+				av = av | bv;
+				break;
+
+			case XOR:
+				av = av ^ bv;
 				break;
 
 			default:
