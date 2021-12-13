@@ -75,6 +75,7 @@ root::has-member
 root::if
 root::instance
 root::int
+root::is-const
 root::join
 root::lambda
 root::let
@@ -86,6 +87,7 @@ root::ls
 root::macro
 root::make-blob
 root::make-cps
+root::make-list
 root::member
 root::name-of
 root::namespace
