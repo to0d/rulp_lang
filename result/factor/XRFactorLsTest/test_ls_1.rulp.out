@@ -1,3 +1,21 @@
+(ls)
+;=>'(main::main main::root main::system)
+
+(ls local)
+;=>'(main::local main::main main::root main::system)
+
+(ls main)
+;=>'(main::local main::main main::root main::system)
+
+(value-of main::parent)
+;=>system
+
+(value-of system::parent)
+;=>root
+
+(print-subject root)
+;=>nil
+;out:
 id=0, name=root, lvl=0, ref=0/0, entry=170, subject=root
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
@@ -173,4 +191,107 @@ true                 : -5       0        0    bool       true
 nil                  : -4       0        0    null       nil                 
 root                 : -1       0        0    frame      frame@root          
 ==========================================================================================================================
+
+
+;eof
+
+(print-subject system)
+;=>nil
+;out:
+id=1, name=system, lvl=1, ref=0/0, entry=27, pid=0(root), subject=system
+==========================================================================================================================
+Name(alias)          : EntryId  FrameId  Ref  Type       Value               
+--------------------------------------------------------------------------------------------------------------------------
+parent               : -197     1        0    frame      frame@root          
+use                  : -189     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=frame@system
+type#stack           : -188     1        0    atom       type#stack          
+stack                : -187     1        1    class      stack               
+type#queue           : -186     1        0    atom       type#queue          
+queue                : -185     1        1    class      queue               
+type#map             : -184     1        0    atom       type#map            
+map                  : -183     1        1    class      map                 
+clear                : -182     1        1    funcList   '((clear type#map) (clear type#queue) (clear type#set) (clear type#stack)) : frame=null, type=list
+                                         1    func       (clear type#set) : frame=frame@system
+                                         1    func       (clear type#map) : frame=frame@system
+                                         1    func       (clear type#queue) : frame=frame@system
+                                         1    func       (clear type#stack) : frame=frame@system
+type#set             : -181     1        0    atom       type#set            
+set                  : -180     1        1    class      set                 
+ls-print             : -179     1        1    funcList   '((ls-print nil nil) (ls-print nil)) : frame=null, type=list
+                                         1    func       (ls-print nil nil) : frame=frame@system
+                                         1    func       (ls-print nil) : frame=frame@system
+print-list           : -178     1        1    macro      print-list          
+println              : -177     1        1    funcList   '((println nil nil nil nil nil) (println nil nil nil nil) (println nil nil nil) (println nil nil) (println nil) (println)) : frame=null, type=list
+                                         1    func       (println) : frame=frame@system
+                                         1    func       (println nil) : frame=frame@system
+                                         1    func       (println nil nil) : frame=frame@system
+                                         1    func       (println nil nil nil) : frame=frame@system
+                                         1    func       (println nil nil nil nil) : frame=frame@system
+                                         1    func       (println nil nil nil nil nil) : frame=frame@system
+cmp                  : -176     1        1    func       (cmp nil nil) : frame=frame@system
+equal                : -175     1        1    funcList   '((equal nil nil) (equal string string)) : frame=null, type=list
+                                         1    func       (equal nil nil) : frame=frame@system
+                                         1    func       (equal string string) : frame=frame@system
+length-of            : -174     1        1    funcList   '((length-of blob) (length-of string)) : frame=null, type=list
+                                         1    func       (length-of string) : frame=frame@system
+                                         1    func       (length-of blob) : frame=frame@system
+get                  : -173     1        1    funcList   '((get array int int) (get array int) (get list int) (get type#queue int)) : frame=null, type=list
+                                         1    func       (get list int) : frame=frame@system
+                                         1    func       (get array int) : frame=frame@system
+                                         1    func       (get array int int) : frame=frame@system
+                                         1    func       (get type#queue int) : frame=frame@system
+add-all              : -172     1        1    func       (add-all list list) : frame=frame@system
+add                  : -171     1        1    funcList   '((add array nil nil nil) (add array nil nil) (add array nil) (add list nil nil nil) (add list nil nil) (add list nil)) : frame=null, type=list
+                                         1    func       (add list nil) : frame=frame@system
+                                         1    func       (add list nil nil) : frame=frame@system
+                                         1    func       (add list nil nil nil) : frame=frame@system
+                                         1    func       (add array nil) : frame=frame@system
+                                         1    func       (add array nil nil) : frame=frame@system
+                                         1    func       (add array nil nil nil) : frame=frame@system
+to-array             : -170     1        1    func       (to-array list) : frame=frame@system
+to-list              : -169     1        1    funcList   '((to-list array) (to-list list) (to-list type#queue) (to-list type#set) (to-list type#stack)) : frame=null, type=list
+                                         1    func       (to-list list) : frame=frame@system
+                                         1    func       (to-list array) : frame=frame@system
+                                         1    func       (to-list type#set) : frame=frame@system
+                                         1    func       (to-list type#queue) : frame=frame@system
+                                         1    func       (to-list type#stack) : frame=frame@system
+is-empty             : -168     1        1    funcList   '((is-empty array) (is-empty list) (is-empty type#map) (is-empty type#queue) (is-empty type#set) (is-empty type#stack)) : frame=null, type=list
+                                         1    func       (is-empty list) : frame=frame@system
+                                         1    func       (is-empty array) : frame=frame@system
+                                         1    func       (is-empty type#set) : frame=frame@system
+                                         1    func       (is-empty type#map) : frame=frame@system
+                                         1    func       (is-empty type#queue) : frame=frame@system
+                                         1    func       (is-empty type#stack) : frame=frame@system
+size-of              : -167     1        1    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#map) (size-of type#queue) (size-of type#set) (size-of type#stack)) : frame=null, type=list
+                                         1    func       (size-of list) : frame=frame@system
+                                         1    func       (size-of array) : frame=frame@system
+                                         1    func       (size-of array int) : frame=frame@system
+                                         1    func       (size-of type#set) : frame=frame@system
+                                         1    func       (size-of type#map) : frame=frame@system
+                                         1    func       (size-of type#queue) : frame=frame@system
+                                         1    func       (size-of type#stack) : frame=frame@system
+?load-paths          : -166     1        1    var        '() : type=list     
+system               : -3       1        0    frame      frame@system        
+root                 : -2       1        0    frame      frame@root          
+==========================================================================================================================
+
+
+;eof
+
+(print-subject main)
+;=>nil
+;out:
+id=2, name=main, lvl=2, ref=1/1, entry=5, pid=1(system), subject=main
+==========================================================================================================================
+Name(alias)          : EntryId  FrameId  Ref  Type       Value               
+--------------------------------------------------------------------------------------------------------------------------
+root                 : 1        2        0    frame      frame@root          
+system               : 2        2        0    frame      frame@system        
+main                 : 3        2        1    frame      frame@main          
+local                : 4        2        1    frame      frame@main          
+parent               : 5        2        0    frame      frame@system        
+==========================================================================================================================
+
+
+;eof
 

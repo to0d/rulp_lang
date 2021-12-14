@@ -1,0 +1,11 @@
+(print-list (ls root))
+;=>
+
+(print-list (ls system))
+;=>
+
+(ls-print root)
+;=>
+
+(ls-print system)
+;=>

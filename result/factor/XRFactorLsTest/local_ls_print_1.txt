@@ -1,2 +1,0 @@
-mbr=x, name=x, type=var, property='(public), value="10"
-mbr=y, name=y, type=var, property='(public), value="nil"

@@ -1,0 +1,9 @@
+(defvar x 10)
+(defvar y)
+;=>
+
+(ls local)
+;=>
+
+(ls-print local var)
+;=>

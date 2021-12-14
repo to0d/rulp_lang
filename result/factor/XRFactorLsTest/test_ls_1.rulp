@@ -1,0 +1,23 @@
+(ls)
+;=>
+
+(ls local)
+;=>
+
+(ls main)
+;=>
+
+(value-of main::parent)
+;=>
+
+(value-of system::parent)
+;=>
+
+(print-subject root)
+;=>
+
+(print-subject system)
+;=>
+
+(print-subject main)
+;=>

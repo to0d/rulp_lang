@@ -1,0 +1,41 @@
+(defun ls1 () (return (ls)))
+;;;
+
+(defun ls2 () (return (ls local)))
+;;;
+
+(defun ls3 (?v1) (return (ls)))
+;;;
+
+(defun ls4 (?v2) (return (ls local)))
+;;;
+
+(defun ls5 () (print-list (ls root)))
+;;;
+
+(defun ls6 () (print-list (ls system)))
+;;;
+
+(defun ls7 () (print-list (ls main)))
+;;;
+
+(ls1)
+;=>
+
+(ls2)
+;=>
+
+(ls3 1)
+;=>
+
+(ls4 2)
+;=>
+
+(ls5)
+;=>
+
+(ls6)
+;=>
+
+(ls7)
+;=>

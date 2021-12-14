@@ -1,0 +1,15 @@
+(defvar x 10)
+(defvar y)
+;=>&x &y
+
+(ls local)
+;=>'(main::local main::main main::root main::system main::x main::y)
+
+(ls-print local var)
+;=>nil
+;out:
+mbr=x, name=x, type=var, property='(public), value="10"
+mbr=y, name=y, type=var, property='(public), value="nil"
+
+;eof
+
