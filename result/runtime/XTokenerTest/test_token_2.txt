@@ -1,0 +1,30 @@
+1.1d
+"'hello'"
+a
+b
+a-b
+ABC123
+123ABC
+ABC 123
+ABC -123
+ABC -123.5
+123 ABC
+123_ABC
+ABC_123
+ABC_123___
+_ABC123
+____ABC123
+____ABC123___
+__
+_123ABC
+XXX 123ABC
+XXX 123 ABC
+XXX 123.5 ABC
+.2 A
+ABC " ' 12" 
+{}
+{};
+&name
+-NONE-
+*pro*
+*T*-2
