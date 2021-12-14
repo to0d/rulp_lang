@@ -41,6 +41,13 @@
 
 (defun cmp (?l ?2) (return (cmp_def ?l ?2)))
 
+(defun println ()                    (print "\n"))
+(defun println (?a1)                 (print ?a1 "\n"))
+(defun println (?a1 ?a2)             (print ?a1 ?a2 "\n"))
+(defun println (?a1 ?a2 ?a3)         (print ?a1 ?a2 ?a3 "\n"))
+(defun println (?a1 ?a2 ?a3 ?a4)     (print ?a1 ?a2 ?a3 ?a4 "\n"))
+(defun println (?a1 ?a2 ?a3 ?a4 ?a5) (print ?a1 ?a2 ?a3 ?a4 ?a5 "\n"))
+
 (defmacro print-list (?list) 
     (loop for ?e in ?list do 
         (print ?e "\n")

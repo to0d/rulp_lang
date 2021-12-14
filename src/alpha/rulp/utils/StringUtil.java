@@ -590,7 +590,7 @@ public class StringUtil {
 
 	}
 
-	public static String addEscapeString(String str) {
+	public static String addEscape(String str) {
 
 		StringBuffer sb = null;
 		int size = str.length();
@@ -614,6 +614,20 @@ public class StringUtil {
 		}
 
 		return sb == null ? str : sb.toString();
+	}
+
+	public static char convertEscapeCharToReal(char c) {
+
+		switch (c) {
+		case 'n':
+			return '\n';
+
+		case 'r':
+			return '\r';
+
+		default:
+			return c;
+		}
 	}
 
 	public static String getSingleMatchString(String mode, String content) throws RException {
@@ -681,31 +695,6 @@ public class StringUtil {
 		return false;
 	}
 
-	public static boolean needEscape(char c) {
-
-		switch (c) {
-		case '\\':
-		case '"':
-			return true;
-		}
-
-		return false;
-	}
-
-	public static char toEcapeChar(char c) {
-
-		switch (c) {
-		case 'n':
-			return '\n';
-
-		case 'r':
-			return '\r';
-
-		default:
-			return c;
-		}
-	}
-
 	public static boolean isNumber(String word) {
 
 		if (word == null || word.isEmpty()) {
@@ -743,34 +732,47 @@ public class StringUtil {
 
 	}
 
-	public static String removeEscapeString(String str) {
+	public static boolean needEscape(char c) {
 
-		if (str == null) {
+		switch (c) {
+		case '\\':
+		case '"':
+			return true;
+		}
+
+		return false;
+	}
+
+	public static String removeEscape(String value) {
+
+		if (value == null) {
 			return null;
 		}
 
+		int size = value.length();
 		StringBuffer sb = null;
-		int size = str.length();
 
-		NEXT: for (int i = 0; i < size; ++i) {
+		NEXT_CHAR: for (int i = 0; i < size; ++i) {
 
-			char c = str.charAt(i);
-			if (c == '\\' && (i + 1) < size) {
-				char c2 = str.charAt(i + 1);
-				switch (c2) {
-				case 'n':
-					c2 = '\n';
-					break;
+			char c = value.charAt(i);
 
-				case '\\':
-					c2 = '\\';
-					break;
+			if ((i + 1) < size && c == '\\') {
+				char c2 = value.charAt(i + 1);
+				if (StringUtil.isEscapeChar(c2)) {
 
-				case '"':
-					c2 = '"';
-					break;
+					c2 = StringUtil.convertEscapeCharToReal(c2);
 
-				default:
+					if (sb == null) {
+						sb = new StringBuffer();
+						if (i > 0) {
+							sb.append(value.substring(0, i));
+						}
+					}
+
+					sb.append(c2);
+					++i;
+
+				} else {
 
 					if (sb != null) {
 						sb.append(c);
@@ -778,28 +780,17 @@ public class StringUtil {
 					}
 
 					++i;
-					continue NEXT;
+					continue NEXT_CHAR;
 				}
-
-				if (sb == null) {
-					sb = new StringBuffer();
-					if (i > 0) {
-						sb.append(str.substring(0, i));
-					}
-				}
-
-				sb.append(c2);
-				++i;
 
 			} else {
-
 				if (sb != null) {
 					sb.append(c);
 				}
 			}
 		}
 
-		return sb == null ? str : sb.toString();
+		return sb == null ? value : sb.toString();
 	}
 
 	public static String simplifyPath(String path) {
@@ -849,35 +840,6 @@ public class StringUtil {
 		return newPath.isEmpty() ? "" + File.separatorChar : newPath;
 	}
 
-	public static List<String> splitStringByStr(String input, String sep) {
-
-		if (input == null) {
-			return Collections.<String>emptyList();
-		}
-
-		ArrayList<String> subStrs = new ArrayList<>();
-		if (sep == null || sep.length() == 0 || input.isEmpty()) {
-			subStrs.add(input);
-			return subStrs;
-		}
-
-		String line = input;
-		int sep_len = sep.length();
-
-		while (!line.isEmpty()) {
-			int mPos = line.indexOf(sep);
-			if (mPos > 0) {
-				subStrs.add(line.substring(0, mPos));
-				line = line.substring(mPos + sep_len);
-			} else {
-				subStrs.add(line);
-				line = "";
-			}
-		}
-
-		return subStrs;
-	}
-
 	public static List<String> splitStringByChar(String input, char... s) {
 
 		if (input == null) {
@@ -915,6 +877,35 @@ public class StringUtil {
 
 		if (sb.length() > 0) {
 			subStrs.add(sb.toString());
+		}
+
+		return subStrs;
+	}
+
+	public static List<String> splitStringByStr(String input, String sep) {
+
+		if (input == null) {
+			return Collections.<String>emptyList();
+		}
+
+		ArrayList<String> subStrs = new ArrayList<>();
+		if (sep == null || sep.length() == 0 || input.isEmpty()) {
+			subStrs.add(input);
+			return subStrs;
+		}
+
+		String line = input;
+		int sep_len = sep.length();
+
+		while (!line.isEmpty()) {
+			int mPos = line.indexOf(sep);
+			if (mPos > 0) {
+				subStrs.add(line.substring(0, mPos));
+				line = line.substring(mPos + sep_len);
+			} else {
+				subStrs.add(line);
+				line = "";
+			}
 		}
 
 		return subStrs;

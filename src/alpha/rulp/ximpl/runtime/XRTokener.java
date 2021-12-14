@@ -334,30 +334,7 @@ public class XRTokener implements IRTokener {
 
 		String value = content.substring(begPos, retPos);
 		if (escapeCount > 0) {
-
-			StringBuffer sb = new StringBuffer();
-			int size = value.length();
-
-			NEXT_CHAR: for (int i = 0; i < size; ++i) {
-				char c = value.charAt(i);
-				if (escapeCount > 0 && (i + 1) < size && c == '\\') {
-					char c2 = value.charAt(i + 1);
-					if (StringUtil.isEscapeChar(c2)) {
-						sb.append(StringUtil.toEcapeChar(c2));
-						++i;
-						--escapeCount;
-						continue NEXT_CHAR;
-					}
-				}
-
-				sb.append(c);
-			}
-
-			if (escapeCount != 0) {
-				throw new RException("Escape string error: " + value);
-			}
-
-			value = sb.toString();
+			value = StringUtil.removeEscape(value);
 		}
 
 		return new Token(findTokenType, value, retPos);

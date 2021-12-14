@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       58        0
+     Interpreter call id/level:       64        0
              CPS support/count:    false        0
                Frame max level:      512
                   Frame max id:      513
@@ -15,49 +15,49 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:     1847
+    factor:     1853
       func:      255
 ==========================================================================================================================
 
-Callable stats info: callId=58, row=14, column=59(1), value-max=509, value-unit=2^x
+Callable stats info: callId=64, row=14, column=33(2), value-max=509, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         .1111111111111111111111111111111111111111111111111111111148 max=2035, unit=3^x
+   Frame    RType  Count  Ref Object                         122222222222222222222222222222248 max=2035, unit=3^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor    509    0 if                                                                                       X
-    main     func    255    1 (fact2 nil)                                                                              9
-    root   factor    255    0 do                                                                                       9
-    root   factor    254    0 return                                                                                   9
-    root   factor    254    0 >                                                                                        9
-    root   factor    254    0 <=                                                                                       9
-    root   factor    254    0 +                                                                                        9
-    root   factor     51    0 defun                                  11111111111111111111111 11 1111 111 11111 1111   5 
-    root   factor      6    0 alias                           111111                                                    
-    root   factor      4    0 defclass                                                         1    1   1     1         
-    root   factor      3    0 deftemplate                                                                          111  
-    root   factor      1    0 load                                                                                    1 
-    root   factor      1    0 defvar                                1                                                   
-    root   factor      1    0 defmacro                                                      1                           
+    root   factor    509    0 if                                                             X
+    main     func    255    1 (fact2 nil)                                                    9
+    root   factor    255    0 do                                                             9
+    root   factor    254    0 return                                                         9
+    root   factor    254    0 >                                                              9
+    root   factor    254    0 <=                                                             9
+    root   factor    254    0 +                                                              9
+    root   factor     57    0 defun                              22222222222222121212122122 5 
+    root   factor      6    0 alias                          1221                             
+    root   factor      4    0 defclass                                           1 1 1  1     
+    root   factor      3    0 deftemplate                                                  21 
+    root   factor      1    0 load                                                          1 
+    root   factor      1    0 defvar                            1                             
+    root   factor      1    0 defmacro                                         1              
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          910            0          910
+        atom:          958            0          958
          int:          131            0          131
-      string:           21            0           21
+      string:           27            0           27
         list:            7            1            6
-        expr:          802          255          547
+        expr:          819          255          564
        array:            1            0            1
          var:          270          255           15
-        func:           99            0           99
+        func:          106            0          106
     template:            1            0            1
        macro:            1            0            1
        class:            4            0            4
       member:          117            0          117
        frame:          510          510            0
  interpreter:            1            0
-  frameEntry:          464            0
+  frameEntry:          465            0
       lambda:            0            0
 ==========================================================================================================================
 

@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       64        0
+     Interpreter call id/level:       70        0
              CPS support/count:     true   252432
                Frame max level:        4
                   Frame max id:        5
@@ -15,52 +15,52 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:   289694
+    factor:   289700
       func:        6
 ==========================================================================================================================
 
-Callable stats info: callId=64, row=17, column=33(2), value-max=84102, value-unit=4^x
+Callable stats info: callId=70, row=17, column=36(2), value-max=84102, value-unit=4^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         12222222222222222222222222222345X max=415604, unit=4^x
+   Frame    RType  Count  Ref Object                         12222222222222222222222222222222345X max=415604, unit=4^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor  84151    0 if                                                          134X
-    root   factor  84151    0 <=                                                          134X
-    root   factor  42078    0 return                                                      1349
-    main     func  42078 42073 (fun2 nil)                                                  1349
-    root   factor  42078    0 do                                                          1349
-    root   factor  42072    0 -                                                            249
-    root   factor  37168    0 make-cps                                                     249
-    root   factor  37168    0 +                                                            249
-    root   factor   4904    0 /                                                             18
-    root   factor     51    0 defun                              22222222222121212122122  3   
-    root   factor      6    0 alias                          1221                             
-    root   factor      4    0 defclass                                        1 1 1  1        
-    root   factor      3    0 deftemplate                                               21    
-    root   factor      1    0 setq                                                       1    
-    root   factor      1    0 load                                                        1   
-    root   factor      1    0 defvar                            1                             
-    root   factor      1    0 defmacro                                      1                 
+    root   factor  84151    0 if                                                             134X
+    root   factor  84151    0 <=                                                             134X
+    root   factor  42078    0 return                                                         1349
+    main     func  42078 42073 (fun2 nil)                                                     1349
+    root   factor  42078    0 do                                                             1349
+    root   factor  42072    0 -                                                               249
+    root   factor  37168    0 make-cps                                                        249
+    root   factor  37168    0 +                                                               249
+    root   factor   4904    0 /                                                                18
+    root   factor     57    0 defun                              22222222222222121212122122  3   
+    root   factor      6    0 alias                          1221                                
+    root   factor      4    0 defclass                                           1 1 1  1        
+    root   factor      3    0 deftemplate                                                  21    
+    root   factor      1    0 setq                                                          1    
+    root   factor      1    0 load                                                           1   
+    root   factor      1    0 defvar                            1                                
+    root   factor      1    0 defmacro                                         1                 
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          928            0          928
+        atom:          976            0          976
          int:         2464            0         2464
-      string:           21            0           21
+      string:           27            0           27
         list:            7            1            6
-        expr:       253034       168294        84740
+        expr:       253051       168294        84757
        array:            1            0            1
          var:        42094        42078           16
-        func:           99            0           99
+        func:          106            0          106
     template:            1            0            1
        macro:            1            0            1
        class:            4            0            4
       member:          117            0          117
        frame:        84156        84156            0
  interpreter:            1            0
-  frameEntry:        42288            0
+  frameEntry:        42289            0
       lambda:            0            0
 ==========================================================================================================================
 

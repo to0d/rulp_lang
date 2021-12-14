@@ -1,26 +1,33 @@
-id=1, name=system, lvl=1, ref=0/0, entry=26, pid=0(root), subject=system
+id=1, name=system, lvl=1, ref=0/0, entry=27, pid=0(root), subject=system
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-parent               : -196     1        0    frame      frame@root          
-use                  : -188     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=frame@system
-type#stack           : -187     1        0    atom       type#stack          
-stack                : -186     1        1    class      stack               
-type#queue           : -185     1        0    atom       type#queue          
-queue                : -184     1        1    class      queue               
-type#map             : -183     1        0    atom       type#map            
-map                  : -182     1        1    class      map                 
-clear                : -181     1        1    funcList   '((clear type#map) (clear type#queue) (clear type#set) (clear type#stack)) : frame=null, type=list
+parent               : -197     1        0    frame      frame@root          
+use                  : -189     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=frame@system
+type#stack           : -188     1        0    atom       type#stack          
+stack                : -187     1        1    class      stack               
+type#queue           : -186     1        0    atom       type#queue          
+queue                : -185     1        1    class      queue               
+type#map             : -184     1        0    atom       type#map            
+map                  : -183     1        1    class      map                 
+clear                : -182     1        1    funcList   '((clear type#map) (clear type#queue) (clear type#set) (clear type#stack)) : frame=null, type=list
                                          1    func       (clear type#set) : frame=frame@system
                                          1    func       (clear type#map) : frame=frame@system
                                          1    func       (clear type#queue) : frame=frame@system
                                          1    func       (clear type#stack) : frame=frame@system
-type#set             : -180     1        0    atom       type#set            
-set                  : -179     1        1    class      set                 
-ls-print             : -178     1        1    funcList   '((ls-print nil nil) (ls-print nil)) : frame=null, type=list
+type#set             : -181     1        0    atom       type#set            
+set                  : -180     1        1    class      set                 
+ls-print             : -179     1        1    funcList   '((ls-print nil nil) (ls-print nil)) : frame=null, type=list
                                          1    func       (ls-print nil nil) : frame=frame@system
                                          1    func       (ls-print nil) : frame=frame@system
-print-list           : -177     1        1    macro      print-list          
+print-list           : -178     1        1    macro      print-list          
+println              : -177     1        1    funcList   '((println nil nil nil nil nil) (println nil nil nil nil) (println nil nil nil) (println nil nil) (println nil) (println)) : frame=null, type=list
+                                         1    func       (println) : frame=frame@system
+                                         1    func       (println nil) : frame=frame@system
+                                         1    func       (println nil nil) : frame=frame@system
+                                         1    func       (println nil nil nil) : frame=frame@system
+                                         1    func       (println nil nil nil nil) : frame=frame@system
+                                         1    func       (println nil nil nil nil nil) : frame=frame@system
 cmp                  : -176     1        1    func       (cmp nil nil) : frame=frame@system
 equal                : -175     1        1    funcList   '((equal nil nil) (equal string string)) : frame=null, type=list
                                          1    func       (equal nil nil) : frame=frame@system

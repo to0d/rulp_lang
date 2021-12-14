@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:      111        0
+     Interpreter call id/level:      117        0
              CPS support/count:    false        0
                Frame max level:        3
                   Frame max id:        5
@@ -15,46 +15,46 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      121
+    factor:      127
       func:       14
 ==========================================================================================================================
 
-Callable stats info: callId=111, row=19, column=56(2), value-max=4, value-unit=2^x
+Callable stats info: callId=117, row=19, column=59(2), value-max=4, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         12222222222222222222222222222222332233222124333233333333 max=5, unit=2^x
+   Frame    RType  Count  Ref Object                         12222222222222222222222222222222222332233222124333233333333 max=5, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     46    0 defun                              22222222222121212122122  1     2   1       1        
-    root   factor     25    0 value-of                                                      132       1 132  11 331  
-    root   factor     14    0 return                                                             22       12 11   122
-    root   factor      8    0 ls                                                              11   2 2 2             
-    root   factor      6    0 defvar                            1                         111       1       1        
-    root   factor      6    0 alias                          1221                                                    
-    main     func      5    1 (f1)                                                               2        1       11 
-    main   member      4    1 namespace@ns1::f2                                                   1        1  1     1
-    main   member      4    1 namespace@ns1::f1                                                   1        1 1     1 
-    root   factor      4    0 defclass                                        1 1 1  1                               
-    root   factor      3    0 search-frame-of                                              1            1      1     
-    root   factor      3    0 deftemplate                                               21                           
-  system template      2    1 use                                                                       1      1     
-    root   factor      2    0 add_search_frame                                                          1      1     
-    root   factor      1    0 new                                                        1                           
-    root   factor      1    0 has-member                                                       1                     
-    root   factor      1    0 frame-of                                                                  1            
-    main     func      1    1 (f3)                                                                                  1
-    root   factor      1    0 defmacro                                      1                                        
+    root   factor     52    0 defun                              22222222222222121212122122  1     2   1       1        
+    root   factor     25    0 value-of                                                         132       1 132  11 331  
+    root   factor     14    0 return                                                                22       12 11   122
+    root   factor      8    0 ls                                                                 11   2 2 2             
+    root   factor      6    0 defvar                            1                            111       1       1        
+    root   factor      6    0 alias                          1221                                                       
+    main     func      5    1 (f1)                                                                  2        1       11 
+    main   member      4    1 namespace@ns1::f2                                                      1        1  1     1
+    main   member      4    1 namespace@ns1::f1                                                      1        1 1     1 
+    root   factor      4    0 defclass                                           1 1 1  1                               
+    root   factor      3    0 search-frame-of                                                 1            1      1     
+    root   factor      3    0 deftemplate                                                  21                           
+  system template      2    1 use                                                                          1      1     
+    root   factor      2    0 add_search_frame                                                             1      1     
+    root   factor      1    0 new                                                           1                           
+    root   factor      1    0 has-member                                                          1                     
+    root   factor      1    0 frame-of                                                                     1            
+    main     func      1    1 (f3)                                                                                     1
+    root   factor      1    0 defmacro                                         1                                        
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          832            0          832
-      string:           19            0           19
+        atom:          880            0          880
+      string:           25            0           25
         list:           16           10            6
-        expr:          485           16          469
+        expr:          502           16          486
        array:            1            0            1
          var:           24            4           20
-        func:           94            0           94
+        func:          101            0          101
     template:            1            0            1
        macro:            1            0            1
     instance:            1            0            1
@@ -62,7 +62,7 @@ Object create count:
       member:          146            9          137
        frame:           17           16            1
  interpreter:            1            0
-  frameEntry:          214            0
+  frameEntry:          215            0
       lambda:            0            0
 ==========================================================================================================================
 

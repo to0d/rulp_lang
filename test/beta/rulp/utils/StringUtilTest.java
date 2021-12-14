@@ -9,22 +9,22 @@ import alpha.rulp.utils.StringUtil;
 class StringUtilTest {
 
 	@Test
-	public void test_removeEscapeString() {
-		assertEquals("", StringUtil.removeEscapeString(""));
-		assertEquals(null, StringUtil.removeEscapeString(null));
-		assertEquals("a", StringUtil.removeEscapeString("a"));
-		assertEquals(" ", StringUtil.removeEscapeString(" "));
-		assertEquals(" a ", StringUtil.removeEscapeString(" a "));
-		assertEquals(" a\nb ", StringUtil.removeEscapeString(" a\\" + "nb "));
-		assertEquals(" a\nb ", StringUtil.removeEscapeString(" a\\nb "));
-		assertEquals(" a\\b ", StringUtil.removeEscapeString(" a\\\\b "));
+	public void test_remove_escape() {
+		assertEquals("", StringUtil.removeEscape(""));
+		assertEquals(null, StringUtil.removeEscape(null));
+		assertEquals("a", StringUtil.removeEscape("a"));
+		assertEquals(" ", StringUtil.removeEscape(" "));
+		assertEquals(" a ", StringUtil.removeEscape(" a "));
+		assertEquals(" a\nb ", StringUtil.removeEscape(" a\\" + "nb "));
+		assertEquals(" a\nb ", StringUtil.removeEscape(" a\\nb "));
+		assertEquals(" a\\b ", StringUtil.removeEscape(" a\\\\b "));
 	}
 
 	@Test
-	public void test_addEscapeString() {
-		assertEquals("", StringUtil.addEscapeString(""));
-		assertEquals("123", StringUtil.addEscapeString("123"));
-		assertEquals("a\\\\b", StringUtil.addEscapeString("a\\b"));
+	public void test_add_Escape() {
+		assertEquals("", StringUtil.addEscape(""));
+		assertEquals("123", StringUtil.addEscape("123"));
+		assertEquals("a\\\\b", StringUtil.addEscape("a\\b"));
 	}
 
 	@Test
