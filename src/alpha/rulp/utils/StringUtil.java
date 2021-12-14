@@ -598,7 +598,7 @@ public class StringUtil {
 		for (int i = 0; i < size; ++i) {
 
 			char c = str.charAt(i);
-			if (isEscapeChar(c)) {
+			if (needEscape(c)) {
 				if (sb == null) {
 					sb = new StringBuffer();
 					if (i > 0) {
@@ -672,12 +672,38 @@ public class StringUtil {
 
 		switch (c) {
 		case '\\':
-		case '\n':
+		case 'n':
+		case 'r':
 		case '"':
 			return true;
 		}
 
 		return false;
+	}
+
+	public static boolean needEscape(char c) {
+
+		switch (c) {
+		case '\\':
+		case '"':
+			return true;
+		}
+
+		return false;
+	}
+
+	public static char toEcapeChar(char c) {
+
+		switch (c) {
+		case 'n':
+			return '\n';
+
+		case 'r':
+			return '\r';
+
+		default:
+			return c;
+		}
 	}
 
 	public static boolean isNumber(String word) {

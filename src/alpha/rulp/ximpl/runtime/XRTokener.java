@@ -343,7 +343,7 @@ public class XRTokener implements IRTokener {
 				if (escapeCount > 0 && (i + 1) < size && c == '\\') {
 					char c2 = value.charAt(i + 1);
 					if (StringUtil.isEscapeChar(c2)) {
-						sb.append(c2);
+						sb.append(StringUtil.toEcapeChar(c2));
 						++i;
 						--escapeCount;
 						continue NEXT_CHAR;

@@ -372,7 +372,10 @@ public class XRParserTest extends RulpTestBase {
 	@Test
 	public void test_g_escape_string() {
 		_setup();
-		_test_parse_line("\"abc\\ndef\"", "\"abc\\\\ndef\"");
+		_test_parse_line("\"abc\\ndef\"", "\"abc\n" + "def\"");
+		_test_parse_line("\"abc\\rdef\"", "\"abc\r" + "def\"");
 		_test_parse_line("abc\ndef", "abc def");
+		_test_parse_line("abc\r\ndef", "abc def");
+		_test_parse_line("abc\rdef", "abcdef");
 	}
 }

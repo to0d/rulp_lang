@@ -88,7 +88,8 @@ public class FramePool {
 		if (frameId < pool1Len) {
 
 			if (globalFramePool1[frameId] == null) {
-				throw new RException("Frame not found in pool1: " + frameId);
+				// throw new RException("Frame not found in pool1: " + frameId);
+				return;
 			}
 
 			globalFramePool1[frameId] = null;
