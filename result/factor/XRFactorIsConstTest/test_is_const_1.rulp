@@ -9,15 +9,3 @@
 
 (is-const {1,2})
 ;=>
-
-(is-const '(a b c))
-;=>
-
-(is-const (make-list a b c))
-;=>
-
-(is-const $(make-list a b c))
-;=>
-
-(is-const $(to-named-list x (make-list a b c)))
-;=>

@@ -1,0 +1,25 @@
+(is-const {})
+;=>false
+
+(is-const {a, b, c})
+;=>false
+
+(is-const (add {a} c))
+;=>true
+
+(is-const $(add {a} c))
+;=>false
+
+(is-const $(add {} c))
+;=>false
+
+(is-const (make-array a b c))
+;=>true
+
+(is-const $(make-array a b c))
+;err:
+factor not found: $(make-array a b c)
+at main: $(make-array a b c)
+at main: (is-const $(make-array a b c))
+;eof
+

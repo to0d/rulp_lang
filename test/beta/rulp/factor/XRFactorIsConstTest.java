@@ -10,7 +10,20 @@ class XRFactorIsConstTest extends RulpTestBase {
 	void test_is_const_1() {
 
 		_setup();
-		_run_script(); 
+		_run_script();
+	}
 
+	@Test
+	void test_is_const_2_list() {
+
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_is_const_3_array() {
+
+		_setup();
+		_run_script();
 	}
 }

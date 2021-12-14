@@ -1158,6 +1158,11 @@ public class RulpUtil {
 
 		obj.decRef();
 
+//		if (obj.getType() == RType.ARRAY) {
+//			System.out.print("decRef: " + obj.getRef() + ", " + obj);
+//			System.out.println();
+//		}
+
 //		if ("frame@_$fun$_fun_add".equals(obj.toString())) {
 //			System.out.print("decRef: " + obj.getRef() + ", " + obj);
 //			System.out.println();
@@ -1280,6 +1285,11 @@ public class RulpUtil {
 		}
 
 		obj.incRef();
+
+//		if (obj.getType() == RType.ARRAY) {
+//			System.out.print("incRef: " + obj.getRef() + ", " + obj);
+//			System.out.println();
+//		}
 
 //		if ("frame@_$fun$_fun_add".equals(obj.toString())) {
 //			System.out.print("incRef: " + obj.getRef() + ", " + obj);

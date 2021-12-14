@@ -1,0 +1,12 @@
+(is-const '(a b c))
+;=>true
+
+(is-const (make-list a b c))
+;=>true
+
+(is-const $(make-list a b c))
+;=>false
+
+(is-const $(to-named-list x (make-list a b c)))
+;=>false
+
