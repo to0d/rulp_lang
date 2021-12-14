@@ -138,68 +138,6 @@ public class RulpTestBase {
 		_run_script(getCachePath() + ".rulp");
 	}
 
-	protected boolean _run_stmt(String inputStmt, Boolean expectError, String expectResult, String expectErrorMessage,
-			ArrayList<String> outLines, IRInterpreter interpreter) {
-
-		RResultList rsultList = null;
-
-		try {
-
-			out.clear();
-			outLines.add(inputStmt);
-
-			rsultList = RulpUtil.compute(interpreter, inputStmt);
-			String result = RulpUtil.toString(rsultList.results);
-			outLines.add(";=>" + result);
-
-			String output = out.getOut();
-			if (output != null && !output.isEmpty()) {
-				outLines.add(";out:");
-				outLines.add(output);
-				outLines.add(";eof");
-			}
-
-			outLines.add("");
-
-			if (expectResult != null && !result.equals(expectResult)) {
-				return false;
-			}
-
-			if (expectError != null && expectError) {
-				return false;
-			}
-
-		} catch (Exception e) {
-
-			outLines.add(";err:");
-			outLines.add(e.getMessage());
-			outLines.add(";eof");
-			outLines.add("");
-
-			if (expectError != null && !expectError) {
-				e.printStackTrace();
-				return false;
-			}
-
-			if (expectErrorMessage != null && !expectErrorMessage.equals(e.getMessage())) {
-				e.printStackTrace();
-				return false;
-			}
-		} finally {
-
-			if (rsultList != null) {
-				try {
-					rsultList.free();
-				} catch (RException e1) {
-					e1.printStackTrace();
-					fail(e1.toString());
-				}
-			}
-		}
-
-		return true;
-	}
-
 	protected void _run_script(String inputScriptPath) {
 
 		try {
@@ -293,6 +231,68 @@ public class RulpTestBase {
 
 	}
 
+	protected boolean _run_stmt(String inputStmt, Boolean expectError, String expectResult, String expectErrorMessage,
+			ArrayList<String> outLines, IRInterpreter interpreter) {
+
+		RResultList rsultList = null;
+
+		try {
+
+			out.clear();
+			outLines.add(inputStmt);
+
+			rsultList = RulpUtil.compute(interpreter, inputStmt);
+			String result = RulpUtil.toString(rsultList.results);
+			outLines.add(";=>" + result);
+
+			String output = out.getOut();
+			if (output != null && !output.isEmpty()) {
+				outLines.add(";out:");
+				outLines.add(output);
+				outLines.add(";eof");
+			}
+
+			outLines.add("");
+
+			if (expectResult != null && !result.equals(expectResult)) {
+				return false;
+			}
+
+			if (expectError != null && expectError) {
+				return false;
+			}
+
+		} catch (Exception e) {
+
+			outLines.add(";err:");
+			outLines.add(e.getMessage());
+			outLines.add(";eof");
+			outLines.add("");
+
+			if (expectError != null && !expectError) {
+				e.printStackTrace();
+				return false;
+			}
+
+			if (expectErrorMessage != null && !expectErrorMessage.equals(e.getMessage())) {
+				e.printStackTrace();
+				return false;
+			}
+		} finally {
+
+			if (rsultList != null) {
+				try {
+					rsultList.free();
+				} catch (RException e1) {
+					e1.printStackTrace();
+					fail(e1.toString());
+				}
+			}
+		}
+
+		return true;
+	}
+
 	protected void _setup() {
 
 		_interpreter = null;
@@ -304,16 +304,16 @@ public class RulpTestBase {
 	}
 
 	protected void _test(String input) {
-		System.out.println(input);
-		System.out.println(";;;");
-		System.out.println();
+//		System.out.println(input);
+//		System.out.println(";;;");
+//		System.out.println();
 		_test(input, null, null);
 	}
 
 	protected void _test(String input, String expectResult) {
-		System.out.println(input);
-		System.out.println(";=>");
-		System.out.println();
+//		System.out.println(input);
+//		System.out.println(";=>");
+//		System.out.println();
 		_test(input, expectResult, "");
 	}
 
