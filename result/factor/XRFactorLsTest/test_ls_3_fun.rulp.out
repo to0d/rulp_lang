@@ -211,6 +211,8 @@ root::~
 (ls6)
 ;=>nil
 ;out:
+system::++
+system::--
 system::?load-paths
 system::add
 system::add-all

@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       79        0
+     Interpreter call id/level:       81        0
              CPS support/count:    false        0
                Frame max level:        3
                   Frame max id:        6
@@ -15,45 +15,45 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      100
+    factor:      102
 ==========================================================================================================================
 
-Callable stats info: callId=79, row=11, column=40(2), value-max=5, value-unit=2^x
+Callable stats info: callId=81, row=11, column=41(2), value-max=5, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         1222222222222222222222222222222222255333 max=11, unit=2^x
+   Frame    RType  Count  Ref Object                         12222222222222222222222222222222222255333 max=11, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     47    0 defun                              22222222222222121212122122          
-    root   factor     18    0 frame-of                                                        1244212
-    root   factor      8    0 print                                                             33   
-    root   factor      6    0 alias                          1221                                    
-    root   factor      5    0 defclass                                           1 1 1  1    1       
-    root   factor      4    0 parent-of                                                           121
-    root   factor      4    0 defvar                            1                           1    1 1 
-    root   factor      3    0 deftemplate                                                  21        
-    root   factor      2    0 new                                                            11      
-    root   factor      2    0 do                                                                11   
-    root   factor      1    0 defmacro                                         1                     
+    root   factor     47    0 defun                              222221  2222222222 2212122121        
+    root   factor     18    0 frame-of                                                         1244212
+    root   factor      8    0 print                                                              33   
+    root   factor      6    0 alias                          1221                                     
+    root   factor      5    0 defclass                                             1  1 1  1  1       
+    root   factor      4    0 parent-of                                                            121
+    root   factor      4    0 defvar                            1                            1    1 1 
+    root   factor      3    0 deftemplate                              12                             
+    root   factor      3    0 defmacro                                11           1                  
+    root   factor      2    0 new                                                             11      
+    root   factor      2    0 do                                                                 11   
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          849            0          849
+        atom:          863            0          863
       string:           33            0           33
         list:            6            0            6
-        expr:          473            0          473
+        expr:          481            0          481
        array:            1            0            1
          var:           20            1           19
         func:           97            0           97
     template:            1            0            1
-       macro:            1            0            1
+       macro:            3            0            3
     instance:            2            0            2
        class:            5            0            5
       member:          129            0          129
        frame:            5            2            3
  interpreter:            1            0
-  frameEntry:          206            0
+  frameEntry:          208            0
       lambda:            0            0
 ==========================================================================================================================
 

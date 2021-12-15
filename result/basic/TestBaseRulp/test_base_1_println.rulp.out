@@ -1,0 +1,9 @@
+(println "a")
+(println "a")
+;=>nil nil
+;out:
+a
+a
+
+;eof
+

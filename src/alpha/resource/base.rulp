@@ -1,3 +1,6 @@
+;****************************************************;
+; Alias
+;****************************************************;
 (alias int INTEGER)
 (alias float FLOAT)
 (alias bool BOOL)
@@ -5,34 +8,15 @@
 (alias list LIST)
 (alias expr EXPRESSION)
 
+;****************************************************;
+; Enviroment vars
+;****************************************************;
 (defvar ?load-paths '())
 
-(defun size-of ((?l list)) (return (size-of-list ?l)))
-(defun size-of ((?arr array)) (return (size-of-array ?arr)))
-(defun size-of ((?arr array) (?dim int)) (return (size-of-array ?arr ?dim)))
 
-(defun is-empty ((?l list)) (return (equal (size-of-list ?l) 0)))
-(defun is-empty ((?arr array)) (return (equal (size-of-array ?arr) 0)))
-
-(defun to-list ((?l list)) (return ?l))
-(defun to-list  ((?arr array)) (return (add-array-to-list '() ?arr)))
-
-(defun to-array  ((?l list)) (return (add-list-to-array {} ?l)))
-
-(defun add ((?l list) ?e0) (return (add-list-to-list ?l '(?e0))))
-(defun add ((?l list) ?e0 ?e1) (return (add-list-to-list ?l '(?e0 ?e1))))
-(defun add ((?l list) ?e0 ?e1 ?e2) (return (add-list-to-list ?l '(?e0 ?e1 ?e2))))
-(defun add ((?a array) ?e0) (return (add-list-to-array ?a '(?e0))))
-(defun add ((?a array) ?e0 ?e1) (return (add-list-to-array ?a '(?e0 ?e1))))
-(defun add ((?a array) ?e0 ?e1 ?e2) (return (add-list-to-array ?a '(?e0 ?e1 ?e2))))
-
-(defun add-all ((?l1 list) (?l2 list)) (return (add-list-to-list ?l1 ?l2)))
-
-
-(defun get ((?l list) (?i int)) (return (get-of-list ?l ?i)))
-(defun get ((?arr array) (?i1 int)) (return (get-of-array ?arr ?i1)))
-(defun get ((?arr array) (?i1 int) (?i2 int)) (return (get-of-array ?arr ?i1 ?i2)))
-
+;****************************************************;
+; Basic tools
+;****************************************************;
 (defun length-of ((?l string)) (return (str-length ?l)))
 (defun length-of ((?l blob)) (return (blob-length ?l)))
 
@@ -48,12 +32,27 @@
 (defun println (?a1 ?a2 ?a3 ?a4)     (print ?a1 ?a2 ?a3 ?a4 "\n"))
 (defun println (?a1 ?a2 ?a3 ?a4 ?a5) (print ?a1 ?a2 ?a3 ?a4 ?a5 "\n"))
 
-(defmacro print-list (?list) 
-    (loop for ?e in ?list do 
-        (print ?e "\n")
-    )
+(defmacro -- (?v) (setq ?v (- ?v 1)))
+(defmacro ++ (?v) (setq ?v (+ ?v 1)))
+
+;****************************************************;
+; Namespace tools
+;****************************************************;
+(deftemplate use ((namespace atom) (?ns namespace))
+    (add_search_frame parent (frame-of $(value-of ?ns)))
 )
 
+(deftemplate use ((namespace atom) (?ns frame))
+    (add_search_frame parent ?ns)
+)
+
+(deftemplate use (namespace ?ns)
+    (error bad-type (strcat "namespace not found: " (to-string ?ns)))
+)
+
+;****************************************************;
+; Subject tools
+;****************************************************;
 (defun ls-print (?subject ?type) 
     (if (equal ?subject local)
     
@@ -98,6 +97,40 @@
     (ls-print ?subject nil)
 )
 
+;****************************************************;
+; Collection tools
+;****************************************************;
+(defun size-of ((?l list)) (return (size-of-list ?l)))
+(defun size-of ((?arr array)) (return (size-of-array ?arr)))
+(defun size-of ((?arr array) (?dim int)) (return (size-of-array ?arr ?dim)))
+
+(defun is-empty ((?l list)) (return (equal (size-of-list ?l) 0)))
+(defun is-empty ((?arr array)) (return (equal (size-of-array ?arr) 0)))
+
+(defun to-list ((?l list)) (return ?l))
+(defun to-list  ((?arr array)) (return (add-array-to-list '() ?arr)))
+
+(defun to-array  ((?l list)) (return (add-list-to-array {} ?l)))
+
+(defun add ((?l list) ?e0) (return (add-list-to-list ?l '(?e0))))
+(defun add ((?l list) ?e0 ?e1) (return (add-list-to-list ?l '(?e0 ?e1))))
+(defun add ((?l list) ?e0 ?e1 ?e2) (return (add-list-to-list ?l '(?e0 ?e1 ?e2))))
+(defun add ((?a array) ?e0) (return (add-list-to-array ?a '(?e0))))
+(defun add ((?a array) ?e0 ?e1) (return (add-list-to-array ?a '(?e0 ?e1))))
+(defun add ((?a array) ?e0 ?e1 ?e2) (return (add-list-to-array ?a '(?e0 ?e1 ?e2))))
+
+(defun add-all ((?l1 list) (?l2 list)) (return (add-list-to-list ?l1 ?l2)))
+
+
+(defun get ((?l list) (?i int)) (return (get-of-list ?l ?i)))
+(defun get ((?arr array) (?i1 int)) (return (get-of-array ?arr ?i1)))
+(defun get ((?arr array) (?i1 int) (?i2 int)) (return (get-of-array ?arr ?i1 ?i2)))
+
+(defmacro print-list (?list) 
+    (loop for ?e in ?list do 
+        (print ?e "\n")
+    )
+)
 
 (defclass set () final
     
@@ -248,17 +281,3 @@
 (defun clear    ((?stack stack)) (return (?stack::clear)))
 (defun to-list  ((?stack stack)) (return (?stack::to-list)))
 
-;(defclass namespace ())
-;
-
-(deftemplate use ((namespace atom) (?ns namespace))
-    (add_search_frame parent (frame-of $(value-of ?ns)))
-)
-
-(deftemplate use ((namespace atom) (?ns frame))
-    (add_search_frame parent ?ns)
-)
-
-(deftemplate use (namespace ?ns)
-    (error bad-type (strcat "namespace not found: " (to-string ?ns)))
-)
