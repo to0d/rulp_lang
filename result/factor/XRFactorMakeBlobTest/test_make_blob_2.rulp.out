@@ -1,0 +1,9 @@
+(defun fun (?len)
+    (defvar ?blob (make-blob ?len))
+    (return ?blob)
+)
+;=>fun
+
+(fun 5)
+;=>[0000000000]
+

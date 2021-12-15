@@ -31,13 +31,12 @@ public class XRFactorMakeBlob extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		int blobLen = RulpUtil.asInteger(args.get(1)).asInteger();
-
+		int blobLen = RulpUtil.asInteger(interpreter.compute(frame, args.get(1))).asInteger();
 		if (blobLen <= 0) {
 			throw new RException("invalid blob length: " + blobLen);
 		}
 
-		return RulpFactory.createBlob( blobLen);
+		return RulpFactory.createBlob(blobLen);
 	}
 
 	@Override

@@ -12,4 +12,11 @@ class XRFactorMakeBlobTest extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	void test_make_blob_2() {
+
+		_setup();
+		_run_script();
+	}
 }
