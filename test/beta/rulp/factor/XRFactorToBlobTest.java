@@ -1,4 +1,4 @@
-package beta.rulp.blob;
+package beta.rulp.factor;
 
 import org.junit.jupiter.api.Test;
 

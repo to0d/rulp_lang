@@ -1,0 +1,9 @@
+(defvar ?b (make-blob 3))
+;=>&?b
+
+?b
+;=>[000000]
+
+(length-of ?b)
+;=>3
+

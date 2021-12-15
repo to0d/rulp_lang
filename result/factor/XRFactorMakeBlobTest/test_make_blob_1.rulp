@@ -1,0 +1,8 @@
+(defvar ?b (make-blob 3))
+;=>
+
+?b
+;=>
+
+(length-of ?b)
+;=>
