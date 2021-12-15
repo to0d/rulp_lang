@@ -821,7 +821,7 @@ public class XRParser implements IRParser {
 		{
 			List<IRObject> list = matchArray();
 			if (list != null) {
-				return RulpFactory.createArray(list);
+				return RulpFactory.createVaryArray(list);
 			}
 		}
 

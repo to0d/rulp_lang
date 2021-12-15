@@ -12,6 +12,7 @@ package alpha.rulp.ximpl.factor;
 import static alpha.rulp.lang.Constant.O_False;
 import static alpha.rulp.lang.Constant.O_True;
 
+import alpha.rulp.lang.IRArray;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -52,6 +53,8 @@ public class XRFactorIsConst extends AbsRFactorAdapter implements IRFactor {
 			return ((IRList) obj).isConst() ? O_True : O_False;
 
 		case ARRAY:
+			return ((IRArray) obj).isConst() ? O_True : O_False;
+
 		case BLOB:
 		case CLASS:
 		case FUNC:

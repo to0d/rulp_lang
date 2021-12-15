@@ -17,7 +17,7 @@ public class TestArray extends RulpTestBase {
 	}
 
 	@Test
-	public void test_add_1() {
+	public void test_array_2_add() {
 		_setup();
 		_test("(add {} a b)", "{a,b}");
 		_test("(add {a,b} c)", "{a,b,c}");
@@ -25,8 +25,16 @@ public class TestArray extends RulpTestBase {
 	}
 
 	@Test
-	public void test_seta_1() {
+	public void test_array_3_seta() {
 		_setup();
 		_test("(seta {a, b} 1 x)", "{a,x}");
+	}
+	
+	@Test
+	public void test_array_4_const() {
+
+		_setup();
+		_run_script();
+		_gInfo();
 	}
 }

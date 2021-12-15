@@ -9,12 +9,17 @@
 
 package alpha.rulp.ximpl.factor;
 
+import java.util.ArrayList;
+
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.utils.RulpFactory;
+import alpha.rulp.utils.RulpUtil;
 
 public class XRFactorMakeArray extends AbsRFactorAdapter implements IRFactor {
 
@@ -24,7 +29,15 @@ public class XRFactorMakeArray extends AbsRFactorAdapter implements IRFactor {
 
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
-		return frame;
+
+		ArrayList<IRObject> elements = new ArrayList<>();
+
+		IRIterator<? extends IRObject> it = args.listIterator(1);
+		while (it.hasNext()) {
+			elements.add(interpreter.compute(frame, it.next()));
+		}
+
+		return RulpFactory.createVaryArray(elements);
 
 	}
 

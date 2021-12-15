@@ -108,6 +108,7 @@ import alpha.rulp.ximpl.factor.XRFactorIf;
 import alpha.rulp.ximpl.factor.XRFactorIsConst;
 import alpha.rulp.ximpl.factor.XRFactorLet;
 import alpha.rulp.ximpl.factor.XRFactorLoop;
+import alpha.rulp.ximpl.factor.XRFactorMakeArray;
 import alpha.rulp.ximpl.factor.XRFactorMakeList;
 import alpha.rulp.ximpl.factor.XRFactorNameOf;
 import alpha.rulp.ximpl.factor.XRFactorRef;
@@ -128,7 +129,7 @@ import alpha.rulp.ximpl.io.XRFactorPrint;
 import alpha.rulp.ximpl.io.XRFactorPrintFrameTree;
 import alpha.rulp.ximpl.io.XRFactorPrintSubject;
 import alpha.rulp.ximpl.io.XRFactorSaveTxtFile;
-import alpha.rulp.ximpl.lang.XRArray;
+import alpha.rulp.ximpl.lang.XRArrayVary;
 import alpha.rulp.ximpl.lang.XRAtom;
 import alpha.rulp.ximpl.lang.XRBlob;
 import alpha.rulp.ximpl.lang.XRBoolean;
@@ -277,11 +278,6 @@ public final class RulpFactory {
 		} catch (RException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public static IRArray createArray(List<? extends IRObject> elements) throws RException {
-		RType.ARRAY.incCreateCount();
-		return XRArray.buildArray(elements);
 	}
 
 	public static IRAtom createAtom(RName rname) {
@@ -572,6 +568,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSearchFrameOf(F_SEARCH_FRAEM_OF));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorIsConst(F_IS_CONST));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorMakeList(F_MAKE_LIST));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorMakeArray(F_MAKE_ARRAY));
 
 		// Class
 		RulpUtil.addFrameObject(rootFrame, new XRNoClass(A_NOCLASS, rootFrame));
@@ -923,6 +920,10 @@ public final class RulpFactory {
 		return new XRThreadContext();
 	}
 
+	public static IRTokener createTokener() {
+		return new XRTokener();
+	}
+
 //	public static IRClass createNoClass() {
 //		IRClass noClass = new XRDefClass(A_NOCLASS);
 //		try {
@@ -932,10 +933,6 @@ public final class RulpFactory {
 //		}
 //		return noClass;
 //	}
-
-	public static IRTokener createTokener() {
-		return new XRTokener();
-	}
 
 	public static String createUniqName(String name) {
 		return name + uniqNameCount.getAndIncrement();
@@ -950,6 +947,11 @@ public final class RulpFactory {
 		IRVar var = createVar(name);
 		var.setValue(newVal);
 		return var;
+	}
+
+	public static IRArray createVaryArray(List<? extends IRObject> elements) throws RException {
+		RType.ARRAY.incCreateCount();
+		return XRArrayVary.build(elements);
 	}
 
 	public static IRList createVaryList() {

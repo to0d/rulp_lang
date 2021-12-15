@@ -121,6 +121,7 @@ root::long
 root::loop
 root::ls
 root::macro
+root::make-array
 root::make-blob
 root::make-cps
 root::make-list

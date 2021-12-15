@@ -1,0 +1,11 @@
+(make-array)
+;=>
+
+(make-array a)
+;=>
+
+(make-array a b c)
+;=>
+
+(make-array {a} {b, c})
+;=>

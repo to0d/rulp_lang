@@ -11,11 +11,11 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.utils.RulpUtil;
 
-public class XRArray extends AbsRefObject implements IRArray {
+public class XRArrayVary extends AbsRefObject implements IRArray {
 
-	public static XRArray buildArray(List<? extends IRObject> elements) throws RException {
+	public static XRArrayVary build(List<? extends IRObject> elements) throws RException {
 
-		XRArray array = new XRArray();
+		XRArrayVary array = new XRArrayVary();
 		array.elementCount = 0;
 		array.arrayDimension = 1;
 		array.arraySize = new int[1];
@@ -36,12 +36,37 @@ public class XRArray extends AbsRefObject implements IRArray {
 
 	protected List<IRObject> elements = new ArrayList<>();
 
-	public XRArray() {
+	public XRArrayVary() {
 
 		super();
 
 		arrayDimension = 0;
 		elementCount = 0;
+	}
+
+	protected void _add(IRObject obj) throws RException {
+		elements.add(obj);
+		arraySize[0]++;
+
+		if (obj != null && obj.getType() != RType.NIL) {
+			elementCount++;
+			RulpUtil.incRef(obj);
+		}
+	}
+
+	@Override
+	protected void _delete() throws RException {
+
+		if (elements != null) {
+
+			for (IRObject e : elements) {
+				RulpUtil.decRef(e);
+			}
+
+			elements = null;
+		}
+
+		super._delete();
 	}
 
 	protected IRObject _get(IRObject arrayObj, int[] indexs, final int from) throws RException {
@@ -70,31 +95,6 @@ public class XRArray extends AbsRefObject implements IRArray {
 		}
 
 		return _get(obj, indexs, from + 1);
-	}
-
-	@Override
-	protected void _delete() throws RException {
-
-		if (elements != null) {
-
-			for (IRObject e : elements) {
-				RulpUtil.decRef(e);
-			}
-
-			elements = null;
-		}
-
-		super._delete();
-	}
-
-	protected void _add(IRObject obj) throws RException {
-		elements.add(obj);
-		arraySize[0]++;
-
-		if (obj != null && obj.getType() != RType.NIL) {
-			elementCount++;
-			RulpUtil.incRef(obj);
-		}
 	}
 
 	@Override
@@ -182,6 +182,11 @@ public class XRArray extends AbsRefObject implements IRArray {
 	@Override
 	public RType getType() {
 		return RType.ARRAY;
+	}
+
+	@Override
+	public boolean isConst() {
+		return false;
 	}
 
 	@Override

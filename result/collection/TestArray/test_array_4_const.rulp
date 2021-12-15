@@ -1,0 +1,23 @@
+(defun fun1 ((?line string))
+    (defvar ?out (make-array))
+    (add ?out ?line)
+    (return (to-list ?out))
+)
+(defun fun2 ((?line string))
+    (defvar ?out {})
+    (add ?out ?line)
+    (return (to-list ?out))
+)
+;=>
+
+(fun1 "abc")
+;=>'("abc")
+
+(fun1 "abc")
+;=>'("abc")
+
+(fun2 "abc")
+;=>'("abc")
+
+(fun2 "abc")
+;=>'("abc")

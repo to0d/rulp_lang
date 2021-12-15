@@ -4,11 +4,14 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-class XRFactorMakeArrayTest {
+import alpha.rulp.utils.RulpTestBase;
+
+class XRFactorMakeArrayTest extends RulpTestBase {
 
 	@Test
-	void test() {
-		fail("Not yet implemented");
+	void test_make_array_1() {
+		_setup();
+		_run_script();
 	}
 
 }

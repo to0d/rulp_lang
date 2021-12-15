@@ -241,6 +241,8 @@ public interface Constant {
 
 	String F_LS = "ls";
 
+	String F_MAKE_ARRAY = "make-array";
+
 	String F_MAKE_BLOB = "make-blob";
 
 	String F_MAKE_CPS = "make-cps";

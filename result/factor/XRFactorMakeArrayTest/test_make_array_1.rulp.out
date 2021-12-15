@@ -1,0 +1,12 @@
+(make-array)
+;=>{}
+
+(make-array a)
+;=>{a}
+
+(make-array a b c)
+;=>{a,b,c}
+
+(make-array {a} {b, c})
+;=>{{a},{b,c}}
+

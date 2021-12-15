@@ -10,6 +10,8 @@ public interface IRArray extends IRObject {
 
 	public int getElementCount();
 
+	public boolean isConst();
+
 	public boolean isEmpty() throws RException;
 
 	public void set(int index, IRObject obj) throws RException;
@@ -17,5 +19,4 @@ public interface IRArray extends IRObject {
 	public int size() throws RException;
 
 	public int size(int dim) throws RException;
-
 }
