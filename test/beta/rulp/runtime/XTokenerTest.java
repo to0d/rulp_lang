@@ -66,31 +66,6 @@ public class XTokenerTest extends RulpTestBase {
 		}
 	}
 
-	void _test_token(String input, String expect) {
-
-		System.out.println(input);
-
-		IRTokener tokener = RulpFactory.createTokener();
-		tokener.setContent(input);
-		StringBuilder sb = new StringBuilder();
-
-		Token token = null;
-		try {
-
-			while ((token = tokener.next()) != null) {
-				sb.append(token.toString());
-				sb.append("; ");
-			}
-
-		} catch (RException e) {
-			e.printStackTrace();
-			fail(e.toString());
-		}
-
-		sb.setLength(sb.length() - 1);
-		assertEquals(expect, sb.toString());
-	}
-
 	void _test_token_not_strict(String input, String expect) {
 
 		IRTokener tokener = RulpFactory.createTokener();
@@ -165,4 +140,9 @@ public class XTokenerTest extends RulpTestBase {
 		_test_pase_token();
 	}
 
+	@Test
+	public void test_token_9_slot() {
+		_setup();
+		_test_pase_token();
+	}
 }
