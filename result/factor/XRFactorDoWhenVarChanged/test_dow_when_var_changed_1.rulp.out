@@ -1,0 +1,12 @@
+(defvar x 1)
+;=>&x
+
+(do-when-var-changed x (lambda (?var ?ov ?nv) (print "var'" (name-of ?var) "' changed from '" ?ov "' to '" ?nv "'")))
+;=>nil
+
+(setq x 9)
+;=>&x
+;out:
+var'x' changed from '1' to '9'
+;eof
+

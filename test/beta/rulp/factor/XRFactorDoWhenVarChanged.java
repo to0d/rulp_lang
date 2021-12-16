@@ -7,13 +7,11 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorDoWhenVarChanged extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_dow_when_var_changed_1() {
 
 		_setup();
-		_test("(defvar x 1)");
-		_test("(do-when-var-changed x (lambda (?var ?ov ?nv) (print \"var'\" (name-of ?var) \"' changed from '\" ?ov \"' to '\" ?nv \"'\")))");
-		_test("(setq x 9)", "&x", "var'x' changed from '1' to '9'");
-
+		_run_script();
+		_gInfo();
 	}
 
 }
