@@ -1,0 +1,66 @@
+(load "result/rclass/TestClass/test_rclass_1.rulp")
+;;;
+
+(ls class1)
+;=>
+
+(new class1 o1)
+;=>
+
+(ls o1)
+;=>
+
+(o1::get)
+;=>
+
+(ls o1)
+;=>
+
+(o1::set 5)
+;=>
+
+(o1::get)
+;=>
+
+(o1::add 1)
+;=>
+
+(o1::get)
+;=>
+
+(o1::sub 2)
+;=>
+
+(o1::get)
+;=>
+
+(ls o1)
+;=>
+
+((:: o1 get))
+;=>
+
+(ls class1)
+;=>
+
+(ls o1)
+;=>
+
+(print-subject o1 -1)
+;;;
+
+(type-of o1)
+;=>
+
+(rulp-object-count frame)
+;=>2
+
+(delete o1)
+;=>nil
+
+(type-of o1)
+;=>
+
+(rulp-object-count frame)
+;=>1
+
