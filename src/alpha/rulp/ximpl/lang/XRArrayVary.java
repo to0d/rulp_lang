@@ -13,6 +13,43 @@ import alpha.rulp.utils.RulpUtil;
 
 public class XRArrayVary extends AbsRefObject implements IRArray {
 
+	public static XRArrayVary build() throws RException {
+
+		XRArrayVary array = new XRArrayVary();
+		array.elementCount = 0;
+		array.arrayDimension = 1;
+		array.arraySize = new int[1];
+		array.arraySize[0] = 0;
+
+		return array;
+	}
+
+	public static XRArrayVary build(int[] sizes) throws RException {
+
+		int dimension = sizes.length;
+
+		if (dimension < 1 || dimension > 2) {
+			throw new RException("support dimension: " + dimension);
+		}
+
+		XRArrayVary array = new XRArrayVary();
+		array.elementCount = 0;
+		array.arrayDimension = dimension;
+		array.arraySize = new int[dimension];
+
+		for (int i = 0; i < dimension; ++i) {
+
+			int size = sizes[i];
+			if (size < 1) {
+				throw new RException("support size: " + size);
+			}
+
+			array.arraySize[i] = size;
+		}
+
+		return array;
+	}
+
 	public static XRArrayVary build(List<? extends IRObject> elements) throws RException {
 
 		XRArrayVary array = new XRArrayVary();

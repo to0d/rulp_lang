@@ -187,6 +187,7 @@ system::clear
 system::cmp
 system::equal
 system::get
+system::is-blank
 system::is-empty
 system::length-of
 system::ls-print
@@ -398,7 +399,8 @@ mbr=clear, name='((clear type#map) (clear type#queue) (clear type#set) (clear ty
 mbr=cmp, name=(cmp nil nil), type=func, property='(public)
 mbr=equal, name='((equal nil nil) (equal string string)), type=func, property='(public)
 mbr=get, name='((get array int int) (get array int) (get list int) (get type#queue int)), type=func, property='(public)
-mbr=is-empty, name='((is-empty array) (is-empty list) (is-empty type#map) (is-empty type#queue) (is-empty type#set) (is-empty type#stack)), type=func, property='(public)
+mbr=is-blank, name=(is-blank string), type=func, property='(public)
+mbr=is-empty, name='((is-empty array) (is-empty list) (is-empty string) (is-empty type#map) (is-empty type#queue) (is-empty type#set) (is-empty type#stack)), type=func, property='(public)
 mbr=length-of, name='((length-of blob) (length-of string)), type=func, property='(public)
 mbr=ls-print, name='((ls-print nil nil) (ls-print nil)), type=func, property='(public)
 mbr=map, name=map, type=class, property='(public), class-property='(final)

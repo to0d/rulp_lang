@@ -36,6 +36,13 @@
 (defmacro ++ (?v) (setq ?v (+ ?v 1)))
 
 ;****************************************************;
+; String tools
+;****************************************************;
+(defun is-empty ((?l string)) (return (= (str-length ?l) 0)))
+(defun is-blank ((?l string)) (return (= (str-length (str-trim ?l)) 0)))
+
+
+;****************************************************;
 ; Namespace tools
 ;****************************************************;
 (deftemplate use ((namespace atom) (?ns namespace))

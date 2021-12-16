@@ -1,11 +1,11 @@
 (make-array)
 ;=>
 
-(make-array a)
+(make-array 1)
 ;=>
 
-(make-array a b c)
+(make-array 1 3)
 ;=>
 
-(make-array {a} {b, c})
-;=>
+(make-array 1 2 3)
+;err

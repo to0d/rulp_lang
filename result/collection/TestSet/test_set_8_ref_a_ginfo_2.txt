@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       77        0
+     Interpreter call id/level:       79        0
              CPS support/count:    false        0
                Frame max level:        7
                   Frame max id:       10
@@ -15,41 +15,41 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:       81
+    factor:       83
       func:        4
 ==========================================================================================================================
 
-Callable stats info: callId=77, row=14, column=39(2), value-max=2, value-unit=2^x
+Callable stats info: callId=79, row=14, column=40(2), value-max=2, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         122222222222222222222222222222222234212 max=6, unit=2^x
+   Frame    RType  Count  Ref Object                         1222222222222222222222222222222222234212 max=6, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     48    0 defun                              222221  2222222222 2212122121 1    
-    root   factor      6    0 rulp-object-count                                              11  2 2
-    root   factor      6    0 alias                          1221                                   
-    root   factor      5    0 defclass                                             1  1 1  1    1   
-    root   factor      3    0 deftemplate                              12                           
-    root   factor      3    0 defmacro                                11           1                
-    root   factor      2    0 setq                                                             11   
-    root   factor      2    0 new                                                              11   
-    root   factor      2    0 defvar                            1                             1     
-  system   member      1    1 set::_set_init                                                   1    
-  system   member      1    1 set::_set_add                                                     1   
-    main     func      1    1 (fun_add nil)                                                     1   
-    root   factor      1    0 do                                                                1   
-    root   factor      1    0 delete                                                              1 
+    root   factor     50    0 defun                              22222111 2222222222 2212122121 1    
+    root   factor      6    0 rulp-object-count                                               11  2 2
+    root   factor      6    0 alias                          1221                                    
+    root   factor      5    0 defclass                                              1  1 1  1    1   
+    root   factor      3    0 deftemplate                               12                           
+    root   factor      3    0 defmacro                                11            1                
+    root   factor      2    0 setq                                                              11   
+    root   factor      2    0 new                                                               11   
+    root   factor      2    0 defvar                            1                              1     
+  system   member      1    1 set::_set_init                                                    1    
+  system   member      1    1 set::_set_add                                                      1   
+    main     func      1    1 (fun_add nil)                                                      1   
+    root   factor      1    0 do                                                                 1   
+    root   factor      1    0 delete                                                               1 
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          838            0          838
+        atom:          855            0          855
       string:           26            0           26
         list:            6            0            6
-        expr:          466            4          462
+        expr:          479            4          475
        array:            1            0            1
          var:           21            3           18
-        func:          102            4           98
+        func:          104            4          100
     template:            1            0            1
        macro:            3            0            3
     instance:            3            1            2
@@ -57,7 +57,7 @@ Object create count:
       member:          128            7          121
        frame:            9            5            4
  interpreter:            1            0
-  frameEntry:          212            0
+  frameEntry:          213            0
       lambda:            3            0
 ==========================================================================================================================
 

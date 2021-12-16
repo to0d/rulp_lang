@@ -17,5 +17,11 @@ public class TestBaseRulp extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	public void test_base_3_string_tool() {
+		_setup();
+		_run_script();
+	}
 
 }

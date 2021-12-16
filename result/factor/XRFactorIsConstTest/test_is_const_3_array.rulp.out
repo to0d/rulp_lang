@@ -1,3 +1,21 @@
+(is-const (add {a} c))
+;=>true
+
+(is-const $(add {a} c))
+;=>false
+
+(is-const $(add {} c))
+;=>false
+
+(is-const (make-array 3))
+;=>true
+
+(is-const $(make-array 3))
+;=>false
+
+(is-const $(make-array))
+;=>false
+
 (is-const {})
 ;=>false
 

@@ -1,0 +1,23 @@
+(is-empty "")
+;=>
+
+(is-empty " ")
+;=>
+
+(is-empty "abc")
+;=>
+
+(is-empty "\n")
+;=>
+
+(is-blank "")
+;=>
+
+(is-blank " ")
+;=>
+
+(is-blank "abc")
+;=>
+
+(is-blank "\n")
+;=>

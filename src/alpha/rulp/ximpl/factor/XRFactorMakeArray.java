@@ -30,14 +30,24 @@ public class XRFactorMakeArray extends AbsRFactorAdapter implements IRFactor {
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		ArrayList<IRObject> elements = new ArrayList<>();
+		if (args.size() > 3) {
+			throw new RException("Invalid parameters: " + args);
+		}
+
+		int dimension = args.size() - 1;
+		if (dimension == 0) {
+			return RulpFactory.createVaryArray();
+		}
+
+		int sizes[] = new int[dimension];
+		int index = 0;
 
 		IRIterator<? extends IRObject> it = args.listIterator(1);
 		while (it.hasNext()) {
-			elements.add(interpreter.compute(frame, it.next()));
+			sizes[index++] = RulpUtil.asInteger(interpreter.compute(frame, it.next())).asInteger();
 		}
 
-		return RulpFactory.createVaryArray(elements);
+		return RulpFactory.createVaryArray(sizes);
 
 	}
 

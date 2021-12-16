@@ -954,6 +954,16 @@ public final class RulpFactory {
 		return XRArrayVary.build(elements);
 	}
 
+	public static IRArray createVaryArray(int[] sizes) throws RException {
+		RType.ARRAY.incCreateCount();
+		return XRArrayVary.build(sizes);
+	}
+
+	public static IRArray createVaryArray() throws RException {
+		RType.ARRAY.incCreateCount();
+		return XRArrayVary.build();
+	}
+
 	public static IRList createVaryList() {
 		RType.LIST.incCreateCount();
 		return new XRListVary(RType.LIST, null);

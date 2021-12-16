@@ -1,0 +1,24 @@
+(is-empty "")
+;=>true
+
+(is-empty " ")
+;=>false
+
+(is-empty "abc")
+;=>false
+
+(is-empty "\n")
+;=>false
+
+(is-blank "")
+;=>true
+
+(is-blank " ")
+;=>true
+
+(is-blank "abc")
+;=>false
+
+(is-blank "\n")
+;=>false
+

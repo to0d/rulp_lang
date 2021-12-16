@@ -220,6 +220,7 @@ system::clear
 system::cmp
 system::equal
 system::get
+system::is-blank
 system::is-empty
 system::length-of
 system::ls-print
