@@ -1,0 +1,6 @@
+in : (defvar ?file-separatorChar "/")
+out: (defvar ?file-separatorChar "/")
+
+in : (defvar ?file-separatorChar "\\")
+out: (defvar ?file-separatorChar "\\")
+

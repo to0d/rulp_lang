@@ -1,5 +1,4 @@
-;;example comes from chtb_0593.nw
-((IP (IP (NP-SBJ (CP (WHNP-2 (-NONE- *OP*))
+in : ((IP (IP (NP-SBJ (CP (WHNP-2 (-NONE- *OP*))
 		     (CP (IP (NP-TPC (-NONE- *T*-2))
 			     (NP-SBJ (NN 生产)
 				     (NN 成本))
@@ -37,3 +36,4 @@
 				 (VP (VA 多)))))
 		     (PU 」))))
      (PU 。)))
+eof

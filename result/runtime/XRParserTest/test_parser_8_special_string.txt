@@ -1,0 +1,3 @@
+(doSendCommand "EVAL %%TST.\\\"%^&*~!()<>?./,{}||-=var7\\\":s 5")
+(expectSimpleResult "'hello'")
+(defvar ?file-separatorChar ";")

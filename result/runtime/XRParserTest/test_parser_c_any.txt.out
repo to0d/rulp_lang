@@ -1,0 +1,15 @@
+in : &name
+out: &name
+
+in : -NONE-
+out: -NONE-
+
+in : *pro*
+out: *pro*
+
+in : *T*-2
+out: *T*-2
+
+in : (3.2万)
+out: (3.2万)
+

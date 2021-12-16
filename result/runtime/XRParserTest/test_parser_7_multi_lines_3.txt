@@ -1,4 +1,4 @@
-( (IP (NP-PN-SBJ (NR 阿布拉莫夫))
+in : ( (IP (NP-PN-SBJ (NR 阿布拉莫夫))
          (VP (NP-TMP (NT 昨天)
                      (NT 晚上))
              (VP (VP (PP-LOC (P 在)
@@ -8180,4 +8180,4 @@
                          (CD 六)
                          (CLP (M 度)))))
          (PU 。)))
-
+eof

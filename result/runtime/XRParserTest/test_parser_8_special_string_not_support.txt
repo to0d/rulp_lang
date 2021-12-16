@@ -1,0 +1,2 @@
+(defvar ?file-separatorChar "/")
+(defvar ?file-separatorChar "\\")

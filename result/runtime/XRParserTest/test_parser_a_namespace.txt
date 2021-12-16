@@ -1,0 +1,2 @@
+nm:hasChild
+(nm:a nm:b)

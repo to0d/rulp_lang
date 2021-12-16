@@ -1,0 +1,17 @@
+in : (a b)
+(x y)
+eof
+
+in : (a b);a comment line
+(x y)
+eof
+
+in : (a b ;a comment line
+(x y);
+)
+eof
+
+in : (a b 
+
+   )
+eof
