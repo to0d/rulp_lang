@@ -1,0 +1,81 @@
+in : +
+out: +
+
+in : -
+out: -
+
+in : *
+out: *
+
+in : /
+out: /
+
+in : mod
+out: mod
+
+in : rem
+out: rem
+
+in : incf
+out: incf
+
+in : decf
+out: decf
+
+in : =
+out: =
+
+in : /=
+out: /=
+
+in : >
+out: >
+
+in : <
+out: <
+
+in : >=
+out: >=
+
+in : <=
+out: <=
+
+in : max
+out: max
+
+in : min
+out: min
+
+in : and
+out: and
+
+in : or
+out: or
+
+in : not
+out: not
+
+in : logand
+out: logand
+
+in : logior
+out: logior
+
+in : logxor
+out: logxor
+
+in : lognor
+out: lognor
+
+in : logeqv
+out: logeqv
+
+in : def!
+out: def!
+
+in : let*
+out: let*
+
+in : ?
+out: ?
+

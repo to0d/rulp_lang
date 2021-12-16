@@ -1,0 +1,6 @@
+in : '(a b c)
+out: '(a b c)
+
+in : ' (a b c)
+out: '(a b c)
+

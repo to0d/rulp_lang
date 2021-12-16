@@ -1,0 +1,96 @@
+in : a::b::c
+out: (:: (:: a b) c)
+
+in : obj::mbr1
+out: obj::mbr1
+
+in : (:: obj mbr1)
+out: (:: obj mbr1)
+
+in : (+ 1 2 3)
+out: (+ 1 2 3)
+
+in : (-a)
+out: (-a)
+
+in : ()
+out: ()
+
+in : (())
+out: (())
+
+in : (_a)
+out: (_a)
+
+in : (a)
+out: (a)
+
+in : ((a))
+out: ((a))
+
+in : ((a) b)
+out: ((a) b)
+
+in : ((&a) &b)
+out: ((&a) &b)
+
+in : ("abc")
+out: ("abc")
+
+in : (?xx)
+out: (?xx)
+
+in : (setRelatedTags $NOTE $RULE $UID)
+out: (setRelatedTags $NOTE $RULE $UID)
+
+in : setRelatedTags TeX LaTex)
+err: Bad Syntax at line 0: token=[S:1:0:25:)], line=setRelatedTags TeX LaTex)
+
+in : (add_tag_relation (CL-Operator hasSubCollection CL-ArithmeticOp))
+out: (add_tag_relation (CL-Operator hasSubCollection CL-ArithmeticOp))
+
+in : (a b.c)
+out: (a b.c)
+
+in : (hasSubTags BOSS-option SS1-Option-6)
+out: (hasSubTags BOSS-option SS1-Option-6)
+
+in : (C&C++ a)
+out: (C&C++ a)
+
+in : (a b )
+out: (a b)
+
+in : (a b c)
+out: (a b c)
+
+in : (a b-c)
+out: (a b-c)
+
+in : (a b c) (x y z)
+out: (a b c) (x y z)
+
+in : (a b ?)
+out: (a b ?)
+
+in : (join (query a b ?) (query ? b d))
+out: (join (query a b ?) (query ? b d))
+
+in : (defmacro ?x (?Team) "a dest" (join (x AS400 hasChild ?) (y ?Team tagAttrOf ?)))
+out: (defmacro ?x (?Team) "a dest" (join (x AS400 hasChild ?) (y ?Team tagAttrOf ?)))
+
+in : (-> mod '(a p1 c))
+out: (-> mod '(a p1 c))
+
+in : (defs a p1 c)
+out: (defs a p1 c)
+
+in : (lists a ? ?)
+out: (lists a ? ?)
+
+in : $(a b c)
+out: $(a b c)
+
+in : (a ,)
+out: (a ,)
+
