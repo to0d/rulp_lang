@@ -70,6 +70,13 @@ public class TestClass extends RulpTestBase {
 		_run_script();
 		_gInfo();
 	}
+	
+	@Test
+	public void test_class_7_overload_4_same_name_fun() {
+
+		_setup();
+		_run_script();
+	}
 
 	@Test
 	public void test_class_8_init_1() {

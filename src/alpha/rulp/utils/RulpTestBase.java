@@ -304,16 +304,16 @@ public class RulpTestBase {
 	}
 
 	protected void _test(String input) {
-		System.out.println(input);
-		System.out.println(";;;");
-		System.out.println();
+//		System.out.println(input);
+//		System.out.println(";;;");
+//		System.out.println();
 		_test(input, null, null);
 	}
 
 	protected void _test(String input, String expectResult) {
-		System.out.println(input);
-		System.out.println(";=>");
-		System.out.println();
+//		System.out.println(input);
+//		System.out.println(";=>");
+//		System.out.println();
 		_test(input, expectResult, "");
 	}
 
