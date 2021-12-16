@@ -245,11 +245,11 @@ public interface Constant {
 
 	String F_MAKE_BLOB = "make-blob";
 
-	String F_MAKE_STRING = "make-string";
-
 	String F_MAKE_CPS = "make-cps";
 
 	String F_MAKE_LIST = "make-list";
+
+	String F_MAKE_STRING = "make-string";
 
 	String F_MBR_INIT = "init";
 
@@ -388,8 +388,10 @@ public interface Constant {
 	String F_TO = "to";
 
 	String F_TO_ATOM = "to-atom";
-
+	
 	String F_TO_BLOB = "to-blob";
+
+	String F_TO_EXPR = "to-expr";
 
 	String F_TO_INT = "to-int";
 

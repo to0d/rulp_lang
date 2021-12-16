@@ -1,0 +1,27 @@
+(defvar x 10) x
+;=>
+
+x
+;=>
+
+; reference exist variable
+(setq (ref x) 1)
+;=>
+
+x
+;=>
+
+; reference not exist variable
+(ref y)
+;=>
+
+y
+;=>
+
+; reference exist variable
+(setq (ref z) 2)
+;=>
+
+z
+;=>
+

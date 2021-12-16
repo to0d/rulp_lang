@@ -1,0 +1,15 @@
+(to-blob 1)
+;=>
+
+(to-blob 1L)
+;=>
+
+(to-blob 1.0)
+;=>
+
+(to-blob 1.0d)
+;=>
+
+(to-blob "abc")
+;=>
+

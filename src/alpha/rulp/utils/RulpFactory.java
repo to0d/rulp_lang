@@ -115,6 +115,7 @@ import alpha.rulp.ximpl.factor.XRFactorSetq;
 import alpha.rulp.ximpl.factor.XRFactorSubjectOf;
 import alpha.rulp.ximpl.factor.XRFactorToAtom;
 import alpha.rulp.ximpl.factor.XRFactorToBlob;
+import alpha.rulp.ximpl.factor.XRFactorToExpr;
 import alpha.rulp.ximpl.factor.XRFactorToInteger;
 import alpha.rulp.ximpl.factor.XRFactorToNamedList;
 import alpha.rulp.ximpl.factor.XRFactorToNoNamedList;
@@ -570,6 +571,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorIsConst(F_IS_CONST));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorMakeList(F_MAKE_LIST));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorMakeArray(F_MAKE_ARRAY));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorToExpr(F_TO_EXPR));
 
 		// Class
 		RulpUtil.addFrameObject(rootFrame, new XRNoClass(A_NOCLASS, rootFrame));
