@@ -11,21 +11,16 @@ package alpha.rulp.lang;
 
 import alpha.rulp.runtime.IRIterator;
 
-public interface IRList extends IRObject {
+public interface IRList extends IRObject, IRArrayList {
 
 	public void add(IRObject obj) throws RException;
-
-	public IRObject get(int index) throws RException;
 
 	public String getNamedName();
 
 	public boolean isConst();
 
-	public boolean isEmpty() throws RException;
-
 	public IRIterator<? extends IRObject> iterator();
 
 	public IRIterator<? extends IRObject> listIterator(int fromIndex);
 
-	public int size() throws RException;
 }

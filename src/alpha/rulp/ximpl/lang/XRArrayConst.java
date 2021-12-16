@@ -59,6 +59,31 @@ public class XRArrayConst extends AbsRefObject implements IRArray {
 		elementCount = 0;
 	}
 
+	protected void _add(IRObject obj) throws RException {
+		elements.add(obj);
+		arraySize[0]++;
+
+		if (obj != null && obj.getType() != RType.NIL) {
+			elementCount++;
+			RulpUtil.incRef(obj);
+		}
+	}
+
+	@Override
+	protected void _delete() throws RException {
+
+		if (elements != null) {
+
+			for (IRObject e : elements) {
+				RulpUtil.decRef(e);
+			}
+
+			elements = null;
+		}
+
+		super._delete();
+	}
+
 	protected IRObject _get(IRObject arrayObj, int[] indexs, final int from) throws RException {
 
 		if (from == indexs.length) {
@@ -85,31 +110,6 @@ public class XRArrayConst extends AbsRefObject implements IRArray {
 		}
 
 		return _get(obj, indexs, from + 1);
-	}
-
-	@Override
-	protected void _delete() throws RException {
-
-		if (elements != null) {
-
-			for (IRObject e : elements) {
-				RulpUtil.decRef(e);
-			}
-
-			elements = null;
-		}
-
-		super._delete();
-	}
-
-	protected void _add(IRObject obj) throws RException {
-		elements.add(obj);
-		arraySize[0]++;
-
-		if (obj != null && obj.getType() != RType.NIL) {
-			elementCount++;
-			RulpUtil.incRef(obj);
-		}
 	}
 
 	@Override
@@ -166,6 +166,11 @@ public class XRArrayConst extends AbsRefObject implements IRArray {
 	}
 
 	@Override
+	public IRObject get(int index) throws RException {
+		return elements.get(index);
+	}
+
+	@Override
 	public IRObject get(int... indexs) throws RException {
 
 		if (indexs.length == 1) {
@@ -197,6 +202,11 @@ public class XRArrayConst extends AbsRefObject implements IRArray {
 	@Override
 	public RType getType() {
 		return RType.ARRAY;
+	}
+
+	@Override
+	public boolean isConst() {
+		return true;
 	}
 
 	@Override
@@ -237,11 +247,6 @@ public class XRArrayConst extends AbsRefObject implements IRArray {
 			e.printStackTrace();
 			return e.toString();
 		}
-	}
-
-	@Override
-	public boolean isConst() {
-		return true;
 	}
 
 }

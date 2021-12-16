@@ -1,6 +1,7 @@
 package alpha.rulp.ximpl.lang;
 
 import static alpha.rulp.lang.Constant.MAX_TOSTRING_LEN;
+import static alpha.rulp.lang.Constant.O_Nil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -204,6 +205,11 @@ public class XRArrayVary extends AbsRefObject implements IRArray {
 			return _get(this, indexs, 0);
 		}
 
+	}
+
+	@Override
+	public IRObject get(int index) throws RException {
+		return index < elements.size() ? elements.get(index) : O_Nil;
 	}
 
 	@Override
