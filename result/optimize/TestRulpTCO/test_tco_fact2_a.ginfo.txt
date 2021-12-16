@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       69        0
+     Interpreter call id/level:       73        0
              CPS support/count:     true     1996
                Frame max level:        4
                   Frame max id:        5
@@ -15,44 +15,44 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:     3577
+    factor:     3581
       func:        1
 ==========================================================================================================================
 
-Callable stats info: callId=69, row=16, column=35(2), value-max=1000, value-unit=2^x
+Callable stats info: callId=73, row=16, column=37(2), value-max=1000, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         12222222222222222222222222222222229 max=4509, unit=3^x
+   Frame    RType  Count  Ref Object                         1222222222222222222222222222222222229 max=4509, unit=3^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor   1000    0 if                                                               X
-    root   factor    500    0 return                                                           X
-    main     func    500  500 (fact2 nil)                                                      X
-    root   factor    500    0 do                                                               X
-    root   factor    500    0 >                                                                X
-    root   factor    500    0 <=                                                               X
-    root   factor    499    0 make-cps                                                         X
-    root   factor    499    0 +                                                                X
-    root   factor     59    0 defun                              22222111 2222222222 22121221215
-    root   factor      6    0 alias                          1221                               
-    root   factor      4    0 defclass                                              1  1 1  1   
-    root   factor      3    0 deftemplate                               12                      
-    root   factor      3    0 defmacro                                11            1           
-    root   factor      1    0 setq                                                            1 
-    root   factor      1    0 load                                                             1
-    root   factor      1    0 defvar                            1                               
+    root   factor   1000    0 if                                                                 X
+    root   factor    500    0 return                                                             X
+    main     func    500  500 (fact2 nil)                                                        X
+    root   factor    500    0 do                                                                 X
+    root   factor    500    0 >                                                                  X
+    root   factor    500    0 <=                                                                 X
+    root   factor    499    0 make-cps                                                           X
+    root   factor    499    0 +                                                                  X
+    root   factor     63    0 defun                              2222222111 2222222222 22121221215
+    root   factor      6    0 alias                          1221                                 
+    root   factor      4    0 defclass                                                1  1 1  1   
+    root   factor      3    0 deftemplate                                 12                      
+    root   factor      3    0 defmacro                                  11            1           
+    root   factor      1    0 setq                                                              1 
+    root   factor      1    0 load                                                               1
+    root   factor      1    0 defvar                            1                                 
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1002            0         1002
+        atom:         1074            0         1074
          int:          376            0          376
-      string:           27            0           27
+      string:           31            0           31
         list:            7            1            6
-        expr:         2626         1498         1128
+        expr:         2638         1498         1140
        array:            1            0            1
          var:          516          500           16
-        func:          108            0          108
+        func:          112            0          112
     template:            1            0            1
        macro:            3            0            3
        class:            4            0            4

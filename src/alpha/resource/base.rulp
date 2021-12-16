@@ -25,12 +25,16 @@
 
 (defun cmp (?l ?2) (return (cmp_def ?l ?2)))
 
-(defun println ()                    (print "\n"))
-(defun println (?a1)                 (print ?a1 "\n"))
-(defun println (?a1 ?a2)             (print ?a1 ?a2 "\n"))
-(defun println (?a1 ?a2 ?a3)         (print ?a1 ?a2 ?a3 "\n"))
-(defun println (?a1 ?a2 ?a3 ?a4)     (print ?a1 ?a2 ?a3 ?a4 "\n"))
-(defun println (?a1 ?a2 ?a3 ?a4 ?a5) (print ?a1 ?a2 ?a3 ?a4 ?a5 "\n"))
+(defun println ()                                    (print "\n"))
+(defun println (?a1)                                 (print ?a1 "\n"))
+(defun println (?a1 ?a2)                             (print ?a1 ?a2 "\n"))
+(defun println (?a1 ?a2 ?a3)                         (print ?a1 ?a2 ?a3 "\n"))
+(defun println (?a1 ?a2 ?a3 ?a4)                     (print ?a1 ?a2 ?a3 ?a4 "\n"))
+(defun println (?a1 ?a2 ?a3 ?a4 ?a5)                 (print ?a1 ?a2 ?a3 ?a4 ?a5 "\n"))
+(defun println (?a1 ?a2 ?a3 ?a4 ?a5 ?a6)             (print ?a1 ?a2 ?a3 ?a4 ?a5 ?a6 "\n"))
+(defun println (?a1 ?a2 ?a3 ?a4 ?a5 ?a6 ?a7)         (print ?a1 ?a2 ?a3 ?a4 ?a5 ?a6 ?a7 "\n"))
+(defun println (?a1 ?a2 ?a3 ?a4 ?a5 ?a6 ?a7 ?a8)     (print ?a1 ?a2 ?a3 ?a4 ?a5 ?a6 ?a7 ?a8 "\n"))
+(defun println (?a1 ?a2 ?a3 ?a4 ?a5 ?a6 ?a7 ?a8 ?a9) (print ?a1 ?a2 ?a3 ?a4 ?a5 ?a6 ?a7 ?a8 ?a9 "\n"))
 
 (defmacro -- (?v) (setq ?v (- ?v 1)))
 (defmacro ++ (?v) (setq ?v (+ ?v 1)))

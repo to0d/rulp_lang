@@ -1,9 +1,18 @@
 (defvar x 1)
 ;=>
 
-(do-when-var-changed x (lambda (?var ?ov ?nv) (print "var'" (name-of ?var) "' changed from '" ?ov "' to '" ?nv "'")))
+(do-when-var-changed x 
+    (lambda (?var ?ov ?nv) 
+        (println "Listener1 var'" (name-of ?var) "' changed from '" ?ov "' to '" ?nv "'")))
 ;=>
 
-(setq x 9)
+(do-when-var-changed x 
+    (lambda (?var ?ov ?nv) 
+        (println "Listener2 var'" (name-of ?var) "' changed from '" ?ov "' to '" ?nv "'")))
 ;=>
 
+(setq x 2)
+;=>
+
+(setq x 3)
+;=>

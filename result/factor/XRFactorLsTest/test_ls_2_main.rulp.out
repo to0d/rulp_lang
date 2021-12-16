@@ -411,7 +411,7 @@ mbr=length-of, name='((length-of blob) (length-of string)), type=func, property=
 mbr=ls-print, name='((ls-print nil nil) (ls-print nil)), type=func, property='(public)
 mbr=map, name=map, type=class, property='(public), class-property='(final)
 mbr=print-list, name=print-list, type=macro, property='(public)
-mbr=println, name='((println nil nil nil nil nil) (println nil nil nil nil) (println nil nil nil) (println nil nil) (println nil) (println)), type=func, property='(public)
+mbr=println, name='((println nil nil nil nil nil nil nil nil nil) (println nil nil nil nil nil nil nil nil) (println nil nil nil nil nil nil nil) (println nil nil nil nil nil nil) (println nil nil nil nil nil) (println nil nil nil nil) (println nil nil nil) (println nil nil) (println nil) (println)), type=func, property='(public)
 mbr=queue, name=queue, type=class, property='(public), class-property='(final)
 mbr=root, name=root, type=frame, property='(public)
 mbr=set, name=set, type=class, property='(public), class-property='(final)

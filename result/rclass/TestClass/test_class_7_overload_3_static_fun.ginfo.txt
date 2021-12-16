@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       75        0
+     Interpreter call id/level:       79        0
              CPS support/count:    false        0
                Frame max level:        4
                   Frame max id:        6
@@ -15,42 +15,42 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:       80
+    factor:       84
       func:        2
 ==========================================================================================================================
 
-Callable stats info: callId=75, row=15, column=38(2), value-max=2, value-unit=2^x
+Callable stats info: callId=79, row=15, column=40(2), value-max=2, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         12222222222222222222222222222222223434 max=6, unit=2^x
+   Frame    RType  Count  Ref Object                         1222222222222222222222222222222222223434 max=6, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     49    0 defun                              22222111 2222222222 2212122121    
-    root   factor      6    0 defclass                                              1  1 1  1 11   
-    root   factor      6    0 alias                          1221                                  
-    root   factor      3    0 print-subject                                                    1 11
-    root   factor      3    0 out-to-file                                                      1 11
-    root   factor      3    0 deftemplate                               12                         
-    root   factor      3    0 defmacro                                11            1              
-    root   factor      2    0 return                                                            1 1
-    root   factor      2    0 new                                                               11 
-    root   factor      2    0 +                                                                 1 1
-    root   factor      1    0 defvar                            1                                  
-    main   member      1    1 class2@o2::fun1                                                     1
-    main   member      1    1 class2::fun1                                                        1
-    main   member      1    1 class1@o1::fun1                                                   1  
-    main   member      1    1 class1::fun1                                                      1  
+    root   factor     53    0 defun                              2222222111 2222222222 2212122121    
+    root   factor      6    0 defclass                                                1  1 1  1 11   
+    root   factor      6    0 alias                          1221                                    
+    root   factor      3    0 print-subject                                                      1 11
+    root   factor      3    0 out-to-file                                                        1 11
+    root   factor      3    0 deftemplate                                 12                         
+    root   factor      3    0 defmacro                                  11            1              
+    root   factor      2    0 return                                                              1 1
+    root   factor      2    0 new                                                                 11 
+    root   factor      2    0 +                                                                   1 1
+    root   factor      1    0 defvar                            1                                    
+    main   member      1    1 class2@o2::fun1                                                       1
+    main   member      1    1 class2::fun1                                                          1
+    main   member      1    1 class1@o1::fun1                                                     1  
+    main   member      1    1 class1::fun1                                                        1  
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          843            0          843
-      string:           28            0           28
+        atom:          915            0          915
+      string:           32            0           32
         list:            6            0            6
-        expr:          474            2          472
+        expr:          486            2          484
        array:            1            0            1
          var:           19            2           17
-        func:          102            0          102
+        func:          106            0          106
     template:            1            0            1
        macro:            3            0            3
     instance:            2            0            2

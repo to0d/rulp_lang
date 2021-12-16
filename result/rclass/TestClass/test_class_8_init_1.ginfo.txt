@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       92        0
+     Interpreter call id/level:       96        0
              CPS support/count:    false        0
                Frame max level:        5
                   Frame max id:       11
@@ -15,42 +15,42 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      110
+    factor:      114
       func:       12
 ==========================================================================================================================
 
-Callable stats info: callId=92, row=15, column=47(2), value-max=6, value-unit=2^x
+Callable stats info: callId=96, row=15, column=49(2), value-max=6, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         12222222222222222222222222222222222333334522221 max=9, unit=2^x
+   Frame    RType  Count  Ref Object                         1222222222222222222222222222222222222333334522221 max=9, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     49    0 defun                              22222111 2222222222 2212122121             
-    root   factor      6    0 setq                                                              111111      
-    root   factor      6    0 rulp-object-count                                                2      11  11
-    root   factor      6    0 return                                                            111111      
-    root   factor      6    0 print-subject                                                           4     
-    root   factor      6    0 new                                                               111111      
-    root   factor      6    0 delete                                                                   1221 
-    root   factor      6    0 alias                          1221                                           
-    root   factor      5    0 defclass                                              1  1 1  1 1             
-    root   factor      4    0 defvar                            1                                  111      
-    root   factor      3    0 deftemplate                               12                                  
-    root   factor      3    0 defmacro                                11            1                       
-    root   factor      2    0 +                                                                   1  1      
-    root   factor      1    0 out-to-file                                                             1     
-    root   factor      1    0 do                                                                      1     
+    root   factor     53    0 defun                              2222222111 2222222222 2212122121             
+    root   factor      6    0 setq                                                                111111      
+    root   factor      6    0 rulp-object-count                                                  2      11  11
+    root   factor      6    0 return                                                              111111      
+    root   factor      6    0 print-subject                                                             4     
+    root   factor      6    0 new                                                                 111111      
+    root   factor      6    0 delete                                                                     1221 
+    root   factor      6    0 alias                          1221                                             
+    root   factor      5    0 defclass                                                1  1 1  1 1             
+    root   factor      4    0 defvar                            1                                    111      
+    root   factor      3    0 deftemplate                                 12                                  
+    root   factor      3    0 defmacro                                  11            1                       
+    root   factor      2    0 +                                                                     1  1      
+    root   factor      1    0 out-to-file                                                               1     
+    root   factor      1    0 do                                                                        1     
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          898            0          898
-      string:           26            0           26
+        atom:          970            0          970
+      string:           30            0           30
         list:           10            0           10
-        expr:          517           24          493
+        expr:          529           24          505
        array:            1            0            1
          var:           37           21           16
-        func:          134           30          104
+        func:          138           30          108
     template:            1            0            1
        macro:            3            0            3
     instance:            6            6            0

@@ -1,12 +1,29 @@
 (defvar x 1)
 ;=>&x
 
-(do-when-var-changed x (lambda (?var ?ov ?nv) (print "var'" (name-of ?var) "' changed from '" ?ov "' to '" ?nv "'")))
+(do-when-var-changed x 
+    (lambda (?var ?ov ?nv) 
+        (println "Listener1 var'" (name-of ?var) "' changed from '" ?ov "' to '" ?nv "'")))
 ;=>nil
 
-(setq x 9)
+(do-when-var-changed x 
+    (lambda (?var ?ov ?nv) 
+        (println "Listener2 var'" (name-of ?var) "' changed from '" ?ov "' to '" ?nv "'")))
+;=>nil
+
+(setq x 2)
 ;=>&x
 ;out:
-var'x' changed from '1' to '9'
+Listener1 var'x' changed from '1' to '2'
+Listener2 var'x' changed from '1' to '2'
+
+;eof
+
+(setq x 3)
+;=>&x
+;out:
+Listener1 var'x' changed from '2' to '3'
+Listener2 var'x' changed from '2' to '3'
+
 ;eof
 
