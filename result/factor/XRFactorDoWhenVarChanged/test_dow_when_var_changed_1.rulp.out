@@ -19,6 +19,9 @@ Listener2 var'x' changed from '1' to '2'
 
 ;eof
 
+(setq x 2)
+;=>&x
+
 (setq x 3)
 ;=>&x
 ;out:

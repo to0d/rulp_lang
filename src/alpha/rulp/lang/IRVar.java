@@ -9,6 +9,8 @@
 
 package alpha.rulp.lang;
 
+import alpha.rulp.runtime.IRListener3;
+
 public interface IRVar extends IRObject {
 
 	public String getName();
@@ -17,5 +19,5 @@ public interface IRVar extends IRObject {
 
 	public void setValue(IRObject newVal) throws RException;
 
-	public void addVarListener(IRVarListener listener);
+	public void addVarListener(IRListener3<IRVar, IRObject, IRObject> listener);
 }

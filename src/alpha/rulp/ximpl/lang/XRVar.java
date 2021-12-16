@@ -11,15 +11,13 @@ package alpha.rulp.ximpl.lang;
 
 import static alpha.rulp.lang.Constant.O_Nil;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRVar;
-import alpha.rulp.lang.IRVarListener;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
+import alpha.rulp.runtime.IRListener3;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.utils.XRRListener3Adapter;
 
 public class XRVar extends AbsRefObject implements IRVar {
 
@@ -27,7 +25,7 @@ public class XRVar extends AbsRefObject implements IRVar {
 
 	private IRObject value = O_Nil;
 
-	private List<IRVarListener> varListenerList = null;
+	private XRRListener3Adapter<IRVar, IRObject, IRObject> varListenerList = null;
 
 	private String varName;
 
@@ -50,14 +48,14 @@ public class XRVar extends AbsRefObject implements IRVar {
 	}
 
 	@Override
-	public void addVarListener(IRVarListener listener) {
+	public void addVarListener(IRListener3<IRVar, IRObject, IRObject> listener) {
 
 		if (varListenerList == null) {
-			varListenerList = new LinkedList<>();
+			varListenerList = new XRRListener3Adapter<>();
 		}
 
 		if (!varListenerList.contains(listener)) {
-			varListenerList.add(listener);
+			varListenerList.addListener(listener);
 		}
 	}
 
@@ -81,9 +79,7 @@ public class XRVar extends AbsRefObject implements IRVar {
 			return;
 		}
 
-		for (IRVarListener listener : varListenerList) {
-			listener.valueChanged(this, oldVal, newVal);
-		}
+		varListenerList.doAction(this, oldVal, newVal);
 	}
 
 	@Override
