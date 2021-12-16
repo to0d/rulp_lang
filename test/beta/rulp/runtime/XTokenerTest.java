@@ -42,16 +42,20 @@ public class XTokenerTest extends RulpTestBase {
 
 			for (String line : FileUtil.openTxtFile(path, "utf-8")) {
 
+				outlines.add("in : " + line);
+
 				IRTokener tokener = RulpFactory.createTokener();
 				tokener.setContent(line);
 				StringBuilder sb = new StringBuilder();
+
 				Token token = null;
 				while ((token = tokener.next()) != null) {
 					sb.append(token.toString());
 					sb.append(" ");
 				}
 
-				outlines.add(sb.toString());
+				outlines.add("out: " + sb.toString());
+				outlines.add("");
 			}
 
 		} catch (Exception e) {
