@@ -76,6 +76,7 @@ root::case
 root::class
 root::class-of
 root::cmp_def
+root::compute
 root::constant
 root::continue
 root::date
@@ -188,6 +189,7 @@ root::sys-gc
 root::sys-time
 root::to-atom
 root::to-blob
+root::to-expr
 root::to-int
 root::to-named-list
 root::to-nonamed-list

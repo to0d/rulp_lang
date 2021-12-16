@@ -43,6 +43,7 @@ root::case
 root::class
 root::class-of
 root::cmp_def
+root::compute
 root::constant
 root::continue
 root::date
@@ -155,6 +156,7 @@ root::sys-gc
 root::sys-time
 root::to-atom
 root::to-blob
+root::to-expr
 root::to-int
 root::to-named-list
 root::to-nonamed-list
@@ -256,6 +258,7 @@ mbr=case, name=case, type=factor, property='(public)
 mbr=class, name=class, type=atom, property='(public)
 mbr=class-of, name=class-of, type=factor, property='(public)
 mbr=cmp_def, name=cmp_def, type=factor, property='(public)
+mbr=compute, name=compute, type=factor, property='(public)
 mbr=constant, name=constant, type=atom, property='(public)
 mbr=continue, name=continue, type=factor, property='(public)
 mbr=date, name=date, type=factor, property='(public)
@@ -368,6 +371,7 @@ mbr=sys-gc, name=sys-gc, type=factor, property='(public)
 mbr=sys-time, name=sys-time, type=factor, property='(public)
 mbr=to-atom, name=to-atom, type=factor, property='(public)
 mbr=to-blob, name=to-blob, type=factor, property='(public)
+mbr=to-expr, name=to-expr, type=factor, property='(public)
 mbr=to-int, name=to-int, type=factor, property='(public)
 mbr=to-named-list, name=to-named-list, type=factor, property='(public)
 mbr=to-nonamed-list, name=to-nonamed-list, type=factor, property='(public)
