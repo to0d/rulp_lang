@@ -15,20 +15,20 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:     1857
-      func:      255
+    factor:     1861
+      func:      256
 ==========================================================================================================================
 
-Callable stats info: callId=68, row=14, column=35(2), value-max=509, value-unit=2^x
+Callable stats info: callId=68, row=14, column=35(2), value-max=510, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         12222222222222222222222222222222248 max=2035, unit=3^x
+   Frame    RType  Count  Ref Object                         12222222222222222222222222222222248 max=2039, unit=3^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor    509    0 if                                                               X
-    main     func    255    1 (fact2 nil)                                                      9
+    root   factor    510    0 if                                                               X
+    root   factor    255    0 return                                                           9
+    main     func    255    2 (fact2 nil)                                                      9
     root   factor    255    0 do                                                               9
-    root   factor    254    0 return                                                           9
-    root   factor    254    0 >                                                                9
-    root   factor    254    0 <=                                                               9
+    root   factor    255    0 >                                                                9
+    root   factor    255    0 <=                                                               9
     root   factor    254    0 +                                                                9
     root   factor     59    0 defun                              22222111 2222222222 2212122125 
     root   factor      6    0 alias                          1221                               
@@ -72,7 +72,7 @@ system               : 2        2        0    frame      frame@system
 main                 : 3        2        1    frame      frame@main          
 findCallee           : 4        2        0    factor     findCallee          
 fact                 : 5        2        1    func       (fact nil) : frame=frame@main
-fact2                : 6        2        1    func       (fact2 nil) : frame=frame@main
+fact2                : 6        2        2    func       (fact2 nil) : frame=frame@main
 fact3                : 7        2        1    func       (fact3 nil) : frame=frame@main
 fun1a                : 8        2        1    func       (fun1a nil) : frame=frame@main
 fun1b                : 9        2        1    func       (fun1b nil) : frame=frame@main
