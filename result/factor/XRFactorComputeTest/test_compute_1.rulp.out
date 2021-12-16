@@ -1,0 +1,27 @@
+(compute 123)
+;=>123
+
+(compute abc)
+;=>abc
+
+(compute "abc")
+;=>"abc"
+
+(compute '(a b c))
+;=>'(a b c)
+
+(compute {a,b,c})
+;=>{a,b,c}
+
+(compute (+ 1 2))
+;=>3
+
+(compute (to-expr '(+ 1 2)))
+;=>3
+
+(defvar ?e (to-expr '(+ 1 2))) ?e
+;=>&?e (+ 1 2)
+
+(compute ?e)
+;=>3
+

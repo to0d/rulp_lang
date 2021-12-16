@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import alpha.rulp.utils.RulpTestBase;
 
-class XRFactorToExprTest extends RulpTestBase {
+class XRFactorComputeTest extends RulpTestBase {
 
 	@Test
-	void test_to_expr_1() {
+	void test_compute_1() {
 
 		_setup();
 		_run_script();

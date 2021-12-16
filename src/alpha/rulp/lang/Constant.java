@@ -177,6 +177,8 @@ public interface Constant {
 
 	String F_CMP_DEF = F_CMP + "_def";
 
+	String F_COMPUTE = "compute";
+
 	String F_CONTINUE = "continue";
 
 	String F_DATE = "date";
@@ -388,7 +390,7 @@ public interface Constant {
 	String F_TO = "to";
 
 	String F_TO_ATOM = "to-atom";
-	
+
 	String F_TO_BLOB = "to-blob";
 
 	String F_TO_EXPR = "to-expr";

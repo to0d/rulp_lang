@@ -1,0 +1,6 @@
+(to-expr f)
+;=>(f)
+
+(to-expr '(a b c))
+;=>(a b c)
+
