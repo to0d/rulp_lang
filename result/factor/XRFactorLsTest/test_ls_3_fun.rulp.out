@@ -125,6 +125,7 @@ root::make-array
 root::make-blob
 root::make-cps
 root::make-list
+root::make-string
 root::member
 root::name-of
 root::namespace

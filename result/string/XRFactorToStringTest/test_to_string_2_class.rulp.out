@@ -1,0 +1,16 @@
+(defclass class1 ()
+)
+(defclass class2 ()
+    (defvar ?value 0)
+    (defun to-string () (return (+ "c2_" ?value)))
+)
+(new class1 o1)
+(new class2 o2)
+;=>class1 class2 o1 o2
+
+(to-string o1)
+;=>"o1"
+
+(to-string o2)
+;=>"o2"
+

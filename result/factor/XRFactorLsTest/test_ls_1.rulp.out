@@ -16,98 +16,99 @@
 (print-subject root)
 ;=>nil
 ;out:
-id=0, name=root, lvl=0, ref=0/0, entry=171, subject=root
+id=0, name=root, lvl=0, ref=0/0, entry=172, subject=root
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?os.version          : -200     0        1    var        10.0 : type=string  
-?os.name             : -199     0        1    var        Windows 10 : type=string
-?path.separator      : -198     0        1    var        ; : type=string     
-?file.separator      : -197     0        1    var        \ : type=string     
-?user.dir            : -196     0        1    var        C:\data\itool\irulp_base : type=string
-?user.name           : -195     0        1    var        921511672 : type=string
-?user.home           : -194     0        1    var        C:\Users\YANLIU : type=string
-rulp-object-count    : -166     0        0    factor     rulp-object-count   
-sys-time             : -165     0        0    factor     sys-time            
-sys-gc               : -164     0        0    factor     sys-gc              
-random               : -163     0        0    factor     random              
-date                 : -162     0        0    factor     date                
-do-p                 : -161     0        0    factor     do-p                
-sleep                : -160     0        0    factor     sleep               
-seta                 : -159     0        0    factor     seta                
-add-array-to-list    : -158     0        0    factor     add-array-to-list   
-add-list-to-array    : -157     0        0    factor     add-list-to-array   
-to-nonamed-list      : -156     0        0    factor     to-nonamed-list     
-to-named-list        : -155     0        0    factor     to-named-list       
-get-of-array         : -154     0        0    factor     get-of-array        
-reverse              : -153     0        0    factor     reverse             
-sort                 : -152     0        0    factor     sort                
-uniq                 : -151     0        0    factor     uniq                
-union                : -150     0        0    factor     union               
-join                 : -149     0        0    factor     join                
-remove               : -148     0        0    factor     remove              
-add-list-to-list     : -147     0        0    factor     add-list-to-list    
-get-of-list          : -146     0        0    factor     get-of-list         
-foreach              : -145     0        0    factor     foreach             
-try                  : -144     0        0    factor     try                 
-error-value          : -143     0        0    factor     error-value         
-error                : -142     0        0    factor     error               
-case                 : -141     0        0    factor     case                
-do                   : -140     0        0    factor     do                  
-break                : -139     0        0    factor     break               
-continue             : -138     0        0    factor     continue            
-return               : -137     0        0    factor     return              
-loop                 : -136     0        0    factor     loop                
-when                 : -135     0        0    factor     when                
-if                   : -134     0        0    factor     if                  
-lambda               : -133     0        0    factor     lambda              
-let                  : -132     0        0    factor     let                 
-make-cps             : -131     0        0    factor     make-cps            
-deftemplate          : -130     0        0    factor     deftemplate         
-defun                : -129     0        0    factor     defun               
-defmacro             : -128     0        0    factor     defmacro            
-can-cast             : -127     0        0    factor     can-cast            
-cmp_def              : -126     0        0    factor     cmp_def             
-<=                   : -125     0        0    factor     <=                  
->=                   : -124     0        0    factor     >=                  
-<                    : -123     0        0    factor     <                   
->                    : -122     0        0    factor     >                   
-!=                   : -121     0        0    factor     !=                  
-=                    : -120     0        0    factor     =                   
-or                   : -119     0        0    factor     or                  
-and                  : -118     0        0    factor     and                 
-not                  : -117     0        0    factor     not                 
-~                    : -116     0        0    factor     ~                   
-^                    : -115     0        0    factor     ^                   
-|                    : -114     0        0    factor     |                   
-&                    : -113     0        0    factor     &                   
-power                : -112     0        0    factor     power               
-%                    : -111     0        0    factor     %                   
-/                    : -110     0        0    factor     /                   
-*                    : -109     0        0    factor     *                   
--                    : -108     0        0    factor     -                   
-+                    : -107     0        0    factor     +                   
-str-split-line       : -106     0        0    factor     str-split-line      
-str-upper            : -105     0        0    factor     str-upper           
-str-replace          : -104     0        0    factor     str-replace         
-str-split            : -103     0        0    factor     str-split           
-str-char-at          : -102     0        0    factor     str-char-at         
-str-format           : -101     0        0    factor     str-format          
-str-last-index-of    : -100     0        0    factor     str-last-index-of   
-str-index-of         : -99      0        0    factor     str-index-of        
-str-length           : -98      0        0    factor     str-length          
-str-substr           : -97      0        0    factor     str-substr          
-str-end-with         : -96      0        0    factor     str-end-with        
-str-start-with       : -95      0        0    factor     str-start-with      
-str-match            : -94      0        0    factor     str-match           
-str-trim-tail        : -93      0        0    factor     str-trim-tail       
-str-trim-head        : -92      0        0    factor     str-trim-head       
-str-trim             : -91      0        0    factor     str-trim            
-str-equal-nocase     : -90      0        0    factor     str-equal-nocase    
-str-equal            : -89      0        0    factor     str-equal           
-strcat               : -88      0        0    factor     strcat              
-to-int               : -87      0        0    factor     to-int              
-to-string            : -86      0        0    factor     to-string           
+?os.version          : -201     0        1    var        10.0 : type=string  
+?os.name             : -200     0        1    var        Windows 10 : type=string
+?path.separator      : -199     0        1    var        ; : type=string     
+?file.separator      : -198     0        1    var        \ : type=string     
+?user.dir            : -197     0        1    var        C:\data\itool\irulp_base : type=string
+?user.name           : -196     0        1    var        921511672 : type=string
+?user.home           : -195     0        1    var        C:\Users\YANLIU : type=string
+rulp-object-count    : -167     0        0    factor     rulp-object-count   
+sys-time             : -166     0        0    factor     sys-time            
+sys-gc               : -165     0        0    factor     sys-gc              
+random               : -164     0        0    factor     random              
+date                 : -163     0        0    factor     date                
+do-p                 : -162     0        0    factor     do-p                
+sleep                : -161     0        0    factor     sleep               
+seta                 : -160     0        0    factor     seta                
+add-array-to-list    : -159     0        0    factor     add-array-to-list   
+add-list-to-array    : -158     0        0    factor     add-list-to-array   
+to-nonamed-list      : -157     0        0    factor     to-nonamed-list     
+to-named-list        : -156     0        0    factor     to-named-list       
+get-of-array         : -155     0        0    factor     get-of-array        
+reverse              : -154     0        0    factor     reverse             
+sort                 : -153     0        0    factor     sort                
+uniq                 : -152     0        0    factor     uniq                
+union                : -151     0        0    factor     union               
+join                 : -150     0        0    factor     join                
+remove               : -149     0        0    factor     remove              
+add-list-to-list     : -148     0        0    factor     add-list-to-list    
+get-of-list          : -147     0        0    factor     get-of-list         
+foreach              : -146     0        0    factor     foreach             
+try                  : -145     0        0    factor     try                 
+error-value          : -144     0        0    factor     error-value         
+error                : -143     0        0    factor     error               
+case                 : -142     0        0    factor     case                
+do                   : -141     0        0    factor     do                  
+break                : -140     0        0    factor     break               
+continue             : -139     0        0    factor     continue            
+return               : -138     0        0    factor     return              
+loop                 : -137     0        0    factor     loop                
+when                 : -136     0        0    factor     when                
+if                   : -135     0        0    factor     if                  
+lambda               : -134     0        0    factor     lambda              
+let                  : -133     0        0    factor     let                 
+make-cps             : -132     0        0    factor     make-cps            
+deftemplate          : -131     0        0    factor     deftemplate         
+defun                : -130     0        0    factor     defun               
+defmacro             : -129     0        0    factor     defmacro            
+can-cast             : -128     0        0    factor     can-cast            
+cmp_def              : -127     0        0    factor     cmp_def             
+<=                   : -126     0        0    factor     <=                  
+>=                   : -125     0        0    factor     >=                  
+<                    : -124     0        0    factor     <                   
+>                    : -123     0        0    factor     >                   
+!=                   : -122     0        0    factor     !=                  
+=                    : -121     0        0    factor     =                   
+or                   : -120     0        0    factor     or                  
+and                  : -119     0        0    factor     and                 
+not                  : -118     0        0    factor     not                 
+~                    : -117     0        0    factor     ~                   
+^                    : -116     0        0    factor     ^                   
+|                    : -115     0        0    factor     |                   
+&                    : -114     0        0    factor     &                   
+power                : -113     0        0    factor     power               
+%                    : -112     0        0    factor     %                   
+/                    : -111     0        0    factor     /                   
+*                    : -110     0        0    factor     *                   
+-                    : -109     0        0    factor     -                   
++                    : -108     0        0    factor     +                   
+str-split-line       : -107     0        0    factor     str-split-line      
+str-upper            : -106     0        0    factor     str-upper           
+str-replace          : -105     0        0    factor     str-replace         
+str-split            : -104     0        0    factor     str-split           
+str-char-at          : -103     0        0    factor     str-char-at         
+str-format           : -102     0        0    factor     str-format          
+str-last-index-of    : -101     0        0    factor     str-last-index-of   
+str-index-of         : -100     0        0    factor     str-index-of        
+str-length           : -99      0        0    factor     str-length          
+str-substr           : -98      0        0    factor     str-substr          
+str-end-with         : -97      0        0    factor     str-end-with        
+str-start-with       : -96      0        0    factor     str-start-with      
+str-match            : -95      0        0    factor     str-match           
+str-trim-tail        : -94      0        0    factor     str-trim-tail       
+str-trim-head        : -93      0        0    factor     str-trim-head       
+str-trim             : -92      0        0    factor     str-trim            
+str-equal-nocase     : -91      0        0    factor     str-equal-nocase    
+str-equal            : -90      0        0    factor     str-equal           
+strcat               : -89      0        0    factor     strcat              
+to-int               : -88      0        0    factor     to-int              
+to-string            : -87      0        0    factor     to-string           
+make-string          : -86      0        0    factor     make-string         
 write-blob           : -85      0        0    factor     write-blob          
 to-blob              : -84      0        0    factor     to-blob             
 blob-length          : -83      0        0    factor     blob-length         
@@ -203,42 +204,42 @@ id=1, name=system, lvl=1, ref=0/0, entry=30, pid=0(root), subject=system
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-parent               : -201     1        0    frame      frame@root          
-type#stack           : -193     1        0    atom       type#stack          
-stack                : -192     1        1    class      stack               
-type#queue           : -191     1        0    atom       type#queue          
-queue                : -190     1        1    class      queue               
-type#map             : -189     1        0    atom       type#map            
-map                  : -188     1        1    class      map                 
-clear                : -187     1        1    funcList   '((clear type#map) (clear type#queue) (clear type#set) (clear type#stack)) : frame=null, type=list
+parent               : -202     1        0    frame      frame@root          
+type#stack           : -194     1        0    atom       type#stack          
+stack                : -193     1        1    class      stack               
+type#queue           : -192     1        0    atom       type#queue          
+queue                : -191     1        1    class      queue               
+type#map             : -190     1        0    atom       type#map            
+map                  : -189     1        1    class      map                 
+clear                : -188     1        1    funcList   '((clear type#map) (clear type#queue) (clear type#set) (clear type#stack)) : frame=null, type=list
                                          1    func       (clear type#set) : frame=frame@system
                                          1    func       (clear type#map) : frame=frame@system
                                          1    func       (clear type#queue) : frame=frame@system
                                          1    func       (clear type#stack) : frame=frame@system
-type#set             : -186     1        0    atom       type#set            
-set                  : -185     1        1    class      set                 
-print-list           : -184     1        1    macro      print-list          
-get                  : -183     1        1    funcList   '((get array int int) (get array int) (get list int) (get type#queue int)) : frame=null, type=list
+type#set             : -187     1        0    atom       type#set            
+set                  : -186     1        1    class      set                 
+print-list           : -185     1        1    macro      print-list          
+get                  : -184     1        1    funcList   '((get array int int) (get array int) (get list int) (get type#queue int)) : frame=null, type=list
                                          1    func       (get list int) : frame=frame@system
                                          1    func       (get array int) : frame=frame@system
                                          1    func       (get array int int) : frame=frame@system
                                          1    func       (get type#queue int) : frame=frame@system
-add-all              : -182     1        1    func       (add-all list list) : frame=frame@system
-add                  : -181     1        1    funcList   '((add array nil nil nil) (add array nil nil) (add array nil) (add list nil nil nil) (add list nil nil) (add list nil)) : frame=null, type=list
+add-all              : -183     1        1    func       (add-all list list) : frame=frame@system
+add                  : -182     1        1    funcList   '((add array nil nil nil) (add array nil nil) (add array nil) (add list nil nil nil) (add list nil nil) (add list nil)) : frame=null, type=list
                                          1    func       (add list nil) : frame=frame@system
                                          1    func       (add list nil nil) : frame=frame@system
                                          1    func       (add list nil nil nil) : frame=frame@system
                                          1    func       (add array nil) : frame=frame@system
                                          1    func       (add array nil nil) : frame=frame@system
                                          1    func       (add array nil nil nil) : frame=frame@system
-to-array             : -180     1        1    func       (to-array list) : frame=frame@system
-to-list              : -179     1        1    funcList   '((to-list array) (to-list list) (to-list type#queue) (to-list type#set) (to-list type#stack)) : frame=null, type=list
+to-array             : -181     1        1    func       (to-array list) : frame=frame@system
+to-list              : -180     1        1    funcList   '((to-list array) (to-list list) (to-list type#queue) (to-list type#set) (to-list type#stack)) : frame=null, type=list
                                          1    func       (to-list list) : frame=frame@system
                                          1    func       (to-list array) : frame=frame@system
                                          1    func       (to-list type#set) : frame=frame@system
                                          1    func       (to-list type#queue) : frame=frame@system
                                          1    func       (to-list type#stack) : frame=frame@system
-size-of              : -178     1        1    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#map) (size-of type#queue) (size-of type#set) (size-of type#stack)) : frame=null, type=list
+size-of              : -179     1        1    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#map) (size-of type#queue) (size-of type#set) (size-of type#stack)) : frame=null, type=list
                                          1    func       (size-of list) : frame=frame@system
                                          1    func       (size-of array) : frame=frame@system
                                          1    func       (size-of array int) : frame=frame@system
@@ -246,12 +247,12 @@ size-of              : -178     1        1    funcList   '((size-of array int) (
                                          1    func       (size-of type#map) : frame=frame@system
                                          1    func       (size-of type#queue) : frame=frame@system
                                          1    func       (size-of type#stack) : frame=frame@system
-ls-print             : -177     1        1    funcList   '((ls-print nil nil) (ls-print nil)) : frame=null, type=list
+ls-print             : -178     1        1    funcList   '((ls-print nil nil) (ls-print nil)) : frame=null, type=list
                                          1    func       (ls-print nil nil) : frame=frame@system
                                          1    func       (ls-print nil) : frame=frame@system
-use                  : -176     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=frame@system
-is-blank             : -175     1        1    func       (is-blank string) : frame=frame@system
-is-empty             : -174     1        1    funcList   '((is-empty array) (is-empty list) (is-empty string) (is-empty type#map) (is-empty type#queue) (is-empty type#set) (is-empty type#stack)) : frame=null, type=list
+use                  : -177     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=frame@system
+is-blank             : -176     1        1    func       (is-blank string) : frame=frame@system
+is-empty             : -175     1        1    funcList   '((is-empty array) (is-empty list) (is-empty string) (is-empty type#map) (is-empty type#queue) (is-empty type#set) (is-empty type#stack)) : frame=null, type=list
                                          1    func       (is-empty string) : frame=frame@system
                                          1    func       (is-empty list) : frame=frame@system
                                          1    func       (is-empty array) : frame=frame@system
@@ -259,23 +260,23 @@ is-empty             : -174     1        1    funcList   '((is-empty array) (is-
                                          1    func       (is-empty type#map) : frame=frame@system
                                          1    func       (is-empty type#queue) : frame=frame@system
                                          1    func       (is-empty type#stack) : frame=frame@system
-++                   : -173     1        1    macro      ++                  
---                   : -172     1        1    macro      --                  
-println              : -171     1        1    funcList   '((println nil nil nil nil nil) (println nil nil nil nil) (println nil nil nil) (println nil nil) (println nil) (println)) : frame=null, type=list
+++                   : -174     1        1    macro      ++                  
+--                   : -173     1        1    macro      --                  
+println              : -172     1        1    funcList   '((println nil nil nil nil nil) (println nil nil nil nil) (println nil nil nil) (println nil nil) (println nil) (println)) : frame=null, type=list
                                          1    func       (println) : frame=frame@system
                                          1    func       (println nil) : frame=frame@system
                                          1    func       (println nil nil) : frame=frame@system
                                          1    func       (println nil nil nil) : frame=frame@system
                                          1    func       (println nil nil nil nil) : frame=frame@system
                                          1    func       (println nil nil nil nil nil) : frame=frame@system
-cmp                  : -170     1        1    func       (cmp nil nil) : frame=frame@system
-equal                : -169     1        1    funcList   '((equal nil nil) (equal string string)) : frame=null, type=list
+cmp                  : -171     1        1    func       (cmp nil nil) : frame=frame@system
+equal                : -170     1        1    funcList   '((equal nil nil) (equal string string)) : frame=null, type=list
                                          1    func       (equal nil nil) : frame=frame@system
                                          1    func       (equal string string) : frame=frame@system
-length-of            : -168     1        1    funcList   '((length-of blob) (length-of string)) : frame=null, type=list
+length-of            : -169     1        1    funcList   '((length-of blob) (length-of string)) : frame=null, type=list
                                          1    func       (length-of string) : frame=frame@system
                                          1    func       (length-of blob) : frame=frame@system
-?load-paths          : -167     1        1    var        '() : type=list     
+?load-paths          : -168     1        1    var        '() : type=list     
 system               : -3       1        0    frame      frame@system        
 root                 : -2       1        0    frame      frame@root          
 ==========================================================================================================================

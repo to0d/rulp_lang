@@ -185,6 +185,7 @@ import alpha.rulp.ximpl.runtime.XRParaAttr;
 import alpha.rulp.ximpl.runtime.XRParser;
 import alpha.rulp.ximpl.runtime.XRThreadContext;
 import alpha.rulp.ximpl.runtime.XRTokener;
+import alpha.rulp.ximpl.string.XRFactorMakeString;
 import alpha.rulp.ximpl.string.XRFactorStrCat;
 import alpha.rulp.ximpl.string.XRFactorStrCharAt;
 import alpha.rulp.ximpl.string.XRFactorStrEndWith;
@@ -605,6 +606,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorBlobLength(F_BLOB_LENGTH));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorToBlob(F_TO_BLOB));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorWriteBlob(F_WRITE_BLOB));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorMakeString(F_MAKE_STRING));
 
 		// String
 		RulpUtil.addFrameObject(rootFrame, new XRFactorToString(F_TO_STRING));

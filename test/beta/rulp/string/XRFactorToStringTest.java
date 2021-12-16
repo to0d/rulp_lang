@@ -7,9 +7,16 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorToStringTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_to_string_1() {
+
 		_setup();
-		_test("(to-string 123)", "\"123\"");
-		_test("(to-string \"123\")", "\"123\"");
+		_run_script();
+	}
+
+	@Test
+	void test_to_string_2_class() {
+
+		_setup();
+		_run_script();
 	}
 }

@@ -245,6 +245,8 @@ public interface Constant {
 
 	String F_MAKE_BLOB = "make-blob";
 
+	String F_MAKE_STRING = "make-string";
+
 	String F_MAKE_CPS = "make-cps";
 
 	String F_MAKE_LIST = "make-list";

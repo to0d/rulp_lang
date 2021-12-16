@@ -33,7 +33,11 @@ public class XRFactorToString extends AbsRFactorAdapter implements IRFactor {
 		}
 
 		IRObject obj = interpreter.compute(frame, args.get(1));
-		return obj.getType() == RType.STRING ? obj : RulpFactory.createString(RulpUtil.toString(obj));
+		if (obj.getType() == RType.STRING) {
+			return obj;
+		}
+
+		return RulpFactory.createString(RulpUtil.toString(obj));
 	}
 
 	@Override

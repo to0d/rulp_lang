@@ -92,6 +92,7 @@ root::make-array
 root::make-blob
 root::make-cps
 root::make-list
+root::make-string
 root::member
 root::name-of
 root::namespace
@@ -304,6 +305,7 @@ mbr=make-array, name=make-array, type=factor, property='(public)
 mbr=make-blob, name=make-blob, type=factor, property='(public)
 mbr=make-cps, name=make-cps, type=factor, property='(public)
 mbr=make-list, name=make-list, type=factor, property='(public)
+mbr=make-string, name=make-string, type=factor, property='(public)
 mbr=member, name=member, type=atom, property='(public)
 mbr=name-of, name=name-of, type=factor, property='(public)
 mbr=namespace, name=namespace, type=class, property='(public), class-property='()

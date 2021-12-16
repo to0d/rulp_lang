@@ -1,0 +1,18 @@
+(to-string 123)
+;=>"123"
+
+(to-string a)
+;=>"a"
+
+(to-string "abc")
+;=>"abc"
+
+(to-string '(a b c))
+;=>"'(a b c)"
+
+(to-string {a,b,c})
+;=>"{a,b,c}"
+
+(to-string (to-blob "abc"))
+;=>"[616263]"
+
