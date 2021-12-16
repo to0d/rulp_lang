@@ -78,6 +78,8 @@ public interface Constant {
 	String A_MAP = "map";
 
 	String A_MEMBER = "member";
+	
+	String A_SLOT = "slot";
 
 	String A_NAMESPACE = "namespace";
 
@@ -532,6 +534,8 @@ public interface Constant {
 	IRAtom T_Macro = RulpFactory.createAtom(A_MACRO);
 
 	IRAtom T_Member = RulpFactory.createAtom(A_MEMBER);
+	
+	IRAtom T_Slot = RulpFactory.createAtom(A_SLOT);
 
 	IRAtom T_Native = RulpFactory.createAtom(A_NATIVE);
 

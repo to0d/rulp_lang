@@ -6,30 +6,30 @@ Total runtime info:
 --------------------------------------------------------------------------------------------------------------------------
      Interpreter call id/level:       72        0
              CPS support/count:    false        0
-               Frame max level:      508
-                  Frame max id:      509
-           Frame free id count:      506
+               Frame max level:      512
+                  Frame max id:      513
+           Frame free id count:      510
 ==========================================================================================================================
 
 Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:     1847
-      func:      253
+    factor:     1861
+      func:      255
 ==========================================================================================================================
 
-Callable stats info: callId=72, row=14, column=37(2), value-max=505, value-unit=2^x
+Callable stats info: callId=72, row=14, column=37(2), value-max=509, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         1222222222222222222222222222222222248 max=2019, unit=3^x
+   Frame    RType  Count  Ref Object                         1222222222222222222222222222222222248 max=2035, unit=3^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor    505    0 if                                                                 X
-    main     func    253    1 (fact2 nil)                                                        9
-    root   factor    253    0 do                                                                 9
-    root   factor    252    0 return                                                             9
-    root   factor    252    0 >                                                                  9
-    root   factor    252    0 <=                                                                 9
-    root   factor    252    0 +                                                                  9
+    root   factor    509    0 if                                                                 X
+    main     func    255    1 (fact2 nil)                                                        9
+    root   factor    255    0 do                                                                 9
+    root   factor    254    0 return                                                             9
+    root   factor    254    0 >                                                                  9
+    root   factor    254    0 <=                                                                 9
+    root   factor    254    0 +                                                                  9
     root   factor     63    0 defun                              2222222111 2222222222 2212122125 
     root   factor      6    0 alias                          1221                                 
     root   factor      4    0 defclass                                                1  1 1  1   
@@ -44,20 +44,20 @@ Object create count:
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
         atom:         1061            0         1061
-         int:          129            0          129
+         int:          131            0          131
       string:           31            0           31
         list:            7            1            6
-        expr:          850          253          597
+        expr:          852          255          597
        array:            1            0            1
-         var:          268          253           15
+         var:          270          255           15
         func:          112            0          112
     template:            1            0            1
        macro:            3            0            3
        class:            4            0            4
       member:          117            0          117
-       frame:          506          506            0
+       frame:          510          510            0
  interpreter:            1            0
-  frameEntry:          470            0
+  frameEntry:          472            0
       lambda:            0            0
 ==========================================================================================================================
 
