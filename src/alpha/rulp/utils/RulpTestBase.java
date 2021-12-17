@@ -312,9 +312,9 @@ public class RulpTestBase {
 	}
 
 	protected void _test(String input, String expectResult, String expectOutput) {
-//		System.out.println(input);
-//		System.out.println(";=>");
-//		System.out.println();
+		System.out.println(input);
+		System.out.println(";=>");
+		System.out.println();
 		
 		RResultList rsultList = null;
 		try {
@@ -353,9 +353,9 @@ public class RulpTestBase {
 
 	protected void _test_error(String input, String expectError) {
 
-//		System.out.println(input);
-//		System.out.println(";err");
-//		System.out.println();
+		System.out.println(input);
+		System.out.println(";err");
+		System.out.println();
 
 		try {
 

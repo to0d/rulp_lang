@@ -78,7 +78,7 @@ public interface Constant {
 	String A_MAP = "map";
 
 	String A_MEMBER = "member";
-	
+
 	String A_SLOT = "slot";
 
 	String A_NAMESPACE = "namespace";
@@ -313,6 +313,8 @@ public interface Constant {
 
 	String F_PRINT_FRAME_TREE = "print-frame-tree";
 
+	String F_PRINT_GLOBAL_INFO = "print-global-info";
+
 	String F_PRINT_SUBJECT = "print-subject";
 
 	String F_PROPERTY_OF = "property-of";
@@ -534,7 +536,7 @@ public interface Constant {
 	IRAtom T_Macro = RulpFactory.createAtom(A_MACRO);
 
 	IRAtom T_Member = RulpFactory.createAtom(A_MEMBER);
-	
+
 	IRAtom T_Slot = RulpFactory.createAtom(A_SLOT);
 
 	IRAtom T_Native = RulpFactory.createAtom(A_NATIVE);

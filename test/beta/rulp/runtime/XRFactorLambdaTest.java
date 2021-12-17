@@ -7,20 +7,15 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorLambdaTest extends RulpTestBase {
 
 	@Test
-	void test_1() {
+	void test_lambda_1() {
 		_setup();
-		_test("((lambda (?v1 ?v2) (return (?v1 ?v2 3))) + 1)", "4");
+		_run_script();
 	}
 
 	@Test
-	void test_2() {
+	void test_lambda_2() {
 		_setup();
-		_test("(defun fun1 (?v) (return (+ ?v 1)))", "fun1");
-		_test("(name-of fun1)", "\"(fun1 nil)\"");
-		_test("(defun fun2 (?f) (return (?f)))", "fun2");
-		_test("(name-of fun1)", "\"(fun1 nil)\"");
-		_test("(fun2 (lambda () (return (fun1 1))))", "2");
-		_gInfo("result/runtime/XRFactorLambdaTest/test_2_ginfo.txt");
+		_run_script();
 	}
 
 	@Test

@@ -111,6 +111,7 @@ root::parent-of
 root::power
 root::print
 root::print-frame-tree
+root::print-global-info
 root::print-subject
 root::private
 root::property-of
@@ -326,6 +327,7 @@ mbr=parent-of, name=parent-of, type=factor, property='(public)
 mbr=power, name=power, type=factor, property='(public)
 mbr=print, name=print, type=factor, property='(public)
 mbr=print-frame-tree, name=print-frame-tree, type=factor, property='(public)
+mbr=print-global-info, name=print-global-info, type=factor, property='(public)
 mbr=print-subject, name=print-subject, type=factor, property='(public)
 mbr=private, name=private, type=atom, property='(public)
 mbr=property-of, name=property-of, type=factor, property='(public)
