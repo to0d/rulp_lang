@@ -20,6 +20,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.string.XRFactorToString;
 
 public class XRFactorArithmetic extends AbsRFactorAdapter implements IRFactor {
 
@@ -50,13 +51,8 @@ public class XRFactorArithmetic extends AbsRFactorAdapter implements IRFactor {
 			sb.append(rst.asString());
 
 			while (it.hasNext()) {
-
 				IRObject next = interpreter.compute(frame, it.next());
-				if (next.getType() == RType.STRING) {
-					sb.append(RulpUtil.asString(next).asString());
-				} else {
-					sb.append(RulpUtil.toString(next));
-				}
+				sb.append(RulpUtil.asString(XRFactorToString.toString(next, interpreter)).asString());
 			}
 
 			rst = RulpFactory.createString(sb.toString());

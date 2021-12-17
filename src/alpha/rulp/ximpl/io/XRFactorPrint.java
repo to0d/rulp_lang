@@ -15,11 +15,13 @@ import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.string.XRFactorToString;
 
 public class XRFactorPrint extends AbsRFactorAdapter implements IRFactor {
 
@@ -38,7 +40,12 @@ public class XRFactorPrint extends AbsRFactorAdapter implements IRFactor {
 		IRIterator<? extends IRObject> iter = args.listIterator(1);
 		while (iter.hasNext()) {
 			rst = interpreter.compute(frame, iter.next());
-			interpreter.out(RulpUtil.toStringPrint(rst));
+			if (rst.getType() == RType.INSTANCE) {
+				interpreter.out(RulpUtil.asString(XRFactorToString.toString(rst, interpreter)).asString());
+			} else {
+				interpreter.out(RulpUtil.toStringPrint(rst));
+			}
+
 		}
 
 		return O_Nil;

@@ -1,0 +1,21 @@
+(print (+ 1 2))
+;=>
+
+(print "xyz")
+;=>
+
+(print "a\nb")
+;=>
+
+(print (+ 1 2) "a")
+;=>
+
+(print "a\\b")
+;=>
+
+(defvar x 1)
+;=>
+
+(print x)
+;=>
+

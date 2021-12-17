@@ -12,10 +12,7 @@ import org.junit.Test;
 
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
-import alpha.rulp.runtime.IRTokener;
-import alpha.rulp.runtime.IRTokener.Token;
 import alpha.rulp.utils.FileUtil;
-import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpTestBase;
 import alpha.rulp.utils.RulpUtil;
 

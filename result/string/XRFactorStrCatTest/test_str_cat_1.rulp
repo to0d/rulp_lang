@@ -1,0 +1,21 @@
+(strcat)
+;=>
+
+(strcat "abc")
+;=>
+
+(strcat "abc" "123")
+;=>
+
+(strcat "abc" "123" "def")
+;=>
+
+(strcat "abc" " 123")
+;=>
+
+(strcat "abc" (to-string 123))
+;=>
+
+(strcat "abc" "-" (date "2020-01-01"))
+;=>
+

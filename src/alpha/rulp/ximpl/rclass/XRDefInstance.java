@@ -18,11 +18,31 @@ import alpha.rulp.utils.RuntimeUtil;
 
 public class XRDefInstance extends AbsRInstance {
 
+	private IRInterpreter interpreter;
+
 	public XRDefInstance(IRClass rClass, String instanceName, IRFrame definedFrame) {
 		super(rClass, instanceName, definedFrame);
 	}
 
-	private IRInterpreter interpreter;
+	protected void _delete() throws RException {
+
+		/******************************************/
+		// Check ~init parameters
+		/******************************************/
+		IRMember member = getMember(F_MBR_UNINIT);
+		if (member != null) {
+
+			ArrayList<IRObject> initArgs = new ArrayList<>();
+			initArgs.add(member);
+
+			IRList expr = RuntimeUtil.rebuildFuncExpr(RulpUtil.asFunction(member.getValue()),
+					RulpFactory.createExpression(initArgs), interpreter, getSubjectFrame());
+
+			interpreter.compute(getSubjectFrame(), expr);
+		}
+
+		super._delete();
+	}
 
 	@Override
 	public void init(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -61,25 +81,5 @@ public class XRDefInstance extends AbsRInstance {
 		}
 
 		this.interpreter = interpreter;
-	}
-
-	protected void _delete() throws RException {
-
-		/******************************************/
-		// Check ~init parameters
-		/******************************************/
-		IRMember member = getMember(F_MBR_UNINIT);
-		if (member != null) {
-
-			ArrayList<IRObject> initArgs = new ArrayList<>();
-			initArgs.add(member);
-
-			IRList expr = RuntimeUtil.rebuildFuncExpr(RulpUtil.asFunction(member.getValue()),
-					RulpFactory.createExpression(initArgs), interpreter, getSubjectFrame());
-
-			interpreter.compute(getSubjectFrame(), expr);
-		}
-
-		super._delete();
 	}
 }

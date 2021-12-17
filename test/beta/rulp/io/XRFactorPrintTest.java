@@ -7,17 +7,15 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorPrintTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_print_1() {
 
 		_setup();
-		_test("(print (+ 1 2))", "nil", "3");
-		_test("(print \"xyz\")", "nil", "xyz");
-		_test("(print \"a\\nb\")", "nil", "a\nb");
-		_test("(print (+ 1 2) \"a\")", "nil", "3a");
-		_test("(print \"a\\\\b\")", "nil", "a\\b");
-
+		_run_script();
+	}
+	
+	@Test
+	void test_print_2_class() {
 		_setup();
-		_test("(defvar x 1)", "&x");
-		_test("(print x)", "nil", "1");
+		_run_script();
 	}
 }

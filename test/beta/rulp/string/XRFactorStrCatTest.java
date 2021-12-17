@@ -7,17 +7,16 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorStrCatTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_str_cat_1() {
 
 		_setup();
-		_test("(strcat)", "\"\"");
-		_test("(strcat \"abc\")", "\"abc\"");
-		_test("(strcat \"abc\" \"123\")", "\"abc123\"");
-		_test("(strcat \"abc\" \"123\" \"def\")", "\"abc123def\"");
-		_test("(strcat \"abc\" \" 123\")", "\"abc 123\"");
-		_test("(strcat \"abc\" (to-string 123))", "\"abc123\"");
-		_test("(strcat \"abc\" \"-\" (date \"2020-01-01\"))", "\"abc-2020-01-01\"");
-		_test("(+ \"abc\" 123)", "\"abc123\"");
+		_run_script();
 	}
+	
+	@Test
+	void test_str_cat_2_class() {
 
+		_setup();
+		_run_script();
+	}
 }

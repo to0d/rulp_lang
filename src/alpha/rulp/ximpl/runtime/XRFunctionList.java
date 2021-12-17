@@ -91,7 +91,7 @@ public class XRFunctionList extends AbsRefCallableAdapter implements IRFunctionL
 
 			for (IRFunction fun : funcList) {
 
-				int matchCount = _matchTypeList(fun, args);
+				int matchCount = matchFunParaCount(fun, args);
 				if (matchCount < 0) {
 					continue;
 				}
@@ -136,7 +136,7 @@ public class XRFunctionList extends AbsRefCallableAdapter implements IRFunctionL
 
 	}
 
-	static int _matchTypeList(IRFunction fun, IRList args) throws RException {
+	public static int matchFunParaCount(IRFunction fun, IRList args) throws RException {
 
 		if ((fun.getParaAttrs().size() + 1) != args.size()) {
 			return -1;

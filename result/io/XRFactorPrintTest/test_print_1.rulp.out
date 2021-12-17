@@ -1,0 +1,40 @@
+(print (+ 1 2))
+;=>nil
+;out:
+3
+;eof
+
+(print "xyz")
+;=>nil
+;out:
+xyz
+;eof
+
+(print "a\nb")
+;=>nil
+;out:
+a
+b
+;eof
+
+(print (+ 1 2) "a")
+;=>nil
+;out:
+3a
+;eof
+
+(print "a\\b")
+;=>nil
+;out:
+a\b
+;eof
+
+(defvar x 1)
+;=>&x
+
+(print x)
+;=>nil
+;out:
+1
+;eof
+

@@ -8,9 +8,15 @@
 (new class2 o2)
 ;=>class1 class2 o1 o2
 
-(to-string o1)
-;=>"o1"
+(print "o1=" o1)
+;=>nil
+;out:
+o1=o1
+;eof
 
-(to-string o2)
-;=>"c2_0"
+(print "o2=" o2)
+;=>nil
+;out:
+o2=c2_0
+;eof
 

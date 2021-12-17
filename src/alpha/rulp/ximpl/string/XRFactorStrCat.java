@@ -15,6 +15,7 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
@@ -29,8 +30,11 @@ public class XRFactorStrCat extends AbsRFactorAdapter implements IRFactor {
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		StringBuffer sb = new StringBuffer();
-		for (int i = 1; i < args.size(); ++i) {
-			sb.append(RulpUtil.asString(interpreter.compute(frame, args.get(i))).asString());
+
+		IRIterator<? extends IRObject> it = args.listIterator(1);
+		while (it.hasNext()) {
+			IRObject next = interpreter.compute(frame, it.next());
+			sb.append(RulpUtil.asString(XRFactorToString.toString(next, interpreter)).asString());
 		}
 
 		return RulpFactory.createString(sb.toString());

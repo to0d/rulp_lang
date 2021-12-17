@@ -8,8 +8,8 @@
 (new class2 o2)
 ;=>
 
-(to-string o1)
-;=>"o1"
+(print "o1=" o1)
+;=>
 
-(to-string o2)
-;=>"c2_0"
+(print "o2=" o2)
+;=>
