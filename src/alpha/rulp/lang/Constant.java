@@ -13,6 +13,8 @@ import alpha.rulp.utils.RulpFactory;
 
 public interface Constant {
 
+	String A_ANNOTATION = "annotation";
+
 	String A_ARRAY = "array";
 
 	String A_ATOM = "atom";
@@ -78,8 +80,6 @@ public interface Constant {
 	String A_MAP = "map";
 
 	String A_MEMBER = "member";
-
-	String A_SLOT = "slot";
 
 	String A_NAMESPACE = "namespace";
 
@@ -501,6 +501,8 @@ public interface Constant {
 
 	int P_STATIC = 0x0002;
 
+	IRAtom T_Annotation = RulpFactory.createAtom(A_ANNOTATION);
+
 	IRAtom T_Array = RulpFactory.createAtom(A_ARRAY);
 
 	IRAtom T_Atom = RulpFactory.createAtom(A_ATOM);
@@ -536,8 +538,6 @@ public interface Constant {
 	IRAtom T_Macro = RulpFactory.createAtom(A_MACRO);
 
 	IRAtom T_Member = RulpFactory.createAtom(A_MEMBER);
-
-	IRAtom T_Slot = RulpFactory.createAtom(A_SLOT);
 
 	IRAtom T_Native = RulpFactory.createAtom(A_NATIVE);
 

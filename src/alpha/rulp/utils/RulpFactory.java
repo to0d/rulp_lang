@@ -552,6 +552,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, T_Native);
 		RulpUtil.addFrameObject(rootFrame, T_Member);
 		RulpUtil.addFrameObject(rootFrame, T_Frame);
+		RulpUtil.addFrameObject(rootFrame, T_Annotation);
 
 		RuntimeUtil.init(rootFrame);
 		TraceUtil.init(rootFrame);

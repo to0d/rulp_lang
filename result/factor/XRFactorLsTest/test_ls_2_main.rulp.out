@@ -32,6 +32,7 @@ root::add-list-to-list
 root::add_search_frame
 root::alias
 root::and
+root::annotation
 root::array
 root::atom
 root::blob
@@ -248,6 +249,7 @@ mbr=add-list-to-list, name=add-list-to-list, type=factor, property='(public)
 mbr=add_search_frame, name=add_search_frame, type=factor, property='(public)
 mbr=alias, name=alias, type=factor, property='(public)
 mbr=and, name=and, type=factor, property='(public)
+mbr=annotation, name=annotation, type=atom, property='(public)
 mbr=array, name=array, type=atom, property='(public)
 mbr=atom, name=atom, type=atom, property='(public)
 mbr=blob, name=blob, type=atom, property='(public)

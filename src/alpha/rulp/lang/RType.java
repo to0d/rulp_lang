@@ -29,7 +29,7 @@ import static alpha.rulp.lang.Constant.A_MACRO;
 import static alpha.rulp.lang.Constant.A_MEMBER;
 import static alpha.rulp.lang.Constant.A_NATIVE;
 import static alpha.rulp.lang.Constant.A_NULL;
-import static alpha.rulp.lang.Constant.A_SLOT;
+import static alpha.rulp.lang.Constant.A_ANNOTATION;
 import static alpha.rulp.lang.Constant.A_STRING;
 import static alpha.rulp.lang.Constant.A_TEMPLATE;
 import static alpha.rulp.lang.Constant.A_VAR;
@@ -54,7 +54,7 @@ import static alpha.rulp.lang.Constant.T_Macro;
 import static alpha.rulp.lang.Constant.T_Member;
 import static alpha.rulp.lang.Constant.T_Native;
 import static alpha.rulp.lang.Constant.T_Null;
-import static alpha.rulp.lang.Constant.T_Slot;
+import static alpha.rulp.lang.Constant.T_Annotation;
 import static alpha.rulp.lang.Constant.T_String;
 import static alpha.rulp.lang.Constant.T_Template;
 import static alpha.rulp.lang.Constant.T_Var;
@@ -85,11 +85,11 @@ public enum RType {
 	CLASS(19, A_CLASS), //
 	NATIVE(20, A_NATIVE), //
 	MEMBER(21, A_MEMBER), //
-	SLOT(22, A_MEMBER), //
+	ANNOTATION(22, A_ANNOTATION), //
 	FRAME(23, A_FRAME); //
 
 	public static final RType ALL_RTYPE[] = { NIL, ATOM, BOOL, INT, LONG, FLOAT, DOUBLE, STRING, BLOB, LIST, EXPR,
-			ARRAY, VAR, CONSTANT, FACTOR, FUNC, TEMPLATE, MACRO, INSTANCE, CLASS, NATIVE, MEMBER, SLOT, FRAME };
+			ARRAY, VAR, CONSTANT, FACTOR, FUNC, TEMPLATE, MACRO, INSTANCE, CLASS, NATIVE, MEMBER, ANNOTATION, FRAME };
 
 	public static final int TYPE_NUM = 24;
 
@@ -159,8 +159,8 @@ public enum RType {
 		case MEMBER:
 			return T_Member;
 
-		case SLOT:
-			return T_Slot;
+		case ANNOTATION:
+			return T_Annotation;
 
 		case FRAME:
 			return T_Frame;
@@ -236,8 +236,8 @@ public enum RType {
 		case A_MEMBER:
 			return MEMBER;
 
-		case A_SLOT:
-			return SLOT;
+		case A_ANNOTATION:
+			return ANNOTATION;
 
 		case A_FRAME:
 			return FRAME;
