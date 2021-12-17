@@ -1,3 +1,7 @@
+;;[SST][TITLE] SQL Array DECFLOAT bugs found in 2015FVTR
+;;[SST][TAGS]DT2V|SQL|Array|ISSUE151220A
+;;[SST][DATE]2020-08-12
+
 (defun fun2 (?x ?x) (print ?x))
 ;err
 
