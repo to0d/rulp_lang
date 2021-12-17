@@ -8,29 +8,35 @@
 ;;;
 
 (do
-    (defun fun1 (?v1 ?v2) (return (+ ?v1 ?v2)))    
-    (out-to-file "result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_2_a.txt" (print-subject 2))
+    (defun fun1 (?v1 ?v2) (return (+ ?v1 ?v2)))
+    (println "********** A - print-subject 2 **********")
+    (print-subject 2)
     (fun1 1 2)
 )
 ;;;
 
-(out-to-file "result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_2_b.txt" (print-subject 1))
+(println "********** B - print-subject 1 **********")
+(print-subject 1)
 ;;;
 
 (fun1 1 2)
 ;;;
 
 (do
-    (defun fun1 (?v1 ?v2) (return (+ ?v1 ?v2)))    
-    (out-to-file "result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_2_c.txt" (print-subject 2))
+    (defun fun1 (?v1 ?v2) (return (+ ?v1 ?v2)))
+    (println "********** C - print-subject 2 **********")
+    (print-subject 2)
     (do
-        (defun fun1 (?v1 ?v2 ?v3) (return (+ ?v1 ?v2 ?v3)))    
-        (out-to-file "result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_2_d.txt" (print-subject 3))
+        (defun fun1 (?v1 ?v2 ?v3) (return (+ ?v1 ?v2 ?v3)))
+        (println "********** D - print-subject 3 **********")
+        (print-subject 3)
     )
-    (out-to-file "result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_2_e.txt" (print-subject 2))
+    (println "********** E - print-subject 2 **********")
+    (print-subject 2)
     (fun1 1 2 3)
 )
 ;;;
 
-(out-to-file "result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_2_f.txt" (print-subject 1))
+(println "********** F - print-subject 1 **********")
+(print-subject 1)
 ;;;

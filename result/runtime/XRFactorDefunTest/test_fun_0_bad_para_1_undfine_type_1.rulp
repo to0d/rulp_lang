@@ -1,0 +1,5 @@
+(defun fun2 ((?x Expr)) (print ?x))
+;err
+
+(defun main::fun2 ((?x Expr)) (print ?x))
+;err

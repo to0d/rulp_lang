@@ -13,12 +13,12 @@
 (name-of fun1)
 ;;;
 
-(out-to-file "result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_1_override2_a.txt" (print-subject 1))
+(print-subject 1)
 ;;;
 
 (do
     (defun fun1 (?v) (return (+ ?v 2)))   
-    (out-to-file "result/runtime/XRFactorDefunTest/test_fun_3_overload_cross_frame_1_override2_b.txt" (print-subject 2))
+    (print-subject 2)
     (fun1 1)
 )
 ;;;

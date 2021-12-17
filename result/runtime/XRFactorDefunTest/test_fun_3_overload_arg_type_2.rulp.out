@@ -1,3 +1,27 @@
+(defun fun1 ((?v1 int) ?v2) (return (+ ?v1 ?v2)))
+;=>fun1
+
+(name-of fun1)
+;=>"(fun1 int nil)"
+
+(defun fun1 (?v1 ?v2) (return (- ?v1 ?v2)))
+;=>fun1
+
+(name-of fun1)
+;=>"'((fun1 int nil) (fun1 nil nil))"
+
+(fun1 2 3)
+;=>5
+
+(fun1 2 3.1)
+;=>5.1
+
+(fun1 2.1 3.1)
+;=>-1.0
+
+(print-subject)
+;=>nil
+;out:
 id=2, name=main, lvl=2, ref=1/2, entry=5, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
@@ -5,9 +29,12 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        1    frame      frame@main          
-fun1                 : 4        2        1    funcList   '((fun1 float) (fun1 nil)) : frame=null, type=list
-                                         1    func       (fun1 nil) : frame=frame@main
-                                         1    func       (fun1 float) : frame=frame@do
-?rv                  : 6        2        1    var        3.0 : type=float    
+fun1                 : 4        2        1    funcList   '((fun1 int nil) (fun1 nil nil)) : frame=null, type=list
+                                         1    func       (fun1 int nil) : frame=frame@main
+                                         1    func       (fun1 nil nil) : frame=frame@main
+?rv                  : 7        2        1    var        -1.0 : type=float   
 ==========================================================================================================================
+
+
+;eof
 

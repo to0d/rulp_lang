@@ -304,16 +304,10 @@ public class RulpTestBase {
 	}
 
 	protected void _test(String input) {
-//		System.out.println(input);
-//		System.out.println(";;;");
-//		System.out.println();
 		_test(input, null, null);
 	}
 
 	protected void _test(String input, String expectResult) {
-//		System.out.println(input);
-//		System.out.println(";=>");
-//		System.out.println();
 		_test(input, expectResult, "");
 	}
 
@@ -360,7 +354,7 @@ public class RulpTestBase {
 	protected void _test_error(String input, String expectError) {
 
 //		System.out.println(input);
-//		System.out.println(";err:");
+//		System.out.println(";err");
 //		System.out.println();
 
 		try {
@@ -377,72 +371,72 @@ public class RulpTestBase {
 		}
 	}
 
-	protected void _test_match(String input, String expectResult, String expecFile) {
-
-		RResultList rsultList = null;
-		try {
-
-			IRInterpreter interpreter = _getInterpreter();
-			out.clear();
-
-			rsultList = RulpUtil.compute(interpreter, input);
-
-			String output = out.getOut();
-			if (expectResult != null) {
-				assertEquals(String.format("input=%s", input), expectResult, RulpUtil.toString(rsultList.results));
-			}
-
-			if (expecFile != null) {
-
-				List<String> outputLines = new ArrayList<>();
-				for (String line : StringUtil.splitStringByChar(output, '\n')) {
-					if (expecFile.trim().isEmpty()) {
-						continue;
-					}
-					outputLines.add(line.trim());
-				}
-
-				List<String> expectLines = new ArrayList<>();
-				for (String line : FileUtil.openTxtFile(expecFile)) {
-					if (expecFile.trim().isEmpty()) {
-						continue;
-					}
-					expectLines.add(line.trim());
-				}
-
-				if (outputLines.size() != expectLines.size()) {
-					assertEquals(String.format("input=%s", input), StringUtil.toOneLine(expectLines), output);
-				}
-
-				int size = expectLines.size();
-				for (int i = 0; i < size; ++i) {
-					String expectLine = expectLines.get(i);
-					String outputLine = outputLines.get(i);
-					if (!StringUtil.matchFormat(expectLine, outputLine)) {
-						assertEquals(String.format("%d: input=%s, expect=%s, out=%s", i, input, expectLine, outputLine),
-								StringUtil.toOneLine(expectLines), output);
-					}
-				}
-
-			}
-
-		} catch (Exception e) {
-
-			e.printStackTrace();
-			fail(e.toString());
-
-		} finally {
-
-			if (rsultList != null) {
-				try {
-					rsultList.free();
-				} catch (RException e1) {
-					e1.printStackTrace();
-					fail(e1.toString());
-				}
-			}
-		}
-	}
+//	protected void _test_match(String input, String expectResult, String expecFile) {
+//
+//		RResultList rsultList = null;
+//		try {
+//
+//			IRInterpreter interpreter = _getInterpreter();
+//			out.clear();
+//
+//			rsultList = RulpUtil.compute(interpreter, input);
+//
+//			String output = out.getOut();
+//			if (expectResult != null) {
+//				assertEquals(String.format("input=%s", input), expectResult, RulpUtil.toString(rsultList.results));
+//			}
+//
+//			if (expecFile != null) {
+//
+//				List<String> outputLines = new ArrayList<>();
+//				for (String line : StringUtil.splitStringByChar(output, '\n')) {
+//					if (expecFile.trim().isEmpty()) {
+//						continue;
+//					}
+//					outputLines.add(line.trim());
+//				}
+//
+//				List<String> expectLines = new ArrayList<>();
+//				for (String line : FileUtil.openTxtFile(expecFile)) {
+//					if (expecFile.trim().isEmpty()) {
+//						continue;
+//					}
+//					expectLines.add(line.trim());
+//				}
+//
+//				if (outputLines.size() != expectLines.size()) {
+//					assertEquals(String.format("input=%s", input), StringUtil.toOneLine(expectLines), output);
+//				}
+//
+//				int size = expectLines.size();
+//				for (int i = 0; i < size; ++i) {
+//					String expectLine = expectLines.get(i);
+//					String outputLine = outputLines.get(i);
+//					if (!StringUtil.matchFormat(expectLine, outputLine)) {
+//						assertEquals(String.format("%d: input=%s, expect=%s, out=%s", i, input, expectLine, outputLine),
+//								StringUtil.toOneLine(expectLines), output);
+//					}
+//				}
+//
+//			}
+//
+//		} catch (Exception e) {
+//
+//			e.printStackTrace();
+//			fail(e.toString());
+//
+//		} finally {
+//
+//			if (rsultList != null) {
+//				try {
+//					rsultList.free();
+//				} catch (RException e1) {
+//					e1.printStackTrace();
+//					fail(e1.toString());
+//				}
+//			}
+//		}
+//	}
 
 //	protected void _test_script2() {
 //		_test_script2(getCachePath() + ".rulp");

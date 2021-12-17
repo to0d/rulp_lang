@@ -1,0 +1,36 @@
+(defvar x 10) x
+;=>
+
+(defun fun1 (?x) (print ?x))
+;=>
+
+(name-of fun1)
+;=>
+
+(fun1 1)        ; pass constant
+;=>
+
+(fun1 x)        ; pass var
+;=>
+
+(fun1 &x)       ; pass var ref
+;=>
+
+(fun1 (+ 1 2))  ; pass expression
+;=>
+
+(fun1 $(+ 1 2)) ; pass early expression
+;=>
+
+(defun fun2 ((?x expr)) (print ?x))
+;=>
+
+(name-of fun2)
+;=>
+
+(fun2 (+ 1 2))  ; pass expression
+;=>
+
+(fun2 $(+ 1 2)) ; pass early expression
+;err
+

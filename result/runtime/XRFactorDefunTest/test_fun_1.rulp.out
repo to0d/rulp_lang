@@ -1,0 +1,12 @@
+(defun fun1 (?v1 ?v2) (return (?v1 ?v2 3))) (fun1 + 1)
+;=>fun1 4
+
+(name-of fun1)
+;=>"(fun1 nil nil)"
+
+(defun fun2 (?v1 ?v2) (do (?v1 ?v2 3) (return (?v1 ?v2 4)))) (fun2 + 1)
+;=>fun2 5
+
+(name-of fun2)
+;=>"(fun2 nil nil)"
+

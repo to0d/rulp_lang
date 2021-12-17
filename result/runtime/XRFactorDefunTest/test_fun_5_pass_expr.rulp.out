@@ -1,0 +1,57 @@
+(defvar x 10) x
+;=>&x 10
+
+(defun fun1 (?x) (print ?x))
+;=>fun1
+
+(name-of fun1)
+;=>"(fun1 nil)"
+
+(fun1 1)        ; pass constant
+;=>nil
+;out:
+1
+;eof
+
+(fun1 x)        ; pass var
+;=>nil
+;out:
+10
+;eof
+
+(fun1 &x)       ; pass var ref
+;=>nil
+;out:
+10
+;eof
+
+(fun1 (+ 1 2))  ; pass expression
+;=>nil
+;out:
+3
+;eof
+
+(fun1 $(+ 1 2)) ; pass early expression
+;=>nil
+;out:
+3
+;eof
+
+(defun fun2 ((?x expr)) (print ?x))
+;=>fun2
+
+(name-of fun2)
+;=>"(fun2 expr)"
+
+(fun2 (+ 1 2))  ; pass expression
+;=>nil
+;out:
+(+ 1 2)
+;eof
+
+(fun2 $(+ 1 2)) ; pass early expression
+;err:
+the type<int> of 0 argument<3> not match <expr>
+at main: (fun2 $(+ 1 2))
+;eof
+

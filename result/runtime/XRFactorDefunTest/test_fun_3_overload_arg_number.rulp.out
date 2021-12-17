@@ -1,3 +1,24 @@
+(defun fun (?v) (return (+ ?v 1)))
+;=>fun
+
+(name-of fun)
+;=>"(fun nil)"
+
+(fun 1)
+;=>2
+
+(defun fun (?v1 ?v2) (return (+ ?v1 ?v2)))
+;=>fun
+
+(name-of fun)
+;=>"'((fun nil nil) (fun nil))"
+
+(fun 1 2)
+;=>3
+
+(print-subject)
+;=>nil
+;out:
 id=2, name=main, lvl=2, ref=1/2, entry=5, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
@@ -10,4 +31,7 @@ fun                  : 4        2        1    funcList   '((fun nil nil) (fun ni
                                          1    func       (fun nil nil) : frame=frame@main
 ?rv                  : 6        2        1    var        3 : type=int        
 ==========================================================================================================================
+
+
+;eof
 

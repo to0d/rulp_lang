@@ -1,0 +1,21 @@
+(defun fun (?v) (return (+ ?v 1)))
+;=>
+
+(name-of fun)
+;=>
+
+(fun 1)
+;=>
+
+(defun fun (?v1 ?v2) (return (+ ?v1 ?v2)))
+;=>
+
+(name-of fun)
+;=>
+
+(fun 1 2)
+;=>
+
+(print-subject)
+;=>
+

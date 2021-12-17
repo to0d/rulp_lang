@@ -1,0 +1,16 @@
+(defvar x 10) x
+;=>&x 10
+
+(defun fun1 (?p1) (setq ?p1 (+ ?p1 1)))
+;=>fun1
+
+(name-of fun1)
+;=>"(fun1 nil)"
+
+; pass reference
+(fun1 &x)
+;=>nil
+
+x
+;=>11
+

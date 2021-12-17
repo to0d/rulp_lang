@@ -1,0 +1,16 @@
+(defvar x 10) x
+;=>
+
+(defun fun1 (?p1) (setq ?p1 (+ ?p1 1)))
+;=>
+
+(name-of fun1)
+;=>
+
+; pass value
+(fun1 x)
+;=>
+
+x
+;=>
+

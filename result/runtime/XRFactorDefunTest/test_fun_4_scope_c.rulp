@@ -7,12 +7,14 @@
 (fun1 1.0)
 ;;;
 
-(out-to-file "result/runtime/XRFactorDefunTest/test_fun_4_scope_c_1.txt" (print-subject 1))
+(println "********** A - print-subject 1 **********")
+(print-subject 1)
 ;;;
 
 (do
     (defun fun1 ((?v float)) (return (+ ?v 2)))    
-    (out-to-file "result/runtime/XRFactorDefunTest/test_fun_4_scope_c_2.txt" (print-subject 2))
+    (println "********** B - print-subject 2 **********")
+    (print-subject 1)
     (fun1 1.0)
 )
 ;;;
@@ -20,5 +22,6 @@
 (fun1 1.0)
 ;;;
 
-(out-to-file "result/runtime/XRFactorDefunTest/test_fun_4_scope_c_3.txt" (print-subject 1))
+(println "********** C - print-subject 1 **********")
+(print-subject 1)
 ;;;
