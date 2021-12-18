@@ -78,9 +78,9 @@ public final class RuntimeUtil {
 
 	private static AtomicInteger frameMaxLevel = new AtomicInteger(0);
 
-	private static StaticVar varSupportOpCPS = new StaticVar(A_OP_CPS, O_False);
+//	private static StaticVar varSupportOpCPS = new StaticVar(A_OP_CPS, O_False);
 
-	private static StaticVar varSupportOpStable = new StaticVar(A_OP_STABLE, O_False);
+//	private static StaticVar varSupportOpStable = new StaticVar(A_OP_STABLE, O_False);
 
 	private static void _checkFrame(IRFrame frame) throws RException {
 
@@ -351,7 +351,7 @@ public final class RuntimeUtil {
 
 			case ATOM: {
 
-				IRFrameEntry entry = lookupFrameEntry((IRAtom) obj, frame);
+				IRFrameEntry entry = lookupFrameEntry(frame, RulpUtil.asAtom(obj).getName());
 				if (entry == null) {
 					return obj;
 				}
@@ -397,7 +397,7 @@ public final class RuntimeUtil {
 					IRObject rst = RuntimeUtil.computeFun((IRFunction) e0, expr, interpreter, frame);
 					if (rst == null) {
 						return O_Nil;
-					} else if (rst.getType() == RType.EXPR && RuntimeUtil.isSupportOpCPS()) {
+					} else if (rst.getType() == RType.EXPR && RuntimeUtil.isSupportOpCPS(frame)) {
 						rst = CPSUtils.computeCPSExpr((IRExpr) rst, interpreter, frame);
 					}
 					return rst;
@@ -690,8 +690,16 @@ public final class RuntimeUtil {
 	}
 
 	public static void init(IRFrame frame) throws RException {
-		varSupportOpCPS.init(frame);
-		varSupportOpStable.init(frame);
+		RulpUtil.setLocalVar(frame, A_OP_CPS, O_False);
+		RulpUtil.setLocalVar(frame, A_OP_STABLE, O_False);
+	}
+
+	public static boolean isSupportOpCPS(IRFrame frame) throws RException {
+		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_OP_CPS)).asBoolean();
+	}
+
+	public static boolean isSupportOpStable(IRFrame frame) throws RException {
+		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_OP_STABLE)).asBoolean();
 	}
 
 	public static boolean isComputable(IRFrame curFrame, IRObject obj) throws RException {
@@ -783,30 +791,21 @@ public final class RuntimeUtil {
 		}
 	}
 
-	public static boolean isSupportOpCPS() throws RException {
-		return varSupportOpCPS.getBoolValue();
-	}
+	public static IRFrameEntry lookupFrameEntry(IRFrame frame, String name) throws RException {
 
-	public static boolean isSupportOpStable() throws RException {
-		return varSupportOpStable.getBoolValue();
-	}
-
-	public static IRFrameEntry lookupFrameEntry(IRAtom atom, IRFrame frame) throws RException {
-
-		String atomName = atom.getName();
-		if (isForceLocalEntryName(atomName)) {
-			return frame.getEntry(atomName);
+		if (isForceLocalEntryName(name)) {
+			return frame.getEntry(name);
 		}
 
 		List<IRFrame> searchFrameList = frame.getSearchFrameList();
 		if (searchFrameList == null) {
-			return frame.getEntry(atomName);
+			return frame.getEntry(name);
 		}
 
 		// Searching the using name space if it was specified
 
 		for (IRFrame searchFrame : searchFrameList) {
-			IRFrameEntry entry = searchFrame.getEntry(atomName);
+			IRFrameEntry entry = searchFrame.getEntry(name);
 			if (entry != null) {
 				return entry;
 			}

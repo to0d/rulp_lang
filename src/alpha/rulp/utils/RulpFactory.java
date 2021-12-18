@@ -725,12 +725,12 @@ public final class RulpFactory {
 		// Rulp Utils
 		RulpUtil.addFrameObject(rootFrame, new XRFactorRulpObjectCount(F_RULP_OBJ_COUNT));
 
+		// Runtime Initialization
+		RuntimeUtil.init(systemFrame);
+		TraceUtil.init(systemFrame);
+
 		// Load base script
 		LoadUtil.loadRulpFromJar(interpreter, systemFrame, "alpha/resource/base.rulp", "utf-8");
-
-		// Runtime Initialization
-		RuntimeUtil.init(rootFrame);
-		TraceUtil.init(rootFrame);
 
 		// Native Class Initialization
 		XRSet.init(interpreter, systemFrame);

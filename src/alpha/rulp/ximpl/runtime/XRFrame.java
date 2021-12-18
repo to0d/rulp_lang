@@ -215,13 +215,6 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 	}
 
 	@Override
-	public IRVar addVar(String name) throws RException {
-		IRVar var = RulpFactory.createVar(name);
-		this.setEntry(name, var);
-		return var;
-	}
-
-	@Override
 	public String asString() {
 		return frameName;
 	}

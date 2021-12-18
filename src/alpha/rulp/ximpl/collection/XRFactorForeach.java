@@ -84,7 +84,7 @@ public class XRFactorForeach extends AbsRFactorAdapter implements IRFactor {
 
 			IRList rstList = RulpFactory.createVaryList();
 
-			IRVar var = factorFrame.addVar(RulpUtil.asAtom(paraObj.get(0)).getName());
+			IRVar var = RulpUtil.addVar(frame, RulpUtil.asAtom(paraObj.get(0)).getName());
 
 			IRObject cond = interpreter.compute(factorFrame, paraObj.get(1));
 			RulpUtil.incRef(cond);

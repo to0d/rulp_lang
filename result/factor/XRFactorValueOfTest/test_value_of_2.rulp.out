@@ -1,0 +1,27 @@
+(defvar v1 10)
+;=>&v1
+
+(foreach (?x (ls main)) (value-of ?x))
+;=>'(main::?x main::main main::root main::system main::v1)
+
+(foreach (?x (ls main)) (type-of $(value-of ?x)))
+;=>'(member member member member member)
+
+(foreach (?x (ls main)) (value-of (value-of ?x)))
+;=>'(&?x main root system &v1)
+
+(foreach (?x (ls main)) (type-of $(value-of (value-of ?x))))
+;=>'(var frame frame frame var)
+
+(foreach (?x (ls main)) (value-of (value-of (value-of ?x))))
+;=>'(main::?x main root system 10)
+
+(foreach (?x (ls main)) (type-of $(value-of (value-of (value-of ?x)))))
+;=>'(member frame frame frame int)
+
+(foreach (?x (ls main)) (value-of (value-of (value-of (value-of ?x)))))
+;=>'(&?x main root system 10)
+
+(foreach (?x (ls main)) (type-of $(value-of (value-of (value-of (value-of ?x))))))
+;=>'(var frame frame frame int)
+

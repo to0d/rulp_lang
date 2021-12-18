@@ -1,0 +1,30 @@
+(value-of nil)
+;=>
+
+(value-of true)
+;=>
+
+(value-of 1)
+;=>
+
+(value-of 1.1)
+;=>
+
+(value-of '(a b))
+;=>
+
+(value-of print-list)
+;=>
+
+(value-of "abc")
+;=>
+
+(defvar v1 10)
+;=>
+
+(value-of v1)
+;=>
+
+(value-of a)
+;err
+

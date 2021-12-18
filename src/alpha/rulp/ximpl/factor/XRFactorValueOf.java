@@ -55,7 +55,7 @@ public class XRFactorValueOf extends AbsRFactorAdapter implements IRFactor {
 
 		case ATOM:
 
-			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry((IRAtom) obj, frame);
+			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, RulpUtil.asAtom(obj).getName());
 			if (entry == null) {
 				throw new RException("object not found: " + obj);
 			}

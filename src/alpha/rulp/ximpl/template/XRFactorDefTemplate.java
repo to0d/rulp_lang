@@ -81,8 +81,7 @@ public class XRFactorDefTemplate extends AbsRFactorAdapter implements IRFactor {
 
 					if (paraType == null || paraType == O_Nil) {
 
-						IRAtom fixPara = RulpFactory.createAtom(paraName);
-						IRFrameEntry fixParaEntry = RuntimeUtil.lookupFrameEntry(fixPara, frame);
+						IRFrameEntry fixParaEntry = RuntimeUtil.lookupFrameEntry(frame, paraName);
 						if (fixParaEntry != null) {
 
 							IRObject fixParaObj = fixParaEntry.getObject();

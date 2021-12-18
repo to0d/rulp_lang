@@ -141,7 +141,7 @@ public class XRFactorDefun extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid args size: " + args.size());
 		}
 
-		if (RuntimeUtil.isSupportOpCPS()) {
+		if (RuntimeUtil.isSupportOpCPS(frame)) {
 			// recursive function
 			if (CPSUtils.findCPSCallee(funBody, frame).contains(funName)) {
 				funBody = CPSUtils.addMakeCpsExpr(funBody, frame);

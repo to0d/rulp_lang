@@ -499,8 +499,7 @@ public class RulpUtil {
 				TemplatePara tp = new TemplatePara();
 				tp.isVar = false;
 
-				IRAtom fixPara = RulpFactory.createAtom(fixedParaNames[i]);
-				IRFrameEntry fixParaEntry = RuntimeUtil.lookupFrameEntry(fixPara, frame);
+				IRFrameEntry fixParaEntry = RuntimeUtil.lookupFrameEntry(frame, fixedParaNames[i]);
 				if (fixParaEntry != null) {
 					IRObject fixParaObj = fixParaEntry.getObject();
 					tp.paraType = RulpUtil.getObjectType(fixParaObj);
@@ -1585,6 +1584,40 @@ public class RulpUtil {
 		} else {
 			mbr.setProperty(mbr.getProperty() & ~P_FINAL);
 		}
+	}
+
+	public static IRVar addVar(IRFrame frame, String name) throws RException {
+		IRVar var = RulpFactory.createVar(name);
+		frame.setEntry(name, var);
+		return var;
+	}
+
+	public static void setLocalVar(IRFrame frame, String varName, IRObject value) throws RException {
+
+		IRObject varObj = frame.findLocalObject(varName);
+		IRVar var = null;
+		if (varObj == null) {
+			var = addVar(frame, varName);
+		} else {
+			var = RulpUtil.asVar(varObj);
+		}
+
+		var.setValue(value);
+	}
+
+	public static IRObject getVarValue(IRFrame frame, String varName) throws RException {
+
+		IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, varName);
+		if (entry == null) {
+			return null;
+		}
+
+		IRObject entryValue = entry.getValue();
+		if (entryValue == null || entryValue.getType() != RType.VAR) {
+			return null;
+		}
+
+		return RulpUtil.asVar(entryValue).getValue();
 	}
 
 	public static void setPropertyInherit(IRMember mbr, boolean bValue) throws RException {

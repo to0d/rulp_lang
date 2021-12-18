@@ -48,12 +48,9 @@ root::=
 root::>
 root::>=
 root::?file.separator
-root::?op-cps
-root::?op-stable
 root::?os.name
 root::?os.version
 root::?path.separator
-root::?trace
 root::?user.dir
 root::?user.home
 root::?user.name
@@ -220,6 +217,9 @@ root::~
 system::++
 system::--
 system::?load-paths
+system::?op-cps
+system::?op-stable
+system::?trace
 system::add
 system::add-all
 system::clear

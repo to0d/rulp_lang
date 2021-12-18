@@ -1,0 +1,33 @@
+(value-of nil)
+;=>nil
+
+(value-of true)
+;=>true
+
+(value-of 1)
+;=>1
+
+(value-of 1.1)
+;=>1.1
+
+(value-of '(a b))
+;=>'(a b)
+
+(value-of print-list)
+;=>print-list
+
+(value-of "abc")
+;=>"abc"
+
+(defvar v1 10)
+;=>&v1
+
+(value-of v1)
+;=>10
+
+(value-of a)
+;err:
+object not found: a
+at main: (value-of a)
+;eof
+

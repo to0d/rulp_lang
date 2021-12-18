@@ -15,12 +15,9 @@ root::=
 root::>
 root::>=
 root::?file.separator
-root::?op-cps
-root::?op-stable
 root::?os.name
 root::?os.version
 root::?path.separator
-root::?trace
 root::?user.dir
 root::?user.home
 root::?user.name
@@ -187,6 +184,9 @@ root::~
 system::++
 system::--
 system::?load-paths
+system::?op-cps
+system::?op-stable
+system::?trace
 system::add
 system::add-all
 system::clear
@@ -233,12 +233,9 @@ mbr==, name==, type=factor, property='(public)
 mbr=>, name=>, type=factor, property='(public)
 mbr=>=, name=>=, type=factor, property='(public)
 mbr=?file.separator, name=?file.separator, type=var, property='(public), value="\"
-mbr=?op-cps, name=?op-cps, type=var, property='(public), value="false"
-mbr=?op-stable, name=?op-stable, type=var, property='(public), value="false"
 mbr=?os.name, name=?os.name, type=var, property='(public), value="Windows 10"
 mbr=?os.version, name=?os.version, type=var, property='(public), value="10.0"
 mbr=?path.separator, name=?path.separator, type=var, property='(public), value=";"
-mbr=?trace, name=?trace, type=var, property='(public), value="false"
 mbr=?user.dir, name=?user.dir, type=var, property='(public), value="C:\data\itool\irulp_base"
 mbr=?user.home, name=?user.home, type=var, property='(public), value="C:\Users\to0d"
 mbr=?user.name, name=?user.name, type=var, property='(public), value="to0d"
@@ -405,6 +402,9 @@ mbr=~, name=~, type=factor, property='(public)
 mbr=++, name=++, type=macro, property='(public)
 mbr=--, name=--, type=macro, property='(public)
 mbr=?load-paths, name=?load-paths, type=var, property='(public), value="'()"
+mbr=?op-cps, name=?op-cps, type=var, property='(public), value="false"
+mbr=?op-stable, name=?op-stable, type=var, property='(public), value="false"
+mbr=?trace, name=?trace, type=var, property='(public), value="false"
 mbr=add, name='((add array nil nil nil) (add array nil nil) (add array nil) (add list nil nil nil) (add list nil nil) (add list nil)), type=func, property='(public)
 mbr=add-all, name=(add-all list list), type=func, property='(public)
 mbr=clear, name='((clear type#map) (clear type#queue) (clear type#set) (clear type#stack)), type=func, property='(public)

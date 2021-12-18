@@ -20,8 +20,6 @@ public interface IRFrame extends IRObject, IRSubject {
 
 	public void addSearchFrame(IRFrame frame);
 
-	public IRVar addVar(String name) throws RException;
-
 	public IRFrameEntry createFrameEntry(String name, IRObject object);
 
 	public IRObject findLocalObject(String name) throws RException;
