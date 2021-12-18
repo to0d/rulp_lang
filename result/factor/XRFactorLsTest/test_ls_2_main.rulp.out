@@ -79,6 +79,7 @@ root::if
 root::instance
 root::int
 root::is-const
+root::is-stable
 root::join
 root::lambda
 root::let
@@ -297,6 +298,7 @@ mbr=if, name=if, type=factor, property='(public)
 mbr=instance, name=instance, type=atom, property='(public)
 mbr=int, name=int, type=atom, property='(public)
 mbr=is-const, name=is-const, type=factor, property='(public)
+mbr=is-stable, name=is-stable, type=factor, property='(public)
 mbr=join, name=join, type=factor, property='(public)
 mbr=lambda, name=lambda, type=factor, property='(public)
 mbr=let, name=let, type=factor, property='(public)

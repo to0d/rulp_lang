@@ -1,0 +1,85 @@
+;; fact(n) = n*fact(n-1)
+(defun fun1 (?v)
+    (do
+        (if (<= ?v 0)(return 1))
+        (return (* ?v (fun1 (- ?v 1))))
+    )
+)
+(is-stable fun1)
+;=>
+
+(defun fun2 (?v)
+    (do
+        (if (<= ?v 1)(return 1))
+        (if (> ?v 500)(return ?v))
+        (return (fun2 (+ ?v 1)))
+    )
+)
+(is-stable fun2)
+;=>
+
+
+(defun fun3 (?v)
+    (do
+        (if (<= ?v 0)(return 1))
+        (if (<= ?v 1)(return 0))
+        (return (fun3 (fun3 (- ?v 1))))
+    )
+)
+(is-stable fun3)
+;=>
+
+;; fun1(n) = n + fun1(n-1)
+(defun fun4 (?v)
+    (do 
+        (if (<= ?v 0)(return 0))
+        (return (+ ?v (fun4 (- ?v 1))))
+    )
+)
+(is-stable fun4)
+;=>
+
+;; fun1(n) = n + fun1(n-1)
+(defun fun5 (?v)
+    (do 
+        (if (> ?v 0)(return (+ ?v (fun5 (- ?v 1)))))
+        (return 0)
+    )
+)
+(is-stable fun5)
+;=>
+
+;; fun6(n) = 0                          when n <=0
+;;         = n + fun6(n-1)              when n < 10
+;;         = fun6(n-1) + fun6(n/2-1)    when n < 100
+;;         = fun6(n-1) + fun6(n/4-1)    when n < 1000
+;;         = fun6(n-1) + fun6(n/8-1)    other
+(defun fun6 (?v) 
+    (do 
+        (if (<= ?v 0)(return 0))
+        (if (<= ?v 10)(return (+ ?v (fun6 (- ?v 1)))))
+        (if (<= ?v 100)(return (+ (fun6 (- ?v 1)) (fun6 (- (/ ?v 2) 1)))))
+        (if (<= ?v 1000)(return (+ (fun6 (- ?v 1)) (fun6 (- (/ ?v 4) 1)))))
+        (return (+ (fun6 (- ?v 1)) (fun6 (- (/ ?v 8) 1))))
+    )
+)
+(is-stable fun6)
+;=>
+
+;; fun1(n) = n / fun1(n-1)
+(defun fun7 (?v) 
+    (do 
+        (if (<= ?v 0)(return 1))
+        (return (/ ?v (fun7 (- ?v 1))))
+    )
+)
+(is-stable fun7)
+;=>
+
+(defun fun8 (?s) 
+    (if (> (length-of ?s) 10)
+        (return ?s)) 
+    (return (fun8 (+ "a" ?s))))
+(is-stable fun8)
+;=>
+

@@ -1,6 +1,5 @@
 package beta.rulp.optimize;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
@@ -17,7 +16,6 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpTestBase;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.optimize.CPSUtils;
-import alpha.rulp.ximpl.optimize.StableUtil;
 
 public class TestOptimizeTCO extends RulpTestBase {
 
@@ -49,40 +47,6 @@ public class TestOptimizeTCO extends RulpTestBase {
 		}
 
 		_test("(load \"result/optimize/TestOptimizeTCO/fact.rulp\")");
-	}
-
-	private void _test_is_stable_fun(String funName, boolean expectStable) {
-
-		try {
-
-			IRInterpreter interpreter = _getInterpreter();
-
-			IRFunction func = RulpUtil.asFunction(interpreter.getObject(funName));
-
-			boolean isStable = StableUtil.isStableFuncion(func);
-			assertEquals(funName, expectStable, isStable);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			fail(e.toString());
-		}
-	}
-
-	@Test
-	public void test_is_stable_fun_1() {
-
-		_setup();
-		_load_fact(true);
-		_test_is_stable_fun("fact", true);
-		_test_is_stable_fun("fact2", true);
-		_test_is_stable_fun("fact3", true);
-		_test_is_stable_fun("fun1a", true);
-		_test_is_stable_fun("fun1b", true);
-		_test_is_stable_fun("fun2", true);
-		_test_is_stable_fun("fun3", true);
-		_test_is_stable_fun("fun4a", true);
-		_test_is_stable_fun("fun4b", true);
-		_test_is_stable_fun("fun5", true);
 	}
 
 	@Test

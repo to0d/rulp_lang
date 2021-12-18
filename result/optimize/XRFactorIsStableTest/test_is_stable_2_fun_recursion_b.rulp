@@ -1,0 +1,20 @@
+(defun fun4a (?v) 
+    (do 
+        (if (<= ?v 0)(return 0))
+        (return (+ ?v (fun4b (- ?v 1))))
+    )
+)
+
+(defun fun4b (?v) 
+    (do 
+        (if (<= ?v 0)(return 0))
+        (return (+ ?v (fun4a (- ?v 1))))
+    )
+)
+;=>
+
+(is-stable fun4a)
+;=>
+
+(is-stable fun4b)
+;=>

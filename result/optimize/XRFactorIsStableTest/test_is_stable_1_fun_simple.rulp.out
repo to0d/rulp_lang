@@ -1,0 +1,19 @@
+(defun fun1 (?v) 
+    (return (+ ?v 1))
+)
+;=>fun1
+
+(is-stable fun1)
+;=>true
+
+(defvar ?x 0)
+;=>&?x
+
+(defun fun2 (?v) 
+    (return (+ ?v ?x))
+)
+;=>fun2
+
+(is-stable fun2)
+;=>true
+

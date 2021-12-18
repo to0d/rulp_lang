@@ -1,10 +1,9 @@
 package alpha.rulp.ximpl.optimize;
 
-import java.util.HashSet;
 import java.util.Set;
 
+import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
-import alpha.rulp.lang.IRParaAttr;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRCallable;
 import alpha.rulp.runtime.IRFunction;
@@ -16,6 +15,10 @@ public class StableUtil {
 	// stable analyze
 	// - expression: no external variable in expression, all elements is stable
 	// - function: no external variable in function body, all elements is stable
+
+	public static boolean isStable(IRObject obj) throws RException {
+		return isStable(obj, null);
+	}
 
 	public static boolean isStable(IRObject obj, Set<String> paraVarNames) throws RException {
 
@@ -44,22 +47,13 @@ public class StableUtil {
 			return ((IRCallable) obj).isStable();
 
 		case LIST:
-			IRIterator<? extends IRObject> listIt = RulpUtil.asList(obj).iterator();
+		case EXPR:
+			IRIterator<? extends IRObject> listIt = ((IRList) obj).iterator();
 			while (listIt.hasNext()) {
 				if (!isStable(listIt.next(), paraVarNames)) {
 					return false;
 				}
 			}
-			return true;
-
-		case EXPR:
-			IRIterator<? extends IRObject> exprIt = RulpUtil.asExpression(obj).iterator();
-			while (exprIt.hasNext()) {
-				if (!isStable(exprIt.next(), paraVarNames)) {
-					return false;
-				}
-			}
-
 			return true;
 
 		case FUNC:
@@ -70,21 +64,17 @@ public class StableUtil {
 			}
 
 			IRFunction func = (IRFunction) obj;
-			return isStable(func.getFunBody(), paraVarNames);
+
+			// This call is coming from Function's isStable
+			if (paraVarNames != null && paraVarNames.contains(func.getName())) {
+				return true;
+			}
+
+			return func.isStable();
 
 		default:
 
 			return false;
 		}
-	}
-
-	public static boolean isStableFuncion(IRFunction func) throws RException {
-
-		Set<String> paraVarNames = new HashSet<>();
-		for (IRParaAttr pa : func.getParaAttrs()) {
-			paraVarNames.add(pa.getParaName());
-		}
-
-		return isStable(func, paraVarNames);
 	}
 }
