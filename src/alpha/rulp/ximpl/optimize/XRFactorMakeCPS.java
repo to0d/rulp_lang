@@ -34,7 +34,13 @@ public class XRFactorMakeCPS extends AbsRFactorAdapter implements IRFactor {
 		return CPSUtils.rebuildCpsTree(RulpUtil.asExpression(args.get(1)), frame);
 	}
 
+	@Override
 	public boolean isThreadSafe() {
+		return true;
+	}
+
+	@Override
+	public boolean isStable() {
 		return true;
 	}
 }

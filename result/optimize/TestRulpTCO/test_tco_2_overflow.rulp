@@ -1,0 +1,41 @@
+(setq ?op-cps true)
+;;;
+
+(defun fact1 (?v)
+    (do
+        (if (<= ?v 1)(return 1))
+        (if (> ?v 500)(return ?v))
+        (return (fact1 (+ ?v 1)))
+    )
+)
+;;;
+
+(findCallee fact1)
+;=>
+
+(fact1 2)
+;=>
+
+(cps-count)
+;=>
+
+(print-global-info)
+;;;
+
+(setq ?op-cps false)
+;;;
+
+(defun fact2 (?v)
+    (do
+        (if (<= ?v 1)(return 1))
+        (if (> ?v 500)(return ?v))
+        (return (fact2 (+ ?v 1)))
+    )
+)
+;;;
+
+(findCallee fact2)
+;=>
+
+(fact2 2)
+;err

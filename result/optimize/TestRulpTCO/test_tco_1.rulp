@@ -1,0 +1,32 @@
+(setq ?op-cps true)
+;=>
+
+;; fact(n) = n*fact(n-1)
+(defun fact (?v)
+    (do
+        (if (<= ?v 0)(return 1))
+        (return (* ?v (fact (- ?v 1))))
+    )
+)
+;=>
+
+(findCallee fact)
+;=>
+
+(fact 1)
+;=>
+
+(fact 2)
+;=>
+
+(fact 3)
+;=>
+
+(fact 4)
+;=>
+
+(cps-count)
+;=>60
+
+(print-global-info)
+;;;

@@ -1,0 +1,140 @@
+(setq ?op-cps true)
+;=>&?op-cps
+
+;; fun2(n) = 0                          when n <=0
+;;         = n + fun2(n-1)              when n < 10
+;;         = fun2(n-1) + fun2(n/2-1)    when n < 100
+;;         = fun2(n-1) + fun2(n/4-1)    when n < 1000
+;;         = fun2(n-1) + fun2(n/8-1)    other
+(defun fun2 (?v) 
+    (do 
+        (if (<= ?v 0)(return 0))
+        (if (<= ?v 10)(return (+ ?v (fun2 (- ?v 1)))))
+        (if (<= ?v 100)(return (+ (fun2 (- ?v 1)) (fun2 (- (/ ?v 2) 1)))))
+        (if (<= ?v 1000)(return (+ (fun2 (- ?v 1)) (fun2 (- (/ ?v 4) 1)))))
+        (return (+ (fun2 (- ?v 1)) (fun2 (- (/ ?v 8) 1))))
+    )
+)
+;=>fun2
+
+(findCallee fun2)
+;=>'("+" "-" "/" "fun2" "make-cps")
+
+(fun2 0)
+;=>0
+
+(fun2 1)
+;=>1
+
+(fun2 2)
+;=>3
+
+(fun2 3)
+;=>6
+
+(fun2 11)
+;=>65
+
+(fun2 101)
+;=>132564
+
+(cps-count)
+;=>252432
+
+(print-global-info)
+;=>nil
+;out:
+Global Info:
+
+Total runtime info:
+==========================================================================================================================
+                          Name:     info
+--------------------------------------------------------------------------------------------------------------------------
+     Interpreter call id/level:       81        1
+             CPS support/count:     true   252432
+               Frame max level:        4
+                  Frame max id:        5
+           Frame free id count:        2
+==========================================================================================================================
+
+Expression compute count:
+==========================================================================================================================
+     RType:    Count
+--------------------------------------------------------------------------------------------------------------------------
+    factor:   289701
+      func:        6
+==========================================================================================================================
+
+Callable stats info: callId=81, row=19, column=41(2), value-max=84135, value-unit=4^x
+==========================================================================================================================
+   Frame    RType  Count  Ref Object                         122222222222222222222222222222222222244X2 max=415768, unit=4^x
+--------------------------------------------------------------------------------------------------------------------------
+    root   factor  84151    0 if                                                                  23X 
+    root   factor  84151    0 <=                                                                  23X 
+    root   factor  42078    0 return                                                              239 
+    main     func  42078 42073 (fun2 nil)                                                          239 
+    root   factor  42078    0 do                                                                  239 
+    root   factor  42072    0 -                                                                   139 
+    root   factor  37168    0 make-cps                                                            139 
+    root   factor  37168    0 +                                                                   139 
+    root   factor   4904    0 /                                                                     8 
+    root   factor     54    0 defun                              2222222111 2222222222 22121221211    
+    root   factor      6    0 alias                          1221                                     
+    root   factor      4    0 defclass                                                1  1 1  1       
+    root   factor      3    0 deftemplate                                 12                          
+    root   factor      3    0 defmacro                                  11            1               
+    root   factor      1    0 setq                                                              1     
+    root   factor      1    0 print-global-info                                                      1
+    main   factor      1    0 findCallee                                                         1    
+    root   factor      1    0 defvar                            1                                     
+    root   factor      1    0 cps-count                                                              1
+==========================================================================================================================
+
+Object create count:
+==========================================================================================================================
+       RType:       Create       Delete        Exist
+--------------------------------------------------------------------------------------------------------------------------
+        atom:          942            0          942
+         int:         2464            0         2464
+      string:           34            0           34
+        list:            7            1            6
+        expr:       252961       168294        84667
+       array:            1            0            1
+         var:        42094        42078           16
+        func:          103            0          103
+    template:            1            0            1
+       macro:            3            0            3
+       class:            4            0            4
+      member:          117            0          117
+       frame:        84156        84156            0
+ interpreter:            1            0
+  frameEntry:        42290            0
+      lambda:            0            0
+==========================================================================================================================
+
+Global frame list: total=0
+
+id=2, name=main, lvl=2, ref=1/2, entry=6, pid=1(system), subject=main
+==========================================================================================================================
+Name(alias)          : EntryId  FrameId  Ref  Type       Value               
+--------------------------------------------------------------------------------------------------------------------------
+root                 : 1        2        0    frame      frame@root          
+system               : 2        2        0    frame      frame@system        
+main                 : 3        2        1    frame      frame@main          
+findCallee           : 4        2        0    factor     findCallee          
+fun2                 : 5        2        42073 func       (fun2 nil) : frame=frame@main
+?rv                  : 7        2        1    var        0 : type=int        
+==========================================================================================================================
+
+
+Global frame tree:
+
+->FRAME(root): id=0, lvl=0, subject=root
+    ->FRAME(system): id=1, lvl=1, subject=system
+        ->FRAME(main): id=2, lvl=2, subject=main
+
+Global Subject list:
+
+
+;eof
+

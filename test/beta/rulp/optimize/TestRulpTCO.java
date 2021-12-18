@@ -69,14 +69,6 @@ public class TestRulpTCO extends RulpTestBase {
 	}
 
 	@Test
-	public void test_fun_1() {
-
-		_setup();
-		_test("(defun fun1 () ())");
-		_test("(fun1)", "nil");
-	}
-
-	@Test
 	public void test_is_stable_fun_1() {
 
 		_setup();
@@ -94,32 +86,17 @@ public class TestRulpTCO extends RulpTestBase {
 	}
 
 	@Test
-	public void test_tco_fact() {
+	public void test_tco_1() {
 
 		_setup();
-		_load_fact(true);
 		_run_script();
-		_gInfo();
-		assertEquals(60, CPSUtils.getCPSCount());
 	}
 
 	@Test
-	public void test_tco_fact2_a() {
+	public void test_tco_2_overflow() {
 
 		_setup();
-		_load_fact(true);
-		_test("(fact2 2)", "501");
-		_gInfo();
-		assertEquals(1996, CPSUtils.getCPSCount());
-	}
-
-	@Test
-	public void test_tco_fact2_b() {
-
-		_setup();
-		_load_fact(false);
-		_test_error("(fact2 2)", "java.lang.StackOverflowError");
-		_gInfo();
+		_run_script();
 	}
 
 	@Test
@@ -131,33 +108,24 @@ public class TestRulpTCO extends RulpTestBase {
 	}
 
 	@Test
-	public void test_tco_fun1a() {
+	public void test_tco_3_return() {
 
 		_setup();
-		_load_fact(true);
 		_run_script();
-		_gInfo();
-		assertEquals(6636, CPSUtils.getCPSCount());
 	}
 
 	@Test
-	public void test_tco_fun1b() {
+	public void test_tco_4_if() {
 
 		_setup();
-		_load_fact(true);
 		_run_script();
-		_gInfo();
-		assertEquals(6636, CPSUtils.getCPSCount());
 	}
 
 	@Test
-	public void test_tco_fun2() {
+	public void test_tco_5_multi() {
 
 		_setup();
-		_load_fact(true);
 		_run_script();
-		_gInfo();
-		assertEquals(252432, CPSUtils.getCPSCount());
 
 //		fail("how to optimize");
 //		_test("(fun2 1001)", "45866");

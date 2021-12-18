@@ -278,6 +278,24 @@ public class RulpTestBase {
 				e.printStackTrace();
 				return false;
 			}
+
+		} catch (Error e) {
+
+			outLines.add(";err:");
+			outLines.add(e.toString());
+			outLines.add(";eof");
+			outLines.add("");
+
+			if (expectError != null && !expectError) {
+				e.printStackTrace();
+				return false;
+			}
+
+			if (expectErrorMessage != null && !expectErrorMessage.equals(e.toString())) {
+				e.printStackTrace();
+				return false;
+			}
+
 		} finally {
 
 			if (rsultList != null) {
@@ -315,7 +333,7 @@ public class RulpTestBase {
 		System.out.println(input);
 		System.out.println(";=>");
 		System.out.println();
-		
+
 		RResultList rsultList = null;
 		try {
 

@@ -242,6 +242,12 @@ public class CPSUtils {
 
 	private static boolean _isSupportCPSFactor(IRObject op, IRFrame frame) throws RException {
 
+		// the cps callee should be "pure" function
+		// -- no global (external) variable
+		// -- no non-callee function called
+		// -- no non-cps factor called
+		// -- no lambda function
+
 		if (op != null) {
 
 			switch (op.getType()) {
@@ -258,7 +264,7 @@ public class CPSUtils {
 				}
 
 			case FACTOR:
-				return RuntimeUtil.isPureOperatorName(RulpUtil.asFactor(op).getName());
+				return RulpUtil.asFactor(op).isStable();
 
 			case FUNC:
 				return true;
