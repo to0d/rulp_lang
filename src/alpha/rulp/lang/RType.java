@@ -9,6 +9,7 @@
 
 package alpha.rulp.lang;
 
+import static alpha.rulp.lang.Constant.A_ANNOTATION;
 import static alpha.rulp.lang.Constant.A_ARRAY;
 import static alpha.rulp.lang.Constant.A_ATOM;
 import static alpha.rulp.lang.Constant.A_BLOB;
@@ -29,11 +30,11 @@ import static alpha.rulp.lang.Constant.A_MACRO;
 import static alpha.rulp.lang.Constant.A_MEMBER;
 import static alpha.rulp.lang.Constant.A_NATIVE;
 import static alpha.rulp.lang.Constant.A_NULL;
-import static alpha.rulp.lang.Constant.A_ANNOTATION;
 import static alpha.rulp.lang.Constant.A_STRING;
 import static alpha.rulp.lang.Constant.A_TEMPLATE;
 import static alpha.rulp.lang.Constant.A_VAR;
 import static alpha.rulp.lang.Constant.O_Nan;
+import static alpha.rulp.lang.Constant.T_Annotation;
 import static alpha.rulp.lang.Constant.T_Array;
 import static alpha.rulp.lang.Constant.T_Atom;
 import static alpha.rulp.lang.Constant.T_Blob;
@@ -54,7 +55,6 @@ import static alpha.rulp.lang.Constant.T_Macro;
 import static alpha.rulp.lang.Constant.T_Member;
 import static alpha.rulp.lang.Constant.T_Native;
 import static alpha.rulp.lang.Constant.T_Null;
-import static alpha.rulp.lang.Constant.T_Annotation;
 import static alpha.rulp.lang.Constant.T_String;
 import static alpha.rulp.lang.Constant.T_Template;
 import static alpha.rulp.lang.Constant.T_Var;

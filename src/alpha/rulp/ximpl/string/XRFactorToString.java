@@ -16,7 +16,6 @@ import alpha.rulp.lang.IRInstance;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRMember;
 import alpha.rulp.lang.IRObject;
-import alpha.rulp.lang.IRString;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;

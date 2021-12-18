@@ -9,7 +9,6 @@
 
 package alpha.rulp.ximpl.optimize;
 
-import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -32,9 +31,7 @@ public class XRFactorMakeCPS extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRExpr expr = RulpUtil.asExpression(args.get(1));
-
-		return CPSUtils.rebuildCpsTree(expr, frame);
+		return CPSUtils.rebuildCpsTree(RulpUtil.asExpression(args.get(1)), frame);
 	}
 
 	public boolean isThreadSafe() {

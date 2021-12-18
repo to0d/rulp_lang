@@ -690,7 +690,6 @@ public final class RuntimeUtil {
 	}
 
 	public static void init(IRFrame frame) throws RException {
-
 		varSupportOpCPS.init(frame);
 		varSupportOpStable.init(frame);
 	}

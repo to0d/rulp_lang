@@ -555,9 +555,6 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, T_Frame);
 		RulpUtil.addFrameObject(rootFrame, T_Annotation);
 
-		RuntimeUtil.init(rootFrame);
-		TraceUtil.init(rootFrame);
-
 		RulpUtil.addFrameObject(rootFrame, new XRFactorNameOf(F_NAME_OF));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorTypeOf(F_TYPE_OF));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorValueOf(F_VALUE_OF));
@@ -730,6 +727,10 @@ public final class RulpFactory {
 
 		// Load base script
 		LoadUtil.loadRulpFromJar(interpreter, systemFrame, "alpha/resource/base.rulp", "utf-8");
+
+		// Runtime Initialization
+		RuntimeUtil.init(rootFrame);
+		TraceUtil.init(rootFrame);
 
 		// Native Class Initialization
 		XRSet.init(interpreter, systemFrame);
