@@ -115,7 +115,7 @@ public class XRFunctionLambda extends AbsRefCallableAdapter implements IRFunctio
 
 	@Override
 	public boolean isStable() throws RException {
-		return func.isStable();
+		return false;
 	}
 
 	@Override

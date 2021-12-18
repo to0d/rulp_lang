@@ -13,6 +13,10 @@ import alpha.rulp.utils.RulpUtil;
 
 public class StableUtil {
 
+	// stable analyze
+	// - expression: no external variable in expression, all elements is stable
+	// - function: no external variable in function body, all elements is stable
+
 	public static boolean isStable(IRObject obj, Set<String> paraVarNames) throws RException {
 
 		switch (obj.getType()) {
@@ -63,10 +67,10 @@ public class StableUtil {
 			if (RulpUtil.isFunctionList(obj)) {
 				return false;
 
-			} else {
-				IRFunction func = (IRFunction) obj;
-				return isStable(func.getFunBody(), paraVarNames);
 			}
+
+			IRFunction func = (IRFunction) obj;
+			return isStable(func.getFunBody(), paraVarNames);
 
 		default:
 

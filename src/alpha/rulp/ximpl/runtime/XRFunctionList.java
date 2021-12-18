@@ -335,9 +335,7 @@ public class XRFunctionList extends AbsRefCallableAdapter implements IRFunctionL
 	public boolean isStable() throws RException {
 
 		if (isStable == null) {
-
 			isStable = true;
-
 			for (IRFunction func : allFuncList) {
 				if (!func.isStable()) {
 					isStable = false;
