@@ -701,6 +701,10 @@ public final class RuntimeUtil {
 		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_OP_CPS)).asBoolean();
 	}
 
+	public static void setOpCPS(IRFrame frame, boolean support) throws RException {
+		RulpUtil.setLocalVar(frame, A_OP_CPS, support ? O_True : O_False);
+	}
+
 	public static boolean isSupportOpStable(IRFrame frame) throws RException {
 		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_OP_STABLE)).asBoolean();
 	}
