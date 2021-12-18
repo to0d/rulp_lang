@@ -5,6 +5,7 @@ import static alpha.rulp.lang.Constant.A_NOCLASS;
 import static alpha.rulp.lang.Constant.A_OP_CPS;
 import static alpha.rulp.lang.Constant.A_OP_STABLE;
 import static alpha.rulp.lang.Constant.A_PARENT;
+import static alpha.rulp.lang.Constant.A_TRACE;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_MBR_THIS;
 import static alpha.rulp.lang.Constant.F_O_ADD;
@@ -27,6 +28,7 @@ import static alpha.rulp.lang.Constant.F_O_XOR;
 import static alpha.rulp.lang.Constant.F_RETURN;
 import static alpha.rulp.lang.Constant.O_False;
 import static alpha.rulp.lang.Constant.O_Nil;
+import static alpha.rulp.lang.Constant.O_True;
 import static alpha.rulp.lang.Constant.T_Expr;
 
 import java.util.ArrayList;
@@ -692,6 +694,7 @@ public final class RuntimeUtil {
 	public static void init(IRFrame frame) throws RException {
 		RulpUtil.setLocalVar(frame, A_OP_CPS, O_False);
 		RulpUtil.setLocalVar(frame, A_OP_STABLE, O_False);
+		RulpUtil.setLocalVar(frame, A_TRACE, O_False);
 	}
 
 	public static boolean isSupportOpCPS(IRFrame frame) throws RException {
@@ -700,6 +703,14 @@ public final class RuntimeUtil {
 
 	public static boolean isSupportOpStable(IRFrame frame) throws RException {
 		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_OP_STABLE)).asBoolean();
+	}
+
+	public static boolean isTrace(IRFrame frame) throws RException {
+		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_TRACE)).asBoolean();
+	}
+
+	public static void setTrace(IRFrame frame, boolean trace) throws RException {
+		RulpUtil.setLocalVar(frame, A_TRACE, trace ? O_True : O_False);
 	}
 
 	public static boolean isComputable(IRFrame curFrame, IRObject obj) throws RException {

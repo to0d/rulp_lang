@@ -22,7 +22,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.FileUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.utils.TraceUtil;
+import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 
 public class XRFactorOpenTxtFile extends AbsRFactorAdapter implements IRFactor {
@@ -39,7 +39,7 @@ public class XRFactorOpenTxtFile extends AbsRFactorAdapter implements IRFactor {
 		}
 
 		String path = RulpUtil.asString(interpreter.compute(frame, args.get(1))).asString();
-		if (TraceUtil.isTrace()) {
+		if (RuntimeUtil.isTrace(frame)) {
 			interpreter.out(String.format("%s: read %s\n", F_OPEN_TXT_FILE, path));
 		}
 
@@ -51,7 +51,7 @@ public class XRFactorOpenTxtFile extends AbsRFactorAdapter implements IRFactor {
 		try {
 			return RulpFactory.createListOfString(FileUtil.openTxtFile(path, charset));
 		} catch (IOException e) {
-			if (TraceUtil.isTrace()) {
+			if (RuntimeUtil.isTrace(frame)) {
 				e.printStackTrace();
 			}
 			throw new RException(e.toString());

@@ -25,8 +25,8 @@ import alpha.rulp.utils.FileUtil;
 import alpha.rulp.utils.LoadUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.utils.SystemUtil;
-import alpha.rulp.utils.TraceUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 
 public class XRFactorLoad extends AbsRFactorAdapter implements IRFactor {
@@ -104,13 +104,13 @@ public class XRFactorLoad extends AbsRFactorAdapter implements IRFactor {
 		if (loadedFilePaths.contains(path)) {
 			return RulpFactory.emptyConstList();
 		}
-		
+
 		loadedFilePaths.add(path);
 
 		String charset = args.size() == 3 ? RulpUtil.asString(interpreter.compute(frame, args.get(2))).asString()
 				: null;
 
-		if (TraceUtil.isTrace()) {
+		if (RuntimeUtil.isTrace(frame)) {
 			System.out.println("loading: " + path);
 		}
 

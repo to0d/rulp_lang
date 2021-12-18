@@ -1,8 +1,6 @@
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.A_TRACE;
 import static alpha.rulp.lang.Constant.MAX_COUNTER_SIZE;
-import static alpha.rulp.lang.Constant.O_False;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -131,7 +129,7 @@ public class TraceUtil {
 
 	static final String SEP_LINE3 = "..........................................................................................................................\n";
 
-	private static StaticVar varTrace = new StaticVar(A_TRACE, O_False);
+//	private static StaticVar varTrace = new StaticVar(A_TRACE, O_False);
 
 	private static String _toRefString(IRObject obj) throws RException {
 
@@ -331,13 +329,13 @@ public class TraceUtil {
 		return lines;
 	}
 
-	public static void init(IRFrame frame) throws RException {
-		varTrace.init(frame);
-	}
-
-	public static boolean isTrace() throws RException {
-		return varTrace.getBoolValue();
-	}
+//	public static void init(IRFrame frame) throws RException {
+//		varTrace.init(frame);
+//	}
+//
+//	public static boolean isTrace() throws RException {
+//		return varTrace.getBoolValue();
+//	}
 
 	public static String outputFrameTree(IRInterpreter interpreter) throws RException {
 
@@ -698,7 +696,4 @@ public class TraceUtil {
 		return sb.toString();
 	}
 
-	public static void setTrace(boolean trace) throws RException {
-		varTrace.setBoolValue(trace);
-	}
 }

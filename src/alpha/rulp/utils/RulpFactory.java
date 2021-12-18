@@ -727,7 +727,6 @@ public final class RulpFactory {
 
 		// Runtime Initialization
 		RuntimeUtil.init(systemFrame);
-		TraceUtil.init(systemFrame);
 
 		// Load base script
 		LoadUtil.loadRulpFromJar(interpreter, systemFrame, "alpha/resource/base.rulp", "utf-8");

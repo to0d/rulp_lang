@@ -11,7 +11,6 @@ package alpha.rulp.ximpl.factor;
 
 import static alpha.rulp.lang.Constant.O_Nil;
 
-import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;

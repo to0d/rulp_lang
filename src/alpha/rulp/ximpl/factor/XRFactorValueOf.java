@@ -9,7 +9,6 @@
 
 package alpha.rulp.ximpl.factor;
 
-import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
