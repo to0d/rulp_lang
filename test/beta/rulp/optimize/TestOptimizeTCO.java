@@ -19,7 +19,7 @@ import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.optimize.CPSUtils;
 import alpha.rulp.ximpl.optimize.StableUtil;
 
-public class TestRulpTCO extends RulpTestBase {
+public class TestOptimizeTCO extends RulpTestBase {
 
 	@Override
 	protected IRInterpreter _createInterpreter() throws RException, IOException {
@@ -48,7 +48,7 @@ public class TestRulpTCO extends RulpTestBase {
 			_test("(setq ?op-cps true)");
 		}
 
-		_test("(load \"result/optimize/TestRulpTCO/fact.rulp\")");
+		_test("(load \"result/optimize/TestOptimizeTCO/fact.rulp\")");
 	}
 
 	private void _test_is_stable_fun(String funName, boolean expectStable) {
@@ -161,7 +161,7 @@ public class TestRulpTCO extends RulpTestBase {
 		_setup();
 
 		// fun(n) = n*(n+1)/2
-		_test("(load \"result/optimize/TestRulpTCO/test_tco_fact.rulp\")");
+		_test("(load \"result/optimize/TestOptimizeTCO/test_tco_fact.rulp\")");
 		_test("(fun3 0)", "1");
 		_test("(fun3 1)", "1");
 		_test("(fun3 2)", "2");
@@ -181,7 +181,7 @@ public class TestRulpTCO extends RulpTestBase {
 		_setup();
 
 		// fun(n) = n*(n+1)/2
-		_test("(load \"result/optimize/TestRulpTCO/test_tco_fact.rulp\")");
+		_test("(load \"result/optimize/TestOptimizeTCO/test_tco_fact.rulp\")");
 		_test("(fun4a 0)", "0");
 		_test("(fun4a 1)", "1");
 		_test("(fun4a 2)", "3");
