@@ -228,7 +228,5 @@ public class TestRulpTCO extends RulpTestBase {
 		_setup();
 		_load_fact(true);
 		_run_script();
-		_gInfo();
-		assertEquals(40, CPSUtils.getCPSCount());
 	}
 }

@@ -47,6 +47,7 @@ root::cmp_def
 root::compute
 root::constant
 root::continue
+root::cps-count
 root::date
 root::default
 root::defclass
@@ -264,6 +265,7 @@ mbr=cmp_def, name=cmp_def, type=factor, property='(public)
 mbr=compute, name=compute, type=factor, property='(public)
 mbr=constant, name=constant, type=atom, property='(public)
 mbr=continue, name=continue, type=factor, property='(public)
+mbr=cps-count, name=cps-count, type=factor, property='(public)
 mbr=date, name=date, type=factor, property='(public)
 mbr=default, name=default, type=atom, property='(public)
 mbr=defclass, name=defclass, type=factor, property='(public)

@@ -183,6 +183,8 @@ public interface Constant {
 
 	String F_CONTINUE = "continue";
 
+	String F_CPS_COUNT = "cps-count";
+
 	String F_DATE = "date";
 
 	String F_DEF_CONST = "defconst";

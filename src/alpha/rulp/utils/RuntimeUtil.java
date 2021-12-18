@@ -792,17 +792,6 @@ public final class RuntimeUtil {
 		return varSupportOpStable.getBoolValue();
 	}
 
-//	public static boolean _findCallee(IRObject obj, Set<String> calleeNames, IRFrame frame, boolean tailCall)
-//			throws RException {
-//
-//		int size = stmtList.size();
-//		for (int i = 0; i < size; ++i) {
-//			_findCallee_obj(stmtList.get(i), calleeNames, frame, i == 0, tailCall && (i + 1) == size);
-//		}
-//
-//		return true;
-//	}
-
 	public static IRFrameEntry lookupFrameEntry(IRAtom atom, IRFrame frame) throws RException {
 
 		String atomName = atom.getName();

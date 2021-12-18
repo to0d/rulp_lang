@@ -80,6 +80,7 @@ root::cmp_def
 root::compute
 root::constant
 root::continue
+root::cps-count
 root::date
 root::default
 root::defclass

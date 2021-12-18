@@ -319,17 +319,15 @@ public class CPSUtils {
 
 		case F_RETURN:
 
-			if (expr.size() > 1) {
-
-				IRObject e = expr.get(1);
-				if (e.getType() == RType.EXPR) {
-
-					ArrayList<IRObject> newExpr = new ArrayList<>();
-					newExpr.add(e0);
-					newExpr.add(RulpFactory.createExpression(RulpFactory.createAtom(F_MAKE_CPS), e));
-					return RulpFactory.createExpression(newExpr);
+			if (expr.size() == 2) {
+				IRObject e1 = expr.get(1);
+				if (e1.getType() == RType.EXPR) {
+					return RulpFactory.createExpression(e0,
+							RulpFactory.createExpression(RulpFactory.createAtom(F_MAKE_CPS), e1));
 				}
 			}
+
+			break;
 
 		default:
 

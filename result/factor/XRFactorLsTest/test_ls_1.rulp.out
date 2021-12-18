@@ -16,52 +16,53 @@
 (print-subject root)
 ;=>nil
 ;out:
-id=0, name=root, lvl=0, ref=0/0, entry=176, subject=root
+id=0, name=root, lvl=0, ref=0/0, entry=177, subject=root
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?os.version          : -205     0        1    var        10.0 : type=string  
-?os.name             : -204     0        1    var        Windows 10 : type=string
-?path.separator      : -203     0        1    var        ; : type=string     
-?file.separator      : -202     0        1    var        \ : type=string     
-?user.dir            : -201     0        1    var        C:\data\itool\irulp_base : type=string
-?user.name           : -200     0        1    var        to0d : type=string  
-?user.home           : -199     0        1    var        C:\Users\to0d : type=string
-rulp-object-count    : -171     0        0    factor     rulp-object-count   
-sys-time             : -170     0        0    factor     sys-time            
-sys-gc               : -169     0        0    factor     sys-gc              
-random               : -168     0        0    factor     random              
-date                 : -167     0        0    factor     date                
-do-p                 : -166     0        0    factor     do-p                
-sleep                : -165     0        0    factor     sleep               
-seta                 : -164     0        0    factor     seta                
-add-array-to-list    : -163     0        0    factor     add-array-to-list   
-add-list-to-array    : -162     0        0    factor     add-list-to-array   
-to-nonamed-list      : -161     0        0    factor     to-nonamed-list     
-to-named-list        : -160     0        0    factor     to-named-list       
-get-of-array         : -159     0        0    factor     get-of-array        
-reverse              : -158     0        0    factor     reverse             
-sort                 : -157     0        0    factor     sort                
-uniq                 : -156     0        0    factor     uniq                
-union                : -155     0        0    factor     union               
-join                 : -154     0        0    factor     join                
-remove               : -153     0        0    factor     remove              
-add-list-to-list     : -152     0        0    factor     add-list-to-list    
-get-of-list          : -151     0        0    factor     get-of-list         
-foreach              : -150     0        0    factor     foreach             
-try                  : -149     0        0    factor     try                 
-error-value          : -148     0        0    factor     error-value         
-error                : -147     0        0    factor     error               
-case                 : -146     0        0    factor     case                
-do                   : -145     0        0    factor     do                  
-break                : -144     0        0    factor     break               
-continue             : -143     0        0    factor     continue            
-return               : -142     0        0    factor     return              
-loop                 : -141     0        0    factor     loop                
-when                 : -140     0        0    factor     when                
-if                   : -139     0        0    factor     if                  
-lambda               : -138     0        0    factor     lambda              
-let                  : -137     0        0    factor     let                 
+?os.version          : -206     0        1    var        10.0 : type=string  
+?os.name             : -205     0        1    var        Windows 10 : type=string
+?path.separator      : -204     0        1    var        ; : type=string     
+?file.separator      : -203     0        1    var        \ : type=string     
+?user.dir            : -202     0        1    var        C:\data\itool\irulp_base : type=string
+?user.name           : -201     0        1    var        to0d : type=string  
+?user.home           : -200     0        1    var        C:\Users\to0d : type=string
+rulp-object-count    : -172     0        0    factor     rulp-object-count   
+sys-time             : -171     0        0    factor     sys-time            
+sys-gc               : -170     0        0    factor     sys-gc              
+random               : -169     0        0    factor     random              
+date                 : -168     0        0    factor     date                
+do-p                 : -167     0        0    factor     do-p                
+sleep                : -166     0        0    factor     sleep               
+seta                 : -165     0        0    factor     seta                
+add-array-to-list    : -164     0        0    factor     add-array-to-list   
+add-list-to-array    : -163     0        0    factor     add-list-to-array   
+to-nonamed-list      : -162     0        0    factor     to-nonamed-list     
+to-named-list        : -161     0        0    factor     to-named-list       
+get-of-array         : -160     0        0    factor     get-of-array        
+reverse              : -159     0        0    factor     reverse             
+sort                 : -158     0        0    factor     sort                
+uniq                 : -157     0        0    factor     uniq                
+union                : -156     0        0    factor     union               
+join                 : -155     0        0    factor     join                
+remove               : -154     0        0    factor     remove              
+add-list-to-list     : -153     0        0    factor     add-list-to-list    
+get-of-list          : -152     0        0    factor     get-of-list         
+foreach              : -151     0        0    factor     foreach             
+try                  : -150     0        0    factor     try                 
+error-value          : -149     0        0    factor     error-value         
+error                : -148     0        0    factor     error               
+case                 : -147     0        0    factor     case                
+do                   : -146     0        0    factor     do                  
+break                : -145     0        0    factor     break               
+continue             : -144     0        0    factor     continue            
+return               : -143     0        0    factor     return              
+loop                 : -142     0        0    factor     loop                
+when                 : -141     0        0    factor     when                
+if                   : -140     0        0    factor     if                  
+lambda               : -139     0        0    factor     lambda              
+let                  : -138     0        0    factor     let                 
+cps-count            : -137     0        0    factor     cps-count           
 make-cps             : -136     0        0    factor     make-cps            
 deftemplate          : -135     0        0    factor     deftemplate         
 defun                : -134     0        0    factor     defun               
@@ -208,42 +209,42 @@ id=1, name=system, lvl=1, ref=0/0, entry=30, pid=0(root), subject=system
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-parent               : -206     1        0    frame      frame@root          
-type#stack           : -198     1        0    atom       type#stack          
-stack                : -197     1        1    class      stack               
-type#queue           : -196     1        0    atom       type#queue          
-queue                : -195     1        1    class      queue               
-type#map             : -194     1        0    atom       type#map            
-map                  : -193     1        1    class      map                 
-clear                : -192     1        1    funcList   '((clear type#map) (clear type#queue) (clear type#set) (clear type#stack)) : frame=null, type=list
+parent               : -207     1        0    frame      frame@root          
+type#stack           : -199     1        0    atom       type#stack          
+stack                : -198     1        1    class      stack               
+type#queue           : -197     1        0    atom       type#queue          
+queue                : -196     1        1    class      queue               
+type#map             : -195     1        0    atom       type#map            
+map                  : -194     1        1    class      map                 
+clear                : -193     1        1    funcList   '((clear type#map) (clear type#queue) (clear type#set) (clear type#stack)) : frame=null, type=list
                                          1    func       (clear type#set) : frame=frame@system
                                          1    func       (clear type#map) : frame=frame@system
                                          1    func       (clear type#queue) : frame=frame@system
                                          1    func       (clear type#stack) : frame=frame@system
-type#set             : -191     1        0    atom       type#set            
-set                  : -190     1        1    class      set                 
-print-list           : -189     1        1    macro      print-list          
-get                  : -188     1        1    funcList   '((get array int int) (get array int) (get list int) (get type#queue int)) : frame=null, type=list
+type#set             : -192     1        0    atom       type#set            
+set                  : -191     1        1    class      set                 
+print-list           : -190     1        1    macro      print-list          
+get                  : -189     1        1    funcList   '((get array int int) (get array int) (get list int) (get type#queue int)) : frame=null, type=list
                                          1    func       (get list int) : frame=frame@system
                                          1    func       (get array int) : frame=frame@system
                                          1    func       (get array int int) : frame=frame@system
                                          1    func       (get type#queue int) : frame=frame@system
-add-all              : -187     1        1    func       (add-all list list) : frame=frame@system
-add                  : -186     1        1    funcList   '((add array nil nil nil) (add array nil nil) (add array nil) (add list nil nil nil) (add list nil nil) (add list nil)) : frame=null, type=list
+add-all              : -188     1        1    func       (add-all list list) : frame=frame@system
+add                  : -187     1        1    funcList   '((add array nil nil nil) (add array nil nil) (add array nil) (add list nil nil nil) (add list nil nil) (add list nil)) : frame=null, type=list
                                          1    func       (add list nil) : frame=frame@system
                                          1    func       (add list nil nil) : frame=frame@system
                                          1    func       (add list nil nil nil) : frame=frame@system
                                          1    func       (add array nil) : frame=frame@system
                                          1    func       (add array nil nil) : frame=frame@system
                                          1    func       (add array nil nil nil) : frame=frame@system
-to-array             : -185     1        1    func       (to-array list) : frame=frame@system
-to-list              : -184     1        1    funcList   '((to-list array) (to-list list) (to-list type#queue) (to-list type#set) (to-list type#stack)) : frame=null, type=list
+to-array             : -186     1        1    func       (to-array list) : frame=frame@system
+to-list              : -185     1        1    funcList   '((to-list array) (to-list list) (to-list type#queue) (to-list type#set) (to-list type#stack)) : frame=null, type=list
                                          1    func       (to-list list) : frame=frame@system
                                          1    func       (to-list array) : frame=frame@system
                                          1    func       (to-list type#set) : frame=frame@system
                                          1    func       (to-list type#queue) : frame=frame@system
                                          1    func       (to-list type#stack) : frame=frame@system
-size-of              : -183     1        1    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#map) (size-of type#queue) (size-of type#set) (size-of type#stack)) : frame=null, type=list
+size-of              : -184     1        1    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#map) (size-of type#queue) (size-of type#set) (size-of type#stack)) : frame=null, type=list
                                          1    func       (size-of list) : frame=frame@system
                                          1    func       (size-of array) : frame=frame@system
                                          1    func       (size-of array int) : frame=frame@system
@@ -251,12 +252,12 @@ size-of              : -183     1        1    funcList   '((size-of array int) (
                                          1    func       (size-of type#map) : frame=frame@system
                                          1    func       (size-of type#queue) : frame=frame@system
                                          1    func       (size-of type#stack) : frame=frame@system
-ls-print             : -182     1        1    funcList   '((ls-print nil nil) (ls-print nil)) : frame=null, type=list
+ls-print             : -183     1        1    funcList   '((ls-print nil nil) (ls-print nil)) : frame=null, type=list
                                          1    func       (ls-print nil nil) : frame=frame@system
                                          1    func       (ls-print nil) : frame=frame@system
-use                  : -181     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=frame@system
-is-blank             : -180     1        1    func       (is-blank string) : frame=frame@system
-is-empty             : -179     1        1    funcList   '((is-empty array) (is-empty list) (is-empty string) (is-empty type#map) (is-empty type#queue) (is-empty type#set) (is-empty type#stack)) : frame=null, type=list
+use                  : -182     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=frame@system
+is-blank             : -181     1        1    func       (is-blank string) : frame=frame@system
+is-empty             : -180     1        1    funcList   '((is-empty array) (is-empty list) (is-empty string) (is-empty type#map) (is-empty type#queue) (is-empty type#set) (is-empty type#stack)) : frame=null, type=list
                                          1    func       (is-empty string) : frame=frame@system
                                          1    func       (is-empty list) : frame=frame@system
                                          1    func       (is-empty array) : frame=frame@system
@@ -264,9 +265,9 @@ is-empty             : -179     1        1    funcList   '((is-empty array) (is-
                                          1    func       (is-empty type#map) : frame=frame@system
                                          1    func       (is-empty type#queue) : frame=frame@system
                                          1    func       (is-empty type#stack) : frame=frame@system
-++                   : -178     1        1    macro      ++                  
---                   : -177     1        1    macro      --                  
-println              : -176     1        1    funcList   '((println nil nil nil nil nil nil nil nil nil) (println nil nil nil nil nil nil nil nil) (println nil nil nil nil nil nil nil) (println nil nil nil nil nil nil) (println nil nil nil nil nil) (println nil nil nil nil) (println nil nil nil) (println nil nil) (println nil) (println)) : frame=null, type=list
+++                   : -179     1        1    macro      ++                  
+--                   : -178     1        1    macro      --                  
+println              : -177     1        1    funcList   '((println nil nil nil nil nil nil nil nil nil) (println nil nil nil nil nil nil nil nil) (println nil nil nil nil nil nil nil) (println nil nil nil nil nil nil) (println nil nil nil nil nil) (println nil nil nil nil) (println nil nil nil) (println nil nil) (println nil) (println)) : frame=null, type=list
                                          1    func       (println) : frame=frame@system
                                          1    func       (println nil) : frame=frame@system
                                          1    func       (println nil nil) : frame=frame@system
@@ -277,14 +278,14 @@ println              : -176     1        1    funcList   '((println nil nil nil 
                                          1    func       (println nil nil nil nil nil nil nil) : frame=frame@system
                                          1    func       (println nil nil nil nil nil nil nil nil) : frame=frame@system
                                          1    func       (println nil nil nil nil nil nil nil nil nil) : frame=frame@system
-cmp                  : -175     1        1    func       (cmp nil nil) : frame=frame@system
-equal                : -174     1        1    funcList   '((equal nil nil) (equal string string)) : frame=null, type=list
+cmp                  : -176     1        1    func       (cmp nil nil) : frame=frame@system
+equal                : -175     1        1    funcList   '((equal nil nil) (equal string string)) : frame=null, type=list
                                          1    func       (equal nil nil) : frame=frame@system
                                          1    func       (equal string string) : frame=frame@system
-length-of            : -173     1        1    funcList   '((length-of blob) (length-of string)) : frame=null, type=list
+length-of            : -174     1        1    funcList   '((length-of blob) (length-of string)) : frame=null, type=list
                                          1    func       (length-of string) : frame=frame@system
                                          1    func       (length-of blob) : frame=frame@system
-?load-paths          : -172     1        1    var        '() : type=list     
+?load-paths          : -173     1        1    var        '() : type=list     
 system               : -3       1        0    frame      frame@system        
 root                 : -2       1        0    frame      frame@root          
 ==========================================================================================================================
