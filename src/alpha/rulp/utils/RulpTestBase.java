@@ -46,6 +46,25 @@ public class RulpTestBase {
 
 	static String BETA_RULP_PRE = "beta.rulp.";
 
+	protected static String _getClassPathName(Class<?> c, int tailIndex) {
+
+		if (c == null || tailIndex < 0) {
+			return null;
+		}
+
+		String fullName = c.getCanonicalName();
+		if (fullName == null) {
+			return null;
+		}
+
+		String[] names = fullName.split("\\.");
+		if (names == null || tailIndex >= names.length) {
+			return null;
+		}
+
+		return names[names.length - tailIndex - 1];
+	}
+
 	protected static String _load(String path) {
 
 		try {
@@ -68,30 +87,11 @@ public class RulpTestBase {
 		}
 	}
 
-	protected static String getClassPathName(Class<?> c, int tailIndex) {
-
-		if (c == null || tailIndex < 0) {
-			return null;
-		}
-
-		String fullName = c.getCanonicalName();
-		if (fullName == null) {
-			return null;
-		}
-
-		String[] names = fullName.split("\\.");
-		if (names == null || tailIndex >= names.length) {
-			return null;
-		}
-
-		return names[names.length - tailIndex - 1];
-	}
-
 	protected IRInterpreter _interpreter;
 
-	protected IRParser _parser = null;
+	protected XROut _out = null;
 
-	protected XROut out = null;
+	protected IRParser _parser = null;
 
 	protected IRInterpreter _createInterpreter() throws RException, IOException {
 		return RulpFactory.createInterpreter();
@@ -101,8 +101,8 @@ public class RulpTestBase {
 
 		if (_interpreter == null) {
 			_interpreter = _createInterpreter();
-			out = new XROut();
-			_interpreter.setOutput(out);
+			_out = new XROut();
+			_interpreter.setOutput(_out);
 		}
 
 		return _interpreter;
@@ -238,14 +238,14 @@ public class RulpTestBase {
 
 		try {
 
-			out.clear();
+			_out.clear();
 			outLines.add(inputStmt);
 
 			rsultList = RulpUtil.compute(interpreter, inputStmt);
 			String result = RulpUtil.toString(rsultList.results);
 			outLines.add(";=>" + result);
 
-			String output = out.getOut();
+			String output = _out.getOut();
 			if (output != null && !output.isEmpty()) {
 				outLines.add(";out:");
 				outLines.add(output);
@@ -340,10 +340,10 @@ public class RulpTestBase {
 		try {
 
 			IRInterpreter interpreter = _getInterpreter();
-			out.clear();
+			_out.clear();
 
 			rsultList = RulpUtil.compute(interpreter, input);
-			String output = out.getOut();
+			String output = _out.getOut();
 
 			if (expectResult != null) {
 				assertEquals(String.format("input=%s", input), expectResult, RulpUtil.toString(rsultList.results));
@@ -380,7 +380,7 @@ public class RulpTestBase {
 		try {
 
 			IRInterpreter interpreter = _getInterpreter();
-			out.clear();
+			_out.clear();
 			interpreter.compute(input);
 			fail("Should fail: " + input);
 
@@ -623,7 +623,7 @@ public class RulpTestBase {
 		}
 
 		String packageShortName = packageName.substring(BETA_RULP_PRE.length());
-		String className = getClassPathName(this.getClass(), 0);
+		String className = _getClassPathName(this.getClass(), 0);
 		String methodName = Thread.currentThread().getStackTrace()[3].getMethodName();
 
 		return "result" + File.separator + packageShortName + File.separator + className + File.separator + methodName;

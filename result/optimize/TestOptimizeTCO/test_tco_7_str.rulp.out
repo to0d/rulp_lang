@@ -8,7 +8,7 @@
 ;=>fun5
 
 (cps-callee fun5)
-;=>'("+" "fun5" "make-cps")
+;=>'("fun5")
 
 (fun5 "b")
 ;=>"aaaaaaaaaab"
@@ -70,7 +70,7 @@ Object create count:
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
         atom:          898            0          898
-      string:           44            0           44
+      string:           42            0           42
         list:            7            1            6
         expr:          534           42          492
        array:            1            0            1

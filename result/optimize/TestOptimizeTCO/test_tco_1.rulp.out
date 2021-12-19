@@ -11,7 +11,7 @@
 ;=>fact
 
 (cps-callee fact)
-;=>'("*" "-" "fact" "make-cps")
+;=>'("fact")
 
 (fact 1)
 ;=>1
@@ -81,7 +81,7 @@ Object create count:
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
         atom:          901            0          901
-      string:           33            0           33
+      string:           30            0           30
         list:            7            1            6
         expr:          549           44          505
        array:            1            0            1

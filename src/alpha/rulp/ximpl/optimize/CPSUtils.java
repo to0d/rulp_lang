@@ -203,11 +203,10 @@ public class CPSUtils {
 
 		case F_RETURN:
 
-			if (expr.size() > 1) {
-
-				IRObject e = expr.get(1);
-				if (e.getType() == RType.EXPR) {
-					_findCPSCalleeInReturn((IRExpr) e, calleeNames, frame);
+			if (expr.size() > 1 && expr.get(1).getType() == RType.EXPR) {
+				IRExpr e1 = (IRExpr) expr.get(1);
+				if (e1.size() > 0) {
+					_findCPSCalleeInReturn(e1.get(0), e1, calleeNames, frame);
 				}
 			}
 
@@ -219,24 +218,57 @@ public class CPSUtils {
 		return true;
 	}
 
-	private static void _findCPSCalleeInReturn(IRExpr expr, Set<String> calleeNames, IRFrame frame) throws RException {
+	private static void _findCPSCalleeInReturn(IRObject e0, IRExpr expr, Set<String> calleeNames, IRFrame frame)
+			throws RException {
 
-		IRObject e0 = expr.get(0);
+		switch (e0.getType()) {
+		case ATOM:
 
-		if (_isSupportCPSFactor(e0, frame)) {
+			String opName = RulpUtil.asAtom(e0).getName();
+			IRFrameEntry entry = frame.getEntry(opName);
 
-			calleeNames.add(e0.asString());
-
-			IRIterator<? extends IRObject> it = expr.listIterator(1);
-			while (it.hasNext()) {
-
-				IRObject e = it.next();
-				if (e.getType() != RType.EXPR) {
-					continue;
-				}
-
-				_findCPSCalleeInReturn((IRExpr) e, calleeNames, frame);
+			if (entry != null && entry.getValue() != null && entry.getValue().getType() != RType.ATOM) {
+				_findCPSCalleeInReturn(entry.getValue(), expr, calleeNames, frame);
+				return;
 			}
+
+			// it maybe a undefined function
+			calleeNames.add(e0.asString());
+			break;
+
+		case FACTOR:
+
+			// does't support unstable factor
+			if (!RulpUtil.asFactor(e0).isStable()) {
+				return;
+			}
+
+			break;
+
+		case FUNC:
+			calleeNames.add(e0.asString());
+			break;
+
+		default:
+
+			// unsupport type
+			return;
+		}
+
+		IRIterator<? extends IRObject> it = expr.listIterator(1);
+		while (it.hasNext()) {
+
+			IRObject e = it.next();
+			if (e.getType() != RType.EXPR) {
+				continue;
+			}
+
+			IRExpr ex = (IRExpr) e;
+			if (ex.isEmpty()) {
+				continue;
+			}
+
+			_findCPSCalleeInReturn(ex.get(0), ex, calleeNames, frame);
 		}
 	}
 

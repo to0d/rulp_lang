@@ -17,10 +17,10 @@
 ;=>fun4a fun4b
 
 (cps-callee fun4a)
-;=>'("+" "-" "fun4b")
+;=>'("fun4b")
 
 (cps-callee fun4b)
-;=>'("+" "-" "fun4a")
+;=>'("fun4a")
 
 (fun4a 3)
 ;=>6
