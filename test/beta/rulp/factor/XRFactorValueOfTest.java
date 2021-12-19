@@ -25,4 +25,11 @@ class XRFactorValueOfTest extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	void test_value_of_4_frame() {
+
+		_setup();
+		_run_script();
+	}
 }

@@ -1,0 +1,6 @@
+(value-of main::parent)
+;=>system
+
+(value-of system::parent)
+;=>root
+

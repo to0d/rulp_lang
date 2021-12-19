@@ -3,9 +3,3 @@
 
 (print-list (ls system))
 ;=>
-
-(ls-print root)
-;=>
-
-(ls-print system)
-;=>

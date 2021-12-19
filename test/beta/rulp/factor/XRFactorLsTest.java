@@ -14,13 +14,6 @@ public class XRFactorLsTest extends RulpTestBase {
 	}
 
 	@Test
-	public void test_ls_2_main() {
-
-		_setup();
-		_run_script();
-	}
-
-	@Test
 	public void test_ls_3_fun() {
 
 		_setup();
