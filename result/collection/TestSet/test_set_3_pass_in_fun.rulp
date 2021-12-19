@@ -1,0 +1,15 @@
+(defun fun_add (?set ?v) (?set::add ?v))
+;=>
+
+(new set set1)
+;=>
+
+(fun_add set1 1)
+;=>
+
+(set1::size-of)
+;=>
+
+(set1::has 1)
+;=>
+

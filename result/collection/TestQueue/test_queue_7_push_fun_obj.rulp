@@ -9,3 +9,6 @@
 
 (loop for ?action in (to-list q1) do (?action 1))
 ;;;
+
+(print-global-info)
+;;;

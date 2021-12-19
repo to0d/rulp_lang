@@ -1,0 +1,12 @@
+(size-of {a,b})
+;=>
+
+(is-empty {a,b})
+;=>
+
+(to-list {a,b})
+;=>
+
+(to-array '(a b))
+;=>
+

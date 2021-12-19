@@ -1,0 +1,21 @@
+(new map map1)
+;=>
+
+(map1::is-empty)
+;=>
+
+(map1::put 1 2)
+;=>
+
+(is-empty map1)
+;=>
+
+(map1::clear)
+;=>
+
+(clear map1)
+;=>
+
+(is-empty map1)
+;=>
+

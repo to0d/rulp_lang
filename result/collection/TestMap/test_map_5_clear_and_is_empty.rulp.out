@@ -1,0 +1,21 @@
+(new map map1)
+;=>map1
+
+(map1::is-empty)
+;=>true
+
+(map1::put 1 2)
+;=>nil
+
+(is-empty map1)
+;=>false
+
+(map1::clear)
+;=>nil
+
+(clear map1)
+;=>nil
+
+(is-empty map1)
+;=>true
+

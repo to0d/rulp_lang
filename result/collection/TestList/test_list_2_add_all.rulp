@@ -1,0 +1,9 @@
+(add-all '(a b) '())
+;=>
+
+(add-all '() '(a b))
+;=>
+
+(add-all '(a b) '(c))
+;=>
+

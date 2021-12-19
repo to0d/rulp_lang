@@ -1,0 +1,15 @@
+(defmacro macro_push (?queue ?v) (?queue::push ?v))
+;=>macro_push
+
+(new queue q1)
+;=>q1
+
+(macro_push q1 1)
+;=>nil
+
+(q1::size-of)
+;=>1
+
+(q1::pop)
+;=>1
+

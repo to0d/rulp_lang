@@ -1,0 +1,56 @@
+(defvar q1 (new queue))
+;=>
+
+(name-of q1)
+;=>
+
+(q1::size-of)
+;=>
+
+(q1::push 1)        ;;; push & pop
+;=>
+
+(q1::push 2)
+;=>
+
+(q1::size-of)
+;=>
+
+(q1::get 0)
+;=>
+
+(get q1 1)
+;=>
+
+(q1::pop)
+;=>
+
+(q1::size-of)
+;=>
+
+(setq q1 (new queue))       ;; replace queue
+;=>
+
+(q1::size-of)
+;=>
+
+(q1::is-empty)      ;;  clear && is-empty
+;=>
+
+(q1::push 1)
+;=>
+
+(is-empty q1)
+;=>
+
+(q1::clear)
+;=>
+
+(clear q1)
+;=>
+
+(is-empty q1)
+;=>
+
+(print-global-info)
+;;;

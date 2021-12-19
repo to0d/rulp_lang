@@ -1,0 +1,59 @@
+(new set set1)
+;=>
+
+(name-of set1)
+;=>
+
+(set1::size-of)
+;=>
+
+(set1::add 1)
+;=>
+
+(set1::size-of)
+;=>
+
+(set1::has 1)
+;=>
+
+(set1::has 2)
+;=>
+
+(set1::add a)
+;=>
+
+(set1::size-of)
+;=>
+
+(set1::has a)
+;=>
+
+(set1::has b)
+;=>
+
+(set1::add "str1")
+;=>
+
+(set1::size-of)
+;=>
+
+(set1::has "str1")
+;=>
+
+(set1::has "str2")
+;=>
+
+(set1::add '(a))
+;=>
+
+(set1::size-of)
+;=>
+
+(set1::has '(a))
+;=>
+
+(set1::has '(b))
+;=>
+
+(print-global-info)
+;;;

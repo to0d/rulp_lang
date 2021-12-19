@@ -1,0 +1,24 @@
+(new set setx)
+;=>
+
+(setx::add 2)
+;=>
+
+(new set set1)
+;=>
+
+(set1::size-of)
+;=>
+
+(set1::add 1)
+;=>
+
+(set1::size-of)
+;=>
+
+(set1::has 1)
+;=>
+
+(set1::has 2)
+;=>
+

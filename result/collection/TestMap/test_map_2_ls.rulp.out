@@ -1,0 +1,34 @@
+(ls map)
+;=>'(map::?impl map::_map_clear map::_map_get map::_map_init map::_map_is_empty map::_map_put map::_map_size_of map::clear map::get map::init map::is-empty map::put map::size-of)
+
+(new map map1)
+;=>map1
+
+(ls map1)
+;=>'(map1::?impl map1::init map1::this)
+
+(map1::put 1 2)
+;=>nil
+
+(ls map1)
+;=>'(map1::?impl map1::init map1::put map1::this)
+
+(ls-print map)
+;=>nil
+;out:
+mbr=?impl, access deny
+mbr=_map_clear, access deny
+mbr=_map_get, access deny
+mbr=_map_init, access deny
+mbr=_map_is_empty, access deny
+mbr=_map_put, access deny
+mbr=_map_size_of, access deny
+mbr=clear, name=(clear), type=func, property='(default final)
+mbr=get, name=(get nil), type=func, property='(default final)
+mbr=init, name=(init), type=func, property='(default final)
+mbr=is-empty, name=(is-empty), type=func, property='(default final)
+mbr=put, name=(put nil nil), type=func, property='(default final)
+mbr=size-of, name=(size-of), type=func, property='(default final)
+
+;eof
+

@@ -1,10 +1,67 @@
+(defvar q1 (new queue))
+;=>&q1
+
+(name-of q1)
+;=>"q1"
+
+(q1::size-of)
+;=>0
+
+(q1::push 1)        ;;; push & pop
+;=>nil
+
+(q1::push 2)
+;=>nil
+
+(q1::size-of)
+;=>2
+
+(q1::get 0)
+;=>1
+
+(get q1 1)
+;=>2
+
+(q1::pop)
+;=>1
+
+(q1::size-of)
+;=>1
+
+(setq q1 (new queue))       ;; replace queue
+;=>&q1
+
+(q1::size-of)
+;=>0
+
+(q1::is-empty)      ;;  clear && is-empty
+;=>true
+
+(q1::push 1)
+;=>nil
+
+(is-empty q1)
+;=>false
+
+(q1::clear)
+;=>nil
+
+(clear q1)
+;=>nil
+
+(is-empty q1)
+;=>true
+
+(print-global-info)
+;=>nil
+;out:
 Global Info:
 
 Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       88        0
+     Interpreter call id/level:       89        1
              CPS support/count:    false        0
                Frame max level:        4
                   Frame max id:        7
@@ -15,13 +72,13 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      107
+    factor:      108
       func:       21
 ==========================================================================================================================
 
-Callable stats info: callId=88, row=20, column=45(2), value-max=3, value-unit=2^x
+Callable stats info: callId=89, row=21, column=45(2), value-max=3, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         122222222222222222222222222222222224323443433 max=6, unit=2^x
+   Frame    RType  Count  Ref Object                         122222222222222222222222222222222224323443434 max=6, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
     root   factor     53    0 defun                              2222222111 2222222222 2212122121         
     root   factor     13    0 return                                                             1 23122 2
@@ -40,6 +97,7 @@ Callable stats info: callId=88, row=20, column=45(2), value-max=3, value-unit=2^
   system funcList      2    1 is-empty                                                                 1 1
     root   factor      2    0 defvar                            1                               1         
   system   member      1    1 queue::_queue_pop_front                                               1     
+    root   factor      1    0 print-global-info                                                          1
     root   factor      1    0 name-of                                                            1        
   system funcList      1    1 get                                                                   1     
   system funcList      1    1 clear                                                                     1 
@@ -49,10 +107,10 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          905            0          905
+        atom:          906            0          906
       string:           30            0           30
         list:            6            0            6
-        expr:          494           18          476
+        expr:          495           18          477
        array:            1            0            1
          var:           31           12           19
         func:          112            5          107
@@ -95,4 +153,6 @@ Global frame tree:
 
 Global Subject list:
 
+
+;eof
 

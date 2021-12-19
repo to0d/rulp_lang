@@ -1,0 +1,12 @@
+(defvar l1 '(a b c))
+;=>
+
+(size-of l1)
+;=>
+
+(is-empty l1)
+;=>
+
+(to-list l1)
+;=>
+

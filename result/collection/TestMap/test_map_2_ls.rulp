@@ -1,0 +1,18 @@
+(ls map)
+;=>
+
+(new map map1)
+;=>
+
+(ls map1)
+;=>
+
+(map1::put 1 2)
+;=>
+
+(ls map1)
+;=>
+
+(ls-print map)
+;=>
+

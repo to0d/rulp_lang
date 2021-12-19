@@ -25,3 +25,30 @@
 
 (fun_add s1)
 ;;;
+
+?x
+;=>
+
+(rulp-object-count frame)
+;=>
+
+(rulp-object-count instance)
+;=>
+
+(print-global-info)
+;;;
+
+(delete s1)     ;; delete object
+;=>
+
+?x
+;=>
+
+(rulp-object-count frame)
+;=>
+
+(rulp-object-count instance)
+;=>
+
+(print-global-info)
+;;;

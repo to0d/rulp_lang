@@ -1,0 +1,104 @@
+(new queue q1)
+;=>
+
+(name-of q1)
+;=>
+
+(q1::size-of)
+;=>
+
+(q1::push 1)            ;;; push & pop
+;=>
+
+(q1::push 2)
+;=>
+
+(q1::get 0)
+;=>
+
+(get q1 1)
+;=>
+
+(q1::size-of)
+;=>
+
+(q1::pop)
+;=>
+
+(q1::pop)
+;=>
+
+(q1::size-of)
+;=>
+
+(q1::push_back 1)   ;;; push_back & pop_back
+;=>
+
+(q1::push_back 2)
+;=>
+
+(q1::size-of)
+;=>
+
+(q1::pop_back)
+;=>
+
+(q1::pop_back)
+;=>
+
+(q1::size-of)
+;=>
+
+(q1::push_front 1)      ;;; push_front & pop_front
+;=>
+
+(q1::push_front 2)
+;=>
+
+(q1::size-of)
+;=>
+
+(q1::pop_front)
+;=>
+
+(q1::pop_front)
+;=>
+
+(q1::size-of)
+;=>
+
+(q1::is-empty)          ;;; is-empty
+;=>
+
+(is-empty q1)
+;=>
+
+(q1::push 1)            ;;; to-list
+;=>
+
+(q1::push 2)
+;=>
+
+(q1::push 3)
+;=>
+
+(q1::to-list)
+;=>
+
+(to-list q1)
+;=>
+
+(is-empty q1)           ;;; clear
+;=>
+
+(q1::clear)
+;=>
+
+(clear q1)
+;=>
+
+(is-empty q1)
+;=>
+
+(print-global-info)
+;;;

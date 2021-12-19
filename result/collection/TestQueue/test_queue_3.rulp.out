@@ -1,0 +1,15 @@
+(defun fun_push (?queue ?v) (?queue::push ?v))
+;=>fun_push
+
+(new queue q1)
+;=>q1
+
+(fun_push q1 1)
+;=>nil
+
+(q1::size-of)
+;=>1
+
+(q1::pop)
+;=>1
+
