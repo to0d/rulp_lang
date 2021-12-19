@@ -33,40 +33,7 @@ public class XRFactorIsConst extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRObject obj = args.get(1);
-		switch (obj.getType()) {
-		case CONSTANT:
-		case DOUBLE:
-		case ATOM:
-		case BOOL:
-		case EXPR:
-		case FACTOR:
-		case FLOAT:
-		case INT:
-		case LONG:
-		case NIL:
-		case STRING:
-		case MACRO:
-			return O_True;
-
-		case LIST:
-			return ((IRList) obj).isConst() ? O_True : O_False;
-
-		case ARRAY:
-			return ((IRArray) obj).isConst() ? O_True : O_False;
-
-		case BLOB:
-		case CLASS:
-		case FUNC:
-		case FRAME:
-		case INSTANCE:
-		case MEMBER:
-		case NATIVE:
-		case TEMPLATE:
-		case VAR:
-		default:
-			return O_False;
-		}
+		return args.get(1).isConst() ? O_True : O_False;
 	}
 
 	@Override

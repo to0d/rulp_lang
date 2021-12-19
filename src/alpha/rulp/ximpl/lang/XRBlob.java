@@ -20,6 +20,11 @@ public class XRBlob extends AbsAtomObject implements IRBlob {
 
 	private byte[] value;
 
+	public XRBlob(byte[] buf) {
+		this.value = new byte[buf.length];
+		System.arraycopy(buf, 0, value, 0, buf.length);
+	}
+
 	public XRBlob(int size) {
 
 		if (size > 0) {
@@ -28,11 +33,6 @@ public class XRBlob extends AbsAtomObject implements IRBlob {
 				this.value[i] = 0;
 			}
 		}
-	}
-
-	public XRBlob(byte[] buf) {
-		this.value = new byte[buf.length];
-		System.arraycopy(buf, 0, value, 0, buf.length);
 	}
 
 	protected int _copy(int blob_pos, byte[] buf, int buf_pos, int length, boolean read) throws RException {
@@ -91,6 +91,11 @@ public class XRBlob extends AbsAtomObject implements IRBlob {
 	@Override
 	public byte[] getValue() {
 		return value;
+	}
+
+	@Override
+	public boolean isConst() {
+		return false;
 	}
 
 	@Override

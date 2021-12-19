@@ -24,9 +24,9 @@ import alpha.rulp.utils.RulpUtil;
 
 public class XRFunctionLambda extends AbsRefCallableAdapter implements IRFunction {
 
-	protected IRFunction func;
-
 	protected IRFrame definedFrame;
+
+	protected IRFunction func;
 
 	protected int lambdaId;
 
@@ -101,6 +101,11 @@ public class XRFunctionLambda extends AbsRefCallableAdapter implements IRFunctio
 	@Override
 	public RType getType() {
 		return RType.FUNC;
+	}
+
+	@Override
+	public boolean isConst() {
+		return true;
 	}
 
 	@Override

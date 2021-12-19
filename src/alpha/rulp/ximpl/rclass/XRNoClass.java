@@ -90,7 +90,17 @@ public final class XRNoClass extends AbsAtomObject implements IRClass {
 	}
 
 	@Override
+	public boolean hasMember(String name) throws RException {
+		return false;
+	}
+
+	@Override
 	public boolean hasSubjectFrame() {
+		return true;
+	}
+
+	@Override
+	public boolean isConst() {
 		return true;
 	}
 
@@ -118,11 +128,6 @@ public final class XRNoClass extends AbsAtomObject implements IRClass {
 	@Override
 	public void setMember(String name, IRMember mbr) throws RException {
 		throw new RException("Can't operation");
-	}
-
-	@Override
-	public boolean hasMember(String name) throws RException {
-		return false;
 	}
 
 }

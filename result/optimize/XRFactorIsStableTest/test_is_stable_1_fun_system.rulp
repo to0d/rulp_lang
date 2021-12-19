@@ -1,0 +1,29 @@
+(defun ls-stable-fun (?subject) 
+    (if (equal ?subject local)
+    
+        (ls-print-fun (value-of (:: (value-of local::parent) parent)))
+        
+        (loop for ?mbr in (ls ?subject) do 
+            (if (not (equal func (type-of $(value-of (value-of ?mbr)))))
+                (continue)
+            )
+
+            (print "mbr=" (name-of $(value-of ?mbr))
+            )
+
+            (print ", stable=" (is-stable  $(value-of (value-of ?mbr))))
+
+            (print "\n")
+        )
+    )
+)
+;;;
+
+(ls-stable-fun root)
+;;;
+
+(ls-stable-fun system)
+;;;
+
+(ls-stable-fun main)
+;;;

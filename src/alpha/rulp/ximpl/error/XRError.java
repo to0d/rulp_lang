@@ -49,4 +49,9 @@ public class XRError extends AbsRInstance implements IRError {
 		return asString();
 	}
 
+	@Override
+	public boolean isConst() {
+		return true;
+	}
+
 }

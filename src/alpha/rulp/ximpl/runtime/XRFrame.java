@@ -391,6 +391,11 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 	}
 
 	@Override
+	public boolean isConst() {
+		return false;
+	}
+
+	@Override
 	public boolean isFinal() {
 		return bFinal;
 	}

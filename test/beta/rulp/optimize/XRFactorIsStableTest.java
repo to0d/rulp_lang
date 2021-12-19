@@ -13,6 +13,12 @@ class XRFactorIsStableTest extends RulpTestBase {
 		_run_script();
 	}
 
+	@Test
+	public void test_is_stable_1_fun_system() {
+		_setup();
+		_run_script();
+	}
+
 //	@Test
 //	public void test_is_stable_2_fun_list() {
 //

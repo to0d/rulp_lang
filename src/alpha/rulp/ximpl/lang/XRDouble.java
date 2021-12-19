@@ -13,6 +13,11 @@ public class XRDouble extends AbsAtomObject implements IRDouble {
 	}
 
 	@Override
+	public double asDouble() {
+		return value;
+	}
+
+	@Override
 	public String asString() {
 		return "" + value + "D";
 	}
@@ -23,8 +28,8 @@ public class XRDouble extends AbsAtomObject implements IRDouble {
 	}
 
 	@Override
-	public double asDouble() {
-		return value;
+	public boolean isConst() {
+		return true;
 	}
 
 }

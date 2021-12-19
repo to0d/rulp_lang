@@ -36,4 +36,9 @@ public class XRInteger extends AbsAtomObject implements IRInteger {
 		return RType.INT;
 	}
 
+	@Override
+	public boolean isConst() {
+		return true;
+	}
+
 }

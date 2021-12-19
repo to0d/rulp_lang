@@ -31,4 +31,5 @@ public class XRFactorBreak extends AbsRFactorAdapter implements IRFactor {
 	public boolean isThreadSafe() {
 		return true;
 	}
+
 }

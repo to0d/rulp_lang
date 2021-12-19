@@ -30,6 +30,14 @@ public class XRMember extends AbsRefObject implements IRMember {
 
 	private IRObject value;
 
+	public XRMember(IRObject subject, String name, IRObject value) throws RException {
+		super();
+		this.subject = subject;
+		this.name = name;
+		this.value = value;
+//		RulpUtil.incRef(value);
+	}
+
 //	protected void _delete() throws RException {
 //
 //		if (this.value != null) {
@@ -39,14 +47,6 @@ public class XRMember extends AbsRefObject implements IRMember {
 //
 //		super._delete();
 //	}
-
-	public XRMember(IRObject subject, String name, IRObject value) throws RException {
-		super();
-		this.subject = subject;
-		this.name = name;
-		this.value = value;
-//		RulpUtil.incRef(value);
-	}
 
 	@Override
 	public String asString() {
@@ -69,6 +69,11 @@ public class XRMember extends AbsRefObject implements IRMember {
 	}
 
 	@Override
+	public int getProperty() {
+		return property;
+	}
+
+	@Override
 	public IRObject getSubject() {
 		return subject;
 	}
@@ -84,23 +89,23 @@ public class XRMember extends AbsRefObject implements IRMember {
 	}
 
 	@Override
+	public boolean isConst() {
+		return false;
+	}
+
+	@Override
 	public void setAccessType(RAccessType accessType) throws RException {
 		this.accessType = accessType;
 	}
 
 	@Override
-	public String toString() {
-		return asString();
-	}
-
-	@Override
-	public int getProperty() {
-		return property;
-	}
-
-	@Override
 	public void setProperty(int property) {
 		this.property = property;
+	}
+
+	@Override
+	public String toString() {
+		return asString();
 	}
 
 }

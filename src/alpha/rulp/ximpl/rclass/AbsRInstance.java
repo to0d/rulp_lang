@@ -196,6 +196,11 @@ public abstract class AbsRInstance extends AbsRSubject implements IRInstance {
 
 	}
 
+	@Override
+	public boolean isConst() {
+		return false;
+	}
+
 	public void setRClass(IRClass rClass) {
 		this.rClass = rClass;
 	}

@@ -322,6 +322,11 @@ public class XRFunctionList extends AbsRefCallableAdapter implements IRFunctionL
 	}
 
 	@Override
+	public boolean isConst() {
+		return false;
+	}
+
+	@Override
 	public boolean isLambda() {
 		return false;
 	}

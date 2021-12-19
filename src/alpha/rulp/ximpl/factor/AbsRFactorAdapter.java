@@ -38,6 +38,11 @@ public abstract class AbsRFactorAdapter extends AbsAtomCallableAdapter implement
 	}
 
 	@Override
+	public boolean isConst() {
+		return true;
+	}
+
+	@Override
 	public boolean isStable() {
 		return false;
 	}

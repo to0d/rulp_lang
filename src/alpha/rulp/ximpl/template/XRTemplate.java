@@ -241,6 +241,11 @@ public class XRTemplate extends AbsRefCallableAdapter implements IRTemplate {
 	}
 
 	@Override
+	public boolean isConst() {
+		return false;
+	}
+
+	@Override
 	public boolean isStable() {
 		return false;
 	}

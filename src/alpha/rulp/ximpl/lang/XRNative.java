@@ -52,4 +52,9 @@ public class XRNative extends AbsRefObject implements IRNative {
 		return RType.NATIVE;
 	}
 
+	@Override
+	public boolean isConst() {
+		return false;
+	}
+
 }

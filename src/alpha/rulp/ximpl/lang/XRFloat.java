@@ -36,4 +36,9 @@ public class XRFloat extends AbsAtomObject implements IRFloat {
 		return RType.FLOAT;
 	}
 
+	@Override
+	public boolean isConst() {
+		return true;
+	}
+
 }

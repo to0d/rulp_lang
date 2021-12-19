@@ -68,4 +68,9 @@ public abstract class AbsRClass extends AbsRSubject implements IRClass {
 		return RType.CLASS;
 	}
 
+	@Override
+	public boolean isConst() {
+		return false;
+	}
+
 }

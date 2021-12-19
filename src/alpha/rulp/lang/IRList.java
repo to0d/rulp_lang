@@ -19,8 +19,6 @@ public interface IRList extends IRObject {
 
 	public String getNamedName();
 
-	public boolean isConst();
-
 	public boolean isEmpty() throws RException;
 
 	public IRIterator<? extends IRObject> iterator();

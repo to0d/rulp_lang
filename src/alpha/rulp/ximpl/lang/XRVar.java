@@ -98,6 +98,11 @@ public class XRVar extends AbsRefObject implements IRVar {
 	}
 
 	@Override
+	public boolean isConst() {
+		return false;
+	}
+
+	@Override
 	public void setValue(IRObject newVal) throws RException {
 
 		IRObject oldVal = this.value;

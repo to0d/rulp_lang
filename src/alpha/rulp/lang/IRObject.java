@@ -27,6 +27,7 @@ public interface IRObject {
 
 	public void incRef() throws RException;
 
+	public boolean isConst();
+	
 	public boolean isDeleted();
-
 }
