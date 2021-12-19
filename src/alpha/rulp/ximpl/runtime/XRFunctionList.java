@@ -230,10 +230,11 @@ public class XRFunctionList extends AbsRefCallableAdapter implements IRFunctionL
 			RulpUtil.decRef(oldFun);
 		}
 
-		allFuncList.add(fun);
+		this.allFuncList.add(fun);
 		RulpUtil.incRef(fun);
-		signature = null;
-		isStable = null;
+
+		this.signature = null;
+		this.isStable = null;
 	}
 
 	@Override
@@ -276,6 +277,10 @@ public class XRFunctionList extends AbsRefCallableAdapter implements IRFunctionL
 	@Override
 	public IRExpr getFunBody() {
 		return null;
+	}
+
+	public Boolean getIsStable() {
+		return isStable;
 	}
 
 	@Override
@@ -354,6 +359,10 @@ public class XRFunctionList extends AbsRefCallableAdapter implements IRFunctionL
 
 	public boolean isThreadSafe() {
 		return false;
+	}
+
+	public void setIsStable(Boolean isStable) {
+		this.isStable = isStable;
 	}
 
 	public String toString() {

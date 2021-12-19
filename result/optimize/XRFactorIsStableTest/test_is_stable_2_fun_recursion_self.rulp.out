@@ -80,5 +80,5 @@
         (return ?s)) 
     (return (fun8 (+ "a" ?s))))
 (is-stable fun8)
-;=>fun8 false
+;=>fun8 true
 

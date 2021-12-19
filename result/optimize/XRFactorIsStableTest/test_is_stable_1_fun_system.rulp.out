@@ -27,11 +27,11 @@ obj=add, type=func, stable=false
 obj=add-all, type=func, stable=false
 obj=clear, type=func, stable=false
 obj=cmp, type=func, stable=true
-obj=equal, type=func, stable=false
+obj=equal, type=func, stable=true
 obj=get, type=func, stable=false
 obj=is-blank, type=func, stable=true
 obj=is-empty, type=func, stable=false
-obj=length-of, type=func, stable=false
+obj=length-of, type=func, stable=true
 obj=ls-print, type=func, stable=false
 obj=println, type=func, stable=false
 obj=size-of, type=func, stable=false

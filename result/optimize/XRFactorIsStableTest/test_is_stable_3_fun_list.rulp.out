@@ -5,5 +5,5 @@
 ;=>fun1
 
 (is-stable fun1)
-;=>false
+;=>true
 

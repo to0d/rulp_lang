@@ -26,11 +26,13 @@ import alpha.rulp.lang.IRParaAttr;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRCallable;
+import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.error.RInterrupt;
 import alpha.rulp.ximpl.runtime.XRFunction;
+import alpha.rulp.ximpl.runtime.XRFunctionList;
 
 public class StableUtil {
 
@@ -241,17 +243,6 @@ public class StableUtil {
 		return false;
 	}
 
-	private static boolean _isStable(IRIterator<? extends IRObject> it, NameSet nameSet, IRFrame frame)
-			throws RException {
-
-		while (it.hasNext()) {
-			if (!_isStable(it.next(), nameSet, frame)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
 	private static boolean _isStable(IRObject obj, NameSet nameSet, IRFrame frame) throws RException {
 
 		if (obj == null) {
@@ -310,14 +301,14 @@ public class StableUtil {
 			if (e0.getType() == RType.ATOM && nameSet.lookupType(e0.asString()) == RType.FUNC) {
 
 				// need new branch
-				return _isStable(expr.listIterator(1), nameSet.newBranch(), frame);
+				return _isStableList(expr.listIterator(1), nameSet.newBranch(), frame);
 			}
 
 			// External defined function
 			if (e0.getType() == RType.ATOM) {
 				IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, RulpUtil.asAtom(e0).getName());
 				if (entry != null && entry.getValue() != null && entry.getValue().getType() == RType.FUNC) {
-					return _isStable(expr.listIterator(0), nameSet, frame);
+					return _isStableList(expr.listIterator(0), nameSet, frame);
 				}
 			}
 
@@ -325,7 +316,7 @@ public class StableUtil {
 			if (_isNewFrameFactor(e0)) {
 
 				// need new branch
-				return _isStable(expr.listIterator(1), nameSet.newBranch(), frame);
+				return _isStableList(expr.listIterator(1), nameSet.newBranch(), frame);
 			}
 
 			// (defvar ?x)
@@ -337,18 +328,18 @@ public class StableUtil {
 				nameSet.addFunName(RulpUtil.asAtom(expr.get(1)).getName());
 			}
 
-			return _isStable(expr.listIterator(0), nameSet, frame);
+			return _isStableList(expr.listIterator(0), nameSet, frame);
 
 		case LIST:
-			return _isStable(((IRList) obj).listIterator(0), nameSet, frame);
+			return _isStableList(((IRList) obj).listIterator(0), nameSet, frame);
 
 		case FUNC:
 
 			if (RulpUtil.isFunctionList(obj)) {
-				return false;
+				return _isStableFuncList((XRFunctionList) obj, nameSet.newBranch(), frame);
+			} else {
+				return _isStableFunc((XRFunction) obj, nameSet.newBranch(), frame);
 			}
-
-			return _isStable((XRFunction) obj, nameSet.newBranch(), frame);
 
 		case MEMBER:
 		case FRAME:
@@ -362,7 +353,7 @@ public class StableUtil {
 		}
 	}
 
-	private static boolean _isStable(XRFunction func, NameSet nameSet, IRFrame frame) throws RException {
+	private static boolean _isStableFunc(XRFunction func, NameSet nameSet, IRFrame frame) throws RException {
 
 		Boolean bRc = func.getIsStable();
 		if (bRc != null) {
@@ -456,6 +447,36 @@ public class StableUtil {
 			nameSet.checkingStack.remove(checkSize);
 		}
 
+	}
+
+	private static boolean _isStableFuncList(XRFunctionList func, NameSet nameSet, IRFrame frame) throws RException {
+
+		Boolean bRc = func.getIsStable();
+		if (bRc != null) {
+			return bRc;
+		}
+
+		boolean rc = true;
+		for (IRFunction childFunc : func.getAllFuncList()) {
+			if (!_isStable(childFunc, nameSet, frame)) {
+				rc = false;
+				break;
+			}
+		}
+
+		func.setIsStable(rc);
+		return rc;
+	}
+
+	private static boolean _isStableList(IRIterator<? extends IRObject> it, NameSet nameSet, IRFrame frame)
+			throws RException {
+
+		while (it.hasNext()) {
+			if (!_isStable(it.next(), nameSet, frame)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public static Set<String> findFunCallee(IRExpr expr, IRFrame frame) throws RException {
