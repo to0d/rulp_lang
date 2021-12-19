@@ -1,0 +1,23 @@
+(defun ls-is-const (?subject) 
+    (if (equal ?subject local)
+    
+        (ls-is-const (value-of (:: (value-of local::parent) parent)))
+        
+        (loop for ?mbr in (ls ?subject) do 
+            (print "obj=" (name-of $(value-of ?mbr)))
+            (print ", type=" (type-of $(value-of (value-of ?mbr))))
+            (print ", const=" (is-const  $(value-of (value-of ?mbr))))
+            (print "\n")
+        )
+    )
+)
+;;;
+
+(ls-is-const root)
+;;;
+
+(ls-is-const system)
+;;;
+
+(ls-is-const main)
+;;;
