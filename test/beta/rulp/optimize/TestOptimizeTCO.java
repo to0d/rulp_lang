@@ -2,20 +2,9 @@ package beta.rulp.optimize;
 
 import static org.junit.Assert.fail;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Set;
-
 import org.junit.Test;
 
-import alpha.rulp.lang.RException;
-import alpha.rulp.runtime.IRFunction;
-import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpTestBase;
-import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.optimize.CPSUtils;
 
 public class TestOptimizeTCO extends RulpTestBase {
 

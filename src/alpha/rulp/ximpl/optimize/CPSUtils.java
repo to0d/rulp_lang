@@ -518,6 +518,10 @@ public class CPSUtils {
 		return cpsCount.get();
 	}
 
+	public static boolean isCPSRecursive(IRExpr expr, IRFrame frame) throws RException {
+		return false;
+	}
+
 	public static IRObject rebuildCpsTree(IRObject obj, IRFrame frame) throws RException {
 
 		switch (obj.getType()) {

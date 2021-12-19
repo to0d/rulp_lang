@@ -9,21 +9,24 @@
 
 package alpha.rulp.ximpl.optimize;
 
-import alpha.rulp.lang.IRExpr;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Set;
+
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
+import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 
-public class XRFactorOpt extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorIsCPSRecursive extends AbsRFactorAdapter implements IRFactor {
 
-	public XRFactorOpt(String factorName) {
+	public XRFactorIsCPSRecursive(String factorName) {
 		super(factorName);
 	}
 
@@ -34,28 +37,20 @@ public class XRFactorOpt extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRExpr expr = RulpUtil.asExpression(args.get(1));
-
-		// support cps already
-		if (RuntimeUtil.isSupportOpCPS(frame)) {
-			return interpreter.compute(frame, expr);
+		IRFunction fun = RulpUtil.asFunction(interpreter.compute(frame, args.get(1)));
+		if (fun.isList()) {
+			return RulpFactory.emptyConstList();
 		}
 
-		IRFrame cpsFrame = RulpFactory.createFrame(frame, "cps");
-
-		try {
-
-			RulpUtil.incRef(cpsFrame);
-
-			IRObject e0 = expr.get(0);
-
-			return CPSUtils.rebuildCpsTree(RulpUtil.asExpression(args.get(1)), frame);
-
-		} finally {
-			cpsFrame.release();
-			RulpUtil.decRef(cpsFrame);
+		Set<String> calleeNames = CPSUtils.findCPSCallee(fun.getFunBody(), frame);
+		if (calleeNames.isEmpty()) {
+			return RulpFactory.emptyConstList();
 		}
 
+		ArrayList<String> nameList = new ArrayList<>(calleeNames);
+		Collections.sort(nameList);
+
+		return RulpFactory.createListOfString(nameList);
 	}
 
 	@Override
