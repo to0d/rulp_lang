@@ -34,6 +34,11 @@ public class XRFactorIsStable extends AbsRFactorAdapter implements IRFactor {
 		return RulpFactory.createBoolean(StableUtil.isStable(args.get(1), frame));
 	}
 
+	@Override
+	public boolean isStable() {
+		return false;
+	}
+
 	public boolean isThreadSafe() {
 		return true;
 	}

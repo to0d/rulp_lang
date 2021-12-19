@@ -155,6 +155,11 @@ public class XRFactorNew extends AbsRFactorAdapter implements IRFactor {
 		return newInstance(args, interpreter, frame);
 	}
 
+	@Override
+	public boolean isStable() {
+		return true;
+	}
+
 	public boolean isThreadSafe() {
 		return true;
 	}

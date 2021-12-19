@@ -19,26 +19,26 @@ import alpha.rulp.ximpl.optimize.CPSUtils;
 
 public class TestOptimizeTCO extends RulpTestBase {
 
-	@Override
-	protected IRInterpreter _createInterpreter() throws RException, IOException {
-
-		IRInterpreter ip = RulpFactory.createInterpreter();
-
-		RulpUtil.addFactor(ip.getMainFrame(), "findCallee", (_args, _interpreter, _frame) -> {
-
-			if (_args.size() != 2) {
-				throw new RException("Invalid parameters: " + _args);
-			}
-
-			IRFunction fun = RulpUtil.asFunction(_interpreter.compute(_frame, _args.get(1)));
-			Set<String> calleeNames = CPSUtils.findCPSCallee(fun.getFunBody(), _frame);
-			ArrayList<String> nameList = new ArrayList<>(calleeNames);
-			Collections.sort(nameList);
-			return RulpFactory.createListOfString(nameList);
-		});
-
-		return ip;
-	}
+//	@Override
+//	protected IRInterpreter _createInterpreter() throws RException, IOException {
+//
+//		IRInterpreter ip = RulpFactory.createInterpreter();
+//
+//		RulpUtil.addFactor(ip.getMainFrame(), "findCallee", (_args, _interpreter, _frame) -> {
+//
+//			if (_args.size() != 2) {
+//				throw new RException("Invalid parameters: " + _args);
+//			}
+//
+//			IRFunction fun = RulpUtil.asFunction(_interpreter.compute(_frame, _args.get(1)));
+//			Set<String> calleeNames = CPSUtils.findCPSCallee(fun.getFunBody(), _frame);
+//			ArrayList<String> nameList = new ArrayList<>(calleeNames);
+//			Collections.sort(nameList);
+//			return RulpFactory.createListOfString(nameList);
+//		});
+//
+//		return ip;
+//	}
 
 	@Test
 	public void test_tco_1() {

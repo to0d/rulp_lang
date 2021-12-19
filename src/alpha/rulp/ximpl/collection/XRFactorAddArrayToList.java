@@ -60,6 +60,11 @@ public class XRFactorAddArrayToList extends AbsRFactorAdapter implements IRFacto
 		return RulpFactory.createList(rstList);
 	}
 
+	@Override
+	public boolean isStable() {
+		return true;
+	}
+
 	public boolean isThreadSafe() {
 		return true;
 	}

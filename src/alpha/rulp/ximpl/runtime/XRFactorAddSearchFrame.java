@@ -36,4 +36,10 @@ public class XRFactorAddSearchFrame extends AbsRFactorAdapter implements IRFacto
 		tgtFrame.addSearchFrame(searchFrame);
 		return searchFrame;
 	}
+
+	@Override
+	public boolean isStable() {
+		return false;
+	}
+
 }

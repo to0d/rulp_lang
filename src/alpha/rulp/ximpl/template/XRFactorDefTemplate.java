@@ -182,6 +182,11 @@ public class XRFactorDefTemplate extends AbsRFactorAdapter implements IRFactor {
 		throw new RException("Invalid parameters: " + args);
 	}
 
+	@Override
+	public boolean isStable() {
+		return true;
+	}
+
 	public boolean isThreadSafe() {
 		return true;
 	}

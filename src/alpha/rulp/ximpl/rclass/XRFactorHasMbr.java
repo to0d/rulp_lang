@@ -41,6 +41,11 @@ public class XRFactorHasMbr extends AbsRFactorAdapter implements IRFactor {
 	}
 
 	@Override
+	public boolean isStable() {
+		return true;
+	}
+
+	@Override
 	public boolean isThreadSafe() {
 		return true;
 	}

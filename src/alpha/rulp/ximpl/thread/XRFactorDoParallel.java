@@ -27,22 +27,9 @@ import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 
 public class XRFactorDoParallel extends AbsRFactorAdapter implements IRFactor {
 
-	static boolean TRACE = false;
-
 	static long beginTime = 0;
 
-	static void trace(String line) {
-		long dt = System.currentTimeMillis() - beginTime;
-		System.out.println(String.format("%10d: %s", dt, line));
-	}
-
-	public static void setTrace(boolean trace) {
-
-		XRFactorDoParallel.TRACE = trace;
-		if (trace) {
-			XRFactorDoParallel.beginTime = System.currentTimeMillis();
-		}
-	}
+	static boolean TRACE = false;
 
 	static void doParallel(IRExpr expr, IRInterpreter interpreter, IRFrame frame, IRThreadContext atext)
 			throws RException {
@@ -82,6 +69,19 @@ public class XRFactorDoParallel extends AbsRFactorAdapter implements IRFactor {
 			dopFrame.release();
 			RulpUtil.decRef(dopFrame);
 		}
+	}
+
+	public static void setTrace(boolean trace) {
+
+		XRFactorDoParallel.TRACE = trace;
+		if (trace) {
+			XRFactorDoParallel.beginTime = System.currentTimeMillis();
+		}
+	}
+
+	static void trace(String line) {
+		long dt = System.currentTimeMillis() - beginTime;
+		System.out.println(String.format("%10d: %s", dt, line));
 	}
 
 	public XRFactorDoParallel(String factorName) {
@@ -164,6 +164,11 @@ public class XRFactorDoParallel extends AbsRFactorAdapter implements IRFactor {
 		}
 
 		return newText.getResult(0);
+	}
+
+	@Override
+	public boolean isStable() {
+		return false;
 	}
 
 	public boolean isThreadSafe() {

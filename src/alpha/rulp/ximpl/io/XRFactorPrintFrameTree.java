@@ -23,4 +23,8 @@ public class XRFactorPrintFrameTree extends AbsRFactorAdapter implements IRFacto
 		return O_Nil;
 	}
 
+	@Override
+	public boolean isStable() {
+		return false;
+	}
 }

@@ -23,8 +23,8 @@
 (ls-is-stable-fun system)
 ;=>nil
 ;out:
-obj=add, type=func, stable=false
-obj=add-all, type=func, stable=false
+obj=add, type=func, stable=true
+obj=add-all, type=func, stable=true
 obj=clear, type=func, stable=false
 obj=cmp, type=func, stable=true
 obj=equal, type=func, stable=true

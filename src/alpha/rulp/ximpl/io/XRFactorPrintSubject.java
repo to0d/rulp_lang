@@ -116,4 +116,8 @@ public class XRFactorPrintSubject extends AbsRFactorAdapter implements IRFactor 
 		}
 	}
 
+	@Override
+	public boolean isStable() {
+		return false;
+	}
 }

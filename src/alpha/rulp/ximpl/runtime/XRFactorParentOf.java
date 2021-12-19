@@ -36,7 +36,7 @@ public class XRFactorParentOf extends AbsRFactorAdapter implements IRFactor {
 
 	@Override
 	public boolean isStable() {
-		return true;
+		return false;
 	}
 
 	public boolean isThreadSafe() {

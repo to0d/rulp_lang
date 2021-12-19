@@ -34,7 +34,7 @@
 )
 ;;;
 
-(findCallee fact2)
+(cps-callee fact2)
 ;=>
 
 (fact2 2)

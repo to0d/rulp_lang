@@ -47,6 +47,11 @@ public class XRFactorAddListToArray extends AbsRFactorAdapter implements IRFacto
 		return a1;
 	}
 
+	@Override
+	public boolean isStable() {
+		return true;
+	}
+
 	public boolean isThreadSafe() {
 		return true;
 	}

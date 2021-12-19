@@ -29,6 +29,11 @@ public class XRFactorSystemTime extends AbsRFactorAdapter implements IRFactor {
 		return RulpFactory.createLong(System.currentTimeMillis());
 	}
 
+	@Override
+	public boolean isStable() {
+		return false;
+	}
+
 	public boolean isThreadSafe() {
 		return true;
 	}

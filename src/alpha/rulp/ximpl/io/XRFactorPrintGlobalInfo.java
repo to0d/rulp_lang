@@ -23,4 +23,8 @@ public class XRFactorPrintGlobalInfo extends AbsRFactorAdapter implements IRFact
 		return O_Nil;
 	}
 
+	@Override
+	public boolean isStable() {
+		return false;
+	}
 }

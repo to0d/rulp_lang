@@ -53,6 +53,11 @@ public class XRFactorCPSCallee extends AbsRFactorAdapter implements IRFactor {
 		return RulpFactory.createListOfString(nameList);
 	}
 
+	@Override
+	public boolean isStable() {
+		return false;
+	}
+
 	public boolean isThreadSafe() {
 		return true;
 	}

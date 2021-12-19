@@ -117,6 +117,11 @@ public class XRFactorLoad extends AbsRFactorAdapter implements IRFactor {
 		return LoadUtil.loadRulp(interpreter, path, charset);
 	}
 
+	@Override
+	public boolean isStable() {
+		return false;
+	}
+
 	public boolean isThreadSafe() {
 		return false;
 	}

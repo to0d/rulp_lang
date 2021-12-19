@@ -58,6 +58,11 @@ public class XRFactorOpt extends AbsRFactorAdapter implements IRFactor {
 
 	}
 
+	@Override
+	public boolean isStable() {
+		return false;
+	}
+
 	public boolean isThreadSafe() {
 		return true;
 	}

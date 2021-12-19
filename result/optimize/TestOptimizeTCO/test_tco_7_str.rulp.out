@@ -82,22 +82,21 @@ Object create count:
       member:          117            0          117
        frame:           33           33            0
  interpreter:            1            0
-  frameEntry:          247            0
+  frameEntry:          246            0
       lambda:            0            0
 ==========================================================================================================================
 
 Global frame list: total=0
 
-id=2, name=main, lvl=2, ref=1/2, entry=6, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=1/2, entry=5, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        1    frame      frame@main          
-findCallee           : 4        2        0    factor     findCallee          
-fun5                 : 5        2        11   func       (fun5 nil) : frame=frame@main
-?rv                  : 9        2        1    var        aaaaaaaaaab : type=string
+fun5                 : 4        2        11   func       (fun5 nil) : frame=frame@main
+?rv                  : 8        2        1    var        aaaaaaaaaab : type=string
 ==========================================================================================================================
 
 

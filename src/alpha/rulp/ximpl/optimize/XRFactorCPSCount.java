@@ -34,6 +34,11 @@ public class XRFactorCPSCount extends AbsRFactorAdapter implements IRFactor {
 		return RulpFactory.createInteger(CPSUtils.getCPSCount());
 	}
 
+	@Override
+	public boolean isStable() {
+		return false;
+	}
+
 	public boolean isThreadSafe() {
 		return true;
 	}

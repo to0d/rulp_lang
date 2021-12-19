@@ -29,4 +29,8 @@ public class XRFactorRulpObjectCount extends AbsRFactorAdapter implements IRFact
 		return RulpFactory.createInteger(count);
 	}
 
+	@Override
+	public boolean isStable() {
+		return false;
+	}
 }

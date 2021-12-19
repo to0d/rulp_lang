@@ -89,6 +89,11 @@ public class XRFactorUniq extends AbsRFactorAdapter implements IRFactor {
 
 	}
 
+	@Override
+	public boolean isStable() {
+		return true;
+	}
+
 	public boolean isThreadSafe() {
 		return true;
 	}

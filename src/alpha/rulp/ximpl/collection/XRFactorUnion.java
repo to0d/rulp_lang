@@ -68,6 +68,11 @@ public class XRFactorUnion extends AbsRFactorAdapter implements IRFactor {
 		return unionCol.toList();
 	}
 
+	@Override
+	public boolean isStable() {
+		return true;
+	}
+
 	public boolean isThreadSafe() {
 		return true;
 	}

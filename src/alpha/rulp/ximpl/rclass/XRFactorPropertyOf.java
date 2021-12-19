@@ -97,4 +97,9 @@ public class XRFactorPropertyOf extends AbsRFactorAdapter implements IRFactor {
 		return getPropertyList(obj);
 	}
 
+	@Override
+	public boolean isStable() {
+		return true;
+	}
+
 }

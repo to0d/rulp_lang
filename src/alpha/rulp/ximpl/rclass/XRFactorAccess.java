@@ -45,6 +45,11 @@ public class XRFactorAccess extends AbsRFactorAdapter implements IRFactor {
 		return RulpFactory.createBoolean(RuntimeUtil.canAccess(obj, interpreter, frame));
 	}
 
+	@Override
+	public boolean isStable() {
+		return true;
+	}
+
 	public boolean isThreadSafe() {
 		return true;
 	}
