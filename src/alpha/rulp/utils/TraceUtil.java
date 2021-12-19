@@ -442,7 +442,7 @@ public class TraceUtil {
 		sb.append(String.format("%30s: %8s\n", "Name", "info"));
 		sb.append(SEP_LINE2);
 		sb.append(String.format("%30s: %8d %8d\n", "Interpreter call id/level", interpreter.getCallId(),
-				interpreter.getCallLevel()));
+				interpreter.getTLS().getCallLevel()));
 		sb.append(String.format("%30s: %8s %8d\n", "CPS support/count",
 				"" + RuntimeUtil.isSupportOpCPS(interpreter.getMainFrame()), CPSUtils.getCPSCount()));
 		sb.append(String.format("%30s: %8d\n", "Frame max level", RuntimeUtil.getFrameMaxLevel()));

@@ -13,10 +13,8 @@ import static alpha.rulp.lang.Constant.A_FUN_PRE;
 import static alpha.rulp.lang.Constant.O_Nil;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRExpr;
@@ -151,6 +149,10 @@ public class XRFunction extends AbsRefCallableAdapter implements IRFunction {
 		return funBody;
 	}
 
+	public Boolean getIsStable() {
+		return isStable;
+	}
+
 	@Override
 	public String getName() {
 		return name;
@@ -199,15 +201,7 @@ public class XRFunction extends AbsRefCallableAdapter implements IRFunction {
 	public boolean isStable() throws RException {
 
 		if (isStable == null) {
-
-			Set<String> paraVarNames = new HashSet<>();
-			paraVarNames.add(this.getName());
-
-			for (IRParaAttr pa : getParaAttrs()) {
-				paraVarNames.add(pa.getParaName());
-			}
-
-			isStable = StableUtil.isStable(funBody, paraVarNames);
+			isStable = StableUtil.isStable(this, defineFrame);
 		}
 
 		return isStable;
@@ -215,6 +209,10 @@ public class XRFunction extends AbsRefCallableAdapter implements IRFunction {
 
 	public boolean isThreadSafe() {
 		return true;
+	}
+
+	public void setIsStable(Boolean isStable) {
+		this.isStable = isStable;
 	}
 
 	public String toString() {

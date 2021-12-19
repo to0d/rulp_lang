@@ -50,6 +50,18 @@ public class CPSUtils {
 
 		private IRExpr expr;
 
+		private int indexOfParent;
+
+		private CpsNode parrent;
+
+		public CpsNode(CpsNode parrent, int indexOfParent, IRExpr expr) throws RException {
+			super();
+			this.parrent = parrent;
+			this.indexOfParent = indexOfParent;
+
+			setExpr(expr);
+		}
+
 		public IRExpr getExpr() {
 			return expr;
 		}
@@ -61,18 +73,6 @@ public class CPSUtils {
 
 			RulpUtil.incRef(newExpr);
 			RulpUtil.decRef(oldExpr);
-		}
-
-		private int indexOfParent;
-
-		private CpsNode parrent;
-
-		public CpsNode(CpsNode parrent, int indexOfParent, IRExpr expr) throws RException {
-			super();
-			this.parrent = parrent;
-			this.indexOfParent = indexOfParent;
-
-			setExpr(expr);
 		}
 
 		public String toString() {
@@ -168,7 +168,7 @@ public class CPSUtils {
 		}
 	}
 
-	private static boolean _findCallee(IRExpr expr, Set<String> calleeNames, IRFrame frame) throws RException {
+	private static boolean _findCPSCallee(IRExpr expr, Set<String> calleeNames, IRFrame frame) throws RException {
 
 		IRObject e0 = expr.get(0);
 		if (e0.getType() != RType.ATOM) {
@@ -183,7 +183,7 @@ public class CPSUtils {
 			while (it.hasNext()) {
 				IRObject e = it.next();
 				if (e.getType() == RType.EXPR) {
-					_findCallee((IRExpr) e, calleeNames, frame);
+					_findCPSCallee((IRExpr) e, calleeNames, frame);
 				}
 			}
 		}
@@ -195,7 +195,7 @@ public class CPSUtils {
 			while (it.hasNext()) {
 				IRObject e = it.next();
 				if (e.getType() == RType.EXPR) {
-					_findCallee((IRExpr) e, calleeNames, frame);
+					_findCPSCallee((IRExpr) e, calleeNames, frame);
 				}
 			}
 		}
@@ -207,7 +207,7 @@ public class CPSUtils {
 
 				IRObject e = expr.get(1);
 				if (e.getType() == RType.EXPR) {
-					_findCallee_return((IRExpr) e, calleeNames, frame);
+					_findCPSCalleeInReturn((IRExpr) e, calleeNames, frame);
 				}
 			}
 
@@ -219,7 +219,7 @@ public class CPSUtils {
 		return true;
 	}
 
-	private static void _findCallee_return(IRExpr expr, Set<String> calleeNames, IRFrame frame) throws RException {
+	private static void _findCPSCalleeInReturn(IRExpr expr, Set<String> calleeNames, IRFrame frame) throws RException {
 
 		IRObject e0 = expr.get(0);
 
@@ -235,7 +235,7 @@ public class CPSUtils {
 					continue;
 				}
 
-				_findCallee_return((IRExpr) e, calleeNames, frame);
+				_findCPSCalleeInReturn((IRExpr) e, calleeNames, frame);
 			}
 		}
 	}
@@ -478,7 +478,7 @@ public class CPSUtils {
 
 	public static Set<String> findCPSCallee(IRExpr expr, IRFrame frame) throws RException {
 		HashSet<String> calleeNames = new HashSet<>();
-		_findCallee(expr, calleeNames, frame);
+		_findCPSCallee(expr, calleeNames, frame);
 		return calleeNames;
 	}
 

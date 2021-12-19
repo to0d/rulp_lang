@@ -40,15 +40,6 @@ public class TestOptimizeTCO extends RulpTestBase {
 		return ip;
 	}
 
-	protected void _load_fact(boolean enableCPS) {
-
-		if (enableCPS) {
-			_test("(setq ?op-cps true)");
-		}
-
-		_test("(load \"result/optimize/TestOptimizeTCO/fact.rulp\")");
-	}
-
 	@Test
 	public void test_tco_1() {
 
@@ -60,14 +51,6 @@ public class TestOptimizeTCO extends RulpTestBase {
 	public void test_tco_2_overflow() {
 
 		_setup();
-		_run_script();
-	}
-
-	@Test
-	public void test_tco_findCallee() {
-
-		_setup();
-		_load_fact(false);
 		_run_script();
 	}
 
@@ -94,17 +77,27 @@ public class TestOptimizeTCO extends RulpTestBase {
 //		fail("how to optimize");
 //		_test("(fun2 1001)", "45866");
 //		assertEquals(0, CPSUtils.getCPSCount());
+	}
 
+	@Test
+	public void test_tco_6_recursion_cycle() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	public void test_tco_7_str() {
+
+		_setup();
+		_run_script();
 	}
 
 //	@Test
-	public void test_tco_fun2_by_cc() {
+	public void test_tco_8_fun2_by_cc() {
 
 		_setup();
 
 		// cc: compute in cache
-
-		_load_fact(true);
 		_test("(cc (fun2 0))", "0");
 		_test("(cc (fun2 1))", "1");
 		_test("(cc (fun2 2))", "3");
@@ -113,12 +106,12 @@ public class TestOptimizeTCO extends RulpTestBase {
 		_test("(cc (fun2 101))", "132564");
 		_test("(cc (fun2 1001))", "45866");
 
-		_gInfo("result/optimize/TestRulpTCO/test_tco_fun2_by_cc.txt");
+		_gInfo();
 
 	}
 
 //	@Test
-	public void test_tco_fun3() {
+	public void test_tco_9_fun3() {
 
 		fail("not support yet");
 
@@ -137,28 +130,4 @@ public class TestOptimizeTCO extends RulpTestBase {
 		_test("(fun3 1000)", "1000");
 	}
 
-//	@Test
-	public void test_tco_fun4() {
-
-		fail("not support yet");
-
-		_setup();
-
-		// fun(n) = n*(n+1)/2
-		_test("(load \"result/optimize/TestOptimizeTCO/test_tco_fact.rulp\")");
-		_test("(fun4a 0)", "0");
-		_test("(fun4a 1)", "1");
-		_test("(fun4a 2)", "3");
-		_test("(fun4a 3)", "6");
-		_test("(fun4a 100)", "5050");
-		_test("(fun4a 1000)", "24");
-	}
-
-	@Test
-	public void test_tco_str_1() {
-
-		_setup();
-		_load_fact(true);
-		_run_script();
-	}
 }

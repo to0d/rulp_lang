@@ -9,7 +9,9 @@
 
 package alpha.rulp.ximpl.runtime;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import alpha.rulp.lang.IRAtom;
@@ -25,6 +27,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRListener1;
 import alpha.rulp.runtime.IROut;
 import alpha.rulp.runtime.IRParser;
+import alpha.rulp.runtime.IRTLS;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
@@ -32,8 +35,36 @@ import alpha.rulp.ximpl.error.RIException;
 
 public class XRInterpreter implements IRInterpreter {
 
-	static class TLS {
-		public int level = 0;
+	static class TLS implements IRTLS {
+
+		protected int level = 0;
+
+		protected Map<Object, Object> tlsMap = null;
+
+		@Override
+		public Object get(Object key) {
+			return tlsMap == null ? null : tlsMap.get(key);
+		}
+
+		@Override
+		public int getCallLevel() {
+			return level;
+		}
+
+		@Override
+		public void put(Object key, Object value) {
+
+			if (tlsMap == null) {
+				tlsMap = new HashMap<>();
+			}
+
+			tlsMap.put(key, value);
+		}
+
+		@Override
+		public Object remove(Object key) {
+			return tlsMap == null ? null : tlsMap.remove(key);
+		}
 	}
 
 	public static boolean TRACE = false;
@@ -47,17 +78,6 @@ public class XRInterpreter implements IRInterpreter {
 	protected IRParser parser;
 
 	protected final ThreadLocal<TLS> tlsPerThread = new ThreadLocal<>();
-
-	protected TLS _getTLS() {
-
-		TLS tls = tlsPerThread.get();
-		if (tls == null) {
-			tls = new TLS();
-			tlsPerThread.set(tls);
-		}
-
-		return tls;
-	}
 
 	@Override
 	public void addObject(IRObject obj) throws RException {
@@ -93,7 +113,7 @@ public class XRInterpreter implements IRInterpreter {
 	@Override
 	public IRObject compute(IRFrame frame, IRObject obj) throws RException {
 
-		TLS tls = _getTLS();
+		TLS tls = getTLS();
 
 		// First level call
 		if (tls.level++ == 0) {
@@ -164,11 +184,6 @@ public class XRInterpreter implements IRInterpreter {
 	}
 
 	@Override
-	public int getCallLevel() {
-		return _getTLS().level;
-	}
-
-	@Override
 	public IRFrame getMainFrame() {
 		return mainFrame;
 	}
@@ -192,6 +207,18 @@ public class XRInterpreter implements IRInterpreter {
 		}
 
 		return parser;
+	}
+
+	@Override
+	public TLS getTLS() {
+
+		TLS tls = tlsPerThread.get();
+		if (tls == null) {
+			tls = new TLS();
+			tlsPerThread.set(tls);
+		}
+
+		return tls;
 	}
 
 	@Override

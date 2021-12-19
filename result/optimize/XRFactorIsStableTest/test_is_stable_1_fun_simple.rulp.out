@@ -15,5 +15,5 @@
 ;=>fun2
 
 (is-stable fun2)
-;=>true
+;=>false
 

@@ -31,7 +31,7 @@ public class XRFactorIsStable extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		return RulpFactory.createBoolean(StableUtil.isStable(args.get(1)));
+		return RulpFactory.createBoolean(StableUtil.isStable(args.get(1), frame));
 	}
 
 	public boolean isThreadSafe() {

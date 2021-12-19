@@ -25,8 +25,6 @@ public interface IRInterpreter {
 
 	public int getCallId();
 
-	public int getCallLevel();
-
 	public IRFrame getMainFrame();
 
 	public IRObject getObject(String name) throws RException;
@@ -34,6 +32,8 @@ public interface IRInterpreter {
 	public IROut getOut();
 
 	public IRParser getParser();
+
+	public IRTLS getTLS();
 
 	public void out(String line);
 

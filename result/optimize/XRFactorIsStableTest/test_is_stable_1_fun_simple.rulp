@@ -1,18 +1,18 @@
 (defun fun1 (?v) 
     (return (+ ?v 1))
 )
-;=>
+;;;
 
 (is-stable fun1)
-;=>
+;=>true
 
 (defvar ?x 0)
-;=>
+;;;
 
 (defun fun2 (?v) 
     (return (+ ?v ?x))
 )
-;=>
+;;;
 
 (is-stable fun2)
-;=>
+;=>false

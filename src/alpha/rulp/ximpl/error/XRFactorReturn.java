@@ -36,6 +36,12 @@ public class XRFactorReturn extends AbsRFactorAdapter implements IRFactor {
 		throw new RReturn(this, frame, size == 1 ? O_Nan : interpreter.compute(frame, args.get(1)));
 	}
 
+	@Override
+	public boolean isStable() {
+		return true;
+	}
+
+	@Override
 	public boolean isThreadSafe() {
 		return true;
 	}

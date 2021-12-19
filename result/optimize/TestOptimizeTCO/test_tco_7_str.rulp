@@ -1,0 +1,17 @@
+(setq ?op-cps true)
+;;;
+
+(defun fun5 (?s) 
+    (if (> (length-of ?s) 10)
+        (return ?s)) 
+    (return (fun5 (+ "a" ?s))))
+;;;
+
+(fun5 "b")
+;=>"aaaaaaaaaab"
+
+(cps-count)
+;=>40
+
+(print-global-info)
+;;;

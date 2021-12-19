@@ -184,7 +184,7 @@ public interface Constant {
 	String F_CONTINUE = "continue";
 
 	String F_CPS_COUNT = "cps-count";
-	
+
 	String F_IS_STABLE = "is-stable";
 
 	String F_DATE = "date";
@@ -244,6 +244,8 @@ public interface Constant {
 	String F_LET = "let";
 
 	String F_LOAD = "load";
+
+	String F_OPT = "opt";
 
 	String F_LOOP = "loop";
 

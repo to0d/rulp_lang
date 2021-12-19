@@ -1,0 +1,32 @@
+(setq ?op-cps true)
+;=>&?op-cps
+
+(defun fun4a (?v) 
+    (do 
+        (if (<= ?v 0)(return 0))
+        (return (+ ?v (fun4b (- ?v 1))))
+    )
+)
+
+(defun fun4b (?v) 
+    (do 
+        (if (<= ?v 0)(return 0))
+        (return (+ ?v (fun4a (- ?v 1))))
+    )
+)
+;=>
+
+(findCallee fun4a)
+;=>
+
+(findCallee fun4b)
+;=>
+
+(fun4a 3)
+;=>
+
+(cps-count)
+;=>1
+
+(print-global-info)
+;=>
