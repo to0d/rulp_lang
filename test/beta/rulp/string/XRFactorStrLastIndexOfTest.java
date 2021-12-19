@@ -7,10 +7,8 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorStrLastIndexOfTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_str_last_index_of_1() {
 		_setup();
-		_test("(str-last-index-of \"abc123a\" \"a\")", "6");
-		_test("(str-last-index-of \"abc123a\" \"2\")", "4");
-		_test("(str-last-index-of \"abc123a\" \"x\")", "-1");
+		_run_script(); 
 	}
 }

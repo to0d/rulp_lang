@@ -4,11 +4,11 @@ import org.junit.jupiter.api.Test;
 
 import alpha.rulp.utils.RulpTestBase;
 
-class XRFactorStrStartsWithTest extends RulpTestBase {
+class XRFactorStrTrimTailTest extends RulpTestBase {
 
 	@Test
-	void test_start_with_1() {
+	void test_str_trim_tail_1() {
 		_setup();
-		_run_script(); 
+		_run_script();
 	}
 }

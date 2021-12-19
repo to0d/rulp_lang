@@ -1,0 +1,14 @@
+(str-trim "")
+;=>
+
+(str-trim "abc")
+;=>
+
+(str-trim "abc ")
+;=>
+
+(str-trim "abc  ")
+;=>
+
+(str-trim " abc ")
+;=>

@@ -1,0 +1,21 @@
+(str-equal "" "")
+;=>
+
+(str-equal "" nil)
+;=>
+
+(str-equal "abc" "abc")
+;=>
+
+(str-equal "abc" "ab")
+;=>
+
+(str-equal "abc" "abd")
+;=>
+
+(str-equal "abc" "Abc")
+;=>
+
+(str-equal-nocase "abc" "Abc")
+;=>
+

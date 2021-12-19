@@ -1,0 +1,15 @@
+(str-format "%d" 1)
+;=>"1"
+
+(str-format "%b" true)
+;=>"true"
+
+(str-format "%1.2f" 1.1111)
+;=>"1.11"
+
+(str-format "%d" 1L)
+;=>"1"
+
+(str-format "%1.2f" 1.123D)
+;=>"1.12"
+

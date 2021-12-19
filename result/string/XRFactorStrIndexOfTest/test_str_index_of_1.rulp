@@ -1,0 +1,9 @@
+(str-index-of "abc123a" "a")
+;=>
+
+(str-index-of "abc123a" "2")
+;=>
+
+(str-index-of "abc123a" "x")
+;=>
+

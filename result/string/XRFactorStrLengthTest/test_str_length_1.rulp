@@ -1,0 +1,6 @@
+(str-length "abc5")
+;=>
+
+(length-of "abc5")
+;=>
+

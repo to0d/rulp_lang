@@ -1,0 +1,3 @@
+(str-replace "XX/YY/ZZ" "/" "_")
+;=>"XX_YY_ZZ"
+

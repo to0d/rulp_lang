@@ -1,0 +1,9 @@
+(str-start-with "abc5" "abc")
+;=>
+
+(str-start-with "*TEST" "*")
+;=>
+
+(str-start-with "*TEST" "X")
+;=>
+

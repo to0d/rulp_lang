@@ -1,0 +1,24 @@
+(str-substr "abc5" 0)
+;=>"abc5"
+
+(str-substr "abc5" 1)
+;=>"bc5"
+
+(str-substr "abc5" 5)
+;=>""
+
+(str-substr "abc5" -1)
+;=>"abc5"
+
+(str-substr "abc5" 0 5)
+;=>"abc5"
+
+(str-substr "abc5" 2 4)
+;=>"c5"
+
+(str-substr "abc5" 4 2)
+;=>""
+
+(str-substr "abc5" 3 3)
+;=>""
+

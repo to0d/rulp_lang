@@ -1,0 +1,9 @@
+(str-last-index-of "abc123a" "a")
+;=>6
+
+(str-last-index-of "abc123a" "2")
+;=>4
+
+(str-last-index-of "abc123a" "x")
+;=>-1
+

@@ -1,0 +1,9 @@
+(str-start-with "abc5" "abc")
+;=>true
+
+(str-start-with "*TEST" "*")
+;=>true
+
+(str-start-with "*TEST" "X")
+;=>false
+

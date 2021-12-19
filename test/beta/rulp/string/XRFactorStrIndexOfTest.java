@@ -7,10 +7,8 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorStrIndexOfTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_str_index_of_1() {
 		_setup();
-		_test("(str-index-of \"abc123a\" \"a\")", "0");
-		_test("(str-index-of \"abc123a\" \"2\")", "4");
-		_test("(str-index-of \"abc123a\" \"x\")", "-1");
+		_run_script();
 	}
 }

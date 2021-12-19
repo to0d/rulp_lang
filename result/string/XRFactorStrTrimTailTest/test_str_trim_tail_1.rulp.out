@@ -1,0 +1,18 @@
+(str-trim-tail "")
+;=>""
+
+(str-trim-tail "abc")
+;=>"abc"
+
+(str-trim-tail "abc ")
+;=>"abc"
+
+(str-trim-tail " abc ")
+;=>" abc"
+
+(str-trim-tail "abc  ")
+;=>"abc"
+
+(str-trim-tail " abc ")
+;=>" abc"
+

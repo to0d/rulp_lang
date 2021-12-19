@@ -7,8 +7,8 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorStrEndWithTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_str_end_with_1() {
 		_setup();
-		_test("(str-end-with \"abc5\" \"bc5\")", "true");
+		_run_script();
 	}
 }

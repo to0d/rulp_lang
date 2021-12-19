@@ -7,9 +7,9 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorStrUpperTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_str_upper_1() {
 		_setup();
-		_test("(str-upper \"abc\")", "\"ABC\"");
+		_run_script();
 	}
 
 }

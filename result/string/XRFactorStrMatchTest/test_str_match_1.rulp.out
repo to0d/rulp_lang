@@ -1,0 +1,9 @@
+(str-match "*-*" "abc-xyz")
+;=>true
+
+(str-match "*-*" "abc")
+;=>false
+
+(str-match "* *" "abc xyz")
+;=>true
+

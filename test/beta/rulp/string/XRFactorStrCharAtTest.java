@@ -7,8 +7,8 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorStrCharAtTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_str_char_at_1() {
 		_setup();
-		_test("(str-char-at \"abc5\" 0)", "97");
+		_run_script();
 	}
 }

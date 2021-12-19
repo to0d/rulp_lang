@@ -1,0 +1,6 @@
+(str-length "abc5")
+;=>4
+
+(length-of "abc5")
+;=>4
+

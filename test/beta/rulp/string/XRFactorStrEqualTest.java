@@ -7,15 +7,8 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorStrEqualTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_str_equal_1() {
 		_setup();
-		_test("(str-equal \"\" \"\")", "true");
-		_test("(str-equal \"\" nil)", "false");
-		_test("(str-equal \"abc\" \"abc\")", "true");
-		_test("(str-equal \"abc\" \"ab\")", "false");
-		_test("(str-equal \"abc\" \"abd\")", "false");
-		_test("(str-equal \"abc\" \"Abc\")", "false");
-		_test("(str-equal-nocase \"abc\" \"Abc\")", "true");
-
+		_run_script();
 	}
 }

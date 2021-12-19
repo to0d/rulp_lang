@@ -1,0 +1,24 @@
+(defvar v1)
+;=>&v1
+
+(defvar v2)
+;=>&v2
+
+(str-match "%?-%?" "abc-xyz" '(&v1 (ref v2)))
+;=>true
+
+v1
+;=>"abc"
+
+v2
+;=>"xyz"
+
+(str-match "%?-%?" "123-456" '(v1 v2))
+;=>true
+
+v1
+;=>"123"
+
+v2
+;=>"456"
+

@@ -7,9 +7,8 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorStrLengthTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_str_length_1() {
 		_setup();
-		_test("(str-length \"abc5\")", "4");
-		_test("(length-of \"abc5\")", "4");
+		_run_script();  
 	}
 }
