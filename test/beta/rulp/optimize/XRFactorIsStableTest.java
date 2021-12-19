@@ -19,13 +19,6 @@ class XRFactorIsStableTest extends RulpTestBase {
 		_run_script();
 	}
 
-//	@Test
-//	public void test_is_stable_2_fun_list() {
-//
-//		_setup();
-//		_run_script();
-//	}
-
 	@Test
 	public void test_is_stable_2_fun_recursion_cycle() {
 
@@ -35,6 +28,13 @@ class XRFactorIsStableTest extends RulpTestBase {
 
 	@Test
 	public void test_is_stable_2_fun_recursion_self() {
+
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	public void test_is_stable_3_fun_list() {
 
 		_setup();
 		_run_script();

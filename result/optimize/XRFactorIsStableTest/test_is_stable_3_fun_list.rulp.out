@@ -1,0 +1,9 @@
+(defun fun1 (?v) (return (+ ?v 1)))
+;=>fun1
+
+(defun fun1 (?v1 ?v2) (return (+ ?v1 ?v2)))
+;=>fun1
+
+(is-stable fun1)
+;=>false
+

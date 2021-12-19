@@ -348,14 +348,7 @@ public class StableUtil {
 				return false;
 			}
 
-			XRFunction func = (XRFunction) obj;
-			Boolean vStable = func.getIsStable();
-			if (vStable != null) {
-				return vStable;
-			}
-
-//			nameSet.checkingFuncList.add(func);
-			return _isStable(func, nameSet.newBranch(), frame);
+			return _isStable((XRFunction) obj, nameSet.newBranch(), frame);
 
 		case MEMBER:
 		case FRAME:
@@ -370,6 +363,11 @@ public class StableUtil {
 	}
 
 	private static boolean _isStable(XRFunction func, NameSet nameSet, IRFrame frame) throws RException {
+
+		Boolean bRc = func.getIsStable();
+		if (bRc != null) {
+			return bRc;
+		}
 
 		int checkSize = nameSet.checkingStack.size();
 
