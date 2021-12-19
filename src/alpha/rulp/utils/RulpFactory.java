@@ -156,6 +156,7 @@ import alpha.rulp.ximpl.lang.XRVar;
 import alpha.rulp.ximpl.math.XRFactorRandom;
 import alpha.rulp.ximpl.namespace.XRNameSpace;
 import alpha.rulp.ximpl.namespace.XRNameSpaceClass;
+import alpha.rulp.ximpl.optimize.XRFactorCPSCallee;
 import alpha.rulp.ximpl.optimize.XRFactorCPSCount;
 import alpha.rulp.ximpl.optimize.XRFactorIsStable;
 import alpha.rulp.ximpl.optimize.XRFactorMakeCPS;
@@ -671,6 +672,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefTemplate(F_DEFTEMPLATE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorMakeCPS(F_MAKE_CPS));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorCPSCount(F_CPS_COUNT));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorCPSCallee(F_CPS_CALLEE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorIsStable(F_IS_STABLE));
 
 		// Lambda

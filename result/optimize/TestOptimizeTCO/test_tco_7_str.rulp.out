@@ -7,6 +7,9 @@
     (return (fun5 (+ "a" ?s))))
 ;=>fun5
 
+(cps-callee fun5)
+;=>'("+" "fun5" "make-cps")
+
 (fun5 "b")
 ;=>"aaaaaaaaaab"
 
@@ -22,7 +25,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       75        1
+     Interpreter call id/level:       76        1
              CPS support/count:     true       40
                Frame max level:        5
                   Frame max id:        6
@@ -33,42 +36,43 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      150
+    factor:      151
       func:       12
 ==========================================================================================================================
 
-Callable stats info: callId=75, row=18, column=38(2), value-max=22, value-unit=2^x
+Callable stats info: callId=76, row=19, column=39(2), value-max=22, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         12222222222222222222222222222222222282 max=109, unit=2^x
+   Frame    RType  Count  Ref Object                         122222222222222222222222222222222222281 max=109, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     54    0 defun                              2222222111 2222222222 22121221211 
-    root   factor     22    0 return                                                             6 
-    root   factor     11    0 str-length                                                         5 
-  system funcList     11    1 length-of                                                          5 
-    root   factor     11    0 if                                                                 5 
-    main     func     11   11 (fun5 nil)                                                         5 
-    root   factor     11    0 do                                                                 5 
-    root   factor     11    0 >                                                                  5 
-    root   factor     10    0 make-cps                                                           5 
-    root   factor     10    0 +                                                                  5 
-    root   factor      6    0 alias                          1221                                  
-    root   factor      4    0 defclass                                                1  1 1  1    
-    root   factor      3    0 deftemplate                                 12                       
-    root   factor      3    0 defmacro                                  11            1            
-    root   factor      1    0 setq                                                              1  
-    root   factor      1    0 print-global-info                                                   1
-    root   factor      1    0 defvar                            1                                  
-    root   factor      1    0 cps-count                                                           1
+    root   factor     54    0 defun                              2222222111 2222222222 22121221211  
+    root   factor     22    0 return                                                              6 
+    root   factor     11    0 str-length                                                          5 
+  system funcList     11    1 length-of                                                           5 
+    root   factor     11    0 if                                                                  5 
+    main     func     11   11 (fun5 nil)                                                          5 
+    root   factor     11    0 do                                                                  5 
+    root   factor     11    0 >                                                                   5 
+    root   factor     10    0 make-cps                                                            5 
+    root   factor     10    0 +                                                                   5 
+    root   factor      6    0 alias                          1221                                   
+    root   factor      4    0 defclass                                                1  1 1  1     
+    root   factor      3    0 deftemplate                                 12                        
+    root   factor      3    0 defmacro                                  11            1             
+    root   factor      1    0 setq                                                              1   
+    root   factor      1    0 print-global-info                                                    1
+    root   factor      1    0 defvar                            1                                   
+    root   factor      1    0 cps-count                                                           1 
+    root   factor      1    0 cps-callee                                                         1  
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          896            0          896
-      string:           41            0           41
-        list:            6            0            6
-        expr:          533           42          491
+        atom:          898            0          898
+      string:           44            0           44
+        list:            7            1            6
+        expr:          534           42          492
        array:            1            0            1
          var:           49           33           16
         func:          103            0          103
@@ -78,7 +82,7 @@ Object create count:
       member:          117            0          117
        frame:           33           33            0
  interpreter:            1            0
-  frameEntry:          246            0
+  frameEntry:          247            0
       lambda:            0            0
 ==========================================================================================================================
 

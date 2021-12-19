@@ -184,6 +184,8 @@ public interface Constant {
 	String F_CONTINUE = "continue";
 
 	String F_CPS_COUNT = "cps-count";
+	
+	String F_CPS_CALLEE = "cps-callee";
 
 	String F_IS_STABLE = "is-stable";
 

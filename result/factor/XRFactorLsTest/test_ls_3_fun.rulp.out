@@ -77,6 +77,7 @@ root::cmp_def
 root::compute
 root::constant
 root::continue
+root::cps-callee
 root::cps-count
 root::date
 root::default

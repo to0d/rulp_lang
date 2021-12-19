@@ -16,10 +16,10 @@
 )
 ;=>
 
-(findCallee fun4a)
+(cps-callee fun4a)
 ;=>
 
-(findCallee fun4b)
+(cps-callee fun4b)
 ;=>
 
 (fun4a 3)

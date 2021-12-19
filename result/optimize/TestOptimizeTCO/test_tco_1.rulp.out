@@ -10,7 +10,7 @@
 )
 ;=>fact
 
-(findCallee fact)
+(cps-callee fact)
 ;=>'("*" "-" "fact" "make-cps")
 
 (fact 1)
@@ -71,9 +71,9 @@ Callable stats info: callId=79, row=18, column=40(2), value-max=9, value-unit=2^
     root   factor      3    0 defmacro                                  11            1              
     root   factor      1    0 setq                                                              1    
     root   factor      1    0 print-global-info                                                     1
-    main   factor      1    0 findCallee                                                         1   
     root   factor      1    0 defvar                            1                                    
     root   factor      1    0 cps-count                                                             1
+    root   factor      1    0 cps-callee                                                         1   
 ==========================================================================================================================
 
 Object create count:
@@ -93,7 +93,7 @@ Object create count:
       member:          117            0          117
        frame:           28           28            0
  interpreter:            1            0
-  frameEntry:          227            0
+  frameEntry:          228            0
       lambda:            0            0
 ==========================================================================================================================
 

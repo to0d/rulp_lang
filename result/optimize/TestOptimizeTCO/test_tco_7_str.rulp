@@ -7,6 +7,9 @@
     (return (fun5 (+ "a" ?s))))
 ;;;
 
+(cps-callee fun5)
+;=>
+
 (fun5 "b")
 ;=>"aaaaaaaaaab"
 

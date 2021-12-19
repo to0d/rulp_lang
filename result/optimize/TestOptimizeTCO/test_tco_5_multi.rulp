@@ -17,7 +17,7 @@
 )
 ;;;
 
-(findCallee fun2)
+(cps-callee fun2)
 ;=>
 
 (fun2 0)

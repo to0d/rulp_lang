@@ -10,7 +10,7 @@
 )
 ;=>
 
-(findCallee fact)
+(cps-callee fact)
 ;=>
 
 (fact 1)
