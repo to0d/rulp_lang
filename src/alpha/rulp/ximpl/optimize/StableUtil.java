@@ -243,8 +243,14 @@ public class StableUtil {
 		return false;
 	}
 
+//	static int deep = 0;
+
 	private static boolean _isStable(IRObject obj, NameSet nameSet, IRFrame frame) throws RException {
 
+//		if (deep++ > 100) {
+//			System.out.println();
+//		}
+		
 		if (obj == null) {
 			return true;
 		}
@@ -280,7 +286,12 @@ public class StableUtil {
 				return true;
 			}
 
-			return _isStable(entry.getObject(), nameSet, frame);
+			IRObject entryValue = entry.getObject();
+			if (entryValue == null || entryValue.getType() == RType.ATOM) {
+				return true;
+			}
+
+			return _isStable(entryValue, nameSet, frame);
 		}
 
 		case FACTOR:
@@ -491,6 +502,7 @@ public class StableUtil {
 	}
 
 	public static boolean isStable(IRObject obj, IRFrame frame) throws RException {
+//		deep = 0;
 		return _isStable(obj, new NameSet(), frame);
 	}
 }

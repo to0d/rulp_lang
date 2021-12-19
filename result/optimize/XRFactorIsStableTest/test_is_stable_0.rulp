@@ -4,10 +4,6 @@
         (ls-is-stable-fun (value-of (:: (value-of local::parent) parent)))
         
         (loop for ?mbr in (ls ?subject) do 
-            (if (not (equal func (type-of $(value-of (value-of ?mbr)))))
-                (continue)
-            )
-            
             (print "obj=" (name-of $(value-of ?mbr)))
             (print ", type=" (type-of $(value-of (value-of ?mbr))))
             (print ", stable=" (is-stable  $(value-of (value-of ?mbr))))

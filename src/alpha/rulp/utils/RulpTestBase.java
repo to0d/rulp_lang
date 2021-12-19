@@ -281,6 +281,8 @@ public class RulpTestBase {
 
 		} catch (Error e) {
 
+			e.printStackTrace();
+
 			outLines.add(";err:");
 			outLines.add(e.toString());
 			outLines.add(";eof");

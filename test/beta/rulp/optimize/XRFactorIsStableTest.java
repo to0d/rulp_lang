@@ -7,14 +7,14 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorIsStableTest extends RulpTestBase {
 
 	@Test
-	public void test_is_stable_1_fun_simple() {
-
+	public void test_is_stable_0() {
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	public void test_is_stable_1_fun_system() {
+	public void test_is_stable_1_fun_simple() {
+
 		_setup();
 		_run_script();
 	}
