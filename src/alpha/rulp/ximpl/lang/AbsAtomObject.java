@@ -1,7 +1,6 @@
 package alpha.rulp.ximpl.lang;
 
 import java.util.List;
-import java.util.Map;
 
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRObject;

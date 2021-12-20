@@ -10,21 +10,14 @@ public class AttributeUtil {
 
 	public static void addAttribute(List<IRAtom> attributeList, String key) {
 
-//		if (containAttribute(attributeList, key)) {
-//			return;
-//		}
-//
-//		IRAtom attr = null;
-//		switch (key) {
-//
-//		}
-//
-//		attributeList.add(attr);
-//		Collections.sort(attributeList);
-	}
+		if (containAttribute(attributeList, key)) {
+			return;
+		}
 
-	public static boolean isTrue(Boolean b) {
-		return b != null && b == true;
+		attributeList.add(RulpUtil.toAtom(key));
+		Collections.sort(attributeList, (a1, a2) -> {
+			return a1.getName().compareTo(a2.getName());
+		});
 	}
 
 	public static boolean containAttribute(List<IRAtom> attributeList, String key) {
@@ -36,6 +29,10 @@ public class AttributeUtil {
 		}
 
 		return false;
+	}
+
+	public static boolean isTrue(Boolean b) {
+		return b != null && b == true;
 	}
 
 	public static IRAtom removeAttribute(List<IRAtom> attributeList, String key) {

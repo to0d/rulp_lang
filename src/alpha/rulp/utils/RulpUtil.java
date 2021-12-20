@@ -9,19 +9,72 @@
 
 package alpha.rulp.utils;
 
+import static alpha.rulp.lang.Constant.A_ANNOTATION;
+import static alpha.rulp.lang.Constant.A_ARRAY;
+import static alpha.rulp.lang.Constant.A_ATOM;
+import static alpha.rulp.lang.Constant.A_BLOB;
+import static alpha.rulp.lang.Constant.A_BOOL;
+import static alpha.rulp.lang.Constant.A_CLASS;
+import static alpha.rulp.lang.Constant.A_CONST;
+import static alpha.rulp.lang.Constant.A_CONSTANT;
 import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.A_DOUBLE;
+import static alpha.rulp.lang.Constant.A_EXPRESSION;
+import static alpha.rulp.lang.Constant.A_FACTOR;
+import static alpha.rulp.lang.Constant.A_FLOAT;
+import static alpha.rulp.lang.Constant.A_FRAME;
+import static alpha.rulp.lang.Constant.A_FUNCTION;
+import static alpha.rulp.lang.Constant.A_INSTANCE;
+import static alpha.rulp.lang.Constant.A_INTEGER;
+import static alpha.rulp.lang.Constant.A_LAMBDA;
+import static alpha.rulp.lang.Constant.A_LIST;
+import static alpha.rulp.lang.Constant.A_LONG;
+import static alpha.rulp.lang.Constant.A_MACRO;
+import static alpha.rulp.lang.Constant.A_MEMBER;
 import static alpha.rulp.lang.Constant.A_NAMESPACE;
+import static alpha.rulp.lang.Constant.A_NATIVE;
 import static alpha.rulp.lang.Constant.A_NIL;
+import static alpha.rulp.lang.Constant.A_NULL;
 import static alpha.rulp.lang.Constant.A_QUESTION;
 import static alpha.rulp.lang.Constant.A_QUESTION_C;
+import static alpha.rulp.lang.Constant.A_STABLE;
+import static alpha.rulp.lang.Constant.A_STRING;
+import static alpha.rulp.lang.Constant.A_TEMPLATE;
+import static alpha.rulp.lang.Constant.A_VAR;
 import static alpha.rulp.lang.Constant.MAX_TOSTRING_LEN;
+import static alpha.rulp.lang.Constant.O_CONST;
+import static alpha.rulp.lang.Constant.O_EMPTY;
+import static alpha.rulp.lang.Constant.O_LAMBDA;
 import static alpha.rulp.lang.Constant.O_New;
 import static alpha.rulp.lang.Constant.O_Nil;
+import static alpha.rulp.lang.Constant.O_STABLE;
 import static alpha.rulp.lang.Constant.P_FINAL;
 import static alpha.rulp.lang.Constant.P_INHERIT;
 import static alpha.rulp.lang.Constant.P_STATIC;
+import static alpha.rulp.lang.Constant.T_Annotation;
+import static alpha.rulp.lang.Constant.T_Array;
 import static alpha.rulp.lang.Constant.T_Atom;
+import static alpha.rulp.lang.Constant.T_Blob;
+import static alpha.rulp.lang.Constant.T_Bool;
+import static alpha.rulp.lang.Constant.T_Class;
+import static alpha.rulp.lang.Constant.T_Constant;
+import static alpha.rulp.lang.Constant.T_Double;
+import static alpha.rulp.lang.Constant.T_Expr;
+import static alpha.rulp.lang.Constant.T_Factor;
+import static alpha.rulp.lang.Constant.T_Float;
+import static alpha.rulp.lang.Constant.T_Frame;
+import static alpha.rulp.lang.Constant.T_Func;
 import static alpha.rulp.lang.Constant.T_Instance;
+import static alpha.rulp.lang.Constant.T_Int;
+import static alpha.rulp.lang.Constant.T_List;
+import static alpha.rulp.lang.Constant.T_Long;
+import static alpha.rulp.lang.Constant.T_Macro;
+import static alpha.rulp.lang.Constant.T_Member;
+import static alpha.rulp.lang.Constant.T_Native;
+import static alpha.rulp.lang.Constant.T_Null;
+import static alpha.rulp.lang.Constant.T_String;
+import static alpha.rulp.lang.Constant.T_Template;
+import static alpha.rulp.lang.Constant.T_Var;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -568,6 +621,12 @@ public class RulpUtil {
 		template.addEntry(paraEntry);
 
 		return template;
+	}
+
+	public static IRVar addVar(IRFrame frame, String name) throws RException {
+		IRVar var = RulpFactory.createVar(name);
+		frame.setEntry(name, var);
+		return var;
 	}
 
 	public static IRArray asArray(IRObject obj) throws RException {
@@ -1277,6 +1336,21 @@ public class RulpUtil {
 		return valAtom;
 	}
 
+	public static IRObject getVarValue(IRFrame frame, String varName) throws RException {
+
+		IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, varName);
+		if (entry == null) {
+			return null;
+		}
+
+		IRObject entryValue = entry.getValue();
+		if (entryValue == null || entryValue.getType() != RType.VAR) {
+			return null;
+		}
+
+		return RulpUtil.asVar(entryValue).getValue();
+	}
+
 	public static void incRef(IRObject obj) throws RException {
 
 		if (obj == null) {
@@ -1305,10 +1379,6 @@ public class RulpUtil {
 		return obj.getType() == RType.ATOM;
 	}
 
-	public static boolean isAtom(IRObject obj, String name) {
-		return obj.getType() == RType.ATOM && ((IRAtom) obj).getName().equals(name);
-	}
-
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
 //
 //		IRObject nsObj = frame.getObject(A_USING_NS);
@@ -1318,6 +1388,10 @@ public class RulpUtil {
 //
 //		return RulpUtil.asSubject(nsObj);
 //	}
+
+	public static boolean isAtom(IRObject obj, String name) {
+		return obj.getType() == RType.ATOM && ((IRAtom) obj).getName().equals(name);
+	}
 
 	public static boolean isExpression(IRObject obj) {
 		return obj.getType() == RType.EXPR;
@@ -1542,6 +1616,19 @@ public class RulpUtil {
 		incRef(obj);
 	}
 
+	public static void setLocalVar(IRFrame frame, String varName, IRObject value) throws RException {
+
+		IRObject varObj = frame.findLocalObject(varName);
+		IRVar var = null;
+		if (varObj == null) {
+			var = addVar(frame, varName);
+		} else {
+			var = RulpUtil.asVar(varObj);
+		}
+
+		var.setValue(value);
+	}
+
 	public static void setMember(IRSubject subject, String name, IRFactorBody body, RAccessType accessType)
 			throws RException {
 		setMember(subject, name, body, accessType, 0);
@@ -1584,40 +1671,6 @@ public class RulpUtil {
 		} else {
 			mbr.setProperty(mbr.getProperty() & ~P_FINAL);
 		}
-	}
-
-	public static IRVar addVar(IRFrame frame, String name) throws RException {
-		IRVar var = RulpFactory.createVar(name);
-		frame.setEntry(name, var);
-		return var;
-	}
-
-	public static void setLocalVar(IRFrame frame, String varName, IRObject value) throws RException {
-
-		IRObject varObj = frame.findLocalObject(varName);
-		IRVar var = null;
-		if (varObj == null) {
-			var = addVar(frame, varName);
-		} else {
-			var = RulpUtil.asVar(varObj);
-		}
-
-		var.setValue(value);
-	}
-
-	public static IRObject getVarValue(IRFrame frame, String varName) throws RException {
-
-		IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, varName);
-		if (entry == null) {
-			return null;
-		}
-
-		IRObject entryValue = entry.getValue();
-		if (entryValue == null || entryValue.getType() != RType.VAR) {
-			return null;
-		}
-
-		return RulpUtil.asVar(entryValue).getValue();
 	}
 
 	public static void setPropertyInherit(IRMember mbr, boolean bValue) throws RException {
@@ -1689,6 +1742,102 @@ public class RulpUtil {
 		}
 
 		return list;
+	}
+
+	public static IRAtom toAtom(String name) {
+
+		if (name == null) {
+			return T_Null;
+		}
+
+		switch (name) {
+		case "":
+			return O_EMPTY;
+
+		case A_ATOM:
+			return T_Atom;
+
+		case A_BOOL:
+			return T_Bool;
+
+		case A_CONST:
+			return O_CONST;
+
+		case A_INSTANCE:
+			return T_Instance;
+
+		case A_EXPRESSION:
+			return T_Expr;
+
+		case A_FACTOR:
+			return T_Factor;
+
+		case A_FLOAT:
+			return T_Float;
+
+		case A_DOUBLE:
+			return T_Double;
+
+		case A_FUNCTION:
+			return T_Func;
+
+		case A_INTEGER:
+			return T_Int;
+
+		case A_LONG:
+			return T_Long;
+
+		case A_LIST:
+			return T_List;
+
+		case A_MACRO:
+			return T_Macro;
+
+		case A_NATIVE:
+			return T_Native;
+
+		case A_NULL:
+			return T_Null;
+
+		case A_STRING:
+			return T_String;
+
+		case A_BLOB:
+			return T_Blob;
+
+		case A_VAR:
+			return T_Var;
+
+		case A_CONSTANT:
+			return T_Constant;
+
+		case A_CLASS:
+			return T_Class;
+
+		case A_MEMBER:
+			return T_Member;
+
+		case A_ANNOTATION:
+			return T_Annotation;
+
+		case A_FRAME:
+			return T_Frame;
+
+		case A_ARRAY:
+			return T_Array;
+
+		case A_TEMPLATE:
+			return T_Template;
+
+		case A_STABLE:
+			return O_STABLE;
+
+		case A_LAMBDA:
+			return O_LAMBDA;
+
+		default:
+			return RulpFactory.createAtom(name);
+		}
 	}
 
 	public static IRBlob toBlob(IRObject a) throws RException {

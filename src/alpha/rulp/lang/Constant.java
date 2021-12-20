@@ -194,6 +194,8 @@ public interface Constant {
 	String F_DATE = "date";
 
 	String F_DEF_CONST = "defconst";
+	
+	String A_CONST = "const";
 
 	String F_DEFCLASS = "defclass";
 
@@ -477,6 +479,8 @@ public interface Constant {
 
 	IRAtom O_MOD = RulpFactory.createAtom(F_O_MOD);
 
+	IRAtom O_EMPTY = RulpFactory.createAtom("");
+
 	IRAtom O_Nan = RulpFactory.createAtom(A_NAN);
 
 	IRAtom O_NE = RulpFactory.createAtom(F_O_NE);
@@ -558,5 +562,11 @@ public interface Constant {
 	IRAtom T_Template = RulpFactory.createAtom(A_TEMPLATE);
 
 	IRAtom T_Var = RulpFactory.createAtom(A_VAR);
-
+	
+	IRAtom O_STABLE = RulpFactory.createAtom(A_STABLE);
+	
+	IRAtom O_LAMBDA = RulpFactory.createAtom(A_LAMBDA);
+	
+	IRAtom O_CONST = RulpFactory.createAtom(A_CONST);
+	
 }
