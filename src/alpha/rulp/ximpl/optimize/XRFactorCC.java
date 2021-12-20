@@ -55,7 +55,6 @@ public class XRFactorCC extends AbsRFactorAdapter implements IRFactor {
 			cpsFrame.release();
 			RulpUtil.decRef(cpsFrame);
 		}
-
 	}
 
 	@Override

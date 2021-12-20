@@ -34,7 +34,7 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 
-public class XRFunctionList extends AbsRefCallableAdapter implements IRFunctionList {
+public class XRFunctionList extends AbsFunctionAdapter implements IRFunctionList {
 
 	static class FuncList {
 
@@ -189,8 +189,6 @@ public class XRFunctionList extends AbsRefCallableAdapter implements IRFunctionL
 
 	protected Map<Integer, FuncList> funListMap = new HashMap<>();
 
-	protected Boolean isStable = null;
-
 	protected String name;
 
 	protected String signature;
@@ -279,10 +277,6 @@ public class XRFunctionList extends AbsRefCallableAdapter implements IRFunctionL
 		return null;
 	}
 
-	public Boolean getIsStable() {
-		return isStable;
-	}
-
 	@Override
 	public String getName() {
 		return name;
@@ -359,10 +353,6 @@ public class XRFunctionList extends AbsRefCallableAdapter implements IRFunctionL
 
 	public boolean isThreadSafe() {
 		return false;
-	}
-
-	public void setIsStable(Boolean isStable) {
-		this.isStable = isStable;
 	}
 
 	public String toString() {

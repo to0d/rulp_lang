@@ -9,6 +9,8 @@
 
 package alpha.rulp.lang;
 
+import java.util.Map;
+
 import alpha.rulp.runtime.IRListener1;
 
 public interface IRObject {
@@ -21,6 +23,8 @@ public interface IRObject {
 
 	public int getMaxRef();
 
+	public Map<String, String> getPropertyMap();
+
 	public int getRef();
 
 	public RType getType();
@@ -28,6 +32,6 @@ public interface IRObject {
 	public void incRef() throws RException;
 
 	public boolean isConst();
-	
+
 	public boolean isDeleted();
 }

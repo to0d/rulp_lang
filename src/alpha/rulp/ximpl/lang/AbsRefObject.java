@@ -12,12 +12,18 @@ package alpha.rulp.ximpl.lang;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRListener1;
 
 public abstract class AbsRefObject implements IRObject {
+
+	@Override
+	public Map<String, String> getPropertyMap() {
+		return null;
+	}
 
 	protected int max_ref = 0;
 

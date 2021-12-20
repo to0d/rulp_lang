@@ -141,6 +141,7 @@ public class CPSUtils {
 		}
 
 		case MEMBER: {
+
 			IRMember mbr = (IRMember) obj;
 			if (mbr.getValue() != null) {
 				return mbr;

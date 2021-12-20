@@ -32,13 +32,11 @@ import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.error.RReturn;
 import alpha.rulp.ximpl.optimize.StableUtil;
 
-public class XRFunction extends AbsRefCallableAdapter implements IRFunction {
+public class XRFunction extends AbsFunctionAdapter implements IRFunction {
 
 	protected IRFrame defineFrame;
 
 	protected IRExpr funBody;
-
-	protected Boolean isStable = null;
 
 	protected String name;
 
@@ -149,10 +147,6 @@ public class XRFunction extends AbsRefCallableAdapter implements IRFunction {
 		return funBody;
 	}
 
-	public Boolean getIsStable() {
-		return isStable;
-	}
-
 	@Override
 	public String getName() {
 		return name;
@@ -214,10 +208,6 @@ public class XRFunction extends AbsRefCallableAdapter implements IRFunction {
 
 	public boolean isThreadSafe() {
 		return true;
-	}
-
-	public void setIsStable(Boolean isStable) {
-		this.isStable = isStable;
 	}
 
 	public String toString() {
