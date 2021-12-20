@@ -1,0 +1,15 @@
+(defun fun_push (?stack ?v) (?stack::push ?v))
+;=>fun_push
+
+(new stack s1)
+;=>s1
+
+(fun_push s1 1)
+;=>nil
+
+(s1::size-of)
+;=>1
+
+(s1::pop)
+;=>1
+

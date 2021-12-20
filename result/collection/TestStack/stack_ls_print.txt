@@ -1,9 +1,0 @@
-mbr=?impl, access deny
-mbr=clear, name=(clear), type=func, property='(default final)
-mbr=init, name=(init), type=func, property='(default final)
-mbr=is-empty, name=(is-empty), type=func, property='(default final)
-mbr=peek, name=(peek), type=func, property='(default final)
-mbr=pop, name=(pop), type=func, property='(default final)
-mbr=push, name=(push nil), type=func, property='(default final)
-mbr=size-of, name=(size-of), type=func, property='(default final)
-mbr=to-list, name=(to-list), type=func, property='(default final)

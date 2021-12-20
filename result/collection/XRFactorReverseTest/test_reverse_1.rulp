@@ -1,0 +1,6 @@
+(reverse '(1 2 3))
+;=>
+
+(reverse '(a b c))
+;=>
+

@@ -1,0 +1,6 @@
+(alias + myplus) 
+;=>+
+
+(myplus 1 2)
+;=>3
+

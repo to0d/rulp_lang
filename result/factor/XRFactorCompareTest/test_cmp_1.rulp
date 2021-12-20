@@ -1,0 +1,24 @@
+(cmp a a)
+;=>
+
+(cmp a b)
+;=>
+
+(cmp a nil)
+;=>
+
+(cmp nil a)
+;=>
+
+(cmp nil nil)
+;=>
+
+(cmp 1 1)
+;=>
+
+(cmp 1 1.1)
+;=>
+
+(cmp 1.1 1)
+;=>
+

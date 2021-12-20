@@ -1,0 +1,59 @@
+(new stack s1)
+;=>
+
+(name-of s1)
+;=>
+
+(s1::size-of)
+;=>
+
+(s1::push 1)
+;=>
+
+(s1::push 2)
+;=>
+
+(s1::size-of)
+;=>
+
+(s1::pop)
+;=>
+
+(s1::pop)
+;=>
+
+(s1::size-of)
+;=>
+
+(s1::is-empty)
+;=>
+
+(is-empty s1)
+;=>
+
+(s1::push 1)
+;=>
+
+(s1::push 2)
+;=>
+
+(s1::push 3)
+;=>
+
+(s1::to-list)
+;=>
+
+(to-list s1)
+;=>
+
+(s1::clear)
+;=>
+
+(clear s1)
+;=>
+
+(is-empty s1)
+;=>
+
+(print-global-info)
+;;;

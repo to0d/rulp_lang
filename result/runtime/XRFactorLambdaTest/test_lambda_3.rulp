@@ -1,0 +1,10 @@
+(defun fun1 (?v) (return (lambda () (return (* ?v ?v)))))
+;=>
+
+(name-of fun1)
+;=>
+
+((fun1 2))
+;=>
+
+(print-global-info)

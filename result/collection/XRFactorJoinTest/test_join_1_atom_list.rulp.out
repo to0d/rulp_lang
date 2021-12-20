@@ -1,0 +1,6 @@
+(join '(a b c) '(x y z))
+;=>'()
+
+(join '(a b c) '(x y a))
+;=>'(a)
+

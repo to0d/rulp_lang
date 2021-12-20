@@ -1,0 +1,9 @@
+(remove '(a b c) a)
+;=>'(b c)
+
+(remove '(a a b c) a)
+;=>'(b c)
+
+(remove '(a b b c) a)
+;=>'(b b c)
+

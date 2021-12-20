@@ -1,0 +1,15 @@
+(uniq '(a b c))
+;=>
+
+(uniq '(a b c a))
+;=>
+
+(uniq '(5 4 3 2 1))
+;=>
+
+(uniq '(5 4 3 2 1) (lambda (?v) (return (% ?v 3))))
+;=>
+
+(uniq '('(a b c) '(x y z)))
+;=>
+

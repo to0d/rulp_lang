@@ -7,41 +7,37 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorDefTemplateTest extends RulpTestBase {
 
 	@Test
-	public void test_1() {
+	public void test_deftemplate_1() {
 
 		_setup();
-		_run_script();
-		_gInfo();
+		_run_script(); 
 	}
 
 	@Test
-	public void test_2_mbr() {
+	public void test_deftemplate_2_mbr() {
 
 		_setup();
-		_run_script();
-		_gInfo();
+		_run_script(); 
 	}
 
 	@Test
-	public void test_3_scope_a() {
+	public void test_deftemplate_3_scope_a() {
 
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	public void test_4_ns() {
+	public void test_deftemplate_4_ns() {
 
 		_setup();
 		_run_script();
-		_gInfo();
 	}
 
 	@Test
-	public void test_5_overwrite_1() {
+	public void test_deftemplate_5_overwrite_1() {
 
 		_setup();
-		_run_script();
-		_gInfo();
+		_run_script(); 
 	}
 }

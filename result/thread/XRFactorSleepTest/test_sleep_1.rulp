@@ -1,0 +1,12 @@
+(defvar t1 (sys-time))
+;=>
+
+(sleep 100)
+;=>
+
+(defvar t2 (- (sys-time) t1))
+;=>
+
+(and (>= t2 100) (< t2 150))
+;=>
+

@@ -1,0 +1,29 @@
+(defclass class1 ()
+    (defvar ?v1 0)
+    (defun inc (?x) (setq ?v1 (+ ?x ?v1)))
+    (defun get () (return ?v1))
+)
+;;;
+
+(new class1 ?o1)
+;;;
+
+(?o1::get)
+;;;
+
+(new namespace ns1)
+;;;
+
+(deftemplate ns1::set (_class (?o class1))
+    (?o::inc 1)
+)
+;;;
+
+(ns1::set _class ?o1)
+;;;
+
+(?o1::get)
+;;;
+
+(print-global-info)
+;;;

@@ -1,0 +1,12 @@
+(new map map1)
+;=>map1
+
+(map1::put 1 2)
+;=>nil
+
+(map1::size-of)
+;=>1
+
+(size-of map1)
+;=>1
+

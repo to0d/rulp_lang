@@ -1,0 +1,13 @@
+(defclass class1 ())
+;;;
+
+(defvar o1 (new class1))
+;;;
+
+(do 
+    (defvar o2 (new class1))
+)
+;=>
+
+(print-global-info)
+;;;

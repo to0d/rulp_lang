@@ -1,0 +1,12 @@
+(do (defvar x 10) (print x))
+;=>nil
+;out:
+10
+;eof
+
+(do (defvar x 11) (print x))
+;=>nil
+;out:
+11
+;eof
+

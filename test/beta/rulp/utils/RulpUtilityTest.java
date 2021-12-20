@@ -43,6 +43,8 @@ public class RulpUtilityTest extends RulpTestBase {
 	@Test
 	public void test_isValidRulpStmt() {
 
+		_setup();
+
 		assertTrue(RulpUtil.isValidRulpStmt("(a b c); comments"));
 		assertTrue(RulpUtil.isValidRulpStmt("(a b c) (b c)"));
 	}

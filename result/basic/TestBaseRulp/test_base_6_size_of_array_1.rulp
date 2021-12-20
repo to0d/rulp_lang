@@ -1,0 +1,6 @@
+(size-of {a, b, c})
+;=>
+
+(size-of {a, b, c} 0)
+;=>
+

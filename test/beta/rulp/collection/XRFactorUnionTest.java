@@ -7,13 +7,15 @@ import alpha.rulp.utils.RulpTestBase;
 public class XRFactorUnionTest extends RulpTestBase {
 
 	@Test
-	void test_atom() {
-		_test("(union '(a b c) '(x y z))", "'(a b c x y z)");
-		_test("(union '('(a b c) '(b c)))", "'(a b c)");
+	void test_union_1_atom() {
+
+		_setup();
+		_run_script();
 	}
 
 	@Test
-	void test_list() {
-		_test("(sort (union '('(a b c) '(x y z)) '('(x y z))))", "'('(a b c) '(x y z) '(x y z))");
+	void test_union_2_list() {
+		_setup();
+		_run_script();
 	}
 }

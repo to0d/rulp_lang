@@ -7,19 +7,10 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorCanCastTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_can_cast_1() {
 
 		_setup();
-		_test("(can-cast int true)", "false");
-		_test("(can-cast int 123)", "true");
-		_test("(can-cast int \"abc\")", "false");
-		_test("(can-cast int \"123\")", "true");
-
-		_test("(can-cast float \"123\")", "true");
-		_test("(can-cast float \"12.1\")", "true");
-
-		_test("(can-cast '(int float) \"12.1\")", "true");
-		_test("(can-cast '(int float) \"123\")", "true");
+		_run_script();
 	}
 
 }

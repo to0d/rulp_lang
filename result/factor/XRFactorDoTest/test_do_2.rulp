@@ -1,0 +1,6 @@
+(do (defvar x 10) (print x))
+;=>
+
+(do (defvar x 11) (print x))
+;=>
+

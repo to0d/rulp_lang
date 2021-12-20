@@ -14,7 +14,7 @@ import alpha.rulp.utils.RulpUtil;
 public class TestTemplate extends RulpTestBase {
 
 	@Test
-	public void test_1() {
+	public void test_template_1() {
 
 		_setup();
 
@@ -34,7 +34,6 @@ public class TestTemplate extends RulpTestBase {
 
 		_test("(f1 a 3)", "A3");
 		_test("(f1 b 3)", "B3");
-
-		_gInfo("result/runtime/TestTemplate/test_1_ginfo.txt");
+		_gInfo();
 	}
 }

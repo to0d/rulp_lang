@@ -1,0 +1,15 @@
+(defmacro macro_push (?stack ?v) (?stack::push ?v))
+;=>
+
+(new stack s1)
+;=>
+
+(macro_push s1 1)
+;=>
+
+(s1::size-of)
+;=>
+
+(s1::pop)
+;=>
+

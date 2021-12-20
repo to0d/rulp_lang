@@ -1,0 +1,12 @@
+(new set set1)
+;=>
+
+(set1::add 1)
+;=>
+
+(set1::size-of)
+;=>
+
+(size-of set1)
+;=>
+

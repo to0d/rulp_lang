@@ -7,25 +7,26 @@ import alpha.rulp.utils.RulpTestBase;
 public class XRFactorAliasTest extends RulpTestBase {
 
 	@Test
-	public void test1() {
+	public void test_alias_1_var() {
+
 		_setup();
-		_test("(defvar x 10) x (alias x y) y", "&x 10 &x 10");
+		_run_script();
 
 	}
 
 	@Test
-	public void test2() {
+	public void test_alias_2_factor() {
+
 		_setup();
-		_test("(alias + myplus) (myplus 1 2)", "+ 3");
+		_run_script();
 
 	}
 
 	@Test
-	public void test3_macro_alias() {
+	public void test_alias_3_macro() {
 
 		_setup();
-		_test("(defmacro m1 (?v1 ?v2) (?v1 ?v2 3)) (m1 + 1)", "m1 4");
-		_test("(alias m1 m2) (m2 + 1)", "m1 4");
+		_run_script();
 
 	}
 }

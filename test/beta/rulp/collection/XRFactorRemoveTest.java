@@ -7,10 +7,9 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorRemoveTest extends RulpTestBase {
 
 	@Test
-	void test_atom() {
-		_test("(remove '(a b c) a)", "'(b c)");
-		_test("(remove '(a a b c) a)", "'(b c)");
-		_test("(remove '(a b b c) a)", "'(b b c)");
+	void test_remove_1_atom() {
+		_setup();
+		_run_script();
 	}
 
 }

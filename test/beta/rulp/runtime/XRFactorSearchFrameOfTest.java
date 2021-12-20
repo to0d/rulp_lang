@@ -11,7 +11,6 @@ class XRFactorSearchFrameOfTest extends RulpTestBase {
 
 		_setup();
 		_run_script();
-		_gInfo();
 	}
 
 }

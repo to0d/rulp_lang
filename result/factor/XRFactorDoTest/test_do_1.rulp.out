@@ -1,0 +1,9 @@
+(defvar x 10) 
+;=>&x
+
+(print x)
+;=>nil
+;out:
+10
+;eof
+

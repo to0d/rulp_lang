@@ -7,10 +7,10 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorDefConstTest extends RulpTestBase {
 
 	@Test
-	void test1() {
+	void test_defconst_1() {
 
 		_setup();
-		_test("(defconst x 10)", "x");
-		_test("(+ x 1)", "11");
+		_run_script();
+
 	}
 }

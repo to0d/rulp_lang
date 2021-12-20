@@ -19,3 +19,6 @@
 
 (setq x 3)
 ;=>
+
+(print-global-info)
+;;;

@@ -1,0 +1,6 @@
+(union '(a b c) '(x y z))
+;=>'(a b c x y z)
+
+(union '('(a b c) '(b c)))
+;=>'(a b c)
+

@@ -1,0 +1,24 @@
+(can-cast int true)
+;=>false
+
+(can-cast int 123)
+;=>true
+
+(can-cast int "abc")
+;=>false
+
+(can-cast int "123")
+;=>true
+
+(can-cast float "123")
+;=>true
+
+(can-cast float "12.1")
+;=>true
+
+(can-cast '(int float) "12.1")
+;=>true
+
+(can-cast '(int float) "123")
+;=>true
+

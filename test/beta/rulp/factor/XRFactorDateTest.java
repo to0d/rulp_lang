@@ -7,11 +7,10 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorDateTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_date_1() {
 
 		_setup();
-		_test("(date \"2020-01-01\")", "\"2020-01-01\"");
-		_test("(date (date))", null);
+		_run_script();
 	}
 
 }

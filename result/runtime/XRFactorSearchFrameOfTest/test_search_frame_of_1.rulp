@@ -33,3 +33,6 @@
 
 (search-frame-of)
 ;;;
+
+(print-global-info)
+;;;

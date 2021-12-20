@@ -1,0 +1,13 @@
+(defun fun1 (?v) (return (lambda () (return (* ?v ?v)))))
+;=>
+
+(defvar ?f (fun1 2))
+;=>
+
+(?f)
+;=>
+
+(?f)
+;=>
+
+(print-global-info)

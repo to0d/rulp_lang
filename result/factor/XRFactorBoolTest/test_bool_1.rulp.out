@@ -1,0 +1,48 @@
+(not true)
+;=>false
+
+(not false)
+;=>true
+
+(and)
+;=>true
+
+(and true)
+;=>true
+
+(and false)
+;=>false
+
+(and true false)
+;=>false
+
+(and true true)
+;=>true
+
+(and false false)
+;=>false
+
+(and true true true)
+;=>true
+
+(or)
+;=>false
+
+(or true)
+;=>true
+
+(or false)
+;=>false
+
+(or true false)
+;=>true
+
+(or true true)
+;=>true
+
+(or false false)
+;=>false
+
+(or false false false)
+;=>false
+
