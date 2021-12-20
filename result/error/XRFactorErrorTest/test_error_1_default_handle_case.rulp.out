@@ -1,0 +1,11 @@
+(try 
+    (if (> 2 3) 
+        (error e1 "msg1") 
+        (error e2 "msg2")) 
+    (?e (print ?e))
+)
+;=>nil
+;out:
+error: e2, msg2
+;eof
+

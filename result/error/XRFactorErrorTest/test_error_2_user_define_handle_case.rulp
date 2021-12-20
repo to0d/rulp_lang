@@ -1,0 +1,8 @@
+(try (if (> 2 1) 
+        (error e1 "msg1") 
+        (error e2 "msg2")) 
+    (e1 (print e1)) 
+    (e2 (print e2))
+)
+;=>
+
