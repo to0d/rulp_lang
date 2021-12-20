@@ -80,10 +80,6 @@ public final class RuntimeUtil {
 
 	private static AtomicInteger frameMaxLevel = new AtomicInteger(0);
 
-//	private static StaticVar varSupportOpCPS = new StaticVar(A_OP_CPS, O_False);
-
-//	private static StaticVar varSupportOpStable = new StaticVar(A_OP_STABLE, O_False);
-
 	private static void _checkFrame(IRFrame frame) throws RException {
 
 		/***************************************************/
@@ -697,26 +693,6 @@ public final class RuntimeUtil {
 		RulpUtil.setLocalVar(frame, A_TRACE, O_False);
 	}
 
-	public static boolean isSupportOpCPS(IRFrame frame) throws RException {
-		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_OP_CPS)).asBoolean();
-	}
-
-	public static void setOpCPS(IRFrame frame, boolean support) throws RException {
-		RulpUtil.setLocalVar(frame, A_OP_CPS, support ? O_True : O_False);
-	}
-
-	public static boolean isSupportOpStable(IRFrame frame) throws RException {
-		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_OP_STABLE)).asBoolean();
-	}
-
-	public static boolean isTrace(IRFrame frame) throws RException {
-		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_TRACE)).asBoolean();
-	}
-
-	public static void setTrace(IRFrame frame, boolean trace) throws RException {
-		RulpUtil.setLocalVar(frame, A_TRACE, trace ? O_True : O_False);
-	}
-
 	public static boolean isComputable(IRFrame curFrame, IRObject obj) throws RException {
 
 		if (obj == null) {
@@ -804,6 +780,18 @@ public final class RuntimeUtil {
 		default:
 			return false;
 		}
+	}
+
+	public static boolean isSupportOpCPS(IRFrame frame) throws RException {
+		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_OP_CPS)).asBoolean();
+	}
+
+	public static boolean isSupportOpStable(IRFrame frame) throws RException {
+		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_OP_STABLE)).asBoolean();
+	}
+
+	public static boolean isTrace(IRFrame frame) throws RException {
+		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_TRACE)).asBoolean();
 	}
 
 	public static IRFrameEntry lookupFrameEntry(IRFrame frame, String name) throws RException {
@@ -1076,5 +1064,13 @@ public final class RuntimeUtil {
 		exprComputeMemberCount.getAndSet(0);
 		frameMaxLevel.getAndSet(0);
 		callStatsId.incrementAndGet();
+	}
+
+	public static void setOpCPS(IRFrame frame, boolean support) throws RException {
+		RulpUtil.setLocalVar(frame, A_OP_CPS, support ? O_True : O_False);
+	}
+
+	public static void setTrace(IRFrame frame, boolean trace) throws RException {
+		RulpUtil.setLocalVar(frame, A_TRACE, trace ? O_True : O_False);
 	}
 }

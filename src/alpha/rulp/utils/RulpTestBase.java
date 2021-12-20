@@ -332,9 +332,9 @@ public class RulpTestBase {
 	}
 
 	protected void _test(String input, String expectResult, String expectOutput) {
-		System.out.println(input);
-		System.out.println(";=>");
-		System.out.println();
+//		System.out.println(input);
+//		System.out.println(";=>");
+//		System.out.println();
 
 		RResultList rsultList = null;
 		try {
