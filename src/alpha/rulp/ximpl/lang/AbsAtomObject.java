@@ -1,7 +1,9 @@
 package alpha.rulp.ximpl.lang;
 
+import java.util.List;
 import java.util.Map;
 
+import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRListener1;
@@ -18,14 +20,13 @@ public abstract class AbsAtomObject implements IRObject {
 
 	}
 
-	@Override
-	public int getMaxRef() {
-		return 0;
+	public List<IRAtom> getAttributeList() {
+		return null;
 	}
 
 	@Override
-	public Map<String, String> getPropertyMap() {
-		return null;
+	public int getMaxRef() {
+		return 0;
 	}
 
 	@Override

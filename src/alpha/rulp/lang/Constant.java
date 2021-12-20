@@ -25,6 +25,8 @@ public interface Constant {
 
 	String A_CLASS = "class";
 
+	String A_STABLE = "stable";
+
 	String A_COLUMN = "column";
 
 	String A_CONSTANT = "constant";
@@ -184,7 +186,7 @@ public interface Constant {
 	String F_CONTINUE = "continue";
 
 	String F_CPS_COUNT = "cps-count";
-	
+
 	String F_CPS_CALLEE = "cps-callee";
 
 	String F_IS_STABLE = "is-stable";

@@ -9,6 +9,7 @@
 
 package alpha.rulp.lang;
 
+import java.util.List;
 import java.util.Map;
 
 import alpha.rulp.runtime.IRListener1;
@@ -21,9 +22,9 @@ public interface IRObject {
 
 	public void decRef() throws RException;
 
-	public int getMaxRef();
+	public List<IRAtom> getAttributeList();
 
-	public Map<String, String> getPropertyMap();
+	public int getMaxRef();
 
 	public int getRef();
 
