@@ -25,9 +25,9 @@ public interface Constant {
 
 	String A_CLASS = "class";
 
-	String A_STABLE = "stable";
-
 	String A_COLUMN = "column";
+
+	String A_CONST = "const";
 
 	String A_CONSTANT = "constant";
 
@@ -121,6 +121,8 @@ public interface Constant {
 
 	String A_SOCKET = "socket";
 
+	String A_STABLE = "stable";
+
 	String A_STATIC = "static";
 
 	String A_STRING = "string";
@@ -161,6 +163,8 @@ public interface Constant {
 
 	String F_ALIAS = "alias";
 
+	String F_ATTRIBUTE_OF = "attribute-of";
+
 	String F_B_AND = "and";
 
 	String F_B_NOT = "not";
@@ -185,17 +189,13 @@ public interface Constant {
 
 	String F_CONTINUE = "continue";
 
-	String F_CPS_COUNT = "cps-count";
-
 	String F_CPS_CALLEE = "cps-callee";
 
-	String F_IS_STABLE = "is-stable";
+	String F_CPS_COUNT = "cps-count";
 
 	String F_DATE = "date";
 
 	String F_DEF_CONST = "defconst";
-	
-	String A_CONST = "const";
 
 	String F_DEFCLASS = "defclass";
 
@@ -243,6 +243,8 @@ public interface Constant {
 
 	String F_IS_CONST = "is-const";
 
+	String F_IS_STABLE = "is-stable";
+
 	String F_JOIN = "join";
 
 	String F_LAMBDA = "lambda";
@@ -250,8 +252,6 @@ public interface Constant {
 	String F_LET = "let";
 
 	String F_LOAD = "load";
-
-	String F_OPT = "opt";
 
 	String F_LOOP = "loop";
 
@@ -316,6 +316,8 @@ public interface Constant {
 	String F_O_XOR = "^";
 
 	String F_OPEN_TXT_FILE = "open-txt-file";
+
+	String F_OPT = "opt";
 
 	String F_OUT_TO_FILE = "out-to-file";
 
@@ -457,9 +459,13 @@ public interface Constant {
 
 	IRAtom O_BY = RulpFactory.createAtom(F_O_BY);
 
+	IRAtom O_CONST = RulpFactory.createAtom(A_CONST);
+
 	IRAtom O_Default = RulpFactory.createAtom(A_DEFAULT);
 
 	IRAtom O_DIV = RulpFactory.createAtom(F_O_DIV);
+
+	IRAtom O_EMPTY = RulpFactory.createAtom("");
 
 	IRAtom O_EQ = RulpFactory.createAtom(F_O_EQ);
 
@@ -473,13 +479,13 @@ public interface Constant {
 
 	IRAtom O_GT = RulpFactory.createAtom(F_O_GT);
 
+	IRAtom O_LAMBDA = RulpFactory.createAtom(A_LAMBDA);
+
 	IRAtom O_LE = RulpFactory.createAtom(F_O_LE);
 
 	IRAtom O_LT = RulpFactory.createAtom(F_O_LT);
 
 	IRAtom O_MOD = RulpFactory.createAtom(F_O_MOD);
-
-	IRAtom O_EMPTY = RulpFactory.createAtom("");
 
 	IRAtom O_Nan = RulpFactory.createAtom(A_NAN);
 
@@ -500,6 +506,8 @@ public interface Constant {
 	IRAtom O_Public = RulpFactory.createAtom(A_PUBLIC);
 
 	IRAtom O_QUESTION = RulpFactory.createAtom(A_QUESTION);
+
+	IRAtom O_STABLE = RulpFactory.createAtom(A_STABLE);
 
 	IRAtom O_Static = RulpFactory.createAtom(A_STATIC);
 
@@ -562,11 +570,5 @@ public interface Constant {
 	IRAtom T_Template = RulpFactory.createAtom(A_TEMPLATE);
 
 	IRAtom T_Var = RulpFactory.createAtom(A_VAR);
-	
-	IRAtom O_STABLE = RulpFactory.createAtom(A_STABLE);
-	
-	IRAtom O_LAMBDA = RulpFactory.createAtom(A_LAMBDA);
-	
-	IRAtom O_CONST = RulpFactory.createAtom(A_CONST);
-	
+
 }

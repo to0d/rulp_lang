@@ -86,6 +86,7 @@ import alpha.rulp.ximpl.error.XRFactorReturn;
 import alpha.rulp.ximpl.error.XRFactorTry;
 import alpha.rulp.ximpl.factor.XRFactorAlias;
 import alpha.rulp.ximpl.factor.XRFactorArithmetic;
+import alpha.rulp.ximpl.factor.XRFactorAttributeOf;
 import alpha.rulp.ximpl.factor.XRFactorBitNot;
 import alpha.rulp.ximpl.factor.XRFactorBlobLength;
 import alpha.rulp.ximpl.factor.XRFactorBoolAnd;
@@ -576,6 +577,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorMakeArray(F_MAKE_ARRAY));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorToExpr(F_TO_EXPR));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorCompute(F_COMPUTE));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorAttributeOf(F_ATTRIBUTE_OF));
 
 		// Class
 		RulpUtil.addFrameObject(rootFrame, new XRNoClass(A_NOCLASS, rootFrame));
@@ -964,9 +966,9 @@ public final class RulpFactory {
 		return var;
 	}
 
-	public static IRArray createVaryArray(List<? extends IRObject> elements) throws RException {
+	public static IRArray createVaryArray() throws RException {
 		RType.ARRAY.incCreateCount();
-		return XRArrayVary.build(elements);
+		return XRArrayVary.build();
 	}
 
 	public static IRArray createVaryArray(int[] sizes) throws RException {
@@ -974,9 +976,9 @@ public final class RulpFactory {
 		return XRArrayVary.build(sizes);
 	}
 
-	public static IRArray createVaryArray() throws RException {
+	public static IRArray createVaryArray(List<? extends IRObject> elements) throws RException {
 		RType.ARRAY.incCreateCount();
-		return XRArrayVary.build();
+		return XRArrayVary.build(elements);
 	}
 
 	public static IRList createVaryList() {

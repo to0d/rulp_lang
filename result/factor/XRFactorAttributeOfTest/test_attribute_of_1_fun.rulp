@@ -1,0 +1,5 @@
+(defun fun1 () (return 1))
+;;;
+
+(attribute-of fun1)
+;=>

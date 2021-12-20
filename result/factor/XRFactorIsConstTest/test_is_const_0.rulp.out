@@ -47,6 +47,7 @@ obj=and, type=factor, const=true
 obj=annotation, type=atom, const=true
 obj=array, type=atom, const=true
 obj=atom, type=atom, const=true
+obj=attribute-of, type=factor, const=true
 obj=blob, type=atom, const=true
 obj=blob-length, type=factor, const=true
 obj=bool, type=atom, const=true

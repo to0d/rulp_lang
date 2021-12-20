@@ -1,0 +1,23 @@
+(defun ls-attribute-of (?subject) 
+    (if (equal ?subject local)
+    
+        (ls-is-const (value-of (:: (value-of local::parent) parent)))
+        
+        (loop for ?mbr in (ls ?subject) do 
+            (print "obj=" (name-of $(value-of ?mbr)))
+            (print ", type=" (type-of $(value-of (value-of ?mbr))))
+            (print ", attribute=" (attribute-of  $(value-of (value-of ?mbr))))
+            (print "\n")
+        )
+    )
+)
+;;;
+
+(ls-attribute-of root)
+;;;
+
+(ls-attribute-of system)
+;;;
+
+(ls-attribute-of main)
+;;;

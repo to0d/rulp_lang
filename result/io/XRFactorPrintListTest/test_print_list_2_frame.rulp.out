@@ -32,6 +32,7 @@ root::and
 root::annotation
 root::array
 root::atom
+root::attribute-of
 root::blob
 root::blob-length
 root::bool

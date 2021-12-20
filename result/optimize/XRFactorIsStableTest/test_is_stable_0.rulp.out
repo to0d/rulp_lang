@@ -47,6 +47,7 @@ obj=and, type=factor, stable=true
 obj=annotation, type=atom, stable=true
 obj=array, type=atom, stable=true
 obj=atom, type=atom, stable=true
+obj=attribute-of, type=factor, stable=true
 obj=blob, type=atom, stable=true
 obj=blob-length, type=factor, stable=true
 obj=bool, type=atom, stable=true
