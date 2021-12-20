@@ -1,0 +1,47 @@
+(new namespace ns1)
+;=>
+
+(new namespace ns2)
+;=>
+
+(defvar ns1::var1 1)
+;=>
+
+(defun ns1::f1 () (return 1))
+;=>
+
+(defvar ns2::var1 2)
+;=>
+
+(defun ns2::f1 () (return 2))
+;=>
+
+(use namespace ns1)
+;=>
+
+(value-of var1)
+;=>
+
+(f1)
+;=>
+
+(use namespace ns2)
+;=>
+
+(value-of var1)
+;=>
+
+(f1)
+;=>
+
+(use namespace ns1)
+;=>
+
+(value-of var1)
+;=>
+
+(f1)
+;=>
+
+(print-global-info)
+;;;

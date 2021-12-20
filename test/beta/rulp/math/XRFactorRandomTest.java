@@ -7,7 +7,8 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorRandomTest extends RulpTestBase {
 
 	@Test
-	void test() {
-		_test("(type-of $(random))", "double");
+	void test_random_1() {
+		_setup();
+		_run_script();
 	}
 }

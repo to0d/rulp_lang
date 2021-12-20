@@ -7,10 +7,10 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorValueTypeOfTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_value_type_of_1() {
 
 		_setup();
-		_test("(defvar var1 10)(value-type-of var1)", "&var1 int");
+		_run_script();
 	}
 
 }

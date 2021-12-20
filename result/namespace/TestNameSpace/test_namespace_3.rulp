@@ -48,3 +48,6 @@
 
 (fun3)
 ;;;
+
+(print-global-info)
+;;;

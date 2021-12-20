@@ -1,10 +1,58 @@
+(new namespace ns1)
+;=>ns1
+
+(new namespace ns2)
+;=>ns2
+
+(defvar ns1::var1 1)
+;=>&var1
+
+(defun ns1::f1 () (return 1))
+;=>ns1::f1
+
+(defvar ns2::var1 2)
+;=>&var1
+
+(defun ns2::f1 () (return 2))
+;=>ns2::f1
+
+(use namespace ns1)
+;=>nil
+
+(value-of var1)
+;=>1
+
+(f1)
+;=>1
+
+(use namespace ns2)
+;=>nil
+
+(value-of var1)
+;=>2
+
+(f1)
+;=>2
+
+(use namespace ns1)
+;=>nil
+
+(value-of var1)
+;=>1
+
+(f1)
+;=>1
+
+(print-global-info)
+;=>nil
+;out:
 Global Info:
 
 Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       85        0
+     Interpreter call id/level:       86        1
              CPS support/count:    false        0
                Frame max level:        3
                   Frame max id:        6
@@ -15,38 +63,39 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:       91
+    factor:       92
       func:        3
 ==========================================================================================================================
 
-Callable stats info: callId=85, row=14, column=43(2), value-max=2, value-unit=2^x
+Callable stats info: callId=86, row=15, column=44(2), value-max=2, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         1222222222222222222222222222222222222243443 max=6, unit=2^x
+   Frame    RType  Count  Ref Object                         12222222222222222222222222222222222222434431 max=6, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     55    0 defun                              2222222111 2222222222 2212122121 11    
-    root   factor      6    0 value-of                                                             11211
-    root   factor      6    0 alias                          1221                                       
-    root   factor      4    0 defclass                                                1  1 1  1         
-  system template      3    1 use                                                                  1 11 
-    root   factor      3    0 return                                                                1 11
-    root   factor      3    0 frame-of                                                             1 11 
-    root   factor      3    0 defvar                            1                                11     
-    root   factor      3    0 deftemplate                                 12                            
-    root   factor      3    0 defmacro                                  11            1                 
-    root   factor      3    0 add_search_frame                                                     1 11 
-    root   factor      2    0 new                                                               11      
-    main   member      2    1 namespace@ns1::f1                                                     1  1
-    main   member      1    1 namespace@ns2::f1                                                       1 
+    root   factor     55    0 defun                              2222222111 2222222222 2212122121 11     
+    root   factor      6    0 value-of                                                             11211 
+    root   factor      6    0 alias                          1221                                        
+    root   factor      4    0 defclass                                                1  1 1  1          
+  system template      3    1 use                                                                  1 11  
+    root   factor      3    0 return                                                                1 11 
+    root   factor      3    0 frame-of                                                             1 11  
+    root   factor      3    0 defvar                            1                                11      
+    root   factor      3    0 deftemplate                                 12                             
+    root   factor      3    0 defmacro                                  11            1                  
+    root   factor      3    0 add_search_frame                                                     1 11  
+    root   factor      2    0 new                                                               11       
+    main   member      2    1 namespace@ns1::f1                                                     1  1 
+    root   factor      1    0 print-global-info                                                         1
+    main   member      1    1 namespace@ns2::f1                                                       1  
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          910            0          910
+        atom:          911            0          911
       string:           29            0           29
         list:            6            0            6
-        expr:          486            6          480
+        expr:          487            6          481
        array:            1            0            1
          var:           24            6           18
         func:          104            0          104
@@ -108,4 +157,6 @@ this                 : DEFAULT                      0    2    instance   namespa
 var1                 : DEFAULT                      0    1    var        2 : type=int
 ==========================================================================================================================
 
+
+;eof
 

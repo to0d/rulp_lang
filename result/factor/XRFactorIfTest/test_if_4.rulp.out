@@ -1,0 +1,13 @@
+(defclass c1 () 
+    (defvar ?var false) 
+    (defun fun1 () 
+        (if ?var (return 1) (return 2)))
+)
+;=>c1
+
+(new c1 o1)
+;=>o1
+
+(o1::fun1)
+;=>2
+

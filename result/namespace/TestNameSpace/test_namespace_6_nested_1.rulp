@@ -36,3 +36,6 @@
 
 (+ main::ns1::ns2::ns3::var3 1)
 ;;;
+
+(print-global-info)
+;;;

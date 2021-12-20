@@ -1,0 +1,15 @@
+(defvar v1 1) v1
+;=>&v1 1
+
+(defvar v2 2) v2
+;=>&v2 2
+
+(if (> 2 1) (do (setq v1 (+ v1 1)) (setq v2 (+ v2 2))))
+;=>nil
+
+v1 
+;=>2
+
+v2
+;=>4
+

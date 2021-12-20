@@ -7,10 +7,8 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorToIntegerTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_to_int_1() {
 		_setup();
-		_test("(to-int 123)", "123");
-		_test("(to-int \"123\")", "123");
-		_test("(to-int 1.1)", "1");
+		_run_script();
 	}
 }

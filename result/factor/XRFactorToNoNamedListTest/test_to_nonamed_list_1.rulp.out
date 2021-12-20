@@ -1,0 +1,6 @@
+(to-nonamed-list '(b c))
+;=>'(b c)
+
+(to-nonamed-list n1:'(b c))
+;=>'(b c)
+

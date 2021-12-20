@@ -1,0 +1,21 @@
+(name-of nil)
+;=>
+
+(name-of true)
+;=>
+
+(name-of 1)
+;=>
+
+(name-of 1.1)
+;=>
+
+(name-of '(a b))
+;=>
+
+(name-of print-list)
+;=>
+
+(name-of n1:'(a b))
+;=>
+

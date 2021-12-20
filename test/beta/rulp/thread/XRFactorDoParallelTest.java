@@ -9,7 +9,7 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorDoParallelTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_do_p_1() {
 
 		_setup();
 		_test("(defvar count)");
@@ -21,12 +21,9 @@ class XRFactorDoParallelTest extends RulpTestBase {
 		_test_time("(or (fun1 50 true) (fun1 100 true))", "true", 1, 50);
 		_test_time("(or (fun1 50 false) (fun1 100 true))", "true", 2, 150);
 
-		// parallel
-		// XRFactorDoParallel.setTrace(true);
 		_test_time("(do-p (fun1 50 false) (fun1 100 true))", "false", 1, 50);
 		_test_time("(do-p (fun1 300 false) (fun1 600 true))", "false", 1, 300);
 		_test_time("(do-p (do (fun1 600 false) (fun1 500 false)) (fun1 500 true))", "true", 1, 500);
-		// XRFactorDoParallel.setTrace(false);
 	}
 
 	void _test_time(String expr, String out, int count, int min_time) {

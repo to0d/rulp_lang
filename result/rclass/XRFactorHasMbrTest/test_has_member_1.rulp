@@ -1,0 +1,15 @@
+(defclass class1 () (defvar ?value 0))
+;=>
+
+(new class1 o1)
+;=>
+
+(has-member o1 ?value)
+;=>
+
+(+ (value-of (value-of o1::?value)) 0)
+;=>
+
+(has-member o1 ?value)
+;=>
+

@@ -171,3 +171,5 @@
 (f3)
 ;=>
 
+(print-global-info)
+;;;

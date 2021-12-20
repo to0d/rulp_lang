@@ -7,10 +7,9 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorToNoNamedListTest extends RulpTestBase {
 
 	@Test
-	void test() {
+	void test_to_nonamed_list_1() {
 
 		_setup();
-		_test("(to-nonamed-list '(b c))", "'(b c)");
-		_test("(to-nonamed-list n1:'(b c))", "'(b c)");
+		_run_script();
 	}
 }

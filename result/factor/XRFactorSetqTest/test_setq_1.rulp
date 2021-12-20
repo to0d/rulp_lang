@@ -1,0 +1,6 @@
+(defvar x 10) x
+;=>
+
+(setq x 9) x
+;=>
+

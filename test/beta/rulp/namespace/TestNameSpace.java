@@ -11,36 +11,14 @@ public class TestNameSpace extends RulpTestBase {
 
 		_setup();
 		_run_script();
-		_gInfo();
 	}
 
 	@Test
 	public void test_namespace_2() {
 
 		_setup();
+		_run_script();
 
-		_test("(new namespace ns1)", "ns1");
-		_test("(new namespace ns2)", "ns2");
-
-		_test("(defvar ns1::var1 1)", "&var1");
-		_test("(defun ns1::f1 () (return 1))", "ns1::f1");
-
-		_test("(defvar ns2::var1 2)", "&var1");
-		_test("(defun ns2::f1 () (return 2))", "ns2::f1");
-
-		_test("(use namespace ns1)", "nil");
-		_test("(value-of var1)", "1");
-		_test("(f1)", "1");
-
-		_test("(use namespace ns2)", "nil");
-		_test("(value-of var1)", "2");
-		_test("(f1)", "2");
-
-		_test("(use namespace ns1)", "nil");
-		_test("(value-of var1)", "1");
-		_test("(f1)", "1");
-
-		_gInfo();
 	}
 
 	@Test
@@ -48,7 +26,6 @@ public class TestNameSpace extends RulpTestBase {
 
 		_setup();
 		_run_script();
-		_gInfo();
 	}
 
 	@Test
@@ -70,7 +47,6 @@ public class TestNameSpace extends RulpTestBase {
 
 		_setup();
 		_run_script();
-		_gInfo();
 	}
 
 	@Test
@@ -78,6 +54,5 @@ public class TestNameSpace extends RulpTestBase {
 
 		_setup();
 		_run_script();
-		_gInfo();
 	}
 }

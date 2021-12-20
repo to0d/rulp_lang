@@ -1,0 +1,30 @@
+(type-of $(+ 1 2))
+;=>int
+
+(type-of nil)
+;=>null
+
+(type-of true)
+;=>bool
+
+(type-of 1)
+;=>int
+
+(type-of 1.1)
+;=>float
+
+(type-of '(a b))
+;=>list
+
+(type-of print-list)
+;=>macro
+
+(type-of "abc")
+;=>string
+
+(defvar v1 10)(type-of v1)
+;=>&v1 var
+
+(type-of (+ 1 2))
+;=>expr
+
