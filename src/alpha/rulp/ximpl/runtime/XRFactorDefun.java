@@ -9,6 +9,9 @@
 
 package alpha.rulp.ximpl.runtime;
 
+import static alpha.rulp.lang.Constant.A_OP_CPS;
+
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,7 +36,6 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.utils.SubjectUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 import alpha.rulp.ximpl.optimize.CPSUtils;
@@ -141,14 +143,39 @@ public class XRFactorDefun extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid args size: " + args.size());
 		}
 
-		if (RuntimeUtil.isSupportOpCPS(frame)) {
-			// recursive function
-			if (CPSUtils.findCPSCallee(funBody, frame).contains(funName)) {
-				funBody = CPSUtils.addMakeCpsExpr(funBody, frame);
+		ArrayList<String> attrList = null;
+
+		/*****************************************************/
+		// Process function attribute
+		/*****************************************************/
+		if (RulpUtil.hasAttributeList(args)) {
+
+			attrList = new ArrayList<>();
+
+			for (String attr : RulpUtil.getAttributeList(args)) {
+				switch (attr) {
+				case A_OP_CPS:
+					// recursive function
+					if (CPSUtils.findCPSCallee(funBody, frame).contains(funName)) {
+						funBody = CPSUtils.addMakeCpsExpr(funBody, frame);
+					}
+					attrList.add(attr);
+					break;
+				default:
+					throw new RException("unknown attr: " + attr);
+				}
 			}
 		}
 
 		IRFunction newFun = RulpFactory.createFunction(frame, funName, paraAttrs, funBody);
+		/*****************************************************/
+		// Update attribute list
+		/*****************************************************/
+		if (attrList != null) {
+			for (String attr : attrList) {
+				RulpUtil.addAttribute(newFun, attr);
+			}
+		}
 
 		/*****************************************************/
 		// Function
@@ -198,10 +225,9 @@ public class XRFactorDefun extends AbsRFactorAdapter implements IRFactor {
 			/*****************************************************/
 			if (oldFunc.getSignature().contentEquals(newFun.getSignature())) {
 				XRFunctionList.tryOverride(oldFunc, newFun);
-
 				frame.setEntry(funName, newFun);
-				return newFun;
 
+				return newFun;
 			}
 			/*****************************************************/
 			// Create Function List

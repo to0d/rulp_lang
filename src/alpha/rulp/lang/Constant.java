@@ -93,11 +93,9 @@ public interface Constant {
 
 	String A_NULL = "null";
 
-	String A_OP_CPS = "?op-cps";
+	String A_OP_CPS = "op-cps";
 
 	String A_OP_STABLE = "?op-stable";
-
-	String A_OP_TCO = "op-tco";
 
 	String A_PARENT = "parent";
 

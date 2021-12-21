@@ -4,7 +4,6 @@ import static alpha.rulp.lang.Constant.A_LOCAL;
 import static alpha.rulp.lang.Constant.A_NOCLASS;
 import static alpha.rulp.lang.Constant.A_OP_CPS;
 import static alpha.rulp.lang.Constant.A_OP_STABLE;
-import static alpha.rulp.lang.Constant.A_OP_TCO;
 import static alpha.rulp.lang.Constant.A_PARENT;
 import static alpha.rulp.lang.Constant.A_TRACE;
 import static alpha.rulp.lang.Constant.F_IF;
@@ -396,7 +395,7 @@ public final class RuntimeUtil {
 					IRObject rst = RuntimeUtil.computeFun((IRFunction) e0, expr, interpreter, frame);
 					if (rst == null) {
 						return O_Nil;
-					} else if (rst.getType() == RType.EXPR && RulpUtil.containAttribute(rst, A_OP_TCO)) {
+					} else if (rst.getType() == RType.EXPR && RulpUtil.containAttribute(rst, A_OP_CPS)) {
 						rst = CPSUtils.computeCPSExpr((IRExpr) rst, interpreter, frame);
 					}
 					return rst;
@@ -689,7 +688,7 @@ public final class RuntimeUtil {
 	}
 
 	public static void init(IRFrame frame) throws RException {
-		RulpUtil.setLocalVar(frame, A_OP_CPS, O_False);
+//		RulpUtil.setLocalVar(frame, A_OP_CPS, O_False);
 		RulpUtil.setLocalVar(frame, A_OP_STABLE, O_False);
 		RulpUtil.setLocalVar(frame, A_TRACE, O_False);
 	}
@@ -783,9 +782,9 @@ public final class RuntimeUtil {
 		}
 	}
 
-	public static boolean isSupportOpCPS(IRFrame frame) throws RException {
-		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_OP_CPS)).asBoolean();
-	}
+//	public static boolean isSupportOpCPS(IRFrame frame) throws RException {
+//		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_OP_CPS)).asBoolean();
+//	}
 
 	public static boolean isSupportOpStable(IRFrame frame) throws RException {
 		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_OP_STABLE)).asBoolean();
@@ -1067,9 +1066,9 @@ public final class RuntimeUtil {
 		callStatsId.incrementAndGet();
 	}
 
-	public static void setOpCPS(IRFrame frame, boolean support) throws RException {
-		RulpUtil.setLocalVar(frame, A_OP_CPS, support ? O_True : O_False);
-	}
+//	public static void setOpCPS(IRFrame frame, boolean support) throws RException {
+//		RulpUtil.setLocalVar(frame, A_OP_CPS, support ? O_True : O_False);
+//	}
 
 	public static void setTrace(IRFrame frame, boolean trace) throws RException {
 		RulpUtil.setLocalVar(frame, A_TRACE, trace ? O_True : O_False);

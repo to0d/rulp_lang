@@ -201,7 +201,6 @@ obj=~, type=factor, stable=true
 obj=++, type=macro, stable=false
 obj=--, type=macro, stable=false
 obj=?load-paths, type=var, stable=false
-obj=?op-cps, type=var, stable=false
 obj=?op-stable, type=var, stable=false
 obj=?trace, type=var, stable=false
 obj=add, type=func, stable=true

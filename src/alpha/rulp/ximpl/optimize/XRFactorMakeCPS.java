@@ -9,7 +9,7 @@
 
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.A_OP_TCO;
+import static alpha.rulp.lang.Constant.A_OP_CPS;
 
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
@@ -36,7 +36,7 @@ public class XRFactorMakeCPS extends AbsRFactorAdapter implements IRFactor {
 
 		IRObject rst = CPSUtils.rebuildCpsTree(RulpUtil.asExpression(args.get(1)), frame);
 		if (rst.getType() == RType.EXPR) {
-			RulpUtil.addAttribute(rst, A_OP_TCO);
+			RulpUtil.addAttribute(rst, A_OP_CPS);
 		}
 
 		return rst;

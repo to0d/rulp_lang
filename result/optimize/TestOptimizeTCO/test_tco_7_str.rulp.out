@@ -1,14 +1,15 @@
-(setq ?op-cps true)
-;=>&?op-cps
-
 (defun fun5 (?s) 
     (if (> (length-of ?s) 10)
         (return ?s)) 
-    (return (fun5 (+ "a" ?s))))
-;=>fun5
+    (return (fun5 (+ "a" ?s)))
+)[op-cps]
+;=>fun5[op-cps]
 
 (cps-callee fun5)
 ;=>'("fun5")
+
+(attribute-of fun5)
+;=>'(op-cps)
 
 (fun5 "b")
 ;=>"aaaaaaaaaab"
@@ -26,7 +27,7 @@ Total runtime info:
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
      Interpreter call id/level:       76        1
-             CPS support/count:     true       40
+                     CPS count:       40
                Frame max level:        5
                   Frame max id:        6
            Frame free id count:        3
@@ -44,7 +45,7 @@ Callable stats info: callId=76, row=19, column=39(2), value-max=22, value-unit=2
 ==========================================================================================================================
    Frame    RType  Count  Ref Object                         122222222222222222222222222222222222281 max=109, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     54    0 defun                              2222222111 2222222222 22121221211  
+    root   factor     54    0 defun                              2222222111 2222222222 2212122122   
     root   factor     22    0 return                                                              6 
     root   factor     11    0 str-length                                                          5 
   system funcList     11    1 length-of                                                           5 
@@ -58,23 +59,23 @@ Callable stats info: callId=76, row=19, column=39(2), value-max=22, value-unit=2
     root   factor      4    0 defclass                                                1  1 1  1     
     root   factor      3    0 deftemplate                                 12                        
     root   factor      3    0 defmacro                                  11            1             
-    root   factor      1    0 setq                                                              1   
     root   factor      1    0 print-global-info                                                    1
     root   factor      1    0 defvar                            1                                   
     root   factor      1    0 cps-count                                                           1 
     root   factor      1    0 cps-callee                                                         1  
+    root   factor      1    0 attribute-of                                                       1  
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          898            0          898
+        atom:          900            0          900
       string:           42            0           42
-        list:            7            1            6
+        list:            8            2            6
         expr:          534           42          492
        array:            1            0            1
-         var:           49           33           16
+         var:           48           33           15
         func:          103            0          103
     template:            1            0            1
        macro:            3            0            3
@@ -82,7 +83,7 @@ Object create count:
       member:          117            0          117
        frame:           33           33            0
  interpreter:            1            0
-  frameEntry:          246            0
+  frameEntry:          245            0
       lambda:            0            0
 ==========================================================================================================================
 

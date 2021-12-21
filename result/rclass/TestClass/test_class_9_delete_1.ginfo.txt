@@ -5,7 +5,7 @@ Total runtime info:
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
      Interpreter call id/level:       77        0
-             CPS support/count:    false        0
+                     CPS count:        0
                Frame max level:        7
                   Frame max id:        8
            Frame free id count:        5
@@ -46,7 +46,7 @@ Object create count:
         list:            6            0            6
         expr:          481            2          479
        array:            1            0            1
-         var:           18            2           16
+         var:           17            2           15
         func:          106            4          102
     template:            1            0            1
        macro:            3            0            3
@@ -55,7 +55,7 @@ Object create count:
       member:          124            7          117
        frame:            6            6            0
  interpreter:            1            0
-  frameEntry:          217            0
+  frameEntry:          216            0
       lambda:            2            0
 ==========================================================================================================================
 

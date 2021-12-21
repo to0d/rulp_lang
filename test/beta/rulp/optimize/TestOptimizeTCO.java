@@ -16,7 +16,14 @@ public class TestOptimizeTCO extends RulpTestBase {
 	}
 
 	@Test
-	public void test_tco_2_overflow() {
+	public void test_tco_2_overflow_a() {
+
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	public void test_tco_2_overflow_b() {
 
 		_setup();
 		_run_script();

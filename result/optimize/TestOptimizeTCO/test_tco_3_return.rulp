@@ -1,16 +1,16 @@
-(setq ?op-cps true)
-;=>
-
 ;; fact(n) = n + fact(n-1)
 (defun fact (?v)
     (do 
         (if (<= ?v 0)(return 0))
         (return (+ ?v (fact (- ?v 1))))     ; <== cps in return expression
     )
-)
+)[op-cps]
 ;=>
 
 (cps-callee fact)
+;=>
+
+(attribute-of fact)
 ;=>
 
 (fact 0)

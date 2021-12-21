@@ -1,17 +1,17 @@
-(setq ?op-cps true)
-;=>&?op-cps
-
 (defun fact1 (?v)
     (do
         (if (<= ?v 1)(return 1))
         (if (> ?v 500)(return ?v))
         (return (fact1 (+ ?v 1)))
     )
-)
-;=>fact1
+)[op-cps]
+;=>fact1[op-cps]
 
 (cps-callee fact1)
 ;=>'("fact1")
+
+(attribute-of fact1)
+;=>'(op-cps)
 
 (fact1 2)
 ;=>501
@@ -29,7 +29,7 @@ Total runtime info:
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
      Interpreter call id/level:       76        1
-             CPS support/count:     true     1996
+                     CPS count:     1996
                Frame max level:        4
                   Frame max id:        5
            Frame free id count:        2
@@ -55,29 +55,29 @@ Callable stats info: callId=76, row=18, column=39(2), value-max=1000, value-unit
     root   factor    500    0 <=                                                                  X 
     root   factor    499    0 make-cps                                                            X 
     root   factor    499    0 +                                                                   X 
-    root   factor     54    0 defun                              2222222111 2222222222 22121221211  
+    root   factor     54    0 defun                              2222222111 2222222222 2212122122   
     root   factor      6    0 alias                          1221                                   
     root   factor      4    0 defclass                                                1  1 1  1     
     root   factor      3    0 deftemplate                                 12                        
     root   factor      3    0 defmacro                                  11            1             
-    root   factor      1    0 setq                                                              1   
     root   factor      1    0 print-global-info                                                    1
     root   factor      1    0 defvar                            1                                   
     root   factor      1    0 cps-count                                                           1 
     root   factor      1    0 cps-callee                                                         1  
+    root   factor      1    0 attribute-of                                                       1  
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          901            0          901
+        atom:          903            0          903
          int:          376            0          376
       string:           30            0           30
-        list:            7            1            6
+        list:            8            2            6
         expr:         2482         1498          984
        array:            1            0            1
-         var:          516          500           16
+         var:          515          500           15
         func:          103            0          103
     template:            1            0            1
        macro:            3            0            3
@@ -85,7 +85,7 @@ Object create count:
       member:          117            0          117
        frame:         1000         1000            0
  interpreter:            1            0
-  frameEntry:          713            0
+  frameEntry:          712            0
       lambda:            0            0
 ==========================================================================================================================
 
@@ -112,25 +112,5 @@ Global frame tree:
 Global Subject list:
 
 
-;eof
-
-(setq ?op-cps false)
-;=>&?op-cps
-
-(defun fact2 (?v)
-    (do
-        (if (<= ?v 1)(return 1))
-        (if (> ?v 500)(return ?v))
-        (return (fact2 (+ ?v 1)))
-    )
-)
-;=>fact2
-
-(cps-callee fact2)
-;=>'("fact2")
-
-(fact2 2)
-;err:
-java.lang.StackOverflowError
 ;eof
 

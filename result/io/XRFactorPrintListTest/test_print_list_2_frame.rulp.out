@@ -186,7 +186,6 @@ root::~
 system::++
 system::--
 system::?load-paths
-system::?op-cps
 system::?op-stable
 system::?trace
 system::add

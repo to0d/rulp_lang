@@ -45,7 +45,7 @@ Total runtime info:
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
      Interpreter call id/level:       80        1
-             CPS support/count:    false        0
+                     CPS count:        0
                Frame max level:        7
                   Frame max id:       10
            Frame free id count:        2
@@ -90,7 +90,7 @@ Object create count:
         list:            6            0            6
         expr:          489            4          485
        array:            1            0            1
-         var:           21            2           19
+         var:           20            2           18
         func:          108            2          106
     template:            1            0            1
        macro:            3            0            3
@@ -99,7 +99,7 @@ Object create count:
       member:          128            3          125
        frame:            9            4            5
  interpreter:            1            0
-  frameEntry:          221            0
+  frameEntry:          220            0
       lambda:            3            0
 ==========================================================================================================================
 
@@ -181,7 +181,7 @@ Total runtime info:
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
      Interpreter call id/level:       85        1
-             CPS support/count:    false        0
+                     CPS count:        0
                Frame max level:        7
                   Frame max id:       10
            Frame free id count:        3
@@ -225,7 +225,7 @@ Object create count:
         list:            6            0            6
         expr:          493            4          489
        array:            1            0            1
-         var:           21            3           18
+         var:           20            3           17
         func:          108            4          104
     template:            1            0            1
        macro:            3            0            3
@@ -234,7 +234,7 @@ Object create count:
       member:          128            7          121
        frame:            9            5            4
  interpreter:            1            0
-  frameEntry:          221            0
+  frameEntry:          220            0
       lambda:            3            0
 ==========================================================================================================================
 

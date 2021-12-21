@@ -24,11 +24,8 @@ import java.util.Map;
 
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRExpr;
-import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
-import alpha.rulp.lang.RType;
-import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRParser;
 import alpha.rulp.runtime.IRTokener;
 import alpha.rulp.runtime.IRTokener.Token;

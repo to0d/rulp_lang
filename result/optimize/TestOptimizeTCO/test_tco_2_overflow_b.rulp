@@ -1,0 +1,23 @@
+(defun fact1 (?v)
+    (do
+        (if (<= ?v 1)(return 1))
+        (if (> ?v 500)(return ?v))
+        (return (fact1 (+ ?v 1)))
+    )
+)
+;;;
+
+(cps-callee fact1)
+;=>
+
+(attribute-of fact1)
+;=>
+
+(fact1 2)
+;err
+
+(cps-count)
+;=>
+
+(print-global-info)
+;;;

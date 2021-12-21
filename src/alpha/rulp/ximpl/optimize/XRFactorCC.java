@@ -18,7 +18,6 @@ import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
 
 public class XRFactorCC extends AbsRFactorAdapter implements IRFactor {
@@ -36,10 +35,10 @@ public class XRFactorCC extends AbsRFactorAdapter implements IRFactor {
 
 		IRExpr expr = RulpUtil.asExpression(args.get(1));
 
-		// support cps already
-		if (RuntimeUtil.isSupportOpCPS(frame)) {
-			return interpreter.compute(frame, expr);
-		}
+//		// support cps already
+//		if (RuntimeUtil.isSupportOpCPS(frame)) {
+//			return interpreter.compute(frame, expr);
+//		}
 
 		IRFrame cpsFrame = RulpFactory.createFrame(frame, "cps");
 

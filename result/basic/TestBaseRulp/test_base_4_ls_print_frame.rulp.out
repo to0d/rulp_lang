@@ -186,7 +186,6 @@ mbr=~, name=~, type=factor, property='(public)
 mbr=++, name=++, type=macro, property='(public)
 mbr=--, name=--, type=macro, property='(public)
 mbr=?load-paths, name=?load-paths, type=var, property='(public), value="'()"
-mbr=?op-cps, name=?op-cps, type=var, property='(public), value="false"
 mbr=?op-stable, name=?op-stable, type=var, property='(public), value="false"
 mbr=?trace, name=?trace, type=var, property='(public), value="false"
 mbr=add, name='((add array nil nil nil) (add array nil nil) (add array nil) (add list nil nil nil) (add list nil nil) (add list nil)), type=func, property='(public)

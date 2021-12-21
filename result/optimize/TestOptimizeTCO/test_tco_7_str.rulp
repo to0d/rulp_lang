@@ -1,13 +1,14 @@
-(setq ?op-cps true)
-;;;
-
 (defun fun5 (?s) 
     (if (> (length-of ?s) 10)
         (return ?s)) 
-    (return (fun5 (+ "a" ?s))))
+    (return (fun5 (+ "a" ?s)))
+)[op-cps]
 ;;;
 
 (cps-callee fun5)
+;=>
+
+(attribute-of fun5)
 ;=>
 
 (fun5 "b")

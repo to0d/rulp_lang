@@ -1,6 +1,3 @@
-(setq ?op-cps true)
-;=>&?op-cps
-
 ;; fun2(n) = 0                          when n <=0
 ;;         = n + fun2(n-1)              when n < 10
 ;;         = fun2(n-1) + fun2(n/2-1)    when n < 100
@@ -14,11 +11,14 @@
         (if (<= ?v 1000)(return (+ (fun2 (- ?v 1)) (fun2 (- (/ ?v 4) 1)))))
         (return (+ (fun2 (- ?v 1)) (fun2 (- (/ ?v 8) 1))))
     )
-)
-;=>fun2
+)[op-cps]
+;=>fun2[op-cps]
 
 (cps-callee fun2)
 ;=>'("fun2")
+
+(attribute-of fun2)
+;=>'(op-cps)
 
 (fun2 0)
 ;=>0
@@ -51,7 +51,7 @@ Total runtime info:
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
      Interpreter call id/level:       81        1
-             CPS support/count:     true   252432
+                     CPS count:   252432
                Frame max level:        4
                   Frame max id:        5
            Frame free id count:        2
@@ -78,29 +78,29 @@ Callable stats info: callId=81, row=19, column=41(2), value-max=84135, value-uni
     root   factor  37168    0 make-cps                                                            139 
     root   factor  37168    0 +                                                                   139 
     root   factor   4904    0 /                                                                     8 
-    root   factor     54    0 defun                              2222222111 2222222222 22121221211    
+    root   factor     54    0 defun                              2222222111 2222222222 2212122122     
     root   factor      6    0 alias                          1221                                     
     root   factor      4    0 defclass                                                1  1 1  1       
     root   factor      3    0 deftemplate                                 12                          
     root   factor      3    0 defmacro                                  11            1               
-    root   factor      1    0 setq                                                              1     
     root   factor      1    0 print-global-info                                                      1
     root   factor      1    0 defvar                            1                                     
     root   factor      1    0 cps-count                                                              1
     root   factor      1    0 cps-callee                                                         1    
+    root   factor      1    0 attribute-of                                                       1    
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          942            0          942
+        atom:          944            0          944
          int:         2464            0         2464
       string:           30            0           30
-        list:            7            1            6
+        list:            8            2            6
         expr:       252961       168294        84667
        array:            1            0            1
-         var:        42094        42078           16
+         var:        42093        42078           15
         func:          103            0          103
     template:            1            0            1
        macro:            3            0            3
@@ -108,7 +108,7 @@ Object create count:
       member:          117            0          117
        frame:        84156        84156            0
  interpreter:            1            0
-  frameEntry:        42291            0
+  frameEntry:        42290            0
       lambda:            0            0
 ==========================================================================================================================
 
