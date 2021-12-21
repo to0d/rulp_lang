@@ -265,7 +265,30 @@ public class RulpUtil {
 			default:
 				throw new RException("unsupport type: " + obj.getType() + ", " + obj.toString());
 			}
+
+			_formatAttrList(sb, obj);
 		}
+	}
+
+	private static void _formatAttrList(StringBuffer sb, IRObject obj) throws RException {
+
+		List<String> attrList = obj.getAttributeList();
+		if (attrList == null || attrList.isEmpty()) {
+			return;
+		}
+
+		sb.append("[");
+		Iterator<String> it = attrList.iterator();
+		int i = 0;
+		while (it.hasNext()) {
+
+			if (i++ != 0) {
+				sb.append(' ');
+			}
+
+			sb.append(it.next());
+		}
+		sb.append("]");
 	}
 
 	static class XShortFormater extends XRFormater {
@@ -424,6 +447,8 @@ public class RulpUtil {
 		default:
 			formater.format(sb, obj);
 		}
+
+		_formatAttrList(sb, obj);
 	}
 
 	private static void _toStringList(IRObject obj, List<String> list) throws RException {

@@ -45,7 +45,7 @@ public abstract class AbsObject implements IRObject {
 
 	@Override
 	public List<String> getAttributeList() {
-		return attributeList == null ? Collections.emptyList() : attributeList;
+		return attributeList;
 	}
 
 	@Override
@@ -59,15 +59,22 @@ public abstract class AbsObject implements IRObject {
 			return false;
 		}
 
+		boolean rc = false;
+
 		Iterator<String> it = attributeList.iterator();
 		while (it.hasNext()) {
 			if (it.next().equals(attr)) {
 				it.remove();
-				return true;
+				rc = true;
+				break;
 			}
 		}
 
-		return false;
+		if (rc && attributeList.isEmpty()) {
+			attributeList = null;
+		}
+
+		return rc;
 	}
 
 	@Override
