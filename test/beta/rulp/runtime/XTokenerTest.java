@@ -145,7 +145,7 @@ public class XTokenerTest extends RulpTestBase {
 	}
 
 	@Test
-	public void test_token_9_slot() {
+	public void test_token_9_attr() {
 		_setup();
 		_test_pase_token();
 	}

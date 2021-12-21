@@ -10,6 +10,6 @@ out: (a b) [m]
 in : {a,b,c}[n]
 out: {a,b,c} [n]
 
-in : a[1,2]
-out: a[1 , 2]
+in : a[1 2]
+out: a[1 2]
 

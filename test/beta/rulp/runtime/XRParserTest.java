@@ -292,7 +292,7 @@ public class XRParserTest extends RulpTestBase {
 	}
 
 	@Test
-	public void test_parser_f_slot() {
+	public void test_parser_f_attr() {
 		_setup();
 		_test_parse();
 	}
