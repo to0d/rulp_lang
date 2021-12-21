@@ -1,13 +1,10 @@
 package alpha.rulp.ximpl.lang;
 
-import java.util.List;
-
-import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRListener1;
 
-public abstract class AbsAtomObject implements IRObject {
+public abstract class AbsAtomObject extends AbsObject implements IRObject {
 
 	@Override
 	public void addObjectDeletedListener(IRListener1<IRObject> listener) {
@@ -17,10 +14,6 @@ public abstract class AbsAtomObject implements IRObject {
 	@Override
 	public void decRef() throws RException {
 
-	}
-
-	public List<IRAtom> getAttributeList() {
-		return null;
 	}
 
 	@Override
@@ -42,8 +35,4 @@ public abstract class AbsAtomObject implements IRObject {
 		return false;
 	}
 
-	@Override
-	public String toString() {
-		return asString();
-	}
 }

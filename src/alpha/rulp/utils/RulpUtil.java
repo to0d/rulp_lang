@@ -37,7 +37,6 @@ import static alpha.rulp.lang.Constant.A_NIL;
 import static alpha.rulp.lang.Constant.A_NULL;
 import static alpha.rulp.lang.Constant.A_QUESTION;
 import static alpha.rulp.lang.Constant.A_QUESTION_C;
-import static alpha.rulp.lang.Constant.A_STABLE;
 import static alpha.rulp.lang.Constant.A_STRING;
 import static alpha.rulp.lang.Constant.A_TEMPLATE;
 import static alpha.rulp.lang.Constant.A_VAR;
@@ -47,7 +46,6 @@ import static alpha.rulp.lang.Constant.O_EMPTY;
 import static alpha.rulp.lang.Constant.O_LAMBDA;
 import static alpha.rulp.lang.Constant.O_New;
 import static alpha.rulp.lang.Constant.O_Nil;
-import static alpha.rulp.lang.Constant.O_STABLE;
 import static alpha.rulp.lang.Constant.P_FINAL;
 import static alpha.rulp.lang.Constant.P_INHERIT;
 import static alpha.rulp.lang.Constant.P_STATIC;
@@ -80,6 +78,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -1829,15 +1828,28 @@ public class RulpUtil {
 		case A_TEMPLATE:
 			return T_Template;
 
-		case A_STABLE:
-			return O_STABLE;
-
 		case A_LAMBDA:
 			return O_LAMBDA;
 
 		default:
 			return RulpFactory.createAtom(name);
 		}
+	}
+
+	public static IRList toAtomList(Collection<String> names) throws RException {
+
+		if (names == null || names.isEmpty()) {
+			return RulpFactory.emptyConstList();
+		}
+
+		IRAtom[] atoms = new IRAtom[names.size()];
+		Iterator<String> it = names.iterator();
+		int index = 0;
+		while (it.hasNext()) {
+			atoms[index++] = RulpUtil.toAtom(it.next());
+		}
+
+		return RulpFactory.createList(atoms);
 	}
 
 	public static IRBlob toBlob(IRObject a) throws RException {

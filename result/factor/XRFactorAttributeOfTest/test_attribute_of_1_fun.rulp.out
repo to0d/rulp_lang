@@ -2,5 +2,5 @@
 ;=>fun1
 
 (attribute-of fun1)
-;=>'(const)
+;=>'()
 

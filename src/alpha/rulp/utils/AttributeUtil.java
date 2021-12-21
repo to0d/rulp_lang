@@ -8,6 +8,20 @@ import alpha.rulp.lang.IRAtom;
 
 public class AttributeUtil {
 
+	public static String toValidAttribute(String attr) {
+
+		if (attr == null) {
+			return null;
+		}
+
+		attr = attr.trim();
+		if (attr.isEmpty()) {
+			return null;
+		}
+
+		return attr;
+	}
+
 	public static void addAttribute(List<IRAtom> attributeList, String key) {
 
 		if (containAttribute(attributeList, key)) {

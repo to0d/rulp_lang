@@ -9,9 +9,6 @@
 
 package alpha.rulp.ximpl.factor;
 
-import java.util.List;
-
-import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
@@ -20,7 +17,6 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 
 public class XRFactorAttributeOf extends AbsRFactorAdapter implements IRFactor {
@@ -44,12 +40,7 @@ public class XRFactorAttributeOf extends AbsRFactorAdapter implements IRFactor {
 			}
 		}
 
-		List<IRAtom> attrList = obj.getAttributeList();
-		if (attrList == null || attrList.isEmpty()) {
-			return RulpFactory.emptyConstList();
-		}
-
-		return RulpFactory.createList(attrList);
+		return RulpUtil.toAtomList(obj.getAttributeList());
 	}
 
 	@Override

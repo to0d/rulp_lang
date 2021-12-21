@@ -121,7 +121,7 @@ public interface Constant {
 
 	String A_SOCKET = "socket";
 
-	String A_STABLE = "stable";
+//	String A_STABLE = "stable";
 
 	String A_STATIC = "static";
 
@@ -507,7 +507,7 @@ public interface Constant {
 
 	IRAtom O_QUESTION = RulpFactory.createAtom(A_QUESTION);
 
-	IRAtom O_STABLE = RulpFactory.createAtom(A_STABLE);
+//	IRAtom O_STABLE = RulpFactory.createAtom(A_STABLE);
 
 	IRAtom O_Static = RulpFactory.createAtom(A_STATIC);
 

@@ -13,12 +13,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRListener1;
 
-public abstract class AbsRefObject implements IRObject {
+public abstract class AbsRefObject extends AbsObject implements IRObject {
 
 	protected int max_ref = 0;
 
@@ -71,10 +70,6 @@ public abstract class AbsRefObject implements IRObject {
 		}
 	}
 
-	public List<IRAtom> getAttributeList() {
-		return null;
-	}
-
 	@Override
 	public int getMaxRef() {
 		return max_ref;
@@ -102,8 +97,4 @@ public abstract class AbsRefObject implements IRObject {
 		return ref < 0;
 	}
 
-	@Override
-	public String toString() {
-		return asString();
-	}
 }
