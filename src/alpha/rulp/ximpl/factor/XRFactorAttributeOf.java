@@ -40,7 +40,7 @@ public class XRFactorAttributeOf extends AbsRFactorAdapter implements IRFactor {
 			}
 		}
 
-		return RulpUtil.toAtomList(obj.getAttributeList());
+		return RulpUtil.toAtomList(RulpUtil.getAttributeList(obj));
 	}
 
 	@Override

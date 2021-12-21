@@ -396,7 +396,7 @@ public final class RuntimeUtil {
 					IRObject rst = RuntimeUtil.computeFun((IRFunction) e0, expr, interpreter, frame);
 					if (rst == null) {
 						return O_Nil;
-					} else if (rst.getType() == RType.EXPR && AttributeUtil.containAttribute(rst, A_OP_TCO)) {
+					} else if (rst.getType() == RType.EXPR && RulpUtil.containAttribute(rst, A_OP_TCO)) {
 						rst = CPSUtils.computeCPSExpr((IRExpr) rst, interpreter, frame);
 					}
 					return rst;

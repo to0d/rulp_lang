@@ -95,9 +95,9 @@ public interface Constant {
 
 	String A_OP_CPS = "?op-cps";
 
-	String A_OP_TCO = "op-tco";
-
 	String A_OP_STABLE = "?op-stable";
+
+	String A_OP_TCO = "op-tco";
 
 	String A_PARENT = "parent";
 
@@ -121,9 +121,9 @@ public interface Constant {
 
 	String A_SOCKET = "socket";
 
-//	String A_STABLE = "stable";
-
 	String A_STATIC = "static";
+
+//	String A_STABLE = "stable";
 
 	String A_STRING = "string";
 
@@ -507,9 +507,9 @@ public interface Constant {
 
 	IRAtom O_QUESTION = RulpFactory.createAtom(A_QUESTION);
 
-//	IRAtom O_STABLE = RulpFactory.createAtom(A_STABLE);
-
 	IRAtom O_Static = RulpFactory.createAtom(A_STATIC);
+
+//	IRAtom O_STABLE = RulpFactory.createAtom(A_STABLE);
 
 	IRAtom O_SUB = RulpFactory.createAtom(F_O_SUB);
 
@@ -522,6 +522,8 @@ public interface Constant {
 	int P_INHERIT = 0x0004;
 
 	int P_STATIC = 0x0002;
+
+	String S_ATTR = "_attr_";
 
 	IRAtom T_Array = RulpFactory.createAtom(A_ARRAY);
 

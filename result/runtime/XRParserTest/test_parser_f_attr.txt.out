@@ -2,13 +2,13 @@ in : a[1]
 out: a[1]
 
 in : '(a b c)[k]
-out: '(a b c) [k]
+out: '(a b c)[k]
 
 in : (a b) [m]
-out: (a b) [m]
+out: (a b)[m]
 
 in : {a,b,c}[n]
-out: {a,b,c} [n]
+out: {a,b,c}[n]
 
 in : a[1 2]
 out: a[1 2]

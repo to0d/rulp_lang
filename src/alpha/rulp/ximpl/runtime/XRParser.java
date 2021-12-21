@@ -15,6 +15,7 @@ import static alpha.rulp.lang.Constant.F_O_MBR;
 import static alpha.rulp.lang.Constant.O_False;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.O_True;
+import static alpha.rulp.lang.Constant.S_ATTR;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,14 +25,18 @@ import java.util.Map;
 
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRExpr;
+import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RType;
+import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRParser;
 import alpha.rulp.runtime.IRTokener;
 import alpha.rulp.runtime.IRTokener.Token;
 import alpha.rulp.runtime.IRTokener.TokenType;
 import alpha.rulp.runtime.RName;
 import alpha.rulp.utils.RulpFactory;
+import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.StringUtil;
 import alpha.rulp.ximpl.error.RParseException;
 import alpha.rulp.ximpl.error.RulpIncompleteException;
@@ -82,6 +87,8 @@ public class XRParser implements IRParser {
 			case ")":
 			case "{":
 			case "}":
+			case "[":
+			case "]":
 			case ",":
 				return true;
 			}
@@ -463,6 +470,47 @@ public class XRParser implements IRParser {
 		return null;
 	}
 
+	private List<IRObject> matchAttrList() throws RException {
+
+		_checkRecursion();
+
+		if (!_more()) {
+			return null;
+		}
+
+		// save depth of option
+		int depth = _depth();
+
+		if (!matchSymbol('[')) {
+			_pullStack(depth);
+			return null;
+		}
+
+		_ignoreBlank();
+
+		/* save depth of option */
+		int depth2 = _depth();
+
+		if (matchSymbol(']')) {
+			return Collections.emptyList();
+		} else {
+			_pullStack(depth2);
+		}
+
+		ArrayList<IRObject> list = new ArrayList<>();
+		IRObject obj = null;
+		while (_ignoreBlank() && (obj = nextObject()) != null) {
+			list.add(obj);
+		}
+
+		if (_ignoreBlank() && matchSymbol(']')) {
+			return list;
+		}
+
+		_pullStack(depth);
+		return null;
+	}
+
 	private List<IRObject> matchList() throws RException {
 
 		_checkRecursion();
@@ -826,6 +874,19 @@ public class XRParser implements IRParser {
 		}
 
 		/******************************************/
+		// Try match Array: []
+		/******************************************/
+		_pullStack(depth);
+		{
+			List<IRObject> list = matchAttrList();
+			if (list != null) {
+				IRList attr = RulpFactory.createList(list);
+				RulpUtil.addAttribute(attr, S_ATTR);
+				return attr;
+			}
+		}
+
+		/******************************************/
 		// Try match atom: abc
 		/******************************************/
 		_pullStack(depth);
@@ -1006,13 +1067,15 @@ public class XRParser implements IRParser {
 		// Match rules
 		/****************************************************/
 		ArrayList<IRObject> list = new ArrayList<>();
+		IRObject lastObj = null;
+
 		while (_ignoreBlank() && _more()) {
 
 			IRObject obj = nextObject();
+
 			if (obj == null) {
 
 				Token lastToken = this._curToken();
-
 				int lastLineIndex = lastToken == null ? -1 : lastToken.lineIndex;
 				String lastLine = lastLineIndex == -1 ? null : lines.get(lastLineIndex);
 
@@ -1025,7 +1088,31 @@ public class XRParser implements IRParser {
 				}
 			}
 
-			list.add(obj);
+			/****************************************/
+			// Append attribute list [] to last object
+			/****************************************/
+			if (obj.getType() == RType.LIST && RulpUtil.containAttribute(obj, S_ATTR)) {
+
+				IRList attrList = (IRList) obj;
+
+				if (lastObj == null) {
+					Token lastToken = this._curToken();
+					int lastLineIndex = lastToken == null ? -1 : lastToken.lineIndex;
+					String lastLine = lastLineIndex == -1 ? null : lines.get(lastLineIndex);
+					throw new RParseException(lastLineIndex,
+							String.format("no object before attr, token=%s, line=%s", lastToken, lastLine));
+				}
+
+				IRIterator<? extends IRObject> it = attrList.iterator();
+				while (it.hasNext()) {
+					IRObject attr = it.next();
+					RulpUtil.addAttribute(lastObj, attr.asString());
+				}
+
+			} else {
+				list.add(obj);
+				lastObj = obj;
+			}
 
 			// Clean stack
 			int curTokenPos = _tokenPos();

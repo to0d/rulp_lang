@@ -124,6 +124,7 @@ import alpha.rulp.runtime.IRTemplate.TemplateParaEntry;
 import alpha.rulp.runtime.RName;
 import alpha.rulp.ximpl.collection.XRMap;
 import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.lang.AbsObject;
 import alpha.rulp.ximpl.rclass.XRFactorNew;
 
 public class RulpUtil {
@@ -265,30 +266,7 @@ public class RulpUtil {
 			default:
 				throw new RException("unsupport type: " + obj.getType() + ", " + obj.toString());
 			}
-
-			_formatAttrList(sb, obj);
 		}
-	}
-
-	private static void _formatAttrList(StringBuffer sb, IRObject obj) throws RException {
-
-		List<String> attrList = obj.getAttributeList();
-		if (attrList == null || attrList.isEmpty()) {
-			return;
-		}
-
-		sb.append("[");
-		Iterator<String> it = attrList.iterator();
-		int i = 0;
-		while (it.hasNext()) {
-
-			if (i++ != 0) {
-				sb.append(' ');
-			}
-
-			sb.append(it.next());
-		}
-		sb.append("]");
 	}
 
 	static class XShortFormater extends XRFormater {
@@ -361,6 +339,27 @@ public class RulpUtil {
 	private static final String R_TEMPALTE_PRE = "$$tp_";
 
 	private static final String R_VAR_PRE = "$$v_";
+
+	private static void _formatAttrList(StringBuffer sb, IRObject obj) throws RException {
+
+		List<String> attrList = RulpUtil.getAttributeList(obj);
+		if (attrList == null || attrList.isEmpty()) {
+			return;
+		}
+
+		sb.append("[");
+		Iterator<String> it = attrList.iterator();
+		int i = 0;
+		while (it.hasNext()) {
+
+			if (i++ != 0) {
+				sb.append(' ');
+			}
+
+			sb.append(it.next());
+		}
+		sb.append("]");
+	}
 
 	private static void _toString(StringBuffer sb, IRIterator<? extends IRObject> iterator, IRFormater formater)
 			throws RException {
@@ -504,6 +503,10 @@ public class RulpUtil {
 		while (it.hasNext()) {
 			list.add(it.next());
 		}
+	}
+
+	public static void addAttribute(IRObject obj, String attr) {
+		((AbsObject) obj).addAttribute(attr);
 	}
 
 	public static void addFactor(IRFrame frame, String factorName, IRFactorBody factorBody) throws RException {
@@ -1230,6 +1233,10 @@ public class RulpUtil {
 		throw new RException(String.format("Invalid rational expression: (%s %s %s)", op, a.toString(), b.toString()));
 	}
 
+	public static boolean containAttribute(IRObject obj, String attr) {
+		return ((AbsObject) obj).containAttribute(attr);
+	}
+
 	public static void decRef(IRObject obj) throws RException {
 
 		if (obj == null) {
@@ -1348,6 +1355,10 @@ public class RulpUtil {
 		}
 	}
 
+	public static List<String> getAttributeList(IRObject obj) {
+		return ((AbsObject) obj).getAttributeList();
+	}
+
 	public static IRAtom getObjectType(IRObject valObj) throws RException {
 
 		IRAtom valAtom = RType.toObject(valObj.getType());
@@ -1371,6 +1382,11 @@ public class RulpUtil {
 		}
 
 		return RulpUtil.asVar(entryValue).getValue();
+	}
+
+	public static boolean hasAttributeList(IRObject obj) {
+		List<String> al = ((AbsObject) obj).getAttributeList();
+		return al != null && !al.isEmpty();
 	}
 
 	public static void incRef(IRObject obj) throws RException {
@@ -1401,6 +1417,14 @@ public class RulpUtil {
 		return obj.getType() == RType.ATOM;
 	}
 
+	public static boolean isAtom(IRObject obj, String name) {
+		return obj.getType() == RType.ATOM && ((IRAtom) obj).getName().equals(name);
+	}
+
+	public static boolean isExpression(IRObject obj) {
+		return obj.getType() == RType.EXPR;
+	}
+
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
 //
 //		IRObject nsObj = frame.getObject(A_USING_NS);
@@ -1410,14 +1434,6 @@ public class RulpUtil {
 //
 //		return RulpUtil.asSubject(nsObj);
 //	}
-
-	public static boolean isAtom(IRObject obj, String name) {
-		return obj.getType() == RType.ATOM && ((IRAtom) obj).getName().equals(name);
-	}
-
-	public static boolean isExpression(IRObject obj) {
-		return obj.getType() == RType.EXPR;
-	}
 
 	public static boolean isFunctionLambda(IRObject obj) throws RException {
 		return obj.getType() == RType.FUNC && ((IRFunction) obj).isLambda();
@@ -1631,6 +1647,10 @@ public class RulpUtil {
 				throw new RException(e.toString());
 			}
 		});
+	}
+
+	public static boolean removeAttribute(IRObject obj, String attr) {
+		return ((AbsObject) obj).removeAttribute(attr);
 	}
 
 	public static void saveObjList(List<IRObject> list, IRObject obj) throws RException {
@@ -2086,6 +2106,20 @@ public class RulpUtil {
 		default:
 			throw new RException("unsupport type: " + obj.getType());
 		}
+	}
+
+	public static String toValidAttribute(String attr) {
+
+		if (attr == null) {
+			return null;
+		}
+
+		attr = attr.trim();
+		if (attr.isEmpty()) {
+			return null;
+		}
+
+		return attr;
 	}
 
 }

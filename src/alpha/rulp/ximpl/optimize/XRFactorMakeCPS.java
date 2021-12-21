@@ -36,7 +36,7 @@ public class XRFactorMakeCPS extends AbsRFactorAdapter implements IRFactor {
 
 		IRObject rst = CPSUtils.rebuildCpsTree(RulpUtil.asExpression(args.get(1)), frame);
 		if (rst.getType() == RType.EXPR) {
-			rst.addAttribute(A_OP_TCO);
+			RulpUtil.addAttribute(rst, A_OP_TCO);
 		}
 
 		return rst;

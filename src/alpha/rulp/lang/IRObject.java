@@ -10,23 +10,15 @@
 
 package alpha.rulp.lang;
 
-import java.util.List;
-
 import alpha.rulp.runtime.IRListener1;
 
 public interface IRObject {
-
-	public void addAttribute(String attr);
 
 	public void addObjectDeletedListener(IRListener1<IRObject> listener);
 
 	public String asString();
 
-	public boolean containAttribute(String attr);
-
 	public void decRef() throws RException;
-
-	public List<String> getAttributeList();
 
 	public int getMaxRef();
 
@@ -40,5 +32,4 @@ public interface IRObject {
 
 	public boolean isDeleted();
 
-	public boolean removeAttribute(String attr);
 }
