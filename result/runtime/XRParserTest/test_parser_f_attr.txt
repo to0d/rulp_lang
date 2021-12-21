@@ -1,5 +1,8 @@
 a[1]
 '(a b c)[k]
-(a b) [m]
+(a b)[m]
 {a,b,c}[n]
 a[1 2]
+(attribute-of a[1])
+(a b) [m]
+[m]

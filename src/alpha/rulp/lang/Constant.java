@@ -523,8 +523,6 @@ public interface Constant {
 
 	int P_STATIC = 0x0002;
 
-	String S_ATTR = "_attr_";
-
 	IRAtom T_Array = RulpFactory.createAtom(A_ARRAY);
 
 	IRAtom T_Atom = RulpFactory.createAtom(A_ATOM);

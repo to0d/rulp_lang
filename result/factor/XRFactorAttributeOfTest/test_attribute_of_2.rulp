@@ -1,0 +1,8 @@
+(attribute-of a[1])
+;=>
+
+(attribute-of a[m n])
+;=>
+
+(attribute-of (a b c)[x y z])
+;=>

@@ -4,7 +4,7 @@ out: a[1]
 in : '(a b c)[k]
 out: '(a b c)[k]
 
-in : (a b) [m]
+in : (a b)[m]
 out: (a b)[m]
 
 in : {a,b,c}[n]
@@ -12,4 +12,13 @@ out: {a,b,c}[n]
 
 in : a[1 2]
 out: a[1 2]
+
+in : (attribute-of a[1])
+out: (attribute-of a[1])
+
+in : (a b) [m]
+err: Bad Syntax at line 0: token=[S:1:0:7:[], line=(a b) [m]
+
+in : [m]
+err: Bad Syntax at line 0: token=[S:1:0:1:[], line=[m]
 

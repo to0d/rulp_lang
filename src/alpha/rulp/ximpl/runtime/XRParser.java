@@ -15,7 +15,6 @@ import static alpha.rulp.lang.Constant.F_O_MBR;
 import static alpha.rulp.lang.Constant.O_False;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.O_True;
-import static alpha.rulp.lang.Constant.S_ATTR;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -458,7 +457,7 @@ public class XRParser implements IRParser {
 				return arrayList;
 			}
 
-			IRObject nextObj = nextObject();
+			IRObject nextObj = _nextObject();
 			if (nextObj == null) {
 				break; // invalid
 			}
@@ -492,7 +491,7 @@ public class XRParser implements IRParser {
 		int depth2 = _depth();
 
 		if (matchSymbol(']')) {
-			return Collections.emptyList();
+			return null;
 		} else {
 			_pullStack(depth2);
 		}
@@ -540,7 +539,7 @@ public class XRParser implements IRParser {
 
 		ArrayList<IRObject> list = new ArrayList<>();
 		IRObject obj = null;
-		while (_ignoreBlank() && (obj = nextObject()) != null) {
+		while (_ignoreBlank() && (obj = _nextObject()) != null) {
 			list.add(obj);
 		}
 
@@ -590,6 +589,25 @@ public class XRParser implements IRParser {
 
 		_pullStack(depth);
 		return null;
+	}
+
+	private IRObject _nextObject() throws RException {
+
+		IRObject obj = nextObject();
+
+		/******************************************/
+		// Try match Array: []
+		/******************************************/
+		if (obj != null) {
+			List<IRObject> list = matchAttrList();
+			if (list != null) {
+				for (IRObject attr : list) {
+					RulpUtil.addAttribute(obj, attr.asString());
+				}
+			}
+		}
+
+		return obj;
 	}
 
 	private IRObject nextObject() throws RException {
@@ -874,19 +892,6 @@ public class XRParser implements IRParser {
 		}
 
 		/******************************************/
-		// Try match Array: []
-		/******************************************/
-		_pullStack(depth);
-		{
-			List<IRObject> list = matchAttrList();
-			if (list != null) {
-				IRList attr = RulpFactory.createList(list);
-				RulpUtil.addAttribute(attr, S_ATTR);
-				return attr;
-			}
-		}
-
-		/******************************************/
 		// Try match atom: abc
 		/******************************************/
 		_pullStack(depth);
@@ -1067,11 +1072,10 @@ public class XRParser implements IRParser {
 		// Match rules
 		/****************************************************/
 		ArrayList<IRObject> list = new ArrayList<>();
-		IRObject lastObj = null;
 
 		while (_ignoreBlank() && _more()) {
 
-			IRObject obj = nextObject();
+			IRObject obj = _nextObject();
 
 			if (obj == null) {
 
@@ -1088,31 +1092,7 @@ public class XRParser implements IRParser {
 				}
 			}
 
-			/****************************************/
-			// Append attribute list [] to last object
-			/****************************************/
-			if (obj.getType() == RType.LIST && RulpUtil.containAttribute(obj, S_ATTR)) {
-
-				IRList attrList = (IRList) obj;
-
-				if (lastObj == null) {
-					Token lastToken = this._curToken();
-					int lastLineIndex = lastToken == null ? -1 : lastToken.lineIndex;
-					String lastLine = lastLineIndex == -1 ? null : lines.get(lastLineIndex);
-					throw new RParseException(lastLineIndex,
-							String.format("no object before attr, token=%s, line=%s", lastToken, lastLine));
-				}
-
-				IRIterator<? extends IRObject> it = attrList.iterator();
-				while (it.hasNext()) {
-					IRObject attr = it.next();
-					RulpUtil.addAttribute(lastObj, attr.asString());
-				}
-
-			} else {
-				list.add(obj);
-				lastObj = obj;
-			}
+			list.add(obj);
 
 			// Clean stack
 			int curTokenPos = _tokenPos();
