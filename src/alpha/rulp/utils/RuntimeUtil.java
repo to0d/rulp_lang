@@ -4,6 +4,7 @@ import static alpha.rulp.lang.Constant.A_LOCAL;
 import static alpha.rulp.lang.Constant.A_NOCLASS;
 import static alpha.rulp.lang.Constant.A_OP_CPS;
 import static alpha.rulp.lang.Constant.A_OP_STABLE;
+import static alpha.rulp.lang.Constant.A_OP_TCO;
 import static alpha.rulp.lang.Constant.A_PARENT;
 import static alpha.rulp.lang.Constant.A_TRACE;
 import static alpha.rulp.lang.Constant.F_IF;
@@ -395,7 +396,7 @@ public final class RuntimeUtil {
 					IRObject rst = RuntimeUtil.computeFun((IRFunction) e0, expr, interpreter, frame);
 					if (rst == null) {
 						return O_Nil;
-					} else if (rst.getType() == RType.EXPR && RuntimeUtil.isSupportOpCPS(frame)) {
+					} else if (rst.getType() == RType.EXPR && AttributeUtil.containAttribute(rst, A_OP_TCO)) {
 						rst = CPSUtils.computeCPSExpr((IRExpr) rst, interpreter, frame);
 					}
 					return rst;

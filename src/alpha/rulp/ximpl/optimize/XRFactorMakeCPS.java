@@ -9,10 +9,13 @@
 
 package alpha.rulp.ximpl.optimize;
 
+import static alpha.rulp.lang.Constant.A_OP_TCO;
+
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
@@ -31,7 +34,12 @@ public class XRFactorMakeCPS extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		return CPSUtils.rebuildCpsTree(RulpUtil.asExpression(args.get(1)), frame);
+		IRObject rst = CPSUtils.rebuildCpsTree(RulpUtil.asExpression(args.get(1)), frame);
+		if (rst.getType() == RType.EXPR) {
+			rst.addAttribute(A_OP_TCO);
+		}
+
+		return rst;
 	}
 
 	@Override
