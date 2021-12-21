@@ -29,7 +29,6 @@ root::add-list-to-list
 root::add_search_frame
 root::alias
 root::and
-root::annotation
 root::array
 root::atom
 root::attribute-of

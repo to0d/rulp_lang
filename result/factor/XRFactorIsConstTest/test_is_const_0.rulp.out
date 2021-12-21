@@ -44,7 +44,6 @@ obj=add-list-to-list, type=factor, const=true
 obj=add_search_frame, type=factor, const=true
 obj=alias, type=factor, const=true
 obj=and, type=factor, const=true
-obj=annotation, type=atom, const=true
 obj=array, type=atom, const=true
 obj=atom, type=atom, const=true
 obj=attribute-of, type=factor, const=true

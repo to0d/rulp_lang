@@ -13,8 +13,6 @@ import alpha.rulp.utils.RulpFactory;
 
 public interface Constant {
 
-	String A_ANNOTATION = "annotation";
-
 	String A_ARRAY = "array";
 
 	String A_ATOM = "atom";
@@ -524,8 +522,6 @@ public interface Constant {
 	int P_INHERIT = 0x0004;
 
 	int P_STATIC = 0x0002;
-
-	IRAtom T_Annotation = RulpFactory.createAtom(A_ANNOTATION);
 
 	IRAtom T_Array = RulpFactory.createAtom(A_ARRAY);
 

@@ -556,7 +556,6 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, T_Native);
 		RulpUtil.addFrameObject(rootFrame, T_Member);
 		RulpUtil.addFrameObject(rootFrame, T_Frame);
-		RulpUtil.addFrameObject(rootFrame, T_Annotation);
 
 		RulpUtil.addFrameObject(rootFrame, new XRFactorNameOf(F_NAME_OF));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorTypeOf(F_TYPE_OF));

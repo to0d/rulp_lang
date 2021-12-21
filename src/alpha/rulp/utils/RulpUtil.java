@@ -9,7 +9,6 @@
 
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.A_ANNOTATION;
 import static alpha.rulp.lang.Constant.A_ARRAY;
 import static alpha.rulp.lang.Constant.A_ATOM;
 import static alpha.rulp.lang.Constant.A_BLOB;
@@ -49,7 +48,6 @@ import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.P_FINAL;
 import static alpha.rulp.lang.Constant.P_INHERIT;
 import static alpha.rulp.lang.Constant.P_STATIC;
-import static alpha.rulp.lang.Constant.T_Annotation;
 import static alpha.rulp.lang.Constant.T_Array;
 import static alpha.rulp.lang.Constant.T_Atom;
 import static alpha.rulp.lang.Constant.T_Blob;
@@ -1815,9 +1813,6 @@ public class RulpUtil {
 
 		case A_MEMBER:
 			return T_Member;
-
-		case A_ANNOTATION:
-			return T_Annotation;
 
 		case A_FRAME:
 			return T_Frame;

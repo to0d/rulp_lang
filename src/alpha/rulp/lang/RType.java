@@ -9,7 +9,6 @@
 
 package alpha.rulp.lang;
 
-import static alpha.rulp.lang.Constant.A_ANNOTATION;
 import static alpha.rulp.lang.Constant.A_ARRAY;
 import static alpha.rulp.lang.Constant.A_ATOM;
 import static alpha.rulp.lang.Constant.A_BLOB;
@@ -34,7 +33,6 @@ import static alpha.rulp.lang.Constant.A_STRING;
 import static alpha.rulp.lang.Constant.A_TEMPLATE;
 import static alpha.rulp.lang.Constant.A_VAR;
 import static alpha.rulp.lang.Constant.O_Nan;
-import static alpha.rulp.lang.Constant.T_Annotation;
 import static alpha.rulp.lang.Constant.T_Array;
 import static alpha.rulp.lang.Constant.T_Atom;
 import static alpha.rulp.lang.Constant.T_Blob;
@@ -85,13 +83,12 @@ public enum RType {
 	CLASS(19, A_CLASS), //
 	NATIVE(20, A_NATIVE), //
 	MEMBER(21, A_MEMBER), //
-	ANNOTATION(22, A_ANNOTATION), //
-	FRAME(23, A_FRAME); //
+	FRAME(22, A_FRAME); //
 
 	public static final RType ALL_RTYPE[] = { NIL, ATOM, BOOL, INT, LONG, FLOAT, DOUBLE, STRING, BLOB, LIST, EXPR,
-			ARRAY, VAR, CONSTANT, FACTOR, FUNC, TEMPLATE, MACRO, INSTANCE, CLASS, NATIVE, MEMBER, ANNOTATION, FRAME };
+			ARRAY, VAR, CONSTANT, FACTOR, FUNC, TEMPLATE, MACRO, INSTANCE, CLASS, NATIVE, MEMBER, FRAME };
 
-	public static final int TYPE_NUM = 24;
+	public static final int TYPE_NUM = 23;
 
 	public static IRAtom toObject(RType type) {
 
@@ -158,9 +155,6 @@ public enum RType {
 
 		case MEMBER:
 			return T_Member;
-
-		case ANNOTATION:
-			return T_Annotation;
 
 		case FRAME:
 			return T_Frame;
@@ -235,9 +229,6 @@ public enum RType {
 
 		case A_MEMBER:
 			return MEMBER;
-
-		case A_ANNOTATION:
-			return ANNOTATION;
 
 		case A_FRAME:
 			return FRAME;

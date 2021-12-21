@@ -250,7 +250,7 @@ public class StableUtil {
 //		if (deep++ > 100) {
 //			System.out.println();
 //		}
-		
+
 		if (obj == null) {
 			return true;
 		}
@@ -358,7 +358,6 @@ public class StableUtil {
 		case INSTANCE:
 		case ARRAY:
 		case BLOB:
-		case ANNOTATION:
 		default:
 			return false;
 		}
