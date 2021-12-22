@@ -19,7 +19,8 @@
 ;=>nil
 ;out:
 1:var, name=?rv
-2:var, name=v1
+2:var, name=?script-path
+3:var, name=v1
 
 ;eof
 

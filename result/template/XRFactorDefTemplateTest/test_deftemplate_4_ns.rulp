@@ -19,5 +19,5 @@
 (ns1::ask teacher (+ 1 1))
 ;;;
 
-(print-global-info)
+(_ginfo)
 ;;;

@@ -1,0 +1,26 @@
+name=o3, string=class1@o3, lvl=1, ref=1/3, parent=class1, final=false, mbrs=5, frame=6(SF-o3-3)
+==========================================================================================================================
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
+--------------------------------------------------------------------------------------------------------------------------
+?rv                  : DEFAULT                      0    1    var        3 : type=int
+?value               : DEFAULT              Y       4    1    var        3 : type=int
+get                  : DEFAULT              Y       4    1    func       (get) : frame=frame@SF-o3-3, type=lambda
+init                 : DEFAULT              Y       4    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
+                                                         1    func       (init) : frame=frame@SF-o3-3, type=lambda
+                                                         1    func       (init nil) : frame=frame@SF-o3-3, type=lambda
+                                                         1    func       (init nil nil) : frame=frame@SF-o3-3, type=lambda
+this                 : DEFAULT                      0    1    instance   class1@o3
+==========================================================================================================================
+
+name=class1, string=class1, lvl=0, ref=1/3, parent=null, final=false, mbrs=3, frame=3(SF-class1-0)
+==========================================================================================================================
+Name                 : Access  Final Static Inherit Prop Ref  Type       Value
+--------------------------------------------------------------------------------------------------------------------------
+?value               : DEFAULT                      0    1    var        null
+get                  : DEFAULT                      0    1    func       (get) : frame=frame@main
+init                 : DEFAULT                      0    1    funcList   '((init nil nil) (init nil) (init)) : frame=null, type=list
+                                                         3    func       (init) : frame=frame@main
+                                                         2    func       (init nil) : frame=frame@main
+                                                         1    func       (init nil nil) : frame=frame@main
+==========================================================================================================================
+

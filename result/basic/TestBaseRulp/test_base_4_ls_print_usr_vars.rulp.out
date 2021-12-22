@@ -5,8 +5,9 @@
 (ls-print local var)
 ;=>nil
 ;out:
-mbr=x, name=x, type=var, property='(public), value="10"
-mbr=y, name=y, type=var, property='(public), value="nil"
+mbr=?script-path, name=?script-path, type=var, property='(public), attribute='(), value="result\basic\TestBaseRulp\test_base_4_ls_print_usr_vars.rulp"
+mbr=x, name=x, type=var, property='(public), attribute='(), value="10"
+mbr=y, name=y, type=var, property='(public), attribute='(), value="nil"
 
 ;eof
 

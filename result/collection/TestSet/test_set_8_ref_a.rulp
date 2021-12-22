@@ -35,7 +35,7 @@
 (rulp-object-count instance)
 ;=>
 
-(print-global-info)
+(_ginfo "a")
 ;;;
 
 (delete s1)     ;; delete object
@@ -50,5 +50,5 @@
 (rulp-object-count instance)
 ;=>
 
-(print-global-info)
+(_ginfo "b")
 ;;;

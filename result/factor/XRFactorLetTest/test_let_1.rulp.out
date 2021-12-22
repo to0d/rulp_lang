@@ -2,11 +2,11 @@
 ;=>&x
 
 (ls local)
-;=>'(main::local main::main main::root main::system main::x)
+;=>'(main::?script-path main::local main::main main::root main::system main::x)
 
 (let (a 5) (+ a 1))
 ;=>6
 
 (ls local) ; no global var created
-;=>'(main::local main::main main::root main::system main::x)
+;=>'(main::?script-path main::local main::main main::root main::system main::x)
 

@@ -13,5 +13,5 @@
 (ask other (+ 1 1))
 ;;;
 
-(print-global-info)
+(_ginfo)
 ;;;

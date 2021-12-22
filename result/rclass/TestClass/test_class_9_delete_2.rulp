@@ -32,5 +32,5 @@
 ?dx
 ;;;
 
-(print-global-info)
+(_ginfo)
 ;;;

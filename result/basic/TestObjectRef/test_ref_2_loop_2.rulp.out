@@ -1,11 +1,11 @@
 (defclass class1 ()
-    (defvar ?value 1 public)
+    (defvar ?value 1)[public]
     (defun dump () (print ?value "\n"))
 )
 ;=>class1
 
 (defclass class2 ()
-    (defvar ?descriptors nil public)
+    (defvar ?descriptors nil)[public]
     (defun load (?count)
         (defvar ?_descriptors {})    
         (loop for ?x from 1 to ?count do

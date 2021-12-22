@@ -131,76 +131,52 @@ public class SubjectUtil {
 		return mbr;
 	}
 
-	private static IRMember _processMemberAttribute(IRMember mbr, IRList mbrExpr, int fromIdx, int endIdx, boolean fun)
-			throws RException {
+	private static IRMember _processMemberAttribute(IRMember mbr, String attr, boolean fun) throws RException {
 
-		RAccessType accessType = null;
-		boolean bFinal = false;
-		boolean bStatic = false;
+		switch (attr) {
+		case A_PUBLIC:
+			mbr.setAccessType(RAccessType.PUBLIC);
+			break;
 
-		for (int i = fromIdx; i < endIdx; ++i) {
+		case A_PRIVATE:
+			mbr.setAccessType(RAccessType.PRIVATE);
+			break;
 
-			switch (RulpUtil.asAtom(mbrExpr.get(i)).getName()) {
-			case A_PUBLIC:
-				if (accessType != null) {
-					throw new RException("duplicate modifier:" + mbrExpr.get(i));
-				}
-				accessType = RAccessType.PUBLIC;
-				break;
+		case A_DEFAULT:
+			mbr.setAccessType(RAccessType.DEFAULT);
+			break;
 
-			case A_PRIVATE:
-				if (accessType != null) {
-					throw new RException("duplicate modifier:" + mbrExpr.get(i));
-				}
-				accessType = RAccessType.PRIVATE;
-				break;
+		case A_FINAL:
+			RulpUtil.setPropertyFinal(mbr, true);
+			break;
 
-			case A_DEFAULT:
-				if (accessType != null) {
-					throw new RException("duplicate modifier:" + mbrExpr.get(i));
-				}
-				accessType = RAccessType.DEFAULT;
-				break;
-
-			case A_FINAL:
-				if (bFinal) {
-					throw new RException("duplicate modifier:" + mbrExpr.get(i));
-				}
-				bFinal = true;
-				break;
-
-			case A_STATIC:
-				if (bStatic) {
-					throw new RException("duplicate modifier:" + mbrExpr.get(i));
-				}
-				bStatic = true;
-				break;
-
-			default:
-				throw new RException("duplicate modifier:" + mbrExpr.get(i));
+		case A_STATIC:
+			RulpUtil.setPropertyStatic(mbr, true);
+			/****************************************************/
+			// set subject frame for static function
+			/****************************************************/
+			if (fun) {
+				mbr = RulpFactory.createMember(mbr.getSubject(), mbr.getName(), RulpFactory.createFunctionLambda(
+						RulpUtil.asFunction(mbr.getValue()), RulpUtil.asSubject(mbr.getSubject()).getSubjectFrame()));
 			}
+			break;
+
+		default:
+			throw new RException("unknown attribute:" + attr);
 		}
 
-		if (accessType != null) {
-			mbr.setAccessType(accessType);
-		}
-
-		/****************************************************/
-		// set subject frame for static function
-		/****************************************************/
-		if (fun && bStatic) {
-			mbr = RulpFactory.createMember(mbr.getSubject(), mbr.getName(), RulpFactory.createFunctionLambda(
-					RulpUtil.asFunction(mbr.getValue()), RulpUtil.asSubject(mbr.getSubject()).getSubjectFrame()));
-		}
-
-		RulpUtil.setPropertyFinal(mbr, bFinal);
-		RulpUtil.setPropertyStatic(mbr, bStatic);
+		RulpUtil.addAttribute(mbr, attr);
 
 		return mbr;
 	}
 
 	public static IRMember defineMemberFun(IRSubject sub, String mbrName, IRList mbrExpr, IRInterpreter interpreter,
 			IRFrame frame) throws RException {
+
+		int mbrExprSize = mbrExpr.size();
+		if (mbrExprSize < 4) {
+			throw new RException("Invalid member parameters:" + mbrExpr);
+		}
 
 		IRMember mbr = null;
 
@@ -223,21 +199,12 @@ public class SubjectUtil {
 		/*****************************************************/
 		// Function body
 		/*****************************************************/
-		int mbrExprSize = mbrExpr.size();
-		int bodyEndIndex = 3;
-		while (bodyEndIndex < mbrExprSize && mbrExpr.get(bodyEndIndex).getType() == RType.EXPR) {
-			++bodyEndIndex;
-		}
-
 		IRExpr funBody = null;
-		if (bodyEndIndex <= 3) {
-			throw new RException("no mbr body found: " + mbrExpr);
-
-		} else if (bodyEndIndex == 4) {
+		if (mbrExprSize == 4) {
 			funBody = RulpUtil.asExpression(mbrExpr.get(3));
 
 		} else {
-			funBody = RulpUtil.toDoExpr(RulpUtil.subList(mbrExpr, 3, bodyEndIndex));
+			funBody = RulpUtil.toDoExpr(mbrExpr.listIterator(3));
 		}
 
 		/*****************************************************/
@@ -306,13 +273,17 @@ public class SubjectUtil {
 		}
 
 		mbr = RulpFactory.createMember(sub, mbrName, newFunc);
+
 		/*****************************************************/
-		// Process modifier
+		// Process attribute
 		/*****************************************************/
-		mbr = _processModifier(mbr, mbrExpr, bodyEndIndex, mbrExprSize, true);
+		if (RulpUtil.hasAttributeList(mbrExpr)) {
+			for (String attr : RulpUtil.getAttributeList(mbrExpr)) {
+				mbr = _processMemberAttribute(mbr, attr, true);
+			}
+		}
 
 		sub.setMember(mbrName, mbr);
-
 		return mbr;
 	}
 
@@ -339,6 +310,10 @@ public class SubjectUtil {
 	public static void defineMemberVar(IRSubject sub, IRList mbrExpr, IRInterpreter interpreter, IRFrame frame)
 			throws RException {
 
+		if (mbrExpr.size() != 2 && mbrExpr.size() != 3) {
+			throw new RException("Invalid member parameters: " + mbrExpr);
+		}
+
 		/*****************************************************/
 		// name
 		/*****************************************************/
@@ -359,9 +334,13 @@ public class SubjectUtil {
 		IRMember mbr = _createMemberVar(sub, mbrName, varValue);
 
 		/*****************************************************/
-		// Process modifier
+		// Process attribute
 		/*****************************************************/
-		mbr = _processModifier(mbr, mbrExpr, 3, mbrExprSize, false);
+		if (RulpUtil.hasAttributeList(mbrExpr)) {
+			for (String attr : RulpUtil.getAttributeList(mbrExpr)) {
+				mbr = _processMemberAttribute(mbr, attr, true);
+			}
+		}
 
 		sub.setMember(mbrName, mbr);
 	}

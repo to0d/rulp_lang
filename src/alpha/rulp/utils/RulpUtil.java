@@ -9,7 +9,7 @@
 
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_ARRAY;
 import static alpha.rulp.lang.Constant.A_ATOM;
 import static alpha.rulp.lang.Constant.A_BLOB;
 import static alpha.rulp.lang.Constant.A_BOOL;
@@ -20,6 +20,7 @@ import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.A_DOUBLE;
 import static alpha.rulp.lang.Constant.A_EXPRESSION;
 import static alpha.rulp.lang.Constant.A_FACTOR;
+import static alpha.rulp.lang.Constant.A_FINAL;
 import static alpha.rulp.lang.Constant.A_FLOAT;
 import static alpha.rulp.lang.Constant.A_FRAME;
 import static alpha.rulp.lang.Constant.A_FUNCTION;
@@ -34,17 +35,24 @@ import static alpha.rulp.lang.Constant.A_NAMESPACE;
 import static alpha.rulp.lang.Constant.A_NATIVE;
 import static alpha.rulp.lang.Constant.A_NIL;
 import static alpha.rulp.lang.Constant.A_NULL;
+import static alpha.rulp.lang.Constant.A_PRIVATE;
+import static alpha.rulp.lang.Constant.A_PUBLIC;
 import static alpha.rulp.lang.Constant.A_QUESTION;
 import static alpha.rulp.lang.Constant.A_QUESTION_C;
+import static alpha.rulp.lang.Constant.A_STATIC;
 import static alpha.rulp.lang.Constant.A_STRING;
 import static alpha.rulp.lang.Constant.A_TEMPLATE;
 import static alpha.rulp.lang.Constant.A_VAR;
 import static alpha.rulp.lang.Constant.MAX_TOSTRING_LEN;
 import static alpha.rulp.lang.Constant.O_CONST;
 import static alpha.rulp.lang.Constant.O_EMPTY;
+import static alpha.rulp.lang.Constant.O_Final;
 import static alpha.rulp.lang.Constant.O_LAMBDA;
 import static alpha.rulp.lang.Constant.O_New;
 import static alpha.rulp.lang.Constant.O_Nil;
+import static alpha.rulp.lang.Constant.O_Private;
+import static alpha.rulp.lang.Constant.O_Public;
+import static alpha.rulp.lang.Constant.O_Static;
 import static alpha.rulp.lang.Constant.P_FINAL;
 import static alpha.rulp.lang.Constant.P_INHERIT;
 import static alpha.rulp.lang.Constant.P_STATIC;
@@ -447,7 +455,7 @@ public class RulpUtil {
 			formater.format(sb, obj);
 		}
 
-		_formatAttrList(sb, obj);
+//		_formatAttrList(sb, obj);
 	}
 
 	private static void _toStringList(IRObject obj, List<String> list) throws RException {

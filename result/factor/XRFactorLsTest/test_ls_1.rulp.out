@@ -1,9 +1,9 @@
 (ls)
-;=>'(main::main main::root main::system)
+;=>'(main::?script-path main::main main::root main::system)
 
 (ls local)
-;=>'(main::local main::main main::root main::system)
+;=>'(main::?script-path main::local main::main main::root main::system)
 
 (ls main)
-;=>'(main::local main::main main::root main::system)
+;=>'(main::?script-path main::local main::main main::root main::system)
 

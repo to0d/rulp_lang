@@ -13,3 +13,12 @@
 (?f)
 ;=>4
 
+(_ginfo "a")
+;=>nil
+
+(setq ?f nil)
+;=>&?f
+
+(_ginfo "b")
+;=>nil
+

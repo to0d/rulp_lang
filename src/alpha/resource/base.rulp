@@ -45,6 +45,27 @@
 (defun is-empty ((?l string)) (return (= (str-length ?l) 0)))
 (defun is-blank ((?l string)) (return (= (str-length (str-trim ?l)) 0)))
 
+(defun file-prename ((?path string))
+    
+    (defvar ?new-path ?path)
+    (defvar ?pos (str-last-index-of ?new-path "."))
+    (if (!= ?pos -1)
+        (setq ?new-path (str-substr ?new-path 0 ?pos))
+    )
+
+    (return ?new-path)
+)
+
+(defun file-subffix ((?path string))
+    
+    (defvar ?new-path ?path)
+    (defvar ?pos (str-last-index-of ?new-path "."))
+    (if (!= ?pos -1)
+        (setq ?new-path (str-substr ?new-path (+ ?pos 1)))
+    )
+
+    (return ?new-path)
+)
 
 ;****************************************************;
 ; Namespace tools
@@ -85,11 +106,11 @@
                 )
             )                
             
-            (print ", name=" (name-of $(value-of (value-of ?mbr)))
-                   ", type=" (type-of $(value-of (value-of ?mbr)))
-                   ", property=" (property-of $(value-of ?mbr))
-            )
-            
+            (print ", name=" (name-of $(value-of (value-of ?mbr))))
+            (print ", type=" (type-of $(value-of (value-of ?mbr))))
+            (print ", property=" (property-of $(value-of ?mbr)))
+            (print ", attribute=" (attribute-of $(value-of ?mbr)))
+
             (if (equal (type-of $(value-of (value-of ?mbr))) class)
                 (print ", class-property=" (property-of $(value-of (value-of ?mbr)))))
             
@@ -98,7 +119,7 @@
             
             (if (equal (type-of $(value-of (value-of ?mbr))) var)
                 (print ", value=\"" $(value-of (value-of ?mbr)) "\""))
-            
+
             (print "\n")
         )
     )
@@ -145,28 +166,28 @@
 
 (defclass set () final
     
-    (defvar ?impl nil private)
+    (defvar ?impl nil)[private]
     
     (defun init ()
-        (setq ?impl (set::_set_init)))
+        (setq ?impl (set::_set_init)))[final]
     
     (defun add (?v)
-        (set::_set_add ?impl ?v) final)
+        (set::_set_add ?impl ?v))[final]
     
     (defun has (?v)
-        (return (set::_set_has ?impl ?v)) final)
+        (return (set::_set_has ?impl ?v)))[final]
     
     (defun size-of ()
-        (return (set::_set_size_of ?impl)) final)
+        (return (set::_set_size_of ?impl)))[final]
         
     (defun is-empty ()
-        (return (set::_set_is_empty ?impl)) final)
+        (return (set::_set_is_empty ?impl)))[final]
         
     (defun clear ()
-        (set::_set_clear ?impl) final)
+        (set::_set_clear ?impl))[final]
         
     (defun to-list ()
-        (return (set::_set_to_list ?impl)) final)
+        (return (set::_set_to_list ?impl)))[final]
 )
 
 (defun size-of  ((?set set)) (return (?set::size-of)))
@@ -176,25 +197,25 @@
 
 (defclass map () final
     
-    (defvar ?impl nil private)
+    (defvar ?impl nil)[private]
     
     (defun init ()
-        (setq ?impl (map::_map_init)) final)
+        (setq ?impl (map::_map_init)))[final]
     
     (defun put (?k ?v)
-        (map::_map_put ?impl ?k ?v) final)
+        (map::_map_put ?impl ?k ?v))[final]
     
     (defun get (?k)
-        (return (map::_map_get ?impl ?k)) final)
+        (return (map::_map_get ?impl ?k)))[final]
     
     (defun size-of ()
-        (return (map::_map_size_of ?impl)) final)
+        (return (map::_map_size_of ?impl)))[final]
         
     (defun is-empty ()
-        (return (map::_map_is_empty ?impl)) final)
+        (return (map::_map_is_empty ?impl)))[final]
         
     (defun clear ()
-        (map::_map_clear ?impl) final)
+        (map::_map_clear ?impl))[final]
 
 )
 
@@ -204,52 +225,52 @@
 
 (defclass queue () final
     
-    (defvar ?impl nil private)
+    (defvar ?impl nil)[private]
     
     (defun init ()
-        (setq ?impl (queue::_queue_init)) final)
+        (setq ?impl (queue::_queue_init)))[final]
     
     (defun push (?e)
-        (queue::_queue_push_back ?impl ?e) final)
+        (queue::_queue_push_back ?impl ?e))[final]
         
     (defun push_back (?e)
-        (queue::_queue_push_back ?impl ?e) final)
+        (queue::_queue_push_back ?impl ?e))[final]
         
     (defun push_front (?e)
-        (queue::_queue_push_front ?impl ?e) final)
+        (queue::_queue_push_front ?impl ?e))[final]
     
     (defun pop ()
-        (return (queue::_queue_pop_front ?impl)) final)
+        (return (queue::_queue_pop_front ?impl)))[final]
 
     (defun pop_back ()
-        (return (queue::_queue_pop_back ?impl)) final)
+        (return (queue::_queue_pop_back ?impl)))[final]
     
     (defun pop_front ()
-        (return (queue::_queue_pop_front ?impl)) final)
+        (return (queue::_queue_pop_front ?impl)))[final]
     
     (defun peek ()
-        (return (queue::_queue_peek_front ?impl)) final)
+        (return (queue::_queue_peek_front ?impl)))[final]
 
     (defun peek_back ()
-        (return (queue::_queue_peek_back ?impl)) final)
+        (return (queue::_queue_peek_back ?impl)))[final]
 
     (defun peek_front ()
-        (return (queue::_queue_peek_front ?impl)) final)
+        (return (queue::_queue_peek_front ?impl)))[final]
 
     (defun get (?k)
-        (return (queue::_queue_get ?impl ?k)) final)
+        (return (queue::_queue_get ?impl ?k)))[final]
 
     (defun size-of ()
-        (return (queue::_queue_size_of ?impl)) final)
+        (return (queue::_queue_size_of ?impl)))[final]
         
     (defun is-empty ()
-        (return (queue::_queue_is_empty ?impl)) final)
+        (return (queue::_queue_is_empty ?impl)))[final]
 
     (defun clear ()
-        (queue::_queue_clear ?impl) final)
+        (queue::_queue_clear ?impl))[final]
         
     (defun to-list ()
-        (return (queue::_queue_to_list ?impl)) final)
+        (return (queue::_queue_to_list ?impl)))[final]
 )
 
 (defun size-of  ((?queue queue))            (return (?queue::size-of)))
@@ -260,31 +281,31 @@
 
 (defclass stack () final
     
-    (defvar ?impl nil private)
+    (defvar ?impl nil)[private]
     
     (defun init ()
-        (setq ?impl (new queue)) final)
+        (setq ?impl (new queue)))[final]
     
     (defun push (?e)
-        (?impl::push_back ?e) final)
+        (?impl::push_back ?e))[final]
 
     (defun pop ()
-        (return (?impl::pop_back)) final)
+        (return (?impl::pop_back)))[final]
     
     (defun peek ()
-        (return (?impl::peek_back)) final)
+        (return (?impl::peek_back)))[final]
 
     (defun size-of ()
-        (return (?impl::size-of)) final)
+        (return (?impl::size-of)))[final]
         
     (defun is-empty ()
-        (return (?impl::is-empty)) final)
+        (return (?impl::is-empty)))[final]
         
     (defun clear ()
-        (?impl::clear) final)
+        (?impl::clear))[final]
         
     (defun to-list ()
-        (return (?impl::to-list)) final)
+        (return (?impl::to-list)))[final]
 )
 
 (defun size-of  ((?stack stack)) (return (?stack::size-of)))
@@ -292,3 +313,27 @@
 (defun clear    ((?stack stack)) (return (?stack::clear)))
 (defun to-list  ((?stack stack)) (return (?stack::to-list)))
 
+;****************************************************;
+; Test tools
+;****************************************************;
+
+(defvar ?script-path nil)
+(defmacro script_out (?expr ?sub_name)
+    (out-to-file
+        (+ (file-prename ?script-path) ?sub_name)
+        ?expr
+    )
+)
+
+(defun _ginfo ()
+    (script_out (print-global-info) ".ginfo.txt")
+)
+
+(defun _ginfo ((?n string))
+    (defvar ?new_name ".ginfo.txt")
+    (if (> (length-of ?n) 0)
+        (setq ?new_name (+ "_" ?n ?new_name))
+    )
+
+    (script_out (print-global-info) ?new_name)
+)

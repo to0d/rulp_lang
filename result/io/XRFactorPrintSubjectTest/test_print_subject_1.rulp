@@ -1,8 +1,8 @@
-(print-subject root)
+(script_out (print-subject root) "_root.txt")
 ;=>
 
-(print-subject system)
+(script_out (print-subject system) "_system.txt")
 ;=>
 
-(print-subject main)
+(script_out (print-subject main) "_main.txt")
 ;=>

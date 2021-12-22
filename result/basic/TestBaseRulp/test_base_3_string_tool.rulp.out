@@ -22,3 +22,15 @@
 (is-blank "\n")
 ;=>false
 
+(file-prename "abc.xyz")
+;=>"abc"
+
+(file-prename "abc.xyz.123")
+;=>"abc.xyz"
+
+(file-subffix "abc.xyz")
+;=>"xyz"
+
+(file-subffix "abc.xyz.123")
+;=>"123"
+

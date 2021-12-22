@@ -1,0 +1,12 @@
+id=2, name=main, lvl=2, ref=1/2, entry=6, pid=1(system), subject=main
+==========================================================================================================================
+Name(alias)          : EntryId  FrameId  Ref  Type       Value               
+--------------------------------------------------------------------------------------------------------------------------
+root                 : 1        2        0    frame      frame@root          
+system               : 2        2        0    frame      frame@system        
+main                 : 3        2        1    frame      frame@main          
+?script-path         : 4        2        1    var        result\runtime\XRFactorDefunTest\test_fun_3_overload_arg_type_1.rulp : type=string
+fun1                 : 5        2        1    func       (fun1 int nil) : frame=frame@main
+?rv                  : 8        2        1    var        result\runtime\XRFactorDefunTest\test_fun_3_overload_arg_type_1 : type=string
+==========================================================================================================================
+

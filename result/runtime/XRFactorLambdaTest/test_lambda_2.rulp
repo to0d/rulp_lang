@@ -13,5 +13,5 @@
 (fun2 (lambda () (return (fun1 1))))
 ;=>
 
-(print-global-info)
+(_ginfo)
 ;;;

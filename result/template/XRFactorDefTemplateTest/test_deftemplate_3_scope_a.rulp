@@ -1,14 +1,14 @@
-(deftemplate ask (teacher (?question expr)) (print "teacher say: yes, I know " ?question ", answer is " (value-of $(value-of ?question)) ". "))
+(deftemplate ask (teacher (?question expr)) 
+    (print "teacher say: yes, I know " ?question ", answer is " (value-of $(value-of ?question)) ". "))
 ;;;
 
-;; ************ A print-subject 1 ******************
-(print-subject 1)
+(script_out (print-subject 1) "_a.txt")
 ;;;
 
 (do
-    (deftemplate ask (student (?question expr)) (print "student say: no, I don't know " ?question "."))
-    ;; ************ B print-subject 2 ******************
-    (print-subject 2)
+    (deftemplate ask (student (?question expr)) 
+        (print "student say: no, I don't know " ?question "."))
+    (script_out (print-subject 2) "_b.txt")
     (ask teacher (+ 1 1))
     (ask student (+ 1 1))
 )
@@ -20,6 +20,5 @@
 (ask student (+ 1 1))
 ;;;
 
-;; ************ C print-subject 1 ******************
-(print-subject 1)
+(script_out (print-subject 1) "_c.txt")
 ;;;

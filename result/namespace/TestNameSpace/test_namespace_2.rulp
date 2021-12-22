@@ -43,5 +43,5 @@
 (f1)
 ;=>
 
-(print-global-info)
+(_ginfo)
 ;;;

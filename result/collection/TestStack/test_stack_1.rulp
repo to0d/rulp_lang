@@ -55,5 +55,5 @@
 (is-empty s1)
 ;=>
 
-(print-global-info)
+(_ginfo)
 ;;;

@@ -9,54 +9,13 @@
 
 (do
     (defun fun1 (?v1 ?v2) (return (+ ?v1 ?v2)))
-    (println "********** A - print-subject 2 **********")
-    (print-subject 2)
+    (script_out (print-subject 2) "_a.txt")
     (fun1 1 2)
 )
 ;=>nil
-;out:
-********** A - print-subject 2 **********
-id=3, name=do, lvl=3, ref=1/2, entry=1, pid=2(main), subject=do
-==========================================================================================================================
-Name(alias)          : EntryId  FrameId  Ref  Type       Value               
---------------------------------------------------------------------------------------------------------------------------
-fun1                 : 7        3        1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
-                                         2    func       (fun1 nil) : frame=frame@main
-                                         1    func       (fun1 nil nil) : frame=frame@do
-==========================================================================================================================
 
-id=2, name=main, lvl=2, ref=2/2, entry=5, pid=1(system), subject=main
-==========================================================================================================================
-Name(alias)          : EntryId  FrameId  Ref  Type       Value               
---------------------------------------------------------------------------------------------------------------------------
-root                 : 1        2        0    frame      frame@root          
-system               : 2        2        0    frame      frame@system        
-main                 : 3        2        2    frame      frame@main          
-fun1                 : 4        2        2    func       (fun1 nil) : frame=frame@main
-?rv                  : 6        2        1    var        2 : type=int        
-==========================================================================================================================
-
-
-;eof
-
-(println "********** B - print-subject 1 **********")
-(print-subject 1)
-;=>nil nil
-;out:
-********** B - print-subject 1 **********
-id=2, name=main, lvl=2, ref=1/2, entry=5, pid=1(system), subject=main
-==========================================================================================================================
-Name(alias)          : EntryId  FrameId  Ref  Type       Value               
---------------------------------------------------------------------------------------------------------------------------
-root                 : 1        2        0    frame      frame@root          
-system               : 2        2        0    frame      frame@system        
-main                 : 3        2        1    frame      frame@main          
-fun1                 : 4        2        1    func       (fun1 nil) : frame=frame@main
-?rv                  : 6        2        1    var        2 : type=int        
-==========================================================================================================================
-
-
-;eof
+(script_out (print-subject 1) "_b.txt")
+;=>nil
 
 (fun1 1 2)
 ;err:
@@ -66,39 +25,20 @@ at main: (fun1 1 2)
 
 (do
     (defun fun1 (?v1 ?v2) (return (+ ?v1 ?v2)))
-    (println "********** C - print-subject 2 **********")
-    (print-subject 2)
+    (script_out (print-subject 2) "_c.txt")
     (do
         (defun fun1 (?v1 ?v2 ?v3) (return (+ ?v1 ?v2 ?v3)))
-        (println "********** D - print-subject 3 **********")
-        (print-subject 3)
+        (script_out (print-subject 3) "_d.txt")
     )
-    (println "********** E - print-subject 2 **********")
-    (print-subject 2)
+    (script_out (print-subject 2) "_e.txt")
     (fun1 1 2 3)
 )
 ;err:
 match funcion not found:  expr=(fun1 1 2 3)
 at do: (fun1 1 2 3)
-at main: (do (defun fun1 (?v1 ?v2) (return (+ ?v1 ?v2))) (println "********** C - prin...
+at main: (do (defun fun1 (?v1 ?v2) (return (+ ?v1 ?v2))) (script_out (print-subject 2)...
 ;eof
 
-(println "********** F - print-subject 1 **********")
-(print-subject 1)
-;=>nil nil
-;out:
-********** F - print-subject 1 **********
-id=2, name=main, lvl=2, ref=1/2, entry=5, pid=1(system), subject=main
-==========================================================================================================================
-Name(alias)          : EntryId  FrameId  Ref  Type       Value               
---------------------------------------------------------------------------------------------------------------------------
-root                 : 1        2        0    frame      frame@root          
-system               : 2        2        0    frame      frame@system        
-main                 : 3        2        1    frame      frame@main          
-fun1                 : 4        2        1    func       (fun1 nil) : frame=frame@main
-?rv                  : 6        2        1    var        2 : type=int        
-==========================================================================================================================
-
-
-;eof
+(script_out (print-subject 1) "_f.txt")
+;=>nil
 

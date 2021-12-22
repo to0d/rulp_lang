@@ -23,12 +23,12 @@ mbr=_map_init, access deny
 mbr=_map_is_empty, access deny
 mbr=_map_put, access deny
 mbr=_map_size_of, access deny
-mbr=clear, name=(clear), type=func, property='(default final)
-mbr=get, name=(get nil), type=func, property='(default final)
-mbr=init, name=(init), type=func, property='(default final)
-mbr=is-empty, name=(is-empty), type=func, property='(default final)
-mbr=put, name=(put nil nil), type=func, property='(default final)
-mbr=size-of, name=(size-of), type=func, property='(default final)
+mbr=clear, name=(clear), type=func, property='(default final), attribute='(final)
+mbr=get, name=(get nil), type=func, property='(default final), attribute='(final)
+mbr=init, name=(init), type=func, property='(default final), attribute='(final)
+mbr=is-empty, name=(is-empty), type=func, property='(default final), attribute='(final)
+mbr=put, name=(put nil nil), type=func, property='(default final), attribute='(final)
+mbr=size-of, name=(size-of), type=func, property='(default final), attribute='(final)
 
 ;eof
 

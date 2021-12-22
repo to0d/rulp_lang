@@ -13,12 +13,12 @@
 (name-of fun1)
 ;;;
 
-(print-subject 1)
+(script_out (print-subject 1) "_a.txt")
 ;;;
 
 (do
     (defun fun1 (?v) (return (+ ?v 2)))   
-    (print-subject 2)
+    (script_out (print-subject 2) "_b.txt")
     (fun1 1)
 )
 ;;;

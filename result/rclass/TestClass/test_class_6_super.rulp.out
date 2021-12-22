@@ -19,8 +19,8 @@
 (ls-print class2)
 ;=>nil
 ;out:
-mbr=add, name=(add nil), type=func, property='(default)
-mbr=super, name=class1, type=class, property='(default), class-property='()
+mbr=add, name=(add nil), type=func, property='(default), attribute='()
+mbr=super, name=class1, type=class, property='(default), attribute='(), class-property='()
 
 ;eof
 

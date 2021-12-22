@@ -1,12 +1,12 @@
 (do
     (defvar x 1)
     (do-when-obj-deleted x (lambda (?obj) (print "obj'" (name-of ?obj) "' was deleted")))
-    (print-subject local)
+    (script_out (print-subject local) "_a.txt")
 )
 ;=>
 
-(print-subject local)
+(script_out (print-subject local) "_b.txt")
 ;=>
 
-(print-global-info)
+(_ginfo)
 ;;;

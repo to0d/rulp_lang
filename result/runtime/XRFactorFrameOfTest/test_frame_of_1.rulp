@@ -63,5 +63,5 @@
 (parent-of (frame-of ns1::var3))
 ;;;
 
-(print-global-info)
+(_ginfo)
 ;;;

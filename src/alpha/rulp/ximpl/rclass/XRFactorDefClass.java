@@ -123,11 +123,6 @@ public class XRFactorDefClass extends AbsRFactorAdapter implements IRFactor {
 					break;
 
 				case F_DEFUN:
-
-					if (mbrExprSize < 4) {
-						throw new RException("Invalid parameter number for member obj:" + mbrExpr);
-					}
-
 					SubjectUtil.defineMemberFun(defClass, RulpUtil.asAtom(mbrExpr.get(1)).getName(), mbrExpr,
 							interpreter, frame);
 					break;

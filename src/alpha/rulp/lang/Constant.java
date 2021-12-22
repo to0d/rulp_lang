@@ -566,5 +566,4 @@ public interface Constant {
 	IRAtom T_Template = RulpFactory.createAtom(A_TEMPLATE);
 
 	IRAtom T_Var = RulpFactory.createAtom(A_VAR);
-
 }

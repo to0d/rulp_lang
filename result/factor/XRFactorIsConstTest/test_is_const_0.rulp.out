@@ -202,12 +202,16 @@ obj=++, type=macro, const=true
 obj=--, type=macro, const=true
 obj=?load-paths, type=var, const=false
 obj=?op-stable, type=var, const=false
+obj=?script-path, type=var, const=false
 obj=?trace, type=var, const=false
+obj=_ginfo, type=func, const=false
 obj=add, type=func, const=false
 obj=add-all, type=func, const=true
 obj=clear, type=func, const=false
 obj=cmp, type=func, const=true
 obj=equal, type=func, const=false
+obj=file-prename, type=func, const=true
+obj=file-subffix, type=func, const=true
 obj=get, type=func, const=false
 obj=is-blank, type=func, const=true
 obj=is-empty, type=func, const=false
@@ -218,6 +222,7 @@ obj=print-list, type=macro, const=true
 obj=println, type=func, const=false
 obj=queue, type=class, const=false
 obj=root, type=frame, const=false
+obj=script_out, type=macro, const=true
 obj=set, type=class, const=false
 obj=size-of, type=func, const=false
 obj=stack, type=class, const=false
@@ -235,6 +240,7 @@ obj=use, type=template, const=false
 (ls-is-const main)
 ;=>nil
 ;out:
+obj=?script-path, type=var, const=false
 obj=ls-is-const, type=func, const=true
 obj=main, type=frame, const=false
 obj=root, type=frame, const=false

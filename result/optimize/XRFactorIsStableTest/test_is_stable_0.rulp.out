@@ -202,12 +202,16 @@ obj=++, type=macro, stable=false
 obj=--, type=macro, stable=false
 obj=?load-paths, type=var, stable=false
 obj=?op-stable, type=var, stable=false
+obj=?script-path, type=var, stable=false
 obj=?trace, type=var, stable=false
+obj=_ginfo, type=func, stable=false
 obj=add, type=func, stable=true
 obj=add-all, type=func, stable=true
 obj=clear, type=func, stable=false
 obj=cmp, type=func, stable=true
 obj=equal, type=func, stable=true
+obj=file-prename, type=func, stable=true
+obj=file-subffix, type=func, stable=true
 obj=get, type=func, stable=false
 obj=is-blank, type=func, stable=true
 obj=is-empty, type=func, stable=false
@@ -218,6 +222,7 @@ obj=print-list, type=macro, stable=false
 obj=println, type=func, stable=false
 obj=queue, type=class, stable=false
 obj=root, type=frame, stable=false
+obj=script_out, type=macro, stable=false
 obj=set, type=class, stable=false
 obj=size-of, type=func, stable=false
 obj=stack, type=class, stable=false
@@ -235,6 +240,7 @@ obj=use, type=template, stable=false
 (ls-is-stable-fun main)
 ;=>nil
 ;out:
+obj=?script-path, type=var, stable=false
 obj=ls-is-stable-fun, type=func, stable=false
 obj=main, type=frame, stable=false
 obj=root, type=frame, stable=false

@@ -9,7 +9,7 @@
 
 (do
     (defun fun1 (?v) (return (+ ?v 2)))    
-    (print-subject 2)
+    (script_out (print-subject 2) ".txt")
     (fun1 1)
 )
 ;;;

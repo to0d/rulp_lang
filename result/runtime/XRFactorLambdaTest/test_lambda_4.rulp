@@ -10,4 +10,4 @@
 (?f)
 ;=>
 
-(print-global-info)
+(_ginfo)

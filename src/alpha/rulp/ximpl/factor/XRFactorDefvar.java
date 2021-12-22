@@ -34,14 +34,10 @@ public class XRFactorDefvar extends AbsRFactorAdapter implements IRFactor {
 		this.allowRedefine = allowRedefine;
 	}
 
-	public static boolean isValidArgNum(int size) {
-		return size == 2 || size == 3;
-	}
-
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (!isValidArgNum(args.size())) {
+		if (args.size() != 2 && args.size() != 3) {
 			throw new RException("Invalid parameters: " + args);
 		}
 

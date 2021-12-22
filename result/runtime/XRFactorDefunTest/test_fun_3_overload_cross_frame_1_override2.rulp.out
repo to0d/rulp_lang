@@ -13,56 +13,15 @@
 (name-of fun1)
 ;=>"'((fun1 nil nil) (fun1 nil))"
 
-(print-subject 1)
+(script_out (print-subject 1) "_a.txt")
 ;=>nil
-;out:
-id=2, name=main, lvl=2, ref=1/2, entry=5, pid=1(system), subject=main
-==========================================================================================================================
-Name(alias)          : EntryId  FrameId  Ref  Type       Value               
---------------------------------------------------------------------------------------------------------------------------
-root                 : 1        2        0    frame      frame@root          
-system               : 2        2        0    frame      frame@system        
-main                 : 3        2        1    frame      frame@main          
-fun1                 : 4        2        1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
-                                         1    func       (fun1 nil) : frame=frame@main
-                                         1    func       (fun1 nil nil) : frame=frame@main
-?rv                  : 6        2        1    var        2 : type=int        
-==========================================================================================================================
-
-
-;eof
 
 (do
     (defun fun1 (?v) (return (+ ?v 2)))   
-    (print-subject 2)
+    (script_out (print-subject 2) "_b.txt")
     (fun1 1)
 )
 ;=>nil
-;out:
-id=3, name=do, lvl=3, ref=1/1, entry=1, pid=2(main), subject=do
-==========================================================================================================================
-Name(alias)          : EntryId  FrameId  Ref  Type       Value               
---------------------------------------------------------------------------------------------------------------------------
-fun1                 : 7        3        1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
-                                         2    func       (fun1 nil nil) : frame=frame@main
-                                         1    func       (fun1 nil) : frame=frame@do
-==========================================================================================================================
-
-id=2, name=main, lvl=2, ref=2/2, entry=5, pid=1(system), subject=main
-==========================================================================================================================
-Name(alias)          : EntryId  FrameId  Ref  Type       Value               
---------------------------------------------------------------------------------------------------------------------------
-root                 : 1        2        0    frame      frame@root          
-system               : 2        2        0    frame      frame@system        
-main                 : 3        2        2    frame      frame@main          
-fun1                 : 4        2        1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
-                                         1    func       (fun1 nil) : frame=frame@main
-                                         2    func       (fun1 nil nil) : frame=frame@main
-?rv                  : 6        2        1    var        2 : type=int        
-==========================================================================================================================
-
-
-;eof
 
 (fun1 1)
 ;=>2

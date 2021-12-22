@@ -17,5 +17,5 @@
 (cps-count)
 ;=>40
 
-(print-global-info)
+(_ginfo)
 ;;;

@@ -12,5 +12,5 @@
 (new class1 ns1::o1)
 ;;;
 
-(print-global-info)
+(_ginfo)
 ;;;

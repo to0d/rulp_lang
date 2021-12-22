@@ -11,7 +11,7 @@
         (return (+ ?v (fun4a (- ?v 1))))
     )
 )[op-cps]
-;=>fun4a[op-cps] fun4b[op-cps]
+;=>fun4a fun4b
 
 (cps-callee fun4a)
 ;=>'("fun4b")

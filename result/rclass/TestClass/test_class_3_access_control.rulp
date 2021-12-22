@@ -1,7 +1,7 @@
 (defclass class1 ()
-    (defvar ?value 0 private)
-    (defun add (?x) (setq ?value (+ ?value ?x)) public)
-    (defun sub (?x) (setq ?value (- ?value ?x)) private)
+    (defvar ?value 0)[private]
+    (defun add (?x) (setq ?value (+ ?value ?x)))[public]
+    (defun sub (?x) (setq ?value (- ?value ?x)))[private]
     (defun get ()   (return ?value))
     (defun set (?x) (setq ?value ?x))
 )

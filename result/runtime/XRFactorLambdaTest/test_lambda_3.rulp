@@ -7,4 +7,4 @@
 ((fun1 2))
 ;=>
 
-(print-global-info)
+(_ginfo)

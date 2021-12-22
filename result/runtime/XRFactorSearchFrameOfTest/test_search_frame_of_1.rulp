@@ -34,5 +34,5 @@
 (search-frame-of)
 ;;;
 
-(print-global-info)
+(_ginfo)
 ;;;

@@ -31,5 +31,5 @@
 (cps-count)
 ;=>1
 
-(print-global-info)
+(_ginfo)
 ;=>

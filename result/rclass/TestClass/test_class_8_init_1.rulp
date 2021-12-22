@@ -49,22 +49,22 @@
 (o6::get)
 ;;;
 
-(print-subject o1 -1)
+(script_out (print-subject o1 -1) "_1.txt")
 ;;;
 
-(print-subject o2 -1)
+(script_out (print-subject o2 -1) "_2.txt")
 ;;;
 
-(print-subject o3 -1)
+(script_out (print-subject o3 -1) "_3.txt")
 ;;;
 
-(print-subject o4 -1)
+(script_out (print-subject o4 -1) "_4.txt")
 ;;;
 
-(print-subject o5 -1)
+(script_out (print-subject o5 -1) "_5.txt")
 ;;;
 
-(print-subject o6 -1)
+(script_out (print-subject o6 -1) "_6.txt")
 ;;;
 
 (rulp-object-count frame)
@@ -87,5 +87,5 @@
 (rulp-object-count instance)
 ;=>0
 
-(print-global-info)
+(_ginfo)
 ;;;

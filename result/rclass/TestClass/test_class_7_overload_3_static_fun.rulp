@@ -1,12 +1,12 @@
 (defclass class1 ()
-    (defun fun1 (?x) (return (+ ?x 1)) static)
+    (defun fun1 (?x) (return (+ ?x 1)))[static]
 )
 (defclass class2 (class1)
-    (defun fun1 (?x) (return (+ ?x 2)) static)
+    (defun fun1 (?x) (return (+ ?x 2)))[static]
 )
 ;;;
 
-(print-subject class2)
+(script_out (print-subject class2) "_a.txt")
 ;;;
 
 (new class1 o1)
@@ -15,7 +15,7 @@
 (o1::fun1 1)
 ;;;
 
-(print-subject o1 -1)
+(script_out (print-subject o1 -1) "_b.txt")
 ;;;
 
 (new class2 o2)
@@ -24,8 +24,8 @@
 (o2::fun1 1)
 ;;;
 
-(print-subject o2 -1)
+(script_out (print-subject o2 -1) "_c.txt")
 ;;;
 
-(print-global-info)
+(_ginfo)
 ;;;

@@ -51,6 +51,3 @@
 
 (is-empty q1)
 ;=>
-
-(print-global-info)
-;;;

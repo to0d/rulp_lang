@@ -52,7 +52,7 @@
 (ls o1)
 ;=>
 
-(print-subject o1 -1)
+(script_out (print-subject o1 -1) "_a.txt")
 ;;;
 
 (type-of o1)
@@ -70,5 +70,5 @@
 (rulp-object-count frame)
 ;=>1
 
-(print-global-info)
+(_ginfo)
 ;;;

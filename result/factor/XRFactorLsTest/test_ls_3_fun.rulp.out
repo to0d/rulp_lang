@@ -220,12 +220,16 @@ system::++
 system::--
 system::?load-paths
 system::?op-stable
+system::?script-path
 system::?trace
+system::_ginfo
 system::add
 system::add-all
 system::clear
 system::cmp
 system::equal
+system::file-prename
+system::file-subffix
 system::get
 system::is-blank
 system::is-empty
@@ -236,6 +240,7 @@ system::print-list
 system::println
 system::queue
 system::root
+system::script_out
 system::set
 system::size-of
 system::stack
@@ -254,6 +259,7 @@ system::use
 ;=>nil
 ;out:
 main::?rv
+main::?script-path
 main::ls1
 main::ls2
 main::ls3

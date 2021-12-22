@@ -3,5 +3,5 @@
 ;=>&x &y
 
 (ls local)
-;=>'(main::local main::main main::root main::system main::x main::y)
+;=>'(main::?script-path main::local main::main main::root main::system main::x main::y)
 

@@ -22,5 +22,5 @@
 (+ var3 1)
 ;;;
 
-(print-global-info)
+(_ginfo)
 ;;;

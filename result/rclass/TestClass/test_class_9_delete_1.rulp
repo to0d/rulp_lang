@@ -26,5 +26,5 @@
 ?x
 ;;;
 
-(print-global-info)
+(_ginfo)
 ;;;

@@ -25,5 +25,5 @@
 (?o1::get)
 ;;;
 
-(print-global-info)
+(_ginfo)
 ;;;

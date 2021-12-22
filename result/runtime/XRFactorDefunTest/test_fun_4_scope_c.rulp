@@ -7,14 +7,12 @@
 (fun1 1.0)
 ;;;
 
-(println "********** A - print-subject 1 **********")
-(print-subject 1)
+(script_out (print-subject 1) "_a.txt")
 ;;;
 
 (do
     (defun fun1 ((?v float)) (return (+ ?v 2)))    
-    (println "********** B - print-subject 2 **********")
-    (print-subject 1)
+    (script_out (print-subject 2) "_b.txt")
     (fun1 1.0)
 )
 ;;;
@@ -22,6 +20,5 @@
 (fun1 1.0)
 ;;;
 
-(println "********** C - print-subject 1 **********")
-(print-subject 1)
+(script_out (print-subject 1) "_c.txt")
 ;;;

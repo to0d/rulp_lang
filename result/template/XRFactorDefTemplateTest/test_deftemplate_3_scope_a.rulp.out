@@ -1,49 +1,19 @@
-(deftemplate ask (teacher (?question expr)) (print "teacher say: yes, I know " ?question ", answer is " (value-of $(value-of ?question)) ". "))
+(deftemplate ask (teacher (?question expr)) 
+    (print "teacher say: yes, I know " ?question ", answer is " (value-of $(value-of ?question)) ". "))
 ;=>ask
 
-;; ************ A print-subject 1 ******************
-(print-subject 1)
+(script_out (print-subject 1) "_a.txt")
 ;=>nil
-;out:
-id=2, name=main, lvl=2, ref=1/1, entry=4, pid=1(system), subject=main
-==========================================================================================================================
-Name(alias)          : EntryId  FrameId  Ref  Type       Value               
---------------------------------------------------------------------------------------------------------------------------
-root                 : 1        2        0    frame      frame@root          
-system               : 2        2        0    frame      frame@system        
-main                 : 3        2        1    frame      frame@main          
-ask                  : 4        2        1    template   (ask '('(teacher atom) '(? expr))) : frame=frame@main
-==========================================================================================================================
-
-
-;eof
 
 (do
-    (deftemplate ask (student (?question expr)) (print "student say: no, I don't know " ?question "."))
-    ;; ************ B print-subject 2 ******************
-    (print-subject 2)
+    (deftemplate ask (student (?question expr)) 
+        (print "student say: no, I don't know " ?question "."))
+    (script_out (print-subject 2) "_b.txt")
     (ask teacher (+ 1 1))
     (ask student (+ 1 1))
 )
 ;=>nil
 ;out:
-id=3, name=do, lvl=3, ref=1/1, entry=1, pid=2(main), subject=do
-==========================================================================================================================
-Name(alias)          : EntryId  FrameId  Ref  Type       Value               
---------------------------------------------------------------------------------------------------------------------------
-ask                  : 5        3        1    template   (ask '('(teacher atom) '(? expr)) '('(student atom) '(? expr))) : frame=frame@do
-==========================================================================================================================
-
-id=2, name=main, lvl=2, ref=2/2, entry=4, pid=1(system), subject=main
-==========================================================================================================================
-Name(alias)          : EntryId  FrameId  Ref  Type       Value               
---------------------------------------------------------------------------------------------------------------------------
-root                 : 1        2        0    frame      frame@root          
-system               : 2        2        0    frame      frame@system        
-main                 : 3        2        2    frame      frame@main          
-ask                  : 4        2        1    template   (ask '('(teacher atom) '(? expr))) : frame=frame@main
-==========================================================================================================================
-
 teacher say: yes, I know (+ 1 1), answer is 2. student say: no, I don't know (+ 1 1).
 ;eof
 
@@ -59,20 +29,6 @@ no template match
 at main: (ask student (+ 1 1))
 ;eof
 
-;; ************ C print-subject 1 ******************
-(print-subject 1)
+(script_out (print-subject 1) "_c.txt")
 ;=>nil
-;out:
-id=2, name=main, lvl=2, ref=1/2, entry=4, pid=1(system), subject=main
-==========================================================================================================================
-Name(alias)          : EntryId  FrameId  Ref  Type       Value               
---------------------------------------------------------------------------------------------------------------------------
-root                 : 1        2        0    frame      frame@root          
-system               : 2        2        0    frame      frame@system        
-main                 : 3        2        1    frame      frame@main          
-ask                  : 4        2        1    template   (ask '('(teacher atom) '(? expr))) : frame=frame@main
-==========================================================================================================================
-
-
-;eof
 

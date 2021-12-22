@@ -25,6 +25,6 @@
 (fun1 (get-null) 3)
 ;=>
 
-(print-subject)
+(script_out (print-subject) ".txt")
 ;=>
 

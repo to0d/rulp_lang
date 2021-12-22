@@ -26,7 +26,8 @@
 ;out:
 1:var, name=?load-paths
 2:var, name=?op-stable
-3:var, name=?trace
+3:var, name=?script-path
+4:var, name=?trace
 
 ;eof
 
@@ -37,4 +38,8 @@
         (print $idx ":"  (type-of $(value-of (value-of ?x))) ", name=" (name-of ?x) "\n") 
         (setq $idx (+ $idx 1))))
 ;=>nil
+;out:
+1:var, name=?script-path
+
+;eof
 

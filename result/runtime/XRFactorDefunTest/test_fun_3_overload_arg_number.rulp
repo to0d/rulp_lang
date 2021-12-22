@@ -16,6 +16,6 @@
 (fun 1 2)
 ;=>
 
-(print-subject)
+(script_out (print-subject) ".txt")
 ;=>
 

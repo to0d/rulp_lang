@@ -1,20 +1,20 @@
 in : a[1]
-out: a[1]
+out: a
 
 in : '(a b c)[k]
-out: '(a b c)[k]
+out: '(a b c)
 
 in : (a b)[m]
-out: (a b)[m]
+out: (a b)
 
 in : {a,b,c}[n]
-out: {a,b,c}[n]
+out: {a,b,c}
 
 in : a[1 2]
-out: a[1 2]
+out: a
 
 in : (attribute-of a[1])
-out: (attribute-of a[1])
+out: (attribute-of a)
 
 in : (a b) [m]
 err: Bad Syntax at line 0: token=[S:1:0:7:[], line=(a b) [m]

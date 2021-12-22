@@ -54,6 +54,3 @@
 
 (set1::has '(b))
 ;=>
-
-(print-global-info)
-;;;

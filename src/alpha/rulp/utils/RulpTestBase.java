@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IROut;
@@ -25,6 +26,8 @@ import alpha.rulp.utils.RulpUtil.RResultList;
 import alpha.rulp.ximpl.optimize.CPSUtils;
 
 public class RulpTestBase {
+
+	static final String V_SCRIPT_PATH = "?script-path";
 
 	protected static class XROut implements IROut {
 
@@ -103,6 +106,31 @@ public class RulpTestBase {
 			_interpreter = _createInterpreter();
 			_out = new XROut();
 			_interpreter.setOutput(_out);
+
+			IRFrame mainFrame = _interpreter.getMainFrame();
+
+//			RulpUtil.setLocalVar(mainFrame, V_TEST_SCRIPT, O_Nil);
+
+//			RulpUtil.addFrameObject(mainFrame, new AbsRFactorAdapter("script_out") {
+//
+//				@Override
+//				public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+//
+//					if (args.size() > 3) {
+//						throw new RException("Invalid parameters: " + args);
+//					}
+//
+//					String scriptPath = RulpUtil.asString(RulpUtil.getVarValue(frame, V_TEST_SCRIPT)).asString();
+//					String outName = FileUtil.getFilePreName(scriptPath);
+//					if (args.size() > 1) {
+//						outName += "_" + RulpUtil.asString(interpreter.compute(frame, args.get(1))).asString();
+//					}
+//
+//					outName += ".ginfo.txt";
+//					_gInfo(outName);
+//					return O_Nil;
+//				}
+//			});
 		}
 
 		return _interpreter;
@@ -153,6 +181,8 @@ public class RulpTestBase {
 			int index = 0;
 			String inputStmt = null;
 			IRInterpreter interpreter = _getInterpreter();
+
+			RulpUtil.setLocalVar(interpreter.getMainFrame(), V_SCRIPT_PATH, RulpFactory.createString(inputScriptPath));
 
 			TEST: for (; rc && index < size; ++index) {
 
