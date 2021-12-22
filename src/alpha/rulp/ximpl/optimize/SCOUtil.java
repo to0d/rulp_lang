@@ -18,7 +18,23 @@ import alpha.rulp.utils.RulpUtil;
 
 public class SCOUtil {
 
-	public static IRExpr rebuildCPS(IRExpr expr, IRFrame frame) throws RException {
+	static final int SCO_LEVEL_CC0 = 0; // (Op A1 A2 ... Ak), Op is simple stable factor, Ak is number or string
+
+	static final int SCO_LEVEL_CC1 = 1;
+
+	static final int SCO_LEVEL_NONE = -1;
+
+	static final int SCO_LEVEL_MAX = 0;
+
+	public static IRExpr rebuildSCO(IRExpr expr, IRFrame frame, int scoLevel) throws RException {
+
+		if (scoLevel < SCO_LEVEL_NONE || scoLevel > SCO_LEVEL_MAX) {
+			throw new RException("invalid sco level: " + scoLevel);
+		}
+
+		if (scoLevel == SCO_LEVEL_NONE) {
+			return expr;
+		}
 
 		IRObject e0 = expr.get(0);
 		if (e0.getType() != RType.ATOM) {
@@ -36,7 +52,7 @@ public class SCOUtil {
 
 				IRObject e = it.next();
 				if (e.getType() == RType.EXPR) {
-					e = rebuildCPS((IRExpr) e, frame);
+					e = rebuildSCO((IRExpr) e, frame, scoLevel);
 				}
 
 				newExpr.add(e);
@@ -55,7 +71,7 @@ public class SCOUtil {
 			while (it.hasNext()) {
 				IRObject e = it.next();
 				if (e.getType() == RType.EXPR) {
-					e = rebuildCPS((IRExpr) e, frame);
+					e = rebuildSCO((IRExpr) e, frame, scoLevel);
 				}
 
 				newExpr.add(e);
