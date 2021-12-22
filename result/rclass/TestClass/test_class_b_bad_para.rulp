@@ -1,9 +1,9 @@
-(defclass class1 ()
+(defclass class1
     (defun fun1 ((?x Expr)) (print ?x))
 )
 ;;;
 
-(defclass class2 ()
+(defclass class2
     (defun fun1 (?x ?x) (print ?x))
 )
 ;;;

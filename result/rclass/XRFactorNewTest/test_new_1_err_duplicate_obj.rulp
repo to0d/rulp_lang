@@ -1,4 +1,4 @@
-(defclass class1 ())
+(defclass class1)
 ;;;
 
 (new class1 obj1)

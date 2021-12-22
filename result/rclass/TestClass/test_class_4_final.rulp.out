@@ -1,4 +1,4 @@
-(defclass class1 ()
+(defclass class1
     (defvar ?value 0)
     (defvar ?v1 1)
     (defvar ?v2 2)[final]

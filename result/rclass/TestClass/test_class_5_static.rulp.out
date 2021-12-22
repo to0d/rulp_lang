@@ -1,4 +1,4 @@
-(defclass class1 ()
+(defclass class1
     (defvar ?v1 0)
     (defvar ?v2 0)[static]
     (defun fun1 () (return 1))[static]

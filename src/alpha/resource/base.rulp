@@ -164,8 +164,8 @@
     )
 )
 
-(defclass set () final
-    
+(defclass set
+
     (defvar ?impl nil)[private]
     
     (defun init ()
@@ -188,14 +188,15 @@
         
     (defun to-list ()
         (return (set::_set_to_list ?impl)))[final]
-)
+
+)[final]
 
 (defun size-of  ((?set set)) (return (?set::size-of)))
 (defun is-empty ((?set set)) (return (?set::is-empty)))
 (defun clear    ((?set set)) (return (?set::clear)))
 (defun to-list  ((?set set)) (return (?set::to-list)))
 
-(defclass map () final
+(defclass map
     
     (defvar ?impl nil)[private]
     
@@ -217,13 +218,13 @@
     (defun clear ()
         (map::_map_clear ?impl))[final]
 
-)
+)[final]
 
 (defun size-of  ((?map map))    (return (?map::size-of)))
 (defun is-empty ((?map map))    (return (?map::is-empty)))
 (defun clear    ((?map map))    (return (?map::clear)))
 
-(defclass queue () final
+(defclass queue
     
     (defvar ?impl nil)[private]
     
@@ -271,7 +272,8 @@
         
     (defun to-list ()
         (return (queue::_queue_to_list ?impl)))[final]
-)
+
+)[final]
 
 (defun size-of  ((?queue queue))            (return (?queue::size-of)))
 (defun get      ((?queue queue) (?i1 int))  (return (?queue::get ?i1)))
@@ -279,7 +281,7 @@
 (defun clear    ((?queue queue))            (?queue::clear))
 (defun to-list  ((?queue queue))            (return (?queue::to-list)))
 
-(defclass stack () final
+(defclass stack
     
     (defvar ?impl nil)[private]
     
@@ -306,7 +308,8 @@
         
     (defun to-list ()
         (return (?impl::to-list)))[final]
-)
+
+)[final]
 
 (defun size-of  ((?stack stack)) (return (?stack::size-of)))
 (defun is-empty ((?stack stack)) (return (?stack::is-empty)))

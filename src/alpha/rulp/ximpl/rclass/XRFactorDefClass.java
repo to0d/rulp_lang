@@ -39,7 +39,8 @@ public class XRFactorDefClass extends AbsRFactorAdapter implements IRFactor {
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() < 3) {
+		int argSize = args.size();
+		if (args.size() < 2) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
@@ -49,30 +50,26 @@ public class XRFactorDefClass extends AbsRFactorAdapter implements IRFactor {
 		String className = RulpUtil.asAtom(args.get(1)).getName();
 
 		/*****************************************************/
-		// super class
+		// find super expression
 		/*****************************************************/
 		IRClass superClass = null;
+		int superExprIndex = -1;
+		for (int i = 2; i < argSize; ++i) {
+			IRExpr superExpr = RulpUtil.asExpression(args.get(i));
 
-		IRObject superExprObj = args.get(2);
-		if (superExprObj.getType() != RType.EXPR) {
-			throw new RException("Invalid super class parameter: " + superExprObj);
-		}
+			if (!superExpr.isEmpty() && superExpr.get(0).asString().equals(F_MBR_SUPER)) {
 
-		IRExpr expr = (IRExpr) superExprObj;
-		if (expr.size() == 0) {
+				if (superExpr.size() != 2) {
+					throw new RException("Invalid super expression: " + superExpr);
+				}
 
-			// no super class
-
-		} else if (expr.size() == 1) {
-
-			superClass = RulpUtil.asClass(interpreter.compute(frame, expr.get(0)));
-			if (superClass.isFinal()) {
-				throw new RException("Can't inherit final class: " + superClass);
+				superExprIndex = i;
+				superClass = RulpUtil.asClass(interpreter.compute(frame, superExpr.get(1)));
+				if (superClass.isFinal()) {
+					throw new RException("Can't inherit final class: " + superClass);
+				}
+				break;
 			}
-
-		} else {
-
-			throw new RException("Invalid super class parameter: " + superExprObj);
 		}
 
 		IRClass defClass = RulpFactory.createClassDefClass(className, frame, superClass);
@@ -80,66 +77,58 @@ public class XRFactorDefClass extends AbsRFactorAdapter implements IRFactor {
 			RulpUtil.setMember(defClass, F_MBR_SUPER, superClass);
 		}
 
-		Boolean isFinal = null;
-
 		/*****************************************************/
 		// members
 		/*****************************************************/
-		IRIterator<? extends IRObject> it = args.listIterator(3);
-		while (it.hasNext()) {
+		for (int i = 2; i < argSize; ++i) {
 
-			IRObject mbrObj = it.next();
-			switch (mbrObj.getType()) {
-			case ATOM:
-				switch (RulpUtil.asAtom(mbrObj).getName()) {
-				case A_FINAL:
-					if (isFinal != null) {
-						throw new RException("duplicate modifier:" + mbrObj);
-					}
-					isFinal = true;
-					break;
-				default:
-					throw new RException("invalid modifier: " + mbrObj);
-				}
+			IRExpr mbrExpr = RulpUtil.asExpression(args.get(i));
+
+			int mbrExprSize = mbrExpr.size();
+			if (mbrExprSize < 2) {
+				throw new RException("Invalid member expression: " + mbrExpr);
+			}
+
+			IRObject e0 = mbrExpr.get(0);
+			if (e0.getType() != RType.ATOM) {
+				throw new RException("Invalid member expression: " + mbrExpr);
+			}
+
+			switch (((IRAtom) e0).getName()) {
+			case F_DEFVAR:
+				SubjectUtil.defineMemberVar(defClass, mbrExpr, interpreter, frame);
 				break;
 
-			case EXPR:
+			case F_DEFUN:
+				SubjectUtil.defineMemberFun(defClass, RulpUtil.asAtom(mbrExpr.get(1)).getName(), mbrExpr, interpreter,
+						frame);
+				break;
 
-				IRExpr mbrExpr = (IRExpr) mbrObj;
-
-				int mbrExprSize = mbrExpr.size();
-				if (mbrExprSize < 2) {
-					throw new RException("Invalid member expression: " + mbrExpr);
-				}
-
-				IRObject e0 = mbrExpr.get(0);
-				if (e0.getType() != RType.ATOM) {
-					throw new RException("Invalid member expression: " + mbrExpr);
-				}
-
-				switch (((IRAtom) e0).getName()) {
-				case F_DEFVAR:
-					SubjectUtil.defineMemberVar(defClass, mbrExpr, interpreter, frame);
-					break;
-
-				case F_DEFUN:
-					SubjectUtil.defineMemberFun(defClass, RulpUtil.asAtom(mbrExpr.get(1)).getName(), mbrExpr,
-							interpreter, frame);
-					break;
-
-				default:
-					throw new RException("Invalid member obj: " + mbrExpr);
+			case F_MBR_SUPER:
+				if (superExprIndex != i) {
+					throw new RException("duplicated super expression: " + mbrExpr);
 				}
 
 				break;
 
 			default:
-				throw new RException("Invalid member obj: " + mbrObj);
+				throw new RException("Invalid member obj: " + mbrExpr);
 			}
 		}
 
-		if (isFinal != null) {
-			defClass.setFinal(isFinal);
+		if (RulpUtil.hasAttributeList(args)) {
+			for (String attr : RulpUtil.getAttributeList(args)) {
+				switch (attr) {
+				case A_FINAL:
+					defClass.setFinal(true);
+					break;
+
+				default:
+					throw new RException("unknown attribute:" + attr);
+				}
+
+				RulpUtil.addAttribute(defClass, attr);
+			}
 		}
 
 		/*****************************************************/

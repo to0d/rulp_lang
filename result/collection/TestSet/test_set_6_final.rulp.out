@@ -1,6 +1,6 @@
 (defclass class1 (set))
 ;err:
-Can't inherit final class: set
+Invalid member expression: (set)
 at main: (defclass class1 (set))
 ;eof
 

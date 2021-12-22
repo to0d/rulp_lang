@@ -1,4 +1,4 @@
-(defclass class1 ()
+(defclass class1
     (defvar ?v1 0)
     (defun inc (?x) (setq ?v1 (+ ?x ?v1)))
     (defun get () (return ?v1))

@@ -1,4 +1,6 @@
-(defclass class1 () (defvar ?value 0))
+(defclass class1 
+    (defvar ?value 0)
+)
 ;=>class1
 
 (new class1 o1)

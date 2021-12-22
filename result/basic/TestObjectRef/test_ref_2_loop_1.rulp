@@ -1,4 +1,4 @@
-(defclass class1 ()
+(defclass class1
     (defvar ?value 1)[public]
 )
 ;;;

@@ -1,6 +1,6 @@
-(defclass nclass1 () final  
+(defclass nclass1
     (defun static_fun1 () 
         (return (nclass1::_fun1)))[static]
-)
+)[final]
 ;=>nclass1
 

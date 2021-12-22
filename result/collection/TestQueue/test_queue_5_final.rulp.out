@@ -1,6 +1,6 @@
 (defclass class1 (queue))
 ;err:
-Can't inherit final class: queue
+Invalid member expression: (queue)
 at main: (defclass class1 (queue))
 ;eof
 

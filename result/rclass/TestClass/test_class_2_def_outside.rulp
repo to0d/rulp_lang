@@ -1,4 +1,4 @@
-(defclass class1 ()
+(defclass class1
     (defvar ?value 0)
     (defun add (?x) (setq ?value (+ ?value ?x)))
     (defun sub (?x) (setq ?value (- ?value ?x)))

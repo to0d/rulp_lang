@@ -1,6 +1,6 @@
 (defclass class1 (stack))
 ;err:
-Can't inherit final class: stack
+Invalid member expression: (stack)
 at main: (defclass class1 (stack))
 ;eof
 

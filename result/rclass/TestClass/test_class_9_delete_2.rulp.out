@@ -7,7 +7,7 @@
 (rulp-object-count instance)
 ;=>0
 
-(defclass class1 ()
+(defclass class1
     (defvar ?value)
     (defun init () (setq ?value 0))
     (defun ~init () (setq ?dx (+ ?dx 1)))

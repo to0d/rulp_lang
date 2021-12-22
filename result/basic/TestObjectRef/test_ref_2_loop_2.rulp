@@ -1,10 +1,10 @@
-(defclass class1 ()
+(defclass class1
     (defvar ?value 1)[public]
     (defun dump () (print ?value "\n"))
 )
 ;=>
 
-(defclass class2 ()
+(defclass class2
     (defvar ?descriptors nil)[public]
     (defun load (?count)
         (defvar ?_descriptors {})    

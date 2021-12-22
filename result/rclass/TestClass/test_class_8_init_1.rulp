@@ -1,4 +1,4 @@
-(defclass class1 ()
+(defclass class1
     (defvar ?value)
     (defun init () (setq ?value 0))
     (defun init (?x) (setq ?value ?x))

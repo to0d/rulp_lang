@@ -1,4 +1,4 @@
-(defclass c1 () 
+(defclass c1
     (defvar ?var false) 
     (defun fun1 () 
         (if ?var (return 1) (return 2)))

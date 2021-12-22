@@ -1,7 +1,7 @@
 (new namespace ns1)
 ;;;
 
-(defclass class1 ()
+(defclass class1
     (defun fun1 (?x) (return (+ ?x 1)))
 )
 ;;;

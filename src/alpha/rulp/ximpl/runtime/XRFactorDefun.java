@@ -159,11 +159,12 @@ public class XRFactorDefun extends AbsRFactorAdapter implements IRFactor {
 					if (CPSUtils.findCPSCallee(funBody, frame).contains(funName)) {
 						funBody = CPSUtils.addMakeCpsExpr(funBody, frame);
 					}
-					attrList.add(attr);
 					break;
 				default:
 					throw new RException("unknown attr: " + attr);
 				}
+
+				attrList.add(attr);
 			}
 		}
 

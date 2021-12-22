@@ -1,6 +1,6 @@
-(defclass class1 ()
+(defclass class1
 )
-(defclass class2 ()
+(defclass class2
     (defvar ?value 0)
     (defun to-string () (return (+ "c2_" ?value)))
 )
