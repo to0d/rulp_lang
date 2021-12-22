@@ -2,19 +2,19 @@
     (if (> (length-of ?s) 10)
         (return ?s)) 
     (return (fun5 (+ "a" ?s)))
-)[op-cps]
+)[opt-tco]
 ;=>fun5
 
-(cps-callee fun5)
+(tco-callee fun5)
 ;=>'("fun5")
 
 (attribute-of fun5)
-;=>'(op-cps)
+;=>'(opt-tco)
 
 (fun5 "b")
 ;=>"aaaaaaaaaab"
 
-(cps-count)
+(tco-count)
 ;=>40
 
 (_ginfo)

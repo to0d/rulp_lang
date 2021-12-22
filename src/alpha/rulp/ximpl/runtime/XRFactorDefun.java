@@ -9,7 +9,7 @@
 
 package alpha.rulp.ximpl.runtime;
 
-import static alpha.rulp.lang.Constant.A_OP_CPS;
+import static alpha.rulp.lang.Constant.A_OPT_TCO;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -38,7 +38,7 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.SubjectUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
-import alpha.rulp.ximpl.optimize.CPSUtil;
+import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
@@ -154,10 +154,10 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
 			for (String attr : RulpUtil.getAttributeList(args)) {
 				switch (attr) {
-				case A_OP_CPS:
+				case A_OPT_TCO:
 					// recursive function
-					if (CPSUtil.findCPSCallee(funBody, frame).contains(funName)) {
-						funBody = CPSUtil.rebuildCPS(funBody, frame);
+					if (TCOUtil.findCPSCallee(funBody, frame).contains(funName)) {
+						funBody = TCOUtil.rebuildTCO(funBody, frame);
 					}
 					break;
 				default:

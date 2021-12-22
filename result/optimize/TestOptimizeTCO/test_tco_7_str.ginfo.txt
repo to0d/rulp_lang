@@ -33,12 +33,14 @@ Callable stats info: callId=82, row=27, column=42(2), value-max=12, value-unit=2
     main     func     11   11 (fun5 nil)                                                             5 
     root   factor     11    0 >                                                                      5 
     root   factor     11    0 +                                                                      51
-    root   factor     10    0 return-cps                                                             5 
+    root   factor     10    0 return-tco                                                             5 
     root   factor      6    0 alias                          1221                                      
     root   factor      4    0 defvar                            1                                1    2
     root   factor      4    0 defmacro                                  11             1          1    
     root   factor      4    0 defclass                                                 1  1 1  1       
     root   factor      3    0 deftemplate                                  12                          
+    root   factor      1    0 tco-count                                                              1 
+    root   factor      1    0 tco-callee                                                            1  
     root   factor      1    0 str-substr                                                              1
     root   factor      1    0 str-last-index-of                                                       1
     root   factor      1    0 setq                                                                    1
@@ -46,8 +48,6 @@ Callable stats info: callId=82, row=27, column=42(2), value-max=12, value-unit=2
     root   factor      1    0 print-global-info                                                       1
     root   factor      1    0 out-to-file                                                             1
   system     func      1    1 (file-prename string)                                                   1
-    root   factor      1    0 cps-count                                                              1 
-    root   factor      1    0 cps-callee                                                            1  
     root   factor      1    0 attribute-of                                                          1  
   system funcList      1    3 _ginfo                                                                  1
     root   factor      1    0 !=                                                                      1
@@ -62,7 +62,7 @@ Object create count:
         list:            8            2            6
         expr:          589           43          546
        array:            1            0            1
-         var:           54           36           18
+         var:           53           36           17
         func:          108            0          108
     template:            1            0            1
        macro:            4            0            4
@@ -70,7 +70,7 @@ Object create count:
       member:          117            0          117
        frame:           36           35            1
  interpreter:            1            0
-  frameEntry:          255            0
+  frameEntry:          254            0
       lambda:            0            0
 ==========================================================================================================================
 

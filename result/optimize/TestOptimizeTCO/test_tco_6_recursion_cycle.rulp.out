@@ -3,31 +3,31 @@
         (if (<= ?v 0)(return 0))
         (return (+ ?v (fun4b (- ?v 1))))
     )
-)[op-cps]
+)[opt-tco]
 
 (defun fun4b (?v) 
     (do 
         (if (<= ?v 0)(return 0))
         (return (+ ?v (fun4a (- ?v 1))))
     )
-)[op-cps]
+)[opt-tco]
 ;=>fun4a fun4b
 
-(cps-callee fun4a)
+(tco-callee fun4a)
 ;=>'("fun4b")
 
 (attribute-of fun4a)
-;=>'(op-cps)
+;=>'(opt-tco)
 
-(cps-callee fun4b)
+(tco-callee fun4b)
 ;=>'("fun4a")
 
 (attribute-of fun4b)
-;=>'(op-cps)
+;=>'(opt-tco)
 
 (fun4a 3)
 ;=>6
 
-(cps-count)
+(tco-count)
 ;=>0
 

@@ -2,8 +2,7 @@ package alpha.rulp.utils;
 
 import static alpha.rulp.lang.Constant.A_LOCAL;
 import static alpha.rulp.lang.Constant.A_NOCLASS;
-import static alpha.rulp.lang.Constant.A_OP_CPS;
-import static alpha.rulp.lang.Constant.A_OP_STABLE;
+import static alpha.rulp.lang.Constant.A_OPT_TCO;
 import static alpha.rulp.lang.Constant.A_PARENT;
 import static alpha.rulp.lang.Constant.A_TRACE;
 import static alpha.rulp.lang.Constant.F_IF;
@@ -62,7 +61,7 @@ import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRThreadContext;
-import alpha.rulp.ximpl.optimize.CPSUtil;
+import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public final class RuntimeUtil {
 
@@ -395,8 +394,8 @@ public final class RuntimeUtil {
 					IRObject rst = RuntimeUtil.computeFun((IRFunction) e0, expr, interpreter, frame);
 					if (rst == null) {
 						return O_Nil;
-					} else if (rst.getType() == RType.EXPR && RulpUtil.containAttribute(rst, A_OP_CPS)) {
-						rst = CPSUtil.computeCPS((IRExpr) rst, interpreter, frame);
+					} else if (rst.getType() == RType.EXPR && RulpUtil.containAttribute(rst, A_OPT_TCO)) {
+						rst = TCOUtil.computeTCO((IRExpr) rst, interpreter, frame);
 					}
 					return rst;
 
@@ -688,8 +687,6 @@ public final class RuntimeUtil {
 	}
 
 	public static void init(IRFrame frame) throws RException {
-//		RulpUtil.setLocalVar(frame, A_OP_CPS, O_False);
-		RulpUtil.setLocalVar(frame, A_OP_STABLE, O_False);
 		RulpUtil.setLocalVar(frame, A_TRACE, O_False);
 	}
 

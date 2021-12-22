@@ -7,7 +7,7 @@
 )
 ;;;
 
-(cps-callee fact1)
+(tco-callee fact1)
 ;=>
 
 (attribute-of fact1)
@@ -16,5 +16,5 @@
 (fact1 2)
 ;err
 
-(cps-count)
+(tco-count)
 ;=>

@@ -59,8 +59,6 @@ obj=cmp_def, type=factor, stable=true
 obj=compute, type=factor, stable=true
 obj=constant, type=atom, stable=true
 obj=continue, type=factor, stable=false
-obj=cps-callee, type=factor, stable=false
-obj=cps-count, type=factor, stable=false
 obj=date, type=factor, stable=false
 obj=default, type=atom, stable=true
 obj=defclass, type=factor, stable=true
@@ -135,7 +133,7 @@ obj=random, type=factor, stable=false
 obj=ref, type=factor, stable=true
 obj=remove, type=factor, stable=true
 obj=return, type=factor, stable=true
-obj=return-cps, type=factor, stable=true
+obj=return-tco, type=factor, stable=true
 obj=reverse, type=factor, stable=true
 obj=root, type=frame, stable=false
 obj=rulp-object-count, type=factor, stable=false
@@ -171,6 +169,8 @@ obj=string, type=atom, stable=true
 obj=subject-of, type=factor, stable=true
 obj=sys-gc, type=factor, stable=false
 obj=sys-time, type=factor, stable=false
+obj=tco-callee, type=factor, stable=false
+obj=tco-count, type=factor, stable=false
 obj=to-atom, type=factor, stable=true
 obj=to-blob, type=factor, stable=true
 obj=to-expr, type=factor, stable=true
@@ -201,7 +201,6 @@ obj=~, type=factor, stable=true
 obj=++, type=macro, stable=false
 obj=--, type=macro, stable=false
 obj=?load-paths, type=var, stable=false
-obj=?op-stable, type=var, stable=false
 obj=?script-path, type=var, stable=false
 obj=?trace, type=var, stable=false
 obj=_ginfo, type=func, stable=false

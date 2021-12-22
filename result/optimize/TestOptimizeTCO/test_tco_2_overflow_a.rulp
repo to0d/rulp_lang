@@ -4,10 +4,10 @@
         (if (> ?v 500)(return ?v))
         (return (fact1 (+ ?v 1)))
     )
-)[op-cps]
+)[opt-tco]
 ;;;
 
-(cps-callee fact1)
+(tco-callee fact1)
 ;=>
 
 (attribute-of fact1)
@@ -16,7 +16,7 @@
 (fact1 2)
 ;=>
 
-(cps-count)
+(tco-count)
 ;=>
 
 (_ginfo)

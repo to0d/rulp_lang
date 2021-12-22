@@ -23,7 +23,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IROut;
 import alpha.rulp.runtime.IRParser;
 import alpha.rulp.utils.RulpUtil.RResultList;
-import alpha.rulp.ximpl.optimize.CPSUtil;
+import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public class RulpTestBase {
 
@@ -348,7 +348,7 @@ public class RulpTestBase {
 		_interpreter = null;
 		_parser = null;
 
-		CPSUtil.resetCpsLoopCount();
+		TCOUtil.reset();
 		RulpFactory.reset();
 		RuntimeUtil.reset();
 	}

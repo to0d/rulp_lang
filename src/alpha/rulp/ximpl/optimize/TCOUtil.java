@@ -3,7 +3,7 @@ package alpha.rulp.ximpl.optimize;
 import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_RETURN;
-import static alpha.rulp.lang.Constant.F_RETURN_CPS;
+import static alpha.rulp.lang.Constant.F_RETURN_TCO;
 import static alpha.rulp.lang.Constant.O_Nil;
 
 import java.util.ArrayList;
@@ -31,9 +31,9 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 
-public class CPSUtil {
+public class TCOUtil {
 
-	static class CpsNode {
+	static class TCONode {
 
 		private ArrayList<IRObject> elements = null;
 
@@ -43,9 +43,9 @@ public class CPSUtil {
 
 		private int indexOfParent;
 
-		private CpsNode parrent;
+		private TCONode parrent;
 
-		public CpsNode(CpsNode parrent, int indexOfParent, IRExpr expr) throws RException {
+		public TCONode(TCONode parrent, int indexOfParent, IRExpr expr) throws RException {
 			super();
 			this.parrent = parrent;
 			this.indexOfParent = indexOfParent;
@@ -71,11 +71,11 @@ public class CPSUtil {
 		}
 	}
 
-	public static boolean CPS_TRACE = false;
+	protected static AtomicInteger TCOCount = new AtomicInteger(0);
 
-	protected static AtomicInteger cpsCount = new AtomicInteger(0);
+	public static boolean TRACE = false;
 
-	private static IRObject _computeCPS(IRObject obj, IRFrame frame) throws RException {
+	private static IRObject _computeTCO(IRObject obj, IRFrame frame) throws RException {
 
 		switch (obj.getType()) {
 
@@ -112,7 +112,7 @@ public class CPSUtil {
 			IRList newList = RulpFactory.createVaryList();
 			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
 			while (it.hasNext()) {
-				newList.add(returnCPS(it.next(), frame));
+				newList.add(returnTCO(it.next(), frame));
 			}
 			return newList;
 		}
@@ -124,7 +124,7 @@ public class CPSUtil {
 				return mbr;
 			}
 
-			IRObject subObj = returnCPS(mbr.getSubject(), frame);
+			IRObject subObj = returnTCO(mbr.getSubject(), frame);
 			if (subObj == null) {
 				throw new RException("subject<" + mbr.getSubject() + "> not found");
 			}
@@ -146,7 +146,7 @@ public class CPSUtil {
 		}
 	}
 
-	private static boolean _findCPSCallee(IRExpr expr, Set<String> calleeNames, IRFrame frame) throws RException {
+	private static boolean _findTCOCallee(IRExpr expr, Set<String> calleeNames, IRFrame frame) throws RException {
 
 		IRObject e0 = expr.get(0);
 		if (e0.getType() != RType.ATOM) {
@@ -161,7 +161,7 @@ public class CPSUtil {
 			while (it.hasNext()) {
 				IRObject e = it.next();
 				if (e.getType() == RType.EXPR) {
-					_findCPSCallee((IRExpr) e, calleeNames, frame);
+					_findTCOCallee((IRExpr) e, calleeNames, frame);
 				}
 			}
 		}
@@ -173,19 +173,19 @@ public class CPSUtil {
 			while (it.hasNext()) {
 				IRObject e = it.next();
 				if (e.getType() == RType.EXPR) {
-					_findCPSCallee((IRExpr) e, calleeNames, frame);
+					_findTCOCallee((IRExpr) e, calleeNames, frame);
 				}
 			}
 		}
 			break;
 
 		case F_RETURN:
-		case F_RETURN_CPS:
+		case F_RETURN_TCO:
 
 			if (expr.size() > 1 && expr.get(1).getType() == RType.EXPR) {
 				IRExpr e1 = (IRExpr) expr.get(1);
 				if (e1.size() > 0) {
-					_findCPSCalleeInReturn(e1.get(0), e1, calleeNames, frame);
+					_findTCOCalleeInReturn(e1.get(0), e1, calleeNames, frame);
 				}
 			}
 
@@ -197,7 +197,7 @@ public class CPSUtil {
 		return true;
 	}
 
-	private static void _findCPSCalleeInReturn(IRObject e0, IRExpr expr, Set<String> calleeNames, IRFrame frame)
+	private static void _findTCOCalleeInReturn(IRObject e0, IRExpr expr, Set<String> calleeNames, IRFrame frame)
 			throws RException {
 
 		switch (e0.getType()) {
@@ -207,7 +207,7 @@ public class CPSUtil {
 			IRFrameEntry entry = frame.getEntry(opName);
 
 			if (entry != null && entry.getValue() != null && entry.getValue().getType() != RType.ATOM) {
-				_findCPSCalleeInReturn(entry.getValue(), expr, calleeNames, frame);
+				_findTCOCalleeInReturn(entry.getValue(), expr, calleeNames, frame);
 				return;
 			}
 
@@ -247,32 +247,32 @@ public class CPSUtil {
 				continue;
 			}
 
-			_findCPSCalleeInReturn(ex.get(0), ex, calleeNames, frame);
+			_findTCOCalleeInReturn(ex.get(0), ex, calleeNames, frame);
 		}
 	}
 
-	public static IRObject computeCPS(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+	public static IRObject computeTCO(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		if (expr.isEmpty()) {
 			return O_Nil;
 		}
 
-		if (CPS_TRACE) {
+		if (TRACE) {
 			System.out.println("cps: compute, " + expr);
 		}
 
-		LinkedList<CpsNode> cpsQueue = new LinkedList<>();
-		cpsQueue.addLast(new CpsNode(null, -1, expr));
+		LinkedList<TCONode> cpsQueue = new LinkedList<>();
+		cpsQueue.addLast(new TCONode(null, -1, expr));
 
 		while (!cpsQueue.isEmpty()) {
 
-			if (CPS_TRACE) {
+			if (TRACE) {
 				System.out.println("cps: queue, size=" + cpsQueue.size());
 			}
 
-			cpsCount.getAndIncrement();
+			TCOCount.getAndIncrement();
 
-			CpsNode topNode = cpsQueue.peekLast();
+			TCONode topNode = cpsQueue.peekLast();
 
 			// not expand
 			if (!topNode.expend) {
@@ -310,9 +310,9 @@ public class CPSUtil {
 
 							IRObject obj = topNode.elements.get(i);
 							if (obj.getType() == RType.EXPR) {
-								cpsQueue.addLast(new CpsNode(topNode, i, (IRExpr) obj));
+								cpsQueue.addLast(new TCONode(topNode, i, (IRExpr) obj));
 							} else {
-								topNode.elements.set(i, _computeCPS(obj, frame));
+								topNode.elements.set(i, _computeTCO(obj, frame));
 							}
 						}
 					}
@@ -344,7 +344,7 @@ public class CPSUtil {
 
 				case FUNC:
 
-					if (CPS_TRACE) {
+					if (TRACE) {
 						System.out.println("cps: call fun, " + newExpr);
 					}
 
@@ -367,14 +367,14 @@ public class CPSUtil {
 
 				if (topNode.parrent != null) {
 					if (rst.getType() == RType.EXPR) {
-						cpsQueue.addLast(new CpsNode(topNode.parrent, topNode.indexOfParent, (IRExpr) rst));
+						cpsQueue.addLast(new TCONode(topNode.parrent, topNode.indexOfParent, (IRExpr) rst));
 					} else {
 						topNode.parrent.elements.set(topNode.indexOfParent, rst);
 					}
 				} else {
 
 					if (rst.getType() == RType.EXPR) {
-						cpsQueue.addLast(new CpsNode(null, -1, (IRExpr) rst));
+						cpsQueue.addLast(new TCONode(null, -1, (IRExpr) rst));
 					} else {
 						return rst;
 					}
@@ -387,19 +387,19 @@ public class CPSUtil {
 
 	public static Set<String> findCPSCallee(IRExpr expr, IRFrame frame) throws RException {
 		HashSet<String> calleeNames = new HashSet<>();
-		_findCPSCallee(expr, calleeNames, frame);
+		_findTCOCallee(expr, calleeNames, frame);
 		return calleeNames;
 	}
 
-	public static int getCPSCount() {
-		return cpsCount.get();
+	public static int getTCOCount() {
+		return TCOCount.get();
 	}
 
 	public static boolean isCPSRecursive(IRExpr expr, IRFrame frame) throws RException {
 		return false;
 	}
 
-	public static IRExpr rebuildCPS(IRExpr expr, IRFrame frame) throws RException {
+	public static IRExpr rebuildTCO(IRExpr expr, IRFrame frame) throws RException {
 
 		IRObject e0 = expr.get(0);
 		if (e0.getType() != RType.ATOM) {
@@ -417,7 +417,7 @@ public class CPSUtil {
 
 				IRObject e = it.next();
 				if (e.getType() == RType.EXPR) {
-					e = rebuildCPS((IRExpr) e, frame);
+					e = rebuildTCO((IRExpr) e, frame);
 				}
 
 				newExpr.add(e);
@@ -436,7 +436,7 @@ public class CPSUtil {
 			while (it.hasNext()) {
 				IRObject e = it.next();
 				if (e.getType() == RType.EXPR) {
-					e = rebuildCPS((IRExpr) e, frame);
+					e = rebuildTCO((IRExpr) e, frame);
 				}
 
 				newExpr.add(e);
@@ -449,7 +449,7 @@ public class CPSUtil {
 			if (expr.size() == 2) {
 				IRObject e1 = expr.get(1);
 				if (e1.getType() == RType.EXPR) {
-					return RulpFactory.createExpression(RulpFactory.createAtom(F_RETURN_CPS), e1);
+					return RulpFactory.createExpression(RulpFactory.createAtom(F_RETURN_TCO), e1);
 				}
 			}
 
@@ -462,11 +462,11 @@ public class CPSUtil {
 		return expr;
 	}
 
-	public static void resetCpsLoopCount() {
-		cpsCount.getAndSet(0);
+	public static void reset() {
+		TCOCount.getAndSet(0);
 	}
 
-	public static IRObject returnCPS(IRObject obj, IRFrame frame) throws RException {
+	public static IRObject returnTCO(IRObject obj, IRFrame frame) throws RException {
 
 		switch (obj.getType()) {
 
@@ -505,7 +505,7 @@ public class CPSUtil {
 
 			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
 			while (it.hasNext()) {
-				newList.add(returnCPS(it.next(), frame));
+				newList.add(returnTCO(it.next(), frame));
 			}
 
 			if (obj.getType() == RType.LIST) {
@@ -527,7 +527,7 @@ public class CPSUtil {
 				return mbr;
 			}
 
-			IRObject subObj = returnCPS(mbr.getSubject(), frame);
+			IRObject subObj = returnTCO(mbr.getSubject(), frame);
 			if (subObj == null) {
 				throw new RException("subject<" + mbr.getSubject() + "> not found");
 			}

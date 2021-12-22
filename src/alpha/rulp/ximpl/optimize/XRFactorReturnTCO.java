@@ -9,7 +9,7 @@
 
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.A_OP_CPS;
+import static alpha.rulp.lang.Constant.A_OPT_TCO;
 
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
@@ -22,9 +22,9 @@ import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.error.RReturn;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorReturnCPS extends AbsAtomFactorAdapter implements IRFactor {
+public class XRFactorReturnTCO extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorReturnCPS(String factorName) {
+	public XRFactorReturnTCO(String factorName) {
 		super(factorName);
 	}
 
@@ -35,9 +35,9 @@ public class XRFactorReturnCPS extends AbsAtomFactorAdapter implements IRFactor 
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRObject rst = CPSUtil.returnCPS(RulpUtil.asExpression(args.get(1)), frame);
+		IRObject rst = TCOUtil.returnTCO(RulpUtil.asExpression(args.get(1)), frame);
 		if (rst.getType() == RType.EXPR) {
-			RulpUtil.addAttribute(rst, A_OP_CPS);
+			RulpUtil.addAttribute(rst, A_OPT_TCO);
 		}
 
 		throw new RReturn(this, frame, rst);

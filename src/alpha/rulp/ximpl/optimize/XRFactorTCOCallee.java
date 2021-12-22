@@ -24,9 +24,9 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorCPSCallee extends AbsAtomFactorAdapter implements IRFactor {
+public class XRFactorTCOCallee extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorCPSCallee(String factorName) {
+	public XRFactorTCOCallee(String factorName) {
 		super(factorName);
 	}
 
@@ -42,7 +42,7 @@ public class XRFactorCPSCallee extends AbsAtomFactorAdapter implements IRFactor 
 			return RulpFactory.emptyConstList();
 		}
 
-		Set<String> calleeNames = CPSUtil.findCPSCallee(fun.getFunBody(), frame);
+		Set<String> calleeNames = TCOUtil.findCPSCallee(fun.getFunBody(), frame);
 		if (calleeNames.isEmpty()) {
 			return RulpFactory.emptyConstList();
 		}

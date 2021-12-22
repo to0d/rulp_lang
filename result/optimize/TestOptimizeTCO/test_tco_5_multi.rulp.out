@@ -11,14 +11,14 @@
         (if (<= ?v 1000)(return (+ (fun2 (- ?v 1)) (fun2 (- (/ ?v 4) 1)))))
         (return (+ (fun2 (- ?v 1)) (fun2 (- (/ ?v 8) 1))))
     )
-)[op-cps]
+)[opt-tco]
 ;=>fun2
 
-(cps-callee fun2)
+(tco-callee fun2)
 ;=>'("fun2")
 
 (attribute-of fun2)
-;=>'(op-cps)
+;=>'(opt-tco)
 
 (fun2 0)
 ;=>0
@@ -38,7 +38,7 @@
 (fun2 101)
 ;=>132564
 
-(cps-count)
+(tco-count)
 ;=>252432
 
 (_ginfo)

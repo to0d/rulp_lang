@@ -3,7 +3,7 @@ package alpha.rulp.ximpl.optimize;
 import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_RETURN;
-import static alpha.rulp.lang.Constant.F_RETURN_CPS;
+import static alpha.rulp.lang.Constant.F_RETURN_TCO;
 
 import java.util.ArrayList;
 
@@ -84,7 +84,7 @@ public class SCOUtil {
 			if (expr.size() == 2) {
 				IRObject e1 = expr.get(1);
 				if (e1.getType() == RType.EXPR) {
-					return RulpFactory.createExpression(RulpFactory.createAtom(F_RETURN_CPS), e1);
+					return RulpFactory.createExpression(RulpFactory.createAtom(F_RETURN_TCO), e1);
 				}
 			}
 

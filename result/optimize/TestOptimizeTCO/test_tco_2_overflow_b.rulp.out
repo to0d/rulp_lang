@@ -7,7 +7,7 @@
 )
 ;=>fact1
 
-(cps-callee fact1)
+(tco-callee fact1)
 ;=>'("fact1")
 
 (attribute-of fact1)
@@ -18,6 +18,6 @@
 java.lang.StackOverflowError
 ;eof
 
-(cps-count)
+(tco-count)
 ;=>0
 

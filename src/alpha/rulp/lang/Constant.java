@@ -93,9 +93,7 @@ public interface Constant {
 
 	String A_NULL = "null";
 
-	String A_OP_CPS = "op-cps";
-
-	String A_OP_STABLE = "?op-stable";
+	String A_OPT_TCO = "opt-tco";
 
 	String A_PARENT = "parent";
 
@@ -186,10 +184,6 @@ public interface Constant {
 	String F_COMPUTE = "compute";
 
 	String F_CONTINUE = "continue";
-
-	String F_CPS_CALLEE = "cps-callee";
-
-	String F_CPS_COUNT = "cps-count";
 
 	String F_DATE = "date";
 
@@ -337,7 +331,7 @@ public interface Constant {
 
 	String F_RETURN = "return";
 
-	String F_RETURN_CPS = "return-cps";
+	String F_RETURN_TCO = "return-tco";
 
 	String F_REVERSE = "reverse";
 
@@ -402,6 +396,10 @@ public interface Constant {
 	String F_SYS_TIME = "sys-time";
 
 	String F_T_SLEEP = "sleep";
+
+	String F_TCO_CALLEE = "tco-callee";
+
+	String F_TCO_COUNT = "tco-count";
 
 	String F_TO = "to";
 

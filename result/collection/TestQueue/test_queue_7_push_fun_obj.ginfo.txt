@@ -53,7 +53,7 @@ Object create count:
         list:            7            0            7
         expr:          532            6          526
        array:            1            0            1
-         var:           24            6           18
+         var:           23            6           17
         func:          114            0          114
     template:            1            0            1
        macro:            4            0            4
@@ -62,7 +62,7 @@ Object create count:
       member:          125            0          125
        frame:           12           10            2
  interpreter:            1            0
-  frameEntry:          225            0
+  frameEntry:          224            0
       lambda:            5            0
 ==========================================================================================================================
 

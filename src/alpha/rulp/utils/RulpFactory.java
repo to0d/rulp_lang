@@ -157,10 +157,10 @@ import alpha.rulp.ximpl.lang.XRVar;
 import alpha.rulp.ximpl.math.XRFactorRandom;
 import alpha.rulp.ximpl.namespace.XRNameSpace;
 import alpha.rulp.ximpl.namespace.XRNameSpaceClass;
-import alpha.rulp.ximpl.optimize.XRFactorCPSCallee;
-import alpha.rulp.ximpl.optimize.XRFactorCPSCount;
 import alpha.rulp.ximpl.optimize.XRFactorIsStable;
-import alpha.rulp.ximpl.optimize.XRFactorReturnCPS;
+import alpha.rulp.ximpl.optimize.XRFactorReturnTCO;
+import alpha.rulp.ximpl.optimize.XRFactorTCOCallee;
+import alpha.rulp.ximpl.optimize.XRFactorTCOCount;
 import alpha.rulp.ximpl.rclass.XRDefClass;
 import alpha.rulp.ximpl.rclass.XRDefInstance;
 import alpha.rulp.ximpl.rclass.XRFactorAccess;
@@ -671,9 +671,9 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefMacro(F_DEFMACRO));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefun(F_DEFUN));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefTemplate(F_DEFTEMPLATE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorReturnCPS(F_RETURN_CPS));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorCPSCount(F_CPS_COUNT));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorCPSCallee(F_CPS_CALLEE));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorReturnTCO(F_RETURN_TCO));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorTCOCount(F_TCO_COUNT));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorTCOCallee(F_TCO_CALLEE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorIsStable(F_IS_STABLE));
 
 		// Lambda

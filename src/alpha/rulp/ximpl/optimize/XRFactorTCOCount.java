@@ -9,48 +9,29 @@
 
 package alpha.rulp.ximpl.optimize;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Set;
-
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
-import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
-import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorIsCPSRecursive extends AbsAtomFactorAdapter implements IRFactor {
+public class XRFactorTCOCount extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorIsCPSRecursive(String factorName) {
+	public XRFactorTCOCount(String factorName) {
 		super(factorName);
 	}
 
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() != 2) {
+		if (args.size() != 1) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRFunction fun = RulpUtil.asFunction(interpreter.compute(frame, args.get(1)));
-		if (fun.isList()) {
-			return RulpFactory.emptyConstList();
-		}
-
-		Set<String> calleeNames = CPSUtil.findCPSCallee(fun.getFunBody(), frame);
-		if (calleeNames.isEmpty()) {
-			return RulpFactory.emptyConstList();
-		}
-
-		ArrayList<String> nameList = new ArrayList<>(calleeNames);
-		Collections.sort(nameList);
-
-		return RulpFactory.createListOfString(nameList);
+		return RulpFactory.createInteger(TCOUtil.getTCOCount());
 	}
 
 	@Override

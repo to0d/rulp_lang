@@ -44,8 +44,6 @@ root::cmp_def
 root::compute
 root::constant
 root::continue
-root::cps-callee
-root::cps-count
 root::date
 root::default
 root::defclass
@@ -120,7 +118,7 @@ root::random
 root::ref
 root::remove
 root::return
-root::return-cps
+root::return-tco
 root::reverse
 root::root
 root::rulp-object-count
@@ -156,6 +154,8 @@ root::string
 root::subject-of
 root::sys-gc
 root::sys-time
+root::tco-callee
+root::tco-count
 root::to-atom
 root::to-blob
 root::to-expr
@@ -186,7 +186,6 @@ root::~
 system::++
 system::--
 system::?load-paths
-system::?op-stable
 system::?script-path
 system::?trace
 system::_ginfo
