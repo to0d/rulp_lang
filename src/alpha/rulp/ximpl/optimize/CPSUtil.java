@@ -31,7 +31,7 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 
-public class CPSUtils {
+public class CPSUtil {
 
 	static class CpsNode {
 
@@ -399,7 +399,7 @@ public class CPSUtils {
 		return false;
 	}
 
-	public static IRExpr rebuildReturnCPS(IRExpr expr, IRFrame frame) throws RException {
+	public static IRExpr rebuildCPS(IRExpr expr, IRFrame frame) throws RException {
 
 		IRObject e0 = expr.get(0);
 		if (e0.getType() != RType.ATOM) {
@@ -417,7 +417,7 @@ public class CPSUtils {
 
 				IRObject e = it.next();
 				if (e.getType() == RType.EXPR) {
-					e = rebuildReturnCPS((IRExpr) e, frame);
+					e = rebuildCPS((IRExpr) e, frame);
 				}
 
 				newExpr.add(e);
@@ -436,7 +436,7 @@ public class CPSUtils {
 			while (it.hasNext()) {
 				IRObject e = it.next();
 				if (e.getType() == RType.EXPR) {
-					e = rebuildReturnCPS((IRExpr) e, frame);
+					e = rebuildCPS((IRExpr) e, frame);
 				}
 
 				newExpr.add(e);

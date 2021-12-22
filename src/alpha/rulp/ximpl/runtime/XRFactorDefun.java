@@ -37,10 +37,10 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.SubjectUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
-import alpha.rulp.ximpl.optimize.CPSUtils;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
+import alpha.rulp.ximpl.optimize.CPSUtil;
 
-public class XRFactorDefun extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
 	public static List<IRParaAttr> buildAttrList(IRObject paraObj, IRInterpreter interpreter, IRFrame frame)
 			throws RException {
@@ -156,8 +156,8 @@ public class XRFactorDefun extends AbsRFactorAdapter implements IRFactor {
 				switch (attr) {
 				case A_OP_CPS:
 					// recursive function
-					if (CPSUtils.findCPSCallee(funBody, frame).contains(funName)) {
-						funBody = CPSUtils.rebuildReturnCPS(funBody, frame);
+					if (CPSUtil.findCPSCallee(funBody, frame).contains(funName)) {
+						funBody = CPSUtil.rebuildCPS(funBody, frame);
 					}
 					break;
 				default:

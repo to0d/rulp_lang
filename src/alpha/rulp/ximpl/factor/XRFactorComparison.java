@@ -19,7 +19,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 
-public class XRFactorComparison extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorComparison extends AbsAtomFactorAdapter implements IRFactor {
 
 	private RRelationalOperator operator;
 

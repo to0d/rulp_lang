@@ -62,7 +62,7 @@ import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRThreadContext;
-import alpha.rulp.ximpl.optimize.CPSUtils;
+import alpha.rulp.ximpl.optimize.CPSUtil;
 
 public final class RuntimeUtil {
 
@@ -396,7 +396,7 @@ public final class RuntimeUtil {
 					if (rst == null) {
 						return O_Nil;
 					} else if (rst.getType() == RType.EXPR && RulpUtil.containAttribute(rst, A_OP_CPS)) {
-						rst = CPSUtils.computeCPS((IRExpr) rst, interpreter, frame);
+						rst = CPSUtil.computeCPS((IRExpr) rst, interpreter, frame);
 					}
 					return rst;
 

@@ -16,7 +16,7 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 
-public class XRFactorBoolAs extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorBoolAs extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorBoolAs(String factorName) {
 		super(factorName);

@@ -24,7 +24,7 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.StringUtil;
 
-public class XRFactorCanCast extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorCanCast extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorCanCast(String factorName) {
 		super(factorName);

@@ -19,7 +19,7 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 
-public class XRFactorIsConst extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorIsConst extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorIsConst(String factorName) {
 		super(factorName);

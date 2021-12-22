@@ -23,9 +23,9 @@ import alpha.rulp.runtime.IRThreadContext;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.error.RInterrupt;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorDoParallel extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorDoParallel extends AbsAtomFactorAdapter implements IRFactor {
 
 	static long beginTime = 0;
 

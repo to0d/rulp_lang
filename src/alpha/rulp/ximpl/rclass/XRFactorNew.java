@@ -28,9 +28,9 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorNew extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorNew extends AbsAtomFactorAdapter implements IRFactor {
 
 	public static IRInstance newInstance(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 

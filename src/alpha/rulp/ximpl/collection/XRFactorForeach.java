@@ -27,9 +27,9 @@ import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.error.RBreak;
 import alpha.rulp.ximpl.error.RContinue;
 import alpha.rulp.ximpl.error.RReturn;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorForeach extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorForeach extends AbsAtomFactorAdapter implements IRFactor {
 
 	static IRObject getResultObject(IRList args, IRInterpreter interpreter, IRFrame frame, IRFrame rtFrame)
 			throws RException {

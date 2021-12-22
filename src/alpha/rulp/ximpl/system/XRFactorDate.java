@@ -22,10 +22,10 @@ import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.runtime.XRInterpreter;
 
-public class XRFactorDate extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorDate extends AbsAtomFactorAdapter implements IRFactor {
 
 	static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	static {

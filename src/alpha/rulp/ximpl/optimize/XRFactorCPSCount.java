@@ -16,9 +16,9 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorCPSCount extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorCPSCount extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorCPSCount(String factorName) {
 		super(factorName);
@@ -31,7 +31,7 @@ public class XRFactorCPSCount extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		return RulpFactory.createInteger(CPSUtils.getCPSCount());
+		return RulpFactory.createInteger(CPSUtil.getCPSCount());
 	}
 
 	@Override

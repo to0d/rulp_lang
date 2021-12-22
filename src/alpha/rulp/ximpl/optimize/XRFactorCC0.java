@@ -9,21 +9,32 @@
 
 package alpha.rulp.ximpl.optimize;
 
-import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsRefFactorAdapter;
 
-public class XRFactorCC extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorCC0 extends AbsRefFactorAdapter implements IRFactor {
 
-	public XRFactorCC(String factorName) {
+	private IRObject rst = null;
+
+	public XRFactorCC0(String factorName) {
 		super(factorName);
+	}
+
+	@Override
+	protected void _delete() throws RException {
+
+		if (rst != null) {
+			RulpUtil.decRef(rst);
+			rst = null;
+		}
+
+		super._delete();
 	}
 
 	@Override
@@ -33,35 +44,12 @@ public class XRFactorCC extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRExpr expr = RulpUtil.asExpression(args.get(1));
-
-//		// support cps already
-//		if (RuntimeUtil.isSupportOpCPS(frame)) {
-//			return interpreter.compute(frame, expr);
-//		}
-
-		IRFrame cpsFrame = RulpFactory.createFrame(frame, "cps");
-
-		try {
-
-			RulpUtil.incRef(cpsFrame);
-
-			IRObject e0 = expr.get(0);
-
-			return CPSUtils.returnCPS(RulpUtil.asExpression(args.get(1)), frame);
-
-		} finally {
-			cpsFrame.release();
-			RulpUtil.decRef(cpsFrame);
+		if (rst == null) {
+			rst = interpreter.compute(frame, args.get(1));
+			RulpUtil.incRef(rst);
 		}
+
+		return rst;
 	}
 
-	@Override
-	public boolean isStable() {
-		return false;
-	}
-
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

@@ -24,9 +24,9 @@ import alpha.rulp.runtime.IRFunctionList;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorToString extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorToString extends AbsAtomFactorAdapter implements IRFactor {
 
 	public static IRObject computeInstanceToString(IRInstance ins, IRInterpreter interpreter) throws RException {
 

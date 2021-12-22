@@ -17,7 +17,7 @@ import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 
-public class XRFactorToAtom extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorToAtom extends AbsAtomFactorAdapter implements IRFactor {
 	public XRFactorToAtom(String factorName) {
 		super(factorName);
 	}

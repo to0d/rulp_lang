@@ -27,9 +27,9 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.utils.SystemUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorLoad extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorLoad extends AbsAtomFactorAdapter implements IRFactor {
 
 	private Set<String> loadedFilePaths = new HashSet<>();
 

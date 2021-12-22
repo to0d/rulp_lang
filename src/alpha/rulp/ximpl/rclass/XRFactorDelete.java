@@ -20,9 +20,9 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorDelete extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorDelete extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorDelete(String factorName) {
 		super(factorName);

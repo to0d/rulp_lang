@@ -1,23 +1,14 @@
-/* Copyright Prolog                                  */
-/*                                                   */
-/* RULP(Run a Lisp Processer) on Java                */
-/* 													 */
-/* Copyright (C) 2020 Todd (to0d@outlook.com)        */
-/* This program comes with ABSOLUTELY NO WARRANTY;   */
-/* This is free software, and you are welcome to     */
-/* redistribute it under certain conditions.         */
-
 package alpha.rulp.ximpl.factor;
 
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
-import alpha.rulp.ximpl.runtime.AbsAtomCallableAdapter;
+import alpha.rulp.ximpl.runtime.AbsRefCallableAdapter;
 
-public abstract class AbsRFactorAdapter extends AbsAtomCallableAdapter implements IRFactor {
+public abstract class AbsRefFactorAdapter extends AbsRefCallableAdapter implements IRFactor {
 
 	protected String factorName;
 
-	public AbsRFactorAdapter(String factorName) {
+	public AbsRefFactorAdapter(String factorName) {
 		super();
 		this.factorName = factorName;
 	}

@@ -14,7 +14,7 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.rclass.AbsRInstance;
 
 public class XRQueue extends AbsRInstance implements IRCollection {
@@ -56,7 +56,7 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 
 		IRClass queueClass = RulpUtil.asClass(systemFrame.getEntry(A_QUEUE).getValue());
 
-		RulpUtil.setMember(queueClass, F_MBR_QUEUE_INIT, new AbsRFactorAdapter(F_MBR_QUEUE_INIT) {
+		RulpUtil.setMember(queueClass, F_MBR_QUEUE_INIT, new AbsAtomFactorAdapter(F_MBR_QUEUE_INIT) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -72,7 +72,7 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(queueClass, F_MBR_QUEUE_PUSH_BACK, new AbsRFactorAdapter(F_MBR_QUEUE_PUSH_BACK) {
+		RulpUtil.setMember(queueClass, F_MBR_QUEUE_PUSH_BACK, new AbsAtomFactorAdapter(F_MBR_QUEUE_PUSH_BACK) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -94,7 +94,7 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(queueClass, F_MBR_QUEUE_PUSH_FRONT, new AbsRFactorAdapter(F_MBR_QUEUE_PUSH_FRONT) {
+		RulpUtil.setMember(queueClass, F_MBR_QUEUE_PUSH_FRONT, new AbsAtomFactorAdapter(F_MBR_QUEUE_PUSH_FRONT) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -116,7 +116,7 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(queueClass, F_MBR_QUEUE_POP_BACK, new AbsRFactorAdapter(F_MBR_QUEUE_POP_BACK) {
+		RulpUtil.setMember(queueClass, F_MBR_QUEUE_POP_BACK, new AbsAtomFactorAdapter(F_MBR_QUEUE_POP_BACK) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -134,7 +134,7 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(queueClass, F_MBR_QUEUE_POP_FRONT, new AbsRFactorAdapter(F_MBR_QUEUE_POP_FRONT) {
+		RulpUtil.setMember(queueClass, F_MBR_QUEUE_POP_FRONT, new AbsAtomFactorAdapter(F_MBR_QUEUE_POP_FRONT) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -152,7 +152,7 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(queueClass, F_MBR_QUEUE_PEEK_BACK, new AbsRFactorAdapter(F_MBR_QUEUE_PEEK_BACK) {
+		RulpUtil.setMember(queueClass, F_MBR_QUEUE_PEEK_BACK, new AbsAtomFactorAdapter(F_MBR_QUEUE_PEEK_BACK) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -170,7 +170,7 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(queueClass, F_MBR_QUEUE_PEEK_FRONT, new AbsRFactorAdapter(F_MBR_QUEUE_PEEK_FRONT) {
+		RulpUtil.setMember(queueClass, F_MBR_QUEUE_PEEK_FRONT, new AbsAtomFactorAdapter(F_MBR_QUEUE_PEEK_FRONT) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -188,7 +188,7 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(queueClass, F_MBR_QUEUE_GET, new AbsRFactorAdapter(F_MBR_QUEUE_GET) {
+		RulpUtil.setMember(queueClass, F_MBR_QUEUE_GET, new AbsAtomFactorAdapter(F_MBR_QUEUE_GET) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -209,7 +209,7 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(queueClass, F_MBR_QUEUE_SIZE_OF, new AbsRFactorAdapter(F_MBR_QUEUE_SIZE_OF) {
+		RulpUtil.setMember(queueClass, F_MBR_QUEUE_SIZE_OF, new AbsAtomFactorAdapter(F_MBR_QUEUE_SIZE_OF) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -227,7 +227,7 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(queueClass, F_MBR_QUEUE_IS_EMTPY, new AbsRFactorAdapter(F_MBR_QUEUE_IS_EMTPY) {
+		RulpUtil.setMember(queueClass, F_MBR_QUEUE_IS_EMTPY, new AbsAtomFactorAdapter(F_MBR_QUEUE_IS_EMTPY) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -245,7 +245,7 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(queueClass, F_MBR_QUEUE_CLEAR, new AbsRFactorAdapter(F_MBR_QUEUE_CLEAR) {
+		RulpUtil.setMember(queueClass, F_MBR_QUEUE_CLEAR, new AbsAtomFactorAdapter(F_MBR_QUEUE_CLEAR) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -265,7 +265,7 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(queueClass, F_MBR_QUEUE_TO_LIST, new AbsRFactorAdapter(F_MBR_QUEUE_TO_LIST) {
+		RulpUtil.setMember(queueClass, F_MBR_QUEUE_TO_LIST, new AbsAtomFactorAdapter(F_MBR_QUEUE_TO_LIST) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {

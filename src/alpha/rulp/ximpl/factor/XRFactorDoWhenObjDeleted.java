@@ -22,7 +22,7 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 
-public class XRFactorDoWhenObjDeleted extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorDoWhenObjDeleted extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorDoWhenObjDeleted(String factorName) {
 		super(factorName);

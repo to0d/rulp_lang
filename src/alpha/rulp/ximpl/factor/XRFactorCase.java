@@ -23,7 +23,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpUtil;
 
-public class XRFactorCase extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorCase extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorCase(String factorName) {
 		super(factorName);

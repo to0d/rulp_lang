@@ -22,7 +22,7 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.SubjectUtil;
 
-public class XRFactorDefvar extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorDefvar extends AbsAtomFactorAdapter implements IRFactor {
 
 	private boolean allowRedefine;
 

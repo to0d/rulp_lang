@@ -19,7 +19,7 @@ import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.MathUtil;
 
-public class XRFactorIf extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorIf extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorIf(String factorName) {
 		super(factorName);

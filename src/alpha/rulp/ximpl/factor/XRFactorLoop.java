@@ -30,7 +30,7 @@ import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.error.RBreak;
 import alpha.rulp.ximpl.error.RContinue;
 
-public class XRFactorLoop extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorLoop(String factorName) {
 		super(factorName);

@@ -25,10 +25,10 @@ import alpha.rulp.runtime.IRTemplate.TemplateParaEntry;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.runtime.XRFactorDefun;
 
-public class XRFactorDefTemplate extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorDefTemplate extends AbsAtomFactorAdapter implements IRFactor {
 
 	static final String TP_TMP_VAR_NAME = "?_TTVN_";
 

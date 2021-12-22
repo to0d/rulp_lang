@@ -131,7 +131,7 @@ import alpha.rulp.runtime.IRTemplate.TemplatePara;
 import alpha.rulp.runtime.IRTemplate.TemplateParaEntry;
 import alpha.rulp.runtime.RName;
 import alpha.rulp.ximpl.collection.XRMap;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.lang.AbsObject;
 import alpha.rulp.ximpl.rclass.XRFactorNew;
 
@@ -160,7 +160,7 @@ public class RulpUtil {
 		}
 	}
 
-	static class XRFactorWrapper extends AbsRFactorAdapter implements IRFactor {
+	static class XRFactorWrapper extends AbsAtomFactorAdapter implements IRFactor {
 
 		private IRFactorBody factorBody;
 

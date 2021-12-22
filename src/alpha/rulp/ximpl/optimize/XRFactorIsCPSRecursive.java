@@ -22,9 +22,9 @@ import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorIsCPSRecursive extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorIsCPSRecursive extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorIsCPSRecursive(String factorName) {
 		super(factorName);
@@ -42,7 +42,7 @@ public class XRFactorIsCPSRecursive extends AbsRFactorAdapter implements IRFacto
 			return RulpFactory.emptyConstList();
 		}
 
-		Set<String> calleeNames = CPSUtils.findCPSCallee(fun.getFunBody(), frame);
+		Set<String> calleeNames = CPSUtil.findCPSCallee(fun.getFunBody(), frame);
 		if (calleeNames.isEmpty()) {
 			return RulpFactory.emptyConstList();
 		}

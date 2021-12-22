@@ -22,7 +22,7 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.string.XRFactorToString;
 
-public class XRFactorArithmetic extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorArithmetic extends AbsAtomFactorAdapter implements IRFactor {
 
 	private RArithmeticOperator operator;
 

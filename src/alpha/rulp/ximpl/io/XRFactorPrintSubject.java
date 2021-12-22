@@ -20,9 +20,9 @@ import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.TraceUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorPrintSubject extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorPrintSubject extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorPrintSubject(String factorName) {
 		super(factorName);

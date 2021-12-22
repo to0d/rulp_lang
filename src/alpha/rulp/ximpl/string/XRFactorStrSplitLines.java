@@ -19,9 +19,9 @@ import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorStrSplitLines extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorStrSplitLines extends AbsAtomFactorAdapter implements IRFactor {
 	public XRFactorStrSplitLines(String factorName) {
 		super(factorName);
 	}

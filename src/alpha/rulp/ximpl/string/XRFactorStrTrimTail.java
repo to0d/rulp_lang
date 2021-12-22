@@ -19,9 +19,9 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.StringUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorStrTrimTail extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorStrTrimTail extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorStrTrimTail(String factorName) {
 		super(factorName);

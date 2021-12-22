@@ -9,9 +9,9 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.TraceUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorPrintFrameTree extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorPrintFrameTree extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorPrintFrameTree(String factorName) {
 		super(factorName);

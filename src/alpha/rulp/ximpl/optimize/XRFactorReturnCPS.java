@@ -20,9 +20,9 @@ import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.error.RReturn;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorReturnCPS extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorReturnCPS extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorReturnCPS(String factorName) {
 		super(factorName);
@@ -35,7 +35,7 @@ public class XRFactorReturnCPS extends AbsRFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRObject rst = CPSUtils.returnCPS(RulpUtil.asExpression(args.get(1)), frame);
+		IRObject rst = CPSUtil.returnCPS(RulpUtil.asExpression(args.get(1)), frame);
 		if (rst.getType() == RType.EXPR) {
 			RulpUtil.addAttribute(rst, A_OP_CPS);
 		}

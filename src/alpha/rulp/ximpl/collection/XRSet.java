@@ -15,7 +15,7 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.rclass.AbsRInstance;
 
 public class XRSet extends AbsRInstance implements IRCollection {
@@ -47,7 +47,7 @@ public class XRSet extends AbsRInstance implements IRCollection {
 
 		IRClass setClass = RulpUtil.asClass(systemFrame.getEntry(A_SET).getValue());
 
-		RulpUtil.setMember(setClass, F_MBR_SET_INIT, new AbsRFactorAdapter(F_MBR_SET_INIT) {
+		RulpUtil.setMember(setClass, F_MBR_SET_INIT, new AbsAtomFactorAdapter(F_MBR_SET_INIT) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -63,7 +63,7 @@ public class XRSet extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(setClass, F_MBR_SET_ADD, new AbsRFactorAdapter(F_MBR_SET_ADD) {
+		RulpUtil.setMember(setClass, F_MBR_SET_ADD, new AbsAtomFactorAdapter(F_MBR_SET_ADD) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -85,7 +85,7 @@ public class XRSet extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(setClass, F_MBR_SET_HAS, new AbsRFactorAdapter(F_MBR_SET_HAS) {
+		RulpUtil.setMember(setClass, F_MBR_SET_HAS, new AbsAtomFactorAdapter(F_MBR_SET_HAS) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -106,7 +106,7 @@ public class XRSet extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(setClass, F_MBR_SET_SIZE_OF, new AbsRFactorAdapter(F_MBR_SET_SIZE_OF) {
+		RulpUtil.setMember(setClass, F_MBR_SET_SIZE_OF, new AbsAtomFactorAdapter(F_MBR_SET_SIZE_OF) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -124,7 +124,7 @@ public class XRSet extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(setClass, F_MBR_SET_IS_EMPTY, new AbsRFactorAdapter(F_MBR_SET_IS_EMPTY) {
+		RulpUtil.setMember(setClass, F_MBR_SET_IS_EMPTY, new AbsAtomFactorAdapter(F_MBR_SET_IS_EMPTY) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -142,7 +142,7 @@ public class XRSet extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(setClass, F_MBR_SET_CLEAR, new AbsRFactorAdapter(F_MBR_SET_CLEAR) {
+		RulpUtil.setMember(setClass, F_MBR_SET_CLEAR, new AbsAtomFactorAdapter(F_MBR_SET_CLEAR) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -161,7 +161,7 @@ public class XRSet extends AbsRInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(setClass, F_MBR_SET_TO_LIST, new AbsRFactorAdapter(F_MBR_SET_TO_LIST) {
+		RulpUtil.setMember(setClass, F_MBR_SET_TO_LIST, new AbsAtomFactorAdapter(F_MBR_SET_TO_LIST) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {

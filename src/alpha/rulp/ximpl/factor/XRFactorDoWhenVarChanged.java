@@ -23,7 +23,7 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 
-public class XRFactorDoWhenVarChanged extends AbsRFactorAdapter implements IRFactor {
+public class XRFactorDoWhenVarChanged extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorDoWhenVarChanged(String factorName) {
 		super(factorName);

@@ -23,7 +23,7 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.factor.AbsRFactorAdapter;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.rclass.XRDefInstance;
 
 public class XRMap extends XRDefInstance implements IRCollection {
@@ -173,7 +173,7 @@ public class XRMap extends XRDefInstance implements IRCollection {
 
 		IRClass mapClass = RulpUtil.asClass(systemFrame.getEntry(A_MAP).getValue());
 
-		RulpUtil.setMember(mapClass, F_MBR_MAP_INIT, new AbsRFactorAdapter(F_MBR_MAP_INIT) {
+		RulpUtil.setMember(mapClass, F_MBR_MAP_INIT, new AbsAtomFactorAdapter(F_MBR_MAP_INIT) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -191,7 +191,7 @@ public class XRMap extends XRDefInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(mapClass, F_MBR_MAP_PUT, new AbsRFactorAdapter(F_MBR_MAP_PUT) {
+		RulpUtil.setMember(mapClass, F_MBR_MAP_PUT, new AbsAtomFactorAdapter(F_MBR_MAP_PUT) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -213,7 +213,7 @@ public class XRMap extends XRDefInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(mapClass, F_MBR_MAP_GET, new AbsRFactorAdapter(F_MBR_MAP_GET) {
+		RulpUtil.setMember(mapClass, F_MBR_MAP_GET, new AbsAtomFactorAdapter(F_MBR_MAP_GET) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -234,7 +234,7 @@ public class XRMap extends XRDefInstance implements IRCollection {
 			}
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(mapClass, F_MBR_MAP_SIZE_OF, new AbsRFactorAdapter(F_MBR_MAP_SIZE_OF) {
+		RulpUtil.setMember(mapClass, F_MBR_MAP_SIZE_OF, new AbsAtomFactorAdapter(F_MBR_MAP_SIZE_OF) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -253,7 +253,7 @@ public class XRMap extends XRDefInstance implements IRCollection {
 
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(mapClass, F_MBR_MAP_IS_EMPTY, new AbsRFactorAdapter(F_MBR_MAP_IS_EMPTY) {
+		RulpUtil.setMember(mapClass, F_MBR_MAP_IS_EMPTY, new AbsAtomFactorAdapter(F_MBR_MAP_IS_EMPTY) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -272,7 +272,7 @@ public class XRMap extends XRDefInstance implements IRCollection {
 
 		}, RAccessType.PRIVATE);
 
-		RulpUtil.setMember(mapClass, F_MBR_MAP_CLEAR, new AbsRFactorAdapter(F_MBR_MAP_CLEAR) {
+		RulpUtil.setMember(mapClass, F_MBR_MAP_CLEAR, new AbsAtomFactorAdapter(F_MBR_MAP_CLEAR) {
 
 			@Override
 			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
