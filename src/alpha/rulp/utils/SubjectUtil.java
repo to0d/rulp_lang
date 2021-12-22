@@ -338,7 +338,7 @@ public class SubjectUtil {
 		/*****************************************************/
 		if (RulpUtil.hasAttributeList(mbrExpr)) {
 			for (String attr : RulpUtil.getAttributeList(mbrExpr)) {
-				mbr = _processMemberAttribute(mbr, attr, true);
+				mbr = _processMemberAttribute(mbr, attr, false);
 			}
 		}
 

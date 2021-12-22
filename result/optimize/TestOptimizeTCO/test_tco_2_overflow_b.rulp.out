@@ -21,6 +21,3 @@ java.lang.StackOverflowError
 (cps-count)
 ;=>0
 
-(_ginfo)
-;=>nil
-

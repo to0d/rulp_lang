@@ -3,7 +3,7 @@
     (defvar ?v2 0)[static]
     (defun fun1 () (return 1))[static]
 )
-;;;
+;=>
 
 (new class1 o1)
 ;;;

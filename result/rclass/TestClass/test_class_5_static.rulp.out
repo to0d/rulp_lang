@@ -1,7 +1,7 @@
 (defclass class1 ()
     (defvar ?v1 0)
-    (defvar ?v2 0 static)
-    (defun fun1 () (return 1) static)
+    (defvar ?v2 0)[static]
+    (defun fun1 () (return 1))[static]
 )
 ;=>class1
 
@@ -38,19 +38,19 @@
 (ls-print class1)
 ;=>nil
 ;out:
-mbr=?rv, name=?rv, type=var, property='(default), value="1"
-mbr=?v1, name=?v1, type=var, property='(default), value="1"
-mbr=?v2, name=?v2, type=var, property='(default static), value="2"
-mbr=fun1, name=(fun1), type=func, property='(default static)
+mbr=?rv, name=?rv, type=var, property='(default), attribute='(), value="1"
+mbr=?v1, name=?v1, type=var, property='(default), attribute='(), value="1"
+mbr=?v2, name=?v2, type=var, property='(default static), attribute='(static), value="2"
+mbr=fun1, name=(fun1), type=func, property='(default), attribute='(static)
 
 ;eof
 
 (ls-print o1)
 ;=>nil
 ;out:
-mbr=?v1, name=?v1, type=var, property='(default), value="0"
-mbr=?v2, name=?v2, type=var, property='(default static), value="2"
-mbr=this, name=o1, type=instance, property='(default), instance-class=class1
+mbr=?v1, name=?v1, type=var, property='(default), attribute='(), value="0"
+mbr=?v2, name=?v2, type=var, property='(default static), attribute='(), value="2"
+mbr=this, name=o1, type=instance, property='(default), attribute='(), instance-class=class1
 
 ;eof
 
