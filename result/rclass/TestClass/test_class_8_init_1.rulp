@@ -49,16 +49,22 @@
 (o6::get)
 ;;;
 
-(out-to-file "result/rclass/TestClass/test_class_8_init_1_a.txt" 
-    (do
-        (print-subject o1 -1)
-        (print-subject o2 -1)
-        (print-subject o3 -1)
-        (print-subject o4 -1)
-        (print-subject o5 -1)
-        (print-subject o6 -1)
-    )
-)
+(print-subject o1 -1)
+;;;
+
+(print-subject o2 -1)
+;;;
+
+(print-subject o3 -1)
+;;;
+
+(print-subject o4 -1)
+;;;
+
+(print-subject o5 -1)
+;;;
+
+(print-subject o6 -1)
 ;;;
 
 (rulp-object-count frame)
@@ -80,3 +86,6 @@
 
 (rulp-object-count instance)
 ;=>0
+
+(print-global-info)
+;;;

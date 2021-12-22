@@ -10,8 +10,7 @@ public class TestClass extends RulpTestBase {
 	public void test_class_1() {
 
 		_setup();
-		_run_script();
-		_gInfo();
+		_run_script(); 
 	}
 
 	@Test
@@ -68,7 +67,6 @@ public class TestClass extends RulpTestBase {
 
 		_setup();
 		_run_script();
-		_gInfo();
 	}
 	
 	@Test
@@ -82,21 +80,18 @@ public class TestClass extends RulpTestBase {
 	public void test_class_8_init_1() {
 		_setup();
 		_run_script();
-		_gInfo();
 	}
 
 	@Test
 	public void test_class_9_delete_1() {
 		_setup();
 		_run_script();
-		_gInfo();
 	}
 
 	@Test
 	public void test_class_9_delete_2() {
 		_setup();
 		_run_script();
-		_gInfo();
 	}
 
 	@Test
@@ -115,7 +110,6 @@ public class TestClass extends RulpTestBase {
 	public void test_class_c_mbr() {
 		_setup();
 		_run_script();
-		_gInfo();
 	}
 
 }

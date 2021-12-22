@@ -1,4 +1,10 @@
-(load "result/rclass/TestClass/test_rclass_1.rulp")
+(defclass class1 ()
+    (defvar ?value 0)
+    (defun add (?x) (setq ?value (+ ?value ?x)))
+    (defun sub (?x) (setq ?value (- ?value ?x)))
+    (defun get ()   (return ?value))
+    (defun set (?x) (setq ?value ?x))
+)
 ;;;
 
 (ls class1)
@@ -64,3 +70,5 @@
 (rulp-object-count frame)
 ;=>1
 
+(print-global-info)
+;;;

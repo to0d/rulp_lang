@@ -148,7 +148,7 @@
     (defvar ?impl nil private)
     
     (defun init ()
-        (setq ?impl (set::_set_init)) final)
+        (setq ?impl (set::_set_init)))
     
     (defun add (?v)
         (set::_set_add ?impl ?v) final)

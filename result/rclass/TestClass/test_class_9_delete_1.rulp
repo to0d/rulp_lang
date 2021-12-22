@@ -25,3 +25,6 @@
 
 ?x
 ;;;
+
+(print-global-info)
+;;;

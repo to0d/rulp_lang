@@ -6,7 +6,7 @@
 )
 ;;;
 
-(out-to-file "result/rclass/TestClass/test_class_7_overload_3_a.txt" (print-subject class2))
+(print-subject class2)
 ;;;
 
 (new class1 o1)
@@ -15,7 +15,7 @@
 (o1::fun1 1)
 ;;;
 
-(out-to-file "result/rclass/TestClass/test_class_7_overload_3_b.txt" (print-subject o1 -1))
+(print-subject o1 -1)
 ;;;
 
 (new class2 o2)
@@ -24,5 +24,8 @@
 (o2::fun1 1)
 ;;;
 
-(out-to-file "result/rclass/TestClass/test_class_7_overload_3_c.txt" (print-subject o2 -1))
+(print-subject o2 -1)
+;;;
+
+(print-global-info)
 ;;;

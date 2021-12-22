@@ -9,7 +9,7 @@
 
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.A_ARRAY;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.A_ATOM;
 import static alpha.rulp.lang.Constant.A_BLOB;
 import static alpha.rulp.lang.Constant.A_BOOL;
@@ -1870,6 +1870,18 @@ public class RulpUtil {
 
 		case A_LAMBDA:
 			return O_LAMBDA;
+
+		case A_FINAL:
+			return O_Final;
+
+		case A_STATIC:
+			return O_Static;
+
+		case A_PRIVATE:
+			return O_Private;
+
+		case A_PUBLIC:
+			return O_Public;
 
 		default:
 			return RulpFactory.createAtom(name);
