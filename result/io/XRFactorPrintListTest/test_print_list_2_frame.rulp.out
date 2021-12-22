@@ -92,7 +92,6 @@ root::ls
 root::macro
 root::make-array
 root::make-blob
-root::make-cps
 root::make-list
 root::make-string
 root::member
@@ -121,6 +120,7 @@ root::random
 root::ref
 root::remove
 root::return
+root::return-cps
 root::reverse
 root::root
 root::rulp-object-count

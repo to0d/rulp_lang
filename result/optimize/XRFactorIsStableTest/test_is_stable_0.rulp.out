@@ -107,7 +107,6 @@ obj=ls, type=factor, stable=true
 obj=macro, type=atom, stable=true
 obj=make-array, type=factor, stable=true
 obj=make-blob, type=factor, stable=true
-obj=make-cps, type=factor, stable=true
 obj=make-list, type=factor, stable=true
 obj=make-string, type=factor, stable=true
 obj=member, type=atom, stable=true
@@ -136,6 +135,7 @@ obj=random, type=factor, stable=false
 obj=ref, type=factor, stable=true
 obj=remove, type=factor, stable=true
 obj=return, type=factor, stable=true
+obj=return-cps, type=factor, stable=true
 obj=reverse, type=factor, stable=true
 obj=root, type=frame, stable=false
 obj=rulp-object-count, type=factor, stable=false

@@ -48,7 +48,7 @@ public class XRFactorCC extends AbsRFactorAdapter implements IRFactor {
 
 			IRObject e0 = expr.get(0);
 
-			return CPSUtils.rebuildCpsTree(RulpUtil.asExpression(args.get(1)), frame);
+			return CPSUtils.returnCPS(RulpUtil.asExpression(args.get(1)), frame);
 
 		} finally {
 			cpsFrame.release();

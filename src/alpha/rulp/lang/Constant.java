@@ -259,8 +259,6 @@ public interface Constant {
 
 	String F_MAKE_BLOB = "make-blob";
 
-	String F_MAKE_CPS = "make-cps";
-
 	String F_MAKE_LIST = "make-list";
 
 	String F_MAKE_STRING = "make-string";
@@ -338,6 +336,8 @@ public interface Constant {
 	String F_REMOVE = "remove";
 
 	String F_RETURN = "return";
+
+	String F_RETURN_CPS = "return-cps";
 
 	String F_REVERSE = "reverse";
 

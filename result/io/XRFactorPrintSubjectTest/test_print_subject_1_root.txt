@@ -47,7 +47,7 @@ let                  : -137     0        0    factor     let
 is-stable            : -136     0        0    factor     is-stable           
 cps-callee           : -135     0        0    factor     cps-callee          
 cps-count            : -134     0        0    factor     cps-count           
-make-cps             : -133     0        0    factor     make-cps            
+return-cps           : -133     0        0    factor     return-cps          
 deftemplate          : -132     0        0    factor     deftemplate         
 defun                : -131     0        0    factor     defun               
 defmacro             : -130     0        0    factor     defmacro            

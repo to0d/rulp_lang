@@ -396,7 +396,7 @@ public final class RuntimeUtil {
 					if (rst == null) {
 						return O_Nil;
 					} else if (rst.getType() == RType.EXPR && RulpUtil.containAttribute(rst, A_OP_CPS)) {
-						rst = CPSUtils.computeCPSExpr((IRExpr) rst, interpreter, frame);
+						rst = CPSUtils.computeCPS((IRExpr) rst, interpreter, frame);
 					}
 					return rst;
 
@@ -736,10 +736,6 @@ public final class RuntimeUtil {
 		}
 	}
 
-	public static boolean isCpsExpr(IRExpr expr, Set<String> calleeNames, IRFrame frame) throws RException {
-		return false;
-	}
-
 	public static boolean isForceLocalEntryName(String name) {
 
 		switch (name) {
@@ -780,14 +776,6 @@ public final class RuntimeUtil {
 		default:
 			return false;
 		}
-	}
-
-//	public static boolean isSupportOpCPS(IRFrame frame) throws RException {
-//		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_OP_CPS)).asBoolean();
-//	}
-
-	public static boolean isSupportOpStable(IRFrame frame) throws RException {
-		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_OP_STABLE)).asBoolean();
 	}
 
 	public static boolean isTrace(IRFrame frame) throws RException {
@@ -1065,10 +1053,6 @@ public final class RuntimeUtil {
 		frameMaxLevel.getAndSet(0);
 		callStatsId.incrementAndGet();
 	}
-
-//	public static void setOpCPS(IRFrame frame, boolean support) throws RException {
-//		RulpUtil.setLocalVar(frame, A_OP_CPS, support ? O_True : O_False);
-//	}
 
 	public static void setTrace(IRFrame frame, boolean trace) throws RException {
 		RulpUtil.setLocalVar(frame, A_TRACE, trace ? O_True : O_False);

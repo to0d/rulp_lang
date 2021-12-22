@@ -2,17 +2,8 @@ package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.F_IF;
-import static alpha.rulp.lang.Constant.F_MAKE_CPS;
-import static alpha.rulp.lang.Constant.F_O_ADD;
-import static alpha.rulp.lang.Constant.F_O_AND;
-import static alpha.rulp.lang.Constant.F_O_BY;
-import static alpha.rulp.lang.Constant.F_O_DIV;
-import static alpha.rulp.lang.Constant.F_O_NOT;
-import static alpha.rulp.lang.Constant.F_O_OR;
-import static alpha.rulp.lang.Constant.F_O_POWER;
-import static alpha.rulp.lang.Constant.F_O_SUB;
-import static alpha.rulp.lang.Constant.F_O_XOR;
 import static alpha.rulp.lang.Constant.F_RETURN;
+import static alpha.rulp.lang.Constant.F_RETURN_CPS;
 import static alpha.rulp.lang.Constant.O_Nil;
 
 import java.util.ArrayList;
@@ -80,25 +71,11 @@ public class CPSUtils {
 		}
 	}
 
-	static final Set<String> cps_op = new HashSet<>();
-
 	public static boolean CPS_TRACE = false;
 
 	protected static AtomicInteger cpsCount = new AtomicInteger(0);
 
-	static {
-		cps_op.add(F_O_BY);
-		cps_op.add(F_O_ADD);
-		cps_op.add(F_O_DIV);
-		cps_op.add(F_O_SUB);
-		cps_op.add(F_O_POWER);
-		cps_op.add(F_O_AND);
-		cps_op.add(F_O_OR);
-		cps_op.add(F_O_NOT);
-		cps_op.add(F_O_XOR);
-	}
-
-	private static IRObject _compute(IRObject obj, IRFrame frame) throws RException {
+	private static IRObject _computeCPS(IRObject obj, IRFrame frame) throws RException {
 
 		switch (obj.getType()) {
 
@@ -135,7 +112,7 @@ public class CPSUtils {
 			IRList newList = RulpFactory.createVaryList();
 			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
 			while (it.hasNext()) {
-				newList.add(rebuildCpsTree(it.next(), frame));
+				newList.add(returnCPS(it.next(), frame));
 			}
 			return newList;
 		}
@@ -147,7 +124,7 @@ public class CPSUtils {
 				return mbr;
 			}
 
-			IRObject subObj = rebuildCpsTree(mbr.getSubject(), frame);
+			IRObject subObj = returnCPS(mbr.getSubject(), frame);
 			if (subObj == null) {
 				throw new RException("subject<" + mbr.getSubject() + "> not found");
 			}
@@ -203,6 +180,7 @@ public class CPSUtils {
 			break;
 
 		case F_RETURN:
+		case F_RETURN_CPS:
 
 			if (expr.size() > 1 && expr.get(1).getType() == RType.EXPR) {
 				IRExpr e1 = (IRExpr) expr.get(1);
@@ -273,109 +251,7 @@ public class CPSUtils {
 		}
 	}
 
-	private static boolean _isSupportCPSFactor(IRObject op, IRFrame frame) throws RException {
-
-		// the cps callee should be "pure" function
-		// -- no global (external) variable
-		// -- no non-callee function called
-		// -- no non-cps factor called
-		// -- no lambda function
-
-		if (op != null) {
-
-			switch (op.getType()) {
-			case ATOM:
-
-				String opName = RulpUtil.asAtom(op).getName();
-				IRFrameEntry entry = frame.getEntry(opName);
-
-				// it maybe a undefined function
-				if (entry == null) {
-					return true;
-				} else {
-					return _isSupportCPSFactor(entry.getValue(), frame);
-				}
-
-			case FACTOR:
-				return RulpUtil.asFactor(op).isStable();
-
-			case FUNC:
-				return true;
-
-			default:
-
-			}
-		}
-
-		return false;
-	}
-
-	public static IRExpr addMakeCpsExpr(IRExpr expr, IRFrame frame) throws RException {
-
-		IRObject e0 = expr.get(0);
-		if (e0.getType() != RType.ATOM) {
-			return expr;
-		}
-
-		switch (RulpUtil.asAtom(e0).getName()) {
-		case A_DO: {
-
-			ArrayList<IRObject> newExpr = new ArrayList<>();
-			newExpr.add(e0);
-
-			IRIterator<? extends IRObject> it = expr.listIterator(1);
-			while (it.hasNext()) {
-
-				IRObject e = it.next();
-				if (e.getType() == RType.EXPR) {
-					e = addMakeCpsExpr((IRExpr) e, frame);
-				}
-
-				newExpr.add(e);
-			}
-
-			return expr.isEarly() ? RulpFactory.createExpressionEarly(newExpr) : RulpFactory.createExpression(newExpr);
-		}
-
-		case F_IF: {
-
-			ArrayList<IRObject> newExpr = new ArrayList<>();
-			newExpr.add(e0);
-			newExpr.add(expr.get(1));
-
-			IRIterator<? extends IRObject> it = expr.listIterator(2);
-			while (it.hasNext()) {
-				IRObject e = it.next();
-				if (e.getType() == RType.EXPR) {
-					e = addMakeCpsExpr((IRExpr) e, frame);
-				}
-
-				newExpr.add(e);
-			}
-
-			return expr.isEarly() ? RulpFactory.createExpressionEarly(newExpr) : RulpFactory.createExpression(newExpr);
-		}
-
-		case F_RETURN:
-
-			if (expr.size() == 2) {
-				IRObject e1 = expr.get(1);
-				if (e1.getType() == RType.EXPR) {
-					return RulpFactory.createExpression(e0,
-							RulpFactory.createExpression(RulpFactory.createAtom(F_MAKE_CPS), e1));
-				}
-			}
-
-			break;
-
-		default:
-
-		}
-
-		return expr;
-	}
-
-	public static IRObject computeCPSExpr(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+	public static IRObject computeCPS(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		if (expr.isEmpty()) {
 			return O_Nil;
@@ -436,7 +312,7 @@ public class CPSUtils {
 							if (obj.getType() == RType.EXPR) {
 								cpsQueue.addLast(new CpsNode(topNode, i, (IRExpr) obj));
 							} else {
-								topNode.elements.set(i, _compute(obj, frame));
+								topNode.elements.set(i, _computeCPS(obj, frame));
 							}
 						}
 					}
@@ -523,7 +399,74 @@ public class CPSUtils {
 		return false;
 	}
 
-	public static IRObject rebuildCpsTree(IRObject obj, IRFrame frame) throws RException {
+	public static IRExpr rebuildReturnCPS(IRExpr expr, IRFrame frame) throws RException {
+
+		IRObject e0 = expr.get(0);
+		if (e0.getType() != RType.ATOM) {
+			return expr;
+		}
+
+		switch (RulpUtil.asAtom(e0).getName()) {
+		case A_DO: {
+
+			ArrayList<IRObject> newExpr = new ArrayList<>();
+			newExpr.add(e0);
+
+			IRIterator<? extends IRObject> it = expr.listIterator(1);
+			while (it.hasNext()) {
+
+				IRObject e = it.next();
+				if (e.getType() == RType.EXPR) {
+					e = rebuildReturnCPS((IRExpr) e, frame);
+				}
+
+				newExpr.add(e);
+			}
+
+			return expr.isEarly() ? RulpFactory.createExpressionEarly(newExpr) : RulpFactory.createExpression(newExpr);
+		}
+
+		case F_IF: {
+
+			ArrayList<IRObject> newExpr = new ArrayList<>();
+			newExpr.add(e0);
+			newExpr.add(expr.get(1));
+
+			IRIterator<? extends IRObject> it = expr.listIterator(2);
+			while (it.hasNext()) {
+				IRObject e = it.next();
+				if (e.getType() == RType.EXPR) {
+					e = rebuildReturnCPS((IRExpr) e, frame);
+				}
+
+				newExpr.add(e);
+			}
+
+			return expr.isEarly() ? RulpFactory.createExpressionEarly(newExpr) : RulpFactory.createExpression(newExpr);
+		}
+
+		case F_RETURN:
+			if (expr.size() == 2) {
+				IRObject e1 = expr.get(1);
+				if (e1.getType() == RType.EXPR) {
+					return RulpFactory.createExpression(RulpFactory.createAtom(F_RETURN_CPS), e1);
+				}
+			}
+
+			break;
+
+		default:
+
+		}
+
+		return expr;
+	}
+
+	public static void resetCpsLoopCount() {
+		cpsCount.getAndSet(0);
+	}
+
+	public static IRObject returnCPS(IRObject obj, IRFrame frame) throws RException {
 
 		switch (obj.getType()) {
 
@@ -562,7 +505,7 @@ public class CPSUtils {
 
 			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
 			while (it.hasNext()) {
-				newList.add(rebuildCpsTree(it.next(), frame));
+				newList.add(returnCPS(it.next(), frame));
 			}
 
 			if (obj.getType() == RType.LIST) {
@@ -584,7 +527,7 @@ public class CPSUtils {
 				return mbr;
 			}
 
-			IRObject subObj = rebuildCpsTree(mbr.getSubject(), frame);
+			IRObject subObj = returnCPS(mbr.getSubject(), frame);
 			if (subObj == null) {
 				throw new RException("subject<" + mbr.getSubject() + "> not found");
 			}
@@ -604,10 +547,6 @@ public class CPSUtils {
 
 			return obj;
 		}
-	}
-
-	public static void resetCpsLoopCount() {
-		cpsCount.getAndSet(0);
 	}
 
 }

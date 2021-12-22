@@ -157,7 +157,7 @@ public class XRFactorDefun extends AbsRFactorAdapter implements IRFactor {
 				case A_OP_CPS:
 					// recursive function
 					if (CPSUtils.findCPSCallee(funBody, frame).contains(funName)) {
-						funBody = CPSUtils.addMakeCpsExpr(funBody, frame);
+						funBody = CPSUtils.rebuildReturnCPS(funBody, frame);
 					}
 					break;
 				default:
