@@ -155,8 +155,8 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 			for (String attr : RulpUtil.getAttributeList(args)) {
 				switch (attr) {
 				case A_OPT_TCO:
-					// recursive function
-					if (TCOUtil.findCPSCallee(funBody, frame).contains(funName)) {
+					// recursive function call in return expression
+					if (TCOUtil.listFunctionInReturn(funBody, frame).contains(funName)) {
 						funBody = TCOUtil.rebuildTCO(funBody, frame);
 					}
 					break;

@@ -45,7 +45,7 @@ if                   : -139     0        0    factor     if
 lambda               : -138     0        0    factor     lambda              
 let                  : -137     0        0    factor     let                 
 is-stable            : -136     0        0    factor     is-stable           
-tco-callee           : -135     0        0    factor     tco-callee          
+list-function-in-return : -135     0        0    factor     list-function-in-return
 tco-count            : -134     0        0    factor     tco-count           
 return-tco           : -133     0        0    factor     return-tco          
 deftemplate          : -132     0        0    factor     deftemplate         

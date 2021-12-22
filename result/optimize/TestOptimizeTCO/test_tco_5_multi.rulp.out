@@ -14,7 +14,7 @@
 )[opt-tco]
 ;=>fun2
 
-(tco-callee fun2)
+(list-function-in-return fun2)
 ;=>'("fun2")
 
 (attribute-of fun2)

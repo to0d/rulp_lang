@@ -7,7 +7,7 @@
 )
 ;;;
 
-(tco-callee fact1)
+(list-function-in-return fact1)
 ;=>
 
 (attribute-of fact1)

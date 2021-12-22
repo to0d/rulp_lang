@@ -98,6 +98,7 @@ obj=join, type=factor, stable=true
 obj=lambda, type=factor, stable=true
 obj=let, type=factor, stable=true
 obj=list, type=atom, stable=true
+obj=list-function-in-return, type=factor, stable=false
 obj=load, type=factor, stable=false
 obj=long, type=atom, stable=true
 obj=loop, type=factor, stable=true
@@ -169,7 +170,6 @@ obj=string, type=atom, stable=true
 obj=subject-of, type=factor, stable=true
 obj=sys-gc, type=factor, stable=false
 obj=sys-time, type=factor, stable=false
-obj=tco-callee, type=factor, stable=false
 obj=tco-count, type=factor, stable=false
 obj=to-atom, type=factor, stable=true
 obj=to-blob, type=factor, stable=true

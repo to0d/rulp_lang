@@ -7,7 +7,7 @@
 )[opt-tco]
 ;=>fact
 
-(tco-callee fact)
+(list-function-in-return fact)
 ;=>'("fact")
 
 (attribute-of fact)

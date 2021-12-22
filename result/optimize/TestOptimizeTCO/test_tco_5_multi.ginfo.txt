@@ -40,13 +40,13 @@ Callable stats info: callId=87, row=27, column=44(2), value-max=84135, value-uni
     root   factor      4    0 defclass                                                 1  1 1  1         
     root   factor      3    0 deftemplate                                  12                            
     root   factor      1    0 tco-count                                                                 1
-    root   factor      1    0 tco-callee                                                            1    
     root   factor      1    0 str-substr                                                                1
     root   factor      1    0 str-last-index-of                                                         1
     root   factor      1    0 setq                                                                      1
   system    macro      1    1 script_out                                                                1
     root   factor      1    0 print-global-info                                                         1
     root   factor      1    0 out-to-file                                                               1
+    root   factor      1    0 list-function-in-return                                               1    
   system     func      1    1 (file-prename string)                                                     1
     root   factor      1    0 attribute-of                                                          1    
   system funcList      1    3 _ginfo                                                                    1

@@ -146,57 +146,6 @@ public class TCOUtil {
 		}
 	}
 
-	private static boolean _findTCOCallee(IRExpr expr, Set<String> calleeNames, IRFrame frame) throws RException {
-
-		IRObject e0 = expr.get(0);
-		if (e0.getType() != RType.ATOM) {
-			return true;
-		}
-
-		IRIterator<? extends IRObject> it = null;
-
-		switch (RulpUtil.asAtom(e0).getName()) {
-		case A_DO: {
-			it = expr.listIterator(1);
-			while (it.hasNext()) {
-				IRObject e = it.next();
-				if (e.getType() == RType.EXPR) {
-					_findTCOCallee((IRExpr) e, calleeNames, frame);
-				}
-			}
-		}
-			break;
-
-		case F_IF: {
-
-			it = expr.listIterator(2);
-			while (it.hasNext()) {
-				IRObject e = it.next();
-				if (e.getType() == RType.EXPR) {
-					_findTCOCallee((IRExpr) e, calleeNames, frame);
-				}
-			}
-		}
-			break;
-
-		case F_RETURN:
-		case F_RETURN_TCO:
-
-			if (expr.size() > 1 && expr.get(1).getType() == RType.EXPR) {
-				IRExpr e1 = (IRExpr) expr.get(1);
-				if (e1.size() > 0) {
-					_findTCOCalleeInReturn(e1.get(0), e1, calleeNames, frame);
-				}
-			}
-
-			return true;
-
-		default:
-
-		}
-		return true;
-	}
-
 	private static void _findTCOCalleeInReturn(IRObject e0, IRExpr expr, Set<String> calleeNames, IRFrame frame)
 			throws RException {
 
@@ -249,6 +198,58 @@ public class TCOUtil {
 
 			_findTCOCalleeInReturn(ex.get(0), ex, calleeNames, frame);
 		}
+	}
+
+	private static boolean _listFunctionInReturn(IRExpr expr, Set<String> calleeNames, IRFrame frame)
+			throws RException {
+
+		IRObject e0 = expr.get(0);
+		if (e0.getType() != RType.ATOM) {
+			return true;
+		}
+
+		IRIterator<? extends IRObject> it = null;
+
+		switch (RulpUtil.asAtom(e0).getName()) {
+		case A_DO: {
+			it = expr.listIterator(1);
+			while (it.hasNext()) {
+				IRObject e = it.next();
+				if (e.getType() == RType.EXPR) {
+					_listFunctionInReturn((IRExpr) e, calleeNames, frame);
+				}
+			}
+		}
+			break;
+
+		case F_IF: {
+
+			it = expr.listIterator(2);
+			while (it.hasNext()) {
+				IRObject e = it.next();
+				if (e.getType() == RType.EXPR) {
+					_listFunctionInReturn((IRExpr) e, calleeNames, frame);
+				}
+			}
+		}
+			break;
+
+		case F_RETURN:
+		case F_RETURN_TCO:
+
+			if (expr.size() > 1 && expr.get(1).getType() == RType.EXPR) {
+				IRExpr e1 = (IRExpr) expr.get(1);
+				if (e1.size() > 0) {
+					_findTCOCalleeInReturn(e1.get(0), e1, calleeNames, frame);
+				}
+			}
+
+			return true;
+
+		default:
+
+		}
+		return true;
 	}
 
 	public static IRObject computeTCO(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -385,18 +386,18 @@ public class TCOUtil {
 		throw new RException("Should not run to here: " + expr);
 	}
 
-	public static Set<String> findCPSCallee(IRExpr expr, IRFrame frame) throws RException {
-		HashSet<String> calleeNames = new HashSet<>();
-		_findTCOCallee(expr, calleeNames, frame);
-		return calleeNames;
-	}
-
 	public static int getTCOCount() {
 		return TCOCount.get();
 	}
 
 	public static boolean isCPSRecursive(IRExpr expr, IRFrame frame) throws RException {
 		return false;
+	}
+
+	public static Set<String> listFunctionInReturn(IRExpr expr, IRFrame frame) throws RException {
+		HashSet<String> calleeNames = new HashSet<>();
+		_listFunctionInReturn(expr, calleeNames, frame);
+		return calleeNames;
 	}
 
 	public static IRExpr rebuildTCO(IRExpr expr, IRFrame frame) throws RException {

@@ -243,6 +243,8 @@ public interface Constant {
 
 	String F_LET = "let";
 
+	String F_LIST_FUNC_IN_RETURN = "list-function-in-return";
+
 	String F_LOAD = "load";
 
 	String F_LOOP = "loop";
@@ -396,8 +398,6 @@ public interface Constant {
 	String F_SYS_TIME = "sys-time";
 
 	String F_T_SLEEP = "sleep";
-
-	String F_TCO_CALLEE = "tco-callee";
 
 	String F_TCO_COUNT = "tco-count";
 

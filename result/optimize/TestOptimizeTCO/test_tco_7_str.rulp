@@ -5,7 +5,7 @@
 )[opt-tco]
 ;;;
 
-(tco-callee fun5)
+(list-function-in-return fun5)
 ;=>
 
 (attribute-of fun5)
