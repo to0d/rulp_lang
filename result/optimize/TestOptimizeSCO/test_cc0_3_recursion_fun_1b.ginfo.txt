@@ -5,16 +5,16 @@ Total runtime info:
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
      Interpreter call id/level:      121        4
-               Frame max level:        5
-                  Frame max id:        6
-           Frame free id count:        2
+               Frame max level:       12
+                  Frame max id:       13
+           Frame free id count:        9
 ==========================================================================================================================
 
 Optimize info:
 ==========================================================================================================================
       Name: Status
 --------------------------------------------------------------------------------------------------------------------------
-       TCO: expr=1, call=4, compute=24
+       TCO: expr=0, call=0, compute=0
        CC0: expr=0, call=0, cache=0
 ==========================================================================================================================
 
@@ -22,30 +22,29 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      156
-      func:        3
+    factor:      164
+      func:        7
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=121, row=28, column=61(2), value-max=9, value-unit=2^x
+Callable stats info: callId=121, row=27, column=61(2), value-max=9, value-unit=2^x
 ==========================================================================================================================
    Frame    RType  Count  Ref Object                         1222222222222222222222222222222222222222222222222222222222275 max=39, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
     root   factor     58    0 defun                                                 12222222 22 122222222211212122122 21  
     root   factor     39    0 add-attribute                     12222222222222222222                                      
     root   factor      9    0 -                                                                                         5 
+    root   factor      6    0 return                                                                                    41
     root   factor      6    0 if                                                                                        41
     root   factor      6    0 do                                                                                        41
     root   factor      6    0 alias                          1221                                                         
-    main     func      5    5 (fun nil)                                                                                 4 
+    main     func      5    1 (fun nil)                                                                                 4 
     root   factor      5    0 <=                                                                                        4 
-    root   factor      4    0 return-tco                                                                                3 
     root   factor      4    0 defvar                                                1                                1   2
     root   factor      4    0 defmacro                                                      2             1          1    
     root   factor      4    0 defclass                                                                     1 1 1  1       
     root   factor      4    0 *                                                                                         3 
     root   factor      3    0 deftemplate                                                      21                         
-    root   factor      2    0 return                                                                                    11
     root   factor      1    0 str-substr                                                                                 1
     root   factor      1    0 str-last-index-of                                                                          1
     root   factor      1    0 setq                                                                                       1
@@ -65,12 +64,12 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1124            0         1124
+        atom:         1122            0         1122
       string:           39            0           39
-        list:            7            1            6
-        expr:          617           18          599
+        list:            6            0            6
+        expr:          594            6          588
        array:            1            0            1
-         var:           25            8           17
+         var:           29           12           17
         func:          108            0          108
     template:            1            0            1
        macro:            4            0            4
@@ -78,7 +77,7 @@ Object create count:
       member:          117            0          117
        frame:           13           12            1
  interpreter:            1            0
-  frameEntry:          228            0
+  frameEntry:          232            0
       lambda:            0            0
 ==========================================================================================================================
 
@@ -92,16 +91,16 @@ root                 : 1        2        0    frame      frame@root
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        2    frame      frame@main          
 ?script-path         : 4        2        1    var        result\optimize\TestOptimizeSCO\test_cc0_3_recursion_fun_1b.rulp : type=string
-fun                  : 5        2        5    func       (fun nil) : frame=frame@main
-?rv                  : 7        2        1    var        1 : type=int        
+fun                  : 5        2        1    func       (fun nil) : frame=frame@main
+?rv                  : 15       2        1    var        24 : type=int       
 ==========================================================================================================================
 
 
-id=4, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$__ginfo
+id=12, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$__ginfo
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?rv                  : 15       4        1    var        result\optimize\TestOptimizeSCO\test_cc0_3_recursion_fun_1b : type=string
+?rv                  : 19       12       1    var        result\optimize\TestOptimizeSCO\test_cc0_3_recursion_fun_1b : type=string
 ==========================================================================================================================
 
 Global frame tree:
@@ -109,7 +108,7 @@ Global frame tree:
 ->FRAME(root): id=0, lvl=0, subject=root
     ->FRAME(system): id=1, lvl=1, subject=system
         ->FRAME(main): id=2, lvl=2, subject=main
-            ->FRAME(_$fun$__ginfo): id=4, lvl=3, subject=_$fun$__ginfo
+            ->FRAME(_$fun$__ginfo): id=12, lvl=3, subject=_$fun$__ginfo
 
 Global Subject list:
 
