@@ -21,16 +21,16 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 
-public class XRFactorAttributeOf extends AbsAtomFactorAdapter implements IRFactor {
+public class XRFactorAddAttribute extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorAttributeOf(String factorName) {
+	public XRFactorAddAttribute(String factorName) {
 		super(factorName);
 	}
 
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() != 2) {
+		if (args.size() != 3) {
 			throw new RException("Invalid parameters: " + args);
 		}
 

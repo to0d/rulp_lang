@@ -1433,6 +1433,10 @@ public class RulpUtil {
 		return obj.getType() == RType.EXPR;
 	}
 
+	public static boolean isFunctionLambda(IRObject obj) throws RException {
+		return obj.getType() == RType.FUNC && ((IRFunction) obj).isLambda();
+	}
+
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
 //
 //		IRObject nsObj = frame.getObject(A_USING_NS);
@@ -1442,10 +1446,6 @@ public class RulpUtil {
 //
 //		return RulpUtil.asSubject(nsObj);
 //	}
-
-	public static boolean isFunctionLambda(IRObject obj) throws RException {
-		return obj.getType() == RType.FUNC && ((IRFunction) obj).isLambda();
-	}
 
 	public static boolean isFunctionList(IRObject obj) throws RException {
 		return obj.getType() == RType.FUNC && ((IRFunction) obj).isList();
@@ -1566,6 +1566,22 @@ public class RulpUtil {
 
 	public static boolean isVarName(String var) {
 		return var.length() > 1 && var.charAt(0) == A_QUESTION_C;
+	}
+
+	public static IRObject lookup(IRObject obj, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		if (obj.getType() == RType.ATOM) {
+
+			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, ((IRAtom) obj).getName());
+			if (entry != null) {
+				obj = entry.getObject();
+			}
+
+		} else if (obj.getType() == RType.MEMBER) {
+			obj = RuntimeUtil.getActualMember((IRMember) obj, interpreter, frame);
+		}
+
+		return obj;
 	}
 
 	public static boolean matchType(IRAtom typeAtom, IRObject obj) throws RException {

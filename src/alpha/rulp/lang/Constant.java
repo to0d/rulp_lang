@@ -95,6 +95,8 @@ public interface Constant {
 
 	String A_OPT_TCO = "opt-tco";
 
+	String A_OPT_CC0 = "opt-cc0";
+
 	String A_PARENT = "parent";
 
 	String A_PRIVATE = "private";
@@ -321,9 +323,9 @@ public interface Constant {
 
 	String F_PRINT_GLOBAL_INFO = "print-global-info";
 
-	String F_PRINT_SUBJECT = "print-subject";
-	
 	String F_PRINT_IMPL = "print-impl";
+
+	String F_PRINT_SUBJECT = "print-subject";
 
 	String F_PROPERTY_OF = "property-of";
 

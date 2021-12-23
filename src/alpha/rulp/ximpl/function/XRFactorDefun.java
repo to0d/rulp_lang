@@ -156,9 +156,10 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 				switch (attr) {
 				case A_OPT_TCO:
 					// recursive function call in return expression
-					if (OpTcoUtil.listFunctionInReturn(funBody, frame).contains(funName)) {
+					if (!attrList.contains(A_OPT_TCO)
+							&& OpTcoUtil.listFunctionInReturn(funBody, frame).contains(funName)) {
 						funBody = OpTcoUtil.rebuildTCO(funBody, frame);
-						attrList.add(attr);
+						attrList.add(A_OPT_TCO);
 					}
 					break;
 				default:

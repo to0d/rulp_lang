@@ -9,22 +9,59 @@ import java.util.ArrayList;
 
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
+import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.utils.RuntimeUtil;
 
+// SCO (Stable Cache Optimization)
 public class SCOUtil {
 
-	static final int SCO_LEVEL_CC0 = 0; // (Op A1 A2 ... Ak), Op is simple stable factor, Ak is number or string
+	static final int SCO_LEVEL_CC0 = 0;
 
 	static final int SCO_LEVEL_CC1 = 1;
 
 	static final int SCO_LEVEL_NONE = -1;
 
 	static final int SCO_LEVEL_MAX = 0;
+
+	// (Op A1 A2 ... Ak), Op is simple stable factor, Ak is number or string
+	public static boolean canOptimizeCC0(IRExpr expr, IRFrame frame) throws RException {
+
+		if (expr.isEmpty()) {
+			return false;
+		}
+
+		IRObject e0 = expr.get(0);
+		if (e0.getType() == RType.ATOM) {
+			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, RulpUtil.asAtom(e0).getName());
+			if (entry != null) {
+				e0 = entry.getValue();
+			}
+		}
+
+		if (e0.getType() != RType.FACTOR) {
+			return false;
+		}
+
+		if (!RulpUtil.asFactor(e0).isStable()) {
+			return false;
+		}
+
+		IRIterator<? extends IRObject> it = expr.listIterator(1);
+		while (it.hasNext()) {
+
+		}
+		return false;
+	}
+
+//	public static boolean _isCC0(IRExpr expr, IRFrame frame) throws RException {
+//
+//	}
 
 	public static IRExpr rebuildSCO(IRExpr expr, IRFrame frame, int scoLevel) throws RException {
 
