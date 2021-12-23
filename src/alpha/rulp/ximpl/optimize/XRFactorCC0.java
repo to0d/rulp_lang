@@ -44,9 +44,13 @@ public class XRFactorCC0 extends AbsRefFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
+		SCOUtil.incCC0CallCount();
+
 		if (rst == null) {
 			rst = interpreter.compute(frame, args.get(1));
 			RulpUtil.incRef(rst);
+		} else {
+			SCOUtil.incCC0CacheCount();
 		}
 
 		return rst;

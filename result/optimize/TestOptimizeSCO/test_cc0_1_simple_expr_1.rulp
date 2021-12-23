@@ -1,0 +1,25 @@
+(defun fun ()
+    (return (+ 1 2))
+)[opt-cc0]
+;=>
+
+(attribute-of fun)
+;=>
+
+(print-impl fun)
+;;;
+
+(fun)
+;=>
+
+(opt-status)
+;=>
+
+(fun)
+;=>
+
+(opt-status)
+;=>
+
+(_ginfo)
+;;;
