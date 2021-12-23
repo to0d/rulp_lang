@@ -1,14 +1,15 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.A_OPT_CC0;
 import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.F_CASE;
+import static alpha.rulp.lang.Constant.F_IF;
+import static alpha.rulp.lang.Constant.O_COMPUTE;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
-import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
@@ -17,7 +18,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.utils.RuntimeUtil;
+import alpha.rulp.ximpl.control.XRFactorCase;
 
 // (Compute Cache Optimization)
 public class CCOUtil {
@@ -218,30 +219,94 @@ public class CCOUtil {
 						rst = rebuildList.get(3);
 					}
 
-					incCC0ComputeCount();
 					cc0.outputExpr = _asExpr(rst);
+					incCC0ComputeCount();
 					return false;
 				}
 			}
 
 			// (case a (a action) (b action))
 			if (e0.getType() == RType.FACTOR && e0.asString().equals(F_CASE) && rebuildList.size() >= 3) {
-				
-				IRObject e1 = rebuildList.get(1);
-				
-				if (e1.getType() == RType.BOOL) {
 
-					IRObject rst = null;
-					if (RulpUtil.asBoolean(e1).asBoolean()) {
-						rst = rebuildList.get(2);
-					} else if (rebuildList.size() > 3) {
-						rst = rebuildList.get(3);
+				IRObject e1 = rebuildList.get(1);
+
+				if (_isConstValue(e1)) {
+
+					boolean nonConstCaseValueFound = false;
+
+					CHECK_CASE: for (int i = 2; i < size; ++i) {
+
+						IRExpr caseClause = RulpUtil.asExpression(rebuildList.get(i));
+						if (caseClause.size() != 2) {
+							throw new RException("Invalid case clause: " + caseClause);
+						}
+
+						IRObject caseValue = caseClause.get(0);
+
+						if (!_isConstValue(caseValue)) {
+							nonConstCaseValueFound = true;
+							break CHECK_CASE;
+						}
+
+						if (XRFactorCase.matchCaseValue(e1, caseValue)) {
+							cc0.outputExpr = _asExpr(caseClause.get(1));
+							incCC0ComputeCount();
+							return false;
+						}
 					}
 
-					incCC0ComputeCount();
-					cc0.outputExpr = _asExpr(rst);
-					return false;
+					// no any case match, return empty expression
+					if (!nonConstCaseValueFound) {
+						cc0.outputExpr = _asExpr(null);
+						incCC0ComputeCount();
+						return false;
+					}
 				}
+
+			}
+
+			// (do () (b action))
+			if (e0.getType() == RType.FACTOR && e0.asString().equals(A_DO)) {
+
+				int pos = 1;
+
+				for (int i = 1; i < size; ++i) {
+
+					IRObject ei = rebuildList.get(i);
+
+					// not empty expr
+					if (ei.getType() != RType.EXPR || !RulpUtil.asExpression(ei).isEmpty()) {
+
+						if (i != pos) {
+							rebuildList.set(pos, ei);
+						}
+
+						pos++;
+					}
+				}
+
+				switch (pos) {
+				case 1: // no expr found
+					cc0.outputExpr = _asExpr(null);
+					incCC0ComputeCount();
+					return false;
+
+				case 2: // only one expr found, remove DO factor
+					cc0.outputExpr = _asExpr(rebuildList.get(1));
+					incCC0ComputeCount();
+					return false;
+
+				default:
+
+					// empty expr found
+					if (pos != size) {
+						cc0.outputExpr = RulpFactory.createExpression(rebuildList.subList(0, pos));
+						incCC0ComputeCount();
+						return false;
+					}
+
+				}
+
 			}
 
 			cc0.outputExpr = RulpFactory.createExpression(rebuildList);

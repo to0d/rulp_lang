@@ -26,6 +26,19 @@ import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorCase extends AbsAtomFactorAdapter implements IRFactor {
 
+	public static boolean matchCaseValue(IRObject value, IRObject caseValue) throws RException {
+
+		if (caseValue.getType() == RType.ATOM && caseValue.asString().equals(A_QUESTION)) {
+			return true;
+		}
+
+		if (RulpUtil.equal(value, caseValue)) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public XRFactorCase(String factorName) {
 		super(factorName);
 	}
@@ -42,33 +55,19 @@ public class XRFactorCase extends AbsAtomFactorAdapter implements IRFactor {
 		IRIterator<? extends IRObject> it = args.listIterator(2);
 		while (it.hasNext()) {
 
-			IRList caseClause = RulpUtil.asExpression(it.next());
+			IRExpr caseClause = RulpUtil.asExpression(it.next());
 			if (caseClause.size() != 2) {
 				throw new RException("Invalid case clause: " + caseClause);
 			}
 
 			IRObject caseValue = interpreter.compute(frame, caseClause.get(0));
-			IRExpr caseExpr = RulpUtil.asExpression(caseClause.get(1));
-
 			if (matchCaseValue(value, caseValue)) {
+				IRExpr caseExpr = RulpUtil.asExpression(caseClause.get(1));
 				return interpreter.compute(frame, caseExpr);
 			}
 		}
 
 		return O_Nil;
-	}
-
-	public static boolean matchCaseValue(IRObject value, IRObject caseValue) throws RException {
-
-		if (caseValue.getType() == RType.ATOM && caseValue.asString().equals(A_QUESTION)) {
-			return true;
-		}
-
-		if (RulpUtil.equal(value, caseValue)) {
-			return true;
-		}
-
-		return false;
 	}
 
 	@Override
