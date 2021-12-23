@@ -9,6 +9,7 @@
 
 package alpha.rulp.ximpl.function;
 
+import static alpha.rulp.lang.Constant.A_OPT_CC0;
 import static alpha.rulp.lang.Constant.A_OPT_TCO;
 
 import java.util.ArrayList;
@@ -39,6 +40,7 @@ import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.SubjectUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.optimize.OpTcoUtil;
+import alpha.rulp.ximpl.optimize.SCOUtil;
 
 public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
@@ -156,12 +158,19 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 				switch (attr) {
 				case A_OPT_TCO:
 					// recursive function call in return expression
-					if (!attrList.contains(A_OPT_TCO)
-							&& OpTcoUtil.listFunctionInReturn(funBody, frame).contains(funName)) {
+					if (!attrList.contains(attr) && OpTcoUtil.listFunctionInReturn(funBody, frame).contains(funName)) {
 						funBody = OpTcoUtil.rebuildTCO(funBody, frame);
-						attrList.add(A_OPT_TCO);
+						attrList.add(attr);
 					}
 					break;
+
+				case A_OPT_CC0:
+					if (!attrList.contains(attr) && SCOUtil.supportCC0(funBody, frame)) {
+						funBody = SCOUtil.rebuildCC0(funBody, frame);
+						attrList.add(attr);
+					}
+					break;
+
 				default:
 					throw new RException("unknown attr: " + attr);
 				}

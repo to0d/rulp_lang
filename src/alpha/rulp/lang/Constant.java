@@ -26,6 +26,8 @@ public interface Constant {
 	String A_COLUMN = "column";
 
 	String A_CONST = "const";
+	
+	String F_CC0 = "cc0";
 
 	String A_CONSTANT = "constant";
 
