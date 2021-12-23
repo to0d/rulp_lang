@@ -8,6 +8,7 @@ import static alpha.rulp.lang.Constant.F_RETURN;
 import static alpha.rulp.lang.Constant.F_RETURN_TCO;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
@@ -23,6 +24,18 @@ import alpha.rulp.utils.RuntimeUtil;
 
 // SCO (Stable Cache Optimization)
 public class SCOUtil {
+
+	static class CC0 {
+
+		public IRExpr inputExpr = null;
+
+		public IRExpr outputExpr = null;
+
+		public void setInputExpr(IRExpr inputExpr) {
+			this.inputExpr = inputExpr;
+			this.outputExpr = null;
+		}
+	}
 
 	static final int SCO_LEVEL_CC0 = 0;
 
@@ -101,38 +114,6 @@ public class SCOUtil {
 		}
 	}
 
-	// (Op A1 A2 ... Ak), Op is simple stable factor, Ak is number or string
-	public static boolean supportCC0(IRExpr expr, IRFrame frame) throws RException {
-
-		if (_isCC0Expr(expr, frame)) {
-			return true;
-		}
-
-		IRIterator<? extends IRObject> it = expr.iterator();
-		while (it.hasNext()) {
-			IRObject ex = it.next();
-			if (ex.getType() == RType.EXPR) {
-				if (_isCC0Expr((IRExpr) ex, frame)) {
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	static class CC0 {
-
-		public IRExpr inputExpr = null;
-
-		public void setInputExpr(IRExpr inputExpr) {
-			this.inputExpr = inputExpr;
-			this.outputExpr = null;
-		}
-
-		public IRExpr outputExpr = null;
-	}
-
 	private static boolean _rebuildCC0(CC0 cc0, IRFrame frame) throws RException {
 
 		if (cc0.inputExpr.isEmpty()) {
@@ -148,6 +129,7 @@ public class SCOUtil {
 		CC0 childCC0 = new CC0();
 
 		int childReBuild = 0;
+		int childUpdate = 0;
 
 		for (int i = 0; i < size; ++i) {
 
@@ -158,8 +140,14 @@ public class SCOUtil {
 
 				childCC0.setInputExpr((IRExpr) ex);
 				reBuild = _rebuildCC0(childCC0, frame);
-				if (reBuild || childCC0.outputExpr != null) {
+
+				if (reBuild) {
 					rebuildList.add(childCC0.outputExpr);
+				} else if (childCC0.outputExpr != null) {
+					rebuildList.add(childCC0.outputExpr);
+					childUpdate++;
+				} else {
+					rebuildList.add(ex);
 				}
 
 			} else {
@@ -179,7 +167,7 @@ public class SCOUtil {
 		}
 
 		// No child rebuild, return directly
-		if (childReBuild == 0) {
+		if (childReBuild == 0 && childUpdate == 0) {
 			return false;
 		}
 
@@ -205,13 +193,17 @@ public class SCOUtil {
 			}
 		}
 
-		if (rebuildCount != 0) {
-			childCC0.outputExpr = RulpFactory.createExpression(rebuildList);
+		if (rebuildCount > 0 || childUpdate > 0) {
+			cc0.outputExpr = RulpFactory.createExpression(rebuildList);
 		}
 
 		return false;
 	}
 
+	protected static AtomicInteger CC0Count = new AtomicInteger(0);
+	public static int getTCOCount() {
+		return CC0Count.get();
+	}
 	public static IRExpr rebuildCC0(IRExpr expr, IRFrame frame) throws RException {
 
 		CC0 cc0 = new CC0();
@@ -297,5 +289,25 @@ public class SCOUtil {
 		}
 
 		return expr;
+	}
+
+	// (Op A1 A2 ... Ak), Op is simple stable factor, Ak is number or string
+	public static boolean supportCC0(IRExpr expr, IRFrame frame) throws RException {
+
+		if (_isCC0Expr(expr, frame)) {
+			return true;
+		}
+
+		IRIterator<? extends IRObject> it = expr.iterator();
+		while (it.hasNext()) {
+			IRObject ex = it.next();
+			if (ex.getType() == RType.EXPR) {
+				if (supportCC0((IRExpr) ex, frame)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 }

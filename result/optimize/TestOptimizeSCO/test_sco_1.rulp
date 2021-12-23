@@ -1,0 +1,18 @@
+(defun fun1 (?v)
+    (if (> 2 1) 
+        (return 1))
+    (return ?v)
+)[opt-cc0]
+;=>
+
+(attribute-of fun1)
+;=>
+
+(print-impl fun1)
+;;;
+
+(fun1 1)
+;=>
+
+(_ginfo)
+;;;
