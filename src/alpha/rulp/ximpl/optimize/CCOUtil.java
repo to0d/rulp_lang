@@ -275,7 +275,7 @@ public class CCOUtil {
 					IRObject ei = rebuildList.get(i);
 
 					// not empty expr
-					if (ei.getType() != RType.EXPR || !RulpUtil.asExpression(ei).isEmpty()) {
+					if (ei.getType() == RType.EXPR && !RulpUtil.asExpression(ei).isEmpty()) {
 
 						if (i != pos) {
 							rebuildList.set(pos, ei);

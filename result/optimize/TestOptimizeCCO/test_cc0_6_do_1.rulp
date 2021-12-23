@@ -1,0 +1,20 @@
+(defun fun (?v)
+   (+ 1 2)
+   (print "" (+ 1 2))
+)[opt-cc0]
+;=>
+
+(attribute-of fun)
+;=>
+
+(print-impl fun)
+;;;
+
+(fun 5)
+;=>
+
+(opt-status)
+;=>
+
+(_ginfo)
+;;;

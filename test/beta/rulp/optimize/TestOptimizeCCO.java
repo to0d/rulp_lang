@@ -54,4 +54,11 @@ public class TestOptimizeCCO extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	public void test_cc0_6_do_1() {
+
+		_setup();
+		_run_script();
+	}
 }
