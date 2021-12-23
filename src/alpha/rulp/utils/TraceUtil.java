@@ -428,6 +428,16 @@ public class TraceUtil {
 		return sb.toString();
 	}
 
+	public static void printOptInfo(StringBuffer sb, IRInterpreter interpreter) throws RException {
+
+		sb.append(SEP_LINE1);
+		sb.append(String.format("%10s: %8s %8s\n", "Name", "expr", "compute"));
+		sb.append(SEP_LINE2);
+		sb.append(String.format("%10s: %8d %8d\n", "TCO", TCOUtil.getTCOExprCount(), TCOUtil.getTCOComputeCount()));
+		sb.append(SEP_LINE1);
+
+	}
+
 	public static String printGlobalInfo(IRInterpreter interpreter) throws RException {
 
 		StringBuffer sb = new StringBuffer();
@@ -453,11 +463,7 @@ public class TraceUtil {
 		// Optimize info
 		/***********************************************/
 		sb.append("Optimize info:\n");
-		sb.append(SEP_LINE1);
-		sb.append(String.format("%10s: %8s %8s\n", "Name", "expr", "compute"));
-		sb.append(SEP_LINE2);
-		sb.append(String.format("%10s: %8d %8d\n", "TCO", TCOUtil.getTCOExprCount(), TCOUtil.getTCOComputeCount()));
-		sb.append(SEP_LINE1);
+		printOptInfo(sb, interpreter);
 		sb.append("\n");
 
 		/***********************************************/

@@ -317,6 +317,8 @@ public interface Constant {
 
 	String F_OPT = "opt";
 
+	String F_OPT_STATUS = "opt-status";
+
 	String F_OUT_TO_FILE = "out-to-file";
 
 	String F_PARENT_OF = "parent-of";
@@ -406,8 +408,6 @@ public interface Constant {
 	String F_SYS_GC = "sys-gc";
 
 	String F_SYS_TIME = "sys-time";
-
-	String F_TCO_STATUS = "tco-status";
 
 	String F_TO = "to";
 

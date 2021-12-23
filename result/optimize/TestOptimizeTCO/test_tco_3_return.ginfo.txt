@@ -45,13 +45,13 @@ Callable stats info: callId=126, row=27, column=64(2), value-max=1001, value-uni
     root   factor      4    0 defmacro                                                      2             1          1       
     root   factor      4    0 defclass                                                                     1 1 1  1          
     root   factor      3    0 deftemplate                                                      21                            
-    root   factor      1    0 tco-status                                                                                   1 
     root   factor      1    0 str-substr                                                                                    1
     root   factor      1    0 str-last-index-of                                                                             1
     root   factor      1    0 setq                                                                                          1
   system    macro      1    1 script_out                                                                                    1
     root   factor      1    0 print-global-info                                                                             1
     root   factor      1    0 out-to-file                                                                                   1
+    root   factor      1    0 opt-status                                                                                   1 
     root   factor      1    0 list-function-in-return                                                                  1     
   system     func      1    1 (file-prename string)                                                                         1
     root   factor      1    0 attribute-of                                                                              1    
@@ -65,7 +65,7 @@ Object create count:
 --------------------------------------------------------------------------------------------------------------------------
         atom:         1108            0         1108
          int:         1943            0         1943
-      string:           40            0           40
+      string:           39            0           39
         list:            8            2            6
         expr:         7223         4431         2792
        array:            1            0            1

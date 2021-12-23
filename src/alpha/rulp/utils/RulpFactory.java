@@ -173,7 +173,7 @@ import alpha.rulp.ximpl.namespace.XRNameSpaceClass;
 import alpha.rulp.ximpl.optimize.XRFactorIsStable;
 import alpha.rulp.ximpl.optimize.XRFactorListFunctionInReturn;
 import alpha.rulp.ximpl.optimize.XRFactorReturnTCO;
-import alpha.rulp.ximpl.optimize.XRFactorTCOStatus;
+import alpha.rulp.ximpl.optimize.XRFactorOptStatus;
 import alpha.rulp.ximpl.rclass.XRDefClass;
 import alpha.rulp.ximpl.rclass.XRDefInstance;
 import alpha.rulp.ximpl.rclass.XRFactorAccess;
@@ -676,7 +676,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefun(F_DEFUN));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefTemplate(F_DEFTEMPLATE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorReturnTCO(F_RETURN_TCO));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorTCOStatus(F_TCO_STATUS));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorOptStatus(F_OPT_STATUS));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorListFunctionInReturn(F_LIST_FUNC_IN_RETURN));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorIsStable(F_IS_STABLE));
 

@@ -19,7 +19,7 @@
 (fun 10)
 ;=>
 
-(tco-status)
+(opt-status)
 ;=>
 
 (_ginfo)

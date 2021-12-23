@@ -38,7 +38,7 @@
 (fun2 101)
 ;=>
 
-(tco-status)
+(opt-status)
 ;=>
 
 (_ginfo)

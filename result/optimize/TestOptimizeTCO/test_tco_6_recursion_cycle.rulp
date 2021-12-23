@@ -28,7 +28,7 @@
 (fun4a 3)
 ;=>
 
-(tco-status)
+(opt-status)
 ;=>1
 
 (_ginfo)

@@ -46,13 +46,13 @@ Callable stats info: callId=121, row=28, column=61(2), value-max=12, value-unit=
     root   factor      4    0 defmacro                                                      2             1          1    
     root   factor      4    0 defclass                                                                     1 1 1  1       
     root   factor      3    0 deftemplate                                                      21                         
-    root   factor      1    0 tco-status                                                                                 1
     root   factor      1    0 str-substr                                                                                 1
     root   factor      1    0 str-last-index-of                                                                          1
     root   factor      1    0 setq                                                                                       1
   system    macro      1    1 script_out                                                                                 1
     root   factor      1    0 print-global-info                                                                          1
     root   factor      1    0 out-to-file                                                                                1
+    root   factor      1    0 opt-status                                                                                 1
     root   factor      1    0 list-function-in-return                                                                  1  
   system     func      1    1 (file-prename string)                                                                      1
     root   factor      1    0 attribute-of                                                                              1 
@@ -65,7 +65,7 @@ Object create count:
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
         atom:         1103            0         1103
-      string:           52            0           52
+      string:           51            0           51
         list:            8            2            6
         expr:          628           43          585
        array:            1            0            1

@@ -16,5 +16,5 @@
 (fact1 2)
 ;err
 
-(tco-status)
+(opt-status)
 ;=>

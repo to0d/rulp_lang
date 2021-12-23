@@ -45,13 +45,13 @@ Callable stats info: callId=121, row=27, column=61(2), value-max=1000, value-uni
     root   factor      4    0 defclass                                                                     1 1 1  1       
     root   factor      3    0 deftemplate                                                      21                         
     root   factor      2    0 return                                                                                    11
-    root   factor      1    0 tco-status                                                                                 1
     root   factor      1    0 str-substr                                                                                 1
     root   factor      1    0 str-last-index-of                                                                          1
     root   factor      1    0 setq                                                                                       1
   system    macro      1    1 script_out                                                                                 1
     root   factor      1    0 print-global-info                                                                          1
     root   factor      1    0 out-to-file                                                                                1
+    root   factor      1    0 opt-status                                                                                 1
     root   factor      1    0 list-function-in-return                                                                  1  
   system     func      1    1 (file-prename string)                                                                      1
     root   factor      1    0 attribute-of                                                                              1 
@@ -65,7 +65,7 @@ Object create count:
 --------------------------------------------------------------------------------------------------------------------------
         atom:         1106            0         1106
          int:          375            0          375
-      string:           40            0           40
+      string:           39            0           39
         list:            8            2            6
         expr:         2576         1499         1077
        array:            1            0            1

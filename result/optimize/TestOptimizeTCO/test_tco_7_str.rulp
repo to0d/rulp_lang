@@ -14,7 +14,7 @@
 (fun5 "b")
 ;=>"aaaaaaaaaab"
 
-(tco-status)
+(opt-status)
 ;=>
 
 (_ginfo)

@@ -138,6 +138,7 @@ root::noclass
 root::not
 root::null
 root::open-txt-file
+root::opt-status
 root::or
 root::out-to-file
 root::parent-of
@@ -190,7 +191,6 @@ root::string
 root::subject-of
 root::sys-gc
 root::sys-time
-root::tco-status
 root::to-atom
 root::to-blob
 root::to-expr

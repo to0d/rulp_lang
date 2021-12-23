@@ -16,7 +16,7 @@
 (fact1 2)
 ;=>
 
-(tco-status)
+(opt-status)
 ;=>
 
 (_ginfo)

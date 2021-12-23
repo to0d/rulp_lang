@@ -9,18 +9,20 @@
 
 package alpha.rulp.ximpl.optimize;
 
+import static alpha.rulp.lang.Constant.O_Nil;
+
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.utils.RulpFactory;
+import alpha.rulp.utils.TraceUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorTCOStatus extends AbsAtomFactorAdapter implements IRFactor {
+public class XRFactorOptStatus extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorTCOStatus(String factorName) {
+	public XRFactorOptStatus(String factorName) {
 		super(factorName);
 	}
 
@@ -31,8 +33,11 @@ public class XRFactorTCOStatus extends AbsAtomFactorAdapter implements IRFactor 
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		return RulpFactory.createString(
-				String.format("tco: expr=%d, compute=%d", TCOUtil.getTCOExprCount(), TCOUtil.getTCOComputeCount()));
+		StringBuffer sb = new StringBuffer();
+		TraceUtil.printOptInfo(sb, interpreter);
+		interpreter.out(sb.toString());
+
+		return O_Nil;
 	}
 
 	@Override

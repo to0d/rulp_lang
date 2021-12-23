@@ -120,6 +120,7 @@ obj=noclass, type=class, const=true
 obj=not, type=factor, const=true
 obj=null, type=atom, const=true
 obj=open-txt-file, type=factor, const=true
+obj=opt-status, type=factor, const=true
 obj=or, type=factor, const=true
 obj=out-to-file, type=factor, const=true
 obj=parent-of, type=factor, const=true
@@ -172,7 +173,6 @@ obj=string, type=atom, const=true
 obj=subject-of, type=factor, const=true
 obj=sys-gc, type=factor, const=true
 obj=sys-time, type=factor, const=true
-obj=tco-status, type=factor, const=true
 obj=to-atom, type=factor, const=true
 obj=to-blob, type=factor, const=true
 obj=to-expr, type=factor, const=true
