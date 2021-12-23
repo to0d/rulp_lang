@@ -1,7 +1,5 @@
 package beta.rulp.optimize;
 
-import static org.junit.Assert.fail;
-
 import org.junit.Test;
 
 import alpha.rulp.utils.RulpTestBase;

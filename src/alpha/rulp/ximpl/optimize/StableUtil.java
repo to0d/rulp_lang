@@ -31,8 +31,8 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.error.RInterrupt;
-import alpha.rulp.ximpl.runtime.XRFunction;
-import alpha.rulp.ximpl.runtime.XRFunctionList;
+import alpha.rulp.ximpl.function.XRFunction;
+import alpha.rulp.ximpl.function.XRFunctionList;
 
 public class StableUtil {
 

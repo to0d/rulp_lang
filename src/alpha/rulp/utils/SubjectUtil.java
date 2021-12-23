@@ -24,8 +24,8 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRFunctionList;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.ximpl.runtime.XRFactorDefun;
-import alpha.rulp.ximpl.runtime.XRFunctionList;
+import alpha.rulp.ximpl.function.XRFactorDefun;
+import alpha.rulp.ximpl.function.XRFunctionList;
 
 public class SubjectUtil {
 
