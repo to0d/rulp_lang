@@ -14,8 +14,8 @@
 (fun5 "b")
 ;=>"aaaaaaaaaab"
 
-(tco-count)
-;=>40
+(tco-status)
+;=>"tco: expr=1, compute=40"
 
 (_ginfo)
 ;=>nil

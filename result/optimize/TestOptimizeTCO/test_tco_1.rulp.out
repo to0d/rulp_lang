@@ -34,8 +34,8 @@
 (fact 4)
 ;=>24
 
-(tco-count)
-;=>60
+(tco-status)
+;=>"tco: expr=1, compute=60"
 
 (_ginfo)
 ;=>nil

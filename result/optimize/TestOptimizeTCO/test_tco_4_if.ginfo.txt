@@ -45,7 +45,7 @@ Callable stats info: callId=126, row=27, column=64(2), value-max=1001, value-uni
     root   factor      4    0 defmacro                                                      2             1          1       
     root   factor      4    0 defclass                                                                     1 1 1  1          
     root   factor      3    0 deftemplate                                                      21                            
-    root   factor      1    0 tco-count                                                                                    1 
+    root   factor      1    0 tco-status                                                                                   1 
     root   factor      1    0 str-substr                                                                                    1
     root   factor      1    0 str-last-index-of                                                                             1
     root   factor      1    0 setq                                                                                          1
@@ -64,8 +64,8 @@ Object create count:
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
         atom:         1108            0         1108
-         int:         1944            0         1944
-      string:           39            0           39
+         int:         1943            0         1943
+      string:           40            0           40
         list:            8            2            6
         expr:         7223         4431         2792
        array:            1            0            1

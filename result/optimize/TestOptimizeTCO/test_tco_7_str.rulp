@@ -14,8 +14,8 @@
 (fun5 "b")
 ;=>"aaaaaaaaaab"
 
-(tco-count)
-;=>40
+(tco-status)
+;=>
 
 (_ginfo)
 ;;;

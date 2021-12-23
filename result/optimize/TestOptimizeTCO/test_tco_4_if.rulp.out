@@ -31,8 +31,8 @@
 (fact 1000)
 ;=>500500
 
-(tco-count)
-;=>6636
+(tco-status)
+;=>"tco: expr=1, compute=6636"
 
 (_ginfo)
 ;=>nil

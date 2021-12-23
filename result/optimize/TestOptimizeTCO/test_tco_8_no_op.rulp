@@ -19,7 +19,7 @@
 (fun 10)
 ;=>
 
-(tco-count)
+(tco-status)
 ;=>
 
 (_ginfo)

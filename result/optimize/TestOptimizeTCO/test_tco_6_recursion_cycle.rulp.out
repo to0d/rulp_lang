@@ -28,6 +28,6 @@
 (fun4a 3)
 ;=>6
 
-(tco-count)
-;=>0
+(tco-status)
+;=>"tco: expr=0, compute=0"
 

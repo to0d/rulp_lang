@@ -173,7 +173,7 @@ import alpha.rulp.ximpl.namespace.XRNameSpaceClass;
 import alpha.rulp.ximpl.optimize.XRFactorIsStable;
 import alpha.rulp.ximpl.optimize.XRFactorListFunctionInReturn;
 import alpha.rulp.ximpl.optimize.XRFactorReturnTCO;
-import alpha.rulp.ximpl.optimize.XRFactorTCOCount;
+import alpha.rulp.ximpl.optimize.XRFactorTCOStatus;
 import alpha.rulp.ximpl.rclass.XRDefClass;
 import alpha.rulp.ximpl.rclass.XRDefInstance;
 import alpha.rulp.ximpl.rclass.XRFactorAccess;
@@ -676,7 +676,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefun(F_DEFUN));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefTemplate(F_DEFTEMPLATE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorReturnTCO(F_RETURN_TCO));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorTCOCount(F_TCO_COUNT));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorTCOStatus(F_TCO_STATUS));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorListFunctionInReturn(F_LIST_FUNC_IN_RETURN));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorIsStable(F_IS_STABLE));
 
@@ -718,7 +718,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSeta(F_SETA));
 
 		// Thread
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSleep(F_T_SLEEP));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorSleep(F_SLEEP));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDoParallel(F_DO_Parallel));
 
 		// Time

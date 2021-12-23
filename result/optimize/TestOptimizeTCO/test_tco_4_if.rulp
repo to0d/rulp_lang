@@ -31,8 +31,8 @@
 (fact 1000)
 ;=>
 
-(tco-count)
-;=>6636
+(tco-status)
+;=>
 
 (_ginfo)
 ;;;

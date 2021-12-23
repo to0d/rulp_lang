@@ -28,8 +28,8 @@
 (fact 4)
 ;=>
 
-(tco-count)
-;=>60
+(tco-status)
+;=>
 
 (_ginfo)
 ;;;

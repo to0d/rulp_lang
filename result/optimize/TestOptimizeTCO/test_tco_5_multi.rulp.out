@@ -38,8 +38,8 @@
 (fun2 101)
 ;=>132564
 
-(tco-count)
-;=>252432
+(tco-status)
+;=>"tco: expr=4, compute=252432"
 
 (_ginfo)
 ;=>nil

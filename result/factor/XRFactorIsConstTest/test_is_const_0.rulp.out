@@ -172,7 +172,7 @@ obj=string, type=atom, const=true
 obj=subject-of, type=factor, const=true
 obj=sys-gc, type=factor, const=true
 obj=sys-time, type=factor, const=true
-obj=tco-count, type=factor, const=true
+obj=tco-status, type=factor, const=true
 obj=to-atom, type=factor, const=true
 obj=to-blob, type=factor, const=true
 obj=to-expr, type=factor, const=true

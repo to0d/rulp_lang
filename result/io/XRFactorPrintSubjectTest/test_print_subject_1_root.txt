@@ -46,7 +46,7 @@ lambda               : -140     0        0    factor     lambda
 let                  : -139     0        0    factor     let                 
 is-stable            : -138     0        0    factor     is-stable           
 list-function-in-return : -137     0        0    factor     list-function-in-return
-tco-count            : -136     0        0    factor     tco-count           
+tco-status           : -136     0        0    factor     tco-status          
 return-tco           : -135     0        0    factor     return-tco          
 deftemplate          : -134     0        0    factor     deftemplate         
 defun                : -133     0        0    factor     defun               

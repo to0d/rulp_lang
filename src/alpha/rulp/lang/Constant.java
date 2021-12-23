@@ -359,6 +359,8 @@ public interface Constant {
 
 	String F_SIZE_OF_LIST = "size-of-list";
 
+	String F_SLEEP = "sleep";
+
 	String F_SORT = "sort";
 
 	String F_STR_CHAR_AT = "str-char-at";
@@ -405,9 +407,7 @@ public interface Constant {
 
 	String F_SYS_TIME = "sys-time";
 
-	String F_T_SLEEP = "sleep";
-
-	String F_TCO_COUNT = "tco-count";
+	String F_TCO_STATUS = "tco-status";
 
 	String F_TO = "to";
 

@@ -28,7 +28,7 @@
 (fun4a 3)
 ;=>
 
-(tco-count)
+(tco-status)
 ;=>1
 
 (_ginfo)

@@ -18,6 +18,6 @@
 java.lang.StackOverflowError
 ;eof
 
-(tco-count)
-;=>0
+(tco-status)
+;=>"tco: expr=0, compute=0"
 

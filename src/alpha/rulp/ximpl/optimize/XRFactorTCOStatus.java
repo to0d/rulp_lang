@@ -18,9 +18,9 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorTCOCount extends AbsAtomFactorAdapter implements IRFactor {
+public class XRFactorTCOStatus extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorTCOCount(String factorName) {
+	public XRFactorTCOStatus(String factorName) {
 		super(factorName);
 	}
 
@@ -31,7 +31,8 @@ public class XRFactorTCOCount extends AbsAtomFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		return RulpFactory.createInteger(TCOUtil.getTCOComputeCount());
+		return RulpFactory.createString(
+				String.format("tco: expr=%d, compute=%d", TCOUtil.getTCOExprCount(), TCOUtil.getTCOComputeCount()));
 	}
 
 	@Override

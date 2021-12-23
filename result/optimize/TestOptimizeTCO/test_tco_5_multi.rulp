@@ -38,8 +38,8 @@
 (fun2 101)
 ;=>
 
-(tco-count)
-;=>252432
+(tco-status)
+;=>
 
 (_ginfo)
 ;;;

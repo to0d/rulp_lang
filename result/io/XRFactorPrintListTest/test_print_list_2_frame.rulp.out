@@ -157,7 +157,7 @@ root::string
 root::subject-of
 root::sys-gc
 root::sys-time
-root::tco-count
+root::tco-status
 root::to-atom
 root::to-blob
 root::to-expr

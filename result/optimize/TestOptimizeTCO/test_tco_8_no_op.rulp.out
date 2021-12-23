@@ -35,8 +35,8 @@
 (fun 10)
 ;=>2
 
-(tco-count)
-;=>0
+(tco-status)
+;=>"tco: expr=0, compute=0"
 
 (_ginfo)
 ;=>nil
