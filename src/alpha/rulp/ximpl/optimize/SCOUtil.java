@@ -250,7 +250,7 @@ public class SCOUtil {
 		CC0CacheCount.set(0);
 	}
 
-	// (Op A1 A2 ... Ak), Op is simple stable factor, Ak is number or string
+	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value
 	public static boolean supportCC0(IRExpr expr, IRFrame frame) throws RException {
 
 		if (_isCC0Expr(expr, frame)) {
@@ -267,6 +267,11 @@ public class SCOUtil {
 			}
 		}
 
+		return false;
+	}
+
+	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak const value, or local variables
+	public static boolean supportCC1(IRExpr expr, IRFrame frame) throws RException {
 		return false;
 	}
 }

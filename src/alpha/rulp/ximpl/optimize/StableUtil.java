@@ -101,42 +101,6 @@ public class StableUtil {
 			_buildMap().put(name, RType.FUNC);
 		}
 
-//		public NameSet newBranch(XRFunction checkingFunc) {
-//
-//			NameSet child = new NameSet();
-//			child.parent = this.parent;
-//			child.funcDepMap = this.funcDepMap;
-//			child.curFunc = checkingFunc;
-//			child._buildCheckingFunSet().add(curFunc);
-//
-//			return child;
-//		}
-
-//		private Set<XRFunction> _findCheckingFunSet() {
-//
-//			if (checkingFunSet != null) {
-//				return checkingFunSet;
-//			}
-//
-//			return parent == null ? Collections.emptySet() : parent._findCheckingFunSet();
-//		}
-
-//		public boolean containCheckFunc(XRFunction func) {
-//			return _findCheckingFunSet().contains(func);
-//		}
-//
-//		private Set<XRFunction> _buildCheckingFunSet() {
-//
-//			if (checkingFunSet == null) {
-//				checkingFunSet = new HashSet<>();
-//				if (parent != null) {
-//					checkingFunSet.addAll(parent._findCheckingFunSet());
-//				}
-//			}
-//
-//			return checkingFunSet;
-//		}
-
 		public void addVar(String name) {
 			_buildMap().put(name, RType.VAR);
 		}
