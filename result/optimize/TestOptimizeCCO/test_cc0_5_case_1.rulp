@@ -1,0 +1,27 @@
+(defun fun (?v) 
+
+    (if (<= ?v 0)
+        (return 0))
+        
+    (case (+ 1 1)
+        (1 (return (+ 1 (fun (- ?v 1)))))
+        (2 (return (+ 2 (fun (- ?v 1)))))
+        (? (return (+ 3 (fun (- ?v 1))))))
+
+)[opt-cc0]
+;=>
+
+(attribute-of fun)
+;=>
+
+(print-impl fun)
+;;;
+
+(fun 5)
+;=>
+
+(opt-status)
+;=>
+
+(_ginfo)
+;;;

@@ -50,13 +50,25 @@ public class XRFactorCase extends AbsAtomFactorAdapter implements IRFactor {
 			IRObject caseValue = interpreter.compute(frame, caseClause.get(0));
 			IRExpr caseExpr = RulpUtil.asExpression(caseClause.get(1));
 
-			if ((caseValue.getType() == RType.ATOM && caseValue.asString().equals(A_QUESTION)) // (? (expr))
-					|| RulpUtil.equal(value, caseValue)) {
+			if (matchCaseValue(value, caseValue)) {
 				return interpreter.compute(frame, caseExpr);
 			}
 		}
 
 		return O_Nil;
+	}
+
+	public static boolean matchCaseValue(IRObject value, IRObject caseValue) throws RException {
+
+		if (caseValue.getType() == RType.ATOM && caseValue.asString().equals(A_QUESTION)) {
+			return true;
+		}
+
+		if (RulpUtil.equal(value, caseValue)) {
+			return true;
+		}
+
+		return true;
 	}
 
 	@Override

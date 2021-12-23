@@ -224,6 +224,26 @@ public class CCOUtil {
 				}
 			}
 
+			// (case a (a action) (b action))
+			if (e0.getType() == RType.FACTOR && e0.asString().equals(F_CASE) && rebuildList.size() >= 3) {
+				
+				IRObject e1 = rebuildList.get(1);
+				
+				if (e1.getType() == RType.BOOL) {
+
+					IRObject rst = null;
+					if (RulpUtil.asBoolean(e1).asBoolean()) {
+						rst = rebuildList.get(2);
+					} else if (rebuildList.size() > 3) {
+						rst = rebuildList.get(3);
+					}
+
+					incCC0ComputeCount();
+					cc0.outputExpr = _asExpr(rst);
+					return false;
+				}
+			}
+
 			cc0.outputExpr = RulpFactory.createExpression(rebuildList);
 		}
 
