@@ -165,7 +165,7 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 					break;
 
 				case A_OPT_CC0:
-					if (!attrList.contains(attr) && CCOUtil.supportCC0(funBody, frame)) {
+					if (!attrList.contains(attr) && CCOUtil.supportCC0(funBody, interpreter, frame)) {
 						funBody = CCOUtil.rebuildCC0(funBody, interpreter, frame);
 						attrList.add(attr);
 					}

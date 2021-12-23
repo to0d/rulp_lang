@@ -1,7 +1,7 @@
 package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.A_OPT_CC0;
-import static alpha.rulp.lang.Constant.O_COMPUTE;
+import static alpha.rulp.lang.Constant.*;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -49,6 +49,19 @@ public class CCOUtil {
 	static final int SCO_LEVEL_MAX = 0;
 
 	static final int SCO_LEVEL_NONE = -1;
+
+	private static IRExpr _asExpr(IRObject obj) throws RException {
+
+		if (obj == null) {
+			return RulpFactory.createExpression();
+		}
+
+		if (obj.getType() == RType.EXPR) {
+			return (IRExpr) obj;
+		} else {
+			return RulpFactory.createExpression(O_COMPUTE, obj);
+		}
+	}
 
 	private static boolean _isCC0Expr(IRObject e0, IRExpr expr, IRFrame frame) throws RException {
 
@@ -110,23 +123,18 @@ public class CCOUtil {
 
 	private static boolean _rebuildCC0(CC0 cc0, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (cc0.inputExpr.isEmpty()) {
+		IRExpr expr = cc0.inputExpr;
+
+		if (expr.isEmpty()) {
 			return true;
 		}
 
-		IRObject e0 = cc0.inputExpr.get(0);
-		if (e0.getType() == RType.ATOM) {
-			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, RulpUtil.asAtom(e0).getName());
-			if (entry != null) {
-				e0 = entry.getValue();
-			}
-		}
-
-		if (_isCC0Expr(e0, cc0.inputExpr, frame)) {
+		IRObject e0 = RulpUtil.lookup(expr.get(0), interpreter, frame);
+		if (_isCC0Expr(e0, expr, frame)) {
 			return true;
 		}
 
-		int size = cc0.inputExpr.size();
+		int size = expr.size();
 		ArrayList<IRObject> rebuildList = new ArrayList<>();
 		CC0 childCC0 = new CC0();
 
@@ -135,15 +143,8 @@ public class CCOUtil {
 
 		for (int i = 0; i < size; ++i) {
 
+			IRObject ex = i == 0 ? e0 : expr.get(i);
 			boolean reBuild = false;
-
-			IRObject ex = cc0.inputExpr.get(i);
-			if (ex.getType() == RType.ATOM) {
-				IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, RulpUtil.asAtom(ex).getName());
-				if (entry != null) {
-					ex = entry.getValue();
-				}
-			}
 
 			if (ex.getType() == RType.EXPR) {
 
@@ -196,7 +197,7 @@ public class CCOUtil {
 			if (newObj == null) {
 
 				// Replace element with cc0 factor
-				newObj = interpreter.compute(frame, cc0.inputExpr.get(i));
+				newObj = interpreter.compute(frame, expr.get(i));
 				rebuildList.set(i, newObj);
 				rebuildCount++;
 				incCC0ComputeCount();
@@ -204,6 +205,25 @@ public class CCOUtil {
 		}
 
 		if (rebuildCount > 0 || childUpdate > 0) {
+
+			// (if true A B) or (if false A B)
+			if (e0.getType() == RType.FACTOR && e0.asString().equals(F_IF) && rebuildList.size() >= 3) {
+				IRObject e1 = rebuildList.get(1);
+				if (e1.getType() == RType.BOOL) {
+
+					IRObject rst = null;
+					if (RulpUtil.asBoolean(e1).asBoolean()) {
+						rst = rebuildList.get(2);
+					} else if (rebuildList.size() > 3) {
+						rst = rebuildList.get(3);
+					}
+
+					incCC0ComputeCount();
+					cc0.outputExpr = _asExpr(rst);
+					return false;
+				}
+			}
+
 			cc0.outputExpr = RulpFactory.createExpression(rebuildList);
 		}
 
@@ -255,12 +275,7 @@ public class CCOUtil {
 
 			IRObject rst = interpreter.compute(frame, expr);
 			incCC0ComputeCount();
-
-			if (rst.getType() == RType.EXPR) {
-				cc0.outputExpr = (IRExpr) rst;
-			} else {
-				cc0.outputExpr = RulpFactory.createExpression(O_COMPUTE, rst);
-			}
+			cc0.outputExpr = _asExpr(rst);
 		}
 
 		return cc0.outputExpr;
@@ -276,17 +291,13 @@ public class CCOUtil {
 	}
 
 	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value
-	public static boolean supportCC0(IRExpr expr, IRFrame frame) throws RException {
+	public static boolean supportCC0(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		IRObject e0 = expr.get(0);
-		if (e0.getType() == RType.ATOM) {
-			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, RulpUtil.asAtom(e0).getName());
-			if (entry != null) {
-				e0 = entry.getValue();
-			}
+		if (expr.isEmpty()) {
+			return false;
 		}
 
-		if (expr.isEmpty() || _isCC0Expr(e0, expr, frame)) {
+		if (_isCC0Expr(RulpUtil.lookup(expr.get(0), interpreter, frame), expr, frame)) {
 			return true;
 		}
 
@@ -294,7 +305,7 @@ public class CCOUtil {
 		while (it.hasNext()) {
 			IRObject ex = it.next();
 			if (ex.getType() == RType.EXPR) {
-				if (supportCC0((IRExpr) ex, frame)) {
+				if (supportCC0((IRExpr) ex, interpreter, frame)) {
 					return true;
 				}
 			}
