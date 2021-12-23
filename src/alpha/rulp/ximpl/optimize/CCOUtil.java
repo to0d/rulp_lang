@@ -1,7 +1,7 @@
 package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.A_OPT_CC0;
-import static alpha.rulp.lang.Constant.F_CC0;
+import static alpha.rulp.lang.Constant.O_COMPUTE;
 
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,13 +13,14 @@ import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
+import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 
-// SCO (Stable Cache Optimization)
-public class SCOUtil {
+// (Compute Cache Optimization)
+public class CCOUtil {
 
 	static class CC0 {
 
@@ -33,11 +34,13 @@ public class SCOUtil {
 		}
 	}
 
-	protected static AtomicInteger CC0CacheCount = new AtomicInteger(0);
+	protected static AtomicInteger CC1CacheCount = new AtomicInteger(0);
 
-	protected static AtomicInteger CC0CallCount = new AtomicInteger(0);
+	protected static AtomicInteger CC1CallCount = new AtomicInteger(0);
 
-	protected static AtomicInteger CC0ExprCount = new AtomicInteger(0);
+	protected static AtomicInteger CC1ExprCount = new AtomicInteger(0);
+
+	protected static AtomicInteger CC0ComputeCount = new AtomicInteger(0);
 
 	static final int SCO_LEVEL_CC0 = 0;
 
@@ -116,7 +119,7 @@ public class SCOUtil {
 		}
 	}
 
-	private static boolean _rebuildCC0(CC0 cc0, IRFrame frame) throws RException {
+	private static boolean _rebuildCC0(CC0 cc0, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		if (cc0.inputExpr.isEmpty()) {
 			return true;
@@ -141,7 +144,7 @@ public class SCOUtil {
 			if (ex.getType() == RType.EXPR) {
 
 				childCC0.setInputExpr((IRExpr) ex);
-				reBuild = _rebuildCC0(childCC0, frame);
+				reBuild = _rebuildCC0(childCC0, interpreter, frame);
 
 				if (reBuild) {
 					rebuildList.add(childCC0.outputExpr);
@@ -189,10 +192,10 @@ public class SCOUtil {
 			if (newObj == null) {
 
 				// Replace element with cc0 factor
-				newObj = RulpFactory.createExpression(new XRFactorCC0(F_CC0), cc0.inputExpr.get(i));
+				newObj = interpreter.compute(frame, cc0.inputExpr.get(i));
 				rebuildList.set(i, newObj);
 				rebuildCount++;
-				incCC0ExprCount();
+				incCC0ComputeCount();
 			}
 		}
 
@@ -203,51 +206,69 @@ public class SCOUtil {
 		return false;
 	}
 
-	public static int getCC0CacheCount() {
-		return CC0CacheCount.get();
+	public static int getCC1CacheCount() {
+		return CC1CacheCount.get();
 	}
 
-	public static int getCC0CallCount() {
-		return CC0CallCount.get();
+	public static int getCC1CallCount() {
+		return CC1CallCount.get();
 	}
 
-	public static int getCC0ExprCount() {
-		return CC0ExprCount.get();
+	public static int getCC1ExprCount() {
+		return CC1ExprCount.get();
 	}
 
-	public static void incCC0CacheCount() {
-		CC0CacheCount.getAndIncrement();
+	public static int getCC0ComputeCount() {
+		return CC0ComputeCount.get();
 	}
 
-	public static void incCC0CallCount() {
-		CC0CallCount.getAndIncrement();
+	public static void incCC1CacheCount() {
+		CC1CacheCount.getAndIncrement();
 	}
 
-	public static void incCC0ExprCount() {
-		CC0ExprCount.getAndIncrement();
+	public static void incCC1CallCount() {
+		CC1CallCount.getAndIncrement();
 	}
 
-	public static IRExpr rebuildCC0(IRExpr expr, IRFrame frame) throws RException {
+	public static void incCC0ComputeCount() {
+		CC0ComputeCount.getAndIncrement();
+	}
+
+	public static void incCC1ExprCount() {
+		CC1ExprCount.getAndIncrement();
+	}
+
+	public static IRExpr rebuildCC0(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		CC0 cc0 = new CC0();
 		cc0.setInputExpr(expr);
 
-		if (!_rebuildCC0(cc0, frame)) {
+		if (!_rebuildCC0(cc0, interpreter, frame)) {
 			return cc0.outputExpr == null ? expr : cc0.outputExpr;
 		}
 
 		if (cc0.outputExpr == null) {
-			cc0.outputExpr = RulpFactory.createExpression(new XRFactorCC0(F_CC0), expr);
-			incCC0ExprCount();
+
+			IRObject rst = interpreter.compute(frame, expr);
+			incCC0ComputeCount();
+
+			if (rst.getType() == RType.EXPR) {
+				cc0.outputExpr = (IRExpr) rst;
+			} else {
+				cc0.outputExpr = RulpFactory.createExpression(O_COMPUTE, rst);
+			}
 		}
 
 		return cc0.outputExpr;
 	}
 
 	public static void reset() {
-		CC0ExprCount.set(0);
-		CC0CallCount.set(0);
-		CC0CacheCount.set(0);
+
+		CC0ComputeCount.set(0);
+		CC1ExprCount.set(0);
+		CC1CallCount.set(0);
+		CC1CacheCount.set(0);
+
 	}
 
 	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value

@@ -43,7 +43,9 @@ import static alpha.rulp.lang.Constant.A_STATIC;
 import static alpha.rulp.lang.Constant.A_STRING;
 import static alpha.rulp.lang.Constant.A_TEMPLATE;
 import static alpha.rulp.lang.Constant.A_VAR;
+import static alpha.rulp.lang.Constant.F_COMPUTE;
 import static alpha.rulp.lang.Constant.MAX_TOSTRING_LEN;
+import static alpha.rulp.lang.Constant.O_COMPUTE;
 import static alpha.rulp.lang.Constant.O_CONST;
 import static alpha.rulp.lang.Constant.O_EMPTY;
 import static alpha.rulp.lang.Constant.O_Final;
@@ -1907,6 +1909,9 @@ public class RulpUtil {
 
 		case A_PUBLIC:
 			return O_Public;
+
+		case F_COMPUTE:
+			return O_COMPUTE;
 
 		default:
 			return RulpFactory.createAtom(name);

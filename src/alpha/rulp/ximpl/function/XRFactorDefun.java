@@ -39,7 +39,7 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.SubjectUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
-import alpha.rulp.ximpl.optimize.SCOUtil;
+import alpha.rulp.ximpl.optimize.CCOUtil;
 import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
@@ -165,8 +165,8 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 					break;
 
 				case A_OPT_CC0:
-					if (!attrList.contains(attr) && SCOUtil.supportCC0(funBody, frame)) {
-						funBody = SCOUtil.rebuildCC0(funBody, frame);
+					if (!attrList.contains(attr) && CCOUtil.supportCC0(funBody, frame)) {
+						funBody = CCOUtil.rebuildCC0(funBody, interpreter, frame);
 						attrList.add(attr);
 					}
 					break;

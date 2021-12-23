@@ -463,6 +463,8 @@ public interface Constant {
 
 	IRAtom O_BY = RulpFactory.createAtom(F_O_BY);
 
+	IRAtom O_COMPUTE = RulpFactory.createAtom(F_COMPUTE);
+
 	IRAtom O_CONST = RulpFactory.createAtom(A_CONST);
 
 	IRAtom O_Default = RulpFactory.createAtom(A_DEFAULT);

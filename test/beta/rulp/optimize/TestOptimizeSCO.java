@@ -40,4 +40,10 @@ public class TestOptimizeSCO extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+//	public void test_cc0_4_if_1() {
+//
+//		_setup();
+//		_run_script();
+//	}
 }
