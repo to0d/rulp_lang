@@ -431,9 +431,10 @@ public class TraceUtil {
 	public static void printOptInfo(StringBuffer sb, IRInterpreter interpreter) throws RException {
 
 		sb.append(SEP_LINE1);
-		sb.append(String.format("%10s: %8s %8s\n", "Name", "expr", "compute"));
+		sb.append(String.format("%10s: %s\n", "Name", "Status"));
 		sb.append(SEP_LINE2);
-		sb.append(String.format("%10s: %8d %8d\n", "TCO", TCOUtil.getTCOExprCount(), TCOUtil.getTCOComputeCount()));
+		sb.append(String.format("%10s: expr=%d, call=%d, compute=%d\n", "TCO", TCOUtil.getTCOExprCount(),
+				TCOUtil.getTCOCallCount(), TCOUtil.getTCOComputeCount()));
 		sb.append(SEP_LINE1);
 
 	}

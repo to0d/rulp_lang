@@ -35,6 +35,8 @@ public class XRFactorReturnTCO extends AbsAtomFactorAdapter implements IRFactor 
 			throw new RException("Invalid parameters: " + args);
 		}
 
+		TCOUtil.incTCOCallCount();
+
 		IRObject rst = TCOUtil.returnTCO(RulpUtil.asExpression(args.get(1)), frame);
 		if (rst.getType() == RType.EXPR) {
 			RulpUtil.addAttribute(rst, A_OPT_TCO);

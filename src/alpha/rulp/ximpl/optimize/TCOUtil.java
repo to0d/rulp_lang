@@ -72,6 +72,8 @@ public class TCOUtil {
 		}
 	}
 
+	protected static AtomicInteger TCOCallCount = new AtomicInteger(0);
+
 	protected static AtomicInteger TCOComputeCount = new AtomicInteger(0);
 
 	protected static AtomicInteger TCOExprCount = new AtomicInteger(0);
@@ -397,12 +399,20 @@ public class TCOUtil {
 		throw new RException("Should not run to here: " + expr);
 	}
 
+	public static int getTCOCallCount() {
+		return TCOCallCount.get();
+	}
+
 	public static int getTCOComputeCount() {
 		return TCOComputeCount.get();
 	}
 
 	public static int getTCOExprCount() {
 		return TCOExprCount.get();
+	}
+
+	public static void incTCOCallCount() {
+		TCOCallCount.getAndIncrement();
 	}
 
 	public static boolean isCPSRecursive(IRExpr expr, IRFrame frame) throws RException {
@@ -480,9 +490,9 @@ public class TCOUtil {
 	}
 
 	public static void reset() {
-
-		TCOComputeCount.set(0);
 		TCOExprCount.set(0);
+		TCOCallCount.set(0);
+		TCOComputeCount.set(0);
 	}
 
 	public static IRObject returnTCO(IRObject obj, IRFrame frame) throws RException {

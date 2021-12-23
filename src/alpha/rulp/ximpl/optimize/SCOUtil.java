@@ -186,6 +186,7 @@ public class SCOUtil {
 				newObj = RulpFactory.createExpression(new XRFactorCC0(F_CC0), cc0.inputExpr.get(i));
 				rebuildList.set(i, newObj);
 				rebuildCount++;
+				_incCC0ExprCount();
 			}
 		}
 
@@ -196,10 +197,29 @@ public class SCOUtil {
 		return false;
 	}
 
-	protected static AtomicInteger CC0Count = new AtomicInteger(0);
+	protected static AtomicInteger CC0ExprCount = new AtomicInteger(0);
 
-	public static int getTCOCount() {
-		return CC0Count.get();
+	protected static AtomicInteger CC0ComputeCount = new AtomicInteger(0);
+
+	public static void _incC0ComputeCount() {
+		CC0ComputeCount.getAndIncrement();
+	}
+
+	public static void reset() {
+		CC0ExprCount.set(0);
+		CC0ComputeCount.set(0);
+	}
+
+	private static void _incCC0ExprCount() {
+		CC0ExprCount.getAndIncrement();
+	}
+
+	public static int getTCOExprCount() {
+		return CC0ExprCount.get();
+	}
+
+	public static int getCC0ComputeCount() {
+		return CC0ComputeCount.get();
 	}
 
 	public static IRExpr rebuildCC0(IRExpr expr, IRFrame frame) throws RException {
@@ -213,6 +233,7 @@ public class SCOUtil {
 
 		if (cc0.outputExpr == null) {
 			cc0.outputExpr = RulpFactory.createExpression(new XRFactorCC0(F_CC0), expr);
+			_incCC0ExprCount();
 		}
 
 		return cc0.outputExpr;
