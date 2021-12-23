@@ -42,7 +42,7 @@ public class XRFactorIsTCORecursive extends AbsAtomFactorAdapter implements IRFa
 			return RulpFactory.emptyConstList();
 		}
 
-		Set<String> calleeNames = TCOUtil.listFunctionInReturn(fun.getFunBody(), frame);
+		Set<String> calleeNames = OpTcoUtil.listFunctionInReturn(fun.getFunBody(), frame);
 		if (calleeNames.isEmpty()) {
 			return RulpFactory.emptyConstList();
 		}

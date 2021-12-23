@@ -31,7 +31,7 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 
-public class TCOUtil {
+public class OpTcoUtil {
 
 	static class TCONode {
 

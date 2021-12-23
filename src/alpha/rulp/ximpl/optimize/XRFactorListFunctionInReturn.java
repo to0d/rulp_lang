@@ -42,7 +42,7 @@ public class XRFactorListFunctionInReturn extends AbsAtomFactorAdapter implement
 			return RulpFactory.emptyConstList();
 		}
 
-		Set<String> calleeNames = TCOUtil.listFunctionInReturn(fun.getFunBody(), frame);
+		Set<String> calleeNames = OpTcoUtil.listFunctionInReturn(fun.getFunBody(), frame);
 		if (calleeNames.isEmpty()) {
 			return RulpFactory.emptyConstList();
 		}

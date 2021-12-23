@@ -66,6 +66,13 @@ public class TestOptimizeTCO extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	public void test_tco_8_no_op() {
+
+		_setup();
+		_run_script();
+	}
 
 //	@Test
 	public void test_tco_8_fun2_by_cc() {
@@ -84,25 +91,4 @@ public class TestOptimizeTCO extends RulpTestBase {
 		_gInfo();
 
 	}
-
-//	@Test
-	public void test_tco_9_fun3() {
-
-		fail("not support yet");
-
-		_setup();
-
-		// fun(n) = n*(n+1)/2
-		_test("(load \"result/optimize/TestOptimizeTCO/test_tco_fact.rulp\")");
-		_test("(fun3 0)", "1");
-		_test("(fun3 1)", "1");
-		_test("(fun3 2)", "2");
-		_test("(fun3 3)", "1");
-		_test("(fun3 4)", "4");
-		_test("(fun3 5)", "1");
-		_test("(fun3 100)", "100");
-		_test("(fun3 101)", "1");
-		_test("(fun3 1000)", "1000");
-	}
-
 }

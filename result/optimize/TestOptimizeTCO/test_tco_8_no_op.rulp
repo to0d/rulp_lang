@@ -1,0 +1,23 @@
+(defun fun (?x) 
+    (if (< ?x 0) 
+        (return 0))
+    (if (> (fun (- ?x 1)) 1)
+        (return 1))
+    (return 2)
+)[opt-tco]
+;;;
+
+(list-function-in-return fun)
+;=>
+
+(attribute-of fun)
+;=>
+
+(fun 10)
+;=>
+
+(tco-count)
+;=>
+
+(_ginfo)
+;;;

@@ -38,7 +38,7 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.SubjectUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
-import alpha.rulp.ximpl.optimize.TCOUtil;
+import alpha.rulp.ximpl.optimize.OpTcoUtil;
 
 public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
@@ -156,15 +156,15 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 				switch (attr) {
 				case A_OPT_TCO:
 					// recursive function call in return expression
-					if (TCOUtil.listFunctionInReturn(funBody, frame).contains(funName)) {
-						funBody = TCOUtil.rebuildTCO(funBody, frame);
+					if (OpTcoUtil.listFunctionInReturn(funBody, frame).contains(funName)) {
+						funBody = OpTcoUtil.rebuildTCO(funBody, frame);
+						attrList.add(attr);
 					}
 					break;
 				default:
 					throw new RException("unknown attr: " + attr);
 				}
 
-				attrList.add(attr);
 			}
 		}
 
