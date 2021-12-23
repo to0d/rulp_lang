@@ -88,7 +88,7 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        2    frame      frame@main          
-?script-path         : 4        2        1    var        result\optimize\TestOptimizeSCO\test_cc0_1_num_expr_1.rulp : type=string
+?script-path         : 4        2        1    var        result\optimize\TestOptimizeCC0\test_cc0_1_num_expr_1.rulp : type=string
 fun                  : 5        2        1    func       (fun) : frame=frame@main
 ?rv                  : 6        2        1    var        3 : type=int        
 ==========================================================================================================================
@@ -98,7 +98,7 @@ id=3, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$__
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?rv                  : 10       3        1    var        result\optimize\TestOptimizeSCO\test_cc0_1_num_expr_1 : type=string
+?rv                  : 10       3        1    var        result\optimize\TestOptimizeCC0\test_cc0_1_num_expr_1 : type=string
 ==========================================================================================================================
 
 Global frame tree:
