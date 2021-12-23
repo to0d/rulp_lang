@@ -93,7 +93,7 @@ system               : 2        2        0    frame      frame@system
 main                 : 3        2        2    frame      frame@main          
 ?script-path         : 4        2        1    var        result\optimize\TestOptimizeCCO\test_cc0_5_case_1.rulp : type=string
 fun                  : 5        2        1    func       (fun nil) : frame=frame@main
-?rv                  : 17       2        1    var        5 : type=int        
+?rv                  : 17       2        1    var        10 : type=int       
 ==========================================================================================================================
 
 

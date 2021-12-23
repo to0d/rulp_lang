@@ -68,7 +68,7 @@ public class XRFactorCase extends AbsAtomFactorAdapter implements IRFactor {
 			return true;
 		}
 
-		return true;
+		return false;
 	}
 
 	@Override

@@ -35,7 +35,7 @@
 ;eof
 
 (fun 5)
-;=>5
+;=>10
 
 (opt-status)
 ;=>nil
