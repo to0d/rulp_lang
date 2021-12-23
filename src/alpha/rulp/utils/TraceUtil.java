@@ -25,6 +25,7 @@ import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.runtime.IRThreadContext;
+import alpha.rulp.ximpl.optimize.SCOUtil;
 import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public class TraceUtil {
@@ -428,17 +429,6 @@ public class TraceUtil {
 		return sb.toString();
 	}
 
-	public static void printOptInfo(StringBuffer sb, IRInterpreter interpreter) throws RException {
-
-		sb.append(SEP_LINE1);
-		sb.append(String.format("%10s: %s\n", "Name", "Status"));
-		sb.append(SEP_LINE2);
-		sb.append(String.format("%10s: expr=%d, call=%d, compute=%d\n", "TCO", TCOUtil.getTCOExprCount(),
-				TCOUtil.getTCOCallCount(), TCOUtil.getTCOComputeCount()));
-		sb.append(SEP_LINE1);
-
-	}
-
 	public static String printGlobalInfo(IRInterpreter interpreter) throws RException {
 
 		StringBuffer sb = new StringBuffer();
@@ -464,7 +454,7 @@ public class TraceUtil {
 		// Optimize info
 		/***********************************************/
 		sb.append("Optimize info:\n");
-		printOptInfo(sb, interpreter);
+		printOptimizeInfo(sb, interpreter);
 		sb.append("\n");
 
 		/***********************************************/
@@ -653,6 +643,19 @@ public class TraceUtil {
 		}
 
 		return sb.toString();
+	}
+
+	public static void printOptimizeInfo(StringBuffer sb, IRInterpreter interpreter) throws RException {
+
+		sb.append(SEP_LINE1);
+		sb.append(String.format("%10s: %s\n", "Name", "Status"));
+		sb.append(SEP_LINE2);
+		sb.append(String.format("%10s: expr=%d, call=%d, compute=%d\n", "TCO", TCOUtil.getTCOExprCount(),
+				TCOUtil.getTCOCallCount(), TCOUtil.getTCOComputeCount()));
+		sb.append(String.format("%10s: expr=%d, call=%d, cache=%d\n", "CC0", SCOUtil.getCC0ExprCount(),
+				SCOUtil.getCC0CallCount(), SCOUtil.getCC0CacheCount()));
+		sb.append(SEP_LINE1);
+
 	}
 
 	public static String printSubject(IRSubject subject) throws RException {

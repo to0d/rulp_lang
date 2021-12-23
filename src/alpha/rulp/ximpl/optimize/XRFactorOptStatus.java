@@ -34,7 +34,7 @@ public class XRFactorOptStatus extends AbsAtomFactorAdapter implements IRFactor 
 		}
 
 		StringBuffer sb = new StringBuffer();
-		TraceUtil.printOptInfo(sb, interpreter);
+		TraceUtil.printOptimizeInfo(sb, interpreter);
 		interpreter.out(sb.toString());
 
 		return O_Nil;

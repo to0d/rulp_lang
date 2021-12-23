@@ -33,6 +33,12 @@ public class SCOUtil {
 		}
 	}
 
+	protected static AtomicInteger CC0CacheCount = new AtomicInteger(0);
+
+	protected static AtomicInteger CC0CallCount = new AtomicInteger(0);
+
+	protected static AtomicInteger CC0ExprCount = new AtomicInteger(0);
+
 	static final int SCO_LEVEL_CC0 = 0;
 
 	static final int SCO_LEVEL_CC1 = 1;
@@ -186,7 +192,7 @@ public class SCOUtil {
 				newObj = RulpFactory.createExpression(new XRFactorCC0(F_CC0), cc0.inputExpr.get(i));
 				rebuildList.set(i, newObj);
 				rebuildCount++;
-				_incCC0ExprCount();
+				incCC0ExprCount();
 			}
 		}
 
@@ -197,29 +203,28 @@ public class SCOUtil {
 		return false;
 	}
 
-	protected static AtomicInteger CC0ExprCount = new AtomicInteger(0);
-
-	protected static AtomicInteger CC0ComputeCount = new AtomicInteger(0);
-
-	public static void _incC0ComputeCount() {
-		CC0ComputeCount.getAndIncrement();
+	public static int getCC0CacheCount() {
+		return CC0CacheCount.get();
 	}
 
-	public static void reset() {
-		CC0ExprCount.set(0);
-		CC0ComputeCount.set(0);
+	public static int getCC0CallCount() {
+		return CC0CallCount.get();
 	}
 
-	private static void _incCC0ExprCount() {
-		CC0ExprCount.getAndIncrement();
-	}
-
-	public static int getTCOExprCount() {
+	public static int getCC0ExprCount() {
 		return CC0ExprCount.get();
 	}
 
-	public static int getCC0ComputeCount() {
-		return CC0ComputeCount.get();
+	public static void incCC0CacheCount() {
+		CC0CacheCount.getAndIncrement();
+	}
+
+	public static void incCC0CallCount() {
+		CC0CallCount.getAndIncrement();
+	}
+
+	public static void incCC0ExprCount() {
+		CC0ExprCount.getAndIncrement();
 	}
 
 	public static IRExpr rebuildCC0(IRExpr expr, IRFrame frame) throws RException {
@@ -233,10 +238,16 @@ public class SCOUtil {
 
 		if (cc0.outputExpr == null) {
 			cc0.outputExpr = RulpFactory.createExpression(new XRFactorCC0(F_CC0), expr);
-			_incCC0ExprCount();
+			incCC0ExprCount();
 		}
 
 		return cc0.outputExpr;
+	}
+
+	public static void reset() {
+		CC0ExprCount.set(0);
+		CC0CallCount.set(0);
+		CC0CacheCount.set(0);
 	}
 
 	// (Op A1 A2 ... Ak), Op is simple stable factor, Ak is number or string

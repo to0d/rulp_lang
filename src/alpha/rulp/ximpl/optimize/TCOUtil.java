@@ -205,14 +205,6 @@ public class TCOUtil {
 		}
 	}
 
-	private static void _incTCOComputeCount() {
-		TCOComputeCount.getAndIncrement();
-	}
-
-	private static void _incTCOExprCount() {
-		TCOExprCount.getAndIncrement();
-	}
-
 	private static boolean _listFunctionInReturn(IRExpr expr, Set<String> calleeNames, IRFrame frame)
 			throws RException {
 
@@ -284,7 +276,7 @@ public class TCOUtil {
 				System.out.println("cps: queue, size=" + cpsQueue.size());
 			}
 
-			_incTCOComputeCount();
+			incTCOComputeCount();
 
 			TCONode topNode = cpsQueue.peekLast();
 
@@ -415,6 +407,14 @@ public class TCOUtil {
 		TCOCallCount.getAndIncrement();
 	}
 
+	public static void incTCOComputeCount() {
+		TCOComputeCount.getAndIncrement();
+	}
+
+	public static void incTCOExprCount() {
+		TCOExprCount.getAndIncrement();
+	}
+
 	public static boolean isCPSRecursive(IRExpr expr, IRFrame frame) throws RException {
 		return false;
 	}
@@ -475,7 +475,7 @@ public class TCOUtil {
 			if (expr.size() == 2) {
 				IRObject e1 = expr.get(1);
 				if (e1.getType() == RType.EXPR) {
-					_incTCOExprCount();
+					incTCOExprCount();
 					return RulpFactory.createExpression(O_RETURN_TCO, e1);
 				}
 			}
