@@ -5,6 +5,7 @@ import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_RETURN;
 import static alpha.rulp.lang.Constant.F_RETURN_TCO;
 import static alpha.rulp.lang.Constant.O_Nil;
+import static alpha.rulp.lang.Constant.O_RETURN_TCO;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -31,7 +32,7 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 
-public class OpTcoUtil {
+public class TCOUtil {
 
 	static class TCONode {
 
@@ -71,7 +72,9 @@ public class OpTcoUtil {
 		}
 	}
 
-	protected static AtomicInteger TCOCount = new AtomicInteger(0);
+	protected static AtomicInteger TCOComputeCount = new AtomicInteger(0);
+
+	protected static AtomicInteger TCOExprCount = new AtomicInteger(0);
 
 	public static boolean TRACE = false;
 
@@ -200,6 +203,14 @@ public class OpTcoUtil {
 		}
 	}
 
+	private static void _incTCOComputeCount() {
+		TCOComputeCount.getAndIncrement();
+	}
+
+	private static void _incTCOExprCount() {
+		TCOExprCount.getAndIncrement();
+	}
+
 	private static boolean _listFunctionInReturn(IRExpr expr, Set<String> calleeNames, IRFrame frame)
 			throws RException {
 
@@ -271,7 +282,7 @@ public class OpTcoUtil {
 				System.out.println("cps: queue, size=" + cpsQueue.size());
 			}
 
-			TCOCount.getAndIncrement();
+			_incTCOComputeCount();
 
 			TCONode topNode = cpsQueue.peekLast();
 
@@ -386,8 +397,12 @@ public class OpTcoUtil {
 		throw new RException("Should not run to here: " + expr);
 	}
 
-	public static int getTCOCount() {
-		return TCOCount.get();
+	public static int getTCOComputeCount() {
+		return TCOComputeCount.get();
+	}
+
+	public static int getTCOExprCount() {
+		return TCOExprCount.get();
 	}
 
 	public static boolean isCPSRecursive(IRExpr expr, IRFrame frame) throws RException {
@@ -450,7 +465,8 @@ public class OpTcoUtil {
 			if (expr.size() == 2) {
 				IRObject e1 = expr.get(1);
 				if (e1.getType() == RType.EXPR) {
-					return RulpFactory.createExpression(RulpFactory.createAtom(F_RETURN_TCO), e1);
+					_incTCOExprCount();
+					return RulpFactory.createExpression(O_RETURN_TCO, e1);
 				}
 			}
 
@@ -464,7 +480,9 @@ public class OpTcoUtil {
 	}
 
 	public static void reset() {
-		TCOCount.getAndSet(0);
+
+		TCOComputeCount.set(0);
+		TCOExprCount.set(0);
 	}
 
 	public static IRObject returnTCO(IRObject obj, IRFrame frame) throws RException {
@@ -545,7 +563,6 @@ public class OpTcoUtil {
 		}
 
 		default:
-
 			return obj;
 		}
 	}

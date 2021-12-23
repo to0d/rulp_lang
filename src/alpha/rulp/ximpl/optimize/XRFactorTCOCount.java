@@ -31,7 +31,7 @@ public class XRFactorTCOCount extends AbsAtomFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		return RulpFactory.createInteger(OpTcoUtil.getTCOCount());
+		return RulpFactory.createInteger(TCOUtil.getTCOComputeCount());
 	}
 
 	@Override

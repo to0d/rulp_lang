@@ -26,8 +26,6 @@ public interface Constant {
 	String A_COLUMN = "column";
 
 	String A_CONST = "const";
-	
-	String F_CC0 = "cc0";
 
 	String A_CONSTANT = "constant";
 
@@ -123,9 +121,9 @@ public interface Constant {
 
 	String A_STATIC = "static";
 
-//	String A_STABLE = "stable";
-
 	String A_STRING = "string";
+
+//	String A_STABLE = "stable";
 
 	String A_SYSTEM = "system";
 
@@ -164,7 +162,7 @@ public interface Constant {
 	String F_ADD_SEARCH_FRAME = "add_search_frame";
 
 	String F_ALIAS = "alias";
-	
+
 	String F_ATTRIBUTE_OF = "attribute-of";
 
 	String F_B_AND = "and";
@@ -180,6 +178,8 @@ public interface Constant {
 	String F_CAN_CAST = "can-cast";
 
 	String F_CASE = "case";
+
+	String F_CC0 = "cc0";
 
 	String F_CLASS_OF = "class-of";
 
@@ -510,6 +510,8 @@ public interface Constant {
 	IRAtom O_Public = RulpFactory.createAtom(A_PUBLIC);
 
 	IRAtom O_QUESTION = RulpFactory.createAtom(A_QUESTION);
+
+	IRAtom O_RETURN_TCO = RulpFactory.createAtom(F_RETURN_TCO);
 
 	IRAtom O_Static = RulpFactory.createAtom(A_STATIC);
 

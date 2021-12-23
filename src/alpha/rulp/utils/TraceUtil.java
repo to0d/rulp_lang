@@ -25,7 +25,7 @@ import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.runtime.IRThreadContext;
-import alpha.rulp.ximpl.optimize.OpTcoUtil;
+import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public class TraceUtil {
 
@@ -443,10 +443,20 @@ public class TraceUtil {
 		sb.append(SEP_LINE2);
 		sb.append(String.format("%30s: %8d %8d\n", "Interpreter call id/level", interpreter.getCallId(),
 				interpreter.getTLS().getCallLevel()));
-		sb.append(String.format("%30s: %8d\n", "CPS count", OpTcoUtil.getTCOCount()));
 		sb.append(String.format("%30s: %8d\n", "Frame max level", RuntimeUtil.getFrameMaxLevel()));
 		sb.append(String.format("%30s: %8d\n", "Frame max id", RulpFactory.getFrameMaxId()));
 		sb.append(String.format("%30s: %8d\n", "Frame free id count", RulpFactory.getFrameFreeIdCount()));
+		sb.append(SEP_LINE1);
+		sb.append("\n");
+
+		/***********************************************/
+		// Optimize info
+		/***********************************************/
+		sb.append("Optimize info:\n");
+		sb.append(SEP_LINE1);
+		sb.append(String.format("%10s: %8s %8s\n", "Name", "expr", "compute"));
+		sb.append(SEP_LINE2);
+		sb.append(String.format("%10s: %8d %8d\n", "TCO", TCOUtil.getTCOExprCount(), TCOUtil.getTCOComputeCount()));
 		sb.append(SEP_LINE1);
 		sb.append("\n");
 
