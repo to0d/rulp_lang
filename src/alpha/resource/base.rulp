@@ -139,21 +139,23 @@
                      (not (equal ?type (type-of $(value-of (value-of ?mbr))))))
                 (continue)
             )
-        
-            (print "mbr=" (name-of $(value-of ?mbr))
-            )
+
+            ;; output member 
+            (print "mbr=" (name-of $(value-of ?mbr)))
             
             (if (not (access $(value-of ?mbr)))
                 (do
                     (print ", access deny\n")
                     (continue)
                 )
-            )                
-            
-            (print ", name=" (name-of $(value-of (value-of ?mbr))))
-            (print ", type=" (type-of $(value-of (value-of ?mbr))))
-            (print ", property=" (property-of $(value-of ?mbr)))
-            (print ", attribute=" (attribute-of $(value-of ?mbr)))
+            )
+
+            (print ", mbr-property=" (property-of $(value-of ?mbr)))
+            (print ", mbr-attribute=" (attribute-of $(value-of ?mbr)))
+    
+            (print ", obj=" (name-of $(value-of (value-of ?mbr))))
+            (print ", obj-type=" (type-of $(value-of (value-of ?mbr))))
+            (print ", obj-attribute=" (attribute-of $(value-of (value-of ?mbr))))
 
             (if (equal (type-of $(value-of (value-of ?mbr))) class)
                 (print ", class-property=" (property-of $(value-of (value-of ?mbr)))))
@@ -162,7 +164,7 @@
                 (print ", instance-class=" (class-of $(value-of (value-of ?mbr)))))
             
             (if (equal (type-of $(value-of (value-of ?mbr))) var)
-                (print ", value=\"" $(value-of (value-of ?mbr)) "\""))
+                (print ", var-value=\"" $(value-of (value-of ?mbr)) "\""))
 
             (print "\n")
         )

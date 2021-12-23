@@ -17,14 +17,14 @@
 ;=>nil
 ;out:
 mbr=?impl, access deny
-mbr=clear, name=(clear), type=func, property='(default final), attribute='(final)
-mbr=init, name=(init), type=func, property='(default final), attribute='(final)
-mbr=is-empty, name=(is-empty), type=func, property='(default final), attribute='(final)
-mbr=peek, name=(peek), type=func, property='(default final), attribute='(final)
-mbr=pop, name=(pop), type=func, property='(default final), attribute='(final)
-mbr=push, name=(push nil), type=func, property='(default final), attribute='(final)
-mbr=size-of, name=(size-of), type=func, property='(default final), attribute='(final)
-mbr=to-list, name=(to-list), type=func, property='(default final), attribute='(final)
+mbr=clear, mbr-property='(default final), mbr-attribute='(final), obj=(clear), obj-type=func, obj-attribute='()
+mbr=init, mbr-property='(default final), mbr-attribute='(final), obj=(init), obj-type=func, obj-attribute='()
+mbr=is-empty, mbr-property='(default final), mbr-attribute='(final), obj=(is-empty), obj-type=func, obj-attribute='()
+mbr=peek, mbr-property='(default final), mbr-attribute='(final), obj=(peek), obj-type=func, obj-attribute='()
+mbr=pop, mbr-property='(default final), mbr-attribute='(final), obj=(pop), obj-type=func, obj-attribute='()
+mbr=push, mbr-property='(default final), mbr-attribute='(final), obj=(push nil), obj-type=func, obj-attribute='()
+mbr=size-of, mbr-property='(default final), mbr-attribute='(final), obj=(size-of), obj-type=func, obj-attribute='()
+mbr=to-list, mbr-property='(default final), mbr-attribute='(final), obj=(to-list), obj-type=func, obj-attribute='()
 
 ;eof
 

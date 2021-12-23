@@ -30,13 +30,13 @@ mbr=_set_init, access deny
 mbr=_set_is_empty, access deny
 mbr=_set_size_of, access deny
 mbr=_set_to_list, access deny
-mbr=add, name=(add nil), type=func, property='(default final), attribute='(final)
-mbr=clear, name=(clear), type=func, property='(default final), attribute='(final)
-mbr=has, name=(has nil), type=func, property='(default final), attribute='(final)
-mbr=init, name=(init), type=func, property='(default final), attribute='(final)
-mbr=is-empty, name=(is-empty), type=func, property='(default final), attribute='(final)
-mbr=size-of, name=(size-of), type=func, property='(default final), attribute='(final)
-mbr=to-list, name=(to-list), type=func, property='(default final), attribute='(final)
+mbr=add, mbr-property='(default final), mbr-attribute='(final), obj=(add nil), obj-type=func, obj-attribute='()
+mbr=clear, mbr-property='(default final), mbr-attribute='(final), obj=(clear), obj-type=func, obj-attribute='()
+mbr=has, mbr-property='(default final), mbr-attribute='(final), obj=(has nil), obj-type=func, obj-attribute='()
+mbr=init, mbr-property='(default final), mbr-attribute='(final), obj=(init), obj-type=func, obj-attribute='()
+mbr=is-empty, mbr-property='(default final), mbr-attribute='(final), obj=(is-empty), obj-type=func, obj-attribute='()
+mbr=size-of, mbr-property='(default final), mbr-attribute='(final), obj=(size-of), obj-type=func, obj-attribute='()
+mbr=to-list, mbr-property='(default final), mbr-attribute='(final), obj=(to-list), obj-type=func, obj-attribute='()
 
 ;eof
 
@@ -69,9 +69,9 @@ set1::this
 ;=>nil
 ;out:
 mbr=?impl, access deny
-mbr=add, name=(add nil), type=func, property='(default final), attribute='()
-mbr=init, name=(init), type=func, property='(default final), attribute='()
-mbr=this, name=set1, type=instance, property='(default), attribute='(), instance-class=set
+mbr=add, mbr-property='(default final), mbr-attribute='(), obj=(add nil), obj-type=func, obj-attribute='()
+mbr=init, mbr-property='(default final), mbr-attribute='(), obj=(init), obj-type=func, obj-attribute='()
+mbr=this, mbr-property='(default), mbr-attribute='(), obj=set1, obj-type=instance, obj-attribute='(), instance-class=set
 
 ;eof
 

@@ -20,8 +20,8 @@
 (ls-print class2)
 ;=>nil
 ;out:
-mbr=add, name=(add nil), type=func, property='(default), attribute='()
-mbr=super, name=class1, type=class, property='(default), attribute='(), class-property='()
+mbr=add, mbr-property='(default), mbr-attribute='(), obj=(add nil), obj-type=func, obj-attribute='()
+mbr=super, mbr-property='(default), mbr-attribute='(), obj=class1, obj-type=class, obj-attribute='(), class-property='()
 
 ;eof
 

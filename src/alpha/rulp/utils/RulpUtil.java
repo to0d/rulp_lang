@@ -1579,6 +1579,7 @@ public class RulpUtil {
 
 		} else if (obj.getType() == RType.MEMBER) {
 			obj = RuntimeUtil.getActualMember((IRMember) obj, interpreter, frame);
+
 		}
 
 		return obj;

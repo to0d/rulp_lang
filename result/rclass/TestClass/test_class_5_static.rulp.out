@@ -38,19 +38,19 @@
 (ls-print class1)
 ;=>nil
 ;out:
-mbr=?rv, name=?rv, type=var, property='(default), attribute='(), value="1"
-mbr=?v1, name=?v1, type=var, property='(default), attribute='(), value="1"
-mbr=?v2, name=?v2, type=var, property='(default static), attribute='(static), value="2"
-mbr=fun1, name=(fun1), type=func, property='(default), attribute='(static)
+mbr=?rv, mbr-property='(default), mbr-attribute='(), obj=?rv, obj-type=var, obj-attribute='(), var-value="1"
+mbr=?v1, mbr-property='(default), mbr-attribute='(), obj=?v1, obj-type=var, obj-attribute='(), var-value="1"
+mbr=?v2, mbr-property='(default static), mbr-attribute='(static), obj=?v2, obj-type=var, obj-attribute='(), var-value="2"
+mbr=fun1, mbr-property='(default), mbr-attribute='(static), obj=(fun1), obj-type=func, obj-attribute='()
 
 ;eof
 
 (ls-print o1)
 ;=>nil
 ;out:
-mbr=?v1, name=?v1, type=var, property='(default), attribute='(), value="0"
-mbr=?v2, name=?v2, type=var, property='(default static), attribute='(), value="2"
-mbr=this, name=o1, type=instance, property='(default), attribute='(), instance-class=class1
+mbr=?v1, mbr-property='(default), mbr-attribute='(), obj=?v1, obj-type=var, obj-attribute='(), var-value="0"
+mbr=?v2, mbr-property='(default static), mbr-attribute='(), obj=?v2, obj-type=var, obj-attribute='(), var-value="2"
+mbr=this, mbr-property='(default), mbr-attribute='(), obj=o1, obj-type=instance, obj-attribute='(), instance-class=class1
 
 ;eof
 
