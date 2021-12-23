@@ -19,4 +19,25 @@ public class TestOptimizeSCO extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+
+	@Test
+	public void test_cc0_2_str_expr_1() {
+
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	public void test_cc0_3_recursion_fun_1a() {
+
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	public void test_cc0_3_recursion_fun_1b() {
+
+		_setup();
+		_run_script();
+	}
 }
