@@ -126,6 +126,7 @@ obj=power, type=factor, const=true
 obj=print, type=factor, const=true
 obj=print-frame-tree, type=factor, const=true
 obj=print-global-info, type=factor, const=true
+obj=print-impl, type=factor, const=true
 obj=print-subject, type=factor, const=true
 obj=private, type=atom, const=true
 obj=property-of, type=factor, const=true

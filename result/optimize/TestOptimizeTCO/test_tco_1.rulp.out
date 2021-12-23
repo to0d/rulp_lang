@@ -13,6 +13,15 @@
 (attribute-of fact)
 ;=>'(opt-tco)
 
+(print-impl fact)
+;=>nil
+;out:
+(defun fact (?v)
+    (do (if (<= ?v 0) (return 1)) (return-tco (* ?v (fact (- ?v 1)))))
+)
+
+;eof
+
 (fact 1)
 ;=>1
 

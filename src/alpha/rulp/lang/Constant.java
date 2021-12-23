@@ -322,6 +322,8 @@ public interface Constant {
 	String F_PRINT_GLOBAL_INFO = "print-global-info";
 
 	String F_PRINT_SUBJECT = "print-subject";
+	
+	String F_PRINT_IMPL = "print-impl";
 
 	String F_PROPERTY_OF = "property-of";
 

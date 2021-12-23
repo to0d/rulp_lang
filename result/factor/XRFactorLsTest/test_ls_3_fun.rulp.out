@@ -144,6 +144,7 @@ root::power
 root::print
 root::print-frame-tree
 root::print-global-info
+root::print-impl
 root::print-subject
 root::private
 root::property-of

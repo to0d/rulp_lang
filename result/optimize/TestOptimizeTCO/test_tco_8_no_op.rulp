@@ -13,6 +13,9 @@
 (attribute-of fun)
 ;=>
 
+(print-impl fun)
+;;;
+
 (fun 10)
 ;=>
 

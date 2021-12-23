@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       82        4
+     Interpreter call id/level:       83        4
                      CPS count:        0
                Frame max level:       26
                   Frame max id:       27
@@ -15,12 +15,12 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      173
+    factor:      174
       func:       14
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=82, row=26, column=42(2), value-max=23, value-unit=2^x
+Callable stats info: callId=83, row=27, column=42(2), value-max=23, value-unit=2^x
 ==========================================================================================================================
    Frame    RType  Count  Ref Object                         122222222222222222222222222222222222222285 max=94, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
@@ -37,11 +37,12 @@ Callable stats info: callId=82, row=26, column=42(2), value-max=23, value-unit=2
     root   factor      4    0 defmacro                                  11             1          1    
     root   factor      4    0 defclass                                                 1  1 1  1       
     root   factor      3    0 deftemplate                                  12                          
-    root   factor      1    0 tco-count                                                              1 
+    root   factor      1    0 tco-count                                                               1
     root   factor      1    0 str-substr                                                              1
     root   factor      1    0 str-last-index-of                                                       1
     root   factor      1    0 setq                                                                    1
   system    macro      1    1 script_out                                                              1
+    root   factor      1    0 print-impl                                                             1 
     root   factor      1    0 print-global-info                                                       1
     root   factor      1    0 out-to-file                                                             1
     root   factor      1    0 list-function-in-return                                               1  
@@ -56,10 +57,10 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:          986            0          986
+        atom:         1003            0         1003
       string:           38            0           38
         list:            6            0            6
-        expr:          548           13          535
+        expr:          561           13          548
        array:            1            0            1
          var:           43           26           17
         func:          108            0          108
@@ -69,7 +70,7 @@ Object create count:
       member:          117            0          117
        frame:           27           26            1
  interpreter:            1            0
-  frameEntry:          244            0
+  frameEntry:          245            0
       lambda:            0            0
 ==========================================================================================================================
 

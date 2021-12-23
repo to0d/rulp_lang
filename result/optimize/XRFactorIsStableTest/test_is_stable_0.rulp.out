@@ -126,6 +126,7 @@ obj=power, type=factor, stable=true
 obj=print, type=factor, stable=false
 obj=print-frame-tree, type=factor, stable=false
 obj=print-global-info, type=factor, stable=false
+obj=print-impl, type=factor, stable=false
 obj=print-subject, type=factor, stable=false
 obj=private, type=atom, stable=true
 obj=property-of, type=factor, stable=true
