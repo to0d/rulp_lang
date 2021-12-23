@@ -10,16 +10,12 @@
 package alpha.rulp.ximpl.factor;
 
 import alpha.rulp.lang.IRFrame;
-import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
-import alpha.rulp.lang.IRMember;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
-import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.utils.RuntimeUtil;
 
 public class XRFactorAttributeOf extends AbsAtomFactorAdapter implements IRFactor {
 

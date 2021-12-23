@@ -24,6 +24,7 @@ root::?user.name
 root::^
 root::access
 root::add-array-to-list
+root::add-attribute
 root::add-list-to-array
 root::add-list-to-list
 root::add_search_frame

@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:       87        4
+     Interpreter call id/level:      126        4
                      CPS count:   252432
                Frame max level:        5
                   Frame max id:        6
@@ -15,53 +15,54 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:   252550
+    factor:   252589
       func:        8
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=87, row=27, column=44(2), value-max=84135, value-unit=4^x
+Callable stats info: callId=126, row=28, column=64(2), value-max=84102, value-unit=4^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         122222222222222222222222222222222222222244X3 max=378606, unit=4^x
+   Frame    RType  Count  Ref Object                         12222222222222222222222222222222222222222222222222222222222345X3 max=378458, unit=4^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor  84152    0 if                                                                     23X1
-    root   factor  84151    0 <=                                                                     23X 
-    root   factor  42079    0 do                                                                     2391
-    main     func  42078 42073 (fun2 nil)                                                             239 
-    root   factor  42072    0 -                                                                      139 
-    root   factor  37169    0 +                                                                      1391
-    root   factor  37168    0 return-tco                                                             139 
-    root   factor   4911    0 return                                                                 2281
-    root   factor   4904    0 /                                                                        8 
-    root   factor     58    0 defun                              22222221121 2222222222 221212212112     
-    root   factor      6    0 alias                          1221                                        
-    root   factor      4    0 defvar                            1                                1      2
-    root   factor      4    0 defmacro                                  11             1          1      
-    root   factor      4    0 defclass                                                 1  1 1  1         
-    root   factor      3    0 deftemplate                                  12                            
-    root   factor      1    0 tco-count                                                                 1
-    root   factor      1    0 str-substr                                                                1
-    root   factor      1    0 str-last-index-of                                                         1
-    root   factor      1    0 setq                                                                      1
-  system    macro      1    1 script_out                                                                1
-    root   factor      1    0 print-global-info                                                         1
-    root   factor      1    0 out-to-file                                                               1
-    root   factor      1    0 list-function-in-return                                               1    
-  system     func      1    1 (file-prename string)                                                     1
-    root   factor      1    0 attribute-of                                                          1    
-  system funcList      1    3 _ginfo                                                                    1
-    root   factor      1    0 !=                                                                        1
+    root   factor  84152    0 if                                                                                        134X1
+    root   factor  84151    0 <=                                                                                        134X 
+    root   factor  42079    0 do                                                                                        13491
+    main     func  42078 42073 (fun2 nil)                                                                                1349 
+    root   factor  42072    0 -                                                                                          249 
+    root   factor  37169    0 +                                                                                          2491
+    root   factor  37168    0 return-tco                                                                                 249 
+    root   factor   4911    0 return                                                                                    12281
+    root   factor   4904    0 /                                                                                           18 
+    root   factor     58    0 defun                                                 12222222 22 122222222211212122122 21     
+    root   factor     39    0 add-attribute                     12222222222222222222                                         
+    root   factor      6    0 alias                          1221                                                            
+    root   factor      4    0 defvar                                                1                                1      2
+    root   factor      4    0 defmacro                                                      2             1          1       
+    root   factor      4    0 defclass                                                                     1 1 1  1          
+    root   factor      3    0 deftemplate                                                      21                            
+    root   factor      1    0 tco-count                                                                                    1 
+    root   factor      1    0 str-substr                                                                                    1
+    root   factor      1    0 str-last-index-of                                                                             1
+    root   factor      1    0 setq                                                                                          1
+  system    macro      1    1 script_out                                                                                    1
+    root   factor      1    0 print-global-info                                                                             1
+    root   factor      1    0 out-to-file                                                                                   1
+    root   factor      1    0 list-function-in-return                                                                  1     
+  system     func      1    1 (file-prename string)                                                                         1
+    root   factor      1    0 attribute-of                                                                              1    
+  system funcList      1    3 _ginfo                                                                                        1
+    root   factor      1    0 !=                                                                                            1
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1031            0         1031
+        atom:         1148            0         1148
          int:         2464            0         2464
       string:           39            0           39
         list:            8            2            6
-        expr:       253013       168295        84718
+        expr:       253052       168295        84757
        array:            1            0            1
          var:        42098        42081           17
         func:          108            0          108
@@ -71,7 +72,7 @@ Object create count:
       member:          117            0          117
        frame:        84159        84158            1
  interpreter:            1            0
-  frameEntry:        42300            0
+  frameEntry:        42301            0
       lambda:            0            0
 ==========================================================================================================================
 

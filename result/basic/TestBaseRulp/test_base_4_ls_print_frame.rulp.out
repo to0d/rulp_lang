@@ -24,6 +24,7 @@ mbr=?user.name, name=?user.name, type=var, property='(public), attribute='(), va
 mbr=^, name=^, type=factor, property='(public), attribute='()
 mbr=access, name=access, type=factor, property='(public), attribute='()
 mbr=add-array-to-list, name=add-array-to-list, type=factor, property='(public), attribute='()
+mbr=add-attribute, name=add-attribute, type=factor, property='(public), attribute='()
 mbr=add-list-to-array, name=add-list-to-array, type=factor, property='(public), attribute='()
 mbr=add-list-to-list, name=add-list-to-list, type=factor, property='(public), attribute='()
 mbr=add_search_frame, name=add_search_frame, type=factor, property='(public), attribute='()

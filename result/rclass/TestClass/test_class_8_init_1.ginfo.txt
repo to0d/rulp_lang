@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:      108        4
+     Interpreter call id/level:      147        4
                      CPS count:        0
                Frame max level:        5
                   Frame max id:       12
@@ -15,48 +15,49 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      196
+    factor:      235
       func:       20
      macro:        7
 ==========================================================================================================================
 
-Callable stats info: callId=108, row=23, column=55(2), value-max=4, value-unit=2^x
+Callable stats info: callId=147, row=24, column=37(4), value-max=8, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         1222222222222222222222222222222222222222333334666222225 max=28, unit=2^x
+   Frame    RType  Count  Ref Object                         3333333333333333333333333333344467636 max=56, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     57    0 defun                              22222221121 2222222222 221212212111                
-    root   factor     19    0 defvar                            1                                1      111333     2
-    root   factor     13    0 setq                                                                   111111222     1
-    root   factor     13    0 return                                                                 111111222     1
-    root   factor      9    0 +                                                                        1  1222     1
-    root   factor      7    0 str-substr                                                                   222     1
-    root   factor      7    0 str-last-index-of                                                            222     1
-  system    macro      7    1 script_out                                                                   222     1
-    root   factor      7    0 out-to-file                                                                  222     1
-    root   factor      7    0 if                                                                           222     1
-  system     func      7    1 (file-prename string)                                                        222     1
-    root   factor      7    0 do                                                                           222     1
-    root   factor      7    0 !=                                                                           222     1
-    root   factor      6    0 rulp-object-count                                                     2         2   2 
-    root   factor      6    0 print-subject                                                                222      
-    root   factor      6    0 new                                                                    111111         
-    root   factor      6    0 delete                                                                           222  
-    root   factor      6    0 alias                          1221                                                   
-    root   factor      5    0 defclass                                                 1  1 1  1   1                
-    root   factor      4    0 defmacro                                  11             1          1                 
-    root   factor      3    0 deftemplate                                  12                                       
-    root   factor      1    0 print-global-info                                                                    1
-  system funcList      1    3 _ginfo                                                                               1
+    root   factor     57    0 defun                                     133323133333333332        
+    root   factor     39    0 add-attribute                   13333333332                         
+    root   factor     19    0 defvar                                    1                1  2342 2
+    root   factor     13    0 setq                                                        122231 1
+    root   factor     13    0 return                                                       22331 1
+    root   factor      9    0 +                                                            1 231 1
+    root   factor      7    0 str-substr                                                     131 1
+    root   factor      7    0 str-last-index-of                                              131 1
+  system    macro      7    1 script_out                                                     131 1
+    root   factor      7    0 out-to-file                                                    131 1
+    root   factor      7    0 if                                                             131 1
+  system     func      7    1 (file-prename string)                                          131 1
+    root   factor      7    0 do                                                             131 1
+    root   factor      7    0 !=                                                             131 1
+    root   factor      6    0 rulp-object-count                                           2    2 2
+    root   factor      6    0 print-subject                                                  131  
+    root   factor      6    0 new                                                         1221    
+    root   factor      6    0 delete                                                           131
+    root   factor      6    0 alias                          33                                   
+    root   factor      5    0 defclass                                              1111  1       
+    root   factor      4    0 defmacro                                      2      1     1        
+    root   factor      3    0 deftemplate                                     3                   
+    root   factor      1    0 print-global-info                                                  1
+  system funcList      1    3 _ginfo                                                             1
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1061            0         1061
+        atom:         1178            0         1178
       string:           56            0           56
         list:           10            0           10
-        expr:          614           31          583
+        expr:          653           31          622
        array:            1            0            1
          var:           60           42           18
         func:          143           30          113
@@ -67,7 +68,7 @@ Object create count:
       member:          158           36          122
        frame:           34           32            2
  interpreter:            1            0
-  frameEntry:          259            0
+  frameEntry:          260            0
       lambda:           24            0
 ==========================================================================================================================
 

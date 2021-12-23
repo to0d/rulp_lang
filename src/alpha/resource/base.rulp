@@ -9,6 +9,50 @@
 (alias expr EXPRESSION)
 
 ;****************************************************;
+; Optimize attribute 
+;****************************************************;
+(add-attribute != opt-cc0)
+(add-attribute %  opt-cc0)
+(add-attribute &  opt-cc0)
+(add-attribute *  opt-cc0)
+(add-attribute +  opt-cc0)
+(add-attribute -  opt-cc0)
+(add-attribute /  opt-cc0)
+(add-attribute <  opt-cc0)
+(add-attribute <= opt-cc0)
+(add-attribute =  opt-cc0)
+(add-attribute >  opt-cc0)
+(add-attribute >= opt-cc0)
+(add-attribute ^  opt-cc0)
+(add-attribute |  opt-cc0)
+(add-attribute ~  opt-cc0)
+(add-attribute and   opt-cc0)
+(add-attribute not   opt-cc0)
+(add-attribute or    opt-cc0)
+(add-attribute power opt-cc0)
+
+(add-attribute str-char-at       opt-cc0)
+(add-attribute str-end-with      opt-cc0)
+(add-attribute str-equal         opt-cc0)
+(add-attribute str-equal-nocase  opt-cc0)
+(add-attribute str-format        opt-cc0)
+(add-attribute str-index-of      opt-cc0)
+(add-attribute str-last-index-of opt-cc0)
+(add-attribute str-length        opt-cc0)
+(add-attribute str-match         opt-cc0)
+(add-attribute str-replace       opt-cc0)
+(add-attribute str-split         opt-cc0)
+(add-attribute str-split-line    opt-cc0)
+(add-attribute str-start-with    opt-cc0)
+(add-attribute str-substr        opt-cc0)
+(add-attribute str-trim          opt-cc0)
+(add-attribute str-trim-head     opt-cc0)
+(add-attribute str-trim-tail     opt-cc0)
+(add-attribute str-upper         opt-cc0)
+(add-attribute strcat            opt-cc0)
+(add-attribute to-int            opt-cc0)
+
+;****************************************************;
 ; Enviroment vars
 ;****************************************************;
 (defvar ?load-paths '())

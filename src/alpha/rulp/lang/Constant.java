@@ -93,9 +93,9 @@ public interface Constant {
 
 	String A_NULL = "null";
 
-	String A_OPT_TCO = "opt-tco";
-
 	String A_OPT_CC0 = "opt-cc0";
+
+	String A_OPT_TCO = "opt-tco";
 
 	String A_PARENT = "parent";
 
@@ -153,6 +153,8 @@ public interface Constant {
 
 	String F_ADD_ARRAY_TO_LIST = "add-array-to-list";
 
+	String F_ADD_ATTRIBUTE = "add-attribute";
+
 	String F_ADD_LIST_TO_ARRAY = "add-list-to-array";
 
 	String F_ADD_LIST_TO_LIST = "add-list-to-list";
@@ -160,7 +162,7 @@ public interface Constant {
 	String F_ADD_SEARCH_FRAME = "add_search_frame";
 
 	String F_ALIAS = "alias";
-
+	
 	String F_ATTRIBUTE_OF = "attribute-of";
 
 	String F_B_AND = "and";

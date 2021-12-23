@@ -39,6 +39,7 @@ obj=?user.name, type=var, const=false
 obj=^, type=factor, const=true
 obj=access, type=factor, const=true
 obj=add-array-to-list, type=factor, const=true
+obj=add-attribute, type=factor, const=true
 obj=add-list-to-array, type=factor, const=true
 obj=add-list-to-list, type=factor, const=true
 obj=add_search_frame, type=factor, const=true
