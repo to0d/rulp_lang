@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import alpha.rulp.utils.RulpTestBase;
 
-public class TestOptimizeSCO extends RulpTestBase {
+public class TestOptimizeCC0 extends RulpTestBase {
 
 	@Test
 	public void test_cc0_1_num_expr_1() {
