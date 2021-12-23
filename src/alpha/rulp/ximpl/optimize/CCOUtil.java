@@ -34,13 +34,13 @@ public class CCOUtil {
 		}
 	}
 
+	protected static AtomicInteger CC0ComputeCount = new AtomicInteger(0);
+
 	protected static AtomicInteger CC1CacheCount = new AtomicInteger(0);
 
 	protected static AtomicInteger CC1CallCount = new AtomicInteger(0);
 
 	protected static AtomicInteger CC1ExprCount = new AtomicInteger(0);
-
-	protected static AtomicInteger CC0ComputeCount = new AtomicInteger(0);
 
 	static final int SCO_LEVEL_CC0 = 0;
 
@@ -50,13 +50,9 @@ public class CCOUtil {
 
 	static final int SCO_LEVEL_NONE = -1;
 
-	private static boolean _isCC0Expr(IRExpr expr, IRFrame frame) throws RException {
+	private static boolean _isCC0Expr(IRObject e0, IRExpr expr, IRFrame frame) throws RException {
 
-		if (expr.isEmpty()) {
-			return false;
-		}
-
-		if (!_isCC0Factor(expr.get(0), frame)) {
+		if (!_isCC0Factor(e0, frame)) {
 			return false;
 		}
 
@@ -68,13 +64,6 @@ public class CCOUtil {
 	}
 
 	private static boolean _isCC0Factor(IRObject obj, IRFrame frame) throws RException {
-
-		if (obj.getType() == RType.ATOM) {
-			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, RulpUtil.asAtom(obj).getName());
-			if (entry != null) {
-				obj = entry.getValue();
-			}
-		}
 
 		if (obj.getType() != RType.FACTOR) {
 			return false;
@@ -125,7 +114,15 @@ public class CCOUtil {
 			return true;
 		}
 
-		if (_isCC0Expr(cc0.inputExpr, frame)) {
+		IRObject e0 = cc0.inputExpr.get(0);
+		if (e0.getType() == RType.ATOM) {
+			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, RulpUtil.asAtom(e0).getName());
+			if (entry != null) {
+				e0 = entry.getValue();
+			}
+		}
+
+		if (_isCC0Expr(e0, cc0.inputExpr, frame)) {
 			return true;
 		}
 
@@ -138,8 +135,15 @@ public class CCOUtil {
 
 		for (int i = 0; i < size; ++i) {
 
-			IRObject ex = cc0.inputExpr.get(i);
 			boolean reBuild = false;
+
+			IRObject ex = cc0.inputExpr.get(i);
+			if (ex.getType() == RType.ATOM) {
+				IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, RulpUtil.asAtom(ex).getName());
+				if (entry != null) {
+					ex = entry.getValue();
+				}
+			}
 
 			if (ex.getType() == RType.EXPR) {
 
@@ -206,6 +210,10 @@ public class CCOUtil {
 		return false;
 	}
 
+	public static int getCC0ComputeCount() {
+		return CC0ComputeCount.get();
+	}
+
 	public static int getCC1CacheCount() {
 		return CC1CacheCount.get();
 	}
@@ -218,8 +226,8 @@ public class CCOUtil {
 		return CC1ExprCount.get();
 	}
 
-	public static int getCC0ComputeCount() {
-		return CC0ComputeCount.get();
+	public static void incCC0ComputeCount() {
+		CC0ComputeCount.getAndIncrement();
 	}
 
 	public static void incCC1CacheCount() {
@@ -228,10 +236,6 @@ public class CCOUtil {
 
 	public static void incCC1CallCount() {
 		CC1CallCount.getAndIncrement();
-	}
-
-	public static void incCC0ComputeCount() {
-		CC0ComputeCount.getAndIncrement();
 	}
 
 	public static void incCC1ExprCount() {
@@ -274,7 +278,15 @@ public class CCOUtil {
 	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value
 	public static boolean supportCC0(IRExpr expr, IRFrame frame) throws RException {
 
-		if (_isCC0Expr(expr, frame)) {
+		IRObject e0 = expr.get(0);
+		if (e0.getType() == RType.ATOM) {
+			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, RulpUtil.asAtom(e0).getName());
+			if (entry != null) {
+				e0 = entry.getValue();
+			}
+		}
+
+		if (expr.isEmpty() || _isCC0Expr(e0, expr, frame)) {
 			return true;
 		}
 
