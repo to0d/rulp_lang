@@ -13,4 +13,10 @@ public class TestOptimizeCC3 extends RulpTestBase {
 		_run_script();
 	}
 
+	@Test
+	public void test_cc3_2_recursion_fun() {
+
+		_setup();
+		_run_script();
+	}
 }

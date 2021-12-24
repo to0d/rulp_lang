@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
@@ -125,6 +126,40 @@ public class StableUtil {
 			return funcDepMap == null ? null : funcDepMap.remove(curFun);
 		}
 
+		public void _listAllUsedVars(IRList list, Set<String> varNames, List<IRAtom> varAtoms) throws RException {
+
+			IRIterator<? extends IRObject> it = list.iterator();
+			while (it.hasNext()) {
+
+				IRObject obj = it.next();
+				switch (obj.getType()) {
+				case ATOM:
+
+					String name = RulpUtil.asAtom(obj).getName();
+					if (!varNames.contains(name) && this.lookupType(name) == RType.VAR) {
+						varNames.add(name);
+						varAtoms.add((IRAtom) obj);
+					}
+
+					break;
+
+				case EXPR:
+				case LIST:
+					_listAllUsedVars((IRList) obj, varNames, varAtoms);
+					break;
+
+				}
+			}
+		}
+
+		public List<IRAtom> listAllVars(IRExpr expr) throws RException {
+
+			ArrayList<IRAtom> vars = new ArrayList<>();
+			_listAllUsedVars(expr, new HashSet<>(), vars);
+
+			return vars;
+		}
+
 		public void updateExpr(IRObject e0, IRExpr expr) throws RException {
 
 			// (defvar ?x)
@@ -213,7 +248,170 @@ public class StableUtil {
 		return obj.asString().equals(name);
 	}
 
-	private static boolean _isStable(IRObject obj, NameSet nameSet, IRFrame frame) throws RException {
+	private static boolean _isStableFunc(XRFunction func, NameSet nameSet, IRFrame frame) throws RException {
+
+		Boolean bRc = func.getIsStable();
+		if (bRc != null) {
+			return bRc;
+		}
+
+		int checkSize = nameSet.checkingStack.size();
+
+		// assuming
+		if (nameSet.assuingFuncs.contains(func)) {
+			return true;
+		}
+
+		int lastPos = nameSet.checkingStack.indexOf(func);
+		if (lastPos != -1) {
+
+			// recursion self
+			if ((lastPos + 1) == checkSize) {
+				return true; // not update function's table value
+			}
+
+			// recursion cycle detected: A call B, B call C, C call A
+			for (int i = (lastPos + 1); i < checkSize; ++i) {
+
+				// Add B and C to A's dep list
+				nameSet.addDepFun(func, nameSet.checkingStack.get(i));
+			}
+
+			// jump to B
+			throw new RInterrupt(nameSet.checkingStack.get(lastPos + 1), frame);
+		}
+
+		for (IRParaAttr pa : func.getParaAttrs()) {
+			nameSet.addVar(pa.getParaName());
+		}
+
+		nameSet.checkingStack.add(func);
+
+		try {
+
+			boolean stable = isStable(func.getFunBody(), nameSet, frame);
+
+			// assume A is stable, check all dep functions again
+			if (stable && nameSet.hasDepFuncs(func)) {
+
+				for (XRFunction depFunc : nameSet.removeDepFun(func)) {
+
+					if (nameSet.assuingFuncs.contains(func)) {
+						throw new RException("duplicated assume func: " + func);
+					}
+
+					nameSet.assuingFuncs.add(func);
+
+					try {
+
+						// find one non-stable function
+						if (!isStable(depFunc, nameSet.newBranch(), frame)) {
+							stable = false;
+							break;
+						}
+
+					} finally {
+						nameSet.assuingFuncs.remove(func);
+					}
+
+				}
+			}
+
+			// Updating dep function list
+			if (nameSet.hasDepFuncs(func)) {
+				for (XRFunction depFunc : nameSet.removeDepFun(func)) {
+					depFunc.setIsStable(stable);
+				}
+			}
+
+			// Updating function's table value
+			func.setIsStable(stable);
+
+			return stable;
+
+		} catch (RInterrupt e) {
+
+			IRObject fromFunc = e.getFromObject();
+			if (fromFunc != func) {
+				throw e;
+			}
+
+			return true; // return true, will check B later
+
+		} finally {
+			nameSet.checkingStack.remove(checkSize);
+		}
+
+	}
+
+//	static int deep = 0;
+
+	private static boolean _isStableFuncList(XRFunctionList func, NameSet nameSet, IRFrame frame) throws RException {
+
+		Boolean bRc = func.getIsStable();
+		if (bRc != null) {
+			return bRc;
+		}
+
+		boolean rc = true;
+		for (IRFunction childFunc : func.getAllFuncList()) {
+			if (!isStable(childFunc, nameSet, frame)) {
+				rc = false;
+				break;
+			}
+		}
+
+		func.setIsStable(rc);
+		return rc;
+	}
+
+	private static boolean _isStableList(IRIterator<? extends IRObject> it, NameSet nameSet, IRFrame frame)
+			throws RException {
+
+		while (it.hasNext()) {
+			if (!isStable(it.next(), nameSet, frame)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static Set<String> findFunCallee(IRExpr expr, IRFrame frame) throws RException {
+
+		if (expr.isEmpty()) {
+			return Collections.emptySet();
+		}
+
+		Set<String> callee = new HashSet<>();
+		_findFunCallee(expr, callee, frame);
+		return callee;
+	}
+
+	public static boolean isNewFrameFactor(IRObject obj) throws RException {
+
+		if (obj.getType() != RType.ATOM && obj.getType() != RType.FACTOR) {
+			return false;
+		}
+
+		switch (obj.asString()) {
+		case F_FOREACH:
+		case F_E_TRY:
+		case A_DO:
+		case F_LET:
+		case F_LOOP:
+		case F_OPT:
+			return true;
+		}
+
+		return false;
+	}
+
+	public static boolean isStable(IRObject obj, IRFrame frame) throws RException {
+//		deep = 0;
+		return isStable(obj, new NameSet(), frame);
+	}
+
+	public static boolean isStable(IRObject obj, NameSet nameSet, IRFrame frame) throws RException {
 
 //		if (deep++ > 100) {
 //			System.out.println();
@@ -259,7 +457,7 @@ public class StableUtil {
 				return true;
 			}
 
-			return _isStable(entryValue, nameSet, frame);
+			return isStable(entryValue, nameSet, frame);
 		}
 
 		case FACTOR:
@@ -322,168 +520,5 @@ public class StableUtil {
 		default:
 			return false;
 		}
-	}
-
-//	static int deep = 0;
-
-	private static boolean _isStableFunc(XRFunction func, NameSet nameSet, IRFrame frame) throws RException {
-
-		Boolean bRc = func.getIsStable();
-		if (bRc != null) {
-			return bRc;
-		}
-
-		int checkSize = nameSet.checkingStack.size();
-
-		// assuming
-		if (nameSet.assuingFuncs.contains(func)) {
-			return true;
-		}
-
-		int lastPos = nameSet.checkingStack.indexOf(func);
-		if (lastPos != -1) {
-
-			// recursion self
-			if ((lastPos + 1) == checkSize) {
-				return true; // not update function's table value
-			}
-
-			// recursion cycle detected: A call B, B call C, C call A
-			for (int i = (lastPos + 1); i < checkSize; ++i) {
-
-				// Add B and C to A's dep list
-				nameSet.addDepFun(func, nameSet.checkingStack.get(i));
-			}
-
-			// jump to B
-			throw new RInterrupt(nameSet.checkingStack.get(lastPos + 1), frame);
-		}
-
-		for (IRParaAttr pa : func.getParaAttrs()) {
-			nameSet.addVar(pa.getParaName());
-		}
-
-		nameSet.checkingStack.add(func);
-
-		try {
-
-			boolean stable = _isStable(func.getFunBody(), nameSet, frame);
-
-			// assume A is stable, check all dep functions again
-			if (stable && nameSet.hasDepFuncs(func)) {
-
-				for (XRFunction depFunc : nameSet.removeDepFun(func)) {
-
-					if (nameSet.assuingFuncs.contains(func)) {
-						throw new RException("duplicated assume func: " + func);
-					}
-
-					nameSet.assuingFuncs.add(func);
-
-					try {
-
-						// find one non-stable function
-						if (!_isStable(depFunc, nameSet.newBranch(), frame)) {
-							stable = false;
-							break;
-						}
-
-					} finally {
-						nameSet.assuingFuncs.remove(func);
-					}
-
-				}
-			}
-
-			// Updating dep function list
-			if (nameSet.hasDepFuncs(func)) {
-				for (XRFunction depFunc : nameSet.removeDepFun(func)) {
-					depFunc.setIsStable(stable);
-				}
-			}
-
-			// Updating function's table value
-			func.setIsStable(stable);
-
-			return stable;
-
-		} catch (RInterrupt e) {
-
-			IRObject fromFunc = e.getFromObject();
-			if (fromFunc != func) {
-				throw e;
-			}
-
-			return true; // return true, will check B later
-
-		} finally {
-			nameSet.checkingStack.remove(checkSize);
-		}
-
-	}
-
-	private static boolean _isStableFuncList(XRFunctionList func, NameSet nameSet, IRFrame frame) throws RException {
-
-		Boolean bRc = func.getIsStable();
-		if (bRc != null) {
-			return bRc;
-		}
-
-		boolean rc = true;
-		for (IRFunction childFunc : func.getAllFuncList()) {
-			if (!_isStable(childFunc, nameSet, frame)) {
-				rc = false;
-				break;
-			}
-		}
-
-		func.setIsStable(rc);
-		return rc;
-	}
-
-	private static boolean _isStableList(IRIterator<? extends IRObject> it, NameSet nameSet, IRFrame frame)
-			throws RException {
-
-		while (it.hasNext()) {
-			if (!_isStable(it.next(), nameSet, frame)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	public static Set<String> findFunCallee(IRExpr expr, IRFrame frame) throws RException {
-
-		if (expr.isEmpty()) {
-			return Collections.emptySet();
-		}
-
-		Set<String> callee = new HashSet<>();
-		_findFunCallee(expr, callee, frame);
-		return callee;
-	}
-
-	public static boolean isNewFrameFactor(IRObject obj) throws RException {
-
-		if (obj.getType() != RType.ATOM && obj.getType() != RType.FACTOR) {
-			return false;
-		}
-
-		switch (obj.asString()) {
-		case F_FOREACH:
-		case F_E_TRY:
-		case A_DO:
-		case F_LET:
-		case F_LOOP:
-		case F_OPT:
-			return true;
-		}
-
-		return false;
-	}
-
-	public static boolean isStable(IRObject obj, IRFrame frame) throws RException {
-//		deep = 0;
-		return _isStable(obj, new NameSet(), frame);
 	}
 }

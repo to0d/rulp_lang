@@ -100,7 +100,17 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 	private static IRExpr _optCC3(IRInterpreter interpreter, IRFrame frame, ArrayList<String> attrList, IRExpr funBody,
 			List<IRParaAttr> paras, String funcName) throws RException {
 
-		return funBody;
+		if (attrList.contains(A_OPT_CC3)) {
+			return funBody;
+		}
+
+		IRExpr newExpr = CCOUtil.rebuildCC3(funBody, paras, funcName, interpreter, frame, false);
+		if (newExpr == funBody) {
+			return funBody;
+		}
+
+		attrList.add(A_OPT_CC3);
+		return newExpr;
 	}
 
 	private static IRExpr _optTCO(IRInterpreter interpreter, IRFrame frame, ArrayList<String> attrList, IRExpr funBody,

@@ -190,6 +190,8 @@ public interface Constant {
 	String F_CC1 = "cc1";
 
 	String F_CC2 = "cc2";
+	
+	String F_CC3 = "cc3";
 
 	String F_CLASS_OF = "class-of";
 
