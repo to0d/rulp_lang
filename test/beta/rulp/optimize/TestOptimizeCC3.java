@@ -19,4 +19,18 @@ public class TestOptimizeCC3 extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	public void test_cc3_3_lt0062_a() {
+
+		_setup();
+		_run_script();
+	}
+	
+	@Test
+	public void test_cc3_3_lt0062_b() {
+
+		_setup();
+		_run_script();
+	}
 }
