@@ -1,6 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.A_OPT_CC0;
 import static alpha.rulp.lang.Constant.F_CASE;
 import static alpha.rulp.lang.Constant.F_CC1;
@@ -27,6 +27,7 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.control.XRFactorCase;
+import alpha.rulp.ximpl.factor.XRFactorDefvar;
 import alpha.rulp.ximpl.optimize.StableUtil.NameSet;
 
 // (Compute Cache Optimization)
@@ -122,6 +123,10 @@ public class CCOUtil {
 			return false;
 		}
 
+		if (_isFactor(obj, F_RETURN)) {
+			return false;
+		}
+
 		if (!StableUtil.isStable(obj, frame)) {
 			return false;
 		}
@@ -172,6 +177,10 @@ public class CCOUtil {
 		default:
 			return false;
 		}
+	}
+
+	private static boolean _isFactor(IRObject obj, String name) {
+		return obj.getType() == RType.FACTOR && obj.asString().equals(name);
 	}
 
 	private static boolean _isLocalValue(IRIterator<? extends IRObject> it, NameSet nameSet) throws RException {
@@ -284,7 +293,7 @@ public class CCOUtil {
 		if (rebuildCount > 0 || childUpdate > 0) {
 
 			// (if true A B) or (if false A B)
-			if (isFactor(e0, F_IF) && rebuildList.size() >= 3) {
+			if (_isFactor(e0, F_IF) && rebuildList.size() >= 3) {
 				IRObject e1 = rebuildList.get(1);
 				if (e1.getType() == RType.BOOL) {
 
@@ -302,7 +311,7 @@ public class CCOUtil {
 			}
 
 			// (case a (a action) (b action))
-			if (isFactor(e0, F_CASE) && rebuildList.size() >= 3) {
+			if (_isFactor(e0, F_CASE) && rebuildList.size() >= 3) {
 
 				IRObject e1 = rebuildList.get(1);
 
@@ -342,7 +351,7 @@ public class CCOUtil {
 			}
 
 			// (do () (b action))
-			if (isFactor(e0, A_DO)) {
+			if (_isFactor(e0, A_DO)) {
 
 				int pos = 1;
 
@@ -503,17 +512,23 @@ public class CCOUtil {
 		}
 
 		IRObject e0 = RulpUtil.lookup(expr.get(0), interpreter, frame);
-		if (isFactor(e0, F_DEFVAR)) {
-			nameSet.addVar(RulpUtil.asAtom(expr.get(1)).getName());
-			return false;
-		}
-
-		if (_isCC2Expr(e0, expr, nameSet, frame)) {
-			return true;
-		}
 
 		if (StableUtil.isNewFrameFactor(e0)) {
 			nameSet = nameSet.newBranch();
+		}
+
+		if (_isFactor(e0, F_DEFVAR)) {
+			nameSet.addVar(XRFactorDefvar.getVarName(expr));
+			return false;
+		}
+
+//		if (isFactor(e0, F_LOOP)) {
+//			nameSet.addVar(RulpUtil.asAtom(expr.get(1)).getName());
+//			return false;
+//		}
+
+		if (_isCC2Expr(e0, expr, nameSet, frame)) {
+			return true;
 		}
 
 		int size = expr.size();
@@ -654,10 +669,6 @@ public class CCOUtil {
 
 	public static void incCC2ExprCount() {
 		CC2ExprCount.getAndIncrement();
-	}
-
-	static boolean isFactor(IRObject obj, String name) {
-		return obj.getType() == RType.FACTOR && obj.asString().equals(name);
 	}
 
 	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value

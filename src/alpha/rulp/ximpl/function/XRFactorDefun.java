@@ -16,6 +16,7 @@ import static alpha.rulp.lang.Constant.A_OPT_FULL;
 import static alpha.rulp.lang.Constant.A_OPT_TCO;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -58,7 +59,7 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 //		return funBody;
 //	}
 //	
-	private static IRExpr _optCC0(IRExpr funBody, ArrayList<String> attrList, IRInterpreter interpreter, IRFrame frame)
+	private static IRExpr _optCC0(IRInterpreter interpreter, IRFrame frame, ArrayList<String> attrList, IRExpr funBody)
 			throws RException {
 
 		if (attrList.contains(A_OPT_CC0)) {
@@ -74,7 +75,7 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 		return newExpr;
 	}
 
-	private static IRExpr _optCC1(IRExpr funBody, ArrayList<String> attrList, IRInterpreter interpreter, IRFrame frame)
+	private static IRExpr _optCC1(IRInterpreter interpreter, IRFrame frame, ArrayList<String> attrList, IRExpr funBody)
 			throws RException {
 
 		if (attrList.contains(A_OPT_CC1)) {
@@ -90,8 +91,8 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 		return newExpr;
 	}
 
-	private static IRExpr _optCC2(IRExpr funBody, List<IRParaAttr> paras, String funcName, ArrayList<String> attrList,
-			IRInterpreter interpreter, IRFrame frame) throws RException {
+	private static IRExpr _optCC2(IRInterpreter interpreter, IRFrame frame, ArrayList<String> attrList, IRExpr funBody,
+			List<IRParaAttr> paras, String funcName) throws RException {
 
 		if (attrList.contains(A_OPT_CC2)) {
 			return funBody;
@@ -106,8 +107,8 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 		return newExpr;
 	}
 
-	private static IRExpr _optTCO(IRExpr funBody, String funName, ArrayList<String> attrList, IRInterpreter interpreter,
-			IRFrame frame) throws RException {
+	private static IRExpr _optTCO(IRInterpreter interpreter, IRFrame frame, ArrayList<String> attrList, IRExpr funBody,
+			String funName) throws RException {
 
 		// recursive function call in return expression
 		if (!attrList.contains(A_OPT_TCO) && TCOUtil.listFunctionInReturn(funBody, frame).contains(funName)) {
@@ -182,6 +183,21 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 		return paraAttrs;
 	}
 
+	static int _getOptOrder(String optName) {
+		switch (optName) {
+		case A_OPT_CC0:
+			return 0;
+		case A_OPT_CC1:
+			return 1;
+		case A_OPT_CC2:
+			return 2;
+		case A_OPT_TCO:
+			return 3;
+		default:
+			return -1;
+		}
+	}
+
 	public static IRObject defFun(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		/*****************************************************/
@@ -228,33 +244,63 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
 			attrList = new ArrayList<>();
 
+			Set<String> uniqOptAttributeSet = new HashSet<>();
 			for (String attr : RulpUtil.getAttributeList(args)) {
 
 				switch (attr) {
 				case A_OPT_TCO:
-					funBody = _optTCO(funBody, funName, attrList, interpreter, frame);
+					uniqOptAttributeSet.add(A_OPT_TCO);
 					break;
 
 				case A_OPT_CC0:
-					funBody = _optCC0(funBody, attrList, interpreter, frame);
+					uniqOptAttributeSet.add(A_OPT_CC0);
 					break;
 
 				case A_OPT_CC1:
-					funBody = _optCC0(funBody, attrList, interpreter, frame);
-					funBody = _optCC1(funBody, attrList, interpreter, frame);
+					uniqOptAttributeSet.add(A_OPT_CC0);
+					uniqOptAttributeSet.add(A_OPT_CC1);
 					break;
 
 				case A_OPT_CC2:
-					funBody = _optCC0(funBody, attrList, interpreter, frame);
-					funBody = _optCC1(funBody, attrList, interpreter, frame);
-					funBody = _optCC2(funBody, paraAttrs, funName, attrList, interpreter, frame);
+					uniqOptAttributeSet.add(A_OPT_CC0);
+					uniqOptAttributeSet.add(A_OPT_CC1);
+					uniqOptAttributeSet.add(A_OPT_CC2);
 					break;
 
 				case A_OPT_FULL:
-					funBody = _optCC0(funBody, attrList, interpreter, frame);
-					funBody = _optCC1(funBody, attrList, interpreter, frame);
-					funBody = _optCC2(funBody, paraAttrs, funName, attrList, interpreter, frame);
-					funBody = _optTCO(funBody, funName, attrList, interpreter, frame);
+					uniqOptAttributeSet.add(A_OPT_CC0);
+					uniqOptAttributeSet.add(A_OPT_CC1);
+					uniqOptAttributeSet.add(A_OPT_CC2);
+					uniqOptAttributeSet.add(A_OPT_TCO);
+					break;
+
+				default:
+					throw new RException("unknown attr: " + attr);
+				}
+			}
+
+			ArrayList<String> uniqOptAttributeList = new ArrayList<>(uniqOptAttributeSet);
+			Collections.sort(uniqOptAttributeList, (n1, n2) -> {
+				return _getOptOrder(n1) - _getOptOrder(n2);
+			});
+
+			for (String attr : uniqOptAttributeList) {
+
+				switch (attr) {
+				case A_OPT_TCO:
+					funBody = _optTCO(interpreter, frame, attrList, funBody, funName);
+					break;
+
+				case A_OPT_CC0:
+					funBody = _optCC0(interpreter, frame, attrList, funBody);
+					break;
+
+				case A_OPT_CC1:
+					funBody = _optCC1(interpreter, frame, attrList, funBody);
+					break;
+
+				case A_OPT_CC2:
+					funBody = _optCC2(interpreter, frame, attrList, funBody, paraAttrs, funName);
 					break;
 
 				default:

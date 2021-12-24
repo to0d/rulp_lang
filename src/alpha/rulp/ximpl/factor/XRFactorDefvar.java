@@ -24,6 +24,10 @@ import alpha.rulp.utils.SubjectUtil;
 
 public class XRFactorDefvar extends AbsAtomFactorAdapter implements IRFactor {
 
+	public static String getVarName(IRList expr) throws RException {
+		return RulpUtil.asAtom(expr.get(1)).getName();
+	}
+
 	private boolean allowRedefine;
 
 	private boolean returnVar;
@@ -45,7 +49,7 @@ public class XRFactorDefvar extends AbsAtomFactorAdapter implements IRFactor {
 		IRObject valObj = args.size() > 2 ? args.get(2) : null;
 
 		if (varObj.getType() == RType.ATOM) {
-			return defVar(RulpUtil.asAtom(varObj).getName(), valObj, interpreter, frame);
+			return defVar(getVarName(args), valObj, interpreter, frame);
 		}
 
 		if (varObj.getType() == RType.MEMBER) {

@@ -31,6 +31,7 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.error.RInterrupt;
+import alpha.rulp.ximpl.factor.XRFactorDefvar;
 import alpha.rulp.ximpl.function.XRFunction;
 import alpha.rulp.ximpl.function.XRFunctionList;
 
@@ -273,7 +274,7 @@ public class StableUtil {
 
 			// (defvar ?x)
 			if (_isFactor(e0, F_DEFVAR)) {
-				nameSet.addVar(RulpUtil.asAtom(expr.get(1)).getName());
+				nameSet.addVar(XRFactorDefvar.getVarName(expr));
 			}
 			// (defun fun)
 			else if (_isFactor(e0, F_DEFUN)) {

@@ -1,0 +1,31 @@
+(defun fun1 (?v)
+    (return (+ ?v 1))
+)
+;=>
+
+(defun fun2 (?m)
+    (defvar ?x 0)
+    (loop for ?i from 1 to ?m do
+        (setq ?x (+ ?x (fun1 ?i)))
+    )
+    (return ?x)
+)[opt-cc2]
+;=>
+
+(attribute-of fun1)
+;=>
+
+(attribute-of fun2)
+;=>
+
+(print-impl fun2)
+;;;
+
+(fun2 5)
+;=>
+
+(opt-status)
+;=>
+
+(_ginfo)
+;;;
