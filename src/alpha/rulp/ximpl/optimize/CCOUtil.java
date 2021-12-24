@@ -45,6 +45,12 @@ public class CCOUtil {
 
 	protected static AtomicInteger CC1ExprCount = new AtomicInteger(0);
 
+	protected static AtomicInteger CC2CacheCount = new AtomicInteger(0);
+
+	protected static AtomicInteger CC2CallCount = new AtomicInteger(0);
+
+	protected static AtomicInteger CC2ExprCount = new AtomicInteger(0);
+
 	static final int SCO_LEVEL_CC0 = 0;
 
 	static final int SCO_LEVEL_CC1 = 1;
@@ -453,6 +459,18 @@ public class CCOUtil {
 		return CC1ExprCount.get();
 	}
 
+	public static int getCC2CacheCount() {
+		return CC2CacheCount.get();
+	}
+
+	public static int getCC2CallCount() {
+		return CC2CallCount.get();
+	}
+
+	public static int getCC2ExprCount() {
+		return CC2ExprCount.get();
+	}
+
 	public static void incCC0ComputeCount() {
 		CC0ComputeCount.getAndIncrement();
 	}
@@ -467,6 +485,18 @@ public class CCOUtil {
 
 	public static void incCC1ExprCount() {
 		CC1ExprCount.getAndIncrement();
+	}
+
+	public static void incCC2CacheCount() {
+		CC2CacheCount.getAndIncrement();
+	}
+
+	public static void incCC2CallCount() {
+		CC2CallCount.getAndIncrement();
+	}
+
+	public static void incCC2ExprCount() {
+		CC2ExprCount.getAndIncrement();
 	}
 
 	public static IRExpr rebuildCC0(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -508,10 +538,14 @@ public class CCOUtil {
 	public static void reset() {
 
 		CC0ComputeCount.set(0);
+
 		CC1ExprCount.set(0);
 		CC1CallCount.set(0);
 		CC1CacheCount.set(0);
 
+		CC2ExprCount.set(0);
+		CC2CallCount.set(0);
+		CC2CacheCount.set(0);
 	}
 
 	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value

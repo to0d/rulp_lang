@@ -9,6 +9,9 @@
 
 package alpha.rulp.ximpl.optimize;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -18,23 +21,45 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsRefFactorAdapter;
 
-public class XRFactorCC1 extends AbsRefFactorAdapter implements IRFactor {
+public class XRFactorCC2 extends AbsRefFactorAdapter implements IRFactor {
 
-	private IRObject cache = null;
+	private Map<String, IRObject> cacheMap = null;
 
-	public XRFactorCC1(String factorName) {
+	public XRFactorCC2(String factorName) {
 		super(factorName);
 	}
 
 	@Override
 	protected void _delete() throws RException {
 
-		if (cache != null) {
-			RulpUtil.decRef(cache);
-			cache = null;
+		if (cacheMap != null) {
+
+			for (IRObject cache : cacheMap.values()) {
+				RulpUtil.decRef(cache);
+			}
+
+			cacheMap = null;
 		}
 
 		super._delete();
+	}
+
+	private IRObject _getCache(String key) {
+		return cacheMap == null ? null : cacheMap.get(key);
+	}
+
+	private void _putCache(String key, IRObject cache) throws RException {
+
+		if (cacheMap == null) {
+			cacheMap = new HashMap<>();
+		}
+
+		cacheMap.put(key, cache);
+		RulpUtil.incRef(cache);
+	}
+
+	private String _getKey(IRObject obj) throws RException {
+		return RulpUtil.toUniqString(obj);
 	}
 
 	@Override
@@ -44,13 +69,16 @@ public class XRFactorCC1 extends AbsRefFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		CCOUtil.incCC1CallCount();
+		CCOUtil.incCC2CallCount();
 
+		IRObject input = args.get(1);
+		String key = _getKey(input);
+		IRObject cache = _getCache(key);
 		if (cache == null) {
-			cache = interpreter.compute(frame, args.get(1));
-			RulpUtil.incRef(cache);
+			cache = interpreter.compute(frame, input);
+			_putCache(key, cache);
 		} else {
-			CCOUtil.incCC1CacheCount();
+			CCOUtil.incCC2CacheCount();
 		}
 
 		return cache;
