@@ -33,8 +33,17 @@ import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorLoop(String factorName) {
-		super(factorName);
+	public static boolean isLoop2(IRList args) throws RException {
+		return args.size() >= 9 && RulpUtil.isAtom(args.get(3), A_FROM) && RulpUtil.isAtom(args.get(5), F_TO)
+				&& RulpUtil.isAtom(args.get(7), A_DO);
+	}
+
+	public static IRObject getLoop2FromObject(IRList args) throws RException {
+		return args.get(4);
+	}
+
+	public static IRObject getLoop2ToObject(IRList args) throws RException {
+		return args.get(6);
 	}
 
 	static void loop1(IRList args, IRInterpreter interpreter, IRFrame loopFrame) throws RException {
@@ -75,8 +84,8 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 	static void loop2(IRList args, IRInterpreter interpreter, IRFrame loopFrame) throws RException {
 
 		String indexName = RulpUtil.asAtom(args.get(2)).getName();
-		int fromIndex = MathUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, args.get(4))));
-		int toIndex = MathUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, args.get(6))));
+		int fromIndex = MathUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop2FromObject(args))));
+		int toIndex = MathUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop2ToObject(args))));
 
 		OUT_LOOP: for (int i = fromIndex; i <= toIndex; ++i) {
 
@@ -154,7 +163,10 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 				RulpUtil.decRef(loopDoFrame);
 			}
 		}
+	}
 
+	public XRFactorLoop(String factorName) {
+		super(factorName);
 	}
 
 	@Override
@@ -180,8 +192,7 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 					}
 
 					// (loop for x from 1 to 3 do (print x))
-					if (args.size() >= 9 && RulpUtil.isAtom(args.get(3), A_FROM) && RulpUtil.isAtom(args.get(5), F_TO)
-							&& RulpUtil.isAtom(args.get(7), A_DO)) {
+					if (isLoop2(args)) {
 						loop2(args, interpreter, loopFrame);
 						return O_Nil;
 					}

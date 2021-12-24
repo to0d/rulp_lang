@@ -61,4 +61,18 @@ public class TestOptimizeCC0 extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	public void test_cc0_7_loop_1() {
+
+		_setup();
+		_run_script();
+	}
+	
+	@Test
+	public void test_cc0_7_loop_2() {
+
+		_setup();
+		_run_script();
+	}
 }

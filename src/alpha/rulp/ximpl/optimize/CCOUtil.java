@@ -1,15 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.A_DO;
-import static alpha.rulp.lang.Constant.A_OPT_CC0;
-import static alpha.rulp.lang.Constant.F_CASE;
-import static alpha.rulp.lang.Constant.F_CC1;
 import static alpha.rulp.lang.Constant.*;
-import static alpha.rulp.lang.Constant.F_DEFUN;
-import static alpha.rulp.lang.Constant.F_DEFVAR;
-import static alpha.rulp.lang.Constant.F_IF;
-import static alpha.rulp.lang.Constant.F_RETURN;
-import static alpha.rulp.lang.Constant.O_COMPUTE;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +21,7 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.control.XRFactorCase;
+import alpha.rulp.ximpl.control.XRFactorLoop;
 import alpha.rulp.ximpl.optimize.StableUtil.NameSet;
 
 // (Compute Cache Optimization)
@@ -440,6 +432,26 @@ public class CCOUtil {
 						cc0.outputExpr = RulpFactory.createExpression(rebuildList.subList(0, pos));
 						incCC0ComputeCount();
 						return false;
+					}
+
+				}
+
+			}
+
+			// (loop for x from 1 to 3 do ...
+			if (_isFactor(e0, F_LOOP) && XRFactorLoop.isLoop2(expr)) {
+
+				IRObject fromObj = XRFactorLoop.getLoop2FromObject(expr);
+				IRObject toObj = XRFactorLoop.getLoop2ToObject(expr);
+
+				if (fromObj.getType() == RType.INT && toObj.getType() == RType.INT) {
+
+					int fromIndex = RulpUtil.asInteger(fromObj).asInteger();
+					int toIndex = RulpUtil.asInteger(toObj).asInteger();
+
+					// from 3 to 1 ==> empty expr
+					if (fromIndex > toIndex) {
+
 					}
 
 				}
