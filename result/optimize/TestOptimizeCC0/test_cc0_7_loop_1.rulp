@@ -1,0 +1,21 @@
+(defun fun (?v)
+    (loop for x from 3 to 1 do 
+        (print x ","))
+    (return ?v)
+)[opt-cc0]
+;=>
+
+(attribute-of fun)
+;=>
+
+(print-impl fun)
+;;;
+
+(fun 5)
+;=>
+
+(opt-status)
+;=>
+
+(_ginfo)
+;;;
