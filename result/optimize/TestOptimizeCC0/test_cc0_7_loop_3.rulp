@@ -1,12 +1,14 @@
+(defconst max_xx 3)
+
 (defun fun (?v)
-    (loop for ?x from 3 to 3 do 
+    (loop for ?x from 3 to max_xx do 
         (return ?x)
     )    
 )[opt-cc0]
 ;=>
 
 (attribute-of fun)
-;=>
+;=>'(opt-cc0)
 
 (print-impl fun)
 ;;;

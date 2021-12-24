@@ -33,9 +33,8 @@ import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 
-	public static boolean isLoop2(IRList args) throws RException {
-		return args.size() >= 9 && RulpUtil.isAtom(args.get(3), A_FROM) && RulpUtil.isAtom(args.get(5), F_TO)
-				&& RulpUtil.isAtom(args.get(7), A_DO);
+	public static IRIterator<? extends IRObject> getLoop2DoList(IRList args) throws RException {
+		return args.listIterator(8);
 	}
 
 	public static IRObject getLoop2FromObject(IRList args) throws RException {
@@ -44,6 +43,11 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 
 	public static IRObject getLoop2ToObject(IRList args) throws RException {
 		return args.get(6);
+	}
+
+	public static boolean isLoop2(IRList args) throws RException {
+		return args.size() >= 9 && RulpUtil.isAtom(args.get(3), A_FROM) && RulpUtil.isAtom(args.get(5), F_TO)
+				&& RulpUtil.isAtom(args.get(7), A_DO);
 	}
 
 	static void loop1(IRList args, IRInterpreter interpreter, IRFrame loopFrame) throws RException {
@@ -89,8 +93,8 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 
 		OUT_LOOP: for (int i = fromIndex; i <= toIndex; ++i) {
 
-			loopFrame.setEntry(indexName, RulpFactory.createInteger(i));
-			IRIterator<? extends IRObject> iter = args.listIterator(8);
+			loopFrame.setEntry(indexName, RulpFactory.createInteger(i));			
+			IRIterator<? extends IRObject> iter = getLoop2DoList(args);
 
 			IRFrame loopDoFrame = RulpFactory.createFrame(loopFrame, "LOOP-DO");
 			RulpUtil.incRef(loopDoFrame);

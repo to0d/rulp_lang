@@ -334,130 +334,154 @@ public class CCOUtil {
 			}
 		}
 
-		if (rebuildCount > 0 || childUpdate > 0) {
+		// (if true A B) or (if false A B)
+		if (_isFactor(e0, F_IF) && rebuildList.size() >= 3) {
+			IRObject e1 = rebuildList.get(1);
+			if (e1.getType() == RType.BOOL) {
 
-			// (if true A B) or (if false A B)
-			if (_isFactor(e0, F_IF) && rebuildList.size() >= 3) {
-				IRObject e1 = rebuildList.get(1);
-				if (e1.getType() == RType.BOOL) {
+				IRObject rst = null;
+				if (RulpUtil.asBoolean(e1).asBoolean()) {
+					rst = rebuildList.get(2);
+				} else if (rebuildList.size() > 3) {
+					rst = rebuildList.get(3);
+				}
 
-					IRObject rst = null;
-					if (RulpUtil.asBoolean(e1).asBoolean()) {
-						rst = rebuildList.get(2);
-					} else if (rebuildList.size() > 3) {
-						rst = rebuildList.get(3);
+				cc0.outputExpr = _asExpr(rst);
+				incCC0ComputeCount();
+				return false;
+			}
+		}
+
+		// (case a (a action) (b action))
+		if (_isFactor(e0, F_CASE) && rebuildList.size() >= 3) {
+
+			IRObject e1 = rebuildList.get(1);
+
+			if (_isConstValue(e1)) {
+
+				boolean nonConstCaseValueFound = false;
+
+				CHECK_CASE: for (int i = 2; i < size; ++i) {
+
+					IRExpr caseClause = RulpUtil.asExpression(rebuildList.get(i));
+					if (caseClause.size() != 2) {
+						throw new RException("Invalid case clause: " + caseClause);
 					}
 
-					cc0.outputExpr = _asExpr(rst);
+					IRObject caseValue = caseClause.get(0);
+
+					if (!_isConstValue(caseValue)) {
+						nonConstCaseValueFound = true;
+						break CHECK_CASE;
+					}
+
+					if (XRFactorCase.matchCaseValue(e1, caseValue)) {
+						cc0.outputExpr = _asExpr(caseClause.get(1));
+						incCC0ComputeCount();
+						return false;
+					}
+				}
+
+				// no any case match, return empty expression
+				if (!nonConstCaseValueFound) {
+					cc0.outputExpr = _asExpr(null);
 					incCC0ComputeCount();
 					return false;
 				}
 			}
 
-			// (case a (a action) (b action))
-			if (_isFactor(e0, F_CASE) && rebuildList.size() >= 3) {
+		}
 
-				IRObject e1 = rebuildList.get(1);
+		// (do () (b action))
+		if (_isFactor(e0, A_DO)) {
 
-				if (_isConstValue(e1)) {
+			int pos = 1;
 
-					boolean nonConstCaseValueFound = false;
+			for (int i = 1; i < size; ++i) {
 
-					CHECK_CASE: for (int i = 2; i < size; ++i) {
+				IRObject ei = rebuildList.get(i);
 
-						IRExpr caseClause = RulpUtil.asExpression(rebuildList.get(i));
-						if (caseClause.size() != 2) {
-							throw new RException("Invalid case clause: " + caseClause);
-						}
+				// not empty expr
+				if (ei.getType() == RType.EXPR && !RulpUtil.asExpression(ei).isEmpty()) {
 
-						IRObject caseValue = caseClause.get(0);
-
-						if (!_isConstValue(caseValue)) {
-							nonConstCaseValueFound = true;
-							break CHECK_CASE;
-						}
-
-						if (XRFactorCase.matchCaseValue(e1, caseValue)) {
-							cc0.outputExpr = _asExpr(caseClause.get(1));
-							incCC0ComputeCount();
-							return false;
-						}
+					if (i != pos) {
+						rebuildList.set(pos, ei);
 					}
 
-					// no any case match, return empty expression
-					if (!nonConstCaseValueFound) {
+					pos++;
+				}
+			}
+
+			switch (pos) {
+			case 1: // no expr found
+				cc0.outputExpr = _asExpr(null);
+				incCC0ComputeCount();
+				return false;
+
+			case 2: // only one expr found, remove DO factor
+				cc0.outputExpr = _asExpr(rebuildList.get(1));
+				incCC0ComputeCount();
+				return false;
+
+			default:
+
+				// empty expr found
+				if (pos != size) {
+					cc0.outputExpr = RulpFactory.createExpression(rebuildList.subList(0, pos));
+					incCC0ComputeCount();
+					return false;
+				}
+
+			}
+
+		}
+
+		// (loop for x from 1 to 3 do ...
+		if (_isFactor(e0, F_LOOP) && XRFactorLoop.isLoop2(expr)) {
+
+			IRObject fromObj = XRFactorLoop.getLoop2FromObject(expr);
+			IRObject toObj = XRFactorLoop.getLoop2ToObject(expr);
+
+			if (fromObj.getType() == RType.INT && toObj.getType() == RType.INT) {
+
+				int fromIndex = RulpUtil.asInteger(fromObj).asInteger();
+				int toIndex = RulpUtil.asInteger(toObj).asInteger();
+
+				// from 3 to 1 ==> empty expr
+				if (fromIndex > toIndex) {
+					cc0.outputExpr = _asExpr(null);
+					incCC0ComputeCount();
+					return false;
+				}
+
+				// from 1 to 1 ==> (do action)
+				if (fromIndex == toIndex) {
+
+					ArrayList<IRObject> doActions = new ArrayList<>();
+					RulpUtil.addAll(doActions, XRFactorLoop.getLoop2DoList(expr));
+
+					if (doActions.size() == 0) {
 						cc0.outputExpr = _asExpr(null);
 						incCC0ComputeCount();
 						return false;
 					}
-				}
 
-			}
-
-			// (do () (b action))
-			if (_isFactor(e0, A_DO)) {
-
-				int pos = 1;
-
-				for (int i = 1; i < size; ++i) {
-
-					IRObject ei = rebuildList.get(i);
-
-					// not empty expr
-					if (ei.getType() == RType.EXPR && !RulpUtil.asExpression(ei).isEmpty()) {
-
-						if (i != pos) {
-							rebuildList.set(pos, ei);
-						}
-
-						pos++;
-					}
-				}
-
-				switch (pos) {
-				case 1: // no expr found
-					cc0.outputExpr = _asExpr(null);
-					incCC0ComputeCount();
-					return false;
-
-				case 2: // only one expr found, remove DO factor
-					cc0.outputExpr = _asExpr(rebuildList.get(1));
-					incCC0ComputeCount();
-					return false;
-
-				default:
-
-					// empty expr found
-					if (pos != size) {
-						cc0.outputExpr = RulpFactory.createExpression(rebuildList.subList(0, pos));
+					if (doActions.size() == 1) {
+						cc0.outputExpr = _asExpr(doActions.get(0));
 						incCC0ComputeCount();
 						return false;
 					}
 
+					cc0.outputExpr = RulpUtil.toDoExpr(doActions);
+					incCC0ComputeCount();
+					return false;
 				}
 
 			}
 
-			// (loop for x from 1 to 3 do ...
-			if (_isFactor(e0, F_LOOP) && XRFactorLoop.isLoop2(expr)) {
+		}
 
-				IRObject fromObj = XRFactorLoop.getLoop2FromObject(expr);
-				IRObject toObj = XRFactorLoop.getLoop2ToObject(expr);
-
-				if (fromObj.getType() == RType.INT && toObj.getType() == RType.INT) {
-
-					int fromIndex = RulpUtil.asInteger(fromObj).asInteger();
-					int toIndex = RulpUtil.asInteger(toObj).asInteger();
-
-					// from 3 to 1 ==> empty expr
-					if (fromIndex > toIndex) {
-
-					}
-
-				}
-
-			}
-
+		if (rebuildCount > 0 || childUpdate > 0) {
 			cc0.outputExpr = RulpFactory.createExpression(rebuildList);
 		}
 
