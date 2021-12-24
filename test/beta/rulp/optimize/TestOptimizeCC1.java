@@ -12,4 +12,11 @@ public class TestOptimizeCC1 extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+
+	@Test
+	public void test_cc1_2_dup_fun() {
+
+		_setup();
+		_run_script();
+	}
 }
