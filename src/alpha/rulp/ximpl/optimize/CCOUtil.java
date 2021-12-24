@@ -45,6 +45,8 @@ public class CCOUtil {
 
 	protected static AtomicInteger CC1ExprCount = new AtomicInteger(0);
 
+	protected static AtomicInteger CC1ReuseCount = new AtomicInteger(0);
+
 	protected static AtomicInteger CC2CacheCount = new AtomicInteger(0);
 
 	protected static AtomicInteger CC2CallCount = new AtomicInteger(0);
@@ -459,6 +461,10 @@ public class CCOUtil {
 		return CC1ExprCount.get();
 	}
 
+	public static int getCC1ReuseCount() {
+		return CC1ReuseCount.get();
+	}
+
 	public static int getCC2CacheCount() {
 		return CC2CacheCount.get();
 	}
@@ -485,6 +491,10 @@ public class CCOUtil {
 
 	public static void incCC1ExprCount() {
 		CC1ExprCount.getAndIncrement();
+	}
+
+	public static void incCC1ReuseCount() {
+		CC1ReuseCount.getAndIncrement();
 	}
 
 	public static void incCC2CacheCount() {
@@ -542,6 +552,7 @@ public class CCOUtil {
 		CC1ExprCount.set(0);
 		CC1CallCount.set(0);
 		CC1CacheCount.set(0);
+		CC1ReuseCount.set(0);
 
 		CC2ExprCount.set(0);
 		CC2CallCount.set(0);
