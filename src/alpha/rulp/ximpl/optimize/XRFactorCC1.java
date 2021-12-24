@@ -18,11 +18,11 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsRefFactorAdapter;
 
-public class XRFactorCC0 extends AbsRefFactorAdapter implements IRFactor {
+public class XRFactorCC1 extends AbsRefFactorAdapter implements IRFactor {
 
 	private IRObject rst = null;
 
-	public XRFactorCC0(String factorName) {
+	public XRFactorCC1(String factorName) {
 		super(factorName);
 	}
 

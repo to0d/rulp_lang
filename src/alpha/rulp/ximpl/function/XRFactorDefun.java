@@ -10,6 +10,8 @@
 package alpha.rulp.ximpl.function;
 
 import static alpha.rulp.lang.Constant.A_OPT_CC0;
+import static alpha.rulp.lang.Constant.A_OPT_CC1;
+import static alpha.rulp.lang.Constant.A_OPT_FULL;
 import static alpha.rulp.lang.Constant.A_OPT_TCO;
 
 import java.util.ArrayList;
@@ -43,6 +45,40 @@ import alpha.rulp.ximpl.optimize.CCOUtil;
 import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
+
+	private static IRExpr _optCC0(IRExpr funBody, ArrayList<String> attrList, IRInterpreter interpreter, IRFrame frame)
+			throws RException {
+
+		if (!attrList.contains(A_OPT_CC0) && CCOUtil.supportCC0(funBody, interpreter, frame)) {
+			funBody = CCOUtil.rebuildCC0(funBody, interpreter, frame);
+			attrList.add(A_OPT_CC0);
+		}
+
+		return funBody;
+	}
+
+	private static IRExpr _optCC1(IRExpr funBody, ArrayList<String> attrList, IRInterpreter interpreter, IRFrame frame)
+			throws RException {
+
+		if (!attrList.contains(A_OPT_CC1) && CCOUtil.supportCC1(funBody, interpreter, frame)) {
+			funBody = CCOUtil.rebuildCC1(funBody, interpreter, frame);
+			attrList.add(A_OPT_CC1);
+		}
+
+		return funBody;
+	}
+
+	private static IRExpr _optTCO(IRExpr funBody, String funName, ArrayList<String> attrList, IRInterpreter interpreter,
+			IRFrame frame) throws RException {
+
+		// recursive function call in return expression
+		if (!attrList.contains(A_OPT_TCO) && TCOUtil.listFunctionInReturn(funBody, frame).contains(funName)) {
+			funBody = TCOUtil.rebuildTCO(funBody, frame);
+			attrList.add(A_OPT_TCO);
+		}
+
+		return funBody;
+	}
 
 	public static List<IRParaAttr> buildAttrList(IRObject paraObj, IRInterpreter interpreter, IRFrame frame)
 			throws RException {
@@ -155,20 +191,25 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 			attrList = new ArrayList<>();
 
 			for (String attr : RulpUtil.getAttributeList(args)) {
+
 				switch (attr) {
 				case A_OPT_TCO:
-					// recursive function call in return expression
-					if (!attrList.contains(attr) && TCOUtil.listFunctionInReturn(funBody, frame).contains(funName)) {
-						funBody = TCOUtil.rebuildTCO(funBody, frame);
-						attrList.add(attr);
-					}
+					funBody = _optTCO(funBody, funName, attrList, interpreter, frame);
 					break;
 
 				case A_OPT_CC0:
-					if (!attrList.contains(attr) && CCOUtil.supportCC0(funBody, interpreter, frame)) {
-						funBody = CCOUtil.rebuildCC0(funBody, interpreter, frame);
-						attrList.add(attr);
-					}
+					funBody = _optCC0(funBody, attrList, interpreter, frame);
+					break;
+
+				case A_OPT_CC1:
+					funBody = _optCC0(funBody, attrList, interpreter, frame);
+					funBody = _optCC1(funBody, attrList, interpreter, frame);
+					break;
+
+				case A_OPT_FULL:
+					funBody = _optCC0(funBody, attrList, interpreter, frame);
+					funBody = _optCC1(funBody, attrList, interpreter, frame);
+					funBody = _optTCO(funBody, funName, attrList, interpreter, frame);
 					break;
 
 				default:

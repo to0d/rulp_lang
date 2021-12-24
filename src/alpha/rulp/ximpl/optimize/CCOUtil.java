@@ -1,7 +1,9 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.A_OPT_CC0;
 import static alpha.rulp.lang.Constant.F_CASE;
+import static alpha.rulp.lang.Constant.F_CC1;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.O_COMPUTE;
 
@@ -84,6 +86,36 @@ public class CCOUtil {
 		}
 
 		if (!RulpUtil.containAttribute(obj, A_OPT_CC0)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private static boolean _isCC1Expr(IRObject e0, IRExpr expr, IRFrame frame) throws RException {
+
+		if (!_isCC1Factor(e0, frame)) {
+			return false;
+		}
+
+		if (!_isConstValue(expr.listIterator(1))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private static boolean _isCC1Factor(IRObject obj, IRFrame frame) throws RException {
+
+		if (_isCC0Factor(obj, frame)) {
+			return false;
+		}
+
+		if (obj.getType() != RType.FACTOR && obj.getType() != RType.FUNC) {
+			return false;
+		}
+
+		if (!StableUtil.isStable(obj, frame)) {
 			return false;
 		}
 
@@ -315,6 +347,96 @@ public class CCOUtil {
 		return false;
 	}
 
+	private static boolean _rebuildCC1(CC0 cc0, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		IRExpr expr = cc0.inputExpr;
+
+		if (expr.isEmpty()) {
+			return true;
+		}
+
+		IRObject e0 = RulpUtil.lookup(expr.get(0), interpreter, frame);
+		if (_isCC1Expr(e0, expr, frame)) {
+			return true;
+		}
+
+		int size = expr.size();
+		ArrayList<IRObject> rebuildList = new ArrayList<>();
+		CC0 childCC0 = new CC0();
+
+		int childReBuild = 0;
+		int childUpdate = 0;
+
+		for (int i = 0; i < size; ++i) {
+
+			IRObject ex = i == 0 ? e0 : expr.get(i);
+			boolean reBuild = false;
+
+			if (ex.getType() == RType.EXPR) {
+
+				childCC0.setInputExpr((IRExpr) ex);
+				reBuild = _rebuildCC1(childCC0, interpreter, frame);
+
+				if (reBuild) {
+					rebuildList.add(childCC0.outputExpr);
+				} else if (childCC0.outputExpr != null) {
+					rebuildList.add(childCC0.outputExpr);
+					childUpdate++;
+				} else {
+					rebuildList.add(ex);
+				}
+
+			} else {
+
+				if (i == 0 && _isCC1Factor(ex, frame)) {
+					reBuild = true;
+				} else {
+					reBuild = _isConstValue(ex);
+				}
+
+				rebuildList.add(ex);
+			}
+
+			if (reBuild) {
+				childReBuild++;
+			}
+		}
+
+		// No child rebuild, return directly
+		if (childReBuild == 0 && childUpdate == 0) {
+			return false;
+		}
+
+		// All child rebuild, return
+		if (childReBuild == size) {
+			return true;
+		}
+
+		int rebuildCount = 0;
+
+		// part rebuild
+		for (int i = 0; i < size; ++i) {
+
+			IRObject newObj = rebuildList.get(i);
+
+			// Need rebuild element
+			if (newObj == null) {
+
+				// Replace element with cc0 factor
+				newObj = RulpFactory.createExpression(new XRFactorCC1(F_CC1), expr.get(i));
+				rebuildList.set(i, newObj);
+				rebuildCount++;
+				incCC1ExprCount();
+			}
+		}
+
+		if (rebuildCount > 0 || childUpdate > 0) {
+			cc0.outputExpr = RulpFactory.createExpression(rebuildList);
+		}
+
+		return false;
+	}
+
 	public static int getCC0ComputeCount() {
 		return CC0ComputeCount.get();
 	}
@@ -366,6 +488,23 @@ public class CCOUtil {
 		return cc0.outputExpr;
 	}
 
+	public static IRExpr rebuildCC1(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		CC0 cc0 = new CC0();
+		cc0.setInputExpr(expr);
+
+		if (!_rebuildCC1(cc0, interpreter, frame)) {
+			return cc0.outputExpr == null ? expr : cc0.outputExpr;
+		}
+
+		if (cc0.outputExpr == null) {
+			cc0.outputExpr = RulpFactory.createExpression(new XRFactorCC1(F_CC1), expr);
+			incCC1ExprCount();
+		}
+
+		return cc0.outputExpr;
+	}
+
 	public static void reset() {
 
 		CC0ComputeCount.set(0);
@@ -399,8 +538,33 @@ public class CCOUtil {
 		return false;
 	}
 
-	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak const value, or local variables
-	public static boolean supportCC1(IRExpr expr, IRFrame frame) throws RException {
+	// (Op A1 A2 ... Ak), Op is Stable factor or functions, Ak const value
+	public static boolean supportCC1(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		if (expr.isEmpty()) {
+			return false;
+		}
+
+		if (_isCC1Expr(RulpUtil.lookup(expr.get(0), interpreter, frame), expr, frame)) {
+			return true;
+		}
+
+		IRIterator<? extends IRObject> it = expr.iterator();
+		while (it.hasNext()) {
+			IRObject ex = it.next();
+			if (ex.getType() == RType.EXPR) {
+				if (supportCC1((IRExpr) ex, interpreter, frame)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
+	// (Op A1 A2 ... Ak), Op is Stable factor or functions, Ak const value, or local
+	// variables
+	public static boolean supportCC2(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 		return false;
 	}
 }

@@ -95,7 +95,11 @@ public interface Constant {
 
 	String A_OPT_CC0 = "opt-cc0";
 
+	String A_OPT_CC1 = "opt-cc1";
+
 	String A_OPT_TCO = "opt-tco";
+
+	String A_OPT_FULL = "opt-full";
 
 	String A_PARENT = "parent";
 
@@ -179,7 +183,7 @@ public interface Constant {
 
 	String F_CASE = "case";
 
-	String F_CC0 = "cc0";
+	String F_CC1 = "cc1";
 
 	String F_CLASS_OF = "class-of";
 
