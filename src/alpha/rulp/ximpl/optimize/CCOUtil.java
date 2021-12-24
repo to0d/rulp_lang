@@ -62,6 +62,12 @@ public class CCOUtil {
 
 	protected static AtomicInteger CC2ExprCount = new AtomicInteger(0);
 
+	protected static AtomicInteger CC3CacheCount = new AtomicInteger(0);
+
+	protected static AtomicInteger CC3CallCount = new AtomicInteger(0);
+
+	protected static AtomicInteger CC3ExprCount = new AtomicInteger(0);
+
 	private static IRExpr _asExpr(IRObject obj) throws RException {
 
 		if (obj == null) {
@@ -654,6 +660,18 @@ public class CCOUtil {
 		return CC2ExprCount.get();
 	}
 
+	public static int getCC3CacheCount() {
+		return CC3CacheCount.get();
+	}
+
+	public static int getCC3CallCount() {
+		return CC3CallCount.get();
+	}
+
+	public static int getCC3ExprCount() {
+		return CC3ExprCount.get();
+	}
+
 	public static void incCC0ComputeCount() {
 		CC0ComputeCount.getAndIncrement();
 	}
@@ -684,6 +702,18 @@ public class CCOUtil {
 
 	public static void incCC2ExprCount() {
 		CC2ExprCount.getAndIncrement();
+	}
+
+	public static void incCC3CacheCount() {
+		CC3CacheCount.getAndIncrement();
+	}
+
+	public static void incCC3CallCount() {
+		CC3CallCount.getAndIncrement();
+	}
+
+	public static void incCC3ExprCount() {
+		CC3ExprCount.getAndIncrement();
 	}
 
 	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value
@@ -768,101 +798,10 @@ public class CCOUtil {
 		CC2ExprCount.set(0);
 		CC2CallCount.set(0);
 		CC2CacheCount.set(0);
+
+		CC3ExprCount.set(0);
+		CC3CallCount.set(0);
+		CC3CacheCount.set(0);
 	}
 
-//	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value
-//	public static boolean supportCC0(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
-//
-//		if (expr.isEmpty()) {
-//			return false;
-//		}
-//
-//		if (_isCC0Expr(RulpUtil.lookup(expr.get(0), interpreter, frame), expr, frame)) {
-//			return true;
-//		}
-//
-//		IRIterator<? extends IRObject> it = expr.iterator();
-//		while (it.hasNext()) {
-//			IRObject ex = it.next();
-//			if (ex.getType() == RType.EXPR) {
-//				if (supportCC0((IRExpr) ex, interpreter, frame)) {
-//					return true;
-//				}
-//			}
-//		}
-//
-//		return false;
-//	}
-//
-//	// (Op A1 A2 ... Ak), Op is Stable factor or functions, Ak const value
-//	public static boolean supportCC1(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
-//
-//		if (expr.isEmpty()) {
-//			return false;
-//		}
-//
-//		if (_isCC1Expr(RulpUtil.lookup(expr.get(0), interpreter, frame), expr, frame)) {
-//			return true;
-//		}
-//
-//		IRIterator<? extends IRObject> it = expr.iterator();
-//		while (it.hasNext()) {
-//			IRObject ex = it.next();
-//			if (ex.getType() == RType.EXPR) {
-//				if (supportCC1((IRExpr) ex, interpreter, frame)) {
-//					return true;
-//				}
-//			}
-//		}
-//
-//		return false;
-//	}
-//
-//	// (Op A1 A2 ... Ak), Op is Stable factor or functions, Ak const value, or local
-//	// variables
-//	public static boolean supportCC2(IRExpr expr, List<IRParaAttr> paras, String funcName, IRInterpreter interpreter,
-//			IRFrame frame) throws RException {
-//
-//		if (expr.isEmpty()) {
-//			return false;
-//		}
-//
-//		NameSet nameSet = new NameSet();
-//
-//		if (paras != null) {
-//			for (IRParaAttr para : paras) {
-//				nameSet.addVar(para.getParaName());
-//			}
-//		}
-//
-//		if (funcName != null) {
-//			nameSet.addFunName(funcName);
-//		}
-//
-//		return supportCC2(expr, nameSet, interpreter, frame);
-//	}
-//
-//	public static boolean supportCC2(IRExpr expr, NameSet nameSet, IRInterpreter interpreter, IRFrame frame)
-//			throws RException {
-//
-//		if (expr.isEmpty()) {
-//			return false;
-//		}
-//
-//		if (_isCC2Expr(RulpUtil.lookup(expr.get(0), interpreter, frame), expr, nameSet, frame)) {
-//			return true;
-//		}
-//
-//		IRIterator<? extends IRObject> it = expr.iterator();
-//		while (it.hasNext()) {
-//			IRObject ex = it.next();
-//			if (ex.getType() == RType.EXPR) {
-//				if (supportCC2((IRExpr) ex, nameSet, interpreter, frame)) {
-//					return true;
-//				}
-//			}
-//		}
-//
-//		return false;
-//	}
 }
