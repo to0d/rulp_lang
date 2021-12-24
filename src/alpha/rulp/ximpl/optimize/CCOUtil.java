@@ -8,6 +8,8 @@ import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.O_COMPUTE;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import alpha.rulp.lang.IRExpr;
@@ -355,7 +357,8 @@ public class CCOUtil {
 		return false;
 	}
 
-	private static boolean _rebuildCC1(CC0 cc0, IRInterpreter interpreter, IRFrame frame) throws RException {
+	private static boolean _rebuildCC1(CC0 cc0, Map<String, XRFactorCC1> cc1Map, IRInterpreter interpreter,
+			IRFrame frame) throws RException {
 
 		IRExpr expr = cc0.inputExpr;
 
@@ -383,7 +386,7 @@ public class CCOUtil {
 			if (ex.getType() == RType.EXPR) {
 
 				childCC0.setInputExpr((IRExpr) ex);
-				reBuild = _rebuildCC1(childCC0, interpreter, frame);
+				reBuild = _rebuildCC1(childCC0, cc1Map, interpreter, frame);
 
 				if (reBuild) {
 					rebuildList.add(childCC0.outputExpr);
@@ -431,7 +434,18 @@ public class CCOUtil {
 			if (newObj == null) {
 
 				// Replace element with cc0 factor
-				newObj = RulpFactory.createExpression(new XRFactorCC1(F_CC1), expr.get(i));
+				IRObject oldObj = expr.get(i);
+				String cc1Key = RulpUtil.toUniqString(oldObj);
+
+				XRFactorCC1 factor = cc1Map.get(cc1Key);
+				if (factor == null) {
+					factor = new XRFactorCC1(F_CC1);
+					cc1Map.put(cc1Key, factor);
+				} else {
+					incCC1ReuseCount();
+				}
+
+				newObj = RulpFactory.createExpression(factor, oldObj);
 				rebuildList.set(i, newObj);
 				rebuildCount++;
 				incCC1ExprCount();
@@ -533,7 +547,7 @@ public class CCOUtil {
 		CC0 cc0 = new CC0();
 		cc0.setInputExpr(expr);
 
-		if (!_rebuildCC1(cc0, interpreter, frame)) {
+		if (!_rebuildCC1(cc0, new HashMap<>(), interpreter, frame)) {
 			return cc0.outputExpr == null ? expr : cc0.outputExpr;
 		}
 
