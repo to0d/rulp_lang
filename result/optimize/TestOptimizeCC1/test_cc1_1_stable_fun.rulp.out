@@ -1,0 +1,52 @@
+(defun fun1 (?v)
+    (return (+ ?v 1))
+)
+;=>fun1
+
+(defun fun2 ()
+    (defvar ?x 0)
+    (loop for x from 1 to 3 do
+        (setq ?x (+ ?x (fun1 1)))
+    )
+    (return ?x)
+)[opt-cc1]
+;=>fun2
+
+(attribute-of fun1)
+;=>'()
+
+(attribute-of fun2)
+;=>'(opt-cc1)
+
+(print-impl fun2)
+;=>nil
+;out:
+(defun fun2 ()
+    (do
+        (defvar ?x 0)
+        (loop for x from 1 to 3 do (setq ?x (+ ?x (cc1 (fun1 1)))))
+        (return ?x)
+    )
+)
+
+;eof
+
+(fun2)
+;=>6
+
+(opt-status)
+;=>nil
+;out:
+==========================================================================================================================
+      Name: Status
+--------------------------------------------------------------------------------------------------------------------------
+       TCO: expr=0, call=0, compute=0
+       CC0: compute=0
+       CC1: expr=1, call=3, cache=2
+==========================================================================================================================
+
+;eof
+
+(_ginfo)
+;=>nil
+
