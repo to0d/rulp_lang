@@ -91,7 +91,7 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        2    frame      frame@main          
-?script-path         : 4        2        1    var        result\optimize\TestOptimizeCCO\test_cc0_3_recursion_fun_1a.rulp : type=string
+?script-path         : 4        2        1    var        result\optimize\TestOptimizeCC0\test_cc0_3_recursion_fun_1a.rulp : type=string
 fun                  : 5        2        1    func       (fun nil) : frame=frame@main
 ?rv                  : 15       2        1    var        24 : type=int       
 ==========================================================================================================================
@@ -101,7 +101,7 @@ id=12, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$_
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?rv                  : 19       12       1    var        result\optimize\TestOptimizeCCO\test_cc0_3_recursion_fun_1a : type=string
+?rv                  : 19       12       1    var        result\optimize\TestOptimizeCC0\test_cc0_3_recursion_fun_1a : type=string
 ==========================================================================================================================
 
 Global frame tree:
