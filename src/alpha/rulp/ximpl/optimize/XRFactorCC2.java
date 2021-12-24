@@ -12,6 +12,7 @@ package alpha.rulp.ximpl.optimize;
 import java.util.HashMap;
 import java.util.Map;
 
+import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -25,8 +26,11 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRFactor {
 
 	private Map<String, IRObject> cacheMap = null;
 
-	public XRFactorCC2(String factorName) {
+	private int varIndex[];
+
+	public XRFactorCC2(String factorName, int[] varIndex) {
 		super(factorName);
+		this.varIndex = varIndex;
 	}
 
 	@Override
@@ -48,6 +52,16 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRFactor {
 		return cacheMap == null ? null : cacheMap.get(key);
 	}
 
+	private String _getKey(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		StringBuffer sb = new StringBuffer();
+		for (int index : varIndex) {
+			sb.append(RulpUtil.toUniqString(interpreter.compute(frame, expr.get(index))));
+		}
+
+		return sb.toString();
+	}
+
 	private void _putCache(String key, IRObject cache) throws RException {
 
 		if (cacheMap == null) {
@@ -56,10 +70,6 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRFactor {
 
 		cacheMap.put(key, cache);
 		RulpUtil.incRef(cache);
-	}
-
-	private String _getKey(IRObject obj) throws RException {
-		return RulpUtil.toUniqString(obj);
 	}
 
 	@Override
@@ -71,11 +81,12 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRFactor {
 
 		CCOUtil.incCC2CallCount();
 
-		IRObject input = args.get(1);
-		String key = _getKey(input);
+		IRExpr expr = RulpUtil.asExpression(args.get(1));
+
+		String key = _getKey(expr, interpreter, frame);
 		IRObject cache = _getCache(key);
 		if (cache == null) {
-			cache = interpreter.compute(frame, input);
+			cache = interpreter.compute(frame, expr);
 			_putCache(key, cache);
 		} else {
 			CCOUtil.incCC2CacheCount();

@@ -1,13 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.A_DO;
-import static alpha.rulp.lang.Constant.F_DEFUN;
-import static alpha.rulp.lang.Constant.F_DEFVAR;
-import static alpha.rulp.lang.Constant.F_E_TRY;
-import static alpha.rulp.lang.Constant.F_FOREACH;
-import static alpha.rulp.lang.Constant.F_LET;
-import static alpha.rulp.lang.Constant.F_LOOP;
-import static alpha.rulp.lang.Constant.F_OPT;
+import static alpha.rulp.lang.Constant.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -125,6 +118,32 @@ public class StableUtil {
 			return funcDepMap == null ? null : funcDepMap.remove(curFun);
 		}
 
+		public void updateExpr(IRObject e0, IRExpr expr) throws RException {
+
+			// (defvar ?x)
+			if (_isFactor(e0, F_DEFVAR)) {
+				addVar(RulpUtil.asAtom(expr.get(1)).getName());
+				return;
+			}
+
+			// (defun fun)
+			if (_isFactor(e0, F_DEFUN)) {
+				addFunName(RulpUtil.asAtom(expr.get(1)).getName());
+				return;
+			}
+
+			// (loop for x in '(1 2 3) do ...
+			// (loop for x from 1 to 3 do ...
+			// (loop stmt1 ...
+			if (_isFactor(e0, F_LOOP)) {
+
+				if (RulpUtil.isAtom(expr.get(1), F_FOR)) {
+					addVar(RulpUtil.asAtom(expr.get(2)).getName());
+				}
+
+				return;
+			}
+		}
 	}
 
 	private static void _findFunCallee(IRIterator<? extends IRObject> it, Set<String> calleeNames, IRFrame frame)
@@ -243,7 +262,7 @@ public class StableUtil {
 
 		case EXPR:
 
-			IRList expr = (IRList) obj;
+			IRExpr expr = (IRExpr) obj;
 			if (expr.size() == 0) {
 				return true;
 			}
@@ -272,14 +291,7 @@ public class StableUtil {
 				return _isStableList(expr.listIterator(1), nameSet.newBranch(), frame);
 			}
 
-			// (defvar ?x)
-			if (_isFactor(e0, F_DEFVAR)) {
-				nameSet.addVar(XRFactorDefvar.getVarName(expr));
-			}
-			// (defun fun)
-			else if (_isFactor(e0, F_DEFUN)) {
-				nameSet.addFunName(RulpUtil.asAtom(expr.get(1)).getName());
-			}
+			nameSet.updateExpr(e0, expr);
 
 			return _isStableList(expr.listIterator(0), nameSet, frame);
 

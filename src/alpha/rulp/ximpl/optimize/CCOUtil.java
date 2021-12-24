@@ -123,8 +123,14 @@ public class CCOUtil {
 			return false;
 		}
 
-		if (_isFactor(obj, F_RETURN)) {
-			return false;
+		if (obj.getType() == RType.FACTOR) {
+			switch (obj.asString()) {
+			case F_RETURN:
+			case F_DEFVAR:
+			case F_DEFUN:
+				return false;
+			}
+
 		}
 
 		if (!StableUtil.isStable(obj, frame)) {
@@ -517,15 +523,7 @@ public class CCOUtil {
 			nameSet = nameSet.newBranch();
 		}
 
-		if (_isFactor(e0, F_DEFVAR)) {
-			nameSet.addVar(XRFactorDefvar.getVarName(expr));
-			return false;
-		}
-
-//		if (isFactor(e0, F_LOOP)) {
-//			nameSet.addVar(RulpUtil.asAtom(expr.get(1)).getName());
-//			return false;
-//		}
+		nameSet.updateExpr(e0, expr);
 
 		if (_isCC2Expr(e0, expr, nameSet, frame)) {
 			return true;
@@ -593,7 +591,23 @@ public class CCOUtil {
 			// Need rebuild element
 			if (newObj == null) {
 
-				newObj = RulpFactory.createExpression(new XRFactorCC2(F_CC2), expr.get(i));
+				IRExpr cc2Expr = RulpUtil.asExpression(expr.get(i));
+				int cc2Size = cc2Expr.size();
+				int indexs[] = new int[cc2Size - 1];
+				int k = 0;
+				for (int j = 1; j < cc2Size; ++j) {
+					IRObject cc2Obj = cc2Expr.get(j);
+					if (!_isConstValue(cc2Obj)) {
+						indexs[k++] = j;
+					}
+				}
+
+				int newIndexs[] = new int[k];
+				for (int j = 0; j < k; ++j) {
+					newIndexs[j] = indexs[j];
+				}
+
+				newObj = RulpFactory.createExpression(new XRFactorCC2(F_CC2, newIndexs), expr.get(i));
 				rebuildList.set(i, newObj);
 				rebuildCount++;
 				incCC2ExprCount();
