@@ -514,7 +514,7 @@ public class CCOUtil {
 
 	}
 
-	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value
+	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value
 	public static boolean supportCC0(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		if (expr.isEmpty()) {
