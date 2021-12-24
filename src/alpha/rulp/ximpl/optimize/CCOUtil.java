@@ -1,12 +1,14 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.A_OPT_CC0;
 import static alpha.rulp.lang.Constant.F_CASE;
 import static alpha.rulp.lang.Constant.F_CC1;
 import static alpha.rulp.lang.Constant.F_CC2;
+import static alpha.rulp.lang.Constant.F_DEFUN;
 import static alpha.rulp.lang.Constant.F_DEFVAR;
 import static alpha.rulp.lang.Constant.F_IF;
+import static alpha.rulp.lang.Constant.F_RETURN;
 import static alpha.rulp.lang.Constant.O_COMPUTE;
 
 import java.util.ArrayList;
@@ -27,7 +29,6 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.control.XRFactorCase;
-import alpha.rulp.ximpl.factor.XRFactorDefvar;
 import alpha.rulp.ximpl.optimize.StableUtil.NameSet;
 
 // (Compute Cache Optimization)

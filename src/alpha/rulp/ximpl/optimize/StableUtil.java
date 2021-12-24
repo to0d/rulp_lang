@@ -1,6 +1,14 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.F_DEFUN;
+import static alpha.rulp.lang.Constant.F_DEFVAR;
+import static alpha.rulp.lang.Constant.F_E_TRY;
+import static alpha.rulp.lang.Constant.F_FOR;
+import static alpha.rulp.lang.Constant.F_FOREACH;
+import static alpha.rulp.lang.Constant.F_LET;
+import static alpha.rulp.lang.Constant.F_LOOP;
+import static alpha.rulp.lang.Constant.F_OPT;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,7 +32,6 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.error.RInterrupt;
-import alpha.rulp.ximpl.factor.XRFactorDefvar;
 import alpha.rulp.ximpl.function.XRFunction;
 import alpha.rulp.ximpl.function.XRFunctionList;
 

@@ -99,9 +99,11 @@ public interface Constant {
 
 	String A_OPT_CC2 = "opt-cc2";
 
-	String A_OPT_TCO = "opt-tco";
+	String A_OPT_CC3 = "opt-cc3";
 
 	String A_OPT_FULL = "opt-full";
+
+	String A_OPT_TCO = "opt-tco";
 
 	String A_PARENT = "parent";
 
