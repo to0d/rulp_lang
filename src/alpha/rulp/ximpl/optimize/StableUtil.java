@@ -186,27 +186,6 @@ public class StableUtil {
 		return obj.asString().equals(name);
 	}
 
-	private static boolean _isNewFrameFactor(IRObject obj) throws RException {
-
-		if (obj.getType() != RType.ATOM && obj.getType() != RType.FACTOR) {
-			return false;
-		}
-
-		switch (obj.asString()) {
-		case F_FOREACH:
-		case F_E_TRY:
-		case A_DO:
-		case F_LET:
-		case F_LOOP:
-		case F_OPT:
-			return true;
-		}
-
-		return false;
-	}
-
-//	static int deep = 0;
-
 	private static boolean _isStable(IRObject obj, NameSet nameSet, IRFrame frame) throws RException {
 
 //		if (deep++ > 100) {
@@ -286,7 +265,7 @@ public class StableUtil {
 			}
 
 			// do foreach, let
-			if (_isNewFrameFactor(e0)) {
+			if (isNewFrameFactor(e0)) {
 
 				// need new branch
 				return _isStableList(expr.listIterator(1), nameSet.newBranch(), frame);
@@ -324,6 +303,8 @@ public class StableUtil {
 			return false;
 		}
 	}
+
+//	static int deep = 0;
 
 	private static boolean _isStableFunc(XRFunction func, NameSet nameSet, IRFrame frame) throws RException {
 
@@ -460,6 +441,25 @@ public class StableUtil {
 		Set<String> callee = new HashSet<>();
 		_findFunCallee(expr, callee, frame);
 		return callee;
+	}
+
+	public static boolean isNewFrameFactor(IRObject obj) throws RException {
+
+		if (obj.getType() != RType.ATOM && obj.getType() != RType.FACTOR) {
+			return false;
+		}
+
+		switch (obj.asString()) {
+		case F_FOREACH:
+		case F_E_TRY:
+		case A_DO:
+		case F_LET:
+		case F_LOOP:
+		case F_OPT:
+			return true;
+		}
+
+		return false;
 	}
 
 	public static boolean isStable(IRObject obj, IRFrame frame) throws RException {

@@ -4,6 +4,8 @@ import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.A_OPT_CC0;
 import static alpha.rulp.lang.Constant.F_CASE;
 import static alpha.rulp.lang.Constant.F_CC1;
+import static alpha.rulp.lang.Constant.F_CC2;
+import static alpha.rulp.lang.Constant.F_DEFVAR;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.O_COMPUTE;
 
@@ -282,7 +284,7 @@ public class CCOUtil {
 		if (rebuildCount > 0 || childUpdate > 0) {
 
 			// (if true A B) or (if false A B)
-			if (e0.getType() == RType.FACTOR && e0.asString().equals(F_IF) && rebuildList.size() >= 3) {
+			if (isFactor(e0, F_IF) && rebuildList.size() >= 3) {
 				IRObject e1 = rebuildList.get(1);
 				if (e1.getType() == RType.BOOL) {
 
@@ -300,7 +302,7 @@ public class CCOUtil {
 			}
 
 			// (case a (a action) (b action))
-			if (e0.getType() == RType.FACTOR && e0.asString().equals(F_CASE) && rebuildList.size() >= 3) {
+			if (isFactor(e0, F_CASE) && rebuildList.size() >= 3) {
 
 				IRObject e1 = rebuildList.get(1);
 
@@ -340,7 +342,7 @@ public class CCOUtil {
 			}
 
 			// (do () (b action))
-			if (e0.getType() == RType.FACTOR && e0.asString().equals(A_DO)) {
+			if (isFactor(e0, A_DO)) {
 
 				int pos = 1;
 
@@ -491,6 +493,105 @@ public class CCOUtil {
 		return false;
 	}
 
+	private static boolean _rebuildCC2(CC0 cc0, NameSet nameSet, IRInterpreter interpreter, IRFrame frame)
+			throws RException {
+
+		IRExpr expr = cc0.inputExpr;
+
+		if (expr.isEmpty()) {
+			return true;
+		}
+
+		IRObject e0 = RulpUtil.lookup(expr.get(0), interpreter, frame);
+		if (isFactor(e0, F_DEFVAR)) {
+			nameSet.addVar(RulpUtil.asAtom(expr.get(1)).getName());
+			return false;
+		}
+
+		if (_isCC2Expr(e0, expr, nameSet, frame)) {
+			return true;
+		}
+
+		if (StableUtil.isNewFrameFactor(e0)) {
+			nameSet = nameSet.newBranch();
+		}
+
+		int size = expr.size();
+		ArrayList<IRObject> rebuildList = new ArrayList<>();
+		CC0 childCC0 = new CC0();
+
+		int childReBuild = 0;
+		int childUpdate = 0;
+
+		for (int i = 0; i < size; ++i) {
+
+			IRObject ex = i == 0 ? e0 : expr.get(i);
+			boolean reBuild = false;
+
+			if (ex.getType() == RType.EXPR) {
+
+				childCC0.setInputExpr((IRExpr) ex);
+				reBuild = _rebuildCC2(childCC0, nameSet, interpreter, frame);
+
+				if (reBuild) {
+					rebuildList.add(childCC0.outputExpr);
+				} else if (childCC0.outputExpr != null) {
+					rebuildList.add(childCC0.outputExpr);
+					childUpdate++;
+				} else {
+					rebuildList.add(ex);
+				}
+
+			} else {
+
+				if (i == 0 && _isCC1Factor(ex, frame)) {
+					reBuild = true;
+				} else {
+					reBuild = _isLocalValue(ex, nameSet);
+				}
+
+				rebuildList.add(ex);
+			}
+
+			if (reBuild) {
+				childReBuild++;
+			}
+		}
+
+		// No child rebuild, return directly
+		if (childReBuild == 0 && childUpdate == 0) {
+			return false;
+		}
+
+		// All child rebuild, return
+		if (childReBuild == size) {
+			return true;
+		}
+
+		int rebuildCount = 0;
+
+		// part rebuild
+		for (int i = 0; i < size; ++i) {
+
+			IRObject newObj = rebuildList.get(i);
+
+			// Need rebuild element
+			if (newObj == null) {
+
+				newObj = RulpFactory.createExpression(new XRFactorCC2(F_CC2), expr.get(i));
+				rebuildList.set(i, newObj);
+				rebuildCount++;
+				incCC2ExprCount();
+			}
+		}
+
+		if (rebuildCount > 0 || childUpdate > 0) {
+			cc0.outputExpr = RulpFactory.createExpression(rebuildList);
+		}
+
+		return false;
+	}
+
 	public static int getCC0ComputeCount() {
 		return CC0ComputeCount.get();
 	}
@@ -555,6 +656,11 @@ public class CCOUtil {
 		CC2ExprCount.getAndIncrement();
 	}
 
+	static boolean isFactor(IRObject obj, String name) {
+		return obj.getType() == RType.FACTOR && obj.asString().equals(name);
+	}
+
+	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value
 	public static IRExpr rebuildCC0(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		CC0 cc0 = new CC0();
@@ -574,6 +680,7 @@ public class CCOUtil {
 		return cc0.outputExpr;
 	}
 
+	// (Op A1 A2 ... Ak), Op is Stable factor or functions, Ak const value
 	public static IRExpr rebuildCC1(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		CC0 cc0 = new CC0();
@@ -586,6 +693,38 @@ public class CCOUtil {
 		if (cc0.outputExpr == null) {
 			cc0.outputExpr = RulpFactory.createExpression(new XRFactorCC1(F_CC1), expr);
 			incCC1ExprCount();
+		}
+
+		return cc0.outputExpr;
+	}
+
+	// (Op A1 A2 ... Ak), Op is Stable factor or functions, Ak const value, or local
+	// variables
+	public static IRExpr rebuildCC2(IRExpr expr, List<IRParaAttr> paras, String funcName, IRInterpreter interpreter,
+			IRFrame frame) throws RException {
+
+		NameSet nameSet = new NameSet();
+
+		if (paras != null) {
+			for (IRParaAttr para : paras) {
+				nameSet.addVar(para.getParaName());
+			}
+		}
+
+		if (funcName != null) {
+			nameSet.addFunName(funcName);
+		}
+
+		CC0 cc0 = new CC0();
+		cc0.setInputExpr(expr);
+
+		if (!_rebuildCC2(cc0, nameSet, interpreter, frame)) {
+			return cc0.outputExpr == null ? expr : cc0.outputExpr;
+		}
+
+		if (cc0.outputExpr == null) {
+			cc0.outputExpr = RulpFactory.createExpression(new XRFactorCC1(F_CC2), expr);
+			incCC2ExprCount();
 		}
 
 		return cc0.outputExpr;
@@ -605,99 +744,99 @@ public class CCOUtil {
 		CC2CacheCount.set(0);
 	}
 
-	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value
-	public static boolean supportCC0(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
-
-		if (expr.isEmpty()) {
-			return false;
-		}
-
-		if (_isCC0Expr(RulpUtil.lookup(expr.get(0), interpreter, frame), expr, frame)) {
-			return true;
-		}
-
-		IRIterator<? extends IRObject> it = expr.iterator();
-		while (it.hasNext()) {
-			IRObject ex = it.next();
-			if (ex.getType() == RType.EXPR) {
-				if (supportCC0((IRExpr) ex, interpreter, frame)) {
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	// (Op A1 A2 ... Ak), Op is Stable factor or functions, Ak const value
-	public static boolean supportCC1(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
-
-		if (expr.isEmpty()) {
-			return false;
-		}
-
-		if (_isCC1Expr(RulpUtil.lookup(expr.get(0), interpreter, frame), expr, frame)) {
-			return true;
-		}
-
-		IRIterator<? extends IRObject> it = expr.iterator();
-		while (it.hasNext()) {
-			IRObject ex = it.next();
-			if (ex.getType() == RType.EXPR) {
-				if (supportCC1((IRExpr) ex, interpreter, frame)) {
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	// (Op A1 A2 ... Ak), Op is Stable factor or functions, Ak const value, or local
-	// variables
-	public static boolean supportCC2(IRExpr expr, List<IRParaAttr> paras, String funcName, IRInterpreter interpreter,
-			IRFrame frame) throws RException {
-
-		if (expr.isEmpty()) {
-			return false;
-		}
-
-		NameSet nameSet = new NameSet();
-
-		if (paras != null) {
-			for (IRParaAttr para : paras) {
-				nameSet.addVar(para.getParaName());
-			}
-		}
-
-		if (funcName != null) {
-			nameSet.addFunName(funcName);
-		}
-
-		return supportCC2(expr, nameSet, interpreter, frame);
-	}
-
-	public static boolean supportCC2(IRExpr expr, NameSet nameSet, IRInterpreter interpreter, IRFrame frame)
-			throws RException {
-
-		if (expr.isEmpty()) {
-			return false;
-		}
-
-		if (_isCC2Expr(RulpUtil.lookup(expr.get(0), interpreter, frame), expr, nameSet, frame)) {
-			return true;
-		}
-
-		IRIterator<? extends IRObject> it = expr.iterator();
-		while (it.hasNext()) {
-			IRObject ex = it.next();
-			if (ex.getType() == RType.EXPR) {
-				if (supportCC2((IRExpr) ex, nameSet, interpreter, frame)) {
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
+//	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value
+//	public static boolean supportCC0(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+//
+//		if (expr.isEmpty()) {
+//			return false;
+//		}
+//
+//		if (_isCC0Expr(RulpUtil.lookup(expr.get(0), interpreter, frame), expr, frame)) {
+//			return true;
+//		}
+//
+//		IRIterator<? extends IRObject> it = expr.iterator();
+//		while (it.hasNext()) {
+//			IRObject ex = it.next();
+//			if (ex.getType() == RType.EXPR) {
+//				if (supportCC0((IRExpr) ex, interpreter, frame)) {
+//					return true;
+//				}
+//			}
+//		}
+//
+//		return false;
+//	}
+//
+//	// (Op A1 A2 ... Ak), Op is Stable factor or functions, Ak const value
+//	public static boolean supportCC1(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+//
+//		if (expr.isEmpty()) {
+//			return false;
+//		}
+//
+//		if (_isCC1Expr(RulpUtil.lookup(expr.get(0), interpreter, frame), expr, frame)) {
+//			return true;
+//		}
+//
+//		IRIterator<? extends IRObject> it = expr.iterator();
+//		while (it.hasNext()) {
+//			IRObject ex = it.next();
+//			if (ex.getType() == RType.EXPR) {
+//				if (supportCC1((IRExpr) ex, interpreter, frame)) {
+//					return true;
+//				}
+//			}
+//		}
+//
+//		return false;
+//	}
+//
+//	// (Op A1 A2 ... Ak), Op is Stable factor or functions, Ak const value, or local
+//	// variables
+//	public static boolean supportCC2(IRExpr expr, List<IRParaAttr> paras, String funcName, IRInterpreter interpreter,
+//			IRFrame frame) throws RException {
+//
+//		if (expr.isEmpty()) {
+//			return false;
+//		}
+//
+//		NameSet nameSet = new NameSet();
+//
+//		if (paras != null) {
+//			for (IRParaAttr para : paras) {
+//				nameSet.addVar(para.getParaName());
+//			}
+//		}
+//
+//		if (funcName != null) {
+//			nameSet.addFunName(funcName);
+//		}
+//
+//		return supportCC2(expr, nameSet, interpreter, frame);
+//	}
+//
+//	public static boolean supportCC2(IRExpr expr, NameSet nameSet, IRInterpreter interpreter, IRFrame frame)
+//			throws RException {
+//
+//		if (expr.isEmpty()) {
+//			return false;
+//		}
+//
+//		if (_isCC2Expr(RulpUtil.lookup(expr.get(0), interpreter, frame), expr, nameSet, frame)) {
+//			return true;
+//		}
+//
+//		IRIterator<? extends IRObject> it = expr.iterator();
+//		while (it.hasNext()) {
+//			IRObject ex = it.next();
+//			if (ex.getType() == RType.EXPR) {
+//				if (supportCC2((IRExpr) ex, nameSet, interpreter, frame)) {
+//					return true;
+//				}
+//			}
+//		}
+//
+//		return false;
+//	}
 }

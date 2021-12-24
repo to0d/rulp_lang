@@ -97,6 +97,8 @@ public interface Constant {
 
 	String A_OPT_CC1 = "opt-cc1";
 
+	String A_OPT_CC2 = "opt-cc2";
+
 	String A_OPT_TCO = "opt-tco";
 
 	String A_OPT_FULL = "opt-full";
@@ -184,6 +186,8 @@ public interface Constant {
 	String F_CASE = "case";
 
 	String F_CC1 = "cc1";
+
+	String F_CC2 = "cc2";
 
 	String F_CLASS_OF = "class-of";
 
