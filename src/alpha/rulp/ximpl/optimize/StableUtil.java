@@ -40,15 +40,13 @@ public class StableUtil {
 	// - expression: no external variable in expression, all elements is stable
 	// - function: no external variable in function body, all elements is stable
 
-	static class NameSet {
+	public static class NameSet {
 
 		private Set<XRFunction> assuingFuncs;
-		// private List<XRFunction> checkingFunSet;
 		private List<XRFunction> checkingStack;
 		private Map<XRFunction, List<XRFunction>> funcDepMap;
 		private Map<String, RType> localObjTypeMap;
 		private NameSet parent = null;
-//		private XRFunction curFunc = null;
 
 		public NameSet() {
 			this.checkingStack = new ArrayList<>();

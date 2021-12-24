@@ -9,6 +9,7 @@ import static alpha.rulp.lang.Constant.O_COMPUTE;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -16,6 +17,7 @@ import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.IRParaAttr;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRInterpreter;
@@ -23,6 +25,7 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.control.XRFactorCase;
+import alpha.rulp.ximpl.optimize.StableUtil.NameSet;
 
 // (Compute Cache Optimization)
 public class CCOUtil {
@@ -54,14 +57,6 @@ public class CCOUtil {
 	protected static AtomicInteger CC2CallCount = new AtomicInteger(0);
 
 	protected static AtomicInteger CC2ExprCount = new AtomicInteger(0);
-
-	static final int SCO_LEVEL_CC0 = 0;
-
-	static final int SCO_LEVEL_CC1 = 1;
-
-	static final int SCO_LEVEL_MAX = 0;
-
-	static final int SCO_LEVEL_NONE = -1;
 
 	private static IRExpr _asExpr(IRObject obj) throws RException {
 
@@ -132,6 +127,19 @@ public class CCOUtil {
 		return true;
 	}
 
+	private static boolean _isCC2Expr(IRObject e0, IRExpr expr, NameSet nameSet, IRFrame frame) throws RException {
+
+		if (!_isCC1Factor(e0, frame)) {
+			return false;
+		}
+
+		if (!_isLocalValue(expr.listIterator(1), nameSet)) {
+			return false;
+		}
+
+		return true;
+	}
+
 	private static boolean _isConstValue(IRIterator<? extends IRObject> it) throws RException {
 
 		while (it.hasNext()) {
@@ -162,6 +170,30 @@ public class CCOUtil {
 		default:
 			return false;
 		}
+	}
+
+	private static boolean _isLocalValue(IRIterator<? extends IRObject> it, NameSet nameSet) throws RException {
+
+		while (it.hasNext()) {
+			if (!_isLocalValue(it.next(), nameSet)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	private static boolean _isLocalValue(IRObject obj, NameSet nameSet) throws RException {
+
+		if (_isConstValue(obj)) {
+			return true;
+		}
+
+		if (obj.getType() == RType.ATOM && nameSet.lookupType(obj.asString()) != null) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private static boolean _rebuildCC0(CC0 cc0, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -623,7 +655,49 @@ public class CCOUtil {
 
 	// (Op A1 A2 ... Ak), Op is Stable factor or functions, Ak const value, or local
 	// variables
-	public static boolean supportCC2(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+	public static boolean supportCC2(IRExpr expr, List<IRParaAttr> paras, String funcName, IRInterpreter interpreter,
+			IRFrame frame) throws RException {
+
+		if (expr.isEmpty()) {
+			return false;
+		}
+
+		NameSet nameSet = new NameSet();
+
+		if (paras != null) {
+			for (IRParaAttr para : paras) {
+				nameSet.addVar(para.getParaName());
+			}
+		}
+
+		if (funcName != null) {
+			nameSet.addFunName(funcName);
+		}
+
+		return supportCC2(expr, nameSet, interpreter, frame);
+	}
+
+	public static boolean supportCC2(IRExpr expr, NameSet nameSet, IRInterpreter interpreter, IRFrame frame)
+			throws RException {
+
+		if (expr.isEmpty()) {
+			return false;
+		}
+
+		if (_isCC2Expr(RulpUtil.lookup(expr.get(0), interpreter, frame), expr, nameSet, frame)) {
+			return true;
+		}
+
+		IRIterator<? extends IRObject> it = expr.iterator();
+		while (it.hasNext()) {
+			IRObject ex = it.next();
+			if (ex.getType() == RType.EXPR) {
+				if (supportCC2((IRExpr) ex, nameSet, interpreter, frame)) {
+					return true;
+				}
+			}
+		}
+
 		return false;
 	}
 }
