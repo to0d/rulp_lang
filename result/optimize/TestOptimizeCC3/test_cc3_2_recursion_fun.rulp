@@ -5,7 +5,7 @@
 ;=>
 
 (attribute-of fun)
-;=>
+;=>'(opt-cc3)
 
 (print-impl fun)
 ;;;

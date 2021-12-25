@@ -11,7 +11,7 @@
 ;=>
 
 (attribute-of uniquePaths)
-;=>
+;=>'(opt-cc3)
 
 (print-impl uniquePaths)
 ;;;

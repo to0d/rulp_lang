@@ -16,7 +16,7 @@
 ;=>
 
 (attribute-of fun2)
-;=>
+;=>'(opt-cc3)
 
 (print-impl fun2)
 ;;;
