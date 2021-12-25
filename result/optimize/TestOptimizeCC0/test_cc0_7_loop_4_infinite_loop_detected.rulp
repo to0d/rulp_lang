@@ -5,10 +5,4 @@
             (break))
     )
 )[opt-cc0]
-;=>
-
-(attribute-of fun)
-;=>'(opt-cc0)
-
-(print-impl fun)
-;;;
+;err

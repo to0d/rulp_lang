@@ -1,6 +1,18 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.A_OPT_CC0;
+import static alpha.rulp.lang.Constant.F_BREAK;
+import static alpha.rulp.lang.Constant.F_CASE;
+import static alpha.rulp.lang.Constant.F_CC1;
+import static alpha.rulp.lang.Constant.F_CC2;
+import static alpha.rulp.lang.Constant.F_CC3;
+import static alpha.rulp.lang.Constant.F_DEFUN;
+import static alpha.rulp.lang.Constant.F_DEFVAR;
+import static alpha.rulp.lang.Constant.F_IF;
+import static alpha.rulp.lang.Constant.F_LOOP;
+import static alpha.rulp.lang.Constant.F_RETURN;
+import static alpha.rulp.lang.Constant.O_COMPUTE;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -265,7 +277,7 @@ public class CCOUtil {
 		}
 
 		int size = expr.size();
-		ArrayList<IRObject> rebuildList = new ArrayList<>();
+		List<IRObject> rebuildList = new ArrayList<>();
 		CC0 childCC0 = new CC0();
 
 		int childReBuild = 0;
@@ -395,22 +407,7 @@ public class CCOUtil {
 		// (do () (b action))
 		if (_isFactor(e0, A_DO)) {
 
-			int pos = 1;
-
-			for (int i = 1; i < size; ++i) {
-
-				IRObject ei = rebuildList.get(i);
-
-				// not empty expr
-				if (ei.getType() == RType.EXPR && !RulpUtil.asExpression(ei).isEmpty()) {
-
-					if (i != pos) {
-						rebuildList.set(pos, ei);
-					}
-
-					pos++;
-				}
-			}
+			int pos = _removeEmptyExpr(rebuildList, 1);
 
 			switch (pos) {
 			case 1: // no expr found
@@ -431,9 +428,7 @@ public class CCOUtil {
 					incCC0ComputeCount();
 					return false;
 				}
-
 			}
-
 		}
 
 		// (loop for x from 1 to 3 do ...
@@ -482,6 +477,28 @@ public class CCOUtil {
 		// Check infinite loop: (loop a)
 		if (_isFactor(e0, F_LOOP) && XRFactorLoop.isLoop3(expr)) {
 
+			int pos = _removeEmptyExpr(rebuildList, 1);
+			if (pos == 1) {
+				throw new RException("infinite loop detected: " + expr);
+			}
+
+			boolean findBreak = false;
+			for (int i = 1; !findBreak && i < pos; ++i) {
+				findBreak = _hasBreakExpr(rebuildList.get(i));
+			}
+
+			// no break clause found, infinite loop
+			if (!findBreak) {
+				throw new RException("infinite loop detected: " + expr);
+			}
+
+			// empty expr found
+			if (pos != size) {
+				cc0.outputExpr = RulpFactory.createExpression(rebuildList.subList(0, pos));
+				incCC0ComputeCount();
+				return false;
+			}
+
 		}
 
 		if (rebuildCount > 0 || childUpdate > 0) {
@@ -489,6 +506,61 @@ public class CCOUtil {
 		}
 
 		return false;
+	}
+
+	static boolean _hasBreakExpr(IRObject obj) throws RException {
+
+		if (obj == null) {
+			return false;
+		}
+
+		switch (obj.getType()) {
+		case ATOM:
+		case FACTOR:
+			String name = obj.asString();
+			if (name.equals(F_RETURN) || name.equals(F_BREAK)) {
+				return true;
+			}
+
+			return false;
+
+		case EXPR:
+			IRIterator<? extends IRObject> it = RulpUtil.asExpression(obj).iterator();
+			while (it.hasNext()) {
+				if (_hasBreakExpr(it.next())) {
+					return true;
+				}
+			}
+			return false;
+
+		default:
+			return false;
+		}
+	}
+
+	static int _removeEmptyExpr(List<IRObject> exprList, int fromIndex) throws RException {
+
+		int size = exprList.size();
+		int pos = 1;
+
+		for (int i = 1; i < size; ++i) {
+
+			IRObject ei = exprList.get(i);
+
+			// ignore empty expr or non-expr object
+			if (ei.getType() != RType.EXPR || RulpUtil.asExpression(ei).isEmpty()) {
+				continue;
+			}
+
+			// move
+			if (i != pos) {
+				exprList.set(pos, ei);
+			}
+
+			pos++;
+		}
+
+		return pos;
 	}
 
 	private static boolean _rebuildCC1(CC0 cc0, Map<String, XRFactorCC1> cc1Map, IRInterpreter interpreter,

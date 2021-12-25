@@ -84,48 +84,6 @@ public class StableUtil {
 			return parent == null ? Collections.emptyMap() : parent._findMap();
 		}
 
-		public void addDepFun(XRFunction curFun, XRFunction depFunc) {
-
-			List<XRFunction> depFuncs = funcDepMap.get(curFun);
-			if (depFuncs == null) {
-				depFuncs = new ArrayList<>();
-				funcDepMap.put(curFun, depFuncs);
-			}
-
-			if (!depFuncs.contains(depFunc)) {
-				depFuncs.add(depFunc);
-			}
-		}
-
-		public void addFunName(String name) {
-			_buildMap().put(name, RType.FUNC);
-		}
-
-		public void addVar(String name) {
-			_buildMap().put(name, RType.VAR);
-		}
-
-		public boolean hasDepFuncs(XRFunction curFun) {
-			return funcDepMap != null && funcDepMap.containsKey(curFun);
-		}
-
-		public RType lookupType(String name) {
-
-			if (localObjTypeMap != null) {
-				return localObjTypeMap.get(name);
-			}
-
-			return parent == null ? null : parent.lookupType(name);
-		}
-
-		public NameSet newBranch() {
-			return new NameSet(this);
-		}
-
-		public List<XRFunction> removeDepFun(XRFunction curFun) {
-			return funcDepMap == null ? null : funcDepMap.remove(curFun);
-		}
-
 		public void _listAllUsedVars(IRList list, Set<String> varNames, List<IRAtom> varAtoms) throws RException {
 
 			IRIterator<? extends IRObject> it = list.iterator();
@@ -152,6 +110,31 @@ public class StableUtil {
 			}
 		}
 
+		public void addDepFun(XRFunction curFun, XRFunction depFunc) {
+
+			List<XRFunction> depFuncs = funcDepMap.get(curFun);
+			if (depFuncs == null) {
+				depFuncs = new ArrayList<>();
+				funcDepMap.put(curFun, depFuncs);
+			}
+
+			if (!depFuncs.contains(depFunc)) {
+				depFuncs.add(depFunc);
+			}
+		}
+
+		public void addFunName(String name) {
+			_buildMap().put(name, RType.FUNC);
+		}
+
+		public void addVar(String name) {
+			_buildMap().put(name, RType.VAR);
+		}
+
+		public boolean hasDepFuncs(XRFunction curFun) {
+			return funcDepMap != null && funcDepMap.containsKey(curFun);
+		}
+
 		public List<IRAtom> listAllVars(IRExpr expr) throws RException {
 
 			ArrayList<IRAtom> vars = new ArrayList<>();
@@ -160,16 +143,33 @@ public class StableUtil {
 			return vars;
 		}
 
+		public RType lookupType(String name) {
+
+			if (localObjTypeMap != null) {
+				return localObjTypeMap.get(name);
+			}
+
+			return parent == null ? null : parent.lookupType(name);
+		}
+
+		public NameSet newBranch() {
+			return new NameSet(this);
+		}
+
+		public List<XRFunction> removeDepFun(XRFunction curFun) {
+			return funcDepMap == null ? null : funcDepMap.remove(curFun);
+		}
+
 		public void updateExpr(IRObject e0, IRExpr expr) throws RException {
 
 			// (defvar ?x)
-			if (_isFactor(e0, F_DEFVAR)) {
+			if (isFactor(e0, F_DEFVAR)) {
 				addVar(RulpUtil.asAtom(expr.get(1)).getName());
 				return;
 			}
 
 			// (defun fun)
-			if (_isFactor(e0, F_DEFUN)) {
+			if (isFactor(e0, F_DEFUN)) {
 				addFunName(RulpUtil.asAtom(expr.get(1)).getName());
 				return;
 			}
@@ -177,7 +177,7 @@ public class StableUtil {
 			// (loop for x in '(1 2 3) do ...
 			// (loop for x from 1 to 3 do ...
 			// (loop stmt1 ...
-			if (_isFactor(e0, F_LOOP)) {
+			if (isFactor(e0, F_LOOP)) {
 
 				if (RulpUtil.isAtom(expr.get(1), F_FOR)) {
 					addVar(RulpUtil.asAtom(expr.get(2)).getName());
@@ -237,15 +237,6 @@ public class StableUtil {
 		}
 
 		_findFunCallee(expr.get(0), expr, calleeNames, frame);
-	}
-
-	private static boolean _isFactor(IRObject obj, String name) throws RException {
-
-		if (obj.getType() != RType.ATOM && obj.getType() != RType.FACTOR) {
-			return false;
-		}
-
-		return obj.asString().equals(name);
 	}
 
 	private static boolean _isStableFunc(XRFunction func, NameSet nameSet, IRFrame frame) throws RException {
@@ -344,8 +335,6 @@ public class StableUtil {
 
 	}
 
-//	static int deep = 0;
-
 	private static boolean _isStableFuncList(XRFunctionList func, NameSet nameSet, IRFrame frame) throws RException {
 
 		Boolean bRc = func.getIsStable();
@@ -364,6 +353,8 @@ public class StableUtil {
 		func.setIsStable(rc);
 		return rc;
 	}
+
+//	static int deep = 0;
 
 	private static boolean _isStableList(IRIterator<? extends IRObject> it, NameSet nameSet, IRFrame frame)
 			throws RException {
@@ -385,6 +376,15 @@ public class StableUtil {
 		Set<String> callee = new HashSet<>();
 		_findFunCallee(expr, callee, frame);
 		return callee;
+	}
+
+	public static boolean isFactor(IRObject obj, String name) throws RException {
+
+		if (obj.getType() != RType.ATOM && obj.getType() != RType.FACTOR) {
+			return false;
+		}
+
+		return obj.asString().equals(name);
 	}
 
 	public static boolean isNewFrameFactor(IRObject obj) throws RException {
