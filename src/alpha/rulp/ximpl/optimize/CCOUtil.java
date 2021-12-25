@@ -630,7 +630,7 @@ public class CCOUtil {
 
 				XRFactorCC1 factor = cc1Map.get(cc1Key);
 				if (factor == null) {
-					factor = new XRFactorCC1(F_CC1);
+					factor = new XRFactorCC1(F_CC1, incCC1ExprCount());
 					cc1Map.put(cc1Key, factor);
 				} else {
 					incCC1ReuseCount();
@@ -639,7 +639,6 @@ public class CCOUtil {
 				newObj = RulpFactory.createExpression(factor, oldObj);
 				rebuildList.set(i, newObj);
 				rebuildCount++;
-				incCC1ExprCount();
 			}
 		}
 
@@ -749,10 +748,10 @@ public class CCOUtil {
 					newIndexs[j] = indexs[j];
 				}
 
-				newObj = RulpFactory.createExpression(new XRFactorCC2(F_CC2, newIndexs), expr.get(i));
+				newObj = RulpFactory.createExpression(new XRFactorCC2(F_CC2, incCC2ExprCount(), newIndexs),
+						expr.get(i));
 				rebuildList.set(i, newObj);
 				rebuildCount++;
-				incCC2ExprCount();
 			}
 		}
 
@@ -849,10 +848,9 @@ public class CCOUtil {
 				IRExpr cc3Expr = RulpUtil.asExpression(expr.get(i));
 				List<IRAtom> varAtoms = nameSet.listAllVars(cc3Expr);
 
-				newObj = RulpFactory.createExpression(new XRFactorCC3(F_CC3, varAtoms), expr.get(i));
+				newObj = RulpFactory.createExpression(new XRFactorCC3(F_CC3, incCC3ExprCount(), varAtoms), expr.get(i));
 				rebuildList.set(i, newObj);
 				rebuildCount++;
-				incCC3ExprCount();
 			}
 		}
 
@@ -976,8 +974,8 @@ public class CCOUtil {
 		CC1CallCount.getAndIncrement();
 	}
 
-	public static void incCC1ExprCount() {
-		CC1ExprCount.getAndIncrement();
+	public static int incCC1ExprCount() {
+		return CC1ExprCount.getAndIncrement();
 	}
 
 	public static void incCC1ReuseCount() {
@@ -992,8 +990,8 @@ public class CCOUtil {
 		CC2CallCount.getAndIncrement();
 	}
 
-	public static void incCC2ExprCount() {
-		CC2ExprCount.getAndIncrement();
+	public static int incCC2ExprCount() {
+		return CC2ExprCount.getAndIncrement();
 	}
 
 	public static void incCC3CacheCount() {
@@ -1004,8 +1002,8 @@ public class CCOUtil {
 		CC3CallCount.getAndIncrement();
 	}
 
-	public static void incCC3ExprCount() {
-		CC3ExprCount.getAndIncrement();
+	public static int incCC3ExprCount() {
+		return CC3ExprCount.getAndIncrement();
 	}
 
 	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value
@@ -1043,8 +1041,7 @@ public class CCOUtil {
 		}
 
 		if (cc0.outputExpr == null) {
-			cc0.outputExpr = RulpFactory.createExpression(new XRFactorCC1(F_CC1), expr);
-			incCC1ExprCount();
+			cc0.outputExpr = RulpFactory.createExpression(new XRFactorCC1(F_CC1, incCC1ExprCount()), expr);
 		}
 
 		return cc0.outputExpr;

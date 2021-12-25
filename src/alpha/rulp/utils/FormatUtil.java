@@ -108,32 +108,8 @@ public class FormatUtil {
 	}
 
 	private static void _output(IRObject obj, List<String> outLines) throws RException {
-
 		objLocMap.clear();
-
 		_output(obj, outLines, 0);
-	}
-
-	public static String toString(IRObject obj) throws RException {
-
-		String out = RulpUtil.toString(obj);
-		if (RulpUtil.hasAttributeList(obj)) {
-
-			out += "[";
-			int index = 0;
-			for (String attr : RulpUtil.getAttributeList(obj)) {
-
-				if (index++ != 0) {
-					out += " ";
-				}
-
-				out += attr;
-
-			}
-			out += "]";
-		}
-
-		return out;
 	}
 
 	private static void _output(IRObject obj, List<String> outLines, int level) throws RException {
@@ -330,6 +306,11 @@ public class FormatUtil {
 		outLines.add(_getSpaceLine(level) + ")");
 	}
 
+	public static void format(IRObject obj, List<String> outLines, int level) throws RException {
+		objLocMap.clear();
+		_output(obj, outLines, level);
+	}
+
 	public static List<String> format(List<String> lines) throws RException {
 
 		ArrayList<String> outLines = new ArrayList<>();
@@ -388,5 +369,27 @@ public class FormatUtil {
 		}
 
 		return outLines;
+	}
+
+	public static String toString(IRObject obj) throws RException {
+
+		String out = RulpUtil.toString(obj);
+		if (RulpUtil.hasAttributeList(obj)) {
+
+			out += "[";
+			int index = 0;
+			for (String attr : RulpUtil.getAttributeList(obj)) {
+
+				if (index++ != 0) {
+					out += " ";
+				}
+
+				out += attr;
+
+			}
+			out += "]";
+		}
+
+		return out;
 	}
 }

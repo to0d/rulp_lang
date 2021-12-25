@@ -22,8 +22,11 @@ public class XRFactorCC1 extends AbsRefFactorAdapter implements IRFactor {
 
 	private IRObject cache = null;
 
-	public XRFactorCC1(String factorName) {
+	private final int id;
+
+	public XRFactorCC1(String factorName, int id) {
 		super(factorName);
+		this.id = id;
 	}
 
 	@Override

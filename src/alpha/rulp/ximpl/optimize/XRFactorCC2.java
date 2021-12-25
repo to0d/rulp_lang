@@ -28,8 +28,11 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRFactor {
 
 	private int varIndex[];
 
-	public XRFactorCC2(String factorName, int[] varIndex) {
+	private final int id;
+
+	public XRFactorCC2(String factorName, int id, int[] varIndex) {
 		super(factorName);
+		this.id = id;
 		this.varIndex = varIndex;
 	}
 

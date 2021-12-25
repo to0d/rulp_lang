@@ -30,7 +30,7 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 
 	static void printFunc(IROut out, int level) throws RException {
 
-		// 
+		//
 		if (level == -1) {
 
 		}
@@ -64,13 +64,12 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 			}
 		}
 
-		sb.append(") ");
-		sb.append(RulpUtil.toStringPrint(func.getFunBody()));
 		sb.append(")");
 
 		List<String> lines = new ArrayList<>();
 		lines.add(sb.toString());
-		lines = FormatUtil.format(lines);
+		FormatUtil.format(func.getFunBody(), lines, 1);
+		lines.add(")");
 
 		for (String line : lines) {
 			out.out(line + "\n");

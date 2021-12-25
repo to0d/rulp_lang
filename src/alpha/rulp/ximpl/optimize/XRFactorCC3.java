@@ -28,10 +28,13 @@ public class XRFactorCC3 extends AbsRefFactorAdapter implements IRFactor {
 
 	private Map<String, IRObject> cacheMap = null;
 
+	private final int id;
+
 	private List<IRAtom> varAtoms;
 
-	public XRFactorCC3(String factorName, List<IRAtom> varAtoms) {
+	public XRFactorCC3(String factorName, int id, List<IRAtom> varAtoms) {
 		super(factorName);
+		this.id = id;
 		this.varAtoms = varAtoms;
 	}
 
