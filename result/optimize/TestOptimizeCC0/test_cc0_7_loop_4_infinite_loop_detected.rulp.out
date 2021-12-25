@@ -1,4 +1,15 @@
-(defun fun (?v)
+(defun fun1 (?v)
+    (loop
+        (if (> 1 2) 
+            (break))
+    )
+)[opt-cc0]
+;err:
+infinite loop detected: input=(loop (if (> 1 2) (break))), output=(loop)
+at main: (defun fun1 (?v) (loop (if (> 1 2) (break))))
+;eof
+
+(defun fun2 (?v)
     (loop 
         (print ?v ",") 
         (if (> 1 2) 
@@ -6,7 +17,7 @@
     )
 )[opt-cc0]
 ;err:
-infinite loop detected: (loop (print ?v ",") (if (> 1 2) (break)))
-at main: (defun fun (?v) (loop (print ?v ",") (if (> 1 2) (break))))
+infinite loop detected: input=(loop (print ?v ",") (if (> 1 2) (break))), output=(loop (print ?v ","))
+at main: (defun fun2 (?v) (loop (print ?v ",") (if (> 1 2) (break))))
 ;eof
 

@@ -1,0 +1,5 @@
+(defun fun1 (?v)    
+    (return (+ 1 (fun1 (?v))))
+)[opt-tco]
+;=>fun1
+

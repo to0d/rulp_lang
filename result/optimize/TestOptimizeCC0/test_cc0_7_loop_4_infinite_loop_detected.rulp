@@ -1,4 +1,12 @@
-(defun fun (?v)
+(defun fun1 (?v)
+    (loop
+        (if (> 1 2) 
+            (break))
+    )
+)[opt-cc0]
+;err
+
+(defun fun2 (?v)
     (loop 
         (print ?v ",") 
         (if (> 1 2) 

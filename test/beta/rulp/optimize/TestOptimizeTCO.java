@@ -64,7 +64,7 @@ public class TestOptimizeTCO extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
-	
+
 	@Test
 	public void test_tco_8_no_op() {
 
@@ -88,5 +88,12 @@ public class TestOptimizeTCO extends RulpTestBase {
 
 		_gInfo();
 
+	}
+
+	@Test
+	public void test_tco_9_infinite_recursion_detected() {
+
+		_setup();
+		_run_script();
 	}
 }

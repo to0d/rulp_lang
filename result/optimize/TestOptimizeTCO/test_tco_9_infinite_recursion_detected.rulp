@@ -1,0 +1,9 @@
+(defun fun1 (?v)    
+    (return (+ 1 (fun1 (?v))))
+)[opt-tco]
+;err
+
+(defun fun2 (?v)    
+    (return (+ 1 (fun2 (- ?v 1))))  ;; no bound set
+)[opt-tco]
+;err

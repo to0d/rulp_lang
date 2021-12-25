@@ -86,6 +86,36 @@ public class CCOUtil {
 		}
 	}
 
+	static boolean _hasBreakExpr(IRObject obj) throws RException {
+
+		if (obj == null) {
+			return false;
+		}
+
+		switch (obj.getType()) {
+		case ATOM:
+		case FACTOR:
+			String name = obj.asString();
+			if (name.equals(F_RETURN) || name.equals(F_BREAK)) {
+				return true;
+			}
+
+			return false;
+
+		case EXPR:
+			IRIterator<? extends IRObject> it = RulpUtil.asExpression(obj).iterator();
+			while (it.hasNext()) {
+				if (_hasBreakExpr(it.next())) {
+					return true;
+				}
+			}
+			return false;
+
+		default:
+			return false;
+		}
+	}
+
 	private static boolean _isCC0Expr(IRObject e0, IRExpr expr, IRFrame frame) throws RException {
 
 		if (!_isCC0Factor(e0, frame)) {
@@ -479,7 +509,8 @@ public class CCOUtil {
 
 			int pos = _removeEmptyExpr(rebuildList, 1);
 			if (pos == 1) {
-				throw new RException("infinite loop detected: " + expr);
+				throw new RException("infinite loop detected: input=" + expr + ", output="
+						+ RulpFactory.createExpression(rebuildList.subList(0, pos)));
 			}
 
 			boolean findBreak = false;
@@ -489,7 +520,8 @@ public class CCOUtil {
 
 			// no break clause found, infinite loop
 			if (!findBreak) {
-				throw new RException("infinite loop detected: " + expr);
+				throw new RException("infinite loop detected: input=" + expr + ", output="
+						+ RulpFactory.createExpression(rebuildList.subList(0, pos)));
 			}
 
 			// empty expr found
@@ -506,61 +538,6 @@ public class CCOUtil {
 		}
 
 		return false;
-	}
-
-	static boolean _hasBreakExpr(IRObject obj) throws RException {
-
-		if (obj == null) {
-			return false;
-		}
-
-		switch (obj.getType()) {
-		case ATOM:
-		case FACTOR:
-			String name = obj.asString();
-			if (name.equals(F_RETURN) || name.equals(F_BREAK)) {
-				return true;
-			}
-
-			return false;
-
-		case EXPR:
-			IRIterator<? extends IRObject> it = RulpUtil.asExpression(obj).iterator();
-			while (it.hasNext()) {
-				if (_hasBreakExpr(it.next())) {
-					return true;
-				}
-			}
-			return false;
-
-		default:
-			return false;
-		}
-	}
-
-	static int _removeEmptyExpr(List<IRObject> exprList, int fromIndex) throws RException {
-
-		int size = exprList.size();
-		int pos = 1;
-
-		for (int i = 1; i < size; ++i) {
-
-			IRObject ei = exprList.get(i);
-
-			// ignore empty expr or non-expr object
-			if (ei.getType() != RType.EXPR || RulpUtil.asExpression(ei).isEmpty()) {
-				continue;
-			}
-
-			// move
-			if (i != pos) {
-				exprList.set(pos, ei);
-			}
-
-			pos++;
-		}
-
-		return pos;
 	}
 
 	private static boolean _rebuildCC1(CC0 cc0, Map<String, XRFactorCC1> cc1Map, IRInterpreter interpreter,
@@ -876,6 +853,31 @@ public class CCOUtil {
 		}
 
 		return false;
+	}
+
+	static int _removeEmptyExpr(List<IRObject> exprList, int fromIndex) throws RException {
+
+		int size = exprList.size();
+		int pos = 1;
+
+		for (int i = 1; i < size; ++i) {
+
+			IRObject ei = exprList.get(i);
+
+			// ignore empty expr or non-expr object
+			if (ei.getType() != RType.EXPR || RulpUtil.asExpression(ei).isEmpty()) {
+				continue;
+			}
+
+			// move
+			if (i != pos) {
+				exprList.set(pos, ei);
+			}
+
+			pos++;
+		}
+
+		return pos;
 	}
 
 	public static int getCC0ComputeCount() {
