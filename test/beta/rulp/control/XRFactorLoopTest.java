@@ -26,7 +26,13 @@ class XRFactorLoopTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_loop_err_1() {
+	void test_loop_4_err_1() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_loop_5_return() {
 		_setup();
 		_run_script();
 	}

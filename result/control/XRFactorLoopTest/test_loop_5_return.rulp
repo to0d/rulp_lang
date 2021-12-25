@@ -1,0 +1,13 @@
+(defun fun (?v)
+    (loop 
+        (setq ?v (- ?v 10))
+        (if (< ?v 0)
+            (return ?v)
+        )
+    )
+    (return -1)
+)
+;=>
+
+(fun 4)
+;=>
