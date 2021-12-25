@@ -78,6 +78,8 @@ public class TCOUtil {
 
 	protected static AtomicInteger TCOExprCount = new AtomicInteger(0);
 
+	protected static AtomicInteger TCORebuildCount = new AtomicInteger(0);
+
 	public static boolean TRACE = false;
 
 	private static IRObject _computeTCO(IRObject obj, IRFrame frame) throws RException {
@@ -257,6 +259,72 @@ public class TCOUtil {
 		return true;
 	}
 
+	private static IRExpr _rebuildTCO(IRExpr expr, IRFrame frame) throws RException {
+
+		incTCORebuildCount();
+
+		IRObject e0 = expr.get(0);
+		if (e0.getType() != RType.ATOM) {
+			return expr;
+		}
+
+		switch (RulpUtil.asAtom(e0).getName()) {
+		case A_DO: {
+
+			ArrayList<IRObject> newExpr = new ArrayList<>();
+			newExpr.add(e0);
+
+			IRIterator<? extends IRObject> it = expr.listIterator(1);
+			while (it.hasNext()) {
+
+				IRObject e = it.next();
+				if (e.getType() == RType.EXPR) {
+					e = _rebuildTCO((IRExpr) e, frame);
+				}
+
+				newExpr.add(e);
+			}
+
+			return expr.isEarly() ? RulpFactory.createExpressionEarly(newExpr) : RulpFactory.createExpression(newExpr);
+		}
+
+		case F_IF: {
+
+			ArrayList<IRObject> newExpr = new ArrayList<>();
+			newExpr.add(e0);
+			newExpr.add(expr.get(1));
+
+			IRIterator<? extends IRObject> it = expr.listIterator(2);
+			while (it.hasNext()) {
+				IRObject e = it.next();
+				if (e.getType() == RType.EXPR) {
+					e = _rebuildTCO((IRExpr) e, frame);
+				}
+
+				newExpr.add(e);
+			}
+
+			return expr.isEarly() ? RulpFactory.createExpressionEarly(newExpr) : RulpFactory.createExpression(newExpr);
+		}
+
+		case F_RETURN:
+			if (expr.size() == 2) {
+				IRObject e1 = expr.get(1);
+				if (e1.getType() == RType.EXPR) {
+					incTCOExprCount();
+					return RulpFactory.createExpression(O_RETURN_TCO, e1);
+				}
+			}
+
+			break;
+
+		default:
+
+		}
+
+		return expr;
+	}
+
 	public static IRObject computeTCO(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		if (expr.isEmpty()) {
@@ -403,6 +471,10 @@ public class TCOUtil {
 		return TCOExprCount.get();
 	}
 
+	public static int getTCORebuildCount() {
+		return TCORebuildCount.get();
+	}
+
 	public static void incTCOCallCount() {
 		TCOCallCount.getAndIncrement();
 	}
@@ -413,6 +485,10 @@ public class TCOUtil {
 
 	public static void incTCOExprCount() {
 		TCOExprCount.getAndIncrement();
+	}
+
+	public static void incTCORebuildCount() {
+		TCORebuildCount.getAndIncrement();
 	}
 
 	public static boolean isCPSRecursive(IRExpr expr, IRFrame frame) throws RException {
@@ -427,72 +503,15 @@ public class TCOUtil {
 
 	public static IRExpr rebuildTCO(IRExpr expr, IRFrame frame) throws RException {
 
-		IRObject e0 = expr.get(0);
-		if (e0.getType() != RType.ATOM) {
-			return expr;
-		}
-
-		switch (RulpUtil.asAtom(e0).getName()) {
-		case A_DO: {
-
-			ArrayList<IRObject> newExpr = new ArrayList<>();
-			newExpr.add(e0);
-
-			IRIterator<? extends IRObject> it = expr.listIterator(1);
-			while (it.hasNext()) {
-
-				IRObject e = it.next();
-				if (e.getType() == RType.EXPR) {
-					e = rebuildTCO((IRExpr) e, frame);
-				}
-
-				newExpr.add(e);
-			}
-
-			return expr.isEarly() ? RulpFactory.createExpressionEarly(newExpr) : RulpFactory.createExpression(newExpr);
-		}
-
-		case F_IF: {
-
-			ArrayList<IRObject> newExpr = new ArrayList<>();
-			newExpr.add(e0);
-			newExpr.add(expr.get(1));
-
-			IRIterator<? extends IRObject> it = expr.listIterator(2);
-			while (it.hasNext()) {
-				IRObject e = it.next();
-				if (e.getType() == RType.EXPR) {
-					e = rebuildTCO((IRExpr) e, frame);
-				}
-
-				newExpr.add(e);
-			}
-
-			return expr.isEarly() ? RulpFactory.createExpressionEarly(newExpr) : RulpFactory.createExpression(newExpr);
-		}
-
-		case F_RETURN:
-			if (expr.size() == 2) {
-				IRObject e1 = expr.get(1);
-				if (e1.getType() == RType.EXPR) {
-					incTCOExprCount();
-					return RulpFactory.createExpression(O_RETURN_TCO, e1);
-				}
-			}
-
-			break;
-
-		default:
-
-		}
-
-		return expr;
+		incTCORebuildCount();
+		return _rebuildTCO(expr, frame);
 	}
 
 	public static void reset() {
 		TCOExprCount.set(0);
 		TCOCallCount.set(0);
 		TCOComputeCount.set(0);
+		TCORebuildCount.set(0);
 	}
 
 	public static IRObject returnTCO(IRObject obj, IRFrame frame) throws RException {

@@ -49,80 +49,90 @@ import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
-	private static IRExpr _optCC0(IRInterpreter interpreter, IRFrame frame, ArrayList<String> attrList, IRExpr funBody)
-			throws RException {
-
-		if (attrList.contains(A_OPT_CC0)) {
-			return funBody;
-		}
-
-		IRExpr newExpr = CCOUtil.rebuildCC0(funBody, interpreter, frame);
-		if (newExpr == funBody) {
-			return funBody;
-		}
-
-		attrList.add(A_OPT_CC0);
-		return newExpr;
+	static class OPT {
+		ArrayList<String> attrList;
+		IRFrame frame;
+		IRExpr funBody;
+		String funName;
+		IRInterpreter interpreter;
+		List<IRParaAttr> paraAttrs;
 	}
 
-	private static IRExpr _optCC1(IRInterpreter interpreter, IRFrame frame, ArrayList<String> attrList, IRExpr funBody)
-			throws RException {
-
-		if (attrList.contains(A_OPT_CC1)) {
-			return funBody;
+	static int _getOptOrder(String optName) {
+		switch (optName) {
+		case A_OPT_CC0:
+			return 0;
+		case A_OPT_CC1:
+			return 1;
+		case A_OPT_CC2:
+			return 2;
+		case A_OPT_CC3:
+			return 3;
+		case A_OPT_TCO:
+			return 4;
+		default:
+			return -1;
 		}
-
-		IRExpr newExpr = CCOUtil.rebuildCC1(funBody, interpreter, frame);
-		if (newExpr == funBody) {
-			return funBody;
-		}
-
-		attrList.add(A_OPT_CC1);
-		return newExpr;
 	}
 
-	private static IRExpr _optCC2(IRInterpreter interpreter, IRFrame frame, ArrayList<String> attrList, IRExpr funBody,
-			List<IRParaAttr> paras, String funcName) throws RException {
+	private static boolean _optCC0(OPT opt) throws RException {
 
-		if (attrList.contains(A_OPT_CC2)) {
-			return funBody;
+		IRExpr newExpr = CCOUtil.rebuildCC0(opt.funBody, opt.interpreter, opt.frame);
+		if (newExpr == opt.funBody) {
+			return false;
 		}
 
-		IRExpr newExpr = CCOUtil.rebuildCC2(funBody, paras, funcName, interpreter, frame);
-		if (newExpr == funBody) {
-			return funBody;
-		}
-
-		attrList.add(A_OPT_CC2);
-		return newExpr;
+		opt.funBody = newExpr;
+		return true;
 	}
 
-	private static IRExpr _optCC3(IRInterpreter interpreter, IRFrame frame, ArrayList<String> attrList, IRExpr funBody,
-			List<IRParaAttr> paras, String funcName) throws RException {
+	private static boolean _optCC1(OPT opt) throws RException {
 
-		if (attrList.contains(A_OPT_CC3)) {
-			return funBody;
+		IRExpr newExpr = CCOUtil.rebuildCC1(opt.funBody, opt.interpreter, opt.frame);
+		if (newExpr == opt.funBody) {
+			return false;
 		}
 
-		IRExpr newExpr = CCOUtil.rebuildCC3(funBody, paras, funcName, interpreter, frame, false);
-		if (newExpr == funBody) {
-			return funBody;
-		}
-
-		attrList.add(A_OPT_CC3);
-		return newExpr;
+		opt.funBody = newExpr;
+		return true;
 	}
 
-	private static IRExpr _optTCO(IRInterpreter interpreter, IRFrame frame, ArrayList<String> attrList, IRExpr funBody,
-			String funName) throws RException {
+	private static boolean _optCC2(OPT opt) throws RException {
+
+		IRExpr newExpr = CCOUtil.rebuildCC2(opt.funBody, opt.paraAttrs, opt.funName, opt.interpreter, opt.frame);
+		if (newExpr == opt.funBody) {
+			return false;
+		}
+
+		opt.funBody = newExpr;
+		return true;
+	}
+
+	private static boolean _optCC3(OPT opt) throws RException {
+
+		IRExpr newExpr = CCOUtil.rebuildCC3(opt.funBody, opt.paraAttrs, opt.funName, opt.interpreter, opt.frame, false);
+		if (newExpr == opt.funBody) {
+			return false;
+		}
+
+		opt.funBody = newExpr;
+		return true;
+	}
+
+	private static boolean _optTCO(OPT opt) throws RException {
+
+		if (!TCOUtil.listFunctionInReturn(opt.funBody, opt.frame).contains(opt.funName)) {
+			return false;
+		}
 
 		// recursive function call in return expression
-		if (!attrList.contains(A_OPT_TCO) && TCOUtil.listFunctionInReturn(funBody, frame).contains(funName)) {
-			funBody = TCOUtil.rebuildTCO(funBody, frame);
-			attrList.add(A_OPT_TCO);
+		IRExpr newExpr = TCOUtil.rebuildTCO(opt.funBody, opt.frame);
+		if (newExpr == opt.funBody) {
+			return false;
 		}
 
-		return funBody;
+		opt.funBody = newExpr;
+		return true;
 	}
 
 	public static List<IRParaAttr> buildAttrList(IRObject paraObj, IRInterpreter interpreter, IRFrame frame)
@@ -187,23 +197,6 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 		}
 
 		return paraAttrs;
-	}
-
-	static int _getOptOrder(String optName) {
-		switch (optName) {
-		case A_OPT_CC0:
-			return 0;
-		case A_OPT_CC1:
-			return 1;
-		case A_OPT_CC2:
-			return 2;
-		case A_OPT_CC3:
-			return 3;
-		case A_OPT_TCO:
-			return 4;
-		default:
-			return -1;
-		}
 	}
 
 	public static IRObject defFun(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -300,33 +293,69 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 				return _getOptOrder(n1) - _getOptOrder(n2);
 			});
 
-			for (String attr : uniqOptAttributeList) {
+			int optSize = uniqOptAttributeList.size();
+			int optIndex = 0;
+			OPT opt = new OPT();
+
+			opt.interpreter = interpreter;
+			opt.frame = frame;
+			opt.funBody = funBody;
+			opt.funName = funName;
+			opt.attrList = attrList;
+			opt.paraAttrs = paraAttrs;
+
+			int optCount = 0;
+
+			while (optIndex < optSize) {
+
+				String attr = uniqOptAttributeList.get(optIndex++);
+
+				boolean update = false;
+				boolean reset = false;
 
 				switch (attr) {
 				case A_OPT_TCO:
-					funBody = _optTCO(interpreter, frame, attrList, funBody, funName);
+					update = _optTCO(opt);
 					break;
 
 				case A_OPT_CC0:
-					funBody = _optCC0(interpreter, frame, attrList, funBody);
+					update = _optCC0(opt);
 					break;
 
 				case A_OPT_CC1:
-					funBody = _optCC1(interpreter, frame, attrList, funBody);
+					update = _optCC1(opt);
+					reset = true;
 					break;
 
 				case A_OPT_CC2:
-					funBody = _optCC2(interpreter, frame, attrList, funBody, paraAttrs, funName);
+					update = _optCC2(opt);
+					reset = true;
 					break;
 
 				case A_OPT_CC3:
-					funBody = _optCC3(interpreter, frame, attrList, funBody, paraAttrs, funName);
+					update = _optCC3(opt);
+					reset = true;
 					break;
 
 				default:
 					throw new RException("unknown attr: " + attr);
 				}
 
+				if (update) {
+
+					if (!opt.attrList.contains(attr)) {
+						opt.attrList.add(attr);
+					}
+					optCount++;
+
+//					if (reset) {
+//						optIndex = 0;
+//					}
+				}
+			}
+
+			if (optCount > 0) {
+				funBody = opt.funBody;
 			}
 		}
 

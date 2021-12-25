@@ -650,15 +650,17 @@ public class TraceUtil {
 		sb.append(SEP_LINE1);
 		sb.append(String.format("%10s: %s\n", "Name", "Status"));
 		sb.append(SEP_LINE2);
-		sb.append(String.format("%10s: expr=%d, call=%d, compute=%d\n", "TCO", TCOUtil.getTCOExprCount(),
-				TCOUtil.getTCOCallCount(), TCOUtil.getTCOComputeCount()));
-		sb.append(String.format("%10s: compute=%d\n", "CC0", CCOUtil.getCC0ComputeCount()));
-		sb.append(String.format("%10s: expr=%d, call=%d, cache=%d, reuse=%d\n", "CC1", CCOUtil.getCC1ExprCount(),
-				CCOUtil.getCC1CallCount(), CCOUtil.getCC1CacheCount(), CCOUtil.getCC1ReuseCount()));
-		sb.append(String.format("%10s: expr=%d, call=%d, cache=%d\n", "CC2", CCOUtil.getCC2ExprCount(),
-				CCOUtil.getCC2CallCount(), CCOUtil.getCC2CacheCount()));
-		sb.append(String.format("%10s: expr=%d, call=%d, cache=%d\n", "CC3", CCOUtil.getCC3ExprCount(),
-				CCOUtil.getCC3CallCount(), CCOUtil.getCC3CacheCount()));
+		sb.append(String.format("%10s: rebuild=%d, expr=%d, call=%d, compute=%d\n", "TCO", TCOUtil.getTCORebuildCount(),
+				TCOUtil.getTCOExprCount(), TCOUtil.getTCOCallCount(), TCOUtil.getTCOComputeCount()));
+		sb.append(String.format("%10s: rebuild=%d, compute=%d\n", "CC0", CCOUtil.getCC0RebuildCount(),
+				CCOUtil.getCC0ComputeCount()));
+		sb.append(String.format("%10s: rebuild=%d, expr=%d, call=%d, cache=%d, reuse=%d\n", "CC1",
+				CCOUtil.getCC1RebuildCount(), CCOUtil.getCC1ExprCount(), CCOUtil.getCC1CallCount(),
+				CCOUtil.getCC1CacheCount(), CCOUtil.getCC1ReuseCount()));
+		sb.append(String.format("%10s: rebuild=%d, expr=%d, call=%d, cache=%d\n", "CC2", CCOUtil.getCC2RebuildCount(),
+				CCOUtil.getCC2ExprCount(), CCOUtil.getCC2CallCount(), CCOUtil.getCC2CacheCount()));
+		sb.append(String.format("%10s: rebuild=%d, expr=%d, call=%d, cache=%d\n", "CC3", CCOUtil.getCC3RebuildCount(),
+				CCOUtil.getCC3ExprCount(), CCOUtil.getCC3CallCount(), CCOUtil.getCC3CacheCount()));
 		sb.append(SEP_LINE1);
 
 	}

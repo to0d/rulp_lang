@@ -59,6 +59,14 @@ public class CCOUtil {
 
 	protected static AtomicInteger CC1ExprCount = new AtomicInteger(0);
 
+	protected static AtomicInteger CC0RebuildCount = new AtomicInteger(0);
+
+	protected static AtomicInteger CC1RebuildCount = new AtomicInteger(0);
+
+	protected static AtomicInteger CC2RebuildCount = new AtomicInteger(0);
+
+	protected static AtomicInteger CC3RebuildCount = new AtomicInteger(0);
+
 	protected static AtomicInteger CC1ReuseCount = new AtomicInteger(0);
 
 	protected static AtomicInteger CC2CacheCount = new AtomicInteger(0);
@@ -884,6 +892,22 @@ public class CCOUtil {
 		return CC0ComputeCount.get();
 	}
 
+	public static int getCC0RebuildCount() {
+		return CC0RebuildCount.get();
+	}
+
+	public static int getCC1RebuildCount() {
+		return CC1RebuildCount.get();
+	}
+
+	public static int getCC2RebuildCount() {
+		return CC2RebuildCount.get();
+	}
+
+	public static int getCC3RebuildCount() {
+		return CC3RebuildCount.get();
+	}
+
 	public static int getCC1CacheCount() {
 		return CC1CacheCount.get();
 	}
@@ -926,6 +950,22 @@ public class CCOUtil {
 
 	public static void incCC0ComputeCount() {
 		CC0ComputeCount.getAndIncrement();
+	}
+
+	public static void incCC0BuildCount() {
+		CC0RebuildCount.getAndIncrement();
+	}
+
+	public static void incCC1BuildCount() {
+		CC1RebuildCount.getAndIncrement();
+	}
+
+	public static void incCC2BuildCount() {
+		CC2RebuildCount.getAndIncrement();
+	}
+
+	public static void incCC3BuildCount() {
+		CC3RebuildCount.getAndIncrement();
 	}
 
 	public static void incCC1CacheCount() {
@@ -971,6 +1011,8 @@ public class CCOUtil {
 	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value
 	public static IRExpr rebuildCC0(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
+		incCC0BuildCount();
+
 		CC0 cc0 = new CC0();
 		cc0.setInputExpr(expr);
 
@@ -991,6 +1033,8 @@ public class CCOUtil {
 	// (Op A1 A2 ... Ak), Op is Stable factor or functions, Ak const value
 	public static IRExpr rebuildCC1(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
+		incCC1BuildCount();
+
 		CC0 cc0 = new CC0();
 		cc0.setInputExpr(expr);
 
@@ -1010,6 +1054,8 @@ public class CCOUtil {
 	// variables
 	public static IRExpr rebuildCC2(IRExpr expr, List<IRParaAttr> paras, String funcName, IRInterpreter interpreter,
 			IRFrame frame) throws RException {
+
+		incCC2BuildCount();
 
 		NameSet nameSet = new NameSet();
 
@@ -1036,6 +1082,8 @@ public class CCOUtil {
 	public static IRExpr rebuildCC3(IRExpr expr, List<IRParaAttr> paras, String funcName, IRInterpreter interpreter,
 			IRFrame frame, boolean recursive) throws RException {
 
+		incCC3BuildCount();
+
 		NameSet nameSet = new NameSet();
 
 		if (paras != null) {
@@ -1059,19 +1107,23 @@ public class CCOUtil {
 	public static void reset() {
 
 		CC0ComputeCount.set(0);
+		CC0RebuildCount.set(0);
 
 		CC1ExprCount.set(0);
 		CC1CallCount.set(0);
 		CC1CacheCount.set(0);
 		CC1ReuseCount.set(0);
+		CC1RebuildCount.set(0);
 
 		CC2ExprCount.set(0);
 		CC2CallCount.set(0);
 		CC2CacheCount.set(0);
+		CC2RebuildCount.set(0);
 
 		CC3ExprCount.set(0);
 		CC3CallCount.set(0);
 		CC3CacheCount.set(0);
+		CC3RebuildCount.set(0);
 	}
 
 }
