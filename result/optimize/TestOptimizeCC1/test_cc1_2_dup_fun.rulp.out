@@ -26,12 +26,13 @@
     (do
         (defvar ?x 0)
         (loop for x from 1 to 3 do
-            (setq ?x (+ ?x (cc1 (fun1 1))))
-            (setq ?x (+ ?x (cc1 (fun1 1))))
+            (setq ?x (+[opt-cc0] ?x (cc1[id=0] (fun1 1))))
+            (setq ?x (+[opt-cc0] ?x (cc1[id=0] (fun1 1))))
         )
         (return ?x)
     )
 )[opt-cc1]
+cc 0: id=0, type=CC1, call=0, hit=0, cache=null
 
 ;eof
 

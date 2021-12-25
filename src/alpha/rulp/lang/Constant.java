@@ -57,6 +57,8 @@ public interface Constant {
 
 	String A_FUNCTION = "func";
 
+	String A_ID = "id";
+
 	String A_INSTANCE = "instance";
 
 	String A_INTEGER = "int";
@@ -129,9 +131,9 @@ public interface Constant {
 
 	String A_STATIC = "static";
 
-	String A_STRING = "string";
-
 //	String A_STABLE = "stable";
+
+	String A_STRING = "string";
 
 	String A_SYSTEM = "system";
 
@@ -190,7 +192,7 @@ public interface Constant {
 	String F_CC1 = "cc1";
 
 	String F_CC2 = "cc2";
-	
+
 	String F_CC3 = "cc3";
 
 	String F_CLASS_OF = "class-of";

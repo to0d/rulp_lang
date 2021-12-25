@@ -13,16 +13,19 @@ import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
-import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsRefFactorAdapter;
 
-public class XRFactorCC1 extends AbsRefFactorAdapter implements IRFactor {
+public class XRFactorCC1 extends AbsRefFactorAdapter implements IRCCFactor {
 
 	private IRObject cache = null;
 
 	private final int id;
+
+	private int callCount = 0;
+
+	private int hitCount = 0;
 
 	public XRFactorCC1(String factorName, int id) {
 		super(factorName);
@@ -48,15 +51,22 @@ public class XRFactorCC1 extends AbsRefFactorAdapter implements IRFactor {
 		}
 
 		CCOUtil.incCC1CallCount();
+		++callCount;
 
 		if (cache == null) {
 			cache = interpreter.compute(frame, args.get(1));
 			RulpUtil.incRef(cache);
 		} else {
 			CCOUtil.incCC1CacheCount();
+			++hitCount;
 		}
 
 		return cache;
+	}
+
+	@Override
+	public String getCCInformation() {
+		return String.format("id=%d, type=CC1, call=%d, hit=%d, cache=%s", id, callCount, hitCount, "" + cache);
 	}
 
 }

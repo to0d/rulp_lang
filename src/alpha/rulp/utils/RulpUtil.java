@@ -371,8 +371,8 @@ public class RulpUtil {
 		sb.append("]");
 	}
 
-	private static void _toString(StringBuffer sb, IRIterator<? extends IRObject> iterator, IRFormater formater)
-			throws RException {
+	private static void _toString(StringBuffer sb, IRIterator<? extends IRObject> iterator, IRFormater formater,
+			boolean attr) throws RException {
 
 		int i = 0;
 		while (iterator.hasNext()) {
@@ -381,11 +381,11 @@ public class RulpUtil {
 				sb.append(' ');
 			}
 
-			_toString(sb, iterator.next(), formater);
+			_toString(sb, iterator.next(), formater, attr);
 		}
 	}
 
-	private static void _toString(StringBuffer sb, IRObject obj, IRFormater formater) throws RException {
+	private static void _toString(StringBuffer sb, IRObject obj, IRFormater formater, boolean attr) throws RException {
 
 		if (obj == null) {
 			sb.append("nil");
@@ -402,7 +402,7 @@ public class RulpUtil {
 			}
 
 			sb.append("'(");
-			_toString(sb, list.iterator(), formater);
+			_toString(sb, list.iterator(), formater, attr);
 			sb.append(")");
 			break;
 
@@ -419,7 +419,7 @@ public class RulpUtil {
 				if (i != 0) {
 					sb.append(',');
 				}
-				_toString(sb, arr.get(i), formater);
+				_toString(sb, arr.get(i), formater, attr);
 			}
 			sb.append("}");
 			break;
@@ -441,14 +441,14 @@ public class RulpUtil {
 
 			IRExpr expr = (IRExpr) obj;
 			sb.append(expr.isEarly() ? "$(" : "(");
-			_toString(sb, expr.iterator(), formater);
+			_toString(sb, expr.iterator(), formater, attr);
 			sb.append(")");
 			break;
 		}
 
 		case MEMBER:
 			IRMember mbr = (IRMember) obj;
-			_toString(sb, mbr.getSubject(), formater);
+			_toString(sb, mbr.getSubject(), formater, attr);
 			sb.append("::");
 			sb.append(mbr.getName());
 			break;
@@ -457,7 +457,9 @@ public class RulpUtil {
 			formater.format(sb, obj);
 		}
 
-//		_formatAttrList(sb, obj);
+		if (attr) {
+			_formatAttrList(sb, obj);
+		}
 	}
 
 	private static void _toStringList(IRObject obj, List<String> list) throws RException {
@@ -1365,6 +1367,12 @@ public class RulpUtil {
 		}
 	}
 
+	public static String formatAttribute(IRObject obj) throws RException {
+		StringBuffer sb = new StringBuffer();
+		_formatAttrList(sb, obj);
+		return sb.toString();
+	}
+
 	public static List<String> getAttributeList(IRObject obj) {
 		return ((AbsObject) obj).getAttributeList();
 	}
@@ -1435,10 +1443,6 @@ public class RulpUtil {
 		return obj.getType() == RType.EXPR;
 	}
 
-	public static boolean isFunctionLambda(IRObject obj) throws RException {
-		return obj.getType() == RType.FUNC && ((IRFunction) obj).isLambda();
-	}
-
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
 //
 //		IRObject nsObj = frame.getObject(A_USING_NS);
@@ -1448,6 +1452,10 @@ public class RulpUtil {
 //
 //		return RulpUtil.asSubject(nsObj);
 //	}
+
+	public static boolean isFunctionLambda(IRObject obj) throws RException {
+		return obj.getType() == RType.FUNC && ((IRFunction) obj).isLambda();
+	}
 
 	public static boolean isFunctionList(IRObject obj) throws RException {
 		return obj.getType() == RType.FUNC && ((IRFunction) obj).isList();
@@ -2046,7 +2054,15 @@ public class RulpUtil {
 	public static String toString(IRObject obj) throws RException {
 
 		StringBuffer sb = new StringBuffer();
-		_toString(sb, obj, objFormater);
+		_toString(sb, obj, objFormater, false);
+
+		return sb.toString();
+	}
+
+	public static String toString(IRObject obj, boolean attr) throws RException {
+
+		StringBuffer sb = new StringBuffer();
+		_toString(sb, obj, objFormater, attr);
 
 		return sb.toString();
 	}
@@ -2055,7 +2071,7 @@ public class RulpUtil {
 
 		StringBuffer sb = new StringBuffer();
 		XShortFormater formater = new XShortFormater(maxLength);
-		_toString(sb, obj, formater);
+		_toString(sb, obj, formater, false);
 		if (formater.bShort) {
 			sb.append("...");
 		}
@@ -2071,7 +2087,7 @@ public class RulpUtil {
 			if (i++ != 0) {
 				sb.append(' ');
 			}
-			_toString(sb, e, objFormater);
+			_toString(sb, e, objFormater, false);
 		}
 
 		return sb.toString();
@@ -2097,7 +2113,7 @@ public class RulpUtil {
 
 	public static String toStringPrint(IRObject obj) throws RException {
 		StringBuffer sb = new StringBuffer();
-		_toString(sb, obj, printFormater);
+		_toString(sb, obj, printFormater, false);
 		return sb.toString();
 	}
 

@@ -9,9 +9,11 @@
 
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.A_NIL;
+import static alpha.rulp.lang.Constant.F_DEFUN;
 import static alpha.rulp.lang.Constant.F_IF;
+import static alpha.rulp.lang.Constant.F_LOOP;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -371,29 +373,7 @@ public class FormatUtil {
 		return outLines;
 	}
 
-	public static String formatAttribute(IRObject obj) throws RException {
-
-		String out = "";
-		if (RulpUtil.hasAttributeList(obj)) {
-
-			out += "[";
-			int index = 0;
-			for (String attr : RulpUtil.getAttributeList(obj)) {
-
-				if (index++ != 0) {
-					out += " ";
-				}
-
-				out += attr;
-
-			}
-			out += "]";
-		}
-
-		return out;
-	}
-
 	public static String toString(IRObject obj) throws RException {
-		return RulpUtil.toString(obj) + formatAttribute(obj);
+		return RulpUtil.toString(obj, true);
 	}
 }

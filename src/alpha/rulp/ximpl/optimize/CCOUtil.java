@@ -1,6 +1,7 @@
 package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.A_ID;
 import static alpha.rulp.lang.Constant.A_OPT_CC0;
 import static alpha.rulp.lang.Constant.F_BREAK;
 import static alpha.rulp.lang.Constant.F_CASE;
@@ -53,19 +54,15 @@ public class CCOUtil {
 
 	protected static AtomicInteger CC0ComputeCount = new AtomicInteger(0);
 
+	protected static AtomicInteger CC0RebuildCount = new AtomicInteger(0);
+
 	protected static AtomicInteger CC1CacheCount = new AtomicInteger(0);
 
 	protected static AtomicInteger CC1CallCount = new AtomicInteger(0);
 
 	protected static AtomicInteger CC1ExprCount = new AtomicInteger(0);
 
-	protected static AtomicInteger CC0RebuildCount = new AtomicInteger(0);
-
 	protected static AtomicInteger CC1RebuildCount = new AtomicInteger(0);
-
-	protected static AtomicInteger CC2RebuildCount = new AtomicInteger(0);
-
-	protected static AtomicInteger CC3RebuildCount = new AtomicInteger(0);
 
 	protected static AtomicInteger CC1ReuseCount = new AtomicInteger(0);
 
@@ -75,11 +72,15 @@ public class CCOUtil {
 
 	protected static AtomicInteger CC2ExprCount = new AtomicInteger(0);
 
+	protected static AtomicInteger CC2RebuildCount = new AtomicInteger(0);
+
 	protected static AtomicInteger CC3CacheCount = new AtomicInteger(0);
 
 	protected static AtomicInteger CC3CallCount = new AtomicInteger(0);
 
 	protected static AtomicInteger CC3ExprCount = new AtomicInteger(0);
+
+	protected static AtomicInteger CC3RebuildCount = new AtomicInteger(0);
 
 	private static IRExpr _asExpr(IRObject obj) throws RException {
 
@@ -630,7 +631,9 @@ public class CCOUtil {
 
 				XRFactorCC1 factor = cc1Map.get(cc1Key);
 				if (factor == null) {
-					factor = new XRFactorCC1(F_CC1, incCC1ExprCount());
+					int ccId = incCC1ExprCount();
+					factor = new XRFactorCC1(F_CC1, ccId);
+					RulpUtil.addAttribute(factor, String.format("%s=%d", A_ID, ccId));
 					cc1Map.put(cc1Key, factor);
 				} else {
 					incCC1ReuseCount();
@@ -748,8 +751,10 @@ public class CCOUtil {
 					newIndexs[j] = indexs[j];
 				}
 
-				newObj = RulpFactory.createExpression(new XRFactorCC2(F_CC2, incCC2ExprCount(), newIndexs),
-						expr.get(i));
+				int ccId = incCC2ExprCount();
+				XRFactorCC2 factor = new XRFactorCC2(F_CC2, ccId, newIndexs);
+				RulpUtil.addAttribute(factor, String.format("%s=%d", A_ID, ccId));
+				newObj = RulpFactory.createExpression(factor, expr.get(i));
 				rebuildList.set(i, newObj);
 				rebuildCount++;
 			}
@@ -848,7 +853,10 @@ public class CCOUtil {
 				IRExpr cc3Expr = RulpUtil.asExpression(expr.get(i));
 				List<IRAtom> varAtoms = nameSet.listAllVars(cc3Expr);
 
-				newObj = RulpFactory.createExpression(new XRFactorCC3(F_CC3, incCC3ExprCount(), varAtoms), expr.get(i));
+				int ccId = incCC3ExprCount();
+				XRFactorCC3 factor = new XRFactorCC3(F_CC3, ccId, varAtoms);
+				RulpUtil.addAttribute(factor, String.format("%s=%d", A_ID, ccId));
+				newObj = RulpFactory.createExpression(factor, expr.get(i));
 				rebuildList.set(i, newObj);
 				rebuildCount++;
 			}
@@ -894,18 +902,6 @@ public class CCOUtil {
 		return CC0RebuildCount.get();
 	}
 
-	public static int getCC1RebuildCount() {
-		return CC1RebuildCount.get();
-	}
-
-	public static int getCC2RebuildCount() {
-		return CC2RebuildCount.get();
-	}
-
-	public static int getCC3RebuildCount() {
-		return CC3RebuildCount.get();
-	}
-
 	public static int getCC1CacheCount() {
 		return CC1CacheCount.get();
 	}
@@ -916,6 +912,10 @@ public class CCOUtil {
 
 	public static int getCC1ExprCount() {
 		return CC1ExprCount.get();
+	}
+
+	public static int getCC1RebuildCount() {
+		return CC1RebuildCount.get();
 	}
 
 	public static int getCC1ReuseCount() {
@@ -934,6 +934,10 @@ public class CCOUtil {
 		return CC2ExprCount.get();
 	}
 
+	public static int getCC2RebuildCount() {
+		return CC2RebuildCount.get();
+	}
+
 	public static int getCC3CacheCount() {
 		return CC3CacheCount.get();
 	}
@@ -946,24 +950,20 @@ public class CCOUtil {
 		return CC3ExprCount.get();
 	}
 
-	public static void incCC0ComputeCount() {
-		CC0ComputeCount.getAndIncrement();
+	public static int getCC3RebuildCount() {
+		return CC3RebuildCount.get();
 	}
 
 	public static void incCC0BuildCount() {
 		CC0RebuildCount.getAndIncrement();
 	}
 
+	public static void incCC0ComputeCount() {
+		CC0ComputeCount.getAndIncrement();
+	}
+
 	public static void incCC1BuildCount() {
 		CC1RebuildCount.getAndIncrement();
-	}
-
-	public static void incCC2BuildCount() {
-		CC2RebuildCount.getAndIncrement();
-	}
-
-	public static void incCC3BuildCount() {
-		CC3RebuildCount.getAndIncrement();
 	}
 
 	public static void incCC1CacheCount() {
@@ -982,6 +982,10 @@ public class CCOUtil {
 		CC1ReuseCount.getAndIncrement();
 	}
 
+	public static void incCC2BuildCount() {
+		CC2RebuildCount.getAndIncrement();
+	}
+
 	public static void incCC2CacheCount() {
 		CC2CacheCount.getAndIncrement();
 	}
@@ -992,6 +996,10 @@ public class CCOUtil {
 
 	public static int incCC2ExprCount() {
 		return CC2ExprCount.getAndIncrement();
+	}
+
+	public static void incCC3BuildCount() {
+		CC3RebuildCount.getAndIncrement();
 	}
 
 	public static void incCC3CacheCount() {
@@ -1041,7 +1049,10 @@ public class CCOUtil {
 		}
 
 		if (cc0.outputExpr == null) {
-			cc0.outputExpr = RulpFactory.createExpression(new XRFactorCC1(F_CC1, incCC1ExprCount()), expr);
+			int ccId = incCC1ExprCount();
+			XRFactorCC1 factor = new XRFactorCC1(F_CC1, ccId);
+			RulpUtil.addAttribute(factor, String.format("%s=%d", A_ID, ccId));
+			cc0.outputExpr = RulpFactory.createExpression(factor, expr);
 		}
 
 		return cc0.outputExpr;

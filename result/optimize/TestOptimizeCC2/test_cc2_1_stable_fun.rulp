@@ -12,6 +12,9 @@
 )[opt-cc2]
 ;=>
 
+(fun2 5)
+;=>
+
 (attribute-of fun1)
 ;=>
 
@@ -20,9 +23,6 @@
 
 (print-impl fun2)
 ;;;
-
-(fun2 5)
-;=>
 
 (opt-status)
 ;=>

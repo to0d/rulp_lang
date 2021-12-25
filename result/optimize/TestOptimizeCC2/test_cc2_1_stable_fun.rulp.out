@@ -12,6 +12,9 @@
 )[opt-cc2]
 ;=>fun2
 
+(fun2 5)
+;=>20
+
 (attribute-of fun1)
 ;=>'()
 
@@ -25,16 +28,14 @@
     (do
         (defvar ?x 0)
         (loop for ?i from 1 to ?m do
-            (setq ?x (+ ?x (cc2 (fun1 ?i))))
+            (setq ?x (+[opt-cc0] ?x (cc2[id=0] (fun1 ?i))))
         )
         (return ?x)
     )
 )[opt-cc2]
+cc 0: id=0, type=CC2, call=5, hit=0, cache=5, index=[1], $$i_1=2, $$i_2=3, $$i_3=4...
 
 ;eof
-
-(fun2 5)
-;=>20
 
 (opt-status)
 ;=>nil

@@ -1,10 +1,12 @@
-package alpha.rulp.ximpl.io;
+package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.F_DEFUN;
 import static alpha.rulp.lang.Constant.O_Nil;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
@@ -16,6 +18,8 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.runtime.IRListener1;
 import alpha.rulp.runtime.IROut;
 import alpha.rulp.utils.FormatUtil;
 import alpha.rulp.utils.RulpUtil;
@@ -28,11 +32,24 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 		super(factorName);
 	}
 
-	static void printFunc(IROut out, int level) throws RException {
+	static void visit(IRObject obj, IRListener1<IRObject> visitor) throws RException {
 
-		//
-		if (level == -1) {
+		if (obj == null) {
+			return;
+		}
 
+		visitor.doAction(obj);
+
+		switch (obj.getType()) {
+		case EXPR:
+		case LIST:
+			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
+			while (it.hasNext()) {
+				visit(it.next(), visitor);
+			}
+			break;
+
+		default:
 		}
 	}
 
@@ -69,11 +86,32 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 		List<String> lines = new ArrayList<>();
 		lines.add(sb.toString());
 		FormatUtil.format(func.getFunBody(), lines, 1);
-		lines.add(")" + FormatUtil.formatAttribute(func));
+		lines.add(")" + RulpUtil.formatAttribute(func));
 
 		for (String line : lines) {
 			out.out(line + "\n");
 		}
+
+		Set<IRObject> ccObjs = new HashSet<>();
+
+		visit(func.getFunBody(), (obj) -> {
+
+			if (obj.getType() != RType.FACTOR) {
+				return;
+			}
+
+			if (!(obj instanceof IRCCFactor)) {
+				return;
+			}
+
+			if (ccObjs.contains(obj)) {
+				return;
+			}
+
+			out.out(String.format("cc %d: %s\n", ccObjs.size(), ((IRCCFactor) obj).getCCInformation()));
+
+			ccObjs.add(obj);
+		});
 	}
 
 	@Override
