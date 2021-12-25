@@ -1,0 +1,6 @@
+(reduct (+ 1 2))
+;err:
+factor not found: (reduct (+ 1 2))
+at main: (reduct (+ 1 2))
+;eof
+
