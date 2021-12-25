@@ -82,4 +82,11 @@ public class TestOptimizeCC0 extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	public void test_cc0_7_loop_4_infinate_loop_detected() {
+
+		_setup();
+		_run_script();
+	}
 }

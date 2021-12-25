@@ -35,19 +35,19 @@ public class XRFactorIf extends AbsAtomFactorAdapter implements IRFactor {
 
 		IRObject cond = args.get(1);
 		IRObject ifClause = interpreter.compute(frame, cond);
-		IRObject rstClause = null;
+		IRObject actionClause = null;
 
 		if (MathUtil.toBoolean(ifClause)) {
-			rstClause = args.get(2); // trueClause
+			actionClause = args.get(2); // trueClause
 		} else {
-			rstClause = args.size() > 3 ? args.get(3) : null; // falseClause
+			actionClause = args.size() > 3 ? args.get(3) : null; // falseClause
 		}
 
-		if (rstClause == null) {
+		if (actionClause == null) {
 			return O_Nil;
 		}
 
-		return interpreter.compute(frame, rstClause);
+		return interpreter.compute(frame, actionClause);
 	}
 
 	@Override

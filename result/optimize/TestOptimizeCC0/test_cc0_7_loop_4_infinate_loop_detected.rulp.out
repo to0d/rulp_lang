@@ -1,0 +1,21 @@
+(defun fun (?v)
+    (loop 
+        (print ?v ",") 
+        (if (> 1 2) 
+            (break))
+    )
+)[opt-cc0]
+;=>fun
+
+(attribute-of fun)
+;=>'(opt-cc0)
+
+(print-impl fun)
+;=>nil
+;out:
+(defun fun (?v)
+    (loop (print ?v ,) ())
+)
+
+;eof
+

@@ -45,11 +45,6 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 		return args.get(6);
 	}
 
-	public static boolean isLoop2(IRList args) throws RException {
-		return args.size() >= 9 && RulpUtil.isAtom(args.get(3), A_FROM) && RulpUtil.isAtom(args.get(5), F_TO)
-				&& RulpUtil.isAtom(args.get(7), A_DO);
-	}
-
 	static void loop1(IRList args, IRInterpreter interpreter, IRFrame loopFrame) throws RException {
 
 		String indexName = RulpUtil.asAtom(args.get(2)).getName();
@@ -93,7 +88,7 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 
 		OUT_LOOP: for (int i = fromIndex; i <= toIndex; ++i) {
 
-			loopFrame.setEntry(indexName, RulpFactory.createInteger(i));			
+			loopFrame.setEntry(indexName, RulpFactory.createInteger(i));
 			IRIterator<? extends IRObject> iter = getLoop2DoList(args);
 
 			IRFrame loopDoFrame = RulpFactory.createFrame(loopFrame, "LOOP-DO");
@@ -173,6 +168,26 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 		super(factorName);
 	}
 
+	public static boolean isLoop2(IRList args) throws RException {
+
+		// (loop for x from 1 to 3 do ...)
+		return args.size() >= 9 && RulpUtil.isAtom(args.get(1), F_FOR) && RulpUtil.isAtom(args.get(2))
+				&& RulpUtil.isAtom(args.get(3), A_FROM) && RulpUtil.isAtom(args.get(5), F_TO)
+				&& RulpUtil.isAtom(args.get(7), A_DO);
+	}
+
+	public static boolean isLoop1(IRList args) throws RException {
+
+		// (loop for x in '(1 2 3) do ...)
+		return args.size() >= 7 && RulpUtil.isAtom(args.get(1), F_FOR) && RulpUtil.isAtom(args.get(2))
+				&& RulpUtil.isAtom(args.get(3), F_IN) && RulpUtil.isAtom(args.get(5), A_DO);
+
+	}
+
+	public static boolean isLoop3(IRList args) throws RException {
+		return args.size() == 1 || args.get(1).getType() == RType.EXPR;
+	}
+
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
@@ -185,31 +200,25 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 
 		try {
 
-			if (RulpUtil.isAtom(args.get(1), F_FOR)) {
-
-				if (args.size() >= 7 && RulpUtil.isAtom(args.get(2))) {
-
-					// (loop for x in '(1 2 3) do (print x))
-					if (RulpUtil.isAtom(args.get(3), F_IN) && RulpUtil.isAtom(args.get(5), A_DO)) {
-						loop1(args, interpreter, loopFrame);
-						return O_Nil;
-					}
-
-					// (loop for x from 1 to 3 do (print x))
-					if (isLoop2(args)) {
-						loop2(args, interpreter, loopFrame);
-						return O_Nil;
-					}
-				}
-
-				throw new RException("Invalid parameters: " + args);
+			// (loop for x in '(1 2 3) do (print x))
+			if (isLoop1(args)) {
+				loop1(args, interpreter, loopFrame);
+				return O_Nil;
 			}
 
-			// (loop stmt1 stmt2 (break))
-			else {
+			// (loop for x from 1 to 3 do ...)
+			if (isLoop2(args)) {
+				loop2(args, interpreter, loopFrame);
+				return O_Nil;
+			}
+
+			// (loop stmt1 ...)
+			if (isLoop3(args)) {
 				loop3(args, interpreter, loopFrame);
 				return O_Nil;
 			}
+
+			throw new RException("Invalid loop expr: " + args);
 
 		} finally {
 

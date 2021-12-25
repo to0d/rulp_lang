@@ -35,10 +35,10 @@ public class XRFactorWhen extends AbsAtomFactorAdapter implements IRFactor {
 		}
 
 		IRObject cond = args.get(1);
-		IRObject ifClause = interpreter.compute(frame, cond);
+		IRObject whenClause = interpreter.compute(frame, cond);
 
 		// false
-		if (!MathUtil.toBoolean(ifClause)) {
+		if (!MathUtil.toBoolean(whenClause)) {
 			return O_Nil;
 		}
 

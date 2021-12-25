@@ -476,9 +476,7 @@ public class CCOUtil {
 					incCC0ComputeCount();
 					return false;
 				}
-
 			}
-
 		}
 
 		if (rebuildCount > 0 || childUpdate > 0) {
