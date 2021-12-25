@@ -479,6 +479,11 @@ public class CCOUtil {
 			}
 		}
 
+		// Check infinite loop: (loop a)
+		if (_isFactor(e0, F_LOOP) && XRFactorLoop.isLoop3(expr)) {
+
+		}
+
 		if (rebuildCount > 0 || childUpdate > 0) {
 			cc0.outputExpr = RulpFactory.createExpression(rebuildList);
 		}
