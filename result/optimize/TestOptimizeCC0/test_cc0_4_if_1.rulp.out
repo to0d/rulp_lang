@@ -18,7 +18,7 @@
 ;out:
 (defun fun (?v)
     (do (if (<= ?v 0) (return 0)) (return (+ 1 (fun (- ?v 1)))))
-)
+)[opt-cc0]
 
 ;eof
 

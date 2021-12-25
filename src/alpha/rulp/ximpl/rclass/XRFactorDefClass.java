@@ -121,9 +121,6 @@ public class XRFactorDefClass extends AbsAtomFactorAdapter implements IRFactor {
 				case A_FINAL:
 					defClass.setFinal(true);
 					break;
-
-				default:
-					throw new RException("unknown attribute:" + attr);
 				}
 
 				RulpUtil.addAttribute(defClass, attr);

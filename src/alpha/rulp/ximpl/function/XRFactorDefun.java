@@ -283,8 +283,6 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 					uniqOptAttributeSet.add(A_OPT_TCO);
 					break;
 
-				default:
-					throw new RException("unknown attr: " + attr);
 				}
 			}
 

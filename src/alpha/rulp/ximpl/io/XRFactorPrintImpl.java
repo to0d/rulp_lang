@@ -69,7 +69,7 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 		List<String> lines = new ArrayList<>();
 		lines.add(sb.toString());
 		FormatUtil.format(func.getFunBody(), lines, 1);
-		lines.add(")");
+		lines.add(")" + FormatUtil.formatAttribute(func));
 
 		for (String line : lines) {
 			out.out(line + "\n");

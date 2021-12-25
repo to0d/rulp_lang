@@ -11,7 +11,7 @@
 ;out:
 (defun fun ()
     (return 3)
-)
+)[opt-cc0]
 
 ;eof
 

@@ -29,7 +29,7 @@
         )
         (return ?x)
     )
-)
+)[opt-cc2]
 
 ;eof
 

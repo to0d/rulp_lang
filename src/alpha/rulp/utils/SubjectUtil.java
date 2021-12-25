@@ -161,8 +161,6 @@ public class SubjectUtil {
 			}
 			break;
 
-		default:
-			throw new RException("unknown attribute:" + attr);
 		}
 
 		RulpUtil.addAttribute(mbr, attr);

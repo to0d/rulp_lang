@@ -371,9 +371,9 @@ public class FormatUtil {
 		return outLines;
 	}
 
-	public static String toString(IRObject obj) throws RException {
+	public static String formatAttribute(IRObject obj) throws RException {
 
-		String out = RulpUtil.toString(obj);
+		String out = "";
 		if (RulpUtil.hasAttributeList(obj)) {
 
 			out += "[";
@@ -391,5 +391,9 @@ public class FormatUtil {
 		}
 
 		return out;
+	}
+
+	public static String toString(IRObject obj) throws RException {
+		return RulpUtil.toString(obj) + formatAttribute(obj);
 	}
 }

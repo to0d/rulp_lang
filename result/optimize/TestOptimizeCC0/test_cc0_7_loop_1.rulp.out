@@ -13,7 +13,7 @@
 ;out:
 (defun fun (?v)
     (return ?v)
-)
+)[opt-cc0]
 
 ;eof
 
