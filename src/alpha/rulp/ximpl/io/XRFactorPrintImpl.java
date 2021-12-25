@@ -28,6 +28,14 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 		super(factorName);
 	}
 
+	static void printFunc(IROut out, int level) throws RException {
+
+		// 
+		if (level == -1) {
+
+		}
+	}
+
 	static void printFunc(IROut out, IRFunction func) throws RException {
 
 		if (func.isList()) {

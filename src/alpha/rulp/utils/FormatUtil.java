@@ -9,7 +9,7 @@
 
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.A_NIL;
 import static alpha.rulp.lang.Constant.F_IF;
 
@@ -24,6 +24,7 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRParser;
+import alpha.rulp.ximpl.control.XRFactorLoop;
 
 public class FormatUtil {
 
@@ -76,7 +77,7 @@ public class FormatUtil {
 
 				break;
 			default:
-				loc = new Loc(0, 1, RulpUtil.toString(obj).length());
+				loc = new Loc(0, 1, toString(obj).length());
 				break;
 			}
 
@@ -113,16 +114,41 @@ public class FormatUtil {
 		_output(obj, outLines, 0);
 	}
 
+	public static String toString(IRObject obj) throws RException {
+
+		String out = RulpUtil.toString(obj);
+		if (RulpUtil.hasAttributeList(obj)) {
+
+			out += "[";
+			int index = 0;
+			for (String attr : RulpUtil.getAttributeList(obj)) {
+
+				if (index++ != 0) {
+					out += " ";
+				}
+
+				out += attr;
+
+			}
+			out += "]";
+		}
+
+		return out;
+	}
+
 	private static void _output(IRObject obj, List<String> outLines, int level) throws RException {
 
 		if (obj.getType() == RType.EXPR) {
 
 			switch (((IRList) obj).get(0).asString()) {
-			case "if":
+			case F_IF:
 				_output_if((IRList) obj, outLines, level);
 				return;
-			case "defun":
+			case F_DEFUN:
 				_output_defun((IRList) obj, outLines, level);
+				return;
+			case F_LOOP:
+				_output_loop((IRList) obj, outLines, level);
 				return;
 			case "add-rule":
 				_output_add_rule((IRList) obj, outLines, level);
@@ -147,7 +173,7 @@ public class FormatUtil {
 		}
 
 		if (outputOneLine) {
-			outLines.add(_getSpaceLine(level) + RulpUtil.toString(obj));
+			outLines.add(_getSpaceLine(level) + toString(obj));
 			return;
 		}
 
@@ -160,7 +186,7 @@ public class FormatUtil {
 		IRIterator<? extends IRObject> it;
 		// first element is simple
 		if (l0.num == 1 || (l0.width < MAX_LEN)) {
-			outLines.add(_getSpaceLine(level) + head + RulpUtil.toString(e0));
+			outLines.add(_getSpaceLine(level) + head + toString(e0));
 			it = list.listIterator(1);
 		} else {
 			outLines.add(_getSpaceLine(level) + head);
@@ -202,7 +228,7 @@ public class FormatUtil {
 				firsLine += " ";
 			}
 
-			firsLine += RulpUtil.toString(obj);
+			firsLine += toString(obj);
 		}
 
 		outLines.add(_getSpaceLine(level) + firsLine);
@@ -228,7 +254,7 @@ public class FormatUtil {
 			if (index != 0) {
 				firsLine += " ";
 			}
-			firsLine += RulpUtil.toString(expr.get(index));
+			firsLine += toString(expr.get(index));
 		}
 
 		outLines.add(_getSpaceLine(level) + firsLine);
@@ -238,7 +264,64 @@ public class FormatUtil {
 
 	private static void _output_if(IRList expr, List<String> outLines, int level) throws RException {
 
-		outLines.add(_getSpaceLine(level) + "(" + RulpUtil.toString(expr.get(0)));
+		outLines.add(_getSpaceLine(level) + "(" + toString(expr.get(0)));
+
+		for (int i = 1; i < expr.size(); ++i) {
+			_output(expr.get(i), outLines, level + 1);
+		}
+
+		outLines.add(_getSpaceLine(level) + ")");
+	}
+
+	private static void _output_loop(IRList expr, List<String> outLines, int level) throws RException {
+
+		// (loop for x in '(1 2 3) do
+		// action
+		// )
+		if (XRFactorLoop.isLoop1(expr)) {
+
+			int size = expr.size();
+
+			String line1 = _getSpaceLine(level) + "(" + toString(expr.get(0));
+			for (int i = 1; i < 6; ++i) {
+				line1 += " " + toString(expr.get(i));
+			}
+			outLines.add(line1);
+
+			for (int i = 6; i < size; ++i) {
+				_output(expr.get(i), outLines, level + 1);
+			}
+			outLines.add(_getSpaceLine(level) + ")");
+
+			return;
+		}
+
+		// (loop for x from 1 to 3 do
+		// action
+		// )
+		if (XRFactorLoop.isLoop2(expr)) {
+
+			int size = expr.size();
+
+			String line1 = _getSpaceLine(level) + "(" + toString(expr.get(0));
+			for (int i = 1; i < 8; ++i) {
+				line1 += " " + toString(expr.get(i));
+			}
+			outLines.add(line1);
+
+			for (int i = 8; i < size; ++i) {
+				_output(expr.get(i), outLines, level + 1);
+			}
+			outLines.add(_getSpaceLine(level) + ")");
+
+			return;
+		}
+
+		// (loop
+		// action
+		// )
+
+		outLines.add(_getSpaceLine(level) + "(" + toString(expr.get(0)));
 
 		for (int i = 1; i < expr.size(); ++i) {
 			_output(expr.get(i), outLines, level + 1);

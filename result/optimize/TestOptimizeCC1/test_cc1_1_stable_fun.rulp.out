@@ -24,7 +24,9 @@
 (defun fun2 ()
     (do
         (defvar ?x 0)
-        (loop for x from 1 to 3 do (setq ?x (+ ?x (cc1 (fun1 1)))))
+        (loop for x from 1 to 3 do
+            (setq ?x (+ ?x (cc1 (fun1 1))))
+        )
         (return ?x)
     )
 )
