@@ -1,0 +1,12 @@
+(seta (a b) 1 x)
+;=>
+
+(defvar ?x (a b))
+;=>
+
+(seta ?x 1 x)
+;=>
+
+?x
+;=>
+
