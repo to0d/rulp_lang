@@ -1,0 +1,12 @@
+(make-array)
+;=>{}
+
+(make-array 1)
+;=>{nil}
+
+(make-array 2)
+;=>{nil,nil}
+
+(make-array 1 3)
+;=>{nil}
+

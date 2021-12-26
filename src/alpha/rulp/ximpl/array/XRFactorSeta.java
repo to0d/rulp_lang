@@ -7,7 +7,7 @@
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-package alpha.rulp.ximpl.collection;
+package alpha.rulp.ximpl.array;
 
 import alpha.rulp.lang.IRArray;
 import alpha.rulp.lang.IRFrame;

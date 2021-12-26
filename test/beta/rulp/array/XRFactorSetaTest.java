@@ -1,4 +1,4 @@
-package beta.rulp.collection;
+package beta.rulp.array;
 
 import org.junit.jupiter.api.Test;
 

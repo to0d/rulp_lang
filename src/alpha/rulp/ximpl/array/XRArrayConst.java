@@ -1,4 +1,4 @@
-package alpha.rulp.ximpl.lang;
+package alpha.rulp.ximpl.array;
 
 import static alpha.rulp.lang.Constant.MAX_TOSTRING_LEN;
 
@@ -10,6 +10,7 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.lang.AbsRefObject;
 
 public class XRArrayConst extends AbsRefObject implements IRArray {
 
