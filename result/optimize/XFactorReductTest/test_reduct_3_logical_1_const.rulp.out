@@ -1,0 +1,6 @@
+(reduct (> 2 1))
+;err:
+factor not found: (reduct (> 2 1))
+at main: (reduct (> 2 1))
+;eof
+

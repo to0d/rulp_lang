@@ -1,0 +1,13 @@
+(reduct
+    (do
+        (defvar ?x 10)
+        (if (< ?x 10)
+            (return 0)
+            (return 1))
+    )
+)
+;err:
+factor not found: (reduct (do (defvar ?x 10) (if (< ?x 10) (return 0) (return 1))))
+at main: (reduct (do (defvar ?x 10) (if (< ?x 10) (return 0) (return 1))))
+;eof
+
