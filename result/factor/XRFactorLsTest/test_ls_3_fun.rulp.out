@@ -189,8 +189,10 @@ root::str-upper
 root::strcat
 root::string
 root::subject-of
+root::sys-free-memory
 root::sys-gc
 root::sys-time
+root::sys-total-memory
 root::to-atom
 root::to-blob
 root::to-expr

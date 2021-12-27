@@ -217,8 +217,10 @@ import alpha.rulp.ximpl.string.XRFactorStrUpper;
 import alpha.rulp.ximpl.string.XRFactorToString;
 import alpha.rulp.ximpl.subject.XRSubjectFrame;
 import alpha.rulp.ximpl.system.XRFactorDate;
+import alpha.rulp.ximpl.system.XRFactorSystemFreeMemory;
 import alpha.rulp.ximpl.system.XRFactorSystemGC;
 import alpha.rulp.ximpl.system.XRFactorSystemTime;
+import alpha.rulp.ximpl.system.XRFactorSystemTotalMemory;
 import alpha.rulp.ximpl.template.XRFactorDefTemplate;
 import alpha.rulp.ximpl.template.XRTemplate;
 import alpha.rulp.ximpl.thread.XRFactorDoParallel;
@@ -730,6 +732,8 @@ public final class RulpFactory {
 		// System
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemGC(F_SYS_GC));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemTime(F_SYS_TIME));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemTotalMemory(F_SYS_TOTAL_MEMORY));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemFreeMemory(F_SYS_FREE_MEMORY));
 
 		// Rulp Utils
 		RulpUtil.addFrameObject(rootFrame, new XRFactorRulpObjectCount(F_RULP_OBJ_COUNT));

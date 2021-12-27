@@ -423,6 +423,10 @@ public interface Constant {
 
 	String F_SYS_TIME = "sys-time";
 
+	String F_SYS_TOTAL_MEMORY = "sys-total-memory";
+	
+	String F_SYS_FREE_MEMORY = "sys-free-memory";
+	
 	String F_TO = "to";
 
 	String F_TO_ATOM = "to-atom";

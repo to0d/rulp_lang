@@ -1,15 +1,17 @@
-id=0, name=root, lvl=0, ref=0/0, entry=178, subject=root
+id=0, name=root, lvl=0, ref=0/0, entry=180, subject=root
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?os.version          : -213     0        1    var        10.0 : type=string  
-?os.name             : -212     0        1    var        Windows 10 : type=string
-?path.separator      : -211     0        1    var        ; : type=string     
-?file.separator      : -210     0        1    var        \ : type=string     
-?user.dir            : -209     0        1    var        C:\data\itool\irulp_base : type=string
-?user.name           : -208     0        1    var        to0d : type=string  
-?user.home           : -207     0        1    var        C:\Users\to0d : type=string
-rulp-object-count    : -173     0        0    factor     rulp-object-count   
+?os.version          : -215     0        1    var        10.0 : type=string  
+?os.name             : -214     0        1    var        Windows 10 : type=string
+?path.separator      : -213     0        1    var        ; : type=string     
+?file.separator      : -212     0        1    var        \ : type=string     
+?user.dir            : -211     0        1    var        C:\data\itool\irulp_base : type=string
+?user.name           : -210     0        1    var        921511672 : type=string
+?user.home           : -209     0        1    var        C:\Users\YANLIU : type=string
+rulp-object-count    : -175     0        0    factor     rulp-object-count   
+sys-free-memory      : -174     0        0    factor     sys-free-memory     
+sys-total-memory     : -173     0        0    factor     sys-total-memory    
 sys-time             : -172     0        0    factor     sys-time            
 sys-gc               : -171     0        0    factor     sys-gc              
 random               : -170     0        0    factor     random              
