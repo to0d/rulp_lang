@@ -63,6 +63,7 @@ public class XRFactorDate extends AbsAtomFactorAdapter implements IRFactor {
 
 				throw new RException(e.toString());
 			}
+
 		} else {
 
 			Calendar cal = Calendar.getInstance();

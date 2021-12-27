@@ -36,9 +36,5 @@ public class TestOptimizeCC3 extends RulpTestBase {
 		_setup();
 		_run_script();
 
-		System.out.println(Runtime.getRuntime().totalMemory()/1024L/1024L);
-		System.out.println(Runtime.getRuntime().maxMemory()/1024L/1024L);
-		System.out.println(Runtime.getRuntime().freeMemory()/1024L/1024L);
-		System.out.println(Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory());
 	}
 }

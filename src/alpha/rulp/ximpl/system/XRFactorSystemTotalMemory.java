@@ -26,6 +26,11 @@ public class XRFactorSystemTotalMemory extends AbsAtomFactorAdapter implements I
 
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		if (args.size() != 1) {
+			throw new RException("Invalid parameters: " + args);
+		}
+
 		return RulpFactory.createLong(Runtime.getRuntime().totalMemory());
 	}
 

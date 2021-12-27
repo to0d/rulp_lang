@@ -186,6 +186,7 @@ import alpha.rulp.ximpl.rclass.XRFactorNew;
 import alpha.rulp.ximpl.rclass.XRFactorPropertyOf;
 import alpha.rulp.ximpl.rclass.XRMember;
 import alpha.rulp.ximpl.rclass.XRNoClass;
+import alpha.rulp.ximpl.runtime.XRFactorRuntimeCallCount;
 import alpha.rulp.ximpl.runtime.XRFrame;
 import alpha.rulp.ximpl.runtime.XRFrameEntry;
 import alpha.rulp.ximpl.runtime.XRFrameProtected;
@@ -734,6 +735,9 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemTime(F_SYS_TIME));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemTotalMemory(F_SYS_TOTAL_MEMORY));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemFreeMemory(F_SYS_FREE_MEMORY));
+
+		// Runtime
+		RulpUtil.addFrameObject(rootFrame, new XRFactorRuntimeCallCount(F_RUNTIME_CALL_COUNT));
 
 		// Rulp Utils
 		RulpUtil.addFrameObject(rootFrame, new XRFactorRulpObjectCount(F_RULP_OBJ_COUNT));

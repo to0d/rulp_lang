@@ -1,0 +1,15 @@
+(defun fun1 (?v1) 
+    (return ?v1)
+)
+;=>
+
+(loop for ?x from 1 to 3 do
+    (print (fun1 ?x) " ")
+)
+;=>
+
+(runtime-call-count fun1)
+;=>
+
+(_ginfo)
+;;;

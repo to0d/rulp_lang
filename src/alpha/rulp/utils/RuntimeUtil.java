@@ -516,7 +516,7 @@ public final class RuntimeUtil {
 			}
 		}
 
-		callObject.incCallCount(callStatsId.get(), interpreter.getCallId());
+		callObject.incCallCount(getCallStatsId(), interpreter.getCallId());
 
 		if (callObject.isThreadSafe()) {
 			return callObject.compute(args, interpreter, frame);
@@ -606,6 +606,10 @@ public final class RuntimeUtil {
 		return RulpUtil.asBoolean(RulpUtil.asVar(interpreter.getObject(varName)).getValue()).asBoolean();
 	}
 
+	public static int getCallStatsId() {
+		return callStatsId.get();
+	}
+
 	public static int getExprComputeCount(RType type) {
 
 		switch (type) {
@@ -650,7 +654,7 @@ public final class RuntimeUtil {
 
 			if (obj instanceof IRCallable) {
 				IRCallable cobj = (IRCallable) obj;
-				DeCounter counter = cobj.getCallCount(callStatsId.get());
+				DeCounter counter = cobj.getCallCount(getCallStatsId());
 				if (counter.getTotalCount() > 0) {
 					cm.put(cobj, counter);
 				}
@@ -674,7 +678,7 @@ public final class RuntimeUtil {
 
 					if (mbrObj instanceof IRCallable) {
 						IRCallable cobj = (IRCallable) mbrObj;
-						DeCounter counter = cobj.getCallCount(callStatsId.get());
+						DeCounter counter = cobj.getCallCount(getCallStatsId());
 						if (counter.getTotalCount() > 0) {
 							cm.put(mbr, counter);
 						}

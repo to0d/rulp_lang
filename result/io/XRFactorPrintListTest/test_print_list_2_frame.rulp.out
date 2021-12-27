@@ -126,6 +126,7 @@ root::return-tco
 root::reverse
 root::root
 root::rulp-object-count
+root::runtime-call-count
 root::save-txt-file
 root::search-frame-of
 root::seta

@@ -141,6 +141,7 @@ obj=return-tco, type=factor, stable=true
 obj=reverse, type=factor, stable=true
 obj=root, type=frame, stable=false
 obj=rulp-object-count, type=factor, stable=false
+obj=runtime-call-count, type=factor, stable=false
 obj=save-txt-file, type=factor, stable=false
 obj=search-frame-of, type=factor, stable=false
 obj=seta, type=factor, stable=true

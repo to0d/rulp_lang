@@ -702,6 +702,15 @@ public class RulpUtil {
 		return (IRBoolean) obj;
 	}
 
+	public static IRCallable asCallable(IRObject obj) throws RException {
+
+		if (!(obj instanceof IRCallable)) {
+			throw new RException("Can't convert object to callable: " + obj);
+		}
+
+		return (IRCallable) obj;
+	}
+
 	public static IRClass asClass(IRObject obj) throws RException {
 
 		if (obj != null && obj.getType() != RType.CLASS) {

@@ -28,6 +28,10 @@ public class XRFactorSystemGC extends AbsAtomFactorAdapter implements IRFactor {
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
+		if (args.size() != 1) {
+			throw new RException("Invalid parameters: " + args);
+		}
+
 		long timestamp = System.currentTimeMillis();
 		System.gc();
 		interpreter.out("GC: time=" + (System.currentTimeMillis() - timestamp) + " m");

@@ -363,6 +363,8 @@ public interface Constant {
 
 	String F_RULP_OBJ_COUNT = "rulp-object-count";
 
+	String F_RUNTIME_CALL_COUNT = "runtime-call-count";
+
 	String F_SAVE_TXT_FILE = "save-txt-file";
 
 	String F_SEARCH_FRAEM_OF = "search-frame-of";
@@ -419,14 +421,14 @@ public interface Constant {
 
 	String F_SUBJECT_OF = "subject-of";
 
+	String F_SYS_FREE_MEMORY = "sys-free-memory";
+
 	String F_SYS_GC = "sys-gc";
 
 	String F_SYS_TIME = "sys-time";
 
 	String F_SYS_TOTAL_MEMORY = "sys-total-memory";
-	
-	String F_SYS_FREE_MEMORY = "sys-free-memory";
-	
+
 	String F_TO = "to";
 
 	String F_TO_ATOM = "to-atom";
