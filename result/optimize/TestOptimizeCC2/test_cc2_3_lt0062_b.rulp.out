@@ -36,8 +36,8 @@
 
 ;eof
 
-(uniquePaths 3 7)
-;=>28
+(uniquePaths 2 2)
+;=>2
 
 (opt-status)
 ;=>nil

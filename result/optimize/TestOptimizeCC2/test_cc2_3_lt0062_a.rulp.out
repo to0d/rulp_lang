@@ -1,0 +1,60 @@
+; f(m,n) = f(m-1,n) + f(m,n-1)
+; f(m,n) = f(n,m)
+; f(1,n) = 1
+
+(defun uniquePaths (m n)
+    (if (or (= m 0) (= n 0)) (return 0))
+    (if (< m n) (return (uniquePaths n m)))
+    (if (= n 1) (return 1))
+    (return (+ (uniquePaths (- m 1) n) (uniquePaths m (- n 1))))
+)[opt-cc2]
+;=>uniquePaths
+
+(attribute-of uniquePaths)
+;=>'(opt-cc2)
+
+(print-impl uniquePaths)
+;=>nil
+;out:
+(defun uniquePaths (mn)
+    (do
+        (if
+            (or (= m 0) (= n 0))
+            (return 0)
+        )
+        (if
+            (< m n)
+            (return (cc2[id=0] (uniquePaths n m)))
+        )
+        (if
+            (= n 1)
+            (return 1)
+        )
+        (return (+ (uniquePaths (- m 1) n) (uniquePaths m (- n 1))))
+    )
+)[opt-cc2]
+cc 0: id=0, type=CC2, call=0, hit=0, cache=0, index=[1,2]
+
+;eof
+
+(uniquePaths 2 2)
+;=>2
+
+(opt-status)
+;=>nil
+;out:
+==========================================================================================================================
+      Name: Status
+--------------------------------------------------------------------------------------------------------------------------
+       TCO: rebuild=0, expr=0, call=0, compute=0
+       CC0: rebuild=1, compute=0
+       CC1: rebuild=1, expr=0, call=0, cache=0, reuse=0
+       CC2: rebuild=1, expr=1, call=1, cache=0
+       CC3: rebuild=0, expr=0, call=0, cache=0
+==========================================================================================================================
+
+;eof
+
+(_ginfo)
+;=>nil
+

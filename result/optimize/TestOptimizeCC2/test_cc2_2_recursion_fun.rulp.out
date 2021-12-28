@@ -1,0 +1,39 @@
+(defun fun (?v)
+    (if (<= ?v (- 1 1))(return 1))
+    (return (* ?v (fun (- ?v 1))))
+)[opt-cc2]
+;=>fun
+
+(attribute-of fun)
+;=>'(opt-cc0)
+
+(print-impl fun)
+;=>nil
+;out:
+(defun fun (?v)
+    (do (if (<=[opt-cc0] ?v 0) (return 1)) (return (* ?v (fun (- ?v 1)))))
+)[opt-cc0]
+
+;eof
+
+(fun 4)
+;=>24
+
+(opt-status)
+;=>nil
+;out:
+==========================================================================================================================
+      Name: Status
+--------------------------------------------------------------------------------------------------------------------------
+       TCO: rebuild=0, expr=0, call=0, compute=0
+       CC0: rebuild=1, compute=1
+       CC1: rebuild=1, expr=0, call=0, cache=0, reuse=0
+       CC2: rebuild=1, expr=0, call=0, cache=0
+       CC3: rebuild=0, expr=0, call=0, cache=0
+==========================================================================================================================
+
+;eof
+
+(_ginfo)
+;=>nil
+

@@ -9,14 +9,14 @@
         (setq ?x (+ ?x (fun1 (+ ?i 1))))
     )
     (return ?x)
-)[opt-cc3]
+)[opt-cc2]
 ;=>
 
 (attribute-of fun1)
 ;=>
 
 (attribute-of fun2)
-;=>'(opt-cc3)
+;=>
 
 (print-impl fun2)
 ;;;

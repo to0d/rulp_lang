@@ -1,9 +1,0 @@
-(defun fun (?v)
-    (if (<= ?v (- 1 1))(return 1))
-    (return (* ?v (fun (- ?v 1))))
-)[opt-cc3]
-;=>fun
-
-(attribute-of fun)
-;=>'(opt-cc0)
-

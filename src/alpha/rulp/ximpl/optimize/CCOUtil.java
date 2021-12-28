@@ -8,8 +8,6 @@ import static alpha.rulp.lang.Constant.F_CASE;
 import static alpha.rulp.lang.Constant.F_CC1;
 import static alpha.rulp.lang.Constant.F_CC2;
 import static alpha.rulp.lang.Constant.F_CC3;
-import static alpha.rulp.lang.Constant.F_DEFUN;
-import static alpha.rulp.lang.Constant.F_DEFVAR;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_LOOP;
 import static alpha.rulp.lang.Constant.F_RETURN;
@@ -166,22 +164,8 @@ public class CCOUtil {
 
 	private static boolean _isCC1Factor(IRObject obj, IRFrame frame) throws RException {
 
-		if (_isCC0Factor(obj, frame)) {
+		if (obj.getType() != RType.FUNC) {
 			return false;
-		}
-
-		if (obj.getType() != RType.FACTOR && obj.getType() != RType.FUNC) {
-			return false;
-		}
-
-		if (obj.getType() == RType.FACTOR) {
-			switch (obj.asString()) {
-			case F_RETURN:
-			case F_DEFVAR:
-			case F_DEFUN:
-				return false;
-			}
-
 		}
 
 		if (!StableUtil.isStable(obj, frame)) {
@@ -193,7 +177,7 @@ public class CCOUtil {
 
 	private static boolean _isCC2Expr(IRObject e0, IRExpr expr, NameSet nameSet, IRFrame frame) throws RException {
 
-		if (!_isCC1Factor(e0, frame)) {
+		if (!_isCC2Factor(e0, frame)) {
 			return false;
 		}
 
@@ -204,9 +188,35 @@ public class CCOUtil {
 		return true;
 	}
 
+	private static boolean _isCC2Factor(IRObject obj, IRFrame frame) throws RException {
+
+		if (obj.getType() != RType.FUNC) {
+			return false;
+		}
+
+		if (!StableUtil.isStable(obj, frame)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private static boolean _isCC3Factor(IRObject obj, IRFrame frame) throws RException {
+
+		if (obj.getType() != RType.FUNC) {
+			return false;
+		}
+
+		if (!StableUtil.isStable(obj, frame)) {
+			return false;
+		}
+
+		return true;
+	}
+
 	private static boolean _isCC3Expr(IRObject e0, IRExpr expr, NameSet nameSet, IRFrame frame) throws RException {
 
-		if (!_isCC1Factor(e0, frame)) {
+		if (!_isCC3Factor(e0, frame)) {
 			return false;
 		}
 
@@ -701,7 +711,7 @@ public class CCOUtil {
 
 			} else {
 
-				if (i == 0 && _isCC1Factor(ex, frame)) {
+				if (i == 0 && _isCC2Factor(ex, frame)) {
 					reBuild = true;
 				} else {
 					reBuild = _isLocalValue(ex, nameSet);
@@ -816,7 +826,7 @@ public class CCOUtil {
 
 			} else {
 
-				if (i == 0 && _isCC1Factor(ex, frame)) {
+				if (i == 0 && _isCC3Factor(ex, frame)) {
 					reBuild = true;
 				} else {
 					reBuild = _isStableValue(ex, nameSet, frame);
@@ -850,15 +860,23 @@ public class CCOUtil {
 			// Need rebuild element
 			if (newObj == null) {
 
-				IRExpr cc3Expr = RulpUtil.asExpression(expr.get(i));
-				List<IRAtom> varAtoms = nameSet.listAllVars(cc3Expr);
+				IRExpr oldExpr = RulpUtil.asExpression(expr.get(i));
+				if (_isCC3Expr(oldExpr.get(0), oldExpr, nameSet, frame)) {
 
-				int ccId = incCC3ExprCount();
-				XRFactorCC3 factor = new XRFactorCC3(F_CC3, ccId, varAtoms);
-				RulpUtil.addAttribute(factor, String.format("%s=%d", A_ID, ccId));
-				newObj = RulpFactory.createExpression(factor, expr.get(i));
-				rebuildList.set(i, newObj);
-				rebuildCount++;
+					List<IRAtom> varAtoms = nameSet.listAllVars(oldExpr);
+
+					int ccId = incCC3ExprCount();
+					XRFactorCC3 factor = new XRFactorCC3(F_CC3, ccId, varAtoms);
+					RulpUtil.addAttribute(factor, String.format("%s=%d", A_ID, ccId));
+					newObj = RulpFactory.createExpression(factor, oldExpr);
+					rebuildList.set(i, newObj);
+					rebuildCount++;
+
+				} else {
+
+					rebuildList.set(i, oldExpr);
+				}
+
 			}
 		}
 
