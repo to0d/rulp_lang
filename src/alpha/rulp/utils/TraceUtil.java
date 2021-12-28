@@ -659,8 +659,8 @@ public class TraceUtil {
 				CCOUtil.getCC1CacheCount(), CCOUtil.getCC1ReuseCount()));
 		sb.append(String.format("%10s: rebuild=%d, expr=%d, call=%d, cache=%d\n", "CC2", CCOUtil.getCC2RebuildCount(),
 				CCOUtil.getCC2ExprCount(), CCOUtil.getCC2CallCount(), CCOUtil.getCC2CacheCount()));
-		sb.append(String.format("%10s: rebuild=%d, expr=%d, call=%d, cache=%d\n", "CC3", CCOUtil.getCC3RebuildCount(),
-				CCOUtil.getCC3ExprCount(), CCOUtil.getCC3CallCount(), CCOUtil.getCC3CacheCount()));
+//		sb.append(String.format("%10s: rebuild=%d, expr=%d, call=%d, cache=%d\n", "CC3", CCOUtil.getCC3RebuildCount(),
+//				CCOUtil.getCC3ExprCount(), CCOUtil.getCC3CallCount(), CCOUtil.getCC3CacheCount()));
 		sb.append(SEP_LINE1);
 
 	}

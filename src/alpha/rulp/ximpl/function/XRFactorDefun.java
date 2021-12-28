@@ -12,7 +12,7 @@ package alpha.rulp.ximpl.function;
 import static alpha.rulp.lang.Constant.A_OPT_CC0;
 import static alpha.rulp.lang.Constant.A_OPT_CC1;
 import static alpha.rulp.lang.Constant.A_OPT_CC2;
-import static alpha.rulp.lang.Constant.A_OPT_CC3;
+//import static alpha.rulp.lang.Constant.A_OPT_CC3;
 import static alpha.rulp.lang.Constant.A_OPT_FULL;
 import static alpha.rulp.lang.Constant.A_OPT_TCO;
 
@@ -66,8 +66,8 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 			return 1;
 		case A_OPT_CC2:
 			return 2;
-		case A_OPT_CC3:
-			return 3;
+//		case A_OPT_CC3:
+//			return 3;
 		case A_OPT_TCO:
 			return 4;
 		default:
@@ -108,16 +108,16 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 		return true;
 	}
 
-	private static boolean _optCC3(OPT opt) throws RException {
-
-		IRExpr newExpr = CCOUtil.rebuildCC3(opt.funBody, opt.paraAttrs, opt.funName, opt.interpreter, opt.frame, false);
-		if (newExpr == opt.funBody) {
-			return false;
-		}
-
-		opt.funBody = newExpr;
-		return true;
-	}
+//	private static boolean _optCC3(OPT opt) throws RException {
+//
+//		IRExpr newExpr = CCOUtil.rebuildCC3(opt.funBody, opt.paraAttrs, opt.funName, opt.interpreter, opt.frame, false);
+//		if (newExpr == opt.funBody) {
+//			return false;
+//		}
+//
+//		opt.funBody = newExpr;
+//		return true;
+//	}
 
 	private static boolean _optTCO(OPT opt) throws RException {
 
@@ -268,18 +268,18 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 					uniqOptAttributeSet.add(A_OPT_CC2);
 					break;
 
-				case A_OPT_CC3:
-					uniqOptAttributeSet.add(A_OPT_CC0);
-					uniqOptAttributeSet.add(A_OPT_CC1);
-					uniqOptAttributeSet.add(A_OPT_CC2);
-					uniqOptAttributeSet.add(A_OPT_CC3);
-					break;
+//				case A_OPT_CC3:
+//					uniqOptAttributeSet.add(A_OPT_CC0);
+//					uniqOptAttributeSet.add(A_OPT_CC1);
+//					uniqOptAttributeSet.add(A_OPT_CC2);
+//					uniqOptAttributeSet.add(A_OPT_CC3);
+//					break;
 
 				case A_OPT_FULL:
 					uniqOptAttributeSet.add(A_OPT_CC0);
 					uniqOptAttributeSet.add(A_OPT_CC1);
 					uniqOptAttributeSet.add(A_OPT_CC2);
-					uniqOptAttributeSet.add(A_OPT_CC3);
+//					uniqOptAttributeSet.add(A_OPT_CC3);
 					uniqOptAttributeSet.add(A_OPT_TCO);
 					break;
 
@@ -330,10 +330,10 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 					reset = true;
 					break;
 
-				case A_OPT_CC3:
-					update = _optCC3(opt);
-					reset = true;
-					break;
+//				case A_OPT_CC3:
+//					update = _optCC3(opt);
+//					reset = true;
+//					break;
 
 				default:
 					throw new RException("unknown attr: " + attr);

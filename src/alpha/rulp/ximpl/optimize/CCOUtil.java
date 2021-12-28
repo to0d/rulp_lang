@@ -72,13 +72,13 @@ public class CCOUtil {
 
 	protected static AtomicInteger CC2RebuildCount = new AtomicInteger(0);
 
-	protected static AtomicInteger CC3CacheCount = new AtomicInteger(0);
-
-	protected static AtomicInteger CC3CallCount = new AtomicInteger(0);
-
-	protected static AtomicInteger CC3ExprCount = new AtomicInteger(0);
-
-	protected static AtomicInteger CC3RebuildCount = new AtomicInteger(0);
+//	protected static AtomicInteger CC3CacheCount = new AtomicInteger(0);
+//
+//	protected static AtomicInteger CC3CallCount = new AtomicInteger(0);
+//
+//	protected static AtomicInteger CC3ExprCount = new AtomicInteger(0);
+//
+//	protected static AtomicInteger CC3RebuildCount = new AtomicInteger(0);
 
 	private static IRExpr _asExpr(IRObject obj) throws RException {
 
@@ -777,115 +777,115 @@ public class CCOUtil {
 		return false;
 	}
 
-	private static boolean _rebuildCC3(CC0 cc0, NameSet nameSet, IRInterpreter interpreter, IRFrame frame, int level)
-			throws RException {
-
-		IRExpr expr = cc0.inputExpr;
-
-		if (expr.isEmpty()) {
-			return true;
-		}
-
-		IRObject e0 = RulpUtil.lookup(expr.get(0), interpreter, frame);
-
-		if (StableUtil.isNewFrameFactor(e0)) {
-			nameSet = nameSet.newBranch();
-		}
-
-		nameSet.updateExpr(e0, expr);
-
-		if (level > 0 && _isCC3Expr(e0, expr, nameSet, frame)) {
-			return true;
-		}
-
-		int size = expr.size();
-		ArrayList<IRObject> rebuildList = new ArrayList<>();
-		CC0 childCC0 = new CC0();
-
-		int childReBuild = 0;
-		int childUpdate = 0;
-
-		for (int i = 0; i < size; ++i) {
-
-			IRObject ex = i == 0 ? e0 : expr.get(i);
-			boolean reBuild = false;
-
-			if (ex.getType() == RType.EXPR) {
-
-				childCC0.setInputExpr((IRExpr) ex);
-				reBuild = _rebuildCC3(childCC0, nameSet, interpreter, frame, level + 1);
-
-				if (reBuild) {
-					rebuildList.add(childCC0.outputExpr);
-				} else if (childCC0.outputExpr != null) {
-					rebuildList.add(childCC0.outputExpr);
-					childUpdate++;
-				} else {
-					rebuildList.add(ex);
-				}
-
-			} else {
-
-				if (i == 0 && _isCC3Factor(ex, frame)) {
-					reBuild = true;
-				} else {
-					reBuild = _isStableValue(ex, nameSet, frame);
-				}
-
-				rebuildList.add(ex);
-			}
-
-			if (reBuild) {
-				childReBuild++;
-			}
-		}
-
-		// No child rebuild, return directly
-		if (childReBuild == 0 && childUpdate == 0) {
-			return false;
-		}
-
-		// All child rebuild, return
-		if (childReBuild == size) {
-			return true;
-		}
-
-		int rebuildCount = 0;
-
-		// part rebuild
-		for (int i = 0; i < size; ++i) {
-
-			IRObject newObj = rebuildList.get(i);
-
-			// Need rebuild element
-			if (newObj == null) {
-
-				IRExpr oldExpr = RulpUtil.asExpression(expr.get(i));
-				if (_isCC3Expr(oldExpr.get(0), oldExpr, nameSet, frame)) {
-
-					List<IRAtom> varAtoms = nameSet.listAllVars(oldExpr);
-
-					int ccId = incCC3ExprCount();
-					XRFactorCC3 factor = new XRFactorCC3(F_CC3, ccId, varAtoms);
-					RulpUtil.addAttribute(factor, String.format("%s=%d", A_ID, ccId));
-					newObj = RulpFactory.createExpression(factor, oldExpr);
-					rebuildList.set(i, newObj);
-					rebuildCount++;
-
-				} else {
-
-					rebuildList.set(i, oldExpr);
-				}
-
-			}
-		}
-
-		if (rebuildCount > 0 || childUpdate > 0) {
-			cc0.outputExpr = RulpFactory.createExpression(rebuildList);
-		}
-
-		return false;
-	}
+//	private static boolean _rebuildCC3(CC0 cc0, NameSet nameSet, IRInterpreter interpreter, IRFrame frame, int level)
+//			throws RException {
+//
+//		IRExpr expr = cc0.inputExpr;
+//
+//		if (expr.isEmpty()) {
+//			return true;
+//		}
+//
+//		IRObject e0 = RulpUtil.lookup(expr.get(0), interpreter, frame);
+//
+//		if (StableUtil.isNewFrameFactor(e0)) {
+//			nameSet = nameSet.newBranch();
+//		}
+//
+//		nameSet.updateExpr(e0, expr);
+//
+//		if (level > 0 && _isCC3Expr(e0, expr, nameSet, frame)) {
+//			return true;
+//		}
+//
+//		int size = expr.size();
+//		ArrayList<IRObject> rebuildList = new ArrayList<>();
+//		CC0 childCC0 = new CC0();
+//
+//		int childReBuild = 0;
+//		int childUpdate = 0;
+//
+//		for (int i = 0; i < size; ++i) {
+//
+//			IRObject ex = i == 0 ? e0 : expr.get(i);
+//			boolean reBuild = false;
+//
+//			if (ex.getType() == RType.EXPR) {
+//
+//				childCC0.setInputExpr((IRExpr) ex);
+//				reBuild = _rebuildCC3(childCC0, nameSet, interpreter, frame, level + 1);
+//
+//				if (reBuild) {
+//					rebuildList.add(childCC0.outputExpr);
+//				} else if (childCC0.outputExpr != null) {
+//					rebuildList.add(childCC0.outputExpr);
+//					childUpdate++;
+//				} else {
+//					rebuildList.add(ex);
+//				}
+//
+//			} else {
+//
+//				if (i == 0 && _isCC3Factor(ex, frame)) {
+//					reBuild = true;
+//				} else {
+//					reBuild = _isStableValue(ex, nameSet, frame);
+//				}
+//
+//				rebuildList.add(ex);
+//			}
+//
+//			if (reBuild) {
+//				childReBuild++;
+//			}
+//		}
+//
+//		// No child rebuild, return directly
+//		if (childReBuild == 0 && childUpdate == 0) {
+//			return false;
+//		}
+//
+//		// All child rebuild, return
+//		if (childReBuild == size) {
+//			return true;
+//		}
+//
+//		int rebuildCount = 0;
+//
+//		// part rebuild
+//		for (int i = 0; i < size; ++i) {
+//
+//			IRObject newObj = rebuildList.get(i);
+//
+//			// Need rebuild element
+//			if (newObj == null) {
+//
+//				IRExpr oldExpr = RulpUtil.asExpression(expr.get(i));
+//				if (_isCC3Expr(oldExpr.get(0), oldExpr, nameSet, frame)) {
+//
+//					List<IRAtom> varAtoms = nameSet.listAllVars(oldExpr);
+//
+//					int ccId = incCC3ExprCount();
+//					XRFactorCC3 factor = new XRFactorCC3(F_CC3, ccId, varAtoms);
+//					RulpUtil.addAttribute(factor, String.format("%s=%d", A_ID, ccId));
+//					newObj = RulpFactory.createExpression(factor, oldExpr);
+//					rebuildList.set(i, newObj);
+//					rebuildCount++;
+//
+//				} else {
+//
+//					rebuildList.set(i, oldExpr);
+//				}
+//
+//			}
+//		}
+//
+//		if (rebuildCount > 0 || childUpdate > 0) {
+//			cc0.outputExpr = RulpFactory.createExpression(rebuildList);
+//		}
+//
+//		return false;
+//	}
 
 	static int _removeEmptyExpr(List<IRObject> exprList, int fromIndex) throws RException {
 
@@ -956,21 +956,21 @@ public class CCOUtil {
 		return CC2RebuildCount.get();
 	}
 
-	public static int getCC3CacheCount() {
-		return CC3CacheCount.get();
-	}
-
-	public static int getCC3CallCount() {
-		return CC3CallCount.get();
-	}
-
-	public static int getCC3ExprCount() {
-		return CC3ExprCount.get();
-	}
-
-	public static int getCC3RebuildCount() {
-		return CC3RebuildCount.get();
-	}
+//	public static int getCC3CacheCount() {
+//		return CC3CacheCount.get();
+//	}
+//
+//	public static int getCC3CallCount() {
+//		return CC3CallCount.get();
+//	}
+//
+//	public static int getCC3ExprCount() {
+//		return CC3ExprCount.get();
+//	}
+//
+//	public static int getCC3RebuildCount() {
+//		return CC3RebuildCount.get();
+//	}
 
 	public static void incCC0BuildCount() {
 		CC0RebuildCount.getAndIncrement();
@@ -1016,21 +1016,21 @@ public class CCOUtil {
 		return CC2ExprCount.getAndIncrement();
 	}
 
-	public static void incCC3BuildCount() {
-		CC3RebuildCount.getAndIncrement();
-	}
-
-	public static void incCC3CacheCount() {
-		CC3CacheCount.getAndIncrement();
-	}
-
-	public static void incCC3CallCount() {
-		CC3CallCount.getAndIncrement();
-	}
-
-	public static int incCC3ExprCount() {
-		return CC3ExprCount.getAndIncrement();
-	}
+//	public static void incCC3BuildCount() {
+//		CC3RebuildCount.getAndIncrement();
+//	}
+//
+//	public static void incCC3CacheCount() {
+//		CC3CacheCount.getAndIncrement();
+//	}
+//
+//	public static void incCC3CallCount() {
+//		CC3CallCount.getAndIncrement();
+//	}
+//
+//	public static int incCC3ExprCount() {
+//		return CC3ExprCount.getAndIncrement();
+//	}
 
 	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value
 	public static IRExpr rebuildCC0(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -1105,30 +1105,30 @@ public class CCOUtil {
 
 	// (Op A1 A2 ... Ak), Op is Stable factor or functions, Ak const value, local
 	// variables or stable expression
-	public static IRExpr rebuildCC3(IRExpr expr, List<IRParaAttr> paras, String funcName, IRInterpreter interpreter,
-			IRFrame frame, boolean recursive) throws RException {
-
-		incCC3BuildCount();
-
-		NameSet nameSet = new NameSet();
-
-		if (paras != null) {
-			for (IRParaAttr para : paras) {
-				nameSet.addVar(para.getParaName());
-			}
-		}
-
-		if (funcName != null) {
-			nameSet.addFunName(funcName);
-		}
-
-		CC0 cc0 = new CC0();
-		cc0.setInputExpr(expr);
-
-		_rebuildCC3(cc0, nameSet, interpreter, frame, recursive ? 1 : 0);
-
-		return cc0.outputExpr == null ? expr : cc0.outputExpr;
-	}
+//	public static IRExpr rebuildCC3(IRExpr expr, List<IRParaAttr> paras, String funcName, IRInterpreter interpreter,
+//			IRFrame frame, boolean recursive) throws RException {
+//
+//		incCC3BuildCount();
+//
+//		NameSet nameSet = new NameSet();
+//
+//		if (paras != null) {
+//			for (IRParaAttr para : paras) {
+//				nameSet.addVar(para.getParaName());
+//			}
+//		}
+//
+//		if (funcName != null) {
+//			nameSet.addFunName(funcName);
+//		}
+//
+//		CC0 cc0 = new CC0();
+//		cc0.setInputExpr(expr);
+//
+//		_rebuildCC3(cc0, nameSet, interpreter, frame, recursive ? 1 : 0);
+//
+//		return cc0.outputExpr == null ? expr : cc0.outputExpr;
+//	}
 
 	public static void reset() {
 
@@ -1146,10 +1146,10 @@ public class CCOUtil {
 		CC2CacheCount.set(0);
 		CC2RebuildCount.set(0);
 
-		CC3ExprCount.set(0);
-		CC3CallCount.set(0);
-		CC3CacheCount.set(0);
-		CC3RebuildCount.set(0);
+//		CC3ExprCount.set(0);
+//		CC3CallCount.set(0);
+//		CC3CacheCount.set(0);
+//		CC3RebuildCount.set(0);
 	}
 
 }

@@ -28,7 +28,6 @@ java.lang.StackOverflowError
        CC0: rebuild=0, compute=0
        CC1: rebuild=0, expr=0, call=0, cache=0, reuse=0
        CC2: rebuild=0, expr=0, call=0, cache=0
-       CC3: rebuild=0, expr=0, call=0, cache=0
 ==========================================================================================================================
 
 ;eof
