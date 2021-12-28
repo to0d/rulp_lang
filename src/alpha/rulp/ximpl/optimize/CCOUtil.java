@@ -54,15 +54,15 @@ public class CCOUtil {
 
 	protected static AtomicInteger CC0RebuildCount = new AtomicInteger(0);
 
-	protected static AtomicInteger CC1CacheCount = new AtomicInteger(0);
+//	protected static AtomicInteger CC1CacheCount = new AtomicInteger(0);
+//
+//	protected static AtomicInteger CC1CallCount = new AtomicInteger(0);
+//
+//	protected static AtomicInteger CC1ExprCount = new AtomicInteger(0);
+//
+//	protected static AtomicInteger CC1RebuildCount = new AtomicInteger(0);
 
-	protected static AtomicInteger CC1CallCount = new AtomicInteger(0);
-
-	protected static AtomicInteger CC1ExprCount = new AtomicInteger(0);
-
-	protected static AtomicInteger CC1RebuildCount = new AtomicInteger(0);
-
-	protected static AtomicInteger CC1ReuseCount = new AtomicInteger(0);
+	protected static AtomicInteger CC2ReuseCount = new AtomicInteger(0);
 
 	protected static AtomicInteger CC2CacheCount = new AtomicInteger(0);
 
@@ -559,108 +559,108 @@ public class CCOUtil {
 		return false;
 	}
 
-	private static boolean _rebuildCC1(CC0 cc0, Map<String, XRFactorCC1> cc1Map, IRInterpreter interpreter,
-			IRFrame frame) throws RException {
-
-		IRExpr expr = cc0.inputExpr;
-
-		if (expr.isEmpty()) {
-			return true;
-		}
-
-		IRObject e0 = RulpUtil.lookup(expr.get(0), interpreter, frame);
-		if (_isCC1Expr(e0, expr, frame)) {
-			return true;
-		}
-
-		int size = expr.size();
-		ArrayList<IRObject> rebuildList = new ArrayList<>();
-		CC0 childCC0 = new CC0();
-
-		int childReBuild = 0;
-		int childUpdate = 0;
-
-		for (int i = 0; i < size; ++i) {
-
-			IRObject ex = i == 0 ? e0 : expr.get(i);
-			boolean reBuild = false;
-
-			if (ex.getType() == RType.EXPR) {
-
-				childCC0.setInputExpr((IRExpr) ex);
-				reBuild = _rebuildCC1(childCC0, cc1Map, interpreter, frame);
-
-				if (reBuild) {
-					rebuildList.add(childCC0.outputExpr);
-				} else if (childCC0.outputExpr != null) {
-					rebuildList.add(childCC0.outputExpr);
-					childUpdate++;
-				} else {
-					rebuildList.add(ex);
-				}
-
-			} else {
-
-				if (i == 0 && _isCC1Factor(ex, frame)) {
-					reBuild = true;
-				} else {
-					reBuild = _isConstValue(ex);
-				}
-
-				rebuildList.add(ex);
-			}
-
-			if (reBuild) {
-				childReBuild++;
-			}
-		}
-
-		// No child rebuild, return directly
-		if (childReBuild == 0 && childUpdate == 0) {
-			return false;
-		}
-
-		// All child rebuild, return
-		if (childReBuild == size) {
-			return true;
-		}
-
-		int rebuildCount = 0;
-
-		// part rebuild
-		for (int i = 0; i < size; ++i) {
-
-			IRObject newObj = rebuildList.get(i);
-
-			// Need rebuild element
-			if (newObj == null) {
-
-				// Replace element with cc0 factor
-				IRObject oldObj = expr.get(i);
-				String cc1Key = RulpUtil.toUniqString(oldObj);
-
-				XRFactorCC1 factor = cc1Map.get(cc1Key);
-				if (factor == null) {
-					int ccId = incCC1ExprCount();
-					factor = new XRFactorCC1(F_CC1, ccId);
-					RulpUtil.addAttribute(factor, String.format("%s=%d", A_ID, ccId));
-					cc1Map.put(cc1Key, factor);
-				} else {
-					incCC1ReuseCount();
-				}
-
-				newObj = RulpFactory.createExpression(factor, oldObj);
-				rebuildList.set(i, newObj);
-				rebuildCount++;
-			}
-		}
-
-		if (rebuildCount > 0 || childUpdate > 0) {
-			cc0.outputExpr = RulpFactory.createExpression(rebuildList);
-		}
-
-		return false;
-	}
+//	private static boolean _rebuildCC1(CC0 cc0, Map<String, XRFactorCC1> cc1Map, IRInterpreter interpreter,
+//			IRFrame frame) throws RException {
+//
+//		IRExpr expr = cc0.inputExpr;
+//
+//		if (expr.isEmpty()) {
+//			return true;
+//		}
+//
+//		IRObject e0 = RulpUtil.lookup(expr.get(0), interpreter, frame);
+//		if (_isCC1Expr(e0, expr, frame)) {
+//			return true;
+//		}
+//
+//		int size = expr.size();
+//		ArrayList<IRObject> rebuildList = new ArrayList<>();
+//		CC0 childCC0 = new CC0();
+//
+//		int childReBuild = 0;
+//		int childUpdate = 0;
+//
+//		for (int i = 0; i < size; ++i) {
+//
+//			IRObject ex = i == 0 ? e0 : expr.get(i);
+//			boolean reBuild = false;
+//
+//			if (ex.getType() == RType.EXPR) {
+//
+//				childCC0.setInputExpr((IRExpr) ex);
+//				reBuild = _rebuildCC1(childCC0, cc1Map, interpreter, frame);
+//
+//				if (reBuild) {
+//					rebuildList.add(childCC0.outputExpr);
+//				} else if (childCC0.outputExpr != null) {
+//					rebuildList.add(childCC0.outputExpr);
+//					childUpdate++;
+//				} else {
+//					rebuildList.add(ex);
+//				}
+//
+//			} else {
+//
+//				if (i == 0 && _isCC1Factor(ex, frame)) {
+//					reBuild = true;
+//				} else {
+//					reBuild = _isConstValue(ex);
+//				}
+//
+//				rebuildList.add(ex);
+//			}
+//
+//			if (reBuild) {
+//				childReBuild++;
+//			}
+//		}
+//
+//		// No child rebuild, return directly
+//		if (childReBuild == 0 && childUpdate == 0) {
+//			return false;
+//		}
+//
+//		// All child rebuild, return
+//		if (childReBuild == size) {
+//			return true;
+//		}
+//
+//		int rebuildCount = 0;
+//
+//		// part rebuild
+//		for (int i = 0; i < size; ++i) {
+//
+//			IRObject newObj = rebuildList.get(i);
+//
+//			// Need rebuild element
+//			if (newObj == null) {
+//
+//				// Replace element with cc0 factor
+//				IRObject oldObj = expr.get(i);
+//				String cc1Key = RulpUtil.toUniqString(oldObj);
+//
+//				XRFactorCC1 factor = cc1Map.get(cc1Key);
+//				if (factor == null) {
+//					int ccId = incCC1ExprCount();
+//					factor = new XRFactorCC1(F_CC1, ccId);
+//					RulpUtil.addAttribute(factor, String.format("%s=%d", A_ID, ccId));
+//					cc1Map.put(cc1Key, factor);
+//				} else {
+//					incCC1ReuseCount();
+//				}
+//
+//				newObj = RulpFactory.createExpression(factor, oldObj);
+//				rebuildList.set(i, newObj);
+//				rebuildCount++;
+//			}
+//		}
+//
+//		if (rebuildCount > 0 || childUpdate > 0) {
+//			cc0.outputExpr = RulpFactory.createExpression(rebuildList);
+//		}
+//
+//		return false;
+//	}
 
 	private static boolean _rebuildCC2(CC0 cc0, NameSet nameSet, Map<String, XRFactorCC2> cc2Map,
 			HashSet<String> stableFuncNames, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -768,6 +768,9 @@ public class CCOUtil {
 								cc2 = new XRFactorCC2(F_CC2, ccId);
 								RulpUtil.addAttribute(cc2, String.format("%s=%d", A_ID, ccId));
 								cc2Map.put(funcName, cc2);
+
+							} else {
+								incCC2ReuseCount();
 							}
 
 							newObj = RulpFactory.createExpression(cc2, childExpr);
@@ -778,21 +781,6 @@ public class CCOUtil {
 				}
 
 				rebuildList.set(i, newObj);
-
-//				int cc2Size = cc2Expr.size();
-//				int indexs[] = new int[cc2Size - 1];
-//				int k = 0;
-//				for (int j = 1; j < cc2Size; ++j) {
-//					IRObject cc2Obj = cc2Expr.get(j);
-//					if (!_isConstValue(cc2Obj)) {
-//						indexs[k++] = j;
-//					}
-//				}
-//
-//				int newIndexs[] = new int[k];
-//				for (int j = 0; j < k; ++j) {
-//					newIndexs[j] = indexs[j];
-//				}
 
 			}
 		}
@@ -947,24 +935,24 @@ public class CCOUtil {
 		return CC0RebuildCount.get();
 	}
 
-	public static int getCC1CacheCount() {
-		return CC1CacheCount.get();
-	}
+//	public static int getCC1CacheCount() {
+//		return CC1CacheCount.get();
+//	}
 
-	public static int getCC1CallCount() {
-		return CC1CallCount.get();
-	}
-
-	public static int getCC1ExprCount() {
-		return CC1ExprCount.get();
-	}
-
-	public static int getCC1RebuildCount() {
-		return CC1RebuildCount.get();
-	}
-
-	public static int getCC1ReuseCount() {
-		return CC1ReuseCount.get();
+//	public static int getCC1CallCount() {
+//		return CC1CallCount.get();
+//	}
+//
+//	public static int getCC1ExprCount() {
+//		return CC1ExprCount.get();
+//	}
+//
+//	public static int getCC1RebuildCount() {
+//		return CC1RebuildCount.get();
+//	}
+//
+	public static int getCC2ReuseCount() {
+		return CC2ReuseCount.get();
 	}
 
 	public static int getCC2CacheCount() {
@@ -1007,24 +995,24 @@ public class CCOUtil {
 		CC0ComputeCount.getAndIncrement();
 	}
 
-	public static void incCC1BuildCount() {
-		CC1RebuildCount.getAndIncrement();
-	}
+//	public static void incCC1BuildCount() {
+//		CC1RebuildCount.getAndIncrement();
+//	}
+//
+//	public static void incCC1CacheCount() {
+//		CC1CacheCount.getAndIncrement();
+//	}
+//
+//	public static void incCC1CallCount() {
+//		CC1CallCount.getAndIncrement();
+//	}
+//
+//	public static int incCC1ExprCount() {
+//		return CC1ExprCount.getAndIncrement();
+//	}
 
-	public static void incCC1CacheCount() {
-		CC1CacheCount.getAndIncrement();
-	}
-
-	public static void incCC1CallCount() {
-		CC1CallCount.getAndIncrement();
-	}
-
-	public static int incCC1ExprCount() {
-		return CC1ExprCount.getAndIncrement();
-	}
-
-	public static void incCC1ReuseCount() {
-		CC1ReuseCount.getAndIncrement();
+	public static void incCC2ReuseCount() {
+		CC2ReuseCount.getAndIncrement();
 	}
 
 	public static void incCC2BuildCount() {
@@ -1081,27 +1069,27 @@ public class CCOUtil {
 		return cc0.outputExpr;
 	}
 
-	// (Op A1 A2 ... Ak), Op is Stable factor or functions, Ak const value
-	public static IRExpr rebuildCC1(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
-
-		incCC1BuildCount();
-
-		CC0 cc0 = new CC0();
-		cc0.setInputExpr(expr);
-
-		if (!_rebuildCC1(cc0, new HashMap<>(), interpreter, frame)) {
-			return cc0.outputExpr == null ? expr : cc0.outputExpr;
-		}
-
-		if (cc0.outputExpr == null) {
-			int ccId = incCC1ExprCount();
-			XRFactorCC1 factor = new XRFactorCC1(F_CC1, ccId);
-			RulpUtil.addAttribute(factor, String.format("%s=%d", A_ID, ccId));
-			cc0.outputExpr = RulpFactory.createExpression(factor, expr);
-		}
-
-		return cc0.outputExpr;
-	}
+//	// (Op A1 A2 ... Ak), Op is Stable factor or functions, Ak const value
+//	public static IRExpr rebuildCC1(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+//
+//		incCC1BuildCount();
+//
+//		CC0 cc0 = new CC0();
+//		cc0.setInputExpr(expr);
+//
+//		if (!_rebuildCC1(cc0, new HashMap<>(), interpreter, frame)) {
+//			return cc0.outputExpr == null ? expr : cc0.outputExpr;
+//		}
+//
+//		if (cc0.outputExpr == null) {
+//			int ccId = incCC1ExprCount();
+//			XRFactorCC1 factor = new XRFactorCC1(F_CC1, ccId);
+//			RulpUtil.addAttribute(factor, String.format("%s=%d", A_ID, ccId));
+//			cc0.outputExpr = RulpFactory.createExpression(factor, expr);
+//		}
+//
+//		return cc0.outputExpr;
+//	}
 
 	// (Op A1 A2 ... Ak), Op is Stable factor or functions, Ak const value, or local
 	// variables
@@ -1169,16 +1157,17 @@ public class CCOUtil {
 		CC0ComputeCount.set(0);
 		CC0RebuildCount.set(0);
 
-		CC1ExprCount.set(0);
-		CC1CallCount.set(0);
-		CC1CacheCount.set(0);
-		CC1ReuseCount.set(0);
-		CC1RebuildCount.set(0);
+//		CC1ExprCount.set(0);
+//		CC1CallCount.set(0);
+//		CC1CacheCount.set(0);
+
+//		CC1RebuildCount.set(0);
 
 		CC2ExprCount.set(0);
 		CC2CallCount.set(0);
 		CC2CacheCount.set(0);
 		CC2RebuildCount.set(0);
+		CC2ReuseCount.set(0);
 
 //		CC3ExprCount.set(0);
 //		CC3CallCount.set(0);

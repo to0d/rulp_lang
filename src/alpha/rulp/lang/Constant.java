@@ -97,7 +97,7 @@ public interface Constant {
 
 	String A_OPT_CC0 = "opt-cc0";
 
-	String A_OPT_CC1 = "opt-cc1";
+//	String A_OPT_CC1 = "opt-cc1";
 
 	String A_OPT_CC2 = "opt-cc2";
 

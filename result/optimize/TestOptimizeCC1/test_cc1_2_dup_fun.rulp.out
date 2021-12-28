@@ -10,14 +10,17 @@
         (setq ?x (+ ?x (fun1 1)))
     )
     (return ?x)
-)[opt-cc1]
+)[opt-cc2]
 ;=>fun2
+
+(fun2)
+;=>12
 
 (attribute-of fun1)
 ;=>'()
 
 (attribute-of fun2)
-;=>'(opt-cc1)
+;=>'(opt-cc2)
 
 (print-impl fun2)
 ;=>nil
@@ -26,18 +29,15 @@
     (do
         (defvar ?x 0)
         (loop for x from 1 to 3 do
-            (setq ?x (+[opt-cc0] ?x (cc1[id=0] (fun1 1))))
-            (setq ?x (+[opt-cc0] ?x (cc1[id=0] (fun1 1))))
+            (setq ?x (+[opt-cc0] ?x (cc2[id=0] (fun1 1))))
+            (setq ?x (+[opt-cc0] ?x (cc2[id=0] (fun1 1))))
         )
         (return ?x)
     )
-)[opt-cc1]
-cc 0: id=0, type=CC1, call=0, hit=0, cache=null
+)[opt-cc2]
+cc 0: id=0, type=CC2, call=6, hit=5, func=fun1, cache=1, $$i_1=2
 
 ;eof
-
-(fun2)
-;=>12
 
 (opt-status)
 ;=>nil
@@ -47,8 +47,7 @@ cc 0: id=0, type=CC1, call=0, hit=0, cache=null
 --------------------------------------------------------------------------------------------------------------------------
        TCO: rebuild=0, expr=0, call=0, compute=0
        CC0: rebuild=1, compute=0
-       CC1: rebuild=1, expr=1, call=6, cache=5, reuse=1
-       CC2: rebuild=0, expr=0, call=0, cache=0
+       CC2: rebuild=1, expr=1, call=6, cache=5, reuse=1
 ==========================================================================================================================
 
 ;eof

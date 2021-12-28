@@ -16,8 +16,7 @@ Optimize info:
 --------------------------------------------------------------------------------------------------------------------------
        TCO: rebuild=0, expr=0, call=0, compute=0
        CC0: rebuild=1, compute=2
-       CC1: rebuild=0, expr=0, call=0, cache=0, reuse=0
-       CC2: rebuild=0, expr=0, call=0, cache=0
+       CC2: rebuild=0, expr=0, call=0, cache=0, reuse=0
 ==========================================================================================================================
 
 Expression compute count:

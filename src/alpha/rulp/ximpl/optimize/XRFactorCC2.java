@@ -118,7 +118,7 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRCCFactor {
 	public String getCCInformation() {
 
 		String out = String.format("id=%d, type=CC2, call=%d, hit=%d, func=%s, cache=%d", id, callCount, hitCount,
-				fun.getName(), cacheMap == null ? 0 : cacheMap.size());
+				fun == null ? null : fun.getName(), cacheMap == null ? 0 : cacheMap.size());
 
 		if (cacheMap != null) {
 
