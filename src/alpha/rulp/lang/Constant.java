@@ -525,8 +525,6 @@ public interface Constant {
 
 	IRAtom O_QUESTION = RulpFactory.createAtom(A_QUESTION);
 
-	IRAtom O_RETURN_TCO = RulpFactory.createAtom(F_CPS);
-
 	IRAtom O_Static = RulpFactory.createAtom(A_STATIC);
 
 	IRAtom O_SUB = RulpFactory.createAtom(F_O_SUB);
