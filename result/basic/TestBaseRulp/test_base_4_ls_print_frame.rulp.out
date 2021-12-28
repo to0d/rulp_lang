@@ -45,7 +45,6 @@ mbr=cmp_def, mbr-property='(public), mbr-attribute='(), obj=cmp_def, obj-type=fa
 mbr=compute, mbr-property='(public), mbr-attribute='(), obj=compute, obj-type=factor, obj-attribute='()
 mbr=constant, mbr-property='(public), mbr-attribute='(), obj=constant, obj-type=atom, obj-attribute='()
 mbr=continue, mbr-property='(public), mbr-attribute='(), obj=continue, obj-type=factor, obj-attribute='()
-mbr=cps, mbr-property='(public), mbr-attribute='(), obj=cps, obj-type=factor, obj-attribute='()
 mbr=date, mbr-property='(public), mbr-attribute='(), obj=date, obj-type=factor, obj-attribute='()
 mbr=default, mbr-property='(public), mbr-attribute='(), obj=default, obj-type=atom, obj-attribute='()
 mbr=defclass, mbr-property='(public), mbr-attribute='(), obj=defclass, obj-type=factor, obj-attribute='()

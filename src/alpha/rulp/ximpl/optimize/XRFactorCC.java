@@ -9,6 +9,8 @@
 
 package alpha.rulp.ximpl.optimize;
 
+import static alpha.rulp.lang.Constant.F_CC;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -26,20 +28,20 @@ import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.factor.AbsRefFactorAdapter;
 
-public class XRFactorCC extends AbsRefFactorAdapter implements IROptFactor {
+public class XRFactorCC extends AbsRefFactorAdapter implements IRRebuildFactor {
 
 	private Map<String, IRObject> cacheMap = null;
 
 	private int callCount = 0;
 
+	private IRFunction fun;
+
 	private int hitCount = 0;
 
 	private final int id;
 
-	private IRFunction fun;
-
-	public XRFactorCC(String factorName, int id) {
-		super(factorName);
+	public XRFactorCC(int id) {
+		super(F_CC);
 		this.id = id;
 	}
 
@@ -115,8 +117,8 @@ public class XRFactorCC extends AbsRefFactorAdapter implements IROptFactor {
 	@Override
 	public String getOptInformation() {
 
-		String out = String.format("id=%d, type=CC2, call=%d, hit=%d, func=%s, cache=%d", id, callCount, hitCount,
-				fun == null ? null : fun.getName(), cacheMap == null ? 0 : cacheMap.size());
+		String out = String.format("id=%d, name=%s, call=%d, hit=%d, func=%s, cache=%d", id, getName(), callCount,
+				hitCount, fun == null ? null : fun.getName(), cacheMap == null ? 0 : cacheMap.size());
 
 		if (cacheMap != null) {
 

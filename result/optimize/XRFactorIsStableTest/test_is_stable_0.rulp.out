@@ -60,7 +60,6 @@ obj=cmp_def, type=factor, stable=true
 obj=compute, type=factor, stable=true
 obj=constant, type=atom, stable=true
 obj=continue, type=factor, stable=false
-obj=cps, type=factor, stable=true
 obj=date, type=factor, stable=false
 obj=default, type=atom, stable=true
 obj=defclass, type=factor, stable=true

@@ -1,7 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.A_ID;
-import static alpha.rulp.lang.Constant.F_CC;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,11 +38,11 @@ public class CCOUtil {
 
 	protected static AtomicInteger CC2CallCount = new AtomicInteger(0);
 
-	protected static AtomicInteger CC2ExprCount = new AtomicInteger(0);
+	protected static AtomicInteger exprCount = new AtomicInteger(0);
 
 	protected static AtomicInteger CC2RebuildCount = new AtomicInteger(0);
 
-	protected static AtomicInteger CC2ReuseCount = new AtomicInteger(0);
+	protected static AtomicInteger reuseCount = new AtomicInteger(0);
 
 	public static int getCC2CacheCount() {
 		return CC2CacheCount.get();
@@ -54,7 +53,7 @@ public class CCOUtil {
 	}
 
 	public static int getCC2ExprCount() {
-		return CC2ExprCount.get();
+		return exprCount.get();
 	}
 
 	public static int getCC2RebuildCount() {
@@ -62,7 +61,7 @@ public class CCOUtil {
 	}
 
 	public static int getCC2ReuseCount() {
-		return CC2ReuseCount.get();
+		return reuseCount.get();
 	}
 
 	public static void incCC2CacheCount() {
@@ -109,11 +108,11 @@ public class CCOUtil {
 
 	public static void reset() {
 
-		CC2ExprCount.set(0);
+		exprCount.set(0);
 		CC2CallCount.set(0);
 		CC2CacheCount.set(0);
 		CC2RebuildCount.set(0);
-		CC2ReuseCount.set(0);
+		reuseCount.set(0);
 	}
 
 	private Map<String, XRFactorCC> cc2Map = new HashMap<>();
@@ -257,13 +256,15 @@ public class CCOUtil {
 							String funcName = childFactor.asString();
 							XRFactorCC cc2 = cc2Map.get(funcName);
 							if (cc2 == null) {
-								int ccId = CC2ExprCount.getAndIncrement();
-								cc2 = new XRFactorCC(F_CC, ccId);
-								RulpUtil.addAttribute(cc2, String.format("%s=%d", A_ID, ccId));
+
+								int optId = OptUtil.getNextOptFactorId();
+								cc2 = new XRFactorCC(optId);
+								RulpUtil.addAttribute(cc2, String.format("%s=%d", A_ID, optId));
 								cc2Map.put(funcName, cc2);
+								exprCount.getAndIncrement();
 
 							} else {
-								CC2ReuseCount.getAndIncrement();
+								reuseCount.getAndIncrement();
 							}
 
 							newObj = RulpFactory.createExpression(cc2, childExpr);

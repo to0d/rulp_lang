@@ -60,7 +60,6 @@ obj=cmp_def, type=factor, const=true
 obj=compute, type=factor, const=true
 obj=constant, type=atom, const=true
 obj=continue, type=factor, const=true
-obj=cps, type=factor, const=true
 obj=date, type=factor, const=true
 obj=default, type=atom, const=true
 obj=defclass, type=factor, const=true

@@ -28,9 +28,9 @@ Expression compute count:
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=126, row=28, column=64(2), value-max=84102, value-unit=4^x
+Callable stats info: callId=126, row=27, column=64(2), value-max=84102, value-unit=4^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         12222222222222222222222222222222222222222222222222222222222345X3 max=378458, unit=4^x
+   Frame    RType  Count  Ref Object                         12222222222222222222222222222222222222222222222222222222222345X3 max=341311, unit=4^x
 --------------------------------------------------------------------------------------------------------------------------
     root   factor  84152    0 if                                                                                        134X1
     root   factor  84151    0 <=                                                                                        134X 
@@ -38,7 +38,6 @@ Callable stats info: callId=126, row=28, column=64(2), value-max=84102, value-un
     main     func  42078 42073 (fun2 nil)                                                                                1349 
     root   factor  42072    0 -                                                                                          249 
     root   factor  37169    0 +                                                                                          2491
-    root   factor  37168    0 cps                                                                                        249 
     root   factor   4911    0 return                                                                                    12281
     root   factor   4904    0 /                                                                                           18 
     root   factor     58    0 defun                                                 12222222 22 122222222211212122122 21     
@@ -80,7 +79,7 @@ Object create count:
       member:          117            0          117
        frame:        84159        84158            1
  interpreter:            1            0
-  frameEntry:        42304            0
+  frameEntry:        42303            0
       lambda:            0            0
 ==========================================================================================================================
 

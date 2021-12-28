@@ -3,6 +3,8 @@ package alpha.rulp.ximpl.optimize;
 import static alpha.rulp.lang.Constant.A_ATOM;
 import static alpha.rulp.lang.Constant.O_COMPUTE;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
@@ -14,6 +16,8 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 
 public class OptUtil {
+
+	protected static AtomicInteger OptFactorCount = new AtomicInteger(0);
 
 	public static IRExpr asExpr(IRObject obj) throws RException {
 
@@ -118,5 +122,14 @@ public class OptUtil {
 		}
 
 		return false;
+	}
+
+	public static void reset() {
+
+		OptFactorCount.set(0);
+	}
+
+	public static int getNextOptFactorId() {
+		return OptFactorCount.getAndIncrement();
 	}
 }

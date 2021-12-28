@@ -22,7 +22,7 @@
         (return (*[atom] ?v (cc[id=0] (fun (- ?v 1)))))
     )
 )[opt-cc2]
-cc 0: id=0, type=CC2, call=4, hit=0, func=fun, cache=4, $$i_0=1, $$i_1=1, $$i_2=2...
+rebuild: id=0, name=cc, call=4, hit=0, func=fun, cache=4, $$i_0=1, $$i_1=1, $$i_2=2...
 
 ;eof
 

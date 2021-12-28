@@ -1,11 +1,11 @@
 package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.A_ID;
 import static alpha.rulp.lang.Constant.F_CPS;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_RETURN;
 import static alpha.rulp.lang.Constant.O_Nil;
-import static alpha.rulp.lang.Constant.O_RETURN_TCO;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -72,11 +72,11 @@ public class TCOUtil {
 		}
 	}
 
+	protected static AtomicInteger exprCount = new AtomicInteger(0);
+
 	protected static AtomicInteger TCOCallCount = new AtomicInteger(0);
 
 	protected static AtomicInteger TCOComputeCount = new AtomicInteger(0);
-
-	protected static AtomicInteger TCOExprCount = new AtomicInteger(0);
 
 	protected static AtomicInteger TCORebuildCount = new AtomicInteger(0);
 
@@ -119,7 +119,7 @@ public class TCOUtil {
 			IRList newList = RulpFactory.createVaryList();
 			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
 			while (it.hasNext()) {
-				newList.add(returnTCO(it.next(), frame));
+				newList.add(makeCPS(it.next(), frame));
 			}
 			return newList;
 		}
@@ -131,7 +131,7 @@ public class TCOUtil {
 				return mbr;
 			}
 
-			IRObject subObj = returnTCO(mbr.getSubject(), frame);
+			IRObject subObj = makeCPS(mbr.getSubject(), frame);
 			if (subObj == null) {
 				throw new RException("subject<" + mbr.getSubject() + "> not found");
 			}
@@ -211,13 +211,13 @@ public class TCOUtil {
 			throws RException {
 
 		IRObject e0 = expr.get(0);
-		if (e0.getType() != RType.ATOM) {
+		if (e0.getType() != RType.ATOM && e0.getType() != RType.FACTOR) {
 			return true;
 		}
 
 		IRIterator<? extends IRObject> it = null;
 
-		switch (RulpUtil.asAtom(e0).getName()) {
+		switch (e0.asString()) {
 		case A_DO: {
 			it = expr.listIterator(1);
 			while (it.hasNext()) {
@@ -311,8 +311,12 @@ public class TCOUtil {
 			if (expr.size() == 2) {
 				IRObject e1 = expr.get(1);
 				if (e1.getType() == RType.EXPR) {
-					incTCOExprCount();
-					return RulpFactory.createExpression(O_RETURN_TCO, e1);
+
+					int optId = OptUtil.getNextOptFactorId();
+					XRFactorCPS cps = new XRFactorCPS(optId);
+					RulpUtil.addAttribute(cps, String.format("%s=%d", A_ID, optId));
+					exprCount.getAndIncrement();
+					return RulpFactory.createExpression(cps, e1);
 				}
 			}
 
@@ -468,7 +472,7 @@ public class TCOUtil {
 	}
 
 	public static int getTCOExprCount() {
-		return TCOExprCount.get();
+		return exprCount.get();
 	}
 
 	public static int getTCORebuildCount() {
@@ -481,10 +485,6 @@ public class TCOUtil {
 
 	public static void incTCOComputeCount() {
 		TCOComputeCount.getAndIncrement();
-	}
-
-	public static void incTCOExprCount() {
-		TCOExprCount.getAndIncrement();
 	}
 
 	public static void incTCORebuildCount() {
@@ -501,20 +501,7 @@ public class TCOUtil {
 		return calleeNames;
 	}
 
-	public static IRExpr rebuild(IRExpr expr, IRFrame frame) throws RException {
-
-		incTCORebuildCount();
-		return _rebuild(expr, frame);
-	}
-
-	public static void reset() {
-		TCOExprCount.set(0);
-		TCOCallCount.set(0);
-		TCOComputeCount.set(0);
-		TCORebuildCount.set(0);
-	}
-
-	public static IRObject returnTCO(IRObject obj, IRFrame frame) throws RException {
+	public static IRObject makeCPS(IRObject obj, IRFrame frame) throws RException {
 
 		switch (obj.getType()) {
 
@@ -553,7 +540,7 @@ public class TCOUtil {
 
 			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
 			while (it.hasNext()) {
-				newList.add(returnTCO(it.next(), frame));
+				newList.add(makeCPS(it.next(), frame));
 			}
 
 			if (obj.getType() == RType.LIST) {
@@ -575,7 +562,7 @@ public class TCOUtil {
 				return mbr;
 			}
 
-			IRObject subObj = returnTCO(mbr.getSubject(), frame);
+			IRObject subObj = makeCPS(mbr.getSubject(), frame);
 			if (subObj == null) {
 				throw new RException("subject<" + mbr.getSubject() + "> not found");
 			}
@@ -594,6 +581,19 @@ public class TCOUtil {
 		default:
 			return obj;
 		}
+	}
+
+	public static IRExpr rebuild(IRExpr expr, IRFrame frame) throws RException {
+
+		incTCORebuildCount();
+		return _rebuild(expr, frame);
+	}
+
+	public static void reset() {
+		exprCount.set(0);
+		TCOCallCount.set(0);
+		TCOComputeCount.set(0);
+		TCORebuildCount.set(0);
 	}
 
 }

@@ -45,7 +45,6 @@ root::cmp_def
 root::compute
 root::constant
 root::continue
-root::cps
 root::date
 root::default
 root::defclass

@@ -41,7 +41,7 @@
         )
     )
 )[opt-cc2]
-cc 0: id=0, type=CC2, call=25, hit=6, func=uniquePaths, cache=19, $$i_1$$i_2=1, $$i_2$$i_1=1, $$i_2$$i_2=2...
+rebuild: id=0, name=cc, call=25, hit=6, func=uniquePaths, cache=19, $$i_1$$i_2=1, $$i_2$$i_1=1, $$i_2$$i_2=2...
 
 ;eof
 

@@ -35,7 +35,7 @@
         (return ?x)
     )
 )[opt-cc2]
-cc 0: id=0, type=CC2, call=6, hit=5, func=fun1, cache=1, $$i_1=2
+rebuild: id=0, name=cc, call=6, hit=5, func=fun1, cache=1, $$i_1=2
 
 ;eof
 

@@ -28,16 +28,15 @@ Expression compute count:
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=126, row=27, column=64(2), value-max=1001, value-unit=2^x
+Callable stats info: callId=126, row=26, column=64(2), value-max=1001, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         12222222222222222222222222222222222222222222222222222222222358X4 max=7006, unit=3^x
+   Frame    RType  Count  Ref Object                         1222222222222222222222222222222222222222222222222222222222235794 max=6006, unit=3^x
 --------------------------------------------------------------------------------------------------------------------------
     root   factor   1113    0 if                                                                                        148X1
     root   factor   1113    0 do                                                                                        148X1
     main     func   1112 1107 (fact nil)                                                                                148X 
     root   factor   1112    0 >                                                                                         148X 
     root   factor   1107    0 +                                                                                          38X1
-    root   factor   1106    0 cps                                                                                        38X 
     root   factor   1106    0 -                                                                                          38X 
     root   factor     58    0 defun                                                 12222222 22 122222222211212122122 21     
     root   factor     39    0 add-attribute                     12222222222222222222                                         
@@ -79,7 +78,7 @@ Object create count:
       member:          117            0          117
        frame:         2227         2226            1
  interpreter:            1            0
-  frameEntry:         1338            0
+  frameEntry:         1337            0
       lambda:            0            0
 ==========================================================================================================================
 
