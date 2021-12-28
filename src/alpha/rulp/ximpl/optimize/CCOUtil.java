@@ -14,6 +14,7 @@ import static alpha.rulp.lang.Constant.O_COMPUTE;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -661,8 +662,8 @@ public class CCOUtil {
 		return false;
 	}
 
-	private static boolean _rebuildCC2(CC0 cc0, NameSet nameSet, IRInterpreter interpreter, IRFrame frame)
-			throws RException {
+	private static boolean _rebuildCC2(CC0 cc0, NameSet nameSet, Map<String, XRFactorCC2> cc2Map,
+			HashSet<String> stableFuncNames, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		IRExpr expr = cc0.inputExpr;
 
@@ -682,6 +683,11 @@ public class CCOUtil {
 			return true;
 		}
 
+		// recursion fun
+		if (e0.getType() == RType.ATOM && stableFuncNames.contains(e0.asString())) {
+			return true;
+		}
+
 		int size = expr.size();
 		ArrayList<IRObject> rebuildList = new ArrayList<>();
 		CC0 childCC0 = new CC0();
@@ -697,7 +703,7 @@ public class CCOUtil {
 			if (ex.getType() == RType.EXPR) {
 
 				childCC0.setInputExpr((IRExpr) ex);
-				reBuild = _rebuildCC2(childCC0, nameSet, interpreter, frame);
+				reBuild = _rebuildCC2(childCC0, nameSet, cc2Map, stableFuncNames, interpreter, frame);
 
 				if (reBuild) {
 					rebuildList.add(childCC0.outputExpr);
@@ -752,12 +758,19 @@ public class CCOUtil {
 					if (!childExpr.isEmpty()) {
 
 						IRObject childFactor = RulpUtil.lookup(childExpr.get(0), interpreter, frame);
-						if (_isCC2Expr(childFactor, childExpr, nameSet, frame)) {
+						if ((childFactor.getType() == RType.ATOM && stableFuncNames.contains(childFactor.asString()))
+								|| _isCC2Expr(childFactor, childExpr, nameSet, frame)) {
 
-							int ccId = incCC2ExprCount();
-							XRFactorCC2 factor = new XRFactorCC2(F_CC2, ccId, (IRFunction) childFactor);
-							RulpUtil.addAttribute(factor, String.format("%s=%d", A_ID, ccId));
-							newObj = RulpFactory.createExpression(factor, childExpr);
+							String funcName = childFactor.asString();
+							XRFactorCC2 cc2 = cc2Map.get(funcName);
+							if (cc2 == null) {
+								int ccId = incCC2ExprCount();
+								cc2 = new XRFactorCC2(F_CC2, ccId);
+								RulpUtil.addAttribute(cc2, String.format("%s=%d", A_ID, ccId));
+								cc2Map.put(funcName, cc2);
+							}
+
+							newObj = RulpFactory.createExpression(cc2, childExpr);
 							rebuildList.set(i, newObj);
 							rebuildCount++;
 						}
@@ -1112,7 +1125,14 @@ public class CCOUtil {
 		CC0 cc0 = new CC0();
 		cc0.setInputExpr(expr);
 
-		_rebuildCC2(cc0, nameSet, interpreter, frame);
+		HashSet<String> stableFuncNames = new HashSet<>();
+
+		// this function is stable
+		if (StableUtil.isStable(expr, frame)) {
+			stableFuncNames.add(funcName);
+		}
+
+		_rebuildCC2(cc0, nameSet, new HashMap<>(), stableFuncNames, interpreter, frame);
 
 		return cc0.outputExpr == null ? expr : cc0.outputExpr;
 	}

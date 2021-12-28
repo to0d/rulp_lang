@@ -53,7 +53,7 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 		}
 	}
 
-	static void printFunc(IROut out, IRFunction func) throws RException {
+	static void printFunc(IRInterpreter interpreter, IRFunction func) throws RException {
 
 		if (func.isList()) {
 			throw new RException("not support list function: " + func);
@@ -89,7 +89,7 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 		lines.add(")" + RulpUtil.formatAttribute(func));
 
 		for (String line : lines) {
-			out.out(line + "\n");
+			interpreter.out(line + "\n");
 		}
 
 		Set<IRObject> ccObjs = new HashSet<>();
@@ -108,7 +108,7 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 				return;
 			}
 
-			out.out(String.format("cc %d: %s\n", ccObjs.size(), ((IRCCFactor) obj).getCCInformation()));
+			interpreter.out(String.format("cc %d: %s\n", ccObjs.size(), ((IRCCFactor) obj).getCCInformation()));
 
 			ccObjs.add(obj);
 		});
@@ -134,7 +134,7 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 			throw new RException("object not found: " + obj);
 
 		case FUNC:
-			printFunc(interpreter.getOut(), (IRFunction) obj);
+			printFunc(interpreter, (IRFunction) obj);
 			break;
 
 		default:

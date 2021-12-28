@@ -32,7 +32,6 @@ public class TestOptimizeCC2 extends RulpTestBase {
 
 		_setup();
 		_run_script();
-		// fail("why test_cc3_3_lt0062_a is bad than test_cc3_3_lt0062_b????");
 	}
 
 	@Test

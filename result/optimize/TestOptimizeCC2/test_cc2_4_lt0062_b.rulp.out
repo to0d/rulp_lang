@@ -10,8 +10,8 @@
 )
 ;=>uniquePaths
 
-(uniquePaths 2 2)
-;=>2
+(uniquePaths 3 7)
+;=>28
 
 (attribute-of uniquePaths)
 ;=>'()

@@ -40,10 +40,9 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRCCFactor {
 
 //	private int varIndex[];
 
-	public XRFactorCC2(String factorName, int id, IRFunction fun) {
+	public XRFactorCC2(String factorName, int id) {
 		super(factorName);
 		this.id = id;
-		this.fun = fun;
 	}
 
 	@Override
@@ -96,8 +95,12 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRCCFactor {
 		CCOUtil.incCC2CallCount();
 		++callCount;
 
-		IRExpr expr = (IRExpr) RuntimeUtil.rebuildFuncExpr(fun, RulpUtil.asExpression(args.get(1)), interpreter, frame);
+		IRExpr expr = RulpUtil.asExpression(args.get(1));
+		if (fun == null) {
+			fun = RulpUtil.asFunction(RulpUtil.lookup(expr.get(0), interpreter, frame));
+		}
 
+		expr = (IRExpr) RuntimeUtil.rebuildFuncExpr(fun, expr, interpreter, frame);
 		String key = _getKey(expr);
 		IRObject cache = _getCache(key);
 		if (cache == null) {

@@ -10,7 +10,7 @@
 )
 ;=>
 
-(uniquePaths 2 2)
+(uniquePaths 3 7)
 ;=>
 
 (attribute-of uniquePaths)

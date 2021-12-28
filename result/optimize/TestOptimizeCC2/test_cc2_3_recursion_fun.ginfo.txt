@@ -17,14 +17,14 @@ Optimize info:
        TCO: rebuild=0, expr=0, call=0, compute=0
        CC0: rebuild=1, compute=1
        CC1: rebuild=1, expr=0, call=0, cache=0, reuse=0
-       CC2: rebuild=1, expr=0, call=0, cache=0
+       CC2: rebuild=1, expr=1, call=4, cache=0
 ==========================================================================================================================
 
 Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      160
+    factor:      164
       func:        7
      macro:        1
 ==========================================================================================================================
@@ -39,7 +39,7 @@ Callable stats info: callId=121, row=27, column=61(2), value-max=5, value-unit=2
     root   factor      6    0 if                                                                                       4 1
     root   factor      6    0 do                                                                                       4 1
     root   factor      6    0 alias                          1221                                                         
-    main     func      5    1 (fun nil)                                                                                4  
+    main     func      5    5 (fun nil)                                                                                4  
     root   factor      5    0 <=                                                                                       4  
     root   factor      5    0 -                                                                                        4  
     root   factor      4    0 defvar                                                1                                1   2
@@ -66,10 +66,10 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1163            0         1163
+        atom:         1110            0         1110
       string:           39            0           39
         list:            7            1            6
-        expr:          586            6          580
+        expr:          594            6          588
        array:            1            0            1
          var:           29           12           17
         func:          108            0          108
@@ -93,7 +93,7 @@ root                 : 1        2        0    frame      frame@root
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        2    frame      frame@main          
 ?script-path         : 4        2        1    var        result\optimize\TestOptimizeCC2\test_cc2_3_recursion_fun.rulp : type=string
-fun                  : 5        2        1    func       (fun nil) : frame=frame@main
+fun                  : 5        2        5    func       (fun nil) : frame=frame@main
 ?rv                  : 15       2        1    var        24 : type=int       
 ==========================================================================================================================
 
