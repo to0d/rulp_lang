@@ -27,7 +27,7 @@
         )
         (if
             (< m n)
-            (return (cc2[id=0] (uniquePaths n m)))
+            (return (cc[id=0] (uniquePaths n m)))
         )
         (if
             (= n 1)
@@ -35,8 +35,8 @@
         )
         (return
             (+[atom]
-                (cc2[id=0] (uniquePaths (- m 1) n))
-                (cc2[id=0] (uniquePaths m (- n 1)))
+                (cc[id=0] (uniquePaths (- m 1) n))
+                (cc[id=0] (uniquePaths m (- n 1)))
             )
         )
     )

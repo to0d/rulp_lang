@@ -99,7 +99,7 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 				return;
 			}
 
-			if (!(obj instanceof IRCCFactor)) {
+			if (!(obj instanceof IROptFactor)) {
 				return;
 			}
 
@@ -107,7 +107,7 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 				return;
 			}
 
-			interpreter.out(String.format("cc %d: %s\n", ccObjs.size(), ((IRCCFactor) obj).getCCInformation()));
+			interpreter.out(String.format("cc %d: %s\n", ccObjs.size(), ((IROptFactor) obj).getOptInformation()));
 
 			ccObjs.add(obj);
 		});

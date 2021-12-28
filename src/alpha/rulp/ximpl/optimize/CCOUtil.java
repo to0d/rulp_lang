@@ -1,7 +1,7 @@
 package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.A_ID;
-import static alpha.rulp.lang.Constant.F_CC2;
+import static alpha.rulp.lang.Constant.F_CC;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -116,7 +116,7 @@ public class CCOUtil {
 		CC2ReuseCount.set(0);
 	}
 
-	private Map<String, XRFactorCC2> cc2Map = new HashMap<>();
+	private Map<String, XRFactorCC> cc2Map = new HashMap<>();
 
 	private IRFrame frame;
 
@@ -255,10 +255,10 @@ public class CCOUtil {
 								|| _isCC2Expr(childFactor, childExpr, nameSet)) {
 
 							String funcName = childFactor.asString();
-							XRFactorCC2 cc2 = cc2Map.get(funcName);
+							XRFactorCC cc2 = cc2Map.get(funcName);
 							if (cc2 == null) {
 								int ccId = CC2ExprCount.getAndIncrement();
-								cc2 = new XRFactorCC2(F_CC2, ccId);
+								cc2 = new XRFactorCC(F_CC, ccId);
 								RulpUtil.addAttribute(cc2, String.format("%s=%d", A_ID, ccId));
 								cc2Map.put(funcName, cc2);
 

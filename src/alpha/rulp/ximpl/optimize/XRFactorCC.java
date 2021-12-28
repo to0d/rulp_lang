@@ -26,7 +26,7 @@ import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.factor.AbsRefFactorAdapter;
 
-public class XRFactorCC2 extends AbsRefFactorAdapter implements IRCCFactor {
+public class XRFactorCC extends AbsRefFactorAdapter implements IROptFactor {
 
 	private Map<String, IRObject> cacheMap = null;
 
@@ -38,9 +38,7 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRCCFactor {
 
 	private IRFunction fun;
 
-//	private int varIndex[];
-
-	public XRFactorCC2(String factorName, int id) {
+	public XRFactorCC(String factorName, int id) {
 		super(factorName);
 		this.id = id;
 	}
@@ -115,7 +113,7 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRCCFactor {
 	}
 
 	@Override
-	public String getCCInformation() {
+	public String getOptInformation() {
 
 		String out = String.format("id=%d, type=CC2, call=%d, hit=%d, func=%s, cache=%d", id, callCount, hitCount,
 				fun == null ? null : fun.getName(), cacheMap == null ? 0 : cacheMap.size());
