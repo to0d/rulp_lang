@@ -23,7 +23,7 @@ import alpha.rulp.utils.RulpUtil;
 // (Compute Cache Optimization)
 public class CCOUtil {
 
-	static class CC0 {
+	static class CCO {
 
 		public IRExpr inputExpr = null;
 
@@ -92,7 +92,7 @@ public class CCOUtil {
 			nameSet.addFunName(funcName);
 		}
 
-		CC0 cc0 = new CC0();
+		CCO cc0 = new CCO();
 		cc0.setInputExpr(expr);
 
 		CCOUtil ccoUtil = new CCOUtil(interpreter, frame);
@@ -156,7 +156,7 @@ public class CCOUtil {
 		return true;
 	}
 
-	private boolean _rebuildCC2(CC0 cc0, NameSet nameSet) throws RException {
+	private boolean _rebuildCC2(CCO cc0, NameSet nameSet) throws RException {
 
 		IRExpr expr = cc0.inputExpr;
 
@@ -183,7 +183,7 @@ public class CCOUtil {
 
 		int size = expr.size();
 		ArrayList<IRObject> rebuildList = new ArrayList<>();
-		CC0 childCC0 = new CC0();
+		CCO childCC0 = new CCO();
 
 		int childReBuild = 0;
 		int childUpdate = 0;

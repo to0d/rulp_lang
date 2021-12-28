@@ -25,7 +25,7 @@ import alpha.rulp.ximpl.control.XRFactorLoop;
 
 public class EROUtil {
 
-	static class CC0 {
+	static class ERO {
 
 		public IRExpr inputExpr = null;
 
@@ -37,9 +37,9 @@ public class EROUtil {
 		}
 	}
 
-	protected static AtomicInteger CC0ComputeCount = new AtomicInteger(0);
+	protected static AtomicInteger computeCount = new AtomicInteger(0);
 
-	protected static AtomicInteger CC0RebuildCount = new AtomicInteger(0);
+	protected static AtomicInteger rebuildCount = new AtomicInteger(0);
 
 	static boolean _hasBreakExpr(IRObject obj) throws RException {
 
@@ -71,7 +71,11 @@ public class EROUtil {
 		}
 	}
 
-	private static boolean _isCC0Expr(IRObject e0, IRExpr expr, IRFrame frame) throws RException {
+	private static void _incComputeCount() {
+		computeCount.getAndIncrement();
+	}
+
+	private static boolean _isEROExpr(IRObject e0, IRExpr expr, IRFrame frame) throws RException {
 
 		if (!OptUtil.isAtomFactor(e0)) {
 			return false;
@@ -84,7 +88,7 @@ public class EROUtil {
 		return true;
 	}
 
-	private static boolean _rebuildCC0(CC0 cc0, IRInterpreter interpreter, IRFrame frame) throws RException {
+	private static boolean _rebuild(ERO cc0, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		IRExpr expr = cc0.inputExpr;
 
@@ -93,13 +97,13 @@ public class EROUtil {
 		}
 
 		IRObject e0 = RulpUtil.lookup(expr.get(0), interpreter, frame);
-		if (_isCC0Expr(e0, expr, frame)) {
+		if (_isEROExpr(e0, expr, frame)) {
 			return true;
 		}
 
 		int size = expr.size();
 		List<IRObject> rebuildList = new ArrayList<>();
-		CC0 childCC0 = new CC0();
+		ERO childCC0 = new ERO();
 
 		int childReBuild = 0;
 		int childUpdate = 0;
@@ -112,7 +116,7 @@ public class EROUtil {
 			if (ex.getType() == RType.EXPR) {
 
 				childCC0.setInputExpr((IRExpr) ex);
-				reBuild = _rebuildCC0(childCC0, interpreter, frame);
+				reBuild = _rebuild(childCC0, interpreter, frame);
 
 				if (reBuild) {
 					rebuildList.add(childCC0.outputExpr);
@@ -163,7 +167,7 @@ public class EROUtil {
 				newObj = interpreter.compute(frame, expr.get(i));
 				rebuildList.set(i, newObj);
 				rebuildCount++;
-				incCC0ComputeCount();
+				_incComputeCount();
 			}
 		}
 
@@ -180,7 +184,7 @@ public class EROUtil {
 				}
 
 				cc0.outputExpr = OptUtil.asExpr(rst);
-				incCC0ComputeCount();
+				_incComputeCount();
 				return false;
 			}
 		}
@@ -210,7 +214,7 @@ public class EROUtil {
 
 					if (XRFactorCase.matchCaseValue(e1, caseValue)) {
 						cc0.outputExpr = OptUtil.asExpr(caseClause.get(1));
-						incCC0ComputeCount();
+						_incComputeCount();
 						return false;
 					}
 				}
@@ -218,7 +222,7 @@ public class EROUtil {
 				// no any case match, return empty expression
 				if (!nonConstCaseValueFound) {
 					cc0.outputExpr = OptUtil.asExpr(null);
-					incCC0ComputeCount();
+					_incComputeCount();
 					return false;
 				}
 			}
@@ -233,12 +237,12 @@ public class EROUtil {
 			switch (pos) {
 			case 1: // no expr found
 				cc0.outputExpr = OptUtil.asExpr(null);
-				incCC0ComputeCount();
+				_incComputeCount();
 				return false;
 
 			case 2: // only one expr found, remove DO factor
 				cc0.outputExpr = OptUtil.asExpr(rebuildList.get(1));
-				incCC0ComputeCount();
+				_incComputeCount();
 				return false;
 
 			default:
@@ -246,7 +250,7 @@ public class EROUtil {
 				// empty expr found
 				if (pos != size) {
 					cc0.outputExpr = RulpFactory.createExpression(rebuildList.subList(0, pos));
-					incCC0ComputeCount();
+					_incComputeCount();
 					return false;
 				}
 			}
@@ -266,7 +270,7 @@ public class EROUtil {
 				// from 3 to 1 ==> empty expr
 				if (fromIndex > toIndex) {
 					cc0.outputExpr = OptUtil.asExpr(null);
-					incCC0ComputeCount();
+					_incComputeCount();
 					return false;
 				}
 
@@ -278,18 +282,18 @@ public class EROUtil {
 
 					if (doActions.size() == 0) {
 						cc0.outputExpr = OptUtil.asExpr(null);
-						incCC0ComputeCount();
+						_incComputeCount();
 						return false;
 					}
 
 					if (doActions.size() == 1) {
 						cc0.outputExpr = OptUtil.asExpr(doActions.get(0));
-						incCC0ComputeCount();
+						_incComputeCount();
 						return false;
 					}
 
 					cc0.outputExpr = RulpUtil.toDoExpr(doActions);
-					incCC0ComputeCount();
+					_incComputeCount();
 					return false;
 				}
 			}
@@ -318,7 +322,7 @@ public class EROUtil {
 			// empty expr found
 			if (pos != size) {
 				cc0.outputExpr = RulpFactory.createExpression(rebuildList.subList(0, pos));
-				incCC0ComputeCount();
+				_incComputeCount();
 				return false;
 			}
 
@@ -356,39 +360,31 @@ public class EROUtil {
 		return pos;
 	}
 
-	public static int getCC0ComputeCount() {
-		return CC0ComputeCount.get();
+	public static int getComputeCount() {
+		return computeCount.get();
 	}
 
-	public static int getCC0RebuildCount() {
-		return CC0RebuildCount.get();
-	}
-
-	public static void incCC0BuildCount() {
-		CC0RebuildCount.getAndIncrement();
-	}
-
-	public static void incCC0ComputeCount() {
-		CC0ComputeCount.getAndIncrement();
+	public static int getRebuildCount() {
+		return rebuildCount.get();
 	}
 
 	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value
-	public static IRExpr rebuildCC0(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+	public static IRExpr rebuil(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		incCC0BuildCount();
+		rebuildCount.getAndIncrement();
 
-		CC0 cc0 = new CC0();
+		ERO cc0 = new ERO();
 		cc0.setInputExpr(expr);
 
-		if (!_rebuildCC0(cc0, interpreter, frame)) {
+		if (!_rebuild(cc0, interpreter, frame)) {
 			return cc0.outputExpr == null ? expr : cc0.outputExpr;
 		}
 
 		if (cc0.outputExpr == null) {
 
 			IRObject rst = interpreter.compute(frame, expr);
-			incCC0ComputeCount();
 			cc0.outputExpr = OptUtil.asExpr(rst);
+			_incComputeCount();
 		}
 
 		return cc0.outputExpr;
@@ -396,7 +392,7 @@ public class EROUtil {
 
 	public static void reset() {
 
-		CC0ComputeCount.set(0);
-		CC0RebuildCount.set(0);
+		computeCount.set(0);
+		rebuildCount.set(0);
 	}
 }
