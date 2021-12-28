@@ -7,14 +7,14 @@
     (if (< m n) (return (uniquePaths n m)))
     (if (= n 1) (return 1))
     (return (+ (uniquePaths (- m 1) n) (uniquePaths m (- n 1))))
-)[opt-cc2]
+)[opt-cco]
 ;=>uniquePaths
 
 (uniquePaths 3 7)
 ;=>28
 
 (attribute-of uniquePaths)
-;=>'(opt-cc2)
+;=>'(opt-cco)
 
 (print-impl uniquePaths)
 ;=>nil
@@ -40,7 +40,7 @@
             )
         )
     )
-)[opt-cc2]
+)[opt-cco]
 rebuild: id=0, name=cc, call=25, hit=6, func=uniquePaths, cache=19, $$i_1$$i_2=1, $$i_2$$i_1=1, $$i_2$$i_2=2...
 
 ;eof

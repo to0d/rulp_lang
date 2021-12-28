@@ -9,7 +9,7 @@
         (setq ?x (+ ?x (fun1 ?i)))
     )
     (return ?x)
-)[opt-cc2]
+)[opt-cco]
 ;=>
 
 (fun2 5)

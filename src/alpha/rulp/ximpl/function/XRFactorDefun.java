@@ -9,7 +9,7 @@
 
 package alpha.rulp.ximpl.function;
 
-import static alpha.rulp.lang.Constant.A_OPT_CC2;
+import static alpha.rulp.lang.Constant.A_OPT_CCO;
 import static alpha.rulp.lang.Constant.A_OPT_ERO;
 //import static alpha.rulp.lang.Constant.A_OPT_CC3;
 import static alpha.rulp.lang.Constant.A_OPT_FULL;
@@ -63,7 +63,7 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 		case A_OPT_ERO:
 			return 0;
 
-		case A_OPT_CC2:
+		case A_OPT_CCO:
 			return 2;
 
 		case A_OPT_TCO:
@@ -234,13 +234,13 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 					uniqOptAttributeSet.add(A_OPT_ERO);
 					break;
 
-				case A_OPT_CC2:
-					uniqOptAttributeSet.add(A_OPT_CC2);
+				case A_OPT_CCO:
+					uniqOptAttributeSet.add(A_OPT_CCO);
 					break;
 
 				case A_OPT_FULL:
 					uniqOptAttributeSet.add(A_OPT_ERO);
-					uniqOptAttributeSet.add(A_OPT_CC2);
+					uniqOptAttributeSet.add(A_OPT_CCO);
 					uniqOptAttributeSet.add(A_OPT_TCO);
 					break;
 
@@ -280,7 +280,7 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 					update = _optCC0(opt);
 					break;
 
-				case A_OPT_CC2:
+				case A_OPT_CCO:
 					update = _optCC2(opt);
 					break;
 

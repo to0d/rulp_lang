@@ -9,7 +9,7 @@
         (setq ?x (+ ?x (fun1 ?i)))
     )
     (return ?x)
-)[opt-cc2]
+)[opt-cco]
 ;=>fun2
 
 (fun2 5)
@@ -19,7 +19,7 @@
 ;=>'()
 
 (attribute-of fun2)
-;=>'(opt-cc2)
+;=>'(opt-cco)
 
 (print-impl fun2)
 ;=>nil
@@ -32,7 +32,7 @@
         )
         (return ?x)
     )
-)[opt-cc2]
+)[opt-cco]
 rebuild: id=0, name=cc, call=5, hit=0, func=fun1, cache=5, $$i_1=2, $$i_2=3, $$i_3=4...
 
 ;eof

@@ -7,14 +7,14 @@
     (if (< m n) (return (uniquePaths n m)))
     (if (= n 1) (return 1))
     (return (+ (uniquePaths (- m 1) n) (uniquePaths m (- n 1))))
-)[opt-cc2]
+)[opt-cco]
 ;=>
 
 (uniquePaths 3 7)
 ;=>
 
 (attribute-of uniquePaths)
-;=>'(opt-cc2)
+;=>'(opt-cco)
 
 (print-impl uniquePaths)
 ;;;
