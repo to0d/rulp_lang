@@ -1,5 +1,5 @@
 (defun fun (?v)
-    (if (<= ?v (- 1 1))(return 1))
+    (if (<= ?v 0)(return 1))
     (return (* ?v (fun (- ?v 1))))
 )[opt-cc2]
 ;=>
@@ -8,7 +8,7 @@
 ;=>
 
 (attribute-of fun)
-;=>'(opt-cc0 opt-cc2)
+;=>'(opt-cc2)
 
 (print-impl fun)
 ;;;

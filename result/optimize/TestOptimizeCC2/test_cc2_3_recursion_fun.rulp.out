@@ -1,5 +1,5 @@
 (defun fun (?v)
-    (if (<= ?v (- 1 1))(return 1))
+    (if (<= ?v 0)(return 1))
     (return (* ?v (fun (- ?v 1))))
 )[opt-cc2]
 ;=>fun
@@ -8,7 +8,7 @@
 ;=>24
 
 (attribute-of fun)
-;=>'(opt-cc0 opt-cc2)
+;=>'(opt-cc2)
 
 (print-impl fun)
 ;=>nil
@@ -16,12 +16,12 @@
 (defun fun (?v)
     (do
         (if
-            (<=[opt-cc0] ?v 0)
+            (<= ?v 0)
             (return 1)
         )
         (return (*[opt-cc0] ?v (cc2[id=0] (fun (- ?v 1)))))
     )
-)[opt-cc0 opt-cc2]
+)[opt-cc2]
 cc 0: id=0, type=CC2, call=4, hit=0, func=fun, cache=4, $$i_0=1, $$i_1=1, $$i_2=2...
 
 ;eof
@@ -33,7 +33,7 @@ cc 0: id=0, type=CC2, call=4, hit=0, func=fun, cache=4, $$i_0=1, $$i_1=1, $$i_2=
       Name: Status
 --------------------------------------------------------------------------------------------------------------------------
        TCO: rebuild=0, expr=0, call=0, compute=0
-       CC0: rebuild=1, compute=1
+       CC0: rebuild=0, compute=0
        CC2: rebuild=1, expr=1, call=4, cache=0, reuse=0
 ==========================================================================================================================
 

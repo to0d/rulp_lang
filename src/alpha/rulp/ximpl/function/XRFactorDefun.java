@@ -263,7 +263,7 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 //					break;
 
 				case A_OPT_CC2:
-					uniqOptAttributeSet.add(A_OPT_CC0);
+//					uniqOptAttributeSet.add(A_OPT_CC0);
 //					uniqOptAttributeSet.add(A_OPT_CC1);
 					uniqOptAttributeSet.add(A_OPT_CC2);
 					break;

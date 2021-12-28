@@ -20,7 +20,6 @@ import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRListener1;
-import alpha.rulp.runtime.IROut;
 import alpha.rulp.utils.FormatUtil;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;

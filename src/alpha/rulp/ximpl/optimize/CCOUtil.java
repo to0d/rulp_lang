@@ -1,16 +1,7 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.A_ID;
-import static alpha.rulp.lang.Constant.A_OPT_CC0;
-import static alpha.rulp.lang.Constant.F_BREAK;
-import static alpha.rulp.lang.Constant.F_CASE;
-import static alpha.rulp.lang.Constant.F_CC1;
 import static alpha.rulp.lang.Constant.F_CC2;
-import static alpha.rulp.lang.Constant.F_IF;
-import static alpha.rulp.lang.Constant.F_LOOP;
-import static alpha.rulp.lang.Constant.F_RETURN;
-import static alpha.rulp.lang.Constant.O_COMPUTE;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,18 +12,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
-import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRParaAttr;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
-import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.control.XRFactorCase;
-import alpha.rulp.ximpl.control.XRFactorLoop;
 import alpha.rulp.ximpl.optimize.StableUtil.NameSet;
 
 // (Compute Cache Optimization)
