@@ -44,6 +44,7 @@ import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.SubjectUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.optimize.CCOUtil;
+import alpha.rulp.ximpl.optimize.EROUtil;
 import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
@@ -76,7 +77,7 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
 	private static boolean _optCC0(OPT opt) throws RException {
 
-		IRExpr newExpr = CCOUtil.rebuildCC0(opt.funBody, opt.interpreter, opt.frame);
+		IRExpr newExpr = EROUtil.rebuildCC0(opt.funBody, opt.interpreter, opt.frame);
 		if (newExpr == opt.funBody) {
 			return false;
 		}

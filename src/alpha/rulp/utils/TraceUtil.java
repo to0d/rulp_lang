@@ -26,7 +26,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.runtime.IRThreadContext;
 import alpha.rulp.ximpl.optimize.CCOUtil;
-import alpha.rulp.ximpl.optimize.TCOUtil;
+import alpha.rulp.ximpl.optimize.*;
 
 public class TraceUtil {
 
@@ -652,8 +652,8 @@ public class TraceUtil {
 		sb.append(SEP_LINE2);
 		sb.append(String.format("%10s: rebuild=%d, expr=%d, call=%d, compute=%d\n", "TCO", TCOUtil.getTCORebuildCount(),
 				TCOUtil.getTCOExprCount(), TCOUtil.getTCOCallCount(), TCOUtil.getTCOComputeCount()));
-		sb.append(String.format("%10s: rebuild=%d, compute=%d\n", "CC0", CCOUtil.getCC0RebuildCount(),
-				CCOUtil.getCC0ComputeCount()));
+		sb.append(String.format("%10s: rebuild=%d, compute=%d\n", "CC0", EROUtil.getCC0RebuildCount(),
+				EROUtil.getCC0ComputeCount()));
 //		sb.append(String.format("%10s: rebuild=%d, expr=%d, call=%d, cache=%d, reuse=%d\n", "CC1",
 //				CCOUtil.getCC1RebuildCount(), CCOUtil.getCC1ExprCount(), CCOUtil.getCC1CallCount(),
 //				CCOUtil.getCC1CacheCount(), CCOUtil.getCC1ReuseCount()));

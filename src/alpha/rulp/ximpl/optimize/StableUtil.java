@@ -163,13 +163,13 @@ public class StableUtil {
 		public void updateExpr(IRObject e0, IRExpr expr) throws RException {
 
 			// (defvar ?x)
-			if (isFactor(e0, F_DEFVAR)) {
+			if (OptUtil.isFactor(e0, F_DEFVAR)) {
 				addVar(RulpUtil.asAtom(expr.get(1)).getName());
 				return;
 			}
 
 			// (defun fun)
-			if (isFactor(e0, F_DEFUN)) {
+			if (OptUtil.isFactor(e0, F_DEFUN)) {
 				addFunName(RulpUtil.asAtom(expr.get(1)).getName());
 				return;
 			}
@@ -177,7 +177,7 @@ public class StableUtil {
 			// (loop for x in '(1 2 3) do ...
 			// (loop for x from 1 to 3 do ...
 			// (loop stmt1 ...
-			if (isFactor(e0, F_LOOP)) {
+			if (OptUtil.isFactor(e0, F_LOOP)) {
 
 				if (RulpUtil.isAtom(expr.get(1), F_FOR)) {
 					addVar(RulpUtil.asAtom(expr.get(2)).getName());
@@ -376,15 +376,6 @@ public class StableUtil {
 		Set<String> callee = new HashSet<>();
 		_findFunCallee(expr, callee, frame);
 		return callee;
-	}
-
-	public static boolean isFactor(IRObject obj, String name) throws RException {
-
-		if (obj.getType() != RType.ATOM && obj.getType() != RType.FACTOR) {
-			return false;
-		}
-
-		return obj.asString().equals(name);
 	}
 
 	public static boolean isNewFrameFactor(IRObject obj) throws RException {
