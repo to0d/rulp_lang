@@ -19,8 +19,11 @@ import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.factor.AbsRefFactorAdapter;
 
 public class XRFactorCC2 extends AbsRefFactorAdapter implements IRCCFactor {
@@ -33,12 +36,14 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRCCFactor {
 
 	private final int id;
 
-	private int varIndex[];
+	private IRFunction fun;
 
-	public XRFactorCC2(String factorName, int id, int[] varIndex) {
+//	private int varIndex[];
+
+	public XRFactorCC2(String factorName, int id, IRFunction fun) {
 		super(factorName);
 		this.id = id;
-		this.varIndex = varIndex;
+		this.fun = fun;
 	}
 
 	@Override
@@ -60,11 +65,12 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRCCFactor {
 		return cacheMap == null ? null : cacheMap.get(key);
 	}
 
-	private String _getKey(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+	private String _getKey(IRExpr expr) throws RException {
 
 		StringBuffer sb = new StringBuffer();
-		for (int index : varIndex) {
-			sb.append(RulpUtil.toUniqString(interpreter.compute(frame, expr.get(index))));
+		IRIterator<? extends IRObject> obj = expr.listIterator(1);
+		while (obj.hasNext()) {
+			sb.append(RulpUtil.toUniqString(obj.next()));
 		}
 
 		return sb.toString();
@@ -90,9 +96,9 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRCCFactor {
 		CCOUtil.incCC2CallCount();
 		++callCount;
 
-		IRExpr expr = RulpUtil.asExpression(args.get(1));
+		IRExpr expr = (IRExpr) RuntimeUtil.rebuildFuncExpr(fun, RulpUtil.asExpression(args.get(1)), interpreter, frame);
 
-		String key = _getKey(expr, interpreter, frame);
+		String key = _getKey(expr);
 		IRObject cache = _getCache(key);
 		if (cache == null) {
 			cache = interpreter.compute(frame, expr);
@@ -108,18 +114,8 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRCCFactor {
 	@Override
 	public String getCCInformation() {
 
-		String out = String.format("id=%d, type=CC2, call=%d, hit=%d, cache=%d, index=[", id, callCount, hitCount,
-				cacheMap == null ? 0 : cacheMap.size());
-
-		int i = 0;
-		for (int index : varIndex) {
-			if (i++ != 0) {
-				out += ",";
-			}
-			out += "" + index;
-		}
-
-		out += "]";
+		String out = String.format("id=%d, type=CC2, call=%d, hit=%d, func=%s, cache=%d", id, callCount, hitCount,
+				fun.getName(), cacheMap == null ? 0 : cacheMap.size());
 
 		if (cacheMap != null) {
 

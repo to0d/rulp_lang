@@ -21,14 +21,14 @@ public class TestOptimizeCC2 extends RulpTestBase {
 	}
 
 	@Test
-	public void test_cc2_2_recursion_fun() {
+	public void test_cc2_3_recursion_fun() {
 
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	public void test_cc2_3_lt0062_a() {
+	public void test_cc2_4_lt0062_a() {
 
 		_setup();
 		_run_script();
@@ -36,7 +36,7 @@ public class TestOptimizeCC2 extends RulpTestBase {
 	}
 
 	@Test
-	public void test_cc2_3_lt0062_b() {
+	public void test_cc2_4_lt0062_b() {
 
 		_setup();
 		_run_script();

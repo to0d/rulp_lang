@@ -4,14 +4,14 @@
 )[opt-cc2]
 ;=>
 
-(attribute-of fun)
+(fun 4)
 ;=>
+
+(attribute-of fun)
+;=>'(opt-cc0 opt-cc2)
 
 (print-impl fun)
 ;;;
-
-(fun 4)
-;=>
 
 (opt-status)
 ;=>

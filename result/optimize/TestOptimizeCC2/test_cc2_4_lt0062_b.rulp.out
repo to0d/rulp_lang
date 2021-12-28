@@ -7,11 +7,14 @@
     (if (< m n) (return (uniquePaths n m)))
     (if (= n 1) (return 1))
     (return (+ (uniquePaths (- m 1) n) (uniquePaths m (- n 1))))
-)[opt-cc2]
+)
 ;=>uniquePaths
 
+(uniquePaths 2 2)
+;=>2
+
 (attribute-of uniquePaths)
-;=>'(opt-cc2)
+;=>'()
 
 (print-impl uniquePaths)
 ;=>nil
@@ -24,7 +27,7 @@
         )
         (if
             (< m n)
-            (return (cc2[id=0] (uniquePaths n m)))
+            (return (uniquePaths n m))
         )
         (if
             (= n 1)
@@ -32,13 +35,9 @@
         )
         (return (+ (uniquePaths (- m 1) n) (uniquePaths m (- n 1))))
     )
-)[opt-cc2]
-cc 0: id=0, type=CC2, call=0, hit=0, cache=0, index=[1,2]
+)
 
 ;eof
-
-(uniquePaths 2 2)
-;=>2
 
 (opt-status)
 ;=>nil
@@ -47,9 +46,9 @@ cc 0: id=0, type=CC2, call=0, hit=0, cache=0, index=[1,2]
       Name: Status
 --------------------------------------------------------------------------------------------------------------------------
        TCO: rebuild=0, expr=0, call=0, compute=0
-       CC0: rebuild=1, compute=0
-       CC1: rebuild=1, expr=0, call=0, cache=0, reuse=0
-       CC2: rebuild=1, expr=1, call=1, cache=0
+       CC0: rebuild=0, compute=0
+       CC1: rebuild=0, expr=0, call=0, cache=0, reuse=0
+       CC2: rebuild=0, expr=0, call=0, cache=0
 ==========================================================================================================================
 
 ;eof

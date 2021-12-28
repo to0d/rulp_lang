@@ -33,7 +33,7 @@
         (return ?x)
     )
 )[opt-cc2]
-cc 0: id=0, type=CC2, call=5, hit=0, cache=5, index=[1], $$i_1=2, $$i_2=3, $$i_3=4...
+cc 0: id=0, type=CC2, call=5, hit=0, func=fun1, cache=5, $$i_1=2, $$i_2=3, $$i_3=4...
 
 ;eof
 

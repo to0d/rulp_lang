@@ -7,7 +7,6 @@ import static alpha.rulp.lang.Constant.F_BREAK;
 import static alpha.rulp.lang.Constant.F_CASE;
 import static alpha.rulp.lang.Constant.F_CC1;
 import static alpha.rulp.lang.Constant.F_CC2;
-import static alpha.rulp.lang.Constant.F_CC3;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_LOOP;
 import static alpha.rulp.lang.Constant.F_RETURN;
@@ -19,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
@@ -27,6 +25,7 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRParaAttr;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
+import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
@@ -181,7 +180,7 @@ public class CCOUtil {
 			return false;
 		}
 
-		if (!_isLocalValue(expr.listIterator(1), nameSet)) {
+		if (!_isStableValue(expr.listIterator(1), nameSet, frame)) {
 			return false;
 		}
 
@@ -201,31 +200,31 @@ public class CCOUtil {
 		return true;
 	}
 
-	private static boolean _isCC3Factor(IRObject obj, IRFrame frame) throws RException {
-
-		if (obj.getType() != RType.FUNC) {
-			return false;
-		}
-
-		if (!StableUtil.isStable(obj, frame)) {
-			return false;
-		}
-
-		return true;
-	}
-
-	private static boolean _isCC3Expr(IRObject e0, IRExpr expr, NameSet nameSet, IRFrame frame) throws RException {
-
-		if (!_isCC3Factor(e0, frame)) {
-			return false;
-		}
-
-		if (!_isStableValue(expr.listIterator(1), nameSet, frame)) {
-			return false;
-		}
-
-		return true;
-	}
+//	private static boolean _isCC3Factor(IRObject obj, IRFrame frame) throws RException {
+//
+//		if (obj.getType() != RType.FUNC) {
+//			return false;
+//		}
+//
+//		if (!StableUtil.isStable(obj, frame)) {
+//			return false;
+//		}
+//
+//		return true;
+//	}
+//
+//	private static boolean _isCC3Expr(IRObject e0, IRExpr expr, NameSet nameSet, IRFrame frame) throws RException {
+//
+//		if (!_isCC3Factor(e0, frame)) {
+//			return false;
+//		}
+//
+//		if (!_isStableValue(expr.listIterator(1), nameSet, frame)) {
+//			return false;
+//		}
+//
+//		return true;
+//	}
 
 	private static boolean _isConstValue(IRIterator<? extends IRObject> it) throws RException {
 
@@ -745,28 +744,43 @@ public class CCOUtil {
 			// Need rebuild element
 			if (newObj == null) {
 
-				IRExpr cc2Expr = RulpUtil.asExpression(expr.get(i));
-				int cc2Size = cc2Expr.size();
-				int indexs[] = new int[cc2Size - 1];
-				int k = 0;
-				for (int j = 1; j < cc2Size; ++j) {
-					IRObject cc2Obj = cc2Expr.get(j);
-					if (!_isConstValue(cc2Obj)) {
-						indexs[k++] = j;
+				newObj = expr.get(i);
+
+				if (newObj.getType() == RType.EXPR) {
+
+					IRExpr childExpr = RulpUtil.asExpression(newObj);
+					if (!childExpr.isEmpty()) {
+
+						IRObject childFactor = RulpUtil.lookup(childExpr.get(0), interpreter, frame);
+						if (_isCC2Expr(childFactor, childExpr, nameSet, frame)) {
+
+							int ccId = incCC2ExprCount();
+							XRFactorCC2 factor = new XRFactorCC2(F_CC2, ccId, (IRFunction) childFactor);
+							RulpUtil.addAttribute(factor, String.format("%s=%d", A_ID, ccId));
+							newObj = RulpFactory.createExpression(factor, childExpr);
+							rebuildList.set(i, newObj);
+							rebuildCount++;
+						}
 					}
 				}
 
-				int newIndexs[] = new int[k];
-				for (int j = 0; j < k; ++j) {
-					newIndexs[j] = indexs[j];
-				}
-
-				int ccId = incCC2ExprCount();
-				XRFactorCC2 factor = new XRFactorCC2(F_CC2, ccId, newIndexs);
-				RulpUtil.addAttribute(factor, String.format("%s=%d", A_ID, ccId));
-				newObj = RulpFactory.createExpression(factor, expr.get(i));
 				rebuildList.set(i, newObj);
-				rebuildCount++;
+
+//				int cc2Size = cc2Expr.size();
+//				int indexs[] = new int[cc2Size - 1];
+//				int k = 0;
+//				for (int j = 1; j < cc2Size; ++j) {
+//					IRObject cc2Obj = cc2Expr.get(j);
+//					if (!_isConstValue(cc2Obj)) {
+//						indexs[k++] = j;
+//					}
+//				}
+//
+//				int newIndexs[] = new int[k];
+//				for (int j = 0; j < k; ++j) {
+//					newIndexs[j] = indexs[j];
+//				}
+
 			}
 		}
 
