@@ -7,7 +7,7 @@
         (return (+ 1 (fun (- ?v 1))))
         (return (+ 2 (fun (- ?v 1)))))
 
-)[opt-cc0]
+)[opt-ero]
 ;=>
 
 (attribute-of fun)

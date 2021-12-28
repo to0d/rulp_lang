@@ -4,7 +4,7 @@
     (loop for ?x from 3 to max_xx do 
         (return ?x)
     )    
-)[opt-cc0]
+)[opt-ero]
 ;=>max_xx fun
 
 (attribute-of fun)

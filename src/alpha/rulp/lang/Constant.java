@@ -95,13 +95,9 @@ public interface Constant {
 
 	String A_NULL = "null";
 
-	String A_OPT_CC0 = "opt-cc0";
-
-//	String A_OPT_CC1 = "opt-cc1";
+	String A_OPT_ERO = "opt-ero";
 
 	String A_OPT_CC2 = "opt-cc2";
-
-//	String A_OPT_CC3 = "opt-cc3";
 
 	String A_OPT_FULL = "opt-full";
 

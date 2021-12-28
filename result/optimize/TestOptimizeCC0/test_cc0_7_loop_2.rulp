@@ -2,7 +2,7 @@
     (loop for ?x from 3 to 3 do 
         (return ?x)
     )    
-)[opt-cc0]
+)[opt-ero]
 ;=>
 
 (attribute-of fun)

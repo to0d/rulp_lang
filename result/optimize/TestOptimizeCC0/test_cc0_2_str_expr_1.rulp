@@ -1,6 +1,6 @@
 (defun fun ()
     (return (str-equal "abc" "ab"))
-)[opt-cc0]
+)[opt-ero]
 ;=>
 
 (attribute-of fun)
