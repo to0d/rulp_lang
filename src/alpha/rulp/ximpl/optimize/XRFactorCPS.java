@@ -17,12 +17,13 @@ import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
+import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.error.RReturn;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorCPS extends AbsAtomFactorAdapter implements IRRebuildFactor {
+public class XRFactorCPS extends AbsAtomFactorAdapter implements IRRebuild, IRFactor {
 
 	private final int id;
 
@@ -55,7 +56,7 @@ public class XRFactorCPS extends AbsAtomFactorAdapter implements IRRebuildFactor
 	}
 
 	@Override
-	public String getOptInformation() {
+	public String getRebuildInformation() {
 		return String.format("id=%d, name=%s, call=%d, expand=%d", id, getName(), callCount, cpsCount);
 	}
 

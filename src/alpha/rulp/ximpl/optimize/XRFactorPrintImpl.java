@@ -99,7 +99,7 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 				return;
 			}
 
-			if (!(obj instanceof IRRebuildFactor)) {
+			if (!(obj instanceof IRRebuild)) {
 				return;
 			}
 
@@ -107,7 +107,7 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 				return;
 			}
 
-			interpreter.out(String.format("rebuild: %s\n", ((IRRebuildFactor) obj).getOptInformation()));
+			interpreter.out(String.format("rebuild: %s\n", ((IRRebuild) obj).getRebuildInformation()));
 
 			ccObjs.add(obj);
 		});
