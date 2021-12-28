@@ -99,7 +99,7 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
 	private static boolean _optCC2(OPT opt) throws RException {
 
-		IRExpr newExpr = CCOUtil.rebuildCC2(opt.funBody, opt.paraAttrs, opt.funName, opt.interpreter, opt.frame);
+		IRExpr newExpr = CCOUtil.rebuild(opt.funBody, opt.paraAttrs, opt.funName, opt.interpreter, opt.frame);
 		if (newExpr == opt.funBody) {
 			return false;
 		}

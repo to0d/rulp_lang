@@ -179,7 +179,7 @@ public class EROUtil {
 					rst = rebuildList.get(3);
 				}
 
-				cc0.outputExpr = OptUtil._asExpr(rst);
+				cc0.outputExpr = OptUtil.asExpr(rst);
 				incCC0ComputeCount();
 				return false;
 			}
@@ -209,7 +209,7 @@ public class EROUtil {
 					}
 
 					if (XRFactorCase.matchCaseValue(e1, caseValue)) {
-						cc0.outputExpr = OptUtil._asExpr(caseClause.get(1));
+						cc0.outputExpr = OptUtil.asExpr(caseClause.get(1));
 						incCC0ComputeCount();
 						return false;
 					}
@@ -217,7 +217,7 @@ public class EROUtil {
 
 				// no any case match, return empty expression
 				if (!nonConstCaseValueFound) {
-					cc0.outputExpr = OptUtil._asExpr(null);
+					cc0.outputExpr = OptUtil.asExpr(null);
 					incCC0ComputeCount();
 					return false;
 				}
@@ -232,12 +232,12 @@ public class EROUtil {
 
 			switch (pos) {
 			case 1: // no expr found
-				cc0.outputExpr = OptUtil._asExpr(null);
+				cc0.outputExpr = OptUtil.asExpr(null);
 				incCC0ComputeCount();
 				return false;
 
 			case 2: // only one expr found, remove DO factor
-				cc0.outputExpr = OptUtil._asExpr(rebuildList.get(1));
+				cc0.outputExpr = OptUtil.asExpr(rebuildList.get(1));
 				incCC0ComputeCount();
 				return false;
 
@@ -265,7 +265,7 @@ public class EROUtil {
 
 				// from 3 to 1 ==> empty expr
 				if (fromIndex > toIndex) {
-					cc0.outputExpr = OptUtil._asExpr(null);
+					cc0.outputExpr = OptUtil.asExpr(null);
 					incCC0ComputeCount();
 					return false;
 				}
@@ -277,13 +277,13 @@ public class EROUtil {
 					RulpUtil.addAll(doActions, XRFactorLoop.getLoop2DoList(expr));
 
 					if (doActions.size() == 0) {
-						cc0.outputExpr = OptUtil._asExpr(null);
+						cc0.outputExpr = OptUtil.asExpr(null);
 						incCC0ComputeCount();
 						return false;
 					}
 
 					if (doActions.size() == 1) {
-						cc0.outputExpr = OptUtil._asExpr(doActions.get(0));
+						cc0.outputExpr = OptUtil.asExpr(doActions.get(0));
 						incCC0ComputeCount();
 						return false;
 					}
@@ -388,7 +388,7 @@ public class EROUtil {
 
 			IRObject rst = interpreter.compute(frame, expr);
 			incCC0ComputeCount();
-			cc0.outputExpr = OptUtil._asExpr(rst);
+			cc0.outputExpr = OptUtil.asExpr(rst);
 		}
 
 		return cc0.outputExpr;
