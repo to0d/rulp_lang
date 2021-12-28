@@ -1,5 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
+import static alpha.rulp.lang.Constant.A_ATOM;
 import static alpha.rulp.lang.Constant.O_COMPUTE;
 
 import alpha.rulp.lang.IRExpr;
@@ -10,6 +11,7 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
+import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.optimize.StableUtil.NameSet;
 
 public class OptUtil {
@@ -25,6 +27,19 @@ public class OptUtil {
 		} else {
 			return RulpFactory.createExpression(O_COMPUTE, obj);
 		}
+	}
+
+	public static boolean isAtomFactor(IRObject obj) throws RException {
+
+		if (obj.getType() != RType.FACTOR) {
+			return false;
+		}
+
+		if (!RulpUtil.containAttribute(obj, A_ATOM)) {
+			return false;
+		}
+
+		return true;
 	}
 
 	public static boolean _isLocalValue(IRObject obj, NameSet nameSet) throws RException {

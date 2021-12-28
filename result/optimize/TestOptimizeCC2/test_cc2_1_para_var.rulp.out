@@ -28,7 +28,7 @@
     (do
         (defvar ?x 0)
         (loop for ?i from 1 to ?m do
-            (setq ?x (+[opt-cc0] ?x (cc2[id=0] (fun1 ?i))))
+            (setq ?x (+[atom] ?x (cc2[id=0] (fun1 ?i))))
         )
         (return ?x)
     )

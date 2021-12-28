@@ -1,7 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.A_DO;
-import static alpha.rulp.lang.Constant.A_OPT_CC0;
 import static alpha.rulp.lang.Constant.F_BREAK;
 import static alpha.rulp.lang.Constant.F_CASE;
 import static alpha.rulp.lang.Constant.F_IF;
@@ -74,24 +73,11 @@ public class EROUtil {
 
 	private static boolean _isCC0Expr(IRObject e0, IRExpr expr, IRFrame frame) throws RException {
 
-		if (!_isCC0Factor(e0, frame)) {
+		if (!OptUtil.isAtomFactor(e0)) {
 			return false;
 		}
 
 		if (!OptUtil.isConstValue(expr.listIterator(1))) {
-			return false;
-		}
-
-		return true;
-	}
-
-	private static boolean _isCC0Factor(IRObject obj, IRFrame frame) throws RException {
-
-		if (obj.getType() != RType.FACTOR) {
-			return false;
-		}
-
-		if (!RulpUtil.containAttribute(obj, A_OPT_CC0)) {
 			return false;
 		}
 
@@ -139,7 +125,7 @@ public class EROUtil {
 
 			} else {
 
-				if (i == 0 && _isCC0Factor(ex, frame)) {
+				if (i == 0 && OptUtil.isAtomFactor(ex)) {
 					reBuild = true;
 				} else {
 					reBuild = OptUtil.isConstValue(ex);

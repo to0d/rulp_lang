@@ -11,7 +11,7 @@
 ;=>nil
 ;out:
 (defun fun (?v)
-    (do (if (<=[opt-cc0] ?v 0) (return 1)) (return (* ?v (fun (- ?v 1)))))
+    (do (if (<=[atom] ?v 0) (return 1)) (return (* ?v (fun (- ?v 1)))))
 )[opt-cc0]
 
 ;eof
