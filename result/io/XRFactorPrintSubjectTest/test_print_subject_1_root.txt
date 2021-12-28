@@ -50,7 +50,7 @@ let                  : -139     0        0    factor     let
 is-stable            : -138     0        0    factor     is-stable           
 list-function-in-return : -137     0        0    factor     list-function-in-return
 opt-status           : -136     0        0    factor     opt-status          
-return-tco           : -135     0        0    factor     return-tco          
+cps                  : -135     0        0    factor     cps                 
 deftemplate          : -134     0        0    factor     deftemplate         
 defun                : -133     0        0    factor     defun               
 defmacro             : -132     0        0    factor     defmacro            

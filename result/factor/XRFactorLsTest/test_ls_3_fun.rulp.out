@@ -78,6 +78,7 @@ root::cmp_def
 root::compute
 root::constant
 root::continue
+root::cps
 root::date
 root::default
 root::defclass
@@ -155,7 +156,6 @@ root::random
 root::ref
 root::remove
 root::return
-root::return-tco
 root::reverse
 root::root
 root::rulp-object-count

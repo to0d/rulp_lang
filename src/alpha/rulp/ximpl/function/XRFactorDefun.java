@@ -103,7 +103,7 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 		}
 
 		// recursive function call in return expression
-		IRExpr newExpr = TCOUtil.rebuildTCO(opt.funBody, opt.frame);
+		IRExpr newExpr = TCOUtil.rebuild(opt.funBody, opt.frame);
 		if (newExpr == opt.funBody) {
 			return false;
 		}

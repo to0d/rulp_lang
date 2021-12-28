@@ -22,9 +22,9 @@ import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.error.RReturn;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorReturnTCO extends AbsAtomFactorAdapter implements IRFactor {
+public class XRFactorCPS extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorReturnTCO(String factorName) {
+	public XRFactorCPS(String factorName) {
 		super(factorName);
 	}
 

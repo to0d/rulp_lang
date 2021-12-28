@@ -42,7 +42,7 @@ Callable stats info: callId=121, row=28, column=61(2), value-max=12, value-unit=
     main     func     11   11 (fun5 nil)                                                                                5 
     root   factor     11    0 >                                                                                         5 
     root   factor     11    0 +                                                                                         51
-    root   factor     10    0 return-tco                                                                                5 
+    root   factor     10    0 cps                                                                                       5 
     root   factor      6    0 alias                          1221                                                         
     root   factor      4    0 defvar                                                1                                1   2
     root   factor      4    0 defmacro                                                      2             1          1    

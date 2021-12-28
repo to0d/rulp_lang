@@ -38,7 +38,7 @@ Callable stats info: callId=126, row=28, column=64(2), value-max=84102, value-un
     main     func  42078 42073 (fun2 nil)                                                                                1349 
     root   factor  42072    0 -                                                                                          249 
     root   factor  37169    0 +                                                                                          2491
-    root   factor  37168    0 return-tco                                                                                 249 
+    root   factor  37168    0 cps                                                                                        249 
     root   factor   4911    0 return                                                                                    12281
     root   factor   4904    0 /                                                                                           18 
     root   factor     58    0 defun                                                 12222222 22 122222222211212122122 21     

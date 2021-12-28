@@ -95,9 +95,9 @@ public interface Constant {
 
 	String A_NULL = "null";
 
-	String A_OPT_ERO = "opt-ero";
-
 	String A_OPT_CC2 = "opt-cc2";
+
+	String A_OPT_ERO = "opt-ero";
 
 	String A_OPT_FULL = "opt-full";
 
@@ -196,6 +196,8 @@ public interface Constant {
 	String F_COMPUTE = "compute";
 
 	String F_CONTINUE = "continue";
+
+	String F_CPS = "cps";
 
 	String F_DATE = "date";
 
@@ -348,8 +350,6 @@ public interface Constant {
 	String F_REMOVE = "remove";
 
 	String F_RETURN = "return";
-
-	String F_RETURN_TCO = "return-tco";
 
 	String F_REVERSE = "reverse";
 
@@ -525,11 +525,9 @@ public interface Constant {
 
 	IRAtom O_QUESTION = RulpFactory.createAtom(A_QUESTION);
 
-	IRAtom O_RETURN_TCO = RulpFactory.createAtom(F_RETURN_TCO);
+	IRAtom O_RETURN_TCO = RulpFactory.createAtom(F_CPS);
 
 	IRAtom O_Static = RulpFactory.createAtom(A_STATIC);
-
-//	IRAtom O_STABLE = RulpFactory.createAtom(A_STABLE);
 
 	IRAtom O_SUB = RulpFactory.createAtom(F_O_SUB);
 

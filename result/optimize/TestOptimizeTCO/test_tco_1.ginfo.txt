@@ -38,7 +38,7 @@ Callable stats info: callId=125, row=29, column=63(2), value-max=9, value-unit=2
     root   factor     15    0 do                                                                                         451
     main     func     14   11 (fact nil)                                                                                 45 
     root   factor     14    0 <=                                                                                         45 
-    root   factor     10    0 return-tco                                                                                 34 
+    root   factor     10    0 cps                                                                                        34 
     root   factor     10    0 -                                                                                          34 
     root   factor     10    0 *                                                                                          34 
     root   factor      6    0 alias                          1221                                                           

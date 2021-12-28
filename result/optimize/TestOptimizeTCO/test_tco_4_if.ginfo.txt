@@ -37,7 +37,7 @@ Callable stats info: callId=126, row=27, column=64(2), value-max=1001, value-uni
     main     func   1112 1107 (fact nil)                                                                                148X 
     root   factor   1112    0 >                                                                                         148X 
     root   factor   1107    0 +                                                                                          38X1
-    root   factor   1106    0 return-tco                                                                                 38X 
+    root   factor   1106    0 cps                                                                                        38X 
     root   factor   1106    0 -                                                                                          38X 
     root   factor     58    0 defun                                                 12222222 22 122222222211212122122 21     
     root   factor     39    0 add-attribute                     12222222222222222222                                         

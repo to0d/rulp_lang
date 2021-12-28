@@ -38,7 +38,7 @@ Callable stats info: callId=121, row=27, column=61(2), value-max=1000, value-uni
     root   factor    500    0 >                                                                                         X 
     root   factor    500    0 <=                                                                                        X 
     root   factor    500    0 +                                                                                         X1
-    root   factor    499    0 return-tco                                                                                X 
+    root   factor    499    0 cps                                                                                       X 
     root   factor     58    0 defun                                                 12222222 22 122222222211212122122 21  
     root   factor     39    0 add-attribute                     12222222222222222222                                      
     root   factor      6    0 alias                          1221                                                         

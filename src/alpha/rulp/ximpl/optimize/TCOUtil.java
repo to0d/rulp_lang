@@ -1,9 +1,9 @@
 package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.F_CPS;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_RETURN;
-import static alpha.rulp.lang.Constant.F_RETURN_TCO;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.O_RETURN_TCO;
 
@@ -242,7 +242,7 @@ public class TCOUtil {
 			break;
 
 		case F_RETURN:
-		case F_RETURN_TCO:
+		case F_CPS:
 
 			if (expr.size() > 1 && expr.get(1).getType() == RType.EXPR) {
 				IRExpr e1 = (IRExpr) expr.get(1);
@@ -259,7 +259,7 @@ public class TCOUtil {
 		return true;
 	}
 
-	private static IRExpr _rebuildTCO(IRExpr expr, IRFrame frame) throws RException {
+	private static IRExpr _rebuild(IRExpr expr, IRFrame frame) throws RException {
 
 		incTCORebuildCount();
 
@@ -279,7 +279,7 @@ public class TCOUtil {
 
 				IRObject e = it.next();
 				if (e.getType() == RType.EXPR) {
-					e = _rebuildTCO((IRExpr) e, frame);
+					e = _rebuild((IRExpr) e, frame);
 				}
 
 				newExpr.add(e);
@@ -298,7 +298,7 @@ public class TCOUtil {
 			while (it.hasNext()) {
 				IRObject e = it.next();
 				if (e.getType() == RType.EXPR) {
-					e = _rebuildTCO((IRExpr) e, frame);
+					e = _rebuild((IRExpr) e, frame);
 				}
 
 				newExpr.add(e);
@@ -501,10 +501,10 @@ public class TCOUtil {
 		return calleeNames;
 	}
 
-	public static IRExpr rebuildTCO(IRExpr expr, IRFrame frame) throws RException {
+	public static IRExpr rebuild(IRExpr expr, IRFrame frame) throws RException {
 
 		incTCORebuildCount();
-		return _rebuildTCO(expr, frame);
+		return _rebuild(expr, frame);
 	}
 
 	public static void reset() {
