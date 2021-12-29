@@ -9,12 +9,7 @@
 
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.*;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import static alpha.rulp.lang.Constant.A_OPT_CCO;
 
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
@@ -24,11 +19,8 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
-import alpha.rulp.ximpl.factor.AbsRefFactorAdapter;
 
 public class XRFactorCC extends AbsAtomFactorAdapter implements IRFactor {
 

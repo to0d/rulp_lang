@@ -7,7 +7,7 @@ import static org.junit.Assert.fail;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRTokener;

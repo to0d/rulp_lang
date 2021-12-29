@@ -1,0 +1,29 @@
+(defun fun2 ()
+    (return (+ 1 2))
+)
+;=>
+
+(defun fun1 (?x ?y)
+    (if (<= ?x 0)
+        (return 0))
+    (return ?y)
+)[opt-lco]
+;=>
+
+(fun1 (* 0 1) (fun2))
+;=>
+
+(runtime-call-count fun2) ; The fun2 should not be called at all
+;=>0
+
+(attribute-of fun1)
+;=>'(opt-lco)
+
+(print-impl fun1)
+;;;
+
+(opt-status)
+;=>
+
+(_ginfo)
+;;;

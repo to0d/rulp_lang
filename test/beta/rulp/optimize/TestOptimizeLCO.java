@@ -42,4 +42,15 @@ public class TestOptimizeLCO extends RulpTestBase {
 		_run_script();
 	}
 
+	@Test
+	void test_lco_5_simple_fun() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_cco_6_work_with_tco() {
+		_setup();
+		_run_script();
+	}
 }

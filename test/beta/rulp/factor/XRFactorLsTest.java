@@ -1,6 +1,6 @@
 package beta.rulp.factor;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import alpha.rulp.utils.RulpTestBase;
 
