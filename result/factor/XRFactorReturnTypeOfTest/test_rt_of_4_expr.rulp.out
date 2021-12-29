@@ -1,0 +1,6 @@
+(return-type-of (+ 1 2))
+;err:
+factor not found: (return-type-of (+ 1 2))
+at main: (return-type-of (+ 1 2))
+;eof
+

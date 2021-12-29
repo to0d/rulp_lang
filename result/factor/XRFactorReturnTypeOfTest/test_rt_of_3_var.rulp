@@ -1,0 +1,9 @@
+(defvar ?x)
+(defvar ?y 1)
+;=>
+
+(return-type-of ?x)
+;=>nil
+
+(return-type-of ?y)
+;=>int

@@ -1,4 +1,4 @@
-(defun fun1 (?x ?y)
+(defun fun1 ((?x int) (?y int))
     (if (<= ?x 0)
         (return 0))
     (return ?y)
@@ -10,7 +10,12 @@
 )
 ;=>fun2
 
-(fun1 0 (fun2))
+(defun fun3 ()
+    (return "abc")
+)
+;=>fun3
+
+(fun1 (* 0 1) (fun2))
 ;=>0
 
 (runtime-call-count fun2) ; The fun2 should not be called at all

@@ -1,0 +1,10 @@
+(defvar ?x)
+(defvar ?y 1)
+;=>&?x &?y
+
+(return-type-of ?x)
+;err:
+factor not found: (return-type-of ?x)
+at main: (return-type-of ?x)
+;eof
+

@@ -1,0 +1,26 @@
+(defun fun1 (?x ?y)
+    (if (<= ?x 0)
+        (return 0))
+    (return ?y)
+)
+
+(defun fun2 ((?x int) (?y int))
+    (if (<= ?x 0)
+        (return 0))
+    (return ?y)
+)
+
+(defun fun3 ((?x int) (?y int))
+    (if (<= ?x 0)
+        (return 0))
+    (return "abc")
+)
+
+;=>fun1 fun2 fun3
+
+(return-type-of fun1)
+;err:
+factor not found: (return-type-of fun1)
+at main: (return-type-of fun1)
+;eof
+

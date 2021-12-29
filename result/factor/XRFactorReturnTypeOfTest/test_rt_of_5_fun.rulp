@@ -1,0 +1,28 @@
+(defun fun1 (?x ?y)
+    (if (<= ?x 0)
+        (return 0))
+    (return ?y)
+)
+
+(defun fun2 ((?x int) (?y int))
+    (if (<= ?x 0)
+        (return 0))
+    (return ?y)
+)
+
+(defun fun3 ((?x int) (?y int))
+    (if (<= ?x 0)
+        (return 0))
+    (return "abc")
+)
+
+;=>
+
+(return-type-of fun1)
+;=>nil
+
+(return-type-of fun2)
+;=>int
+
+(return-type-of fun3)
+;=>nil

@@ -49,6 +49,12 @@ public class TestOptimizeLCO extends RulpTestBase {
 	}
 
 	@Test
+	void test_lco_2_fun_2_has_para_type() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
 	void test_lco_3_tco_by_0() {
 		_setup();
 		_run_script();
