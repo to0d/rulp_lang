@@ -25,19 +25,19 @@
 (runtime-call-count funx)
 ;=>0
 
-(power 1.0 (funx)))
+(power 1.0 (funx))
 ;=>
 
 (runtime-call-count funx)
 ;=>0
 
-(power 1D (funx)))
+(power 1D (funx))
 ;=>
 
 (runtime-call-count funx)
 ;=>0
 
-(power 1L (funx)))
+(power 1L (funx))
 ;=>
 
 (runtime-call-count funx)
@@ -49,19 +49,19 @@
 (runtime-call-count funx)
 ;=>0
 
-(power (fun1f) (funx)))
+(power (fun1f) (funx))
 ;=>
 
 (runtime-call-count funx)
 ;=>0
 
-(power (fun1l) (funx)))
+(power (fun1l) (funx))
 ;=>
 
 (runtime-call-count funx)
 ;=>0
 
-(power (fun1d) (funx)))
+(power (fun1d) (funx))
 ;=>
 
 (runtime-call-count funx)
