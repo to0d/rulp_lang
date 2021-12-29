@@ -761,24 +761,6 @@ public final class RuntimeUtil {
 		return false;
 	}
 
-	public static boolean isPureOperatorName(String name) {
-		switch (name) {
-		case F_O_BY:
-		case F_O_ADD:
-		case F_O_DIV:
-		case F_O_SUB:
-		case F_O_POWER:
-		case F_O_AND:
-		case F_O_OR:
-		case F_O_NOT:
-		case F_O_XOR:
-//		case F_STR_LENGTH:
-			return true;
-		default:
-			return false;
-		}
-	}
-
 	public static boolean isTrace(IRFrame frame) throws RException {
 		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_TRACE)).asBoolean();
 	}

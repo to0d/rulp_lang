@@ -308,10 +308,10 @@ public class TCOUtil {
 		}
 
 		case F_RETURN:
+
 			if (expr.size() == 2) {
 				IRObject e1 = expr.get(1);
 				if (e1.getType() == RType.EXPR) {
-
 					int optId = OptUtil.getNextOptFactorId();
 					XRFactorCPS cps = new XRFactorCPS(optId);
 					RulpUtil.addAttribute(cps, String.format("%s=%d", A_ID, optId));
