@@ -7,11 +7,12 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorComparisonTest extends RulpTestBase {
 
 	@Test
-	void test_comparison_1() {
+	void test_comparison_1_number() {
 
 		_setup();
 		_run_script();
 
 	}
 
+ 
 }
