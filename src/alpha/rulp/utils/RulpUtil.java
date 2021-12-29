@@ -336,6 +336,8 @@ public class RulpUtil {
 
 	private static final String R_CLASS_PRE = "$$c_";
 
+	private static final String R_DOUBLE_PRE = "$$d_";
+
 	private static final String R_FACTOR_PRE = "$$ff_";
 
 	private static final String R_FLOAT_PRE = "$$f_";
@@ -2144,6 +2146,9 @@ public class RulpUtil {
 
 		case FLOAT:
 			return R_FLOAT_PRE + ((IRFloat) obj).asFloat();
+
+		case DOUBLE:
+			return R_DOUBLE_PRE + ((IRDouble) obj).asDouble();
 
 		case BOOL:
 			return R_BOOL_PRE + ((IRBoolean) obj).asBoolean();

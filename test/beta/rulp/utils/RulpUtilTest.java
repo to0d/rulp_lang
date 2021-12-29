@@ -13,15 +13,15 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpTestBase;
 import alpha.rulp.utils.RulpUtil;
 
-public class RulpUtilityTest extends RulpTestBase {
+public class RulpUtilTest extends RulpTestBase {
 
-	public void _test_toString(String input, String expect) {
+	private void _test_toString(String input, String expect) {
 
 		IRParser parser = RulpFactory.createParser();
 		try {
 
 			parser.registerPrefix("nm", "https://github.com/to0d/nm#");
-			IRObject obj = RulpFactory.createList(_getParser().parse(input));
+			IRObject obj = RulpFactory.createList(parser.parse(input));
 			String out = RulpUtil.toString(obj);
 			assertEquals(input, expect, out);
 
@@ -49,4 +49,26 @@ public class RulpUtilityTest extends RulpTestBase {
 		assertTrue(RulpUtil.isValidRulpStmt("(a b c) (b c)"));
 	}
 
+	@Test
+	public void test_toUniqString() {
+
+		_setup();
+
+		_test_toUniqString("1d","'($$d_1.0)");
+	}
+	
+	private void _test_toUniqString(String input, String expect) {
+
+		try {
+
+			IRObject obj = RulpFactory.createList(_getParser().parse(input));
+			String out = RulpUtil.toUniqString(obj);
+			assertEquals(input, expect, out);
+
+		} catch (RException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+
+	}
 }
