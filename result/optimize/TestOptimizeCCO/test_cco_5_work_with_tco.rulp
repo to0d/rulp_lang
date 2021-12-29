@@ -1,14 +1,14 @@
 (defun fun (?v)
     (if (<= ?v 0)(return 0))
     (return (+ 1 (fun (- ?v 1))))
-)
+)[opt-tco opt-cco]
 ;=>
 
 (fun 10)
 ;=>
 
 (attribute-of fun)
-;=>
+;=>'(opt-cco opt-tco)
 
 (print-impl fun)
 ;;;
