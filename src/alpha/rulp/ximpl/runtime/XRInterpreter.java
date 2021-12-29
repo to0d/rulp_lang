@@ -39,22 +39,6 @@ public class XRInterpreter implements IRInterpreter {
 
 		protected int level = 0;
 
-		public void incLevel(XRInterpreter interpreter) {
-
-			// First level call
-			if (level++ == 0) {
-				interpreter.callId.incrementAndGet();
-			}
-
-			if (level > interpreter.maxCallLevel.get()) {
-				interpreter.maxCallLevel.set(level);
-			}
-		}
-
-		public void decLevel() {
-			level--;
-		}
-
 		protected Map<Object, Object> tlsMap = null;
 
 		@Override
@@ -87,15 +71,27 @@ public class XRInterpreter implements IRInterpreter {
 
 	protected AtomicInteger callId = new AtomicInteger(0);
 
-	protected AtomicInteger maxCallLevel = new AtomicInteger(0);
-
 	protected IRFrame mainFrame;
+
+	protected AtomicInteger maxCallLevel = new AtomicInteger(0);
 
 	protected IROut out;
 
 	protected IRParser parser;
 
 	protected final ThreadLocal<TLS> tlsPerThread = new ThreadLocal<>();
+
+	protected void _callLevel(int level) {
+
+		// First level call
+		if (level++ == 0) {
+			callId.incrementAndGet();
+		}
+
+		if (level > maxCallLevel.get()) {
+			maxCallLevel.set(level);
+		}
+	}
 
 	@Override
 	public void addObject(IRObject obj) throws RException {
@@ -133,12 +129,12 @@ public class XRInterpreter implements IRInterpreter {
 
 		TLS tls = getTLS();
 
-		tls.incLevel(this);
+		_callLevel(tls.level++);
 
 		try {
 			return RuntimeUtil.compute(obj, this, frame);
 		} finally {
-			tls.decLevel();
+			tls.level--;
 		}
 	}
 
@@ -201,6 +197,11 @@ public class XRInterpreter implements IRInterpreter {
 	@Override
 	public IRFrame getMainFrame() {
 		return mainFrame;
+	}
+
+	@Override
+	public int getMaxCallLevel() {
+		return maxCallLevel.get();
 	}
 
 	@Override

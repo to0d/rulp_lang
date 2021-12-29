@@ -27,6 +27,8 @@ public interface IRInterpreter {
 
 	public IRFrame getMainFrame();
 
+	public int getMaxCallLevel();
+
 	public IRObject getObject(String name) throws RException;
 
 	public IROut getOut();

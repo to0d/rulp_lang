@@ -61,7 +61,7 @@ public class TestOptimizeCCO extends RulpTestBase {
 
 		_setup();
 		
-		fail();
+//		fail();
 		
 		_run_script();
 	}

@@ -4,7 +4,8 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-     Interpreter call id/level:      121        4
+           Interpreter call id:      121
+    Interpreter call level/max:        4       25
                Frame max level:       12
                   Frame max id:       13
            Frame free id count:        9
