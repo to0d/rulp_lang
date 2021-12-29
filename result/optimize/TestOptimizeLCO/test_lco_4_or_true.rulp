@@ -1,0 +1,26 @@
+(defun fun_t ()
+    (return true)
+)
+
+(defun funx ()
+    (return false)
+)
+;=>
+
+(and true (funx))
+;=>
+
+(runtime-call-count funx)
+;=>0
+
+(and (funx) true (funx))
+;=>
+
+(runtime-call-count funx)
+;=>0
+
+(and (fun_t) (funx))
+;=>
+
+(runtime-call-count funx)
+;=>0

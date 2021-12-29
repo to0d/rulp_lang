@@ -30,4 +30,16 @@ public class TestOptimizeLCO extends RulpTestBase {
 		_run_script();
 	}
 
+	@Test
+	void test_lco_3_and_false() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_lco_4_or_true() {
+		_setup();
+		_run_script();
+	}
+
 }
