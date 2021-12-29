@@ -16,6 +16,7 @@ import alpha.rulp.lang.IRInteger;
 import alpha.rulp.lang.IRLong;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RRelationalOperator;
 import alpha.rulp.lang.RType;
 
 public class MathUtil {
@@ -154,4 +155,180 @@ public class MathUtil {
 		}
 	}
 
+	public static boolean isNumber(IRObject obj) {
+
+		switch (obj.getType()) {
+
+		case DOUBLE:
+		case FLOAT:
+		case INT:
+		case LONG:
+			return true;
+
+		default:
+			return false;
+
+		}
+	}
+
+	public static boolean computeRelationalExpression(RRelationalOperator op, IRObject a, IRObject b)
+			throws RException {
+
+		if (isNumber(a)) {
+
+			if (!isNumber(b)) {
+				throw new RException(
+						String.format("Invalid rational expression: (%s %s %s)", op, a.toString(), b.toString()));
+			}
+
+		} else {
+			switch (op) {
+			case EQ:
+				return RulpUtil.equal(a, b);
+
+			case NE:
+				return !RulpUtil.equal(a, b);
+
+			default:
+			}
+		}
+
+		RType at = a.getType();
+		RType bt = b.getType();
+
+		RType rt = MathUtil.getConvertType(at, bt);
+		if (rt == null) {
+			throw new RException(String.format("Invalid op types: %s %s %s", op, a.toString(), b.toString()));
+		}
+
+		switch (rt) {
+
+		case FLOAT: {
+
+			float av = MathUtil.toFloat(a);
+			float bv = MathUtil.toFloat(b);
+
+			switch (op) {
+
+			case GT: // Greater than
+				return av > bv;
+
+			case GE: // Greater than or equal
+				return av >= bv;
+
+			case LT: // Less than
+				return av < bv;
+
+			case LE: // Less than or equal
+				return av <= bv;
+
+			case EQ: // Equal
+				return av == bv;
+
+			case NE: // not equal
+				return av != bv;
+
+			default:
+			}
+
+			break;
+		}
+
+		case DOUBLE: {
+
+			double av = MathUtil.toDouble(a);
+			double bv = MathUtil.toDouble(b);
+
+			switch (op) {
+
+			case GT: // Greater than
+				return av > bv;
+
+			case GE: // Greater than or equal
+				return av >= bv;
+
+			case LT: // Less than
+				return av < bv;
+
+			case LE: // Less than or equal
+				return av <= bv;
+
+			case EQ: // Equal
+				return av == bv;
+
+			case NE: // not equal
+				return av != bv;
+
+			default:
+			}
+
+			break;
+		}
+
+		case INT: {
+			int av = MathUtil.toInt(a);
+			int bv = MathUtil.toInt(b);
+
+			switch (op) {
+
+			case GT: // Greater than
+				return av > bv;
+
+			case GE: // Greater than or equal
+				return av >= bv;
+
+			case LT: // Less than
+				return av < bv;
+
+			case LE: // Less than or equal
+				return av <= bv;
+
+			case EQ: // Equal
+				return av == bv;
+
+			case NE: // not equal
+				return av != bv;
+
+			default:
+			}
+			break;
+		}
+
+		case LONG: {
+
+			long av = MathUtil.toLong(a);
+			long bv = MathUtil.toLong(b);
+
+			switch (op) {
+
+			case GT: // Greater than
+				return av > bv;
+
+			case GE: // Greater than or equal
+				return av >= bv;
+
+			case LT: // Less than
+				return av < bv;
+
+			case LE: // Less than or equal
+				return av <= bv;
+
+			case EQ: // Equal
+				return av == bv;
+
+			case NE: // not equal
+				return av != bv;
+
+			default:
+			}
+
+			break;
+		}
+
+		default:
+
+		}
+
+		throw new RException(String.format("Invalid rational expression: (%s %s %s)", op, a.toString(), b.toString()));
+	}
 }

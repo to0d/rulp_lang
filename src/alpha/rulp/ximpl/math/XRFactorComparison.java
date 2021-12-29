@@ -7,7 +7,7 @@
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-package alpha.rulp.ximpl.bool;
+package alpha.rulp.ximpl.math;
 
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
@@ -16,6 +16,7 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RRelationalOperator;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.utils.MathUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
@@ -39,7 +40,7 @@ public class XRFactorComparison extends AbsAtomFactorAdapter implements IRFactor
 		IRObject a = interpreter.compute(frame, args.get(1));
 		IRObject b = interpreter.compute(frame, args.get(2));
 
-		return RulpFactory.createBoolean(RulpUtil.computeRelationalExpression(operator, a, b));
+		return RulpFactory.createBoolean(MathUtil.computeRelationalExpression(operator, a, b));
 	}
 
 	@Override

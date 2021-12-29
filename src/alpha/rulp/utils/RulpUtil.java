@@ -116,7 +116,6 @@ import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RAccessType;
 import alpha.rulp.lang.RArithmeticOperator;
 import alpha.rulp.lang.RException;
-import alpha.rulp.lang.RRelationalOperator;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRCallable;
 import alpha.rulp.runtime.IRFactor;
@@ -1153,108 +1152,7 @@ public class RulpUtil {
 
 	}
 
-	public static boolean computeRelationalExpression(RRelationalOperator op, IRObject a, IRObject b)
-			throws RException {
-
-		switch (op) {
-		case EQ:
-			return RulpUtil.equal(a, b);
-
-		case NE:
-			return !RulpUtil.equal(a, b);
-
-		default:
-		}
-
-		RType at = a.getType();
-		RType bt = b.getType();
-
-		RType rt = MathUtil.getConvertType(at, bt);
-		if (rt == null) {
-			throw new RException(String.format("Invalid op types: %s %s %s", op, a.toString(), b.toString()));
-		}
-
-		switch (rt) {
-
-		case FLOAT: {
-
-			float av = MathUtil.toFloat(a);
-			float bv = MathUtil.toFloat(b);
-
-			switch (op) {
-
-			case GT: // Greater than
-				return av > bv;
-
-			case GE: // Greater than or equal
-				return av >= bv;
-
-			case LT: // Less than
-				return av < bv;
-
-			case LE: // Less than or equal
-				return av <= bv;
-
-			default:
-			}
-
-			break;
-		}
-
-		case INT: {
-			int av = MathUtil.toInt(a);
-			int bv = MathUtil.toInt(b);
-
-			switch (op) {
-
-			case GT: // Greater than
-				return av > bv;
-
-			case GE: // Greater than or equal
-				return av >= bv;
-
-			case LT: // Less than
-				return av < bv;
-
-			case LE: // Less than or equal
-				return av <= bv;
-
-			default:
-			}
-			break;
-		}
-
-		case LONG: {
-
-			long av = MathUtil.toLong(a);
-			long bv = MathUtil.toLong(b);
-
-			switch (op) {
-
-			case GT: // Greater than
-				return av > bv;
-
-			case GE: // Greater than or equal
-				return av >= bv;
-
-			case LT: // Less than
-				return av < bv;
-
-			case LE: // Less than or equal
-				return av <= bv;
-
-			default:
-			}
-
-			break;
-		}
-
-		default:
-
-		}
-
-		throw new RException(String.format("Invalid rational expression: (%s %s %s)", op, a.toString(), b.toString()));
-	}
+	
 
 	public static boolean containAttribute(IRObject obj, String attr) {
 		return ((AbsObject) obj).containAttribute(attr);
