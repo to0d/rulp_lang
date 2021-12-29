@@ -38,9 +38,9 @@ public class CCOUtil {
 
 	protected static AtomicInteger CC2CallCount = new AtomicInteger(0);
 
-	protected static AtomicInteger exprCount = new AtomicInteger(0);
-
 	protected static AtomicInteger CC2RebuildCount = new AtomicInteger(0);
+
+	protected static AtomicInteger exprCount = new AtomicInteger(0);
 
 	protected static AtomicInteger reuseCount = new AtomicInteger(0);
 
@@ -115,7 +115,7 @@ public class CCOUtil {
 		reuseCount.set(0);
 	}
 
-	private Map<String, XRFactorCC> cc2Map = new HashMap<>();
+	private Map<String, XRFactorCC2> cc2Map = new HashMap<>();
 
 	private IRFrame frame;
 
@@ -250,15 +250,18 @@ public class CCOUtil {
 					if (!childExpr.isEmpty()) {
 
 						IRObject childFactor = RulpUtil.lookup(childExpr.get(0), interpreter, frame);
+
+						// recursive or stable function
 						if ((childFactor.getType() == RType.ATOM && stableFuncNames.contains(childFactor.asString()))
 								|| _isCC2Expr(childFactor, childExpr, nameSet)) {
 
 							String funcName = childFactor.asString();
-							XRFactorCC cc2 = cc2Map.get(funcName);
+
+							XRFactorCC2 cc2 = cc2Map.get(funcName);
 							if (cc2 == null) {
 
 								int optId = OptUtil.getNextOptFactorId();
-								cc2 = new XRFactorCC(optId);
+								cc2 = new XRFactorCC2(optId);
 								RulpUtil.addAttribute(cc2, String.format("%s=%d", A_ID, optId));
 								cc2Map.put(funcName, cc2);
 								exprCount.getAndIncrement();

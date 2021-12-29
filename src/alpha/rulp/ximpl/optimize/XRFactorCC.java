@@ -9,7 +9,7 @@
 
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.F_CC;
+import static alpha.rulp.lang.Constant.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,63 +27,13 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.factor.AbsRefFactorAdapter;
 
-public class XRFactorCC extends AbsRefFactorAdapter implements IRRebuild, IRFactor {
+public class XRFactorCC extends AbsAtomFactorAdapter implements IRFactor {
 
-	private Map<String, IRObject> cacheMap = null;
-
-	private int callCount = 0;
-
-	private IRFunction fun;
-
-	private int hitCount = 0;
-
-	private final int id;
-
-	public XRFactorCC(int id) {
-		super(F_CC);
-		this.id = id;
-	}
-
-	@Override
-	protected void _delete() throws RException {
-
-		if (cacheMap != null) {
-
-			for (IRObject cache : cacheMap.values()) {
-				RulpUtil.decRef(cache);
-			}
-
-			cacheMap = null;
-		}
-
-		super._delete();
-	}
-
-	private IRObject _getCache(String key) {
-		return cacheMap == null ? null : cacheMap.get(key);
-	}
-
-	private String _getKey(IRExpr expr) throws RException {
-
-		StringBuffer sb = new StringBuffer();
-		IRIterator<? extends IRObject> obj = expr.listIterator(1);
-		while (obj.hasNext()) {
-			sb.append(RulpUtil.toUniqString(obj.next()));
-		}
-
-		return sb.toString();
-	}
-
-	private void _putCache(String key, IRObject cache) throws RException {
-
-		if (cacheMap == null) {
-			cacheMap = new HashMap<>();
-		}
-
-		cacheMap.put(key, cache);
-		RulpUtil.incRef(cache);
+	public XRFactorCC(String factorName) {
+		super(factorName);
 	}
 
 	@Override
@@ -93,50 +43,13 @@ public class XRFactorCC extends AbsRefFactorAdapter implements IRRebuild, IRFact
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		CCOUtil.incCC2CallCount();
-		++callCount;
-
 		IRExpr expr = RulpUtil.asExpression(args.get(1));
-		if (fun == null) {
-			fun = RulpUtil.asFunction(RulpUtil.lookup(expr.get(0), interpreter, frame));
+		IRFunction fun = RulpUtil.asFunction(RulpUtil.lookup(expr.get(0), interpreter, frame));
+		if (!RulpUtil.containAttribute(fun, A_OPT_CCO)) {
+
 		}
 
-		expr = (IRExpr) RuntimeUtil.rebuildFuncExpr(fun, expr, interpreter, frame);
-		String key = _getKey(expr);
-		IRObject cache = _getCache(key);
-		if (cache == null) {
-			cache = interpreter.compute(frame, expr);
-			_putCache(key, cache);
-		} else {
-			CCOUtil.incCC2CacheCount();
-			++hitCount;
-		}
-
-		return cache;
-	}
-
-	@Override
-	public String getRebuildInformation() {
-
-		String out = String.format("id=%d, name=%s, call=%d, hit=%d, func=%s, cache=%d", id, getName(), callCount,
-				hitCount, fun == null ? null : fun.getName(), cacheMap == null ? 0 : cacheMap.size());
-
-		if (cacheMap != null) {
-
-			ArrayList<String> keys = new ArrayList<>(cacheMap.keySet());
-			Collections.sort(keys);
-
-			int j = 0;
-			for (String key : keys) {
-				out += String.format(", %s=%s", key, cacheMap.get(key));
-				if (++j >= 3) {
-					out += "...";
-					break;
-				}
-			}
-		}
-
-		return out;
+		return interpreter.compute(frame, expr);
 	}
 
 }

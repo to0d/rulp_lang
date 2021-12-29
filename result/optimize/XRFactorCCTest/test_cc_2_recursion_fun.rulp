@@ -12,3 +12,40 @@
         (return (+ (fun2 (- ?v 1)) (fun2 (- (/ ?v 8) 1))))
     )
 )
+;=>
+
+(cc (fun2 0))
+;=>
+
+(cc (fun2 1))
+;=>
+
+(cc (fun2 2))
+;=>
+
+(cc (fun2 3))
+;=>
+
+(cc (fun2 11))
+;=>
+
+(cc (fun2 101))
+;=>
+
+(cc (fun2 1001))
+;=>
+
+(attribute-of fun1)
+;=>
+
+(attribute-of fun2)
+;=>
+
+(print-impl fun2)
+;;;
+
+(opt-status)
+;=>
+
+(_ginfo)
+;;;

@@ -1,0 +1,20 @@
+(defun fun1 (?v)
+    (return (+ ?v 1))
+)
+;=>fun1
+
+(defun fun2 (?m)
+    (defvar ?x 0)
+    (loop for ?i from 1 to ?m do
+        (setq ?x (+ ?x (fun1 (+ ?i 1))))
+    )
+    (return ?x)
+)
+;=>fun2
+
+(cc (fun2 5))
+;err:
+factor not found: (cc (fun2 5))
+at main: (cc (fun2 5))
+;eof
+
