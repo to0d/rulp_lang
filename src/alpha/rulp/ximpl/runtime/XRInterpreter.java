@@ -39,6 +39,22 @@ public class XRInterpreter implements IRInterpreter {
 
 		protected int level = 0;
 
+		public void incLevel(XRInterpreter interpreter) {
+
+			// First level call
+			if (level++ == 0) {
+				interpreter.callId.incrementAndGet();
+			}
+
+			if (level > interpreter.maxCallLevel.get()) {
+				interpreter.maxCallLevel.set(level);
+			}
+		}
+
+		public void decLevel() {
+			level--;
+		}
+
 		protected Map<Object, Object> tlsMap = null;
 
 		@Override
@@ -70,6 +86,8 @@ public class XRInterpreter implements IRInterpreter {
 	public static boolean TRACE = false;
 
 	protected AtomicInteger callId = new AtomicInteger(0);
+
+	protected AtomicInteger maxCallLevel = new AtomicInteger(0);
 
 	protected IRFrame mainFrame;
 
@@ -115,15 +133,12 @@ public class XRInterpreter implements IRInterpreter {
 
 		TLS tls = getTLS();
 
-		// First level call
-		if (tls.level++ == 0) {
-			callId.incrementAndGet();
-		}
+		tls.incLevel(this);
 
 		try {
 			return RuntimeUtil.compute(obj, this, frame);
 		} finally {
-			tls.level--;
+			tls.decLevel();
 		}
 	}
 
