@@ -1,0 +1,14 @@
+(defun fun1 ((?v int)) 
+    (return (+ ?v 1))
+)
+;=>fun1
+
+(fun1 1)
+;=>2
+
+(fun1 1.0)
+;err:
+the type<float> of 0 argument<1.0> not match <int>
+at main: (fun1 1.0)
+;eof
+

@@ -13,16 +13,16 @@ import alpha.rulp.utils.RulpUtil;
 class XRFactorDefunTest extends RulpTestBase {
 
 	@Test
+	void test_fun_0_bad_para_1_dup_para_1() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
 	void test_fun_0_bad_para_1_undfine_type_1() {
 		_setup();
 		_run_script();
 
-	}
-
-	@Test
-	void test_fun_0_bad_para_1_dup_para_1() {
-		_setup();
-		_run_script();
 	}
 
 	@Test
