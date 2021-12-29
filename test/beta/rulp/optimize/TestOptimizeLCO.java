@@ -7,49 +7,49 @@ import alpha.rulp.utils.RulpTestBase;
 public class TestOptimizeLCO extends RulpTestBase {
 
 	@Test
-	void test_lco_1_by_0() {
+	void test_lco_1_factor_1_by_0() {
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	void test_lco_2_power_x_0() {
+	void test_lco_1_factor_2_power_x_0() {
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	void test_lco_2_power_x_1() {
+	void test_lco_1_factor_3_power_x_1() {
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	void test_lco_2_power_y_0() {
+	void test_lco_1_factor_4_power_y_0() {
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	void test_lco_3_and_false() {
+	void test_lco_1_factor_5_and_false() {
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	void test_lco_4_or_true() {
+	void test_lco_1_factor_6_or_true() {
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	void test_lco_5_simple_fun() {
+	void test_lco_2_fun_1() {
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	void test_cco_6_work_with_tco() {
+	void test_lco_3_tco_by_0() {
 		_setup();
 		_run_script();
 	}
