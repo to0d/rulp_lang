@@ -134,6 +134,7 @@ obj=private, type=atom, const=true
 obj=property-of, type=factor, const=true
 obj=public, type=atom, const=true
 obj=random, type=factor, const=true
+obj=reduct, type=factor, const=true
 obj=ref, type=factor, const=true
 obj=remove, type=factor, const=true
 obj=return, type=factor, const=true

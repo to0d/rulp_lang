@@ -119,6 +119,7 @@ root::private
 root::property-of
 root::public
 root::random
+root::reduct
 root::ref
 root::remove
 root::return

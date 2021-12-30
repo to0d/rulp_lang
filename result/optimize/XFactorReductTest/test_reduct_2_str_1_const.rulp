@@ -1,2 +1,2 @@
 (reduct (str-equal "abc" "ab"))
-;=>
+;=>false

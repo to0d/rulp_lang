@@ -369,7 +369,7 @@ public class EROUtil {
 	}
 
 	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value
-	public static IRExpr rebuil(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+	public static IRObject rebuild(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		rebuildCount.getAndIncrement();
 
@@ -380,14 +380,13 @@ public class EROUtil {
 			return cc0.outputExpr == null ? expr : cc0.outputExpr;
 		}
 
-		if (cc0.outputExpr == null) {
-
-			IRObject rst = interpreter.compute(frame, expr);
-			cc0.outputExpr = OptUtil.asExpr(rst);
-			_incComputeCount();
+		if (cc0.outputExpr != null) {
+			return cc0.outputExpr;
 		}
 
-		return cc0.outputExpr;
+		IRObject rst = interpreter.compute(frame, expr);
+		_incComputeCount();
+		return rst;
 	}
 
 	public static void reset() {

@@ -119,6 +119,7 @@ mbr=private, mbr-property='(public), mbr-attribute='(), obj=private, obj-type=at
 mbr=property-of, mbr-property='(public), mbr-attribute='(), obj=property-of, obj-type=factor, obj-attribute='()
 mbr=public, mbr-property='(public), mbr-attribute='(), obj=public, obj-type=atom, obj-attribute='()
 mbr=random, mbr-property='(public), mbr-attribute='(), obj=random, obj-type=factor, obj-attribute='()
+mbr=reduct, mbr-property='(public), mbr-attribute='(), obj=reduct, obj-type=factor, obj-attribute='()
 mbr=ref, mbr-property='(public), mbr-attribute='(), obj=ref, obj-type=factor, obj-attribute='()
 mbr=remove, mbr-property='(public), mbr-attribute='(), obj=remove, obj-type=factor, obj-attribute='()
 mbr=return, mbr-property='(public), mbr-attribute='(), obj=return, obj-type=factor, obj-attribute='()

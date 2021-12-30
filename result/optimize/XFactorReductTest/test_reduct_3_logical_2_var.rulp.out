@@ -1,6 +1,3 @@
 (reduct (> ?x (+ ?x 1)))
-;err:
-factor not found: (reduct (> ?x (+ ?x 1)))
-at main: (reduct (> ?x (+ ?x 1)))
-;eof
+;=>(> ?x (+ ?x 1))
 

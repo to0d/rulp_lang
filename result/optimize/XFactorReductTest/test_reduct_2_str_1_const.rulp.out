@@ -1,6 +1,3 @@
 (reduct (str-equal "abc" "ab"))
-;err:
-factor not found: (reduct (str-equal "abc" "ab"))
-at main: (reduct (str-equal "abc" "ab"))
-;eof
+;=>false
 

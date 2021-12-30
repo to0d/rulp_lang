@@ -10,8 +10,5 @@
         )
     )
 )
-;err:
-factor not found: (reduct (do (defvar ?x 10) (loop (setq ?x (/ ?x 3)) (if (< ?x 0) (return ?x)) (println ?x))))
-at main: (reduct (do (defvar ?x 10) (loop (setq ?x (/ ?x 3)) (if (< ?x 0) (return ?x))...
-;eof
+;=>(do (defvar ?x 10) (loop (setq ?x (/ ?x 3)) (if (< ?x 0) (return ?x)) (println ?x)))
 

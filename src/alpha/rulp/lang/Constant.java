@@ -256,7 +256,7 @@ public interface Constant {
 	String F_LAMBDA = "lambda";
 
 	String F_LET = "let";
-
+	
 	String F_LIST_FUNC_IN_RETURN = "list-function-in-return";
 
 	String F_LOAD = "load";
@@ -344,6 +344,8 @@ public interface Constant {
 	String F_PROPERTY_OF = "property-of";
 
 	String F_RANDOM = "random";
+
+	String F_Reduct = "reduct";
 
 	String F_REF = "ref";
 
