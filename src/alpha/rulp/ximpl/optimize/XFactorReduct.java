@@ -1,14 +1,10 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.A_OPT_CCO;
-
-import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
-import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;

@@ -1,0 +1,14 @@
+(reduct (- ?x ?x))
+;=>0
+
+(reduct (+ ?x ?x ?x))
+;=>(* 3 ?x)
+
+(reduct (* ?x ?x))
+;=>(power ?x 2)
+
+(reduct (/ ?x ?x))
+;=>1
+
+(reduct (% ?x ?x))
+;=>0
