@@ -46,12 +46,10 @@ public class TCOUtil {
 
 		private TCONode parrent;
 
-		public TCONode(TCONode parrent, int indexOfParent, IRExpr expr) throws RException {
+		public TCONode(TCONode parrent, int indexOfParent) {
 			super();
 			this.parrent = parrent;
 			this.indexOfParent = indexOfParent;
-
-			setExpr(expr);
 		}
 
 		public IRExpr getExpr() {
@@ -74,11 +72,11 @@ public class TCOUtil {
 
 	protected static AtomicInteger exprCount = new AtomicInteger(0);
 
-	protected static AtomicInteger TCOCallCount = new AtomicInteger(0);
+	protected static AtomicInteger callCount = new AtomicInteger(0);
 
-	protected static AtomicInteger TCOComputeCount = new AtomicInteger(0);
+	protected static AtomicInteger computeCount = new AtomicInteger(0);
 
-	protected static AtomicInteger TCORebuildCount = new AtomicInteger(0);
+	protected static AtomicInteger rebuildCount = new AtomicInteger(0);
 
 	public static boolean TRACE = false;
 
@@ -259,9 +257,13 @@ public class TCOUtil {
 		return true;
 	}
 
-	private static IRExpr _rebuild(IRExpr expr, IRFrame frame) throws RException {
+	private static TCONode _makeTCONode(TCONode parrent, int indexOfParent, IRExpr expr) throws RException {
+		TCONode node = new TCONode(parrent, indexOfParent);
+		node.setExpr(expr);
+		return node;
+	}
 
-		incTCORebuildCount();
+	private static IRExpr _rebuild(IRExpr expr, IRFrame frame) throws RException {
 
 		IRObject e0 = expr.get(0);
 		if (e0.getType() != RType.ATOM) {
@@ -340,7 +342,7 @@ public class TCOUtil {
 		}
 
 		LinkedList<TCONode> cpsQueue = new LinkedList<>();
-		cpsQueue.addLast(new TCONode(null, -1, expr));
+		cpsQueue.addLast(_makeTCONode(null, -1, expr));
 
 		while (!cpsQueue.isEmpty()) {
 
@@ -348,7 +350,7 @@ public class TCOUtil {
 				System.out.println("cps: queue, size=" + cpsQueue.size());
 			}
 
-			incTCOComputeCount();
+			incComputeCount();
 
 			TCONode topNode = cpsQueue.peekLast();
 
@@ -388,7 +390,7 @@ public class TCOUtil {
 
 							IRObject obj = topNode.elements.get(i);
 							if (obj.getType() == RType.EXPR) {
-								cpsQueue.addLast(new TCONode(topNode, i, (IRExpr) obj));
+								cpsQueue.addLast(_makeTCONode(topNode, i, (IRExpr) obj));
 							} else {
 								topNode.elements.set(i, _computeTCO(obj, frame));
 							}
@@ -445,14 +447,14 @@ public class TCOUtil {
 
 				if (topNode.parrent != null) {
 					if (rst.getType() == RType.EXPR) {
-						cpsQueue.addLast(new TCONode(topNode.parrent, topNode.indexOfParent, (IRExpr) rst));
+						cpsQueue.addLast(_makeTCONode(topNode.parrent, topNode.indexOfParent, (IRExpr) rst));
 					} else {
 						topNode.parrent.elements.set(topNode.indexOfParent, rst);
 					}
 				} else {
 
 					if (rst.getType() == RType.EXPR) {
-						cpsQueue.addLast(new TCONode(null, -1, (IRExpr) rst));
+						cpsQueue.addLast(_makeTCONode(null, -1, (IRExpr) rst));
 					} else {
 						return rst;
 					}
@@ -463,32 +465,32 @@ public class TCOUtil {
 		throw new RException("Should not run to here: " + expr);
 	}
 
-	public static int getTCOCallCount() {
-		return TCOCallCount.get();
+	public static int getCallCount() {
+		return callCount.get();
 	}
 
-	public static int getTCOComputeCount() {
-		return TCOComputeCount.get();
+	public static int getComputeCount() {
+		return computeCount.get();
 	}
 
-	public static int getTCOExprCount() {
+	public static int getExprCount() {
 		return exprCount.get();
 	}
 
-	public static int getTCORebuildCount() {
-		return TCORebuildCount.get();
+	public static int getRebuildCount() {
+		return rebuildCount.get();
 	}
 
-	public static void incTCOCallCount() {
-		TCOCallCount.getAndIncrement();
+	public static void incCallCount() {
+		callCount.getAndIncrement();
 	}
 
-	public static void incTCOComputeCount() {
-		TCOComputeCount.getAndIncrement();
+	public static void incComputeCount() {
+		computeCount.getAndIncrement();
 	}
 
 	public static void incTCORebuildCount() {
-		TCORebuildCount.getAndIncrement();
+		rebuildCount.getAndIncrement();
 	}
 
 	public static boolean isCPSRecursive(IRExpr expr, IRFrame frame) throws RException {
@@ -591,9 +593,9 @@ public class TCOUtil {
 
 	public static void reset() {
 		exprCount.set(0);
-		TCOCallCount.set(0);
-		TCOComputeCount.set(0);
-		TCORebuildCount.set(0);
+		callCount.set(0);
+		computeCount.set(0);
+		rebuildCount.set(0);
 	}
 
 }
