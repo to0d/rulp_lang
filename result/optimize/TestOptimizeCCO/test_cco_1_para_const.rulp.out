@@ -45,7 +45,7 @@ rebuild: id=0, name=cc, call=3, hit=2, func=fun1, cache=1, $$i_1=2
 --------------------------------------------------------------------------------------------------------------------------
        ERO: rebuild=0, compute=0
        CCO: rebuild=1, expr=1, call=3, cache=2, reuse=0
-       TCO: rebuild=0, expr=0, call=0, compute=0
+       TCO: rebuild=0, expr=0, call=0, compute=0, max-level=0, node=0
 ==========================================================================================================================
 
 ;eof

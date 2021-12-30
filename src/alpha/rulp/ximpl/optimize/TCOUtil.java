@@ -42,7 +42,9 @@ public class TCOUtil {
 
 		private IRExpr expr;
 
-		private int indexOfParent;
+		private final int indexOfParent;
+
+		private final int level;
 
 		private TCONode parrent;
 
@@ -50,10 +52,20 @@ public class TCOUtil {
 			super();
 			this.parrent = parrent;
 			this.indexOfParent = indexOfParent;
+
+			if (this.parrent == null) {
+				this.level = 0;
+			} else {
+				this.level = this.parrent.level + 1;
+			}
 		}
 
 		public IRExpr getExpr() {
 			return expr;
+		}
+
+		public int getLevel() {
+			return level;
 		}
 
 		public void setExpr(IRExpr newExpr) throws RException {
@@ -70,11 +82,15 @@ public class TCOUtil {
 		}
 	}
 
-	protected static AtomicInteger exprCount = new AtomicInteger(0);
-
 	protected static AtomicInteger callCount = new AtomicInteger(0);
 
 	protected static AtomicInteger computeCount = new AtomicInteger(0);
+
+	protected static AtomicInteger exprCount = new AtomicInteger(0);
+
+	protected static AtomicInteger maxLevelCount = new AtomicInteger(0);
+
+	protected static AtomicInteger nodeCount = new AtomicInteger(0);
 
 	protected static AtomicInteger rebuildCount = new AtomicInteger(0);
 
@@ -258,8 +274,17 @@ public class TCOUtil {
 	}
 
 	private static TCONode _makeTCONode(TCONode parrent, int indexOfParent, IRExpr expr) throws RException {
+
 		TCONode node = new TCONode(parrent, indexOfParent);
 		node.setExpr(expr);
+
+		int level = node.getLevel();
+		if (level > maxLevelCount.get()) {
+			maxLevelCount.set(level);
+		}
+
+		nodeCount.incrementAndGet();
+
 		return node;
 	}
 
@@ -476,6 +501,13 @@ public class TCOUtil {
 	public static int getExprCount() {
 		return exprCount.get();
 	}
+	public static int getMaxLevelCount() {
+		return maxLevelCount.get();
+	}
+
+	public static int getNodeCount() {
+		return nodeCount.get();
+	}
 
 	public static int getRebuildCount() {
 		return rebuildCount.get();
@@ -588,6 +620,7 @@ public class TCOUtil {
 	public static IRExpr rebuild(IRExpr expr, IRFrame frame) throws RException {
 
 		incTCORebuildCount();
+
 		return _rebuild(expr, frame);
 	}
 
@@ -596,6 +629,8 @@ public class TCOUtil {
 		callCount.set(0);
 		computeCount.set(0);
 		rebuildCount.set(0);
+		maxLevelCount.set(0);
+		nodeCount.set(0);
 	}
 
 }

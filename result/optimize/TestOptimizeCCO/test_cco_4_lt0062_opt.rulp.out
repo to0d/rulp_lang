@@ -53,7 +53,7 @@ rebuild: id=0, name=cc, call=25, hit=6, func=uniquePaths, cache=19, $$i_1$$i_2=1
 --------------------------------------------------------------------------------------------------------------------------
        ERO: rebuild=0, compute=0
        CCO: rebuild=1, expr=1, call=25, cache=6, reuse=2
-       TCO: rebuild=0, expr=0, call=0, compute=0
+       TCO: rebuild=0, expr=0, call=0, compute=0, max-level=0, node=0
 ==========================================================================================================================
 
 ;eof

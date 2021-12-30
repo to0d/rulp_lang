@@ -657,8 +657,9 @@ public class TraceUtil {
 		sb.append(String.format("%10s: rebuild=%d, expr=%d, call=%d, cache=%d, reuse=%d\n", "CCO",
 				CCOUtil.getCC2RebuildCount(), CCOUtil.getCC2ExprCount(), CCOUtil.getCC2CallCount(),
 				CCOUtil.getCC2CacheCount(), CCOUtil.getCC2ReuseCount()));
-		sb.append(String.format("%10s: rebuild=%d, expr=%d, call=%d, compute=%d\n", "TCO", TCOUtil.getRebuildCount(),
-				TCOUtil.getExprCount(), TCOUtil.getCallCount(), TCOUtil.getComputeCount()));
+		sb.append(String.format("%10s: rebuild=%d, expr=%d, call=%d, compute=%d, max-level=%d, node=%d\n", "TCO",
+				TCOUtil.getRebuildCount(), TCOUtil.getExprCount(), TCOUtil.getCallCount(), TCOUtil.getComputeCount(),
+				TCOUtil.getMaxLevelCount(), TCOUtil.getNodeCount()));
 		sb.append(SEP_LINE1);
 
 	}
