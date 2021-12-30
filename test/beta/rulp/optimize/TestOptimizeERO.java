@@ -84,7 +84,14 @@ public class TestOptimizeERO extends RulpTestBase {
 	}
 
 	@Test
-	public void test_ero_7_loop_4_infinite_loop_detected() {
+	public void test_ero_8_infinite_loop_detected_loop() {
+
+		_setup();
+		_run_script();
+	}
+	
+	@Test
+	public void test_ero_8_infinite_loop_detected_recursion() {
 
 		_setup();
 		_run_script();
