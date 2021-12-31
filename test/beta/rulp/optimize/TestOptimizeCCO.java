@@ -62,4 +62,11 @@ public class TestOptimizeCCO extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+
+	@Test
+	void test_cco_6_infinite_loop_detected_recursion() {
+
+		_setup();
+		_run_script();
+	}
 }

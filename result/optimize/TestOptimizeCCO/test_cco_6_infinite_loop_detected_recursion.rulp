@@ -1,0 +1,28 @@
+(defun fun (?x)             
+    (if (> ?x 3)
+        (if (> (fun (- ?x 1)) 0)
+            (return 1)
+            (return 2)
+        )
+        (if (> (fun (+ ?x 1)) 0)
+            (return 1)
+            (return 2)
+        )
+    )
+)[opt-cco]
+;=>
+
+(fun 4)
+;=>
+
+(attribute-of fun)
+;=>'(opt-cco)
+
+(print-impl fun)
+;;;
+
+(opt-status)
+;=>
+
+(_ginfo)
+;;;

@@ -1,0 +1,19 @@
+(defun fun (?x)             
+    (if (> ?x 3)
+        (if (> (fun (- ?x 1)) 0)
+            (return 1)
+            (return 2)
+        )
+        (if (> (fun (+ ?x 1)) 0)
+            (return 1)
+            (return 2)
+        )
+    )
+)[opt-cco]
+;=>fun
+
+(fun 4)
+;err:
+java.lang.StackOverflowError
+;eof
+
