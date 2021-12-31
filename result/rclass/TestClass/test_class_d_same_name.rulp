@@ -1,0 +1,23 @@
+(defclass class1
+    (defun fun1 (?x) (return (+ ?x 1)))
+)
+
+(defclass class2
+    (defvar ?value)
+    (defun set_value (?x) (setq ?value ?x))
+)
+
+(defvar ?o1)
+(defvar ?o2)
+
+(setq ?o1 (new class1))
+(setq ?o2 (new class2))
+
+(defun fun1 (?o)
+    (return (?o2::set_value (?o::fun1)))
+)
+;=>
+
+(fun1 ?o1)
+;=>
+

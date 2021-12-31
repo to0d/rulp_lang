@@ -10,7 +10,7 @@ public class TestClass extends RulpTestBase {
 	public void test_class_1() {
 
 		_setup();
-		_run_script(); 
+		_run_script();
 	}
 
 	@Test
@@ -68,7 +68,7 @@ public class TestClass extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
-	
+
 	@Test
 	public void test_class_7_overload_4_same_name_fun() {
 
@@ -112,4 +112,9 @@ public class TestClass extends RulpTestBase {
 		_run_script();
 	}
 
+	@Test
+	public void test_class_d_same_name() {
+		_setup();
+		_run_script();
+	}
 }
