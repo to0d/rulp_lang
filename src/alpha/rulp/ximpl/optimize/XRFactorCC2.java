@@ -9,7 +9,7 @@
 
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.F_CC;
+import static alpha.rulp.lang.Constant.F_CC2;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -42,7 +42,7 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRRebuild, IRFac
 	private final int id;
 
 	public XRFactorCC2(int id) {
-		super(F_CC);
+		super(F_CC2);
 		this.id = id;
 	}
 

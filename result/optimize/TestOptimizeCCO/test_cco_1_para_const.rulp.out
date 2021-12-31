@@ -28,12 +28,12 @@
     (do
         (defvar ?x 0)
         (loop for x from 1 to 3 do
-            (setq ?x (+[atom] ?x (cc[id=0] (fun1 1))))
+            (setq ?x (+[atom] ?x (cc2[id=0] (fun1 1))))
         )
         (return ?x)
     )
 )[opt-cco]
-rebuild: id=0, name=cc, call=3, hit=2, func=fun1, cache=1, $$i_1=2
+rebuild: id=0, name=cc2, call=3, hit=2, func=fun1, cache=1, $$i_1=2
 
 ;eof
 

@@ -187,6 +187,8 @@ public interface Constant {
 
 	String F_CC = "cc";
 
+	String F_CC2 = "cc2";
+
 	String F_CLASS_OF = "class-of";
 
 	String F_CMP = "cmp";
@@ -256,7 +258,7 @@ public interface Constant {
 	String F_LAMBDA = "lambda";
 
 	String F_LET = "let";
-	
+
 	String F_LIST_FUNC_IN_RETURN = "list-function-in-return";
 
 	String F_LOAD = "load";
