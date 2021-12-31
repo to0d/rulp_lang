@@ -14,6 +14,62 @@
 
 (fun 4)
 ;err:
-java.lang.StackOverflowError
+infinite loop detected: (cc2 (fun 3))
+at _$fun$_fun: (cc2 (fun (- ?x 1)))
+at _$fun$_fun: (> (cc2 (fun (- ?x 1))) 0)
+at _$fun$_fun: (if (> (cc2 (fun (- ?x 1))) 0) (return 1) (return 2))
+at _$fun$_fun: (if (> ?x 3) (if (> (cc2 (fun (- ?x 1))) 0) (return 1) (return 2)) (if (> (cc...
+at _$fun$_fun: (fun 4)
+at _$fun$_fun: (cc2 (fun (+ ?x 1)))
+at _$fun$_fun: (> (cc2 (fun (+ ?x 1))) 0)
+at _$fun$_fun: (if (> (cc2 (fun (+ ?x 1))) 0) (return 1) (return 2))
+at _$fun$_fun: (if (> ?x 3) (if (> (cc2 (fun (- ?x 1))) 0) (return 1) (return 2)) (if (> (cc...
+at _$fun$_fun: (fun 3)
+at _$fun$_fun: (cc2 (fun (- ?x 1)))
+at _$fun$_fun: (> (cc2 (fun (- ?x 1))) 0)
+at _$fun$_fun: (if (> (cc2 (fun (- ?x 1))) 0) (return 1) (return 2))
+at _$fun$_fun: (if (> ?x 3) (if (> (cc2 (fun (- ?x 1))) 0) (return 1) (return 2)) (if (> (cc...
+at main: (fun 4)
 ;eof
+
+(attribute-of fun)
+;=>'(opt-cco)
+
+(print-impl fun)
+;=>nil
+;out:
+(defun fun (?x)
+    (if
+        (> ?x 3)
+        (if
+            (>[atom] (cc2[id=0] (fun (- ?x 1))) 0)
+            (return 1)
+            (return 2)
+        )
+        (if
+            (>[atom] (cc2[id=0] (fun (+ ?x 1))) 0)
+            (return 1)
+            (return 2)
+        )
+    )
+)[opt-cco]
+rebuild: id=0, name=cc2, call=3, hit=0, func=fun, cache=2, data:[$$i_3/null/I/0] [$$i_4/null/I/0]
+
+;eof
+
+(opt-status)
+;=>nil
+;out:
+==========================================================================================================================
+      Name: Status
+--------------------------------------------------------------------------------------------------------------------------
+       ERO: rebuild=0, compute=0
+       CCO: rebuild=1, expr=1, call=3, cache=0, reuse=1
+       TCO: rebuild=0, expr=0, call=0, compute=0, max-level=0, node=0
+==========================================================================================================================
+
+;eof
+
+(_ginfo)
+;=>nil
 

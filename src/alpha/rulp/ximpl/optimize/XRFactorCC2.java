@@ -27,11 +27,44 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
+import alpha.rulp.ximpl.error.RInfiniteLoop;
 import alpha.rulp.ximpl.factor.AbsRefFactorAdapter;
 
 public class XRFactorCC2 extends AbsRefFactorAdapter implements IRRebuild, IRFactor {
 
-	private Map<String, IRObject> cacheMap = null;
+	enum CC2_STATUS {
+		WORK, DONE, EXCP, INF
+
+	}
+
+	public String toString(CC2_STATUS status) {
+		switch (status) {
+		case DONE:
+			return "D";
+
+		case EXCP:
+			return "E";
+
+		case INF:
+			return "I";
+
+		case WORK:
+			return "W";
+
+		default:
+			return "U";
+		}
+
+	}
+
+	static class CC2 {
+//		String expr;
+		IRObject result;
+		CC2_STATUS status = CC2_STATUS.WORK;
+		int hitCount = 0;
+	}
+
+	private Map<String, CC2> cacheMap = null;
 
 	private int callCount = 0;
 
@@ -50,20 +83,36 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRRebuild, IRFac
 	protected void _delete() throws RException {
 
 		if (cacheMap != null) {
-
-			for (IRObject cache : cacheMap.values()) {
-				RulpUtil.decRef(cache);
+			for (CC2 cc2 : cacheMap.values()) {
+				if (cc2.result != null) {
+					RulpUtil.decRef(cc2.result);
+				}
 			}
-
 			cacheMap = null;
 		}
 
 		super._delete();
 	}
 
-	private IRObject _getCache(String key) {
+	private CC2 _getCache(String key) {
 		return cacheMap == null ? null : cacheMap.get(key);
 	}
+
+	private CC2 _makeCache(String key) {
+
+		CC2 cc2 = new CC2();
+
+		if (cacheMap == null) {
+			cacheMap = new HashMap<>();
+		}
+
+		cacheMap.put(key, cc2);
+		return cc2;
+	}
+
+//	private void _removeCache(String key) {
+//		cacheMap.remove(key);
+//	}
 
 	private String _getKey(IRExpr expr) throws RException {
 
@@ -74,16 +123,6 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRRebuild, IRFac
 		}
 
 		return sb.toString();
-	}
-
-	private void _putCache(String key, IRObject cache) throws RException {
-
-		if (cacheMap == null) {
-			cacheMap = new HashMap<>();
-		}
-
-		cacheMap.put(key, cache);
-		RulpUtil.incRef(cache);
 	}
 
 	@Override
@@ -102,17 +141,55 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRRebuild, IRFac
 		}
 
 		expr = (IRExpr) RuntimeUtil.rebuildFuncExpr(fun, expr, interpreter, frame);
+
 		String key = _getKey(expr);
-		IRObject cache = _getCache(key);
-		if (cache == null) {
-			cache = interpreter.compute(frame, expr);
-			_putCache(key, cache);
+		CC2 cc2 = _getCache(key);
+
+		// cache was not computed
+		if (cc2 == null) {
+
+			cc2 = _makeCache(key);
+//			cc2.expr = "" + expr;
+
+			try {
+
+				cc2.result = interpreter.compute(frame, expr);
+				cc2.status = CC2_STATUS.DONE;
+				return cc2.result;
+
+			} catch (RInfiniteLoop e) {
+				cc2.status = CC2_STATUS.INF;
+				throw e;
+
+			} catch (RException e) {
+				cc2.status = CC2_STATUS.EXCP;
+				throw e;
+			}
+
 		} else {
-			CCOUtil.incCC2CacheCount();
-			++hitCount;
+
+			switch (cc2.status) {
+
+			case WORK:
+				throw new RInfiniteLoop("infinite loop detected: (cc2 " + expr + ")");
+
+			case DONE:
+				CCOUtil.incCC2CacheCount();
+				++hitCount;
+				cc2.hitCount++;
+				return cc2.result;
+
+			case EXCP:
+				throw new RInfiniteLoop("previous exception record found: (cc2 " + expr + ")");
+
+			case INF:
+				throw new RInfiniteLoop("previous infinite record found: (cc2 " + expr + ")");
+
+			default:
+				throw new RInfiniteLoop("unknown status found: (cc2 " + expr + ")");
+			}
 		}
 
-		return cache;
 	}
 
 	@Override
@@ -126,9 +203,17 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRRebuild, IRFac
 			ArrayList<String> keys = new ArrayList<>(cacheMap.keySet());
 			Collections.sort(keys);
 
+			out += ", data:";
+
 			int j = 0;
 			for (String key : keys) {
-				out += String.format(", %s=%s", key, cacheMap.get(key));
+
+				if (j != 0) {
+					out += " ";
+				}
+
+				CC2 cc2 = cacheMap.get(key);
+				out += String.format("[%s/%s/%s/%d]", key, cc2.result, toString(cc2.status), cc2.hitCount);
 				if (++j >= 3) {
 					out += "...";
 					break;

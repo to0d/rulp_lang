@@ -33,7 +33,7 @@
         (return ?x)
     )
 )[opt-cco]
-rebuild: id=0, name=cc2, call=3, hit=2, func=fun1, cache=1, $$i_1=2
+rebuild: id=0, name=cc2, call=3, hit=2, func=fun1, cache=1, data:[$$i_1/2/D/2]
 
 ;eof
 

@@ -13,7 +13,7 @@
 ;=>
 
 (fun 4)
-;=>
+;err
 
 (attribute-of fun)
 ;=>'(opt-cco)
