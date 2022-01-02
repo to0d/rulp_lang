@@ -209,6 +209,10 @@ public class EROUtil {
 				rebuildObj = _rebuildBy(rebuildList);
 				break;
 
+			case F_O_ADD:
+				rebuildObj = _rebuildAdd(rebuildList);
+				break;
+
 			case F_O_POWER:
 				rebuildObj = _rebuildPower(rebuildList);
 				break;
@@ -228,6 +232,79 @@ public class EROUtil {
 		}
 
 		return false;
+	}
+
+	private static IRObject _rebuildAdd(List<IRObject> rebuildList) throws RException {
+		return _rebuildAdd(rebuildList, 0, rebuildList.size());
+	}
+
+	private static IRObject _rebuildAdd(List<IRObject> elementList, int fromIndex, int toIndex) throws RException {
+
+		int size = toIndex - fromIndex;
+
+		// (+)
+		if (size == 1) {
+			return OptUtil.asExpr(null);
+		}
+
+		// (+ a)
+		if (size == 2) {
+			return elementList.get(fromIndex + 1);
+		}
+
+		ArrayList<IRObject> nums = null;
+		int pos = 1;
+
+		// (+ x n y)
+		for (int i = 1; i < size; ++i) {
+
+			IRObject ex = elementList.get(fromIndex + i);
+			if (OptUtil.isConstNumber(ex)) {
+
+				if (nums == null) {
+					nums = new ArrayList<>();
+				}
+
+				nums.add(ex);
+
+			} else {
+
+				if (pos != i) {
+					elementList.set(fromIndex + pos, ex);
+				}
+
+				pos++;
+			}
+		}
+
+		// (+ a b c)
+		if (nums == null) {
+			return null;
+		}
+
+		IRObject numObj = nums.get(0);
+		for (int i = 1; i < nums.size(); ++i) {
+			numObj = MathUtil.computeArithmeticExpression(RArithmeticOperator.ADD, numObj, nums.get(i));
+		}
+
+		if (pos == 1) {
+			return numObj;
+		}
+
+		// (+ 0 a b) ==> (* a b)
+		if (OptUtil.isConstNumber(numObj, 0)) {
+
+			if (pos == 2) {
+				return elementList.get(fromIndex + 1); // (+ 0 a) ==> a
+			}
+
+			// (+ 0 a b) ==>(+ a b)
+			return RulpFactory.createExpression(elementList.subList(fromIndex, fromIndex + pos));
+		}
+
+		// (+ 2 a b) ==> (+ a b 2)
+		elementList.set(fromIndex + (pos++), numObj);
+		return RulpFactory.createExpression(elementList.subList(fromIndex, fromIndex + pos));
 	}
 
 	private static IRObject _rebuildBy(List<IRObject> rebuildList) throws RException {
@@ -256,11 +333,6 @@ public class EROUtil {
 
 			IRObject ex = elementList.get(fromIndex + i);
 			if (OptUtil.isConstNumber(ex)) {
-
-				// (* x 0) ==> 0
-				if (OptUtil.isConstNumber(ex, 0)) {
-					return O_INT_0;
-				}
 
 				if (nums == null) {
 					nums = new ArrayList<>();
@@ -304,9 +376,11 @@ public class EROUtil {
 				return elementList.get(fromIndex + 1); // (* 1 a) ==> a
 			}
 
+			// (* 1 a b) ==>(+ a b)
 			return RulpFactory.createExpression(elementList.subList(fromIndex, fromIndex + pos));
 		}
 
+		// (* 2 a b) ==> (+ a b 2)
 		elementList.set(fromIndex + (pos++), numObj);
 		return RulpFactory.createExpression(elementList.subList(fromIndex, fromIndex + pos));
 	}

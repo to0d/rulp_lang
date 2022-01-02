@@ -1,0 +1,36 @@
+(reduct (+ 0 a))
+;=>a
+
+(reduct (+ 0.0 a))
+;=>a
+
+(reduct (+ 0.0d a))
+;=>a
+
+(reduct (+ 0L a))
+;=>a
+
+(reduct (+ a 0 b))
+;=>(+ a b)
+
+(reduct (+ a 0.0 b))
+;=>(+ a b)
+
+(reduct (+ a 0.0d b))
+;=>(+ a b)
+
+(reduct (+ a 0L b))
+;=>(+ a b)
+
+(reduct (+ 1 a))
+;=>(+ a 1)
+
+(reduct (+ a 2))
+;=>(+ a 2)
+
+(reduct (+ a 2.0 b 3))
+;=>(+ a b 5.0)
+
+(reduct (+ a 2D b 3L 1))
+;=>(+ a b 6.0D)
+
