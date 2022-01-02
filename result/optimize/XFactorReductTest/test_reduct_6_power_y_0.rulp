@@ -1,0 +1,20 @@
+(defun funx ()
+    (return 100)
+)
+;=>
+
+(power (funx) 0)
+;=>
+
+(power (funx) 0.0)
+;=>
+
+(power (funx) 0D)
+;=>
+
+(power (funx) 0L)
+;=>
+
+(runtime-call-count funx)
+;=>0
+

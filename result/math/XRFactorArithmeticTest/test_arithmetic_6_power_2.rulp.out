@@ -43,5 +43,5 @@
 ;=>1.0D
 
 (runtime-call-count funx)
-;=>0
+;=>8
 

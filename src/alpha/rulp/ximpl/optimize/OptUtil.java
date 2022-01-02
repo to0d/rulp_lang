@@ -41,20 +41,40 @@ public class OptUtil {
 		return OptFactorCount.getAndIncrement();
 	}
 
-	public static IRObject getZeroObject(RType type) throws RException {
+	public static IRObject getNumber0(RType type) throws RException {
 
 		switch (type) {
 		case INT:
-			return O_0_INT;
+			return O_INT_0;
 
 		case FLOAT:
-			return O_0_FLOAT;
+			return O_FLOAT_0;
 
 		case DOUBLE:
-			return O_0_DOUBLE;
+			return O_DOUBLE_0;
 
 		case LONG:
-			return O_0_LONG;
+			return O_LONG_0;
+
+		default:
+			throw new RException("invalid type: " + type);
+		}
+	}
+
+	public static IRObject getNumber1(RType type) throws RException {
+
+		switch (type) {
+		case INT:
+			return O_INT_1;
+
+		case FLOAT:
+			return O_FLOAT_1;
+
+		case DOUBLE:
+			return O_DOUBLE_1;
+
+		case LONG:
+			return O_LONG_1;
 
 		default:
 			throw new RException("invalid type: " + type);
@@ -91,6 +111,23 @@ public class OptUtil {
 
 		case CONSTANT:
 			return isConstNumber(((IRConst) obj).getValue(), value);
+
+		default:
+			return false;
+		}
+	}
+
+	public static boolean isConstNumber(IRObject obj) throws RException {
+
+		switch (obj.getType()) {
+		case INT:
+		case FLOAT:
+		case DOUBLE:
+		case LONG:
+			return true;
+
+		case CONSTANT:
+			return isConstNumber(((IRConst) obj).getValue());
 
 		default:
 			return false;

@@ -72,11 +72,11 @@ public class XRFactorArithmetic extends AbsAtomFactorAdapter implements IRFactor
 					}
 				}
 
-				if (OptUtil.isConstNumber(rst, 1)) {
-					if (operator == RArithmeticOperator.POWER) {
-						return rst;
-					}
-				}
+//				if (OptUtil.isConstNumber(rst, 1)) {
+//					if (operator == RArithmeticOperator.POWER) {
+//						return rst;
+//					}
+//				}
 
 				IRObject next = interpreter.compute(frame, it.next());
 				rst = MathUtil.computeArithmeticExpression(operator, rst, next);

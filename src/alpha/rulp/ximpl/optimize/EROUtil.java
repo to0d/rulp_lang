@@ -246,23 +246,61 @@ public class EROUtil {
 	private static IRObject _rebuildPower(List<IRObject> rebuildList) throws RException {
 
 		int size = rebuildList.size();
-		if (size != 3) {
-			return null;
+
+		// (*)
+		if (size == 1) {
+			return OptUtil.asExpr(null);
 		}
 
-		IRObject ex = rebuildList.get(1);
+		// (power a) ==> a
+		if (size == 2) {
+			return rebuildList.get(1);
+		}
 
-		if (OptUtil.isConstNumber(ex, 1)) {
+		// (power 1 e2 e3 e4...) ==> 1
+		IRObject e1 = rebuildList.get(1);
+		if (OptUtil.isConstNumber(e1, 1)) {
+			return e1;
+		}
 
-//			RType type = ex.getType();
+		// (a^c)^y ==> (a^y)^c
+		ArrayList<IRObject> nums = null;
+		int pos = 1;
+		for (int i = 2; i < size; ++i) {
+
+			IRObject ex = rebuildList.get(i);
+			if (OptUtil.isConstNumber(ex)) {
+				
+				
+
+			}
+		}
+
+		// (power e1 e2 e3 1 e4) ==> (power e1 e2 e3 e4)
+		// (power e1 e2 e3 0 e4) ==> 1
+
+		for (int i = size - 1; i >= 0; --i) {
+
+			IRObject ex = rebuildList.get(i);
+			if (OptUtil.isConstNumber(ex)) {
+
+			}
+
+		}
+
+//		IRObject e2 = rebuildList.get(1);
+//		if (OptUtil.isConstNumber(e2, 0)) {
+//
+//			RType type = e2.getType();
 //			if (type == RType.CONSTANT) {
-//				type = RulpUtil.asConstant(ex).getValue().getType();
+//				type = RulpUtil.asConstant(e2).getValue().getType();
 //			}
-
-			return ex;
-		}
+//
+//			return OptUtil.getNumber1(type);
+//		}
 
 		return null;
+
 	}
 
 	// (case a (a action) (b action))
