@@ -19,10 +19,12 @@ import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRInteger;
 import alpha.rulp.lang.IRLong;
 import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.RArithmeticOperator;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.utils.MathUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.control.XRFactorCase;
@@ -91,258 +93,6 @@ public class EROUtil {
 		}
 
 		return true;
-	}
-
-	// (do () (b action))
-	private static IRObject _rebuildDo(List<IRObject> rebuildList) throws RException {
-
-		int size = rebuildList.size();
-		int pos = _removeEmptyExpr(rebuildList, 1);
-
-		switch (pos) {
-		case 1: // no expr found
-			return OptUtil.asExpr(null);
-
-		case 2: // only one expr found, remove DO factor
-			return OptUtil.asExpr(rebuildList.get(1));
-
-		default:
-
-			// empty expr found
-			if (pos != size) {
-				return RulpFactory.createExpression(rebuildList.subList(0, pos));
-			}
-		}
-
-		return null;
-	}
-
-	private static IRObject _rebuildLoop(IRObject e0, IRExpr expr, List<IRObject> rebuildList) throws RException {
-
-		int size = rebuildList.size();
-
-		// (loop for x from 1 to 3 do ...
-		if (OptUtil.isFactor(e0, F_LOOP) && XRFactorLoop.isLoop2(expr)) {
-
-			IRObject fromObj = XRFactorLoop.getLoop2FromObject(expr);
-			IRObject toObj = XRFactorLoop.getLoop2ToObject(expr);
-
-			if (fromObj.getType() == RType.INT && toObj.getType() == RType.INT) {
-
-				int fromIndex = RulpUtil.asInteger(fromObj).asInteger();
-				int toIndex = RulpUtil.asInteger(toObj).asInteger();
-
-				// from 3 to 1 ==> empty expr
-				if (fromIndex > toIndex) {
-					return OptUtil.asExpr(null);
-				}
-
-				// from 1 to 1 ==> (do action)
-				if (fromIndex == toIndex) {
-
-					ArrayList<IRObject> doActions = new ArrayList<>();
-					RulpUtil.addAll(doActions, XRFactorLoop.getLoop2DoList(expr));
-
-					if (doActions.size() == 0) {
-						return OptUtil.asExpr(null);
-					}
-
-					if (doActions.size() == 1) {
-						return OptUtil.asExpr(doActions.get(0));
-					}
-
-					return RulpUtil.toDoExpr(doActions);
-				}
-			}
-		}
-
-		// Check infinite loop: (loop a)
-		if (OptUtil.isFactor(e0, F_LOOP) && XRFactorLoop.isLoop3(expr)) {
-
-			int pos = _removeEmptyExpr(rebuildList, 1);
-			if (pos == 1) {
-				throw new RException("infinite loop detected: input=" + expr + ", output="
-						+ RulpFactory.createExpression(rebuildList.subList(0, pos)));
-			}
-
-			boolean findBreak = false;
-			for (int i = 1; !findBreak && i < pos; ++i) {
-				findBreak = _hasBreakExpr(rebuildList.get(i));
-			}
-
-			// no break clause found, infinite loop
-			if (!findBreak) {
-				throw new RException("infinite loop detected: input=" + expr + ", output="
-						+ RulpFactory.createExpression(rebuildList.subList(0, pos)));
-			}
-
-			// empty expr found
-			if (pos != size) {
-				return RulpFactory.createExpression(rebuildList.subList(0, pos));
-			}
-		}
-
-		return null;
-	}
-
-	// (if true A B) or (if false A B)
-	private static IRObject _rebuildIf(List<IRObject> rebuildList) throws RException {
-
-		int size = rebuildList.size();
-		if (size < 3) {
-			return null;
-		}
-
-		// (if true A B) or (if false A B)
-		IRObject e1 = rebuildList.get(1);
-		if (e1.getType() == RType.BOOL) {
-
-			IRObject rst = null;
-			if (RulpUtil.asBoolean(e1).asBoolean()) {
-				rst = rebuildList.get(2);
-			} else if (rebuildList.size() > 3) {
-				rst = rebuildList.get(3);
-			}
-
-			return OptUtil.asExpr(rst);
-		}
-
-		return null;
-	}
-
-	private static IRObject _rebuildBy(List<IRObject> rebuildList) throws RException {
-
-		int size = rebuildList.size();
-
-		// (*)
-		if (size == 1) {
-			return OptUtil.asExpr(null);
-		}
-
-		// (* a)
-		if (size == 2) {
-			return rebuildList.get(1);
-		}
-
-		// (* a 0 b)
-		for (int i = 1; i < size; ++i) {
-
-			IRObject ex = rebuildList.get(i);
-
-			if (OptUtil.isConstNumber(ex, 0)) {
-//
-//				RType type = ex.getType();
-//				if (type == RType.CONSTANT) {
-//					type = RulpUtil.asConstant(ex).getValue().getType();
-//				}
-
-				return ex;
-			}
-		}
-
-		return null;
-	}
-
-	private static IRObject _rebuildPower(List<IRObject> rebuildList) throws RException {
-
-		int size = rebuildList.size();
-
-		// (*)
-		if (size == 1) {
-			return OptUtil.asExpr(null);
-		}
-
-		// (power a) ==> a
-		if (size == 2) {
-			return rebuildList.get(1);
-		}
-
-		// (power 1 e2 e3 e4...) ==> 1
-		IRObject e1 = rebuildList.get(1);
-		if (OptUtil.isConstNumber(e1, 1)) {
-			return e1;
-		}
-
-		// (a^c)^y ==> (a^y)^c
-		ArrayList<IRObject> nums = null;
-		int pos = 1;
-		for (int i = 2; i < size; ++i) {
-
-			IRObject ex = rebuildList.get(i);
-			if (OptUtil.isConstNumber(ex)) {
-				
-				
-
-			}
-		}
-
-		// (power e1 e2 e3 1 e4) ==> (power e1 e2 e3 e4)
-		// (power e1 e2 e3 0 e4) ==> 1
-
-		for (int i = size - 1; i >= 0; --i) {
-
-			IRObject ex = rebuildList.get(i);
-			if (OptUtil.isConstNumber(ex)) {
-
-			}
-
-		}
-
-//		IRObject e2 = rebuildList.get(1);
-//		if (OptUtil.isConstNumber(e2, 0)) {
-//
-//			RType type = e2.getType();
-//			if (type == RType.CONSTANT) {
-//				type = RulpUtil.asConstant(e2).getValue().getType();
-//			}
-//
-//			return OptUtil.getNumber1(type);
-//		}
-
-		return null;
-
-	}
-
-	// (case a (a action) (b action))
-	private static IRObject _rebuildCase(List<IRObject> rebuildList) throws RException {
-
-		int size = rebuildList.size();
-		if (size < 3) {
-			return null;
-		}
-
-		IRObject e1 = rebuildList.get(1);
-
-		if (OptUtil.isConstValue(e1)) {
-
-			boolean nonConstCaseValueFound = false;
-
-			CHECK_CASE: for (int i = 2; i < size; ++i) {
-
-				IRExpr caseClause = RulpUtil.asExpression(rebuildList.get(i));
-				if (caseClause.size() != 2) {
-					throw new RException("Invalid case clause: " + caseClause);
-				}
-
-				IRObject caseValue = caseClause.get(0);
-
-				if (!OptUtil.isConstValue(caseValue)) {
-					nonConstCaseValueFound = true;
-					break CHECK_CASE;
-				}
-
-				if (XRFactorCase.matchCaseValue(e1, caseValue)) {
-					return OptUtil.asExpr(caseClause.get(1));
-				}
-			}
-
-			// no any case match, return empty expression
-			if (!nonConstCaseValueFound) {
-				return OptUtil.asExpr(null);
-			}
-		}
-
-		return null;
 	}
 
 	private static boolean _rebuild(ERO cc0, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -478,6 +228,299 @@ public class EROUtil {
 		}
 
 		return false;
+	}
+
+	private static IRObject _rebuildBy(List<IRObject> rebuildList) throws RException {
+		return _rebuildBy(rebuildList, 0, rebuildList.size());
+	}
+
+	private static IRObject _rebuildBy(List<IRObject> elementList, int fromIndex, int toIndex) throws RException {
+
+		int size = toIndex - fromIndex;
+
+		// (*)
+		if (size == 1) {
+			return OptUtil.asExpr(null);
+		}
+
+		// (* a)
+		if (size == 2) {
+			return elementList.get(fromIndex + 1);
+		}
+
+		ArrayList<IRObject> nums = null;
+		int pos = 1;
+
+		// (* x n y)
+		for (int i = 1; i < size; ++i) {
+
+			IRObject ex = elementList.get(fromIndex + i);
+			if (OptUtil.isConstNumber(ex)) {
+
+				// (* x 0) ==> 0
+				if (OptUtil.isConstNumber(ex, 0)) {
+					return O_INT_0;
+				}
+
+				if (nums == null) {
+					nums = new ArrayList<>();
+				}
+
+				nums.add(ex);
+
+			} else {
+
+				if (pos != i) {
+					elementList.set(fromIndex + pos, ex);
+				}
+
+				pos++;
+			}
+		}
+
+		// (* a b c)
+		if (nums == null) {
+			return null;
+		}
+
+		IRObject numObj = nums.get(0);
+		for (int i = 1; i < nums.size(); ++i) {
+			numObj = MathUtil.computeArithmeticExpression(RArithmeticOperator.BY, numObj, nums.get(i));
+		}
+
+		if (pos == 1) {
+			return numObj;
+		}
+
+		// (* 0 a b) ==> 0
+		if (OptUtil.isConstNumber(numObj, 0)) {
+			return O_INT_0;
+		}
+
+		// (* 1 a b) ==> (* a b)
+		if (OptUtil.isConstNumber(numObj, 1)) {
+
+			if (pos == 2) {
+				return elementList.get(fromIndex + 1); // (* 1 a) ==> a
+			}
+
+			return RulpFactory.createExpression(elementList.subList(fromIndex, fromIndex + pos));
+		}
+
+		elementList.set(fromIndex + (pos++), numObj);
+		return RulpFactory.createExpression(elementList.subList(fromIndex, fromIndex + pos));
+	}
+
+	// (case a (a action) (b action))
+	private static IRObject _rebuildCase(List<IRObject> rebuildList) throws RException {
+
+		int size = rebuildList.size();
+		if (size < 3) {
+			return null;
+		}
+
+		IRObject e1 = rebuildList.get(1);
+
+		if (OptUtil.isConstValue(e1)) {
+
+			boolean nonConstCaseValueFound = false;
+
+			CHECK_CASE: for (int i = 2; i < size; ++i) {
+
+				IRExpr caseClause = RulpUtil.asExpression(rebuildList.get(i));
+				if (caseClause.size() != 2) {
+					throw new RException("Invalid case clause: " + caseClause);
+				}
+
+				IRObject caseValue = caseClause.get(0);
+
+				if (!OptUtil.isConstValue(caseValue)) {
+					nonConstCaseValueFound = true;
+					break CHECK_CASE;
+				}
+
+				if (XRFactorCase.matchCaseValue(e1, caseValue)) {
+					return OptUtil.asExpr(caseClause.get(1));
+				}
+			}
+
+			// no any case match, return empty expression
+			if (!nonConstCaseValueFound) {
+				return OptUtil.asExpr(null);
+			}
+		}
+
+		return null;
+	}
+
+	// (do () (b action))
+	private static IRObject _rebuildDo(List<IRObject> rebuildList) throws RException {
+
+		int size = rebuildList.size();
+		int pos = _removeEmptyExpr(rebuildList, 1);
+
+		switch (pos) {
+		case 1: // no expr found
+			return OptUtil.asExpr(null);
+
+		case 2: // only one expr found, remove DO factor
+			return OptUtil.asExpr(rebuildList.get(1));
+
+		default:
+
+			// empty expr found
+			if (pos != size) {
+				return RulpFactory.createExpression(rebuildList.subList(0, pos));
+			}
+		}
+
+		return null;
+	}
+
+	// (if true A B) or (if false A B)
+	private static IRObject _rebuildIf(List<IRObject> rebuildList) throws RException {
+
+		int size = rebuildList.size();
+		if (size < 3) {
+			return null;
+		}
+
+		// (if true A B) or (if false A B)
+		IRObject e1 = rebuildList.get(1);
+		if (e1.getType() == RType.BOOL) {
+
+			IRObject rst = null;
+			if (RulpUtil.asBoolean(e1).asBoolean()) {
+				rst = rebuildList.get(2);
+			} else if (rebuildList.size() > 3) {
+				rst = rebuildList.get(3);
+			}
+
+			return OptUtil.asExpr(rst);
+		}
+
+		return null;
+	}
+
+	private static IRObject _rebuildLoop(IRObject e0, IRExpr expr, List<IRObject> rebuildList) throws RException {
+
+		int size = rebuildList.size();
+
+		// (loop for x from 1 to 3 do ...
+		if (OptUtil.isFactor(e0, F_LOOP) && XRFactorLoop.isLoop2(expr)) {
+
+			IRObject fromObj = XRFactorLoop.getLoop2FromObject(expr);
+			IRObject toObj = XRFactorLoop.getLoop2ToObject(expr);
+
+			if (fromObj.getType() == RType.INT && toObj.getType() == RType.INT) {
+
+				int fromIndex = RulpUtil.asInteger(fromObj).asInteger();
+				int toIndex = RulpUtil.asInteger(toObj).asInteger();
+
+				// from 3 to 1 ==> empty expr
+				if (fromIndex > toIndex) {
+					return OptUtil.asExpr(null);
+				}
+
+				// from 1 to 1 ==> (do action)
+				if (fromIndex == toIndex) {
+
+					ArrayList<IRObject> doActions = new ArrayList<>();
+					RulpUtil.addAll(doActions, XRFactorLoop.getLoop2DoList(expr));
+
+					if (doActions.size() == 0) {
+						return OptUtil.asExpr(null);
+					}
+
+					if (doActions.size() == 1) {
+						return OptUtil.asExpr(doActions.get(0));
+					}
+
+					return RulpUtil.toDoExpr(doActions);
+				}
+			}
+		}
+
+		// Check infinite loop: (loop a)
+		if (OptUtil.isFactor(e0, F_LOOP) && XRFactorLoop.isLoop3(expr)) {
+
+			int pos = _removeEmptyExpr(rebuildList, 1);
+			if (pos == 1) {
+				throw new RException("infinite loop detected: input=" + expr + ", output="
+						+ RulpFactory.createExpression(rebuildList.subList(0, pos)));
+			}
+
+			boolean findBreak = false;
+			for (int i = 1; !findBreak && i < pos; ++i) {
+				findBreak = _hasBreakExpr(rebuildList.get(i));
+			}
+
+			// no break clause found, infinite loop
+			if (!findBreak) {
+				throw new RException("infinite loop detected: input=" + expr + ", output="
+						+ RulpFactory.createExpression(rebuildList.subList(0, pos)));
+			}
+
+			// empty expr found
+			if (pos != size) {
+				return RulpFactory.createExpression(rebuildList.subList(0, pos));
+			}
+		}
+
+		return null;
+	}
+
+	private static IRObject _rebuildPower(List<IRObject> rebuildList) throws RException {
+
+		int size = rebuildList.size();
+
+		// (*)
+		if (size == 1) {
+			return OptUtil.asExpr(null);
+		}
+
+		// (power a) ==> a
+		if (size == 2) {
+			return rebuildList.get(1);
+		}
+
+		// (power 1 e2 e3 e4...) ==> 1
+		IRObject e1 = rebuildList.get(1);
+		if (OptUtil.isConstNumber(e1, 1)) {
+			return O_INT_1;
+		}
+
+		// (x^y)^z ==> x^(y*z)
+		IRObject indexObj = _rebuildBy(rebuildList, 1, rebuildList.size());
+		if (indexObj != null) {
+
+			if (indexObj.getType() == RType.EXPR) {
+
+				IRExpr byExpr = RulpUtil.asExpression(indexObj);
+				for (int i = 1; i < byExpr.size(); ++i) {
+					rebuildList.set(i + 1, byExpr.get(i));
+				}
+
+				return RulpFactory.createExpression(rebuildList.subList(0, byExpr.size() + 1));
+
+			} else {
+
+				// (power a 0) => 1
+				if (OptUtil.isConstNumber(indexObj, 0)) {
+					return O_INT_1;
+				}
+
+				// (power a 1) => a
+				if (OptUtil.isConstNumber(indexObj, 1)) {
+					return e1;
+				}
+
+				rebuildList.set(2, indexObj);
+				return RulpFactory.createExpression(rebuildList.subList(0, 3));
+			}
+		}
+
+		return null;
 	}
 
 	private static int _removeEmptyExpr(List<IRObject> exprList, int fromIndex) throws RException {

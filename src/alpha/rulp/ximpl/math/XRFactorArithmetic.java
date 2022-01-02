@@ -9,6 +9,7 @@
 
 package alpha.rulp.ximpl.math;
 
+import static alpha.rulp.lang.Constant.*;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -68,15 +69,16 @@ public class XRFactorArithmetic extends AbsAtomFactorAdapter implements IRFactor
 
 				if (OptUtil.isConstNumber(rst, 0)) {
 					if (operator == RArithmeticOperator.BY) {
-						return rst;
+						return O_INT_0;
 					}
 				}
 
-//				if (OptUtil.isConstNumber(rst, 1)) {
-//					if (operator == RArithmeticOperator.POWER) {
-//						return rst;
-//					}
-//				}
+				// (power 1 a) ==> 1
+				if (OptUtil.isConstNumber(rst, 1)) {
+					if (operator == RArithmeticOperator.POWER) {
+						return O_INT_1;
+					}
+				}
 
 				IRObject next = interpreter.compute(frame, it.next());
 				rst = MathUtil.computeArithmeticExpression(operator, rst, next);

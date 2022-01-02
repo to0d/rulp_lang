@@ -1,0 +1,61 @@
+; (power 1 e2 e3 e4...) ==> 1
+
+(reduct (power 1 a))
+;=>
+
+(reduct (power 1.0 a))
+;=>
+
+(reduct (power 1D a))
+;=>
+
+(reduct (power 1L a))
+;=>
+
+(reduct (power 1 a b c))
+;=>
+
+; (power e1 e2 e3 0 e4) ==> 1
+
+(reduct (power a 0))
+;=>
+
+(reduct (power a 0.0))
+;=>
+
+(reduct (power a 0D))
+;=>
+
+(reduct (power a 0L))
+;=>
+
+(reduct (power a 0 b c))
+;=>
+
+; (power e1 e2 e3 1 e4) ==> (power e1 e2 e3 e4)
+
+(reduct (power a 1))
+;=>
+
+(reduct (power a 1.0))
+;=>
+
+(reduct (power a 1D))
+;=>
+
+(reduct (power a 1L))
+;=>
+
+(reduct (power a 1 b c))
+;=>
+
+; (power e1 e2 e3 m n e4) ==> (power e1 (* m n e2 e3 e4))
+
+(reduct (power a 2 3))
+;=>
+
+(reduct (power a 3 b 4))
+;=>
+
+(reduct (power a 3 b 3 c))
+;=>

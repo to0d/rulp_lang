@@ -23,25 +23,25 @@
 ;=>1
 
 (power 1.0 (funx))
-;=>1.0
+;=>1
 
 (power 1D (funx))
-;=>1.0D
+;=>1
 
 (power 1L (funx))
 
 (power (fun1i) (funx))
-;=>1L 1
+;=>1 1
 
 (power (fun1f) (funx))
-;=>1.0
+;=>1
 
 (power (fun1l) (funx))
-;=>1L
+;=>1
 
 (power (fun1d) (funx))
-;=>1.0D
+;=>1
 
 (runtime-call-count funx)
-;=>8
+;=>0
 

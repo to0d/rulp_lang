@@ -1,28 +1,35 @@
-(defun fun1 ()
-    (return 1)
-)
+(reduct (* 0 a))
 ;=>
 
-(reduct (* 0 (fun1)))
+(reduct (* 0.0 a))
 ;=>
 
-(reduct (* 0.0 (fun1)))
+(reduct (* 0.0d a))
 ;=>
 
-(reduct (* 0.0d (fun1)))
+(reduct (* 0L a))
 ;=>
 
-(reduct (* 0L (fun1)))
+(reduct (* a 0 b))
 ;=>
 
-(reduct (* (fun1) 0 (fun1)))
+(reduct (* a 0.0 b))
 ;=>
 
-(reduct (* (fun1) 0.0 (fun1)))
+(reduct (* a 0.0d b))
 ;=>
 
-(reduct (* (fun1) 0.0d (fun1)))
+(reduct (* a 0L b))
 ;=>
 
-(reduct (* (fun1) 0L (fun1)))
+(reduct (* 1 a))
+;=>
+
+(reduct (* a 2))
+;=>
+
+(reduct (* a 2.0 b 3))
+;=>
+
+(reduct (* a 2D b 3L 1))
 ;=>
