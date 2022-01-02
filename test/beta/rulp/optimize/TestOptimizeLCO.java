@@ -6,13 +6,6 @@ import alpha.rulp.utils.RulpTestBase;
 
 public class TestOptimizeLCO extends RulpTestBase {
 
-	
-	@Test
-	void test_lco_1_factor_6_or_true() {
-		_setup();
-		_run_script();
-	}
-
 	@Test
 	void test_lco_2_fun_1() {
 		_setup();
