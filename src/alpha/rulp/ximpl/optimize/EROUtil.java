@@ -243,6 +243,26 @@ public class EROUtil {
 		return null;
 	}
 
+	private static IRObject _rebuildPower(List<IRObject> rebuildList) throws RException {
+
+		int size = rebuildList.size();
+		if (size != 3) {
+			return null;
+		}
+
+		IRObject ex = rebuildList.get(1);
+		if (OptUtil.isConstNumber(ex, 0)) {
+			RType type = ex.getType();
+			if (type == RType.CONSTANT) {
+				type = RulpUtil.asConstant(ex).getValue().getType();
+			}
+
+			return OptUtil.getZeroObject(type);
+		}
+
+		return null;
+	}
+
 	// (case a (a action) (b action))
 	private static IRObject _rebuildCase(List<IRObject> rebuildList) throws RException {
 
@@ -397,6 +417,10 @@ public class EROUtil {
 
 			case F_O_BY:
 				rebuildObj = _rebuildBy(rebuildList);
+				break;
+				
+			case F_O_POWER:
+				rebuildObj = _rebuildPower(rebuildList);
 				break;
 
 			default:

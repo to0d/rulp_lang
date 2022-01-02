@@ -1,27 +1,20 @@
-(defun fun0i ()
-    (return 0)
-)
-
-(defun fun0f ()
-    (return 0f)
-)
-
-(defun fun0l ()
-    (return 0l)
-)
-
-(defun fun0d ()
-    (return 0d)
-)
-
 (defun funx ()
     (return 100)
 )
-;=>fun0i fun0f fun0l fun0d funx
+;=>funx
 
-(power 0 (funx))
+(reduct (power 0 (funx)))
 ;=>0
 
+(reduct (power 0.0 (funx)))
+;=>0.0
+
+(reduct (power 0D (funx)))
+;=>0.0D
+
+(reduct (power 0L (funx)))
+;=>0L
+
 (runtime-call-count funx)
-;=>1
+;=>0
 

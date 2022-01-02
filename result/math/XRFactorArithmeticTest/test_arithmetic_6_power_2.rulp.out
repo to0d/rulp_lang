@@ -14,23 +14,23 @@
     (return 0d)
 )
 
-(defun fun1 ()
-    (return 1)
+(defun funx ()
+    (return 100)
 )
-;=>fun0i fun0f fun0l fun0d fun1
+;=>fun0i fun0f fun0l fun0d funx
 
-(* (fun0i) (fun1))
+(power (fun0i) (funx))
 ;=>0
 
-(* (fun0f) (fun1))
+(power (fun0f) (funx))
 ;=>0.0
 
-(* (fun0l) (fun1))
+(power (fun0l) (funx))
 ;=>0L
 
-(* (fun0d) (fun1))
+(power (fun0d) (funx))
 ;=>0.0D
 
-(runtime-call-count fun1)
+(runtime-call-count funx)
 ;=>0
 
