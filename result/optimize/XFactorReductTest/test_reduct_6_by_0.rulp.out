@@ -27,6 +27,3 @@
 (reduct (* (fun1) 0L (fun1)))
 ;=>0L
 
-(runtime-call-count fun1)
-;=>0
-

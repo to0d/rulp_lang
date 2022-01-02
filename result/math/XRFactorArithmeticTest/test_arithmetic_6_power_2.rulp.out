@@ -1,35 +1,46 @@
-(defun fun0i ()
-    (return 0)
+(defun fun1i ()
+    (return 1)
 )
 
-(defun fun0f ()
-    (return 0.0)
+(defun fun1f ()
+    (return 1.0)
 )
 
-(defun fun0l ()
-    (return 0l)
+(defun fun1l ()
+    (return 1L)
 )
 
-(defun fun0d ()
-    (return 0d)
+(defun fun1d ()
+    (return 1D)
 )
 
 (defun funx ()
     (return 100)
 )
-;=>fun0i fun0f fun0l fun0d funx
+;=>fun1i fun1f fun1l fun1d funx
 
-(power (fun0i) (funx))
-;=>0
+(power 1 (funx))
+;=>1
 
-(power (fun0f) (funx))
-;=>0.0
+(power 1.0 (funx))
+;=>1.0
 
-(power (fun0l) (funx))
-;=>0L
+(power 1D (funx))
+;=>1.0D
 
-(power (fun0d) (funx))
-;=>0.0D
+(power 1L (funx))
+
+(power (fun1i) (funx))
+;=>1L 1
+
+(power (fun1f) (funx))
+;=>1.0
+
+(power (fun1l) (funx))
+;=>1L
+
+(power (fun1d) (funx))
+;=>1.0D
 
 (runtime-call-count funx)
 ;=>0

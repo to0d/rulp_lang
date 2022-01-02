@@ -230,13 +230,13 @@ public class EROUtil {
 			IRObject ex = rebuildList.get(i);
 
 			if (OptUtil.isConstNumber(ex, 0)) {
+//
+//				RType type = ex.getType();
+//				if (type == RType.CONSTANT) {
+//					type = RulpUtil.asConstant(ex).getValue().getType();
+//				}
 
-				RType type = ex.getType();
-				if (type == RType.CONSTANT) {
-					type = RulpUtil.asConstant(ex).getValue().getType();
-				}
-
-				return OptUtil.getZeroObject(type);
+				return ex;
 			}
 		}
 
@@ -251,13 +251,15 @@ public class EROUtil {
 		}
 
 		IRObject ex = rebuildList.get(1);
-		if (OptUtil.isConstNumber(ex, 0)) {
-			RType type = ex.getType();
-			if (type == RType.CONSTANT) {
-				type = RulpUtil.asConstant(ex).getValue().getType();
-			}
 
-			return OptUtil.getZeroObject(type);
+		if (OptUtil.isConstNumber(ex, 1)) {
+
+//			RType type = ex.getType();
+//			if (type == RType.CONSTANT) {
+//				type = RulpUtil.asConstant(ex).getValue().getType();
+//			}
+
+			return ex;
 		}
 
 		return null;
@@ -418,7 +420,7 @@ public class EROUtil {
 			case F_O_BY:
 				rebuildObj = _rebuildBy(rebuildList);
 				break;
-				
+
 			case F_O_POWER:
 				rebuildObj = _rebuildPower(rebuildList);
 				break;
