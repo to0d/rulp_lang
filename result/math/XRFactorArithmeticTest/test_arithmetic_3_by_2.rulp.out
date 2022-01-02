@@ -3,7 +3,7 @@
 )
 
 (defun fun0f ()
-    (return 0f)
+    (return 0.0)
 )
 
 (defun fun0l ()
@@ -23,5 +23,23 @@
 ;=>0
 
 (runtime-call-count fun1)
-;=>1
+;=>0
+
+(* (fun0f) (fun1))
+;=>0.0
+
+(runtime-call-count fun1)
+;=>0
+
+(* (fun0l) (fun1))
+;=>0L
+
+(runtime-call-count fun1)
+;=>0
+
+(* (fun0d) (fun1))
+;=>0.0D
+
+(runtime-call-count fun1)
+;=>0
 

@@ -22,6 +22,7 @@ import alpha.rulp.utils.MathUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
+import alpha.rulp.ximpl.optimize.OptUtil;
 import alpha.rulp.ximpl.string.XRFactorToString;
 
 public class XRFactorArithmetic extends AbsAtomFactorAdapter implements IRFactor {
@@ -62,6 +63,12 @@ public class XRFactorArithmetic extends AbsAtomFactorAdapter implements IRFactor
 		} else {
 
 			while (it.hasNext()) {
+
+				// (* 0 ...) ==> 0
+				if (operator == RArithmeticOperator.BY && OptUtil.isConstNumber(rst, 0)) {
+					break;
+				}
+
 				IRObject next = interpreter.compute(frame, it.next());
 				rst = MathUtil.computeArithmeticExpression(operator, rst, next);
 			}
