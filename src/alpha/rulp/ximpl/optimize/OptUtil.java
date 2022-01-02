@@ -1,6 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.A_ATOM;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.O_COMPUTE;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -39,6 +39,26 @@ public class OptUtil {
 
 	public static int getNextOptFactorId() {
 		return OptFactorCount.getAndIncrement();
+	}
+
+	public static IRObject getZeroObject(RType type) throws RException {
+
+		switch (type) {
+		case INT:
+			return O_0_INT;
+
+		case FLOAT:
+			return O_0_FLOAT;
+
+		case DOUBLE:
+			return O_0_DOUBLE;
+
+		case LONG:
+			return O_0_LONG;
+
+		default:
+			throw new RException("invalid type: " + type);
+		}
 	}
 
 	public static boolean isAtomFactor(IRObject obj) throws RException {

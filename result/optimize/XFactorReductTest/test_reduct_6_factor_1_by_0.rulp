@@ -1,19 +1,3 @@
-(defun fun0i ()
-    (return 0)
-)
-
-(defun fun0f ()
-    (return 0f)
-)
-
-(defun fun0l ()
-    (return 0l)
-)
-
-(defun fun0d ()
-    (return 0d)
-)
-
 (defun fun1 ()
     (return 1)
 )
@@ -22,72 +6,23 @@
 (reduct (* 0 (fun1)))
 ;=>
 
-(runtime-call-count fun1)
-;=>0
-
-(* 0.0 (fun1))
+(reduct (* 0.0 (fun1)))
 ;=>
 
-(runtime-call-count fun1)
-;=>0
-
-(* 0.0d (fun1))
+(reduct (* 0.0d (fun1)))
 ;=>
 
-(runtime-call-count fun1)
-;=>0
-
-(* 0L (fun1))
+(reduct (* 0L (fun1)))
 ;=>
 
-(runtime-call-count fun1)
-;=>0
-
-(* (fun0i) (fun1))
+(reduct (* (fun1) 0 (fun1)))
 ;=>
 
-(runtime-call-count fun1)
-;=>0
-
-(* (fun0f) (fun1))
+(reduct (* (fun1) 0.0 (fun1)))
 ;=>
 
-(runtime-call-count fun1)
-;=>0
-
-(* (fun0l) (fun1))
+(reduct (* (fun1) 0.0d (fun1)))
 ;=>
 
-(runtime-call-count fun1)
-;=>0
-
-(* (fun0d) (fun1))
+(reduct (* (fun1) 0L (fun1)))
 ;=>
-
-(runtime-call-count fun1)
-;=>0
-
-
-(* (fun1) 0 (fun1))
-;=>
-
-(runtime-call-count fun1)
-;=>0
-
-(* (fun1) 0.0 (fun1))
-;=>
-
-(runtime-call-count fun1)
-;=>0
-
-(* (fun1) 0.0d (fun1))
-;=>
-
-(runtime-call-count fun1)
-;=>0
-
-(* (fun1) 0L (fun1))
-;=>
-
-(runtime-call-count fun1)
-;=>0

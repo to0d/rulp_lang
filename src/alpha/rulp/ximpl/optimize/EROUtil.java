@@ -11,8 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import alpha.rulp.lang.IRConst;
+import alpha.rulp.lang.IRDouble;
 import alpha.rulp.lang.IRExpr;
+import alpha.rulp.lang.IRFloat;
 import alpha.rulp.lang.IRFrame;
+import alpha.rulp.lang.IRInteger;
+import alpha.rulp.lang.IRLong;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
@@ -29,11 +34,11 @@ public class EROUtil {
 
 		public IRExpr inputExpr = null;
 
-		public IRExpr outputExpr = null;
+		public IRObject outputObj = null;
 
 		public void setInputExpr(IRExpr inputExpr) {
 			this.inputExpr = inputExpr;
-			this.outputExpr = null;
+			this.outputObj = null;
 		}
 	}
 
@@ -89,7 +94,7 @@ public class EROUtil {
 	}
 
 	// (do () (b action))
-	private static IRExpr _rebuildDoExpr(List<IRObject> rebuildList) throws RException {
+	private static IRObject _rebuildDo(List<IRObject> rebuildList) throws RException {
 
 		int size = rebuildList.size();
 		int pos = _removeEmptyExpr(rebuildList, 1);
@@ -112,7 +117,7 @@ public class EROUtil {
 		return null;
 	}
 
-	private static IRExpr _rebuildLoopExpr(IRObject e0, IRExpr expr, List<IRObject> rebuildList) throws RException {
+	private static IRObject _rebuildLoop(IRObject e0, IRExpr expr, List<IRObject> rebuildList) throws RException {
 
 		int size = rebuildList.size();
 
@@ -181,7 +186,7 @@ public class EROUtil {
 	}
 
 	// (if true A B) or (if false A B)
-	private static IRExpr _rebuildIfExpr(List<IRObject> rebuildList) throws RException {
+	private static IRObject _rebuildIf(List<IRObject> rebuildList) throws RException {
 
 		int size = rebuildList.size();
 		if (size < 3) {
@@ -205,12 +210,41 @@ public class EROUtil {
 		return null;
 	}
 
-//	private static IRExpr _rebuildByExpr(List<IRObject> rebuildList) throws RException {
-//
-//	}
+	private static IRObject _rebuildBy(List<IRObject> rebuildList) throws RException {
+
+		int size = rebuildList.size();
+
+		// (*)
+		if (size == 1) {
+			return OptUtil.asExpr(null);
+		}
+
+		// (* a)
+		if (size == 2) {
+			return rebuildList.get(1);
+		}
+
+		// (* a 0 b)
+		for (int i = 1; i < size; ++i) {
+
+			IRObject ex = rebuildList.get(i);
+
+			if (OptUtil.isConstNumber(ex, 0)) {
+
+				RType type = ex.getType();
+				if (type == RType.CONSTANT) {
+					type = RulpUtil.asConstant(ex).getValue().getType();
+				}
+
+				return OptUtil.getZeroObject(type);
+			}
+		}
+
+		return null;
+	}
 
 	// (case a (a action) (b action))
-	private static IRExpr _rebuildCaseExpr(List<IRObject> rebuildList) throws RException {
+	private static IRObject _rebuildCase(List<IRObject> rebuildList) throws RException {
 
 		int size = rebuildList.size();
 		if (size < 3) {
@@ -282,9 +316,9 @@ public class EROUtil {
 				reBuild = _rebuild(childCC0, interpreter, frame);
 
 				if (reBuild) {
-					rebuildList.add(childCC0.outputExpr);
-				} else if (childCC0.outputExpr != null) {
-					rebuildList.add(childCC0.outputExpr);
+					rebuildList.add(childCC0.outputObj);
+				} else if (childCC0.outputObj != null) {
+					rebuildList.add(childCC0.outputObj);
 					childUpdate++;
 				} else {
 					rebuildList.add(ex);
@@ -336,45 +370,47 @@ public class EROUtil {
 
 		if (e0.getType() == RType.FACTOR) {
 
-			IRExpr rebuildExpr = null;
+			IRObject rebuildObj = null;
 
 			switch (e0.asString()) {
 
 			// (if true A B) or (if false A B)
 			case F_IF:
-				rebuildExpr = _rebuildIfExpr(rebuildList);
+				rebuildObj = _rebuildIf(rebuildList);
 				break;
 
 			// (case a (a action) (b action))
 			case F_CASE:
-				rebuildExpr = _rebuildCaseExpr(rebuildList);
+				rebuildObj = _rebuildCase(rebuildList);
 				break;
 
 			// (do () (b action))
 			case A_DO:
-				rebuildExpr = _rebuildDoExpr(rebuildList);
+				rebuildObj = _rebuildDo(rebuildList);
 				break;
 
 			// (loop for x from 1 to 3 do ..
 			// (loop a)
 			case F_LOOP:
-				rebuildExpr = _rebuildLoopExpr(e0, expr, rebuildList);
+				rebuildObj = _rebuildLoop(e0, expr, rebuildList);
 				break;
 
 			case F_O_BY:
+				rebuildObj = _rebuildBy(rebuildList);
+				break;
 
 			default:
 			}
 
-			if (rebuildExpr != null) {
-				cc0.outputExpr = rebuildExpr;
+			if (rebuildObj != null) {
+				cc0.outputObj = rebuildObj;
 				_incComputeCount();
 				return false;
 			}
 		}
 
 		if (rebuildCount > 0 || childUpdate > 0) {
-			cc0.outputExpr = RulpFactory.createExpression(rebuildList);
+			cc0.outputObj = RulpFactory.createExpression(rebuildList);
 		}
 
 		return false;
@@ -422,11 +458,11 @@ public class EROUtil {
 		cc0.setInputExpr(expr);
 
 		if (!_rebuild(cc0, interpreter, frame)) {
-			return cc0.outputExpr == null ? expr : cc0.outputExpr;
+			return cc0.outputObj == null ? expr : cc0.outputObj;
 		}
 
-		if (cc0.outputExpr != null) {
-			return cc0.outputExpr;
+		if (cc0.outputObj != null) {
+			return cc0.outputObj;
 		}
 
 		IRObject rst = interpreter.compute(frame, expr);

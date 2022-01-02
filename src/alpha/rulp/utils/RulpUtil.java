@@ -720,6 +720,15 @@ public class RulpUtil {
 		return (IRClass) obj;
 	}
 
+	public static IRConst asConstant(IRObject obj) throws RException {
+
+		if (obj != null && obj.getType() != RType.CONSTANT) {
+			throw new RException("Can't convert to const: " + obj);
+		}
+
+		return (IRConst) obj;
+	}
+
 	public static IRDouble asDouble(IRObject obj) throws RException {
 
 		if (obj.getType() != RType.DOUBLE) {
@@ -958,8 +967,6 @@ public class RulpUtil {
 
 		return resultList;
 	}
-
-	
 
 	public static boolean containAttribute(IRObject obj, String attr) {
 		return ((AbsObject) obj).containAttribute(attr);

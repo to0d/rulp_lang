@@ -535,6 +535,14 @@ public interface Constant {
 
 	IRBoolean O_True = RulpFactory.createBoolean(true);
 
+	IRInteger O_0_INT = RulpFactory.createInteger(0);
+
+	IRLong O_0_LONG = RulpFactory.createLong(0);
+
+	IRFloat O_0_FLOAT = RulpFactory.createFloat(0);
+
+	IRDouble O_0_DOUBLE = RulpFactory.createDouble(0);
+
 	IRAtom O_XOR = RulpFactory.createAtom(F_O_XOR);
 
 	int P_FINAL = 0x0001;
