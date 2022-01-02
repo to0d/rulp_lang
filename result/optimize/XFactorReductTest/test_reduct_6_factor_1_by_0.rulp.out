@@ -19,8 +19,14 @@
 )
 ;=>fun0i fun0f fun0l fun0d fun1
 
-(* 0 (fun1))
+(reduct (* 0 (fun1)))
+;=>(* 0 (fun1))
+
+(runtime-call-count fun1)
 ;=>0
+
+(* 0.0 (fun1))
+;=>0.0
 
 (runtime-call-count fun1)
 ;=>1
