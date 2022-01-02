@@ -5,8 +5,11 @@ import static alpha.rulp.lang.Constant.O_COMPUTE;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import alpha.rulp.lang.IRDouble;
 import alpha.rulp.lang.IRExpr;
+import alpha.rulp.lang.IRFloat;
 import alpha.rulp.lang.IRFrame;
+import alpha.rulp.lang.IRInteger;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
@@ -30,6 +33,10 @@ public class OptUtil {
 		} else {
 			return RulpFactory.createExpression(O_COMPUTE, obj);
 		}
+	}
+
+	public static int getNextOptFactorId() {
+		return OptFactorCount.getAndIncrement();
 	}
 
 	public static boolean isAtomFactor(IRObject obj) throws RException {
@@ -71,6 +78,28 @@ public class OptUtil {
 
 		case LIST:
 			return isConstValue(((IRList) obj).iterator());
+
+		default:
+			return false;
+		}
+	}
+
+	public static boolean isConstNumber(IRObject obj, double value) throws RException {
+
+		switch (obj.getType()) {
+		case INT:
+			return ((IRInteger) obj).asInteger() == value;
+
+		case FLOAT:
+			return ((IRFloat) obj).asFloat() == value;
+
+		case DOUBLE:
+			return ((IRDouble) obj).asDouble() == value;
+
+		case LONG:
+			return true;
+
+		case CONSTANT:
 
 		default:
 			return false;
@@ -127,9 +156,5 @@ public class OptUtil {
 	public static void reset() {
 
 		OptFactorCount.set(0);
-	}
-
-	public static int getNextOptFactorId() {
-		return OptFactorCount.getAndIncrement();
 	}
 }

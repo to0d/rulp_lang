@@ -75,4 +75,35 @@ class XFactorReductTest extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	void test_lco_1_factor_1_by_0() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_lco_1_factor_2_power_x_0() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_lco_1_factor_3_power_x_1() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_lco_1_factor_4_power_y_0() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_lco_1_factor_5_and_false() {
+		_setup();
+		_run_script();
+	}
+
 }

@@ -18,6 +18,7 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.utils.MathUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
@@ -62,7 +63,7 @@ public class XRFactorArithmetic extends AbsAtomFactorAdapter implements IRFactor
 
 			while (it.hasNext()) {
 				IRObject next = interpreter.compute(frame, it.next());
-				rst = RulpUtil.computeArithmeticExpression(operator, rst, next);
+				rst = MathUtil.computeArithmeticExpression(operator, rst, next);
 			}
 		}
 

@@ -15,6 +15,7 @@ import alpha.rulp.lang.IRFloat;
 import alpha.rulp.lang.IRInteger;
 import alpha.rulp.lang.IRLong;
 import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.RArithmeticOperator;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RRelationalOperator;
 import alpha.rulp.lang.RType;
@@ -53,122 +54,196 @@ public class MathUtil {
 
 	}
 
-	public static RType getConvertType(RType a, RType b) {
-		return calRstType[a.getIndex()][b.getIndex()];
-	}
+	public static IRObject computeArithmeticExpression(RArithmeticOperator op, IRObject a, IRObject b)
+			throws RException {
 
-	public static boolean toBoolean(IRObject a) throws RException {
-		switch (a.getType()) {
-		case NIL:
-			return false;
+		RType at = a.getType();
+		RType bt = b.getType();
 
-		case BOOL:
-			return ((IRBoolean) a).asBoolean();
+		RType rt = MathUtil.getConvertType(at, bt);
+		if (rt == null) {
+			throw new RException(String.format("Invalid op types: %s %s", a.toString(), b.toString()));
+		}
 
-		case FLOAT:
-		case DOUBLE:
-		case EXPR:
-			return true;
+		switch (rt) {
+		case FLOAT: {
 
-		case INT:
-		case LONG:
-			return toLong(a) != 0;
+			float av = MathUtil.toFloat(a);
+			float bv = MathUtil.toFloat(b);
+
+			switch (op) {
+			case ADD:
+				av += bv;
+				break;
+
+			case BY:
+				av *= bv;
+				break;
+
+			case SUB:
+				av -= bv;
+				break;
+
+			case DIV:
+				av /= bv;
+				break;
+
+			case MOD:
+				av %= bv;
+				break;
+
+			case POWER:
+				av = (float) Math.pow(av, bv);
+				break;
+
+			default:
+				throw new RException(String.format("Not support op: %s", op));
+			}
+
+			return RulpFactory.createFloat(av);
+		}
+
+		case DOUBLE: {
+
+			double av = MathUtil.toDouble(a);
+			double bv = MathUtil.toDouble(b);
+
+			switch (op) {
+			case ADD:
+				av += bv;
+				break;
+
+			case BY:
+				av *= bv;
+				break;
+
+			case SUB:
+				av -= bv;
+				break;
+
+			case DIV:
+				av /= bv;
+				break;
+
+			case MOD:
+				av %= bv;
+				break;
+
+			case POWER:
+				av = Math.pow(av, bv);
+				break;
+
+			default:
+				throw new RException(String.format("Not support op: %s", op));
+			}
+
+			return RulpFactory.createDouble(av);
+		}
+
+		case INT: {
+
+			int av = MathUtil.toInt(a);
+			int bv = MathUtil.toInt(b);
+
+			switch (op) {
+			case ADD:
+				av += bv;
+				break;
+
+			case BY:
+				av *= bv;
+				break;
+
+			case SUB:
+				av -= bv;
+				break;
+
+			case DIV:
+				av /= bv;
+				break;
+
+			case MOD:
+				av %= bv;
+				break;
+
+			case POWER:
+				av = (int) Math.pow(av, bv);
+				break;
+
+			case AND:
+				av = av & bv;
+				break;
+
+			case OR:
+				av = av | bv;
+				break;
+
+			case XOR:
+				av = av ^ bv;
+				break;
+
+			default:
+				throw new RException(String.format("Not support op: %s", op));
+			}
+
+			return RulpFactory.createInteger(av);
+		}
+
+		case LONG: {
+
+			long av = MathUtil.toLong(a);
+			long bv = MathUtil.toLong(b);
+
+			switch (op) {
+			case ADD:
+				av += bv;
+				break;
+
+			case BY:
+				av *= bv;
+				break;
+
+			case SUB:
+				av -= bv;
+				break;
+
+			case DIV:
+				av /= bv;
+				break;
+
+			case MOD:
+				av %= bv;
+				break;
+
+			case POWER:
+				av = (long) Math.pow(av, bv);
+				break;
+
+			case AND:
+				av = av & bv;
+				break;
+
+			case OR:
+				av = av | bv;
+				break;
+
+			case XOR:
+				av = av ^ bv;
+				break;
+
+			default:
+				throw new RException(String.format("Not support op: %s", op));
+			}
+
+			return RulpFactory.createLong(av);
+		}
 
 		default:
-			throw new RException(String.format("Not support type: value=%s, type=%s", a.toString(), a.getType()));
 		}
-	}
 
-	public static float toFloat(IRObject a) throws RException {
-		switch (a.getType()) {
-		case FLOAT:
-			return ((IRFloat) a).asFloat();
+		throw new RException(
+				String.format("Invalid arithmetic expression: (%s %s %s)", op, a.toString(), b.toString()));
 
-		case DOUBLE:
-			return (float) ((IRDouble) a).asDouble();
-
-		case INT:
-			return ((IRInteger) a).asInteger();
-
-		case LONG:
-			return (float) ((IRLong) a).asLong();
-
-		default:
-			throw new RException(String.format("Not support type: %s", a.toString()));
-		}
-	}
-
-	public static double toDouble(IRObject a) throws RException {
-		switch (a.getType()) {
-		case FLOAT:
-			return ((IRFloat) a).asFloat();
-
-		case DOUBLE:
-			return ((IRDouble) a).asDouble();
-
-		case INT:
-			return ((IRInteger) a).asInteger();
-
-		case LONG:
-			return (double) ((IRLong) a).asLong();
-
-		default:
-			throw new RException(String.format("Not support type: %s", a.toString()));
-		}
-	}
-
-	public static int toInt(IRObject a) throws RException {
-		switch (a.getType()) {
-		case FLOAT:
-			return (int) ((IRFloat) a).asFloat();
-
-		case DOUBLE:
-			return (int) ((IRDouble) a).asDouble();
-
-		case INT:
-			return ((IRInteger) a).asInteger();
-
-		case LONG:
-			return (int) ((IRLong) a).asLong();
-
-		default:
-			throw new RException(String.format("Not support type: %s", a.toString()));
-		}
-	}
-
-	public static long toLong(IRObject a) throws RException {
-		switch (a.getType()) {
-		case FLOAT:
-			return (long) ((IRFloat) a).asFloat();
-
-		case DOUBLE:
-			return (long) ((IRDouble) a).asDouble();
-
-		case INT:
-			return ((IRInteger) a).asInteger();
-
-		case LONG:
-			return ((IRLong) a).asLong();
-
-		default:
-			throw new RException(String.format("Not support type: %s", a.toString()));
-		}
-	}
-
-	public static boolean isNumber(IRObject obj) {
-
-		switch (obj.getType()) {
-
-		case DOUBLE:
-		case FLOAT:
-		case INT:
-		case LONG:
-			return true;
-
-		default:
-			return false;
-
-		}
 	}
 
 	public static boolean computeRelationalExpression(RRelationalOperator op, IRObject a, IRObject b)
@@ -331,4 +406,123 @@ public class MathUtil {
 
 		throw new RException(String.format("Invalid rational expression: (%s %s %s)", op, a.toString(), b.toString()));
 	}
+
+	public static RType getConvertType(RType a, RType b) {
+		return calRstType[a.getIndex()][b.getIndex()];
+	}
+
+	public static boolean isNumber(IRObject obj) {
+
+		switch (obj.getType()) {
+
+		case DOUBLE:
+		case FLOAT:
+		case INT:
+		case LONG:
+			return true;
+
+		default:
+			return false;
+
+		}
+	}
+
+	public static boolean toBoolean(IRObject a) throws RException {
+		switch (a.getType()) {
+		case NIL:
+			return false;
+
+		case BOOL:
+			return ((IRBoolean) a).asBoolean();
+
+		case FLOAT:
+		case DOUBLE:
+		case EXPR:
+			return true;
+
+		case INT:
+		case LONG:
+			return toLong(a) != 0;
+
+		default:
+			throw new RException(String.format("Not support type: value=%s, type=%s", a.toString(), a.getType()));
+		}
+	}
+
+	public static double toDouble(IRObject a) throws RException {
+		switch (a.getType()) {
+		case FLOAT:
+			return ((IRFloat) a).asFloat();
+
+		case DOUBLE:
+			return ((IRDouble) a).asDouble();
+
+		case INT:
+			return ((IRInteger) a).asInteger();
+
+		case LONG:
+			return (double) ((IRLong) a).asLong();
+
+		default:
+			throw new RException(String.format("Not support type: %s", a.toString()));
+		}
+	}
+
+	public static float toFloat(IRObject a) throws RException {
+		switch (a.getType()) {
+		case FLOAT:
+			return ((IRFloat) a).asFloat();
+
+		case DOUBLE:
+			return (float) ((IRDouble) a).asDouble();
+
+		case INT:
+			return ((IRInteger) a).asInteger();
+
+		case LONG:
+			return (float) ((IRLong) a).asLong();
+
+		default:
+			throw new RException(String.format("Not support type: %s", a.toString()));
+		}
+	}
+
+	public static int toInt(IRObject a) throws RException {
+		switch (a.getType()) {
+		case FLOAT:
+			return (int) ((IRFloat) a).asFloat();
+
+		case DOUBLE:
+			return (int) ((IRDouble) a).asDouble();
+
+		case INT:
+			return ((IRInteger) a).asInteger();
+
+		case LONG:
+			return (int) ((IRLong) a).asLong();
+
+		default:
+			throw new RException(String.format("Not support type: %s", a.toString()));
+		}
+	}
+
+	public static long toLong(IRObject a) throws RException {
+		switch (a.getType()) {
+		case FLOAT:
+			return (long) ((IRFloat) a).asFloat();
+
+		case DOUBLE:
+			return (long) ((IRDouble) a).asDouble();
+
+		case INT:
+			return ((IRInteger) a).asInteger();
+
+		case LONG:
+			return ((IRLong) a).asLong();
+
+		default:
+			throw new RException(String.format("Not support type: %s", a.toString()));
+		}
+	}
+
 }
