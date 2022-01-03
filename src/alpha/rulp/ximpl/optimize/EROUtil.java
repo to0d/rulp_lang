@@ -213,9 +213,9 @@ public class EROUtil {
 				rebuildObj = _rebuildAdd(rebuildList);
 				break;
 
-//			case F_O_SUB:
-//				rebuildObj = _rebuildSub(rebuildList);
-//				break;
+			case F_O_SUB:
+				rebuildObj = _rebuildSub(rebuildList);
+				break;
 
 			case F_O_POWER:
 				rebuildObj = _rebuildPower(rebuildList);
@@ -252,7 +252,7 @@ public class EROUtil {
 			return rebuildList.get(1);
 		}
 
-		size = _rebuildList(rebuildList, 1, size, RArithmeticOperator.ADD);
+		size = _rebuildAddBy(rebuildList, 1, size, RArithmeticOperator.ADD);
 		switch (size) {
 		case -1:
 			return null;
@@ -269,86 +269,13 @@ public class EROUtil {
 
 	}
 
-	private static IRObject _rebuildAdd(List<IRObject> elementList, int fromIndex, int toIndex) throws RException {
-
-		int size = toIndex - fromIndex;
-
-		// (+)
-		if (size == 1) {
-			return OptUtil.asExpr(null);
-		}
-
-		// (+ a)
-		if (size == 2) {
-			return elementList.get(fromIndex + 1);
-		}
-
-		ArrayList<IRObject> nums = null;
-		int pos = 1;
-
-		// (+ x n y)
-		for (int i = 1; i < size; ++i) {
-
-			IRObject ex = elementList.get(fromIndex + i);
-			if (OptUtil.isConstNumber(ex)) {
-
-				if (nums == null) {
-					nums = new ArrayList<>();
-				}
-
-				nums.add(ex);
-
-			} else {
-
-				if (pos != i) {
-					elementList.set(fromIndex + pos, ex);
-				}
-
-				pos++;
-			}
-		}
-
-		// (+ a b c)
-		if (nums == null) {
-			return null;
-		}
-
-		IRObject numObj = nums.get(0);
-		for (int i = 1; i < nums.size(); ++i) {
-			numObj = MathUtil.computeArithmeticExpression(RArithmeticOperator.ADD, numObj, nums.get(i));
-		}
-
-		if (pos == 1) {
-			return numObj;
-		}
-
-		if (OptUtil.isConstNumber(numObj, 0)) {
-
-			if (pos == 2) {
-				return elementList.get(fromIndex + 1); // (+ 0 a) ==> a
-			}
-
-			// (+ 0 a b) ==>(+ a b)
-			return RulpFactory.createExpression(elementList.subList(fromIndex, fromIndex + pos));
-		}
-
-		// (+ a b 2) ==> (+ 2 a b)
-		for (int i = fromIndex + pos; i > fromIndex + 1; --i) {
-			elementList.set(i, elementList.get(i - 1));
-		}
-		elementList.set(fromIndex + 1, numObj);
-		return RulpFactory.createExpression(elementList.subList(fromIndex, fromIndex + pos + 1));
-	}
-
-	private static IRObject _rebuildBy(List<IRObject> rebuildList) throws RException {
-
-		return _rebuildBy(rebuildList, 0, rebuildList.size());
-	}
-
-	private static int _rebuildList(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
+	private static int _rebuildAddBy(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
 			throws RException {
 
 		int size = toIndex - fromIndex;
+
+		// (*)
+		// (* 1)
 		if (size < 2) {
 			return -1;
 		}
@@ -368,9 +295,10 @@ public class EROUtil {
 			return -1;
 		}
 
-		// (* 0) or (/ 0)
-		if ((RArithmeticOperator.BY == op || RArithmeticOperator.DIV == op) && OptUtil.isConstNumber(numObj, 0)) {
-			return 0;
+		// (* 0)
+		if (RArithmeticOperator.BY == op && OptUtil.isConstNumber(numObj, 0)) {
+			list.set(fromIndex, O_INT_0);
+			return 1;
 		}
 
 		int pos = numFirstPos + 1;
@@ -380,9 +308,9 @@ public class EROUtil {
 			if (OptUtil.isConstNumber(ex)) {
 
 				numObj = MathUtil.computeArithmeticExpression(op, numObj, ex);
-				if ((RArithmeticOperator.BY == op || RArithmeticOperator.DIV == op)
-						&& OptUtil.isConstNumber(numObj, 0)) {
-					return 0;
+				if (RArithmeticOperator.BY == op && OptUtil.isConstNumber(numObj, 0)) {
+					list.set(fromIndex, O_INT_0);
+					return 1;
 				}
 
 			} else {
@@ -400,6 +328,13 @@ public class EROUtil {
 		if ((RArithmeticOperator.BY == op && OptUtil.isConstNumber(numObj, 1))
 				|| (RArithmeticOperator.ADD == op && OptUtil.isConstNumber(numObj, 0))) {
 
+			// (* 0) ==> 0
+			// (+ 0) ==> 0
+			if (pos == 1) {
+				list.set(fromIndex, O_INT_0);
+				return 1;
+			}
+
 			// Move left
 			for (int i = numFirstPos; i < (pos - 1); ++i) {
 				list.set(fromIndex + i, list.get(fromIndex + i + 1));
@@ -409,13 +344,18 @@ public class EROUtil {
 		}
 
 		// Move right
-		// (+ a b 0 c) ==> (+ 0 a b c)
+		// (+ a b 0 c) ==> (+ a a b c)
 		for (int i = numFirstPos; i > 0; --i) {
 			list.set(i + fromIndex, list.get(i + fromIndex - 1));
 		}
 
+		// (+ a a b c) ==> (+ n a b c)
 		list.set(fromIndex, numObj);
 		return pos;
+	}
+
+	private static IRObject _rebuildBy(List<IRObject> rebuildList) throws RException {
+		return _rebuildBy(rebuildList, 0, rebuildList.size());
 	}
 
 	private static IRObject _rebuildBy(List<IRObject> elementList, int fromIndex, int toIndex) throws RException {
@@ -668,43 +608,196 @@ public class EROUtil {
 			return rebuildList.get(1);
 		}
 
-		// (power 1 e2 e3 e4...) ==> 1
-		IRObject e1 = rebuildList.get(1);
-		if (OptUtil.isConstNumber(e1, 1)) {
-			return O_INT_1;
+		int indexSize = _rebuildSubDivPower(rebuildList, 1, size, RArithmeticOperator.POWER);
+		if (indexSize == -1) {
+			return null;
 		}
 
+		switch (indexSize) {
+
+		// no change
+		case -1:
+			return null;
+
+		// 0
+		case 0:
+			return O_INT_0;
+
+		case 1:
+			return rebuildList.get(1);
+
+		default:
+			return RulpFactory.createExpression(rebuildList.subList(0, indexSize + 1));
+		}
+
+	}
+
+	private static IRObject _rebuildSub(List<IRObject> rebuildList) throws RException {
+
+		int size = rebuildList.size();
+
+		// (-)
+		if (size == 1) {
+			return OptUtil.asExpr(null);
+		}
+
+		// (- a) ==> a
+		if (size == 2) {
+			return rebuildList.get(1);
+		}
+
+		int indexSize = _rebuildSubDivPower(rebuildList, 1, size, RArithmeticOperator.SUB);
+		if (indexSize == -1) {
+			return null;
+		}
+
+		switch (indexSize) {
+
+		// no change
+		case -1:
+			return null;
+
+		// 0
+		case 0:
+			return O_INT_0;
+
+		case 1:
+			return rebuildList.get(1);
+
+		default:
+			return RulpFactory.createExpression(rebuildList.subList(0, indexSize + 1));
+		}
+
+	}
+
+	private static int _rebuildSubDivPower(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
+			throws RException {
+
+		int size = toIndex - fromIndex;
+
+		// (power)
+		// (- 1)
+		// (/ 5)
+		if (size < 2) {
+			return -1;
+		}
+
+		IRObject e1 = list.get(fromIndex);
+
 		// (x^y)^z ==> x^(y*z)
-		IRObject indexObj = _rebuildBy(rebuildList, 1, rebuildList.size());
-		if (indexObj != null) {
+		// (a-b-c) ==> (a-(b+c))
+		// (a/b/c) ==> (a/(b*c))
 
-			if (indexObj.getType() == RType.EXPR) {
+		RArithmeticOperator op2 = null;
+		switch (op) {
+		case POWER:
+			op2 = RArithmeticOperator.BY;
+			// (power 1 e2 e3 e4...) ==> 1
+			if (OptUtil.isConstNumber(e1, 1)) {
+				list.set(fromIndex, O_INT_1);
+				return 1;
+			}
+			break;
 
-				IRExpr byExpr = RulpUtil.asExpression(indexObj);
-				for (int i = 1; i < byExpr.size(); ++i) {
-					rebuildList.set(i + 1, byExpr.get(i));
-				}
+		case SUB:
+			op2 = RArithmeticOperator.ADD;
+			break;
 
-				return RulpFactory.createExpression(rebuildList.subList(0, byExpr.size() + 1));
+		case DIV:
+			op2 = RArithmeticOperator.BY;
+			// (/ 0 e2 e3 e4...) ==> 1
+			if (OptUtil.isConstNumber(e1, 0)) {
+				list.set(fromIndex, O_INT_0);
+				return 1;
+			}
+			break;
+		default:
+			throw new RException("not support: " + op);
+		}
 
-			} else {
+		final int indexSize = _rebuildAddBy(list, fromIndex + 1, toIndex, op2);
+		int rightSize = indexSize;
+		if (indexSize == -1) {
+			rightSize = size - 1;
+		}
 
-				// (power a 0) => 1
-				if (OptUtil.isConstNumber(indexObj, 0)) {
-					return O_INT_1;
-				}
+		// (power a 1 b) => (power a b)
+		if (rightSize > 0 && RArithmeticOperator.POWER == op && OptUtil.isConstNumber(list.get(fromIndex + 1), 1)) {
 
-				// (power a 1) => a
-				if (OptUtil.isConstNumber(indexObj, 1)) {
-					return e1;
-				}
+			if (rightSize == 1) {
+				list.set(fromIndex, e1);
+				return 1;
+			}
 
-				rebuildList.set(2, indexObj);
-				return RulpFactory.createExpression(rebuildList.subList(0, 3));
+			// Move left
+			// (power a 2 b c) ==> (power a b c)
+			for (int i = 0; i < rightSize - 1; ++i) {
+				list.set(i + fromIndex + 1, list.get(i + fromIndex + 2));
+			}
+
+			rightSize--;
+		}
+
+		if (rightSize == 0 || (rightSize == 1 && OptUtil.isConstNumber(list.get(fromIndex + 1), 0))) {
+
+			switch (op) {
+
+			// (power a 0) ==> 1
+			case POWER:
+				list.set(fromIndex, O_INT_1);
+				return 1;
+
+			// (- a 0) ==> a
+			case SUB:
+				list.set(fromIndex, e1);
+				return 1;
+
+			// (/ a 0) ==> a / 0
+			case DIV:
+				throw new RException("Can't div 0: " + list.subList(fromIndex, toIndex));
+
+			default:
+				throw new RException("not support: " + op);
 			}
 		}
 
-		return null;
+		IRObject e2 = list.get(fromIndex + 1);
+		if (OptUtil.isConstNumber(e1) && OptUtil.isConstNumber(e2)) {
+
+			e1 = MathUtil.computeArithmeticExpression(op, e1, e2);
+
+			// (/ 4 2)
+			if (size == 2) {
+				list.set(fromIndex, e1);
+				return 1;
+			}
+
+			// (/ 0 a b) => 0
+			if (RArithmeticOperator.DIV == op && OptUtil.isConstNumber(e1, 0)) {
+				return 0;
+			}
+
+			// (power 1 a b)
+			if (RArithmeticOperator.POWER == op && OptUtil.isConstNumber(e1, 1)) {
+				list.set(fromIndex, O_INT_1);
+				return 1;
+			}
+
+			// Move left
+			// (power 2 2 a b) ==> (power 4 a b)
+			for (int i = fromIndex + 1; i < toIndex - 1; ++i) {
+				list.set(i, list.get(i + 1));
+			}
+
+			list.set(fromIndex, e1);
+			return size - 1;
+		}
+
+		if (indexSize == -1) {
+			return -1; // no change
+		}
+
+		return rightSize + 1;
 	}
 
 //	private static IRObject _rebuildSub(List<IRObject> rebuildList) throws RException {

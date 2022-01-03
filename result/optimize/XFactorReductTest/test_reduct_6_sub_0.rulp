@@ -10,6 +10,9 @@
 (reduct (- 0L a))
 ;=>
 
+(reduct (- a 0))
+;=>
+
 (reduct (- a 0 b))
 ;=>
 

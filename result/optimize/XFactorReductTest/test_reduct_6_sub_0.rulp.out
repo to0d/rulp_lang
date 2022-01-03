@@ -10,17 +10,20 @@
 (reduct (- 0L a))
 ;=>(- 0L a)
 
+(reduct (- a 0))
+;=>a
+
 (reduct (- a 0 b))
-;=>(- a 0 b)
+;=>(- a b)
 
 (reduct (- a 0.0 b))
-;=>(- a 0.0 b)
+;=>(- a b)
 
 (reduct (- a 0.0d b))
-;=>(- a 0.0D b)
+;=>(- a b)
 
 (reduct (- a 0L b))
-;=>(- a 0L b)
+;=>(- a b)
 
 (reduct (- 1 a))
 ;=>(- 1 a)
@@ -29,8 +32,8 @@
 ;=>(- a 2)
 
 (reduct (- a 2.0 b 3))
-;=>(- a 2.0 b 3)
+;=>(- a 5.0 b)
 
 (reduct (- a 2D b 3L 1))
-;=>(- a 2.0D b 3L 1)
+;=>(- a 6.0D b)
 

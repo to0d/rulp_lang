@@ -5,5 +5,11 @@
 ;=>(+ ?x ?y)
 
 (reduct (- ?x ?y 0))
-;=>(- ?x ?y 0)
+;=>(- ?x ?y)
+
+(reduct (* ?x ?y 0))
+;=>0
+
+(reduct (and ?x ?y false))
+;=>(and ?x ?y false)
 
