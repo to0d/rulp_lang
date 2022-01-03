@@ -36,3 +36,12 @@
 
 (reduct (- a 2D b 3L 1))
 ;=>
+
+(reduct (- a a))
+;=>0
+
+(reduct (- a b a))
+;=>(- 0 b)
+
+(reduct (- a b a c))
+;=>(- 0 b c)

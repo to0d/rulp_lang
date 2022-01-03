@@ -9,7 +9,9 @@
 
 package alpha.rulp.ximpl.math;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.O_INT_0;
+import static alpha.rulp.lang.Constant.O_INT_1;
+
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -23,7 +25,6 @@ import alpha.rulp.utils.MathUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
-import alpha.rulp.ximpl.optimize.EROUtil;
 import alpha.rulp.ximpl.optimize.OptUtil;
 import alpha.rulp.ximpl.string.XRFactorToString;
 

@@ -34,3 +34,6 @@ at main: (reduct (/ a 0.0 b))
 (reduct (/ a 2D b 3L 1))
 ;=>(/ a 6.0D b)
 
+(reduct (/ a a b))
+;=>(/ a a b)
+

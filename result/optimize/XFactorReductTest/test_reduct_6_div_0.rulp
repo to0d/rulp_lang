@@ -27,3 +27,6 @@
 
 (reduct (/ a 2D b 3L 1))
 ;=>
+
+(reduct (/ a a b))
+;=>(/ 1 b)

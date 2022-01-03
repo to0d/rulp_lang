@@ -1,7 +1,15 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_ATOM;
 import static alpha.rulp.lang.Constant.O_COMPUTE;
+import static alpha.rulp.lang.Constant.O_DOUBLE_0;
+import static alpha.rulp.lang.Constant.O_DOUBLE_1;
+import static alpha.rulp.lang.Constant.O_FLOAT_0;
+import static alpha.rulp.lang.Constant.O_FLOAT_1;
+import static alpha.rulp.lang.Constant.O_INT_0;
+import static alpha.rulp.lang.Constant.O_INT_1;
+import static alpha.rulp.lang.Constant.O_LONG_0;
+import static alpha.rulp.lang.Constant.O_LONG_1;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

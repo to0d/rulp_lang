@@ -1,24 +1,27 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.F_BREAK;
 import static alpha.rulp.lang.Constant.F_CASE;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_LOOP;
+import static alpha.rulp.lang.Constant.F_O_ADD;
+import static alpha.rulp.lang.Constant.F_O_BY;
+import static alpha.rulp.lang.Constant.F_O_DIV;
+import static alpha.rulp.lang.Constant.F_O_MOD;
+import static alpha.rulp.lang.Constant.F_O_POWER;
+import static alpha.rulp.lang.Constant.F_O_SUB;
 import static alpha.rulp.lang.Constant.F_RETURN;
+import static alpha.rulp.lang.Constant.O_INT_0;
+import static alpha.rulp.lang.Constant.O_INT_1;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import alpha.rulp.lang.IRConst;
-import alpha.rulp.lang.IRDouble;
 import alpha.rulp.lang.IRExpr;
-import alpha.rulp.lang.IRFloat;
 import alpha.rulp.lang.IRFrame;
-import alpha.rulp.lang.IRInteger;
 import alpha.rulp.lang.IRList;
-import alpha.rulp.lang.IRLong;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RArithmeticOperator;
 import alpha.rulp.lang.RException;

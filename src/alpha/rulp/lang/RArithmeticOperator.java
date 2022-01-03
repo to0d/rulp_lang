@@ -1,6 +1,6 @@
 package alpha.rulp.lang;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.O_ADD;
 import static alpha.rulp.lang.Constant.O_AND;
 import static alpha.rulp.lang.Constant.O_BY;
 import static alpha.rulp.lang.Constant.O_DIV;
