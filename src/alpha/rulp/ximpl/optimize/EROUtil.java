@@ -213,6 +213,10 @@ public class EROUtil {
 				rebuildObj = _rebuildAdd(rebuildList);
 				break;
 
+//			case F_O_SUB:
+//				rebuildObj = _rebuildSub(rebuildList);
+//				break;
+
 			case F_O_POWER:
 				rebuildObj = _rebuildPower(rebuildList);
 				break;
@@ -291,7 +295,6 @@ public class EROUtil {
 			return numObj;
 		}
 
-		// (+ 0 a b) ==> (* a b)
 		if (OptUtil.isConstNumber(numObj, 0)) {
 
 			if (pos == 2) {
@@ -302,9 +305,12 @@ public class EROUtil {
 			return RulpFactory.createExpression(elementList.subList(fromIndex, fromIndex + pos));
 		}
 
-		// (+ 2 a b) ==> (+ a b 2)
-		elementList.set(fromIndex + (pos++), numObj);
-		return RulpFactory.createExpression(elementList.subList(fromIndex, fromIndex + pos));
+		// (+ a b 2) ==> (+ 2 a b)
+		for (int i = fromIndex + pos; i > fromIndex + 1; --i) {
+			elementList.set(i, elementList.get(i - 1));
+		}
+		elementList.set(fromIndex + 1, numObj);
+		return RulpFactory.createExpression(elementList.subList(fromIndex, fromIndex + pos + 1));
 	}
 
 	private static IRObject _rebuildBy(List<IRObject> rebuildList) throws RException {
@@ -380,9 +386,12 @@ public class EROUtil {
 			return RulpFactory.createExpression(elementList.subList(fromIndex, fromIndex + pos));
 		}
 
-		// (* 2 a b) ==> (+ a b 2)
-		elementList.set(fromIndex + (pos++), numObj);
-		return RulpFactory.createExpression(elementList.subList(fromIndex, fromIndex + pos));
+		// (* a b 2) ==> (* 2 a b)
+		for (int i = fromIndex + pos; i > fromIndex + 1; --i) {
+			elementList.set(i, elementList.get(i - 1));
+		}
+		elementList.set(fromIndex + 1, numObj);
+		return RulpFactory.createExpression(elementList.subList(fromIndex, fromIndex + pos + 1));
 	}
 
 	// (case a (a action) (b action))
@@ -595,6 +604,78 @@ public class EROUtil {
 		}
 
 		return null;
+	}
+
+	private static IRObject _rebuildSub(List<IRObject> rebuildList) throws RException {
+		return _rebuildSub(rebuildList, 0, rebuildList.size());
+	}
+
+	private static IRObject _rebuildSub(List<IRObject> elementList, int fromIndex, int toIndex) throws RException {
+
+		int size = toIndex - fromIndex;
+
+		// (+)
+		if (size == 1) {
+			return OptUtil.asExpr(null);
+		}
+
+		// (- a)
+		if (size == 2) {
+			return elementList.get(fromIndex + 1);
+		}
+
+		ArrayList<IRObject> nums = null;
+		int pos = 1;
+
+		// (- x n y)
+		for (int i = 1; i < size; ++i) {
+
+			IRObject ex = elementList.get(fromIndex + i);
+			if (OptUtil.isConstNumber(ex)) {
+
+				if (nums == null) {
+					nums = new ArrayList<>();
+				}
+
+				nums.add(ex);
+
+			} else {
+
+				if (pos != i) {
+					elementList.set(fromIndex + pos, ex);
+				}
+
+				pos++;
+			}
+		}
+
+		// (+ a b c)
+		if (nums == null) {
+			return null;
+		}
+
+		IRObject numObj = nums.get(0);
+		for (int i = 1; i < nums.size(); ++i) {
+			numObj = MathUtil.computeArithmeticExpression(RArithmeticOperator.ADD, numObj, nums.get(i));
+		}
+
+		if (pos == 1) {
+			return numObj;
+		}
+
+		if (OptUtil.isConstNumber(numObj, 0)) {
+
+			if (pos == 2) {
+				return elementList.get(fromIndex + 1); // (+ 0 a) ==> a
+			}
+
+			// (- 0 a b) ==>(- a b)
+			return RulpFactory.createExpression(elementList.subList(fromIndex, fromIndex + pos));
+		}
+
+		// (- 2 a b) ==> (- a b 2)
+		elementList.set(fromIndex + (pos++), numObj);
+		return RulpFactory.createExpression(elementList.subList(fromIndex, fromIndex + pos));
 	}
 
 	private static int _removeEmptyExpr(List<IRObject> exprList, int fromIndex) throws RException {

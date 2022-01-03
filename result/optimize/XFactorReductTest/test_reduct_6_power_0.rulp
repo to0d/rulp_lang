@@ -32,6 +32,9 @@
 (reduct (power a 0 b c))
 ;=>
 
+(reduct (power a b 0 c))
+;=>
+
 ; (power e1 e2 e3 1 e4) ==> (power e1 e2 e3 e4)
 
 (reduct (power a 1))
