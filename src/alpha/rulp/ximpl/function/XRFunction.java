@@ -79,10 +79,9 @@ public class XRFunction extends AbsFunctionAdapter implements IRFunction {
 				continue;
 			}
 
-			IRAtom argAtom = RulpUtil.getObjectType(valObj);
-			if (typeAtom != argAtom) {
-				throw new RException(String.format("the type<%s> of %d argument<%s> not match <%s>", argAtom, argIndex,
-						valObj, typeAtom));
+			if (!RulpUtil.matchParaType(valObj, typeAtom)) {
+				throw new RException(
+						String.format("the %d argument<%s> not match type <%s>", argIndex, valObj, typeAtom));
 			}
 
 			++argIndex;

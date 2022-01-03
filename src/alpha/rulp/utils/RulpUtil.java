@@ -133,6 +133,7 @@ import alpha.rulp.runtime.RName;
 import alpha.rulp.ximpl.collection.XRMap;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.lang.AbsObject;
+import alpha.rulp.ximpl.optimize.OptUtil;
 import alpha.rulp.ximpl.rclass.XRFactorNew;
 
 public class RulpUtil {
@@ -1166,6 +1167,10 @@ public class RulpUtil {
 		return obj.getType() == RType.EXPR;
 	}
 
+	public static boolean isFunctionLambda(IRObject obj) throws RException {
+		return obj.getType() == RType.FUNC && ((IRFunction) obj).isLambda();
+	}
+
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
 //
 //		IRObject nsObj = frame.getObject(A_USING_NS);
@@ -1175,10 +1180,6 @@ public class RulpUtil {
 //
 //		return RulpUtil.asSubject(nsObj);
 //	}
-
-	public static boolean isFunctionLambda(IRObject obj) throws RException {
-		return obj.getType() == RType.FUNC && ((IRFunction) obj).isLambda();
-	}
 
 	public static boolean isFunctionList(IRObject obj) throws RException {
 		return obj.getType() == RType.FUNC && ((IRFunction) obj).isList();
@@ -1326,6 +1327,26 @@ public class RulpUtil {
 		}
 
 		return getObjectType(obj) == typeAtom;
+	}
+
+	public static boolean matchParaType(IRObject paraValue, IRAtom paraTypeAtom) throws RException {
+
+		RType valueType = paraValue.getType();
+		if (valueType == RType.INSTANCE) {
+			return RulpUtil.asInstance(paraValue).getRClass().getClassTypeAtom() == paraTypeAtom;
+		}
+
+		RType expectType = RType.toType(paraTypeAtom.asString());
+		if (valueType == expectType) {
+			return true;
+		}
+
+		RType convertType = MathUtil.getTypeConvert(valueType, expectType);
+		if (convertType == expectType) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public static String nameOf(IRObject obj, IRFrame frame) throws RException {

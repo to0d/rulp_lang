@@ -22,35 +22,36 @@ import alpha.rulp.lang.RType;
 
 public class MathUtil {
 
-	static RType calRstType[][] = new RType[RType.TYPE_NUM][RType.TYPE_NUM];
+	static RType result2Type[][] = new RType[RType.TYPE_NUM][RType.TYPE_NUM];
 
 	static {
-		calRstType[RType.NIL.getIndex()][RType.NIL.getIndex()] = RType.NIL;
 
-		calRstType[RType.INT.getIndex()][RType.INT.getIndex()] = RType.INT;
-		calRstType[RType.INT.getIndex()][RType.LONG.getIndex()] = RType.LONG;
-		calRstType[RType.INT.getIndex()][RType.FLOAT.getIndex()] = RType.FLOAT;
-		calRstType[RType.INT.getIndex()][RType.DOUBLE.getIndex()] = RType.DOUBLE;
+		result2Type[RType.NIL.getIndex()][RType.NIL.getIndex()] = RType.NIL;
 
-		calRstType[RType.LONG.getIndex()][RType.INT.getIndex()] = RType.LONG;
-		calRstType[RType.LONG.getIndex()][RType.LONG.getIndex()] = RType.LONG;
-		calRstType[RType.LONG.getIndex()][RType.FLOAT.getIndex()] = RType.FLOAT;
-		calRstType[RType.LONG.getIndex()][RType.DOUBLE.getIndex()] = RType.DOUBLE;
+		result2Type[RType.INT.getIndex()][RType.INT.getIndex()] = RType.INT;
+		result2Type[RType.INT.getIndex()][RType.LONG.getIndex()] = RType.LONG;
+		result2Type[RType.INT.getIndex()][RType.FLOAT.getIndex()] = RType.FLOAT;
+		result2Type[RType.INT.getIndex()][RType.DOUBLE.getIndex()] = RType.DOUBLE;
 
-		calRstType[RType.FLOAT.getIndex()][RType.INT.getIndex()] = RType.FLOAT;
-		calRstType[RType.FLOAT.getIndex()][RType.LONG.getIndex()] = RType.FLOAT;
-		calRstType[RType.FLOAT.getIndex()][RType.FLOAT.getIndex()] = RType.FLOAT;
-		calRstType[RType.FLOAT.getIndex()][RType.DOUBLE.getIndex()] = RType.DOUBLE;
+		result2Type[RType.LONG.getIndex()][RType.INT.getIndex()] = RType.LONG;
+		result2Type[RType.LONG.getIndex()][RType.LONG.getIndex()] = RType.LONG;
+		result2Type[RType.LONG.getIndex()][RType.FLOAT.getIndex()] = RType.FLOAT;
+		result2Type[RType.LONG.getIndex()][RType.DOUBLE.getIndex()] = RType.DOUBLE;
 
-		calRstType[RType.DOUBLE.getIndex()][RType.INT.getIndex()] = RType.DOUBLE;
-		calRstType[RType.DOUBLE.getIndex()][RType.LONG.getIndex()] = RType.DOUBLE;
-		calRstType[RType.DOUBLE.getIndex()][RType.FLOAT.getIndex()] = RType.DOUBLE;
-		calRstType[RType.DOUBLE.getIndex()][RType.DOUBLE.getIndex()] = RType.DOUBLE;
+		result2Type[RType.FLOAT.getIndex()][RType.INT.getIndex()] = RType.FLOAT;
+		result2Type[RType.FLOAT.getIndex()][RType.LONG.getIndex()] = RType.FLOAT;
+		result2Type[RType.FLOAT.getIndex()][RType.FLOAT.getIndex()] = RType.FLOAT;
+		result2Type[RType.FLOAT.getIndex()][RType.DOUBLE.getIndex()] = RType.DOUBLE;
 
-		calRstType[RType.BOOL.getIndex()][RType.BOOL.getIndex()] = RType.BOOL;
+		result2Type[RType.DOUBLE.getIndex()][RType.INT.getIndex()] = RType.DOUBLE;
+		result2Type[RType.DOUBLE.getIndex()][RType.LONG.getIndex()] = RType.DOUBLE;
+		result2Type[RType.DOUBLE.getIndex()][RType.FLOAT.getIndex()] = RType.DOUBLE;
+		result2Type[RType.DOUBLE.getIndex()][RType.DOUBLE.getIndex()] = RType.DOUBLE;
 
-		calRstType[RType.EXPR.getIndex()][RType.EXPR.getIndex()] = RType.EXPR;
-		calRstType[RType.ATOM.getIndex()][RType.ATOM.getIndex()] = RType.ATOM;
+		result2Type[RType.BOOL.getIndex()][RType.BOOL.getIndex()] = RType.BOOL;
+
+		result2Type[RType.EXPR.getIndex()][RType.EXPR.getIndex()] = RType.EXPR;
+		result2Type[RType.ATOM.getIndex()][RType.ATOM.getIndex()] = RType.ATOM;
 
 	}
 
@@ -60,7 +61,7 @@ public class MathUtil {
 		RType at = a.getType();
 		RType bt = b.getType();
 
-		RType rt = MathUtil.getConvertType(at, bt);
+		RType rt = MathUtil.getTypeConvert(at, bt);
 		if (rt == null) {
 			throw new RException(String.format("Invalid op types: %s %s", a.toString(), b.toString()));
 		}
@@ -271,7 +272,7 @@ public class MathUtil {
 		RType at = a.getType();
 		RType bt = b.getType();
 
-		RType rt = MathUtil.getConvertType(at, bt);
+		RType rt = MathUtil.getTypeConvert(at, bt);
 		if (rt == null) {
 			throw new RException(String.format("Invalid op types: %s %s %s", op, a.toString(), b.toString()));
 		}
@@ -407,8 +408,8 @@ public class MathUtil {
 		throw new RException(String.format("Invalid rational expression: (%s %s %s)", op, a.toString(), b.toString()));
 	}
 
-	public static RType getConvertType(RType a, RType b) {
-		return calRstType[a.getIndex()][b.getIndex()];
+	public static RType getTypeConvert(RType a, RType b) {
+		return result2Type[a.getIndex()][b.getIndex()];
 	}
 
 	public static boolean isNumber(IRObject obj) {

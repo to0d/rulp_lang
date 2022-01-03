@@ -1,4 +1,4 @@
-(defun fun1 ((?v int)) 
+(defun fun1 ((?v double)) 
     (return (+ ?v 1))
 )
 ;=>

@@ -51,7 +51,7 @@
 
 (fun2 $(+ 1 2)) ; pass early expression
 ;err:
-the type<int> of 0 argument<3> not match <expr>
+the 0 argument<3> not match type <expr>
 at main: (fun2 $(+ 1 2))
 ;eof
 
