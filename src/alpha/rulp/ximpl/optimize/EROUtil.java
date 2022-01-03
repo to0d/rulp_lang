@@ -130,9 +130,63 @@ public class EROUtil {
 				return -1;
 			}
 
-			// (% 0 b c)
+			// (% 0 a b) ==> 0
+			IRObject e1 = list.get(fromIndex);
+			if (OptUtil.isConstNumber(e1, 0)) {
+				list.set(fromIndex, O_INT_0);
+				return 1;
+			}
 
-			return 0;
+			IRObject e2 = list.get(fromIndex + 1);
+
+			// (% a a b) ==> 0
+			if (RulpUtil.equal(e1, e2)) {
+				list.set(fromIndex, O_INT_0);
+				return 1;
+			}
+
+			// (% a 0) ==> err
+			if (OptUtil.isConstNumber(e2, 0)) {
+				throw new RException("Can't mode 0: " + list.subList(fromIndex, toIndex));
+			}
+
+			IRObject lastObj = e2;
+			int pos = fromIndex + 2;
+
+			for (int i = fromIndex + 2; i < toIndex; ++i) {
+
+				IRObject ex = list.get(i);
+
+				// (% a b 0)
+				if (OptUtil.isConstNumber(ex, 0)) {
+					throw new RException("Can't mode 0: " + list.subList(fromIndex, toIndex));
+				}
+
+				// (% a b 1 c) ==> 0
+				if (OptUtil.isConstNumber(ex, 1)) {
+					list.set(fromIndex, O_INT_0);
+					return 1;
+				}
+
+				// (% a b b c) ==> (% a b c)
+				if (!RulpUtil.equal(ex, lastObj)) {
+
+					if (pos != i) {
+						list.set(pos, ex);
+					}
+
+					pos++;
+
+					lastObj = ex;
+				}
+			}
+
+			// no change
+			if (pos == toIndex) {
+				return -1;
+			}
+
+			return pos - fromIndex;
 		}
 
 		private static int _rebuildSubDivPower(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
@@ -289,6 +343,10 @@ public class EROUtil {
 			case ADD:
 			case BY:
 				size = _rebuildAddBy(rebuildList, 1, size, op);
+				break;
+
+			case MOD:
+				size = _rebuildMod(rebuildList, 1, size);
 				break;
 
 			default:
@@ -507,6 +565,10 @@ public class EROUtil {
 
 			case F_O_DIV:
 				rebuildObj = ArithmeticUtil.rebuildArithmetic(rebuildList, RArithmeticOperator.DIV);
+				break;
+
+			case F_O_MOD:
+				rebuildObj = ArithmeticUtil.rebuildArithmetic(rebuildList, RArithmeticOperator.MOD);
 				break;
 
 			default:
