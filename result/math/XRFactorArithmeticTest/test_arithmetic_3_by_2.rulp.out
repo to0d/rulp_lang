@@ -43,6 +43,9 @@
 (* (fun0d) (fun1))
 ;=>0
 
-(runtime-call-count fun1)
+(* (fun1) 0 (fun1))
 ;=>0
+
+(runtime-call-count fun1)
+;=>1
 

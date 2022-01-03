@@ -17,6 +17,7 @@ import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFloat;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRInteger;
+import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRLong;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RArithmeticOperator;
@@ -117,6 +118,21 @@ public class EROUtil {
 			// (+ a a b c) ==> (+ n a b c)
 			list.set(fromIndex, numObj);
 			return pos;
+		}
+
+		private static int _rebuildMod(List<IRObject> list, int fromIndex, int toIndex) throws RException {
+
+			int size = toIndex - fromIndex;
+
+			// (%)
+			// (% 1)
+			if (size < 2) {
+				return -1;
+			}
+
+			// (% 0 b c)
+
+			return 0;
 		}
 
 		private static int _rebuildSubDivPower(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
@@ -302,11 +318,11 @@ public class EROUtil {
 
 	static class ERO {
 
-		public IRExpr inputExpr = null;
+		public IRList inputExpr = null;
 
 		public IRObject outputObj = null;
 
-		public void setInputExpr(IRExpr inputExpr) {
+		public void setInputExpr(IRList inputExpr) {
 			this.inputExpr = inputExpr;
 			this.outputObj = null;
 		}
@@ -350,7 +366,7 @@ public class EROUtil {
 		computeCount.getAndIncrement();
 	}
 
-	private static boolean _isEROExpr(IRObject e0, IRExpr expr, IRFrame frame) throws RException {
+	private static boolean _isEROExpr(IRObject e0, IRList expr, IRFrame frame) throws RException {
 
 		if (!OptUtil.isAtomFactor(e0)) {
 			return false;
@@ -365,7 +381,7 @@ public class EROUtil {
 
 	private static boolean _rebuild(ERO cc0, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		IRExpr expr = cc0.inputExpr;
+		IRList expr = cc0.inputExpr;
 
 		if (expr.isEmpty()) {
 			return true;
@@ -601,7 +617,7 @@ public class EROUtil {
 		return null;
 	}
 
-	private static IRObject _rebuildLoop(IRObject e0, IRExpr expr, List<IRObject> rebuildList) throws RException {
+	private static IRObject _rebuildLoop(IRObject e0, IRList expr, List<IRObject> rebuildList) throws RException {
 
 		int size = rebuildList.size();
 
@@ -703,7 +719,7 @@ public class EROUtil {
 	}
 
 	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value
-	public static IRObject rebuild(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+	public static IRObject rebuild(IRList expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		rebuildCount.getAndIncrement();
 

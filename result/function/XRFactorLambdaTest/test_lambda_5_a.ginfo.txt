@@ -76,7 +76,7 @@ Object create count:
        macro:            4            0            4
        class:            4            0            4
       member:          117            0          117
-       frame:            9            6            3
+       frame:            9            5            4
  interpreter:            1            0
   frameEntry:          232            0
       lambda:            1            0
