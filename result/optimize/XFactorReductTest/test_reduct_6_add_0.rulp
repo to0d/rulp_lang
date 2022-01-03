@@ -33,3 +33,24 @@
 
 (reduct (+ a 2D b 3L 1))
 ;=>
+
+(reduct (+ a b 1))
+;=>
+
+(reduct (+ a b 2 3))
+;=>
+
+(reduct (+ a b 3 4 c))
+;=>
+
+(reduct (+ a b 2 3 c))
+;=>
+
+(reduct (+ a b 2 3 c 1))
+;=>
+
+(reduct (+ a b 2 0 c 1))
+;=>
+
+(reduct (+ a b 1 c -1))
+;=>
