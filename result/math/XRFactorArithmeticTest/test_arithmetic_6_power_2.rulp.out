@@ -43,6 +43,9 @@
 (power (fun1d) (funx))
 ;=>1
 
+(runtime-call-count funx)
+;=>0
+
 (power (funx) 0 (funx))
 ;=>1
 

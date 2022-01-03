@@ -23,6 +23,7 @@ import alpha.rulp.utils.MathUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
+import alpha.rulp.ximpl.optimize.EROUtil;
 import alpha.rulp.ximpl.optimize.OptUtil;
 import alpha.rulp.ximpl.string.XRFactorToString;
 
@@ -66,7 +67,6 @@ public class XRFactorArithmetic extends AbsAtomFactorAdapter implements IRFactor
 			while (it.hasNext()) {
 
 				// (* 0 ...) ==> 0
-
 				if (OptUtil.isConstNumber(rst, 0)) {
 					if (operator == RArithmeticOperator.BY) {
 						return O_INT_0;
