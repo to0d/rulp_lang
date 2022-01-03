@@ -43,13 +43,25 @@ class XRFactorArithmeticTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_arithmetic_4_div() {
+	void test_arithmetic_4_div_1() {
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	void test_arithmetic_5_mod() {
+	void test_arithmetic_4_div_2() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_arithmetic_5_mod_1() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_arithmetic_5_mod_2() {
 		_setup();
 		_run_script();
 	}

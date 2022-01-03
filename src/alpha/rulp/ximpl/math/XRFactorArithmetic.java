@@ -68,9 +68,14 @@ public class XRFactorArithmetic extends AbsAtomFactorAdapter implements IRFactor
 
 				// (* 0 ...) ==> 0
 				if (OptUtil.isConstNumber(rst, 0)) {
-					if (operator == RArithmeticOperator.BY) {
+
+					switch (operator) {
+					case BY:
+					case MOD:
+					case DIV:
 						return O_INT_0;
 					}
+
 				}
 
 				// (power 1 a) ==> 1

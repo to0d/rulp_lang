@@ -1,0 +1,28 @@
+(defun fun0i ()
+    (return 0)
+)
+
+(defun fun0l ()
+    (return 0l)
+)
+
+(defun fun1 ()
+    (return 1)
+)
+;=>
+
+(/ 0 (fun1))
+;=>
+
+(/ 0L (fun1))
+;=>
+
+(/ (fun0i) (fun1))
+;=>
+
+(/ (fun0l) (fun1))
+;=>
+
+(runtime-call-count fun1)
+;=>0
+
