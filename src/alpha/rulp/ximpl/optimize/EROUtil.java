@@ -210,15 +210,19 @@ public class EROUtil {
 				break;
 
 			case F_O_ADD:
-				rebuildObj = _rebuildAdd(rebuildList);
+				rebuildObj = _rebuild(rebuildList, RArithmeticOperator.ADD);
 				break;
 
 			case F_O_SUB:
-				rebuildObj = _rebuildSub(rebuildList);
+				rebuildObj = _rebuild(rebuildList, RArithmeticOperator.SUB);
 				break;
 
 			case F_O_POWER:
-				rebuildObj = _rebuildPower(rebuildList);
+				rebuildObj = _rebuild(rebuildList, RArithmeticOperator.POWER);
+				break;
+
+			case F_O_DIV:
+				rebuildObj = _rebuild(rebuildList, RArithmeticOperator.DIV);
 				break;
 
 			default:
@@ -236,37 +240,6 @@ public class EROUtil {
 		}
 
 		return false;
-	}
-
-	private static IRObject _rebuildAdd(List<IRObject> rebuildList) throws RException {
-
-		int size = rebuildList.size();
-
-		// (+)
-		if (size == 1) {
-			return OptUtil.asExpr(null);
-		}
-
-		// (+ a)
-		if (size == 2) {
-			return rebuildList.get(1);
-		}
-
-		size = _rebuildAddBy(rebuildList, 1, size, RArithmeticOperator.ADD);
-		switch (size) {
-		case -1:
-			return null;
-
-		case 0:
-			return O_INT_0;
-
-		case 1:
-			return rebuildList.get(1);
-
-		default:
-			return RulpFactory.createExpression(rebuildList.subList(0, size + 1));
-		}
-
 	}
 
 	private static int _rebuildAddBy(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
@@ -594,7 +567,7 @@ public class EROUtil {
 		return null;
 	}
 
-	private static IRObject _rebuildPower(List<IRObject> rebuildList) throws RException {
+	private static IRObject _rebuild(List<IRObject> rebuildList, RArithmeticOperator op) throws RException {
 
 		int size = rebuildList.size();
 
@@ -608,12 +581,23 @@ public class EROUtil {
 			return rebuildList.get(1);
 		}
 
-		int indexSize = _rebuildSubDivPower(rebuildList, 1, size, RArithmeticOperator.POWER);
-		if (indexSize == -1) {
-			return null;
+		switch (op) {
+		case SUB:
+		case POWER:
+		case DIV:
+			size = _rebuildSubDivPower(rebuildList, 1, size, op);
+			break;
+
+		case ADD:
+		case BY:
+			size = _rebuildAddBy(rebuildList, 1, size, op);
+			break;
+
+		default:
+			throw new RException("not support: " + op);
 		}
 
-		switch (indexSize) {
+		switch (size) {
 
 		// no change
 		case -1:
@@ -627,48 +611,52 @@ public class EROUtil {
 			return rebuildList.get(1);
 
 		default:
-			return RulpFactory.createExpression(rebuildList.subList(0, indexSize + 1));
+			return RulpFactory.createExpression(rebuildList.subList(0, size + 1));
 		}
 
 	}
 
-	private static IRObject _rebuildSub(List<IRObject> rebuildList) throws RException {
-
-		int size = rebuildList.size();
-
-		// (-)
-		if (size == 1) {
-			return OptUtil.asExpr(null);
-		}
-
-		// (- a) ==> a
-		if (size == 2) {
-			return rebuildList.get(1);
-		}
-
-		int indexSize = _rebuildSubDivPower(rebuildList, 1, size, RArithmeticOperator.SUB);
-		if (indexSize == -1) {
-			return null;
-		}
-
-		switch (indexSize) {
-
-		// no change
-		case -1:
-			return null;
-
-		// 0
-		case 0:
-			return O_INT_0;
-
-		case 1:
-			return rebuildList.get(1);
-
-		default:
-			return RulpFactory.createExpression(rebuildList.subList(0, indexSize + 1));
-		}
-
-	}
+//	private static IRObject _rebuildAdd(List<IRObject> rebuildList) throws RException {
+//
+//	}
+//
+//	private static IRObject _rebuildSub(List<IRObject> rebuildList) throws RException {
+//
+//		int size = rebuildList.size();
+//
+//		// (-)
+//		if (size == 1) {
+//			return OptUtil.asExpr(null);
+//		}
+//
+//		// (- a) ==> a
+//		if (size == 2) {
+//			return rebuildList.get(1);
+//		}
+//
+//		int indexSize = _rebuildSubDivPower(rebuildList, 1, size, RArithmeticOperator.SUB);
+//		if (indexSize == -1) {
+//			return null;
+//		}
+//
+//		switch (indexSize) {
+//
+//		// no change
+//		case -1:
+//			return null;
+//
+//		// 0
+//		case 0:
+//			return O_INT_0;
+//
+//		case 1:
+//			return rebuildList.get(1);
+//
+//		default:
+//			return RulpFactory.createExpression(rebuildList.subList(0, indexSize + 1));
+//		}
+//
+//	}
 
 	private static int _rebuildSubDivPower(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
 			throws RException {

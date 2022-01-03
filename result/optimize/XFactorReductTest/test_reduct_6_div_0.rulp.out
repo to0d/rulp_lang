@@ -1,0 +1,36 @@
+(reduct (/ 0 a))
+;=>0
+
+(reduct (/ 0.0 a))
+;=>0
+
+(reduct (/ 0.0d a))
+;=>0
+
+(reduct (/ 0L a))
+;=>0
+
+(reduct (/ a 0))
+;err:
+Can't div 0: [a, 0]
+at main: (reduct (/ a 0))
+;eof
+
+(reduct (/ a 0.0 b))
+;err:
+Can't div 0: [a, 0, b]
+at main: (reduct (/ a 0.0 b))
+;eof
+
+(reduct (/ 1 a))
+;=>(/ 1 a)
+
+(reduct (/ a 2))
+;=>(/ a 2)
+
+(reduct (/ a 2.0 b 3))
+;=>(/ a 6.0 b)
+
+(reduct (/ a 2D b 3L 1))
+;=>(/ a 6.0D b)
+
