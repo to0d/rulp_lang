@@ -1,0 +1,3 @@
+(reduct (or false true))
+;=>true
+

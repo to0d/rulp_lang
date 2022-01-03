@@ -1,0 +1,32 @@
+(reduct (and false true))
+;=>false
+
+(reduct (and false false))
+;=>false
+
+(reduct (and false false true))
+;=>false
+
+(reduct (and true true true))
+;=>true
+
+(reduct (and false a))
+;=>false
+
+(reduct (and a false b))
+;=>false
+
+(reduct (and a true))
+;=>
+
+(reduct (and a b true))
+;=>
+
+(reduct (and true a))
+;=>
+
+(reduct (and a a b))
+;=>
+
+(reduct (and a b a c))
+;=>
