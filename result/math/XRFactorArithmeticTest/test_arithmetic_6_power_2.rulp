@@ -29,6 +29,7 @@
 ;=>
 
 (power 1L (funx))
+;=>
 
 (power (fun1i) (funx))
 ;=>
@@ -40,6 +41,9 @@
 ;=>
 
 (power (fun1d) (funx))
+;=>
+
+(power (funx) 0 (funx))
 ;=>
 
 (runtime-call-count funx)
