@@ -83,7 +83,25 @@ class XFactorReductTest extends RulpTestBase {
 	}
 
 	@Test
+	void test_reduct_6_add_1() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_reduct_6_and_0() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
 	void test_reduct_6_by_0() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_reduct_6_by_1() {
 		_setup();
 		_run_script();
 	}
@@ -95,7 +113,13 @@ class XFactorReductTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_reduct_6_and_0() {
+	void test_reduct_6_div_1() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_reduct_6_mod_0() {
 		_setup();
 		_run_script();
 	}
@@ -113,13 +137,19 @@ class XFactorReductTest extends RulpTestBase {
 	}
 
 	@Test
+	void test_reduct_6_power_1() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
 	void test_reduct_6_sub_0() {
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	void test_reduct_6_mod_0() {
+	void test_reduct_6_sub_1() {
 		_setup();
 		_run_script();
 	}

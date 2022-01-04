@@ -1,0 +1,2 @@
+(reduct (power a b c))
+;=>(power a (* b c))

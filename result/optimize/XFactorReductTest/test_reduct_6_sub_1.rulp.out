@@ -1,0 +1,3 @@
+(reduct (- a b c b b))
+;=>(- a b c b b)
+

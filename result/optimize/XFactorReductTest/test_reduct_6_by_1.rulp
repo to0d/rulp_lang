@@ -1,0 +1,5 @@
+(reduct (* a a a))
+;=>(power a 3)
+
+(reduct (* a b a a b))
+;=>(* (power a 3) (power b 2))
