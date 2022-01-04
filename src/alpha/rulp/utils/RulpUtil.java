@@ -133,7 +133,6 @@ import alpha.rulp.runtime.RName;
 import alpha.rulp.ximpl.collection.XRMap;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.lang.AbsObject;
-import alpha.rulp.ximpl.optimize.OptUtil;
 import alpha.rulp.ximpl.rclass.XRFactorNew;
 
 public class RulpUtil {

@@ -1,0 +1,6 @@
+(min 1 2)
+;err:
+factor not found: (min 1 2)
+at main: (min 1 2)
+;eof
+
