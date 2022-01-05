@@ -249,6 +249,8 @@ obj=ls-is-stable-fun, type=func, stable=false
 obj=ls-print, type=func, stable=false
 obj=main, type=frame, stable=false
 obj=map, type=class, stable=false
+obj=max, type=func, stable=true
+obj=min, type=func, stable=true
 obj=queue, type=class, stable=false
 obj=root, type=frame, stable=false
 obj=script_out, type=macro, stable=false

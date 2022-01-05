@@ -8,7 +8,7 @@ Total runtime info:
     Interpreter call level/max:        4       10
                Frame max level:        5
                   Frame max id:        7
-           Frame free id count:        2
+           Frame free id count:        3
 ==========================================================================================================================
 
 Optimize info:
@@ -66,19 +66,19 @@ Object create count:
         atom:          637            0          637
       string:           28            0           28
         list:            6            0            6
-        expr:          301            4          297
+        expr:          301            5          296
        array:            1            0            1
-         var:           17            3           14
+         var:           17            5           12
         func:           55            0           55
     template:            1            0            1
        macro:            4            0            4
-       frame:            5            3            2
+       frame:            5            7           -2
  interpreter:            1            0
   frameEntry:          218            0
       lambda:            1            0
 ==========================================================================================================================
 
-Global frame list: total=2
+Global frame list: total=1
 
 id=2, name=main, lvl=2, ref=3/3, entry=12, pid=1(system), subject=main
 ==========================================================================================================================
@@ -104,14 +104,6 @@ fun1                 : 11       2        1    func       (fun1 nil) : frame=fram
 ==========================================================================================================================
 
 
-id=3, name=_$fun$_fun1, lvl=3, ref=1/2, entry=2, pid=2(main), subject=_$fun$_fun1
-==========================================================================================================================
-Name(alias)          : EntryId  FrameId  Ref  Type       Value               
---------------------------------------------------------------------------------------------------------------------------
-?v                   : 12       3        1    var        2 : type=int        
-?rv                  : 14       3        1    var        4 : type=int        
-==========================================================================================================================
-
 id=4, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$__ginfo
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
@@ -124,7 +116,6 @@ Global frame tree:
 ->FRAME(root): id=0, lvl=0, subject=root
     ->FRAME(system): id=1, lvl=1, subject=system
         ->FRAME(main): id=2, lvl=2, subject=main
-            ->FRAME(_$fun$_fun1): id=3, lvl=3, subject=_$fun$_fun1
             ->FRAME(_$fun$__ginfo): id=4, lvl=3, subject=_$fun$__ginfo
 
 Global Subject list:

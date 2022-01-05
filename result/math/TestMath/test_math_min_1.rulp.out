@@ -1,6 +1,24 @@
+(load math)
+;=>nil
+
 (min 1 2)
-;err:
-factor not found: (min 1 2)
-at main: (min 1 2)
-;eof
+;=>1
+
+(min 1.0 2.0)
+;=>1.0
+
+(min 1D 2D)
+;=>1.0D
+
+(min 1L 2L)
+;=>1L
+
+(min 1.0 2)
+;=>1.0
+
+(min 1D 2.0)
+;=>1.0D
+
+(min 1L 2)
+;=>1L
 
