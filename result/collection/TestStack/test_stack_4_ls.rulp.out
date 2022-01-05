@@ -1,3 +1,7 @@
+(load stack)
+(load tool)
+;=>nil nil
+
 (ls stack)
 ;=>'(stack::?impl stack::clear stack::init stack::is-empty stack::peek stack::pop stack::push stack::size-of stack::to-list)
 

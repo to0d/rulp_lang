@@ -2,26 +2,26 @@
 ;=>&v1
 
 (foreach (?x (ls main)) (value-of ?x))
-;=>'(main::?script-path main::?x main::main main::root main::system main::v1)
+;=>'(main::?script-path main::?x main::_ginfo main::file-prename main::file-subffix main::is-blank main::is-empty main::main main::root main::script_out main::system main::v1)
 
 (foreach (?x (ls main)) (type-of $(value-of ?x)))
-;=>'(member member member member member member)
+;=>'(member member member member member member member member member member member member)
 
 (foreach (?x (ls main)) (value-of (value-of ?x)))
-;=>'(&?script-path &?x main root system &v1)
+;=>'(&?script-path &?x _ginfo file-prename file-subffix is-blank is-empty main root script_out system &v1)
 
 (foreach (?x (ls main)) (type-of $(value-of (value-of ?x))))
-;=>'(var var frame frame frame var)
+;=>'(var var func func func func func frame frame macro frame var)
 
 (foreach (?x (ls main)) (value-of (value-of (value-of ?x))))
-;=>'("result\\factor\\XRFactorValueOfTest\\test_value_of_2.rulp" main::?x main root system 10)
+;=>'("result\\factor\\XRFactorValueOfTest\\test_value_of_2.rulp" main::?x _ginfo file-prename file-subffix is-blank is-empty main root script_out system 10)
 
 (foreach (?x (ls main)) (type-of $(value-of (value-of (value-of ?x)))))
-;=>'(string member frame frame frame int)
+;=>'(string member func func func func func frame frame macro frame int)
 
 (foreach (?x (ls main)) (value-of (value-of (value-of (value-of ?x)))))
-;=>'("result\\factor\\XRFactorValueOfTest\\test_value_of_2.rulp" &?x main root system 10)
+;=>'("result\\factor\\XRFactorValueOfTest\\test_value_of_2.rulp" &?x _ginfo file-prename file-subffix is-blank is-empty main root script_out system 10)
 
 (foreach (?x (ls main)) (type-of $(value-of (value-of (value-of (value-of ?x))))))
-;=>'(string var frame frame frame int)
+;=>'(string var func func func func func frame frame macro frame int)
 

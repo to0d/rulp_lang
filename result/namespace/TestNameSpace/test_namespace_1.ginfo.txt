@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      171
+           Interpreter call id:      146
     Interpreter call level/max:        4       10
                Frame max level:        5
                   Frame max id:        7
@@ -24,87 +24,97 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      192
+    factor:      171
       func:       16
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=171, row=32, column=43(4), value-max=5, value-unit=2^x
+Callable stats info: callId=146, row=32, column=37(4), value-max=7, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         3333333333333333333333333333334444334444446 max=21, unit=2^x
+   Frame    RType  Count  Ref Object                         3333333333333333333334334444335444446 max=19, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     62    0 defun                                     1333231333333333321  2 1   1    
-    root   factor     39    0 add-attribute                   13333333332                               
-    root   factor     25    0 value-of                                                     33   1331143 
-    root   factor     15    0 return                                                         13   212 23
-    root   factor      9    0 defvar                                    1                112   1   1   2
-    root   factor      8    0 ls                                                            2 1221      
-    root   factor      6    0 alias                          33                                         
-    main     func      5    1 (f1)                                                           11   1   2 
-    main   member      4    1 namespace@ns1::f2                                               1    11  1
-    main   member      4    1 namespace@ns1::f1                                               1   1 1  1
-    root   factor      4    0 defmacro                                      2      1     1              
-    root   factor      4    0 defclass                                              1111                
-    root   factor      3    0 search-frame-of                                             1      1   1  
-    root   factor      3    0 deftemplate                                     3                         
-  system template      2    1 use                                                                1  1   
-    root   factor      2    0 add_search_frame                                                   1  1   
-    root   factor      1    0 str-substr                                                               1
-    root   factor      1    0 str-last-index-of                                                        1
-    root   factor      1    0 setq                                                                     1
-  system    macro      1    1 script_out                                                               1
-    root   factor      1    0 print-global-info                                                        1
-    root   factor      1    0 out-to-file                                                              1
-    root   factor      1    0 new                                                         1             
-    root   factor      1    0 if                                                                       1
-    root   factor      1    0 has-member                                                     1          
-    root   factor      1    0 frame-of                                                           1      
-  system     func      1    1 (file-prename string)                                                    1
-    main     func      1    1 (f3)                                                                     1
-    root   factor      1    0 do                                                                       1
-  system funcList      1    3 _ginfo                                                                   1
-    root   factor      1    0 +                                                                        1
-    root   factor      1    0 !=                                                                       1
+    root   factor     44    0 defun                                     1333213333421  2 1   1    
+    root   factor     39    0 add-attribute                   13333333332                         
+    root   factor     25    0 value-of                                               42   1421141 
+    root   factor     15    0 return                                                   22   311 33
+    root   factor      9    0 defvar                                    1         1 21   1   1   2
+    root   factor      8    0 ls                                                      2 222       
+    root   factor      6    0 alias                          33                                   
+    main     func      5    1 (f1)                                                     2    1   2 
+    main   member      4    1 namespace@ns1::f2                                         1   1 1  1
+    main   member      4    1 namespace@ns1::f1                                         1   11  1 
+    root   factor      4    0 defmacro                                      2     11              
+    root   factor      3    0 search-frame-of                                       1      1  1   
+    root   factor      3    0 deftemplate                                    3                    
+  system template      2    1 use                                                          1  1   
+    root   factor      2    0 add_search_frame                                             1  1   
+    root   factor      1    0 str-substr                                                         1
+    root   factor      1    0 str-last-index-of                                                  1
+    root   factor      1    0 setq                                                               1
+    main    macro      1    1 script_out                                                         1
+    root   factor      1    0 print-global-info                                                  1
+    root   factor      1    0 out-to-file                                                        1
+    root   factor      1    0 new                                                  1              
+    root   factor      1    0 load                                                1               
+    root   factor      1    0 if                                                                 1
+    root   factor      1    0 has-member                                              1           
+    root   factor      1    0 frame-of                                                     1      
+    main     func      1    1 (file-prename string)                                              1
+    main     func      1    1 (f3)                                                               1
+    root   factor      1    0 do                                                                 1
+    main funcList      1    3 _ginfo                                                             1
+    root   factor      1    0 +                                                                  1
+    root   factor      1    0 !=                                                                 1
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1192            0         1192
-      string:           39            0           39
+        atom:          731            0          731
+      string:           27            0           27
         list:           16           10            6
-        expr:          635           17          618
+        expr:          363           17          346
        array:            1            0            1
-         var:           28            7           21
-        func:          112            0          112
+         var:           23            7           16
+        func:           57            0           57
     template:            1            0            1
        macro:            4            0            4
     instance:            1            0            1
-       class:            4            0            4
-      member:          146            9          137
+      member:           29            9           20
        frame:           20           18            2
  interpreter:            1            0
-  frameEntry:          240            0
+  frameEntry:          230            0
       lambda:            0            0
 ==========================================================================================================================
 
 Global frame list: total=2
 
-id=2, name=main, lvl=2, ref=3/6, entry=10, pid=1(system), subject=main, search=[frame@main, frame@SF-ns1-0]
+id=2, name=main, lvl=2, ref=3/6, entry=16, pid=1(system), subject=main, search=[frame@main, frame@SF-ns1-0]
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        3    frame      frame@main          
-?script-path         : 4        2        1    var        result\namespace\TestNameSpace\test_namespace_1.rulp : type=string
-ns1                  : 5        2        2    instance   namespace@ns1       
-var1                 : 6        2        1    var        1 : type=int        
-f1                   : 7        2        1    func       (f1) : frame=frame@main
-?rv                  : 8        2        1    var        4 : type=int        
-var3                 : 12       2        1    var        4 : type=int        
-f3                   : 13       2        1    func       (f3) : frame=frame@main
+is-empty             : 4        2        1    funcList   '((is-empty array) (is-empty list) (is-empty string)) : frame=null, type=list
+                                         2    func       (is-empty list) : frame=frame@system
+                                         2    func       (is-empty array) : frame=frame@system
+                                         1    func       (is-empty string) : frame=frame@main
+is-blank             : 5        2        1    func       (is-blank string) : frame=frame@main
+file-prename         : 6        2        1    func       (file-prename string) : frame=frame@main
+file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
+?script-path         : 8        2        1    var        result\namespace\TestNameSpace\test_namespace_1.rulp : type=string
+script_out           : 9        2        1    macro      script_out          
+_ginfo               : 10       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+                                         1    func       (_ginfo) : frame=frame@main
+                                         1    func       (_ginfo string) : frame=frame@main
+ns1                  : 11       2        2    instance   namespace@ns1       
+var1                 : 12       2        1    var        1 : type=int        
+f1                   : 13       2        1    func       (f1) : frame=frame@main
+?rv                  : 14       2        1    var        4 : type=int        
+var3                 : 18       2        1    var        4 : type=int        
+f3                   : 19       2        1    func       (f3) : frame=frame@main
 ==========================================================================================================================
 
 
@@ -112,7 +122,7 @@ id=3, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$__
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?rv                  : 24       3        1    var        result\namespace\TestNameSpace\test_namespace_1 : type=string
+?rv                  : 30       3        1    var        result\namespace\TestNameSpace\test_namespace_1 : type=string
 ==========================================================================================================================
 
 id=4, name=SF-ns1-0, lvl=3, ref=1/2, entry=0, pid=2(main), subject=ns1

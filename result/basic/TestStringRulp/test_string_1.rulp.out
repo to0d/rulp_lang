@@ -1,3 +1,6 @@
+(load string)
+;=>nil
+
 (is-empty "")
 ;=>true
 

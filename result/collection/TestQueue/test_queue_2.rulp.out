@@ -1,3 +1,6 @@
+(load queue)
+;=>nil
+
 (defmacro macro_push (?queue ?v) (?queue::push ?v))
 ;=>macro_push
 

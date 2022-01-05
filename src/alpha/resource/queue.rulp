@@ -1,0 +1,56 @@
+(defclass queue
+    
+    (defvar ?impl nil)[private]
+    
+    (defun init ()
+        (setq ?impl (queue::_queue_init)))[final]
+    
+    (defun push (?e)
+        (queue::_queue_push_back ?impl ?e))[final]
+        
+    (defun push_back (?e)
+        (queue::_queue_push_back ?impl ?e))[final]
+        
+    (defun push_front (?e)
+        (queue::_queue_push_front ?impl ?e))[final]
+    
+    (defun pop ()
+        (return (queue::_queue_pop_front ?impl)))[final]
+
+    (defun pop_back ()
+        (return (queue::_queue_pop_back ?impl)))[final]
+    
+    (defun pop_front ()
+        (return (queue::_queue_pop_front ?impl)))[final]
+    
+    (defun peek ()
+        (return (queue::_queue_peek_front ?impl)))[final]
+
+    (defun peek_back ()
+        (return (queue::_queue_peek_back ?impl)))[final]
+
+    (defun peek_front ()
+        (return (queue::_queue_peek_front ?impl)))[final]
+
+    (defun get (?k)
+        (return (queue::_queue_get ?impl ?k)))[final]
+
+    (defun size-of ()
+        (return (queue::_queue_size_of ?impl)))[final]
+        
+    (defun is-empty ()
+        (return (queue::_queue_is_empty ?impl)))[final]
+
+    (defun clear ()
+        (queue::_queue_clear ?impl))[final]
+        
+    (defun to-list ()
+        (return (queue::_queue_to_list ?impl)))[final]
+
+)[final]
+
+(defun size-of  ((?queue queue))            (return (?queue::size-of)))
+(defun get      ((?queue queue) (?i1 int))  (return (?queue::get ?i1)))
+(defun is-empty ((?queue queue))            (return (?queue::is-empty)))
+(defun clear    ((?queue queue))            (?queue::clear))
+(defun to-list  ((?queue queue))            (return (?queue::to-list)))

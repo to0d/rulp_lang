@@ -1,3 +1,6 @@
+(load set)
+;=>
+
 (rulp-object-count frame)
 ;;;
 

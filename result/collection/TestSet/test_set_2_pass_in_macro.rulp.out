@@ -1,3 +1,6 @@
+(load set)
+;=>nil
+
 (defmacro macro_add (?set ?v) (?set::add ?v))
 ;=>macro_add
 

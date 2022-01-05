@@ -1,3 +1,6 @@
+(load tool)
+;=>nil
+
 (defvar x 10)
 (defvar y)
 ;=>&x &y
@@ -5,7 +8,7 @@
 (ls-print local var)
 ;=>nil
 ;out:
-mbr=?script-path, mbr-property='(public), mbr-attribute='(), obj=?script-path, obj-type=var, obj-attribute='(), var-value="result\basic\TestBaseRulp\test_base_4_ls_print_usr_vars.rulp"
+mbr=?script-path, mbr-property='(public), mbr-attribute='(), obj=?script-path, obj-type=var, obj-attribute='(), var-value="result\basic\TestToolRulp\test_tool_1_ls_print_usr_vars.rulp"
 mbr=x, mbr-property='(public), mbr-attribute='(), obj=x, obj-type=var, obj-attribute='(), var-value="10"
 mbr=y, mbr-property='(public), mbr-attribute='(), obj=y, obj-type=var, obj-attribute='(), var-value="nil"
 

@@ -1,3 +1,11 @@
+(load map)
+(load queue)
+(load set)
+(load stack)
+(load string)
+(load tool)
+;=>
+
 (defun ls-is-stable-fun (?subject) 
     (if (equal ?subject local)
     

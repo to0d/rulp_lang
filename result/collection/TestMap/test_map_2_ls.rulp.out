@@ -1,3 +1,7 @@
+(load map)
+(load tool)
+;=>nil nil
+
 (ls map)
 ;=>'(map::?impl map::_map_clear map::_map_get map::_map_init map::_map_is_empty map::_map_put map::_map_size_of map::clear map::get map::init map::is-empty map::put map::size-of)
 

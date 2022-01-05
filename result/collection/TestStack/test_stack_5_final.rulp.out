@@ -1,3 +1,6 @@
+(load stack)
+;=>nil
+
 (defclass class1 (stack))
 ;err:
 Invalid member expression: (stack)

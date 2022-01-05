@@ -1,3 +1,7 @@
+(load set)
+(load tool)
+;=>nil nil
+
 (print-list (ls set))
 ;=>nil
 ;out:

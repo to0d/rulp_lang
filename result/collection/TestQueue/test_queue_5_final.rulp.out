@@ -1,3 +1,6 @@
+(load queue)
+;=>nil
+
 (defclass class1 (queue))
 ;err:
 Invalid member expression: (queue)

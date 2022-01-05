@@ -1,0 +1,48 @@
+;****************************************************;
+; Subject tools
+;****************************************************;
+(defun ls-print (?subject ?type) 
+    (if (equal ?subject local)
+    
+        (ls-print (value-of (:: (value-of local::parent) parent)) ?type)
+        
+        (loop for ?mbr in (ls ?subject) do 
+            (if (and (not (equal ?type nil)) 
+                     (not (equal ?type (type-of $(value-of (value-of ?mbr))))))
+                (continue)
+            )
+
+            ;; output member 
+            (print "mbr=" (name-of $(value-of ?mbr)))
+            
+            (if (not (access $(value-of ?mbr)))
+                (do
+                    (print ", access deny\n")
+                    (continue)
+                )
+            )
+
+            (print ", mbr-property=" (property-of $(value-of ?mbr)))
+            (print ", mbr-attribute=" (attribute-of $(value-of ?mbr)))
+    
+            (print ", obj=" (name-of $(value-of (value-of ?mbr))))
+            (print ", obj-type=" (type-of $(value-of (value-of ?mbr))))
+            (print ", obj-attribute=" (attribute-of $(value-of (value-of ?mbr))))
+
+            (if (equal (type-of $(value-of (value-of ?mbr))) class)
+                (print ", class-property=" (property-of $(value-of (value-of ?mbr)))))
+            
+            (if (equal (type-of $(value-of (value-of ?mbr))) instance)
+                (print ", instance-class=" (class-of $(value-of (value-of ?mbr)))))
+            
+            (if (equal (type-of $(value-of (value-of ?mbr))) var)
+                (print ", var-value=\"" $(value-of (value-of ?mbr)) "\""))
+
+            (print "\n")
+        )
+    )
+)
+
+(defun ls-print (?subject)
+    (ls-print ?subject nil)
+)

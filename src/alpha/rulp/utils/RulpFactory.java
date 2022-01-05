@@ -137,7 +137,6 @@ import alpha.rulp.ximpl.function.XRFactorLambda;
 import alpha.rulp.ximpl.function.XRFunction;
 import alpha.rulp.ximpl.function.XRFunctionLambda;
 import alpha.rulp.ximpl.function.XRFunctionList;
-import alpha.rulp.ximpl.io.XRFactorLoad;
 import alpha.rulp.ximpl.io.XRFactorOpenTxtFile;
 import alpha.rulp.ximpl.io.XRFactorOutToFile;
 import alpha.rulp.ximpl.io.XRFactorPrint;
@@ -186,6 +185,7 @@ import alpha.rulp.ximpl.rclass.XRFactorNew;
 import alpha.rulp.ximpl.rclass.XRFactorPropertyOf;
 import alpha.rulp.ximpl.rclass.XRMember;
 import alpha.rulp.ximpl.rclass.XRNoClass;
+import alpha.rulp.ximpl.runtime.XRFactorLoad;
 import alpha.rulp.ximpl.runtime.XRFactorRuntimeCallCount;
 import alpha.rulp.ximpl.runtime.XRFrame;
 import alpha.rulp.ximpl.runtime.XRFrameEntry;
@@ -747,11 +747,6 @@ public final class RulpFactory {
 
 		// Load base script
 		LoadUtil.loadRulpFromJar(interpreter, systemFrame, "alpha/resource/base.rulp", "utf-8");
-
-		// Native Class Initialization
-		XRSet.init(interpreter, systemFrame);
-		XRMap.init(interpreter, systemFrame);
-		XRQueue.init(interpreter, systemFrame);
 
 		/******************************************************/
 		// Load JVM object

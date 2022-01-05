@@ -1,9 +1,9 @@
 (ls)
-;=>'(main::?script-path main::main main::root main::system)
+;=>'(main::?script-path main::_ginfo main::file-prename main::file-subffix main::is-blank main::is-empty main::main main::root main::script_out main::system)
 
 (ls local)
-;=>'(main::?script-path main::local main::main main::root main::system)
+;=>'(main::?script-path main::_ginfo main::file-prename main::file-subffix main::is-blank main::is-empty main::local main::main main::root main::script_out main::system)
 
 (ls main)
-;=>'(main::?script-path main::local main::main main::root main::system)
+;=>'(main::?script-path main::_ginfo main::file-prename main::file-subffix main::is-blank main::is-empty main::local main::main main::root main::script_out main::system)
 

@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      120
+           Interpreter call id:       95
     Interpreter call level/max:        0        7
                Frame max level:        9
                   Frame max id:       13
@@ -24,70 +24,82 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      144
+    factor:      123
       func:        9
 ==========================================================================================================================
 
-Callable stats info: callId=120, row=17, column=61(2), value-max=5, value-unit=2^x
+Callable stats info: callId=95, row=18, column=48(2), value-max=4, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         1222222222222222222222222222222222222222222222222222222222263 max=27, unit=2^x
+   Frame    RType  Count  Ref Object                         122222222222222222222222222222222222222222242236 max=29, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     57    0 defun                                                 12222222 22 122222222211212122122 2   
-    root   factor     39    0 add-attribute                     12222222222222222222                                      
-    root   factor      7    0 defvar                                                1                                1  4 
-    root   factor      6    0 defclass                                                                     1 1 1  1    2  
-    root   factor      6    0 alias                          1221                                                         
-    root   factor      4    0 setq                                                                                      3 
-    root   factor      4    0 return                                                                                    3 
-    root   factor      4    0 new                                                                                       3 
-    root   factor      4    0 defmacro                                                      2             1          1    
-    root   factor      3    0 print                                                                                      3
-    root   factor      3    0 deftemplate                                                      21                         
-    root   factor      3    0 add-list-to-array                                                                         3 
-  system funcList      3    1 add                                                                                       3 
-    root   factor      2    0 loop                                                                                      11
-  system funcList      1    1 to-list                                                                                   1 
-    root   factor      1    0 do                                                                                        1 
-    root   factor      1    0 add-array-to-list                                                                         1 
+    root   factor     39    0 defun                                                 12222222  1222222221311  
+    root   factor     39    0 add-attribute                     12222222222222222222                         
+    root   factor      7    0 defvar                                                1                   1  13
+    root   factor      6    0 alias                          1221                                            
+    root   factor      4    0 setq                                                                          3
+    root   factor      4    0 return                                                                        3
+    root   factor      4    0 new                                                                          13
+    root   factor      4    0 defmacro                                                      2          1 1   
+    root   factor      3    0 print                                                                         3
+    root   factor      3    0 deftemplate                                                    21              
+    root   factor      3    0 add-list-to-array                                                             3
+  system funcList      3    1 add                                                                           3
+    root   factor      2    0 loop                                                                          2
+    root   factor      2    0 defclass                                                                    11 
+  system funcList      1    1 to-list                                                                       1
+    root   factor      1    0 load                                                                      1    
+    root   factor      1    0 do                                                                            1
+    root   factor      1    0 add-array-to-list                                                             1
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1144            0         1144
-      string:           38            0           38
+        atom:          683            0          683
+      string:           26            0           26
         list:           10            0           10
-        expr:          586            6          580
+        expr:          314            6          308
        array:            2            0            2
-         var:           38           16           22
-        func:          115            0          115
+         var:           33           16           17
+        func:           60            0           60
     template:            1            0            1
        macro:            4            0            4
     instance:            4            0            4
-       class:            6            0            6
-      member:          139            1          138
+       class:            2            0            2
+      member:           22            1           21
        frame:           24           18            6
  interpreter:            1            0
-  frameEntry:          247            0
+  frameEntry:          237            0
       lambda:            5            0
 ==========================================================================================================================
 
 Global frame list: total=6
 
-id=2, name=main, lvl=2, ref=3/3, entry=9, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=3/3, entry=15, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        3    frame      frame@main          
-?script-path         : 4        2        1    var        result\basic\TestObjectRef\test_ref_2_loop_2.rulp : type=string
-class1               : 5        2        1    class      class1              
-type#class1          : 6        2        0    atom       type#class1         
-class2               : 7        2        1    class      class2              
-type#class2          : 8        2        0    atom       type#class2         
-?o2                  : 9        2        1    var        class2@un-0 : type=instance
+is-empty             : 4        2        1    funcList   '((is-empty array) (is-empty list) (is-empty string)) : frame=null, type=list
+                                         2    func       (is-empty list) : frame=frame@system
+                                         2    func       (is-empty array) : frame=frame@system
+                                         1    func       (is-empty string) : frame=frame@main
+is-blank             : 5        2        1    func       (is-blank string) : frame=frame@main
+file-prename         : 6        2        1    func       (file-prename string) : frame=frame@main
+file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
+?script-path         : 8        2        1    var        result\basic\TestObjectRef\test_ref_2_loop_2.rulp : type=string
+script_out           : 9        2        1    macro      script_out          
+_ginfo               : 10       2        1    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+                                         1    func       (_ginfo) : frame=frame@main
+                                         1    func       (_ginfo string) : frame=frame@main
+class1               : 11       2        1    class      class1              
+type#class1          : 12       2        0    atom       type#class1         
+class2               : 13       2        1    class      class2              
+type#class2          : 14       2        0    atom       type#class2         
+?o2                  : 15       2        1    var        class2@un-0 : type=instance
 ==========================================================================================================================
 
 

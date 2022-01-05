@@ -41,6 +41,8 @@ public class TestMap extends RulpTestBase {
 	void test_map_4_get_map() {
 
 		_setup();
+
+		_test("(load map)");
 		_test("(new map map1)", "map1");
 		_test("(map1::put 1 2)", "nil");
 
@@ -65,5 +67,11 @@ public class TestMap extends RulpTestBase {
 		_setup();
 		_run_script();
 
+	}
+
+	@Test
+	void test_map_6_size_of() {
+		_setup();
+		_run_script();
 	}
 }

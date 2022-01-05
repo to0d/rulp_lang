@@ -224,37 +224,21 @@ root::~
 system::++
 system::--
 system::?load-paths
-system::?script-path
 system::?trace
-system::_ginfo
 system::add
 system::add-all
-system::clear
 system::cmp
 system::equal
-system::file-prename
-system::file-subffix
 system::get
-system::is-blank
 system::is-empty
 system::length-of
-system::ls-print
-system::map
 system::print-list
 system::println
-system::queue
 system::root
-system::script_out
-system::set
 system::size-of
-system::stack
 system::system
 system::to-array
 system::to-list
-system::type#map
-system::type#queue
-system::type#set
-system::type#stack
 system::use
 
 ;eof
@@ -264,6 +248,11 @@ system::use
 ;out:
 main::?rv
 main::?script-path
+main::_ginfo
+main::file-prename
+main::file-subffix
+main::is-blank
+main::is-empty
 main::ls1
 main::ls2
 main::ls3
@@ -273,6 +262,7 @@ main::ls6
 main::ls7
 main::main
 main::root
+main::script_out
 main::system
 
 ;eof

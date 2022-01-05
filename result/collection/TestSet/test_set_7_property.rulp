@@ -1,2 +1,5 @@
+(load set)
+;=>
+
 (property-of set)
 ;;;

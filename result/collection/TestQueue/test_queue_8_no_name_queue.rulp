@@ -1,3 +1,6 @@
+(load queue)
+;=>
+
 (defvar q1 (new queue))
 ;=>
 

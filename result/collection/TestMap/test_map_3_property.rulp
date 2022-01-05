@@ -1,2 +1,5 @@
+(load map)
+;=>
+
 (property-of map)
 ;;;

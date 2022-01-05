@@ -10,10 +10,10 @@ class XRFactorLoadTest extends RulpTestBase {
 	void test_1() {
 
 		_setup();
-		_test("(load \"load/load1.rulp\")", "'(&x1)");
+		_test("(load \"load/load1.rulp\")", "nil");
 		_test("(ls)", "'(main::main main::root main::system main::x1)");
 
-		_test("(load \"load/load1.rulp\")", "'()");
+		_test("(load \"load/load1.rulp\")", "nil");
 		_test("(ls)", "'(main::main main::root main::system main::x1)");
 	}
 
@@ -25,7 +25,7 @@ class XRFactorLoadTest extends RulpTestBase {
 		_test_error("(load \"load2.rulp\")", "file not found: load2.rulp\n" + "at main: (load \"load2.rulp\")");
 		_test("(print ?load-paths)", "nil", "'()");
 		_test("(setq ?load-paths (add ?load-paths \"load/path2\"))", "&?load-paths");
-		_test("(load \"load2.rulp\")", "'(&x2)");
+		_test("(load \"load2.rulp\")", "nil");
 	}
 
 	@Test

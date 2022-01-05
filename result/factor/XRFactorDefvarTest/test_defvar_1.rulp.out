@@ -5,5 +5,5 @@
 ;=>&y nil
 
 (ls)
-;=>'(main::?script-path main::main main::root main::system main::x main::y)
+;=>'(main::?script-path main::_ginfo main::file-prename main::file-subffix main::is-blank main::is-empty main::main main::root main::script_out main::system main::x main::y)
 

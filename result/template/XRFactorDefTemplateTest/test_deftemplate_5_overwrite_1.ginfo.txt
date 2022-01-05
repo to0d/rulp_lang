@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      123
+           Interpreter call id:       98
     Interpreter call level/max:        4       10
                Frame max level:        5
                   Frame max id:        9
@@ -24,77 +24,89 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      135
+    factor:      114
       func:        5
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=123, row=24, column=62(2), value-max=2, value-unit=2^x
+Callable stats info: callId=98, row=25, column=50(2), value-max=4, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         12222222222222222222222222222222222222222222222222222222222346 max=17, unit=2^x
+   Frame    RType  Count  Ref Object                         12222222222222222222222222222222222222222224223245 max=15, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor     57    0 defun                                                 12222222 22 122222222211212122122 2    
-    root   factor     39    0 add-attribute                     12222222222222222222                                       
-    root   factor      6    0 alias                          1221                                                          
-    root   factor      5    0 defclass                                                                     1 1 1  1    1   
-    root   factor      4    0 defvar                                                1                                1    2
-    root   factor      4    0 deftemplate                                                      21                        1 
-    root   factor      4    0 defmacro                                                      2             1          1     
-    root   factor      3    0 return                                                                                    1 2
-    root   factor      2    0 setq                                                                                       11
-    root   factor      2    0 new                                                                                      11  
-    main   member      2    1 class1@?o1::get                                                                           1 1
-    root   factor      2    0 +                                                                                          11
-    root   factor      1    0 str-substr                                                                                  1
-    root   factor      1    0 str-last-index-of                                                                           1
-  system    macro      1    1 script_out                                                                                  1
-    root   factor      1    0 print-global-info                                                                           1
-    root   factor      1    0 out-to-file                                                                                 1
-    main   member      1    1 namespace@ns1::set                                                                         1 
-    root   factor      1    0 if                                                                                          1
-  system     func      1    1 (file-prename string)                                                                       1
-    root   factor      1    0 do                                                                                          1
-    main   member      1    1 class1@?o1::inc                                                                            1 
-  system funcList      1    3 _ginfo                                                                                      1
-    root   factor      1    0 !=                                                                                          1
+    root   factor     39    0 defun                                                 12222222  1222222221311    
+    root   factor     39    0 add-attribute                     12222222222222222222                           
+    root   factor      6    0 alias                          1221                                              
+    root   factor      4    0 defvar                                                1                   1     2
+    root   factor      4    0 deftemplate                                                    21             1  
+    root   factor      4    0 defmacro                                                      2          1 1     
+    root   factor      3    0 return                                                                       1 11
+    root   factor      2    0 setq                                                                           11
+    root   factor      2    0 new                                                                          11  
+    main   member      2    1 class1@?o1::get                                                              1 1 
+    root   factor      2    0 +                                                                              11
+    root   factor      1    0 str-substr                                                                      1
+    root   factor      1    0 str-last-index-of                                                               1
+    main    macro      1    1 script_out                                                                      1
+    root   factor      1    0 print-global-info                                                               1
+    root   factor      1    0 out-to-file                                                                     1
+    main   member      1    1 namespace@ns1::set                                                             1 
+    root   factor      1    0 load                                                                      1      
+    root   factor      1    0 if                                                                              1
+    main     func      1    1 (file-prename string)                                                           1
+    root   factor      1    0 do                                                                              1
+    root   factor      1    0 defclass                                                                    1    
+    main   member      1    1 class1@?o1::inc                                                                1 
+    main funcList      1    3 _ginfo                                                                          1
+    root   factor      1    0 !=                                                                              1
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1121            0         1121
-      string:           39            0           39
+        atom:          660            0          660
+      string:           27            0           27
         list:            6            0            6
-        expr:          582            5          577
+        expr:          310            5          305
        array:            1            0            1
-         var:           25            6           19
-        func:          112            0          112
+         var:           20            6           14
+        func:           57            0           57
     template:            2            0            2
        macro:            4            0            4
     instance:            2            0            2
-       class:            5            0            5
-      member:          132            2          130
+       class:            1            0            1
+      member:           15            2           13
        frame:           10            6            4
  interpreter:            1            0
-  frameEntry:          232            0
+  frameEntry:          222            0
       lambda:            2            0
 ==========================================================================================================================
 
 Global frame list: total=4
 
-id=2, name=main, lvl=2, ref=4/4, entry=8, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=4/4, entry=14, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        4    frame      frame@main          
-?script-path         : 4        2        1    var        result\template\XRFactorDefTemplateTest\test_deftemplate_5_overwrite_1.rulp : type=string
-class1               : 5        2        1    class      class1              
-type#class1          : 6        2        0    atom       type#class1         
-?o1                  : 7        2        1    instance   class1@?o1          
-ns1                  : 9        2        1    instance   namespace@ns1       
+is-empty             : 4        2        1    funcList   '((is-empty array) (is-empty list) (is-empty string)) : frame=null, type=list
+                                         2    func       (is-empty list) : frame=frame@system
+                                         2    func       (is-empty array) : frame=frame@system
+                                         1    func       (is-empty string) : frame=frame@main
+is-blank             : 5        2        1    func       (is-blank string) : frame=frame@main
+file-prename         : 6        2        1    func       (file-prename string) : frame=frame@main
+file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
+?script-path         : 8        2        1    var        result\template\XRFactorDefTemplateTest\test_deftemplate_5_overwrite_1.rulp : type=string
+script_out           : 9        2        1    macro      script_out          
+_ginfo               : 10       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+                                         1    func       (_ginfo) : frame=frame@main
+                                         1    func       (_ginfo string) : frame=frame@main
+class1               : 11       2        1    class      class1              
+type#class1          : 12       2        0    atom       type#class1         
+?o1                  : 13       2        1    instance   class1@?o1          
+ns1                  : 15       2        1    instance   namespace@ns1       
 ==========================================================================================================================
 
 
@@ -108,7 +120,7 @@ id=6, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$__
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?rv                  : 16       6        1    var        result\template\XRFactorDefTemplateTest\test_deftemplate_5_overwrite_1 : type=string
+?rv                  : 22       6        1    var        result\template\XRFactorDefTemplateTest\test_deftemplate_5_overwrite_1 : type=string
 ==========================================================================================================================
 
 Global frame tree:

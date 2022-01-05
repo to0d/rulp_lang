@@ -1,12 +1,23 @@
-id=2, name=main, lvl=2, ref=1/2, entry=6, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=1/2, entry=12, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        1    frame      frame@main          
-?script-path         : 4        2        1    var        result\template\XRFactorDefTemplateTest\test_deftemplate_3_scope_a.rulp : type=string
-ask                  : 5        2        1    template   (ask '('(teacher atom) '(? expr))) : frame=frame@main
-?rv                  : 9        2        1    var        result\template\XRFactorDefTemplateTest\test_deftemplate_3_scope_a : type=string
+is-empty             : 4        2        1    funcList   '((is-empty array) (is-empty list) (is-empty string)) : frame=null, type=list
+                                         2    func       (is-empty list) : frame=frame@system
+                                         2    func       (is-empty array) : frame=frame@system
+                                         1    func       (is-empty string) : frame=frame@main
+is-blank             : 5        2        1    func       (is-blank string) : frame=frame@main
+file-prename         : 6        2        1    func       (file-prename string) : frame=frame@main
+file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
+?script-path         : 8        2        1    var        result\template\XRFactorDefTemplateTest\test_deftemplate_3_scope_a.rulp : type=string
+script_out           : 9        2        1    macro      script_out          
+_ginfo               : 10       2        1    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+                                         1    func       (_ginfo) : frame=frame@main
+                                         1    func       (_ginfo string) : frame=frame@main
+ask                  : 11       2        1    template   (ask '('(teacher atom) '(? expr))) : frame=frame@main
+?rv                  : 15       2        1    var        result\template\XRFactorDefTemplateTest\test_deftemplate_3_scope_a : type=string
 ==========================================================================================================================
 

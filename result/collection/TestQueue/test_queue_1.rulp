@@ -1,3 +1,6 @@
+(load queue)
+;=>
+
 (new queue q1)
 ;=>
 

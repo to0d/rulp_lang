@@ -69,4 +69,11 @@ public class TestSet extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+
+	@Test
+	void test_set_a_size_of() {
+
+		_setup();
+		_run_script();
+	}
 }

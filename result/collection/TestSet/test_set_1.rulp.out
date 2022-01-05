@@ -1,3 +1,6 @@
+(load set)
+;=>nil
+
 (new set set1)
 ;=>set1
 
