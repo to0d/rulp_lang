@@ -1,10 +1,11 @@
+(load math)
 (load map)
 (load queue)
 (load set)
 (load stack)
 (load string)
 (load tool)
-;=>nil nil nil nil nil nil
+;=>nil nil nil nil nil nil nil
 
 (ls-print root)
 ;=>nil

@@ -1,3 +1,4 @@
+(load math)
 (load map)
 (load queue)
 (load set)

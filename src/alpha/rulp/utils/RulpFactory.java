@@ -298,6 +298,7 @@ public final class RulpFactory {
 		LoadUtil.registerSystemLoader(A_SET, XRSet.getLoader());
 		LoadUtil.registerSystemLoader(A_STACK, null);
 		LoadUtil.registerSystemLoader(A_STRING, null);
+		LoadUtil.registerSystemLoader(A_MATH, null);
 		LoadUtil.registerSystemLoader(A_TOOL, null);
 	}
 

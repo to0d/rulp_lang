@@ -81,6 +81,8 @@ public interface Constant {
 
 	String A_MAP = "map";
 
+	String A_MATH = "math";
+
 	String A_MEMBER = "member";
 
 	String A_NAMESPACE = "namespace";
@@ -120,24 +122,24 @@ public interface Constant {
 	String A_RETURN_VAR = "?rv";
 
 	String A_ROOT = "root";
-
-	String A_SET = "set";
 	
-	String A_STACK = "stack";
+	String A_SET = "set";
 
 	String A_SOCKET = "socket";
 
-	String A_STATIC = "static";
+	String A_STACK = "stack";
 
 //	String A_STABLE = "stable";
 
+	String A_STATIC = "static";
+	
 	String A_STRING = "string";
 	
-	String A_TOOL = "tool";
-
 	String A_SYSTEM = "system";
 
 	String A_TEMPLATE = "template";
+
+	String A_TOOL = "tool";
 
 	String A_TRACE = "?trace";
 
@@ -491,6 +493,10 @@ public interface Constant {
 
 	IRAtom O_DIV = RulpFactory.createAtom(F_O_DIV);
 
+	IRDouble O_DOUBLE_0 = RulpFactory.createDouble(0);
+
+	IRDouble O_DOUBLE_1 = RulpFactory.createDouble(1);
+
 	IRAtom O_EMPTY = RulpFactory.createAtom("");
 
 	IRAtom O_EQ = RulpFactory.createAtom(F_O_EQ);
@@ -499,15 +505,27 @@ public interface Constant {
 
 	IRAtom O_Final = RulpFactory.createAtom(A_FINAL);
 
+	IRFloat O_FLOAT_0 = RulpFactory.createFloat(0);
+
+	IRFloat O_FLOAT_1 = RulpFactory.createFloat(1);
+
 	IRAtom O_From = RulpFactory.createAtom(A_FROM);
 
 	IRAtom O_GE = RulpFactory.createAtom(F_O_GE);
 
 	IRAtom O_GT = RulpFactory.createAtom(F_O_GT);
 
+	IRInteger O_INT_0 = RulpFactory.createInteger(0);
+
+	IRInteger O_INT_1 = RulpFactory.createInteger(1);
+
 	IRAtom O_LAMBDA = RulpFactory.createAtom(A_LAMBDA);
 
 	IRAtom O_LE = RulpFactory.createAtom(F_O_LE);
+
+	IRLong O_LONG_0 = RulpFactory.createLong(0);
+
+	IRLong O_LONG_1 = RulpFactory.createLong(1);
 
 	IRAtom O_LT = RulpFactory.createAtom(F_O_LT);
 
@@ -538,22 +556,6 @@ public interface Constant {
 	IRAtom O_SUB = RulpFactory.createAtom(F_O_SUB);
 
 	IRBoolean O_True = RulpFactory.createBoolean(true);
-
-	IRInteger O_INT_0 = RulpFactory.createInteger(0);
-
-	IRLong O_LONG_0 = RulpFactory.createLong(0);
-
-	IRFloat O_FLOAT_0 = RulpFactory.createFloat(0);
-
-	IRDouble O_DOUBLE_0 = RulpFactory.createDouble(0);
-
-	IRInteger O_INT_1 = RulpFactory.createInteger(1);
-
-	IRLong O_LONG_1 = RulpFactory.createLong(1);
-
-	IRFloat O_FLOAT_1 = RulpFactory.createFloat(1);
-
-	IRDouble O_DOUBLE_1 = RulpFactory.createDouble(1);
 
 	IRAtom O_XOR = RulpFactory.createAtom(F_O_XOR);
 
