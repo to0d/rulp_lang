@@ -285,12 +285,20 @@ public final class RulpFactory {
 	private static AtomicInteger unusedNameCount = new AtomicInteger(0);
 
 	static {
+
 		try {
 			EMPTY_EXPR = new XRListConst(null, RType.EXPR, null, false);
 			EMPTY_CONST_LIST = new XRListConst(null, RType.LIST, null, false);
 		} catch (RException e) {
 			e.printStackTrace();
 		}
+
+		LoadUtil.registerSystemLoader(A_MAP, XRMap.getLoader());
+		LoadUtil.registerSystemLoader(A_QUEUE, XRQueue.getLoader());
+		LoadUtil.registerSystemLoader(A_SET, XRSet.getLoader());
+		LoadUtil.registerSystemLoader(A_STACK, null);
+		LoadUtil.registerSystemLoader(A_STRING, null);
+		LoadUtil.registerSystemLoader(A_TOOL, null);
 	}
 
 	public static IRAtom createAtom(RName rname) {

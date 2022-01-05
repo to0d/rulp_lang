@@ -122,6 +122,8 @@ public interface Constant {
 	String A_ROOT = "root";
 
 	String A_SET = "set";
+	
+	String A_STACK = "stack";
 
 	String A_SOCKET = "socket";
 
@@ -130,6 +132,8 @@ public interface Constant {
 //	String A_STABLE = "stable";
 
 	String A_STRING = "string";
+	
+	String A_TOOL = "tool";
 
 	String A_SYSTEM = "system";
 

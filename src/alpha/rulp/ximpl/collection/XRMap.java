@@ -3,6 +3,7 @@ package alpha.rulp.ximpl.collection;
 import static alpha.rulp.lang.Constant.A_MAP;
 import static alpha.rulp.lang.Constant.O_Nil;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,12 +22,143 @@ import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RAccessType;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.runtime.IRObjectLoader;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.rclass.XRDefInstance;
 
 public class XRMap extends XRDefInstance implements IRCollection {
+
+	static class MapLoader implements IRObjectLoader {
+
+		@Override
+		public void load(IRInterpreter interpreter, IRFrame frame) throws RException, IOException {
+
+			IRClass mapClass = RulpUtil.asClass(frame.getEntry(A_MAP).getValue());
+
+			RulpUtil.setMember(mapClass, F_MBR_MAP_INIT, new AbsAtomFactorAdapter(F_MBR_MAP_INIT) {
+
+				@Override
+				public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+					if (args.size() != 1) {
+						throw new RException("Invalid parameters: " + args);
+					}
+
+					return RulpFactory.createInstanceOfMap(interpreter);
+				}
+
+				@Override
+				public boolean isThreadSafe() {
+					return true;
+				}
+			}, RAccessType.PRIVATE);
+
+			RulpUtil.setMember(mapClass, F_MBR_MAP_PUT, new AbsAtomFactorAdapter(F_MBR_MAP_PUT) {
+
+				@Override
+				public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+					if (args.size() != 4) {
+						throw new RException("Invalid parameters: " + args);
+					}
+
+					XRMap map = RulpUtil.asMap(interpreter.compute(frame, args.get(1)));
+					IRObject key = interpreter.compute(frame, args.get(2));
+					IRObject value = interpreter.compute(frame, args.get(3));
+					map.put(key, value);
+					return O_Nil;
+				}
+
+				@Override
+				public boolean isThreadSafe() {
+					return true;
+				}
+			}, RAccessType.PRIVATE);
+
+			RulpUtil.setMember(mapClass, F_MBR_MAP_GET, new AbsAtomFactorAdapter(F_MBR_MAP_GET) {
+
+				@Override
+				public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+					if (args.size() != 3) {
+						throw new RException("Invalid parameters: " + args);
+					}
+
+					XRMap map = RulpUtil.asMap(interpreter.compute(frame, args.get(1)));
+					IRObject key = interpreter.compute(frame, args.get(2));
+					IRObject value = map.get(key);
+					return value == null ? O_Nil : value;
+				}
+
+				@Override
+				public boolean isThreadSafe() {
+					return true;
+				}
+			}, RAccessType.PRIVATE);
+
+			RulpUtil.setMember(mapClass, F_MBR_MAP_SIZE_OF, new AbsAtomFactorAdapter(F_MBR_MAP_SIZE_OF) {
+
+				@Override
+				public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+					if (args.size() != 2) {
+						throw new RException("Invalid parameters: " + args);
+					}
+
+					return RulpFactory.createInteger(RulpUtil.asMap(interpreter.compute(frame, args.get(1))).size());
+				}
+
+				@Override
+				public boolean isThreadSafe() {
+					return true;
+				}
+
+			}, RAccessType.PRIVATE);
+
+			RulpUtil.setMember(mapClass, F_MBR_MAP_IS_EMPTY, new AbsAtomFactorAdapter(F_MBR_MAP_IS_EMPTY) {
+
+				@Override
+				public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+					if (args.size() != 2) {
+						throw new RException("Invalid parameters: " + args);
+					}
+
+					return RulpFactory.createBoolean(RulpUtil.asMap(interpreter.compute(frame, args.get(1))).isEmpty());
+				}
+
+				@Override
+				public boolean isThreadSafe() {
+					return true;
+				}
+
+			}, RAccessType.PRIVATE);
+
+			RulpUtil.setMember(mapClass, F_MBR_MAP_CLEAR, new AbsAtomFactorAdapter(F_MBR_MAP_CLEAR) {
+
+				@Override
+				public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+					if (args.size() != 2) {
+						throw new RException("Invalid parameters: " + args);
+					}
+
+					RulpUtil.asMap(interpreter.compute(frame, args.get(1))).clear();
+
+					return O_Nil;
+				}
+
+				@Override
+				public boolean isThreadSafe() {
+					return true;
+				}
+
+			}, RAccessType.PRIVATE);
+		}
+
+	}
 
 	static class RMapEntry implements Entry<IRObject, IRObject> {
 
@@ -155,143 +287,22 @@ public class XRMap extends XRDefInstance implements IRCollection {
 
 	static final String A_MBR_MAP_IMPL = "?impl";
 
+	static final String F_MBR_MAP_CLEAR = "_map_clear";
+
 	static final String F_MBR_MAP_GET = "_map_get";
 
 	static final String F_MBR_MAP_INIT = "_map_init";
+
+	static final String F_MBR_MAP_IS_EMPTY = "_map_is_empty";
 
 	static final String F_MBR_MAP_PUT = "_map_put";
 
 	static final String F_MBR_MAP_SIZE_OF = "_map_size_of";
 
-	static final String F_MBR_MAP_IS_EMPTY = "_map_is_empty";
-
-	static final String F_MBR_MAP_CLEAR = "_map_clear";
-
 	public static boolean TRACE = false;
 
-	public static void init(IRInterpreter interpreter, IRFrame systemFrame) throws RException {
-
-		IRClass mapClass = RulpUtil.asClass(systemFrame.getEntry(A_MAP).getValue());
-
-		RulpUtil.setMember(mapClass, F_MBR_MAP_INIT, new AbsAtomFactorAdapter(F_MBR_MAP_INIT) {
-
-			@Override
-			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
-
-				if (args.size() != 1) {
-					throw new RException("Invalid parameters: " + args);
-				}
-
-				return RulpFactory.createInstanceOfMap(interpreter);
-			}
-
-			@Override
-			public boolean isThreadSafe() {
-				return true;
-			}
-		}, RAccessType.PRIVATE);
-
-		RulpUtil.setMember(mapClass, F_MBR_MAP_PUT, new AbsAtomFactorAdapter(F_MBR_MAP_PUT) {
-
-			@Override
-			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
-
-				if (args.size() != 4) {
-					throw new RException("Invalid parameters: " + args);
-				}
-
-				XRMap map = RulpUtil.asMap(interpreter.compute(frame, args.get(1)));
-				IRObject key = interpreter.compute(frame, args.get(2));
-				IRObject value = interpreter.compute(frame, args.get(3));
-				map.put(key, value);
-				return O_Nil;
-			}
-
-			@Override
-			public boolean isThreadSafe() {
-				return true;
-			}
-		}, RAccessType.PRIVATE);
-
-		RulpUtil.setMember(mapClass, F_MBR_MAP_GET, new AbsAtomFactorAdapter(F_MBR_MAP_GET) {
-
-			@Override
-			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
-
-				if (args.size() != 3) {
-					throw new RException("Invalid parameters: " + args);
-				}
-
-				XRMap map = RulpUtil.asMap(interpreter.compute(frame, args.get(1)));
-				IRObject key = interpreter.compute(frame, args.get(2));
-				IRObject value = map.get(key);
-				return value == null ? O_Nil : value;
-			}
-
-			@Override
-			public boolean isThreadSafe() {
-				return true;
-			}
-		}, RAccessType.PRIVATE);
-
-		RulpUtil.setMember(mapClass, F_MBR_MAP_SIZE_OF, new AbsAtomFactorAdapter(F_MBR_MAP_SIZE_OF) {
-
-			@Override
-			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
-
-				if (args.size() != 2) {
-					throw new RException("Invalid parameters: " + args);
-				}
-
-				return RulpFactory.createInteger(RulpUtil.asMap(interpreter.compute(frame, args.get(1))).size());
-			}
-
-			@Override
-			public boolean isThreadSafe() {
-				return true;
-			}
-
-		}, RAccessType.PRIVATE);
-
-		RulpUtil.setMember(mapClass, F_MBR_MAP_IS_EMPTY, new AbsAtomFactorAdapter(F_MBR_MAP_IS_EMPTY) {
-
-			@Override
-			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
-
-				if (args.size() != 2) {
-					throw new RException("Invalid parameters: " + args);
-				}
-
-				return RulpFactory.createBoolean(RulpUtil.asMap(interpreter.compute(frame, args.get(1))).isEmpty());
-			}
-
-			@Override
-			public boolean isThreadSafe() {
-				return true;
-			}
-
-		}, RAccessType.PRIVATE);
-
-		RulpUtil.setMember(mapClass, F_MBR_MAP_CLEAR, new AbsAtomFactorAdapter(F_MBR_MAP_CLEAR) {
-
-			@Override
-			public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
-
-				if (args.size() != 2) {
-					throw new RException("Invalid parameters: " + args);
-				}
-
-				RulpUtil.asMap(interpreter.compute(frame, args.get(1))).clear();
-
-				return O_Nil;
-			}
-
-			@Override
-			public boolean isThreadSafe() {
-				return true;
-			}
-
-		}, RAccessType.PRIVATE);
+	public static IRObjectLoader getLoader() {
+		return new MapLoader();
 	}
 
 	public static IRMap toImplMap(IRInstance instance) throws RException {
@@ -324,6 +335,11 @@ public class XRMap extends XRDefInstance implements IRCollection {
 		super(noClass, null, null);
 	}
 
+	@Override
+	public void clear() {
+		uniqMap.clear();
+	}
+
 	public boolean containsKey(IRObject key) throws RException {
 		return uniqMap.containsKey(RulpUtil.toUniqString(key));
 	}
@@ -334,6 +350,11 @@ public class XRMap extends XRDefInstance implements IRCollection {
 		return entry == null ? null : entry.value;
 	}
 
+	@Override
+	public boolean isEmpty() {
+		return uniqMap.isEmpty();
+	}
+
 	public void put(IRObject key, IRObject value) throws RException {
 		String uniName = RulpUtil.toUniqString(key);
 		uniqMap.put(uniName, new RMapEntry(key, value));
@@ -341,16 +362,6 @@ public class XRMap extends XRDefInstance implements IRCollection {
 
 	public int size() {
 		return uniqMap.size();
-	}
-
-	@Override
-	public void clear() {
-		uniqMap.clear();
-	}
-
-	@Override
-	public boolean isEmpty() {
-		return uniqMap.isEmpty();
 	}
 
 }
