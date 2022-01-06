@@ -63,6 +63,7 @@ import alpha.rulp.ximpl.array.XRArrayVary;
 import alpha.rulp.ximpl.array.XRFactorMakeArray;
 import alpha.rulp.ximpl.array.XRFactorSeta;
 import alpha.rulp.ximpl.attribute.XRFactorIsStable;
+import alpha.rulp.ximpl.attribute.XRFactorIsThreadSafe;
 import alpha.rulp.ximpl.blob.XRBlob;
 import alpha.rulp.ximpl.blob.XRFactorBlobLength;
 import alpha.rulp.ximpl.blob.XRFactorMakeBlob;
@@ -690,6 +691,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorOptStatus(F_OPT_STATUS));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorListFunctionInReturn(F_LIST_FUNC_IN_RETURN));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorIsStable(F_IS_STABLE));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorIsThreadSafe(F_IS_THREAD_SAFE));
 		RulpUtil.addFrameObject(rootFrame, new XFactorReduct(F_Reduct));
 
 		// Lambda

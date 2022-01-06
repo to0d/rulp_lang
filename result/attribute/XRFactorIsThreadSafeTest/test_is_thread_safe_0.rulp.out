@@ -7,22 +7,22 @@
 (load tool)
 ;=>nil nil nil nil nil nil nil
 
-(defun ls-is-stable-fun (?subject) 
+(defun ls-is-thread-safe-objects (?subject) 
     (if (equal ?subject local)
     
-        (ls-is-stable-fun (value-of (:: (value-of local::parent) parent)))
+        (ls-is-thread-safe-objects (value-of (:: (value-of local::parent) parent)))
         
         (loop for ?mbr in (ls ?subject) do 
             (print "obj=" (name-of $(value-of ?mbr)))
             (print ", type=" (type-of $(value-of (value-of ?mbr))))
-            (print ", stable=" (is-stable  $(value-of (value-of ?mbr))))
+            (print ", stable=" (is-thread-safe  $(value-of (value-of ?mbr))))
             (print "\n")
         )
     )
 )
-;=>ls-is-stable-fun
+;=>ls-is-thread-safe-objects
 
-(ls-is-stable-fun root)
+(ls-is-thread-safe-objects root)
 ;=>nil
 ;out:
 obj=!=, type=factor, stable=true
@@ -46,8 +46,8 @@ obj=?user.dir, type=var, stable=false
 obj=?user.home, type=var, stable=false
 obj=?user.name, type=var, stable=false
 obj=^, type=factor, stable=true
-obj=access, type=factor, stable=true
-obj=add-array-to-list, type=factor, stable=true
+obj=access, type=factor, stable=false
+obj=add-array-to-list, type=factor, stable=false
 obj=add-attribute, type=factor, stable=true
 obj=add-list-to-array, type=factor, stable=true
 obj=add-list-to-list, type=factor, stable=true
@@ -60,7 +60,7 @@ obj=attribute-of, type=factor, stable=true
 obj=blob, type=atom, stable=true
 obj=blob-length, type=factor, stable=true
 obj=bool, type=atom, stable=true
-obj=break, type=factor, stable=false
+obj=break, type=factor, stable=true
 obj=can-cast, type=factor, stable=true
 obj=case, type=factor, stable=true
 obj=class, type=atom, stable=true
@@ -68,32 +68,32 @@ obj=class-of, type=factor, stable=true
 obj=cmp_def, type=factor, stable=true
 obj=compute, type=factor, stable=true
 obj=constant, type=atom, stable=true
-obj=continue, type=factor, stable=false
-obj=date, type=factor, stable=false
+obj=continue, type=factor, stable=true
+obj=date, type=factor, stable=true
 obj=default, type=atom, stable=true
 obj=defclass, type=factor, stable=true
 obj=defconst, type=factor, stable=true
-obj=defmacro, type=factor, stable=false
+obj=defmacro, type=factor, stable=true
 obj=deftemplate, type=factor, stable=true
 obj=defun, type=factor, stable=true
 obj=defvar, type=factor, stable=true
-obj=delete, type=factor, stable=false
+obj=delete, type=factor, stable=true
 obj=do, type=factor, stable=true
-obj=do-p, type=factor, stable=false
+obj=do-p, type=factor, stable=true
 obj=do-when-obj-deleted, type=factor, stable=true
 obj=do-when-var-changed, type=factor, stable=true
 obj=double, type=atom, stable=true
 obj=equal_def, type=factor, stable=true
-obj=error, type=factor, stable=false
-obj=error-value, type=factor, stable=false
+obj=error, type=factor, stable=true
+obj=error-value, type=factor, stable=true
 obj=expr, type=atom, stable=true
 obj=factor, type=atom, stable=true
-obj=false, type=bool, stable=true
+obj=false, type=bool, stable=false
 obj=final, type=atom, stable=true
 obj=float, type=atom, stable=true
 obj=foreach, type=factor, stable=true
 obj=frame, type=atom, stable=true
-obj=frame-of, type=factor, stable=false
+obj=frame-of, type=factor, stable=true
 obj=from, type=atom, stable=true
 obj=func, type=atom, stable=true
 obj=get-of-array, type=factor, stable=true
@@ -103,13 +103,13 @@ obj=if, type=factor, stable=true
 obj=instance, type=atom, stable=true
 obj=int, type=atom, stable=true
 obj=is-const, type=factor, stable=true
-obj=is-stable, type=factor, stable=false
-obj=is-thread-safe, type=factor, stable=false
+obj=is-stable, type=factor, stable=true
+obj=is-thread-safe, type=factor, stable=true
 obj=join, type=factor, stable=true
 obj=lambda, type=factor, stable=true
 obj=let, type=factor, stable=true
 obj=list, type=atom, stable=true
-obj=list-function-in-return, type=factor, stable=false
+obj=list-function-in-return, type=factor, stable=true
 obj=load, type=factor, stable=false
 obj=long, type=atom, stable=true
 obj=loop, type=factor, stable=true
@@ -125,25 +125,25 @@ obj=namespace, type=class, stable=false
 obj=nan, type=atom, stable=true
 obj=native, type=atom, stable=true
 obj=new, type=factor, stable=true
-obj=nil, type=null, stable=true
+obj=nil, type=null, stable=false
 obj=noclass, type=class, stable=false
 obj=not, type=factor, stable=true
 obj=null, type=atom, stable=true
-obj=open-txt-file, type=factor, stable=false
-obj=opt-status, type=factor, stable=false
+obj=open-txt-file, type=factor, stable=true
+obj=opt-status, type=factor, stable=true
 obj=or, type=factor, stable=true
-obj=out-to-file, type=factor, stable=false
-obj=parent-of, type=factor, stable=false
+obj=out-to-file, type=factor, stable=true
+obj=parent-of, type=factor, stable=true
 obj=power, type=factor, stable=true
-obj=print, type=factor, stable=false
+obj=print, type=factor, stable=true
 obj=print-frame-tree, type=factor, stable=false
 obj=print-global-info, type=factor, stable=false
-obj=print-impl, type=factor, stable=false
+obj=print-impl, type=factor, stable=true
 obj=print-subject, type=factor, stable=false
 obj=private, type=atom, stable=true
-obj=property-of, type=factor, stable=true
+obj=property-of, type=factor, stable=false
 obj=public, type=atom, stable=true
-obj=random, type=factor, stable=false
+obj=random, type=factor, stable=true
 obj=reduct, type=factor, stable=false
 obj=ref, type=factor, stable=true
 obj=remove, type=factor, stable=true
@@ -151,15 +151,15 @@ obj=return, type=factor, stable=true
 obj=reverse, type=factor, stable=true
 obj=root, type=frame, stable=false
 obj=rulp-object-count, type=factor, stable=false
-obj=runtime-call-count, type=factor, stable=false
-obj=save-txt-file, type=factor, stable=false
-obj=search-frame-of, type=factor, stable=false
+obj=runtime-call-count, type=factor, stable=true
+obj=save-txt-file, type=factor, stable=true
+obj=search-frame-of, type=factor, stable=true
 obj=seta, type=factor, stable=true
 obj=setq, type=factor, stable=true
 obj=size-of-array, type=factor, stable=true
 obj=size-of-list, type=factor, stable=true
-obj=sleep, type=factor, stable=false
-obj=sort, type=factor, stable=true
+obj=sleep, type=factor, stable=true
+obj=sort, type=factor, stable=false
 obj=static, type=atom, stable=true
 obj=str-char-at, type=factor, stable=true
 obj=str-end-with, type=factor, stable=true
@@ -182,10 +182,10 @@ obj=str-upper, type=factor, stable=true
 obj=strcat, type=factor, stable=true
 obj=string, type=atom, stable=true
 obj=subject-of, type=factor, stable=true
-obj=sys-free-memory, type=factor, stable=false
-obj=sys-gc, type=factor, stable=false
-obj=sys-time, type=factor, stable=false
-obj=sys-total-memory, type=factor, stable=false
+obj=sys-free-memory, type=factor, stable=true
+obj=sys-gc, type=factor, stable=true
+obj=sys-time, type=factor, stable=true
+obj=sys-total-memory, type=factor, stable=true
 obj=to-atom, type=factor, stable=true
 obj=to-blob, type=factor, stable=true
 obj=to-expr, type=factor, stable=true
@@ -193,8 +193,8 @@ obj=to-int, type=factor, stable=true
 obj=to-named-list, type=factor, stable=true
 obj=to-nonamed-list, type=factor, stable=true
 obj=to-string, type=factor, stable=true
-obj=true, type=bool, stable=true
-obj=try, type=factor, stable=false
+obj=true, type=bool, stable=false
+obj=try, type=factor, stable=true
 obj=type#namespace, type=atom, stable=true
 obj=type#noclass, type=atom, stable=true
 obj=type-of, type=factor, stable=true
@@ -210,32 +210,32 @@ obj=~, type=factor, stable=true
 
 ;eof
 
-(ls-is-stable-fun system)
+(ls-is-thread-safe-objects system)
 ;=>nil
 ;out:
-obj=++, type=macro, stable=false
-obj=--, type=macro, stable=false
+obj=++, type=macro, stable=true
+obj=--, type=macro, stable=true
 obj=?load-paths, type=var, stable=false
 obj=?trace, type=var, stable=false
-obj=add, type=func, stable=true
+obj=add, type=func, stable=false
 obj=add-all, type=func, stable=true
 obj=cmp, type=func, stable=true
-obj=equal, type=func, stable=true
-obj=get, type=func, stable=true
-obj=is-empty, type=func, stable=true
-obj=length-of, type=func, stable=true
-obj=print-list, type=macro, stable=false
+obj=equal, type=func, stable=false
+obj=get, type=func, stable=false
+obj=is-empty, type=func, stable=false
+obj=length-of, type=func, stable=false
+obj=print-list, type=macro, stable=true
 obj=println, type=func, stable=false
 obj=root, type=frame, stable=false
-obj=size-of, type=func, stable=true
+obj=size-of, type=func, stable=false
 obj=system, type=frame, stable=false
-obj=to-array, type=func, stable=false
-obj=to-list, type=func, stable=true
+obj=to-array, type=func, stable=true
+obj=to-list, type=func, stable=false
 obj=use, type=template, stable=false
 
 ;eof
 
-(ls-is-stable-fun main)
+(ls-is-thread-safe-objects main)
 ;=>nil
 ;out:
 obj=?script-path, type=var, stable=false
@@ -246,7 +246,7 @@ obj=file-subffix, type=func, stable=true
 obj=get, type=func, stable=false
 obj=is-blank, type=func, stable=true
 obj=is-empty, type=func, stable=false
-obj=ls-is-stable-fun, type=func, stable=false
+obj=ls-is-thread-safe-objects, type=func, stable=true
 obj=ls-print, type=func, stable=false
 obj=main, type=frame, stable=false
 obj=map, type=class, stable=false
@@ -254,7 +254,7 @@ obj=max, type=func, stable=true
 obj=min, type=func, stable=true
 obj=queue, type=class, stable=false
 obj=root, type=frame, stable=false
-obj=script_out, type=macro, stable=false
+obj=script_out, type=macro, stable=true
 obj=set, type=class, stable=false
 obj=size-of, type=func, stable=false
 obj=stack, type=class, stable=false

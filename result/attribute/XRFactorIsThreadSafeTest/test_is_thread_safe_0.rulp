@@ -1,0 +1,32 @@
+(load math)
+(load map)
+(load queue)
+(load set)
+(load stack)
+(load string)
+(load tool)
+;=>
+
+(defun ls-is-thread-safe-objects (?subject) 
+    (if (equal ?subject local)
+    
+        (ls-is-thread-safe-objects (value-of (:: (value-of local::parent) parent)))
+        
+        (loop for ?mbr in (ls ?subject) do 
+            (print "obj=" (name-of $(value-of ?mbr)))
+            (print ", type=" (type-of $(value-of (value-of ?mbr))))
+            (print ", stable=" (is-thread-safe  $(value-of (value-of ?mbr))))
+            (print "\n")
+        )
+    )
+)
+;;;
+
+(ls-is-thread-safe-objects root)
+;;;
+
+(ls-is-thread-safe-objects system)
+;;;
+
+(ls-is-thread-safe-objects main)
+;;;

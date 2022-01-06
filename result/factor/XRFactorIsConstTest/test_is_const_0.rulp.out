@@ -95,6 +95,7 @@ obj=instance, type=atom, const=true
 obj=int, type=atom, const=true
 obj=is-const, type=factor, const=true
 obj=is-stable, type=factor, const=true
+obj=is-thread-safe, type=factor, const=true
 obj=join, type=factor, const=true
 obj=lambda, type=factor, const=true
 obj=let, type=factor, const=true

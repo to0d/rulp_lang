@@ -89,6 +89,7 @@ mbr=instance, mbr-property='(public), mbr-attribute='(), obj=instance, obj-type=
 mbr=int, mbr-property='(public), mbr-attribute='(), obj=int, obj-type=atom, obj-attribute='()
 mbr=is-const, mbr-property='(public), mbr-attribute='(), obj=is-const, obj-type=factor, obj-attribute='(stable)
 mbr=is-stable, mbr-property='(public), mbr-attribute='(), obj=is-stable, obj-type=factor, obj-attribute='()
+mbr=is-thread-safe, mbr-property='(public), mbr-attribute='(), obj=is-thread-safe, obj-type=factor, obj-attribute='()
 mbr=join, mbr-property='(public), mbr-attribute='(), obj=join, obj-type=factor, obj-attribute='(stable)
 mbr=lambda, mbr-property='(public), mbr-attribute='(), obj=lambda, obj-type=factor, obj-attribute='(stable)
 mbr=let, mbr-property='(public), mbr-attribute='(), obj=let, obj-type=factor, obj-attribute='(stable)

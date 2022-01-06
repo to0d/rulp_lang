@@ -259,6 +259,8 @@ public interface Constant {
 
 	String F_IS_STABLE = "is-stable";
 
+	String F_IS_THREAD_SAFE = "is-thread-safe";
+
 	String F_JOIN = "join";
 
 	String F_LAMBDA = "lambda";

@@ -113,6 +113,7 @@ root::instance
 root::int
 root::is-const
 root::is-stable
+root::is-thread-safe
 root::join
 root::lambda
 root::let
