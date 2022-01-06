@@ -59,11 +59,6 @@ public class XRFactorToNamedList extends AbsAtomFactorAdapter implements IRFacto
 		return RulpFactory.createNamedList(list.iterator(), name);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

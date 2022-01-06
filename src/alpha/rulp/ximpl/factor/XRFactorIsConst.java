@@ -35,11 +35,6 @@ public class XRFactorIsConst extends AbsAtomFactorAdapter implements IRFactor {
 		return args.get(1).isConst() ? O_True : O_False;
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

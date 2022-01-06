@@ -38,11 +38,6 @@ public class XRFactorStrEndWith extends AbsAtomFactorAdapter implements IRFactor
 		return RulpFactory.createBoolean(str.endsWith(prefix));
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

@@ -39,11 +39,6 @@ public class XRFactorStrEqualNoCase extends AbsAtomFactorAdapter implements IRFa
 		return a.equalsIgnoreCase(b) ? O_True : O_False;
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

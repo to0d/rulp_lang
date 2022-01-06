@@ -38,11 +38,6 @@ public class XRFactorStrStartsWith extends AbsAtomFactorAdapter implements IRFac
 		return RulpFactory.createBoolean(str.startsWith(prefix));
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

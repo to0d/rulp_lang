@@ -1449,6 +1449,10 @@ public class RulpUtil {
 		incRef(obj);
 	}
 
+	public static void setAttribute(IRObject obj, String key, IRObject value) throws RException {
+		((AbsObject) obj).setAttribute(key, value);
+	}
+
 	public static void setLocalVar(IRFrame frame, String varName, IRObject value) throws RException {
 
 		IRObject varObj = frame.findLocalObject(varName);
@@ -1937,10 +1941,6 @@ public class RulpUtil {
 		}
 
 		return attr;
-	}
-
-	public void setAttribute(IRObject obj, String key, IRObject value) throws RException {
-		((AbsObject) obj).setAttribute(key, value);
 	}
 
 }

@@ -23,8 +23,4 @@ public class XRFactorPrintGlobalInfo extends AbsAtomFactorAdapter implements IRF
 		return O_Nil;
 	}
 
-	@Override
-	public boolean isStable() {
-		return false;
-	}
 }

@@ -52,11 +52,6 @@ public class XRFactorAttributeOf extends AbsAtomFactorAdapter implements IRFacto
 		return RulpFactory.createList(attrList);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

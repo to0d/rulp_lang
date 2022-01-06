@@ -17,7 +17,13 @@
 ;=>nil
 ;out:
 (defun fun (?v)
-    (do (if (<= ?v 0) (return 0)) (return (+[atom] 1 (fun (- ?v 1)))))
+    (do[stable]
+        (if
+            (<= ?v 0)
+            (return 0)
+        )
+        (return[stable] (+[atom stable] 1 (fun (- ?v 1))))
+    )
 )[opt-ero]
 
 ;eof

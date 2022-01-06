@@ -65,11 +65,6 @@ public class XRFactorToInteger extends AbsAtomFactorAdapter implements IRFactor 
 		return RulpFactory.createInteger(val);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

@@ -1,6 +1,7 @@
 package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.A_STABLE;
 import static alpha.rulp.lang.Constant.F_E_TRY;
 import static alpha.rulp.lang.Constant.F_FOREACH;
 import static alpha.rulp.lang.Constant.F_LET;
@@ -21,13 +22,14 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRParaAttr;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
-import alpha.rulp.runtime.IRCallable;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.error.RInterrupt;
 import alpha.rulp.ximpl.function.XRFunction;
+import alpha.rulp.ximpl.function.XRFunctionLambda;
 import alpha.rulp.ximpl.function.XRFunctionList;
 
 public class StableUtil {
@@ -140,9 +142,7 @@ public class StableUtil {
 			return true;
 
 		case FACTOR:
-		case TEMPLATE:
-		case MACRO:
-			return ((IRCallable) obj).isStable();
+			return RulpUtil.containAttribute(obj, A_STABLE);
 
 		case ATOM: {
 
@@ -162,6 +162,8 @@ public class StableUtil {
 			return isStable(entryValue, nameSet, frame);
 		}
 
+		case MACRO:
+		case TEMPLATE:
 		case MEMBER:
 		case FRAME:
 		case CLASS:
@@ -222,9 +224,7 @@ public class StableUtil {
 			return true;
 
 		case FACTOR:
-		case TEMPLATE:
-		case MACRO:
-			return ((IRCallable) obj).isStable();
+			return RulpUtil.containAttribute(obj, A_STABLE);
 
 		case VAR:
 			return nameSet.lookupType(RulpUtil.asVar(obj).getName()) != null;
@@ -293,12 +293,32 @@ public class StableUtil {
 
 		case FUNC:
 
-			if (RulpUtil.isFunctionList(obj)) {
-				return _isStableFuncList((XRFunctionList) obj, nameSet.newBranch(), frame);
-			} else {
-				return _isStableFunc((XRFunction) obj, nameSet.newBranch(), frame);
+			IRObject attrValue = RulpUtil.getAttributeValue(obj, A_STABLE);
+			if (attrValue != null) {
+				return RulpUtil.asBoolean(attrValue).asBoolean();
 			}
 
+			boolean rc = false;
+
+			if (RulpUtil.isFunctionList(obj)) {
+				rc = _isStableFuncList((XRFunctionList) obj, nameSet.newBranch(), frame);
+
+			} else if (((IRFunction) obj).isLambda()) {
+
+				XRFunctionLambda lambda = (XRFunctionLambda) obj;
+				rc = StableUtil.isStable(lambda.getFunBody(), lambda.getDefineFrame());
+
+			} else {
+				rc = _isStableFunc((XRFunction) obj, nameSet.newBranch(), frame);
+			}
+
+			// Updating function's stable value
+			RulpUtil.setAttribute(obj, A_STABLE, RulpFactory.createBoolean(rc));
+
+			return rc;
+
+		case TEMPLATE:
+		case MACRO:
 		case MEMBER:
 		case FRAME:
 		case CLASS:
@@ -311,11 +331,6 @@ public class StableUtil {
 	}
 
 	private boolean _isStableFunc(XRFunction func, NameSet nameSet, IRFrame frame) throws RException {
-
-		Boolean bRc = func.getIsStable();
-		if (bRc != null) {
-			return bRc;
-		}
 
 		if (checkingStack == null) {
 			checkingStack = new ArrayList<>();
@@ -386,12 +401,9 @@ public class StableUtil {
 			// Updating dep function list
 			if (nameSet.hasDepFuncs(func)) {
 				for (XRFunction depFunc : nameSet.removeDepFun(func)) {
-					depFunc.setIsStable(stable);
+					RulpUtil.setAttribute(depFunc, A_STABLE, RulpFactory.createBoolean(stable));
 				}
 			}
-
-			// Updating function's table value
-			func.setIsStable(stable);
 
 			return stable;
 
@@ -412,21 +424,13 @@ public class StableUtil {
 
 	private boolean _isStableFuncList(XRFunctionList func, NameSet nameSet, IRFrame frame) throws RException {
 
-		Boolean bRc = func.getIsStable();
-		if (bRc != null) {
-			return bRc;
-		}
-
-		boolean rc = true;
 		for (IRFunction childFunc : func.getAllFuncList()) {
 			if (!_isStable(childFunc, nameSet, frame)) {
-				rc = false;
-				break;
+				return false;
 			}
 		}
 
-		func.setIsStable(rc);
-		return rc;
+		return true;
 	}
 
 	private boolean _isStableList(IRIterator<? extends IRObject> it, NameSet nameSet, IRFrame frame) throws RException {

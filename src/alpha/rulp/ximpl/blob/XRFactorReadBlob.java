@@ -42,11 +42,6 @@ public class XRFactorReadBlob extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpFactory.createBlob(blobLen);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

@@ -45,11 +45,6 @@ public class XRFactorReturnTypeOf extends AbsAtomFactorAdapter implements IRFact
 		return RType.toObject(type);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

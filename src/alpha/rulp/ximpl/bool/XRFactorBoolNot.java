@@ -35,11 +35,6 @@ public class XRFactorBoolNot extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpFactory.createBoolean(!RulpUtil.asBoolean(interpreter.compute(frame, args.get(1))).asBoolean());
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

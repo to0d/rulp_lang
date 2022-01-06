@@ -91,11 +91,6 @@ public class XRMacro extends AbsRefCallableAdapter implements IRMacro {
 		return true;
 	}
 
-	@Override
-	public boolean isStable() {
-		return false;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

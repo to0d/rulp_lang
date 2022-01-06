@@ -40,11 +40,6 @@ public class XRFactorToExpr extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpFactory.createExpression(RulpUtil.asList(obj).iterator());
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

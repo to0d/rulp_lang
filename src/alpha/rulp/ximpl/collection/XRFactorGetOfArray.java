@@ -46,11 +46,6 @@ public class XRFactorGetOfArray extends AbsAtomFactorAdapter implements IRFactor
 		return array.get(indexs);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

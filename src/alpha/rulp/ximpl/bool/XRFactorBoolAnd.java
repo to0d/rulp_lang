@@ -42,11 +42,6 @@ public class XRFactorBoolAnd extends AbsAtomFactorAdapter implements IRFactor {
 		return O_True;
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

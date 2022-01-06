@@ -43,11 +43,6 @@ public class XRFactorStrTrimHead extends AbsAtomFactorAdapter implements IRFacto
 		return RulpFactory.createString(StringUtil.trimHead(str, ' '));
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

@@ -78,11 +78,6 @@ public class XRFactorDefvar extends AbsAtomFactorAdapter implements IRFactor {
 		return returnVar ? var : val;
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

@@ -39,11 +39,6 @@ public class XRFactorToNoNamedList extends AbsAtomFactorAdapter implements IRFac
 		return list;
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

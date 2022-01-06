@@ -70,11 +70,6 @@ public class XRFactorCase extends AbsAtomFactorAdapter implements IRFactor {
 		return O_Nil;
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

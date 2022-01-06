@@ -8,6 +8,7 @@
 /* redistribute it under certain conditions.         */
 
 package alpha.rulp.ximpl.factor;
+
 import static alpha.rulp.lang.Constant.O_Nil;
 
 import alpha.rulp.lang.IRFrame;
@@ -56,11 +57,6 @@ public class XRFactorDoWhenVarChanged extends AbsAtomFactorAdapter implements IR
 		});
 
 		return O_Nil;
-	}
-
-	@Override
-	public boolean isStable() {
-		return true;
 	}
 
 	public boolean isThreadSafe() {

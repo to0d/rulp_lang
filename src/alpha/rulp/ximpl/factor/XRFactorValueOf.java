@@ -112,11 +112,6 @@ public class XRFactorValueOf extends AbsAtomFactorAdapter implements IRFactor {
 		return valueOf(obj, interpreter, frame);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

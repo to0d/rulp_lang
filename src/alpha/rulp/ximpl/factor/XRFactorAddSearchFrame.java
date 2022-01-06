@@ -36,9 +36,4 @@ public class XRFactorAddSearchFrame extends AbsAtomFactorAdapter implements IRFa
 		return searchFrame;
 	}
 
-	@Override
-	public boolean isStable() {
-		return false;
-	}
-
 }

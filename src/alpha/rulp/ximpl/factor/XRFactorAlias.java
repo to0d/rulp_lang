@@ -84,8 +84,4 @@ public class XRFactorAlias extends AbsAtomFactorAdapter implements IRFactor {
 		return true;
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
 }

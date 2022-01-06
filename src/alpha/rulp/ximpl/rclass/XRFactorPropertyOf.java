@@ -97,9 +97,4 @@ public class XRFactorPropertyOf extends AbsAtomFactorAdapter implements IRFactor
 		return getPropertyList(obj);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 }

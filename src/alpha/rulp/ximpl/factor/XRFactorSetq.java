@@ -79,11 +79,6 @@ public class XRFactorSetq extends AbsAtomFactorAdapter implements IRFactor {
 		return setVar(args.get(1), args.get(2), interpreter, frame);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

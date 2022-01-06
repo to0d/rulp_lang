@@ -78,8 +78,4 @@ public class XRFactorDefMacro extends AbsAtomFactorAdapter implements IRFactor {
 		return true;
 	}
 
-	@Override
-	public boolean isStable() {
-		return false;
-	}
 }

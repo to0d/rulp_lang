@@ -116,8 +116,4 @@ public class XRFactorPrintSubject extends AbsAtomFactorAdapter implements IRFact
 		}
 	}
 
-	@Override
-	public boolean isStable() {
-		return false;
-	}
 }

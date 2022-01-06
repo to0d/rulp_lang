@@ -42,11 +42,6 @@ public class XRFactorWriteBlob extends AbsAtomFactorAdapter implements IRFactor 
 		return RulpFactory.createInteger(len);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

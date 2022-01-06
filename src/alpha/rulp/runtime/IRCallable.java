@@ -23,7 +23,5 @@ public interface IRCallable extends IRObject {
 
 	public void incCallCount(int statsId, int callId);
 
-	public boolean isStable() throws RException;
-
 	public boolean isThreadSafe();
 }

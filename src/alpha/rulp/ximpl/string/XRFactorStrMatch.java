@@ -90,11 +90,6 @@ public class XRFactorStrMatch extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpFactory.createBoolean(rc);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

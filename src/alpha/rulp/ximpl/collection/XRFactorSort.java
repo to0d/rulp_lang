@@ -67,8 +67,4 @@ public class XRFactorSort extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpFactory.createList(allObjs);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
 }

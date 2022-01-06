@@ -35,11 +35,6 @@ public class XRFactorSizeOfList extends AbsAtomFactorAdapter implements IRFactor
 		return RulpFactory.createInteger(RulpUtil.asList(interpreter.compute(frame, args.get(1))).size());
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

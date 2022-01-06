@@ -45,11 +45,6 @@ public class XRFactorSeta extends AbsAtomFactorAdapter implements IRFactor {
 		return arr;
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

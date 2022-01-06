@@ -40,11 +40,6 @@ public class XRFactorStrCharAt extends AbsAtomFactorAdapter implements IRFactor 
 		return RulpFactory.createInteger(rst.asString().charAt(loc.asInteger()));
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

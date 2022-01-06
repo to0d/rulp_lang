@@ -28,8 +28,4 @@ public class XRFactorRulpObjectCount extends AbsAtomFactorAdapter implements IRF
 		return RulpFactory.createInteger(count);
 	}
 
-	@Override
-	public boolean isStable() {
-		return false;
-	}
 }

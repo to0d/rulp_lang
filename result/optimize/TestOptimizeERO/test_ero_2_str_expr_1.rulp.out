@@ -10,7 +10,7 @@
 ;=>nil
 ;out:
 (defun fun ()
-    (return false)
+    (return[stable] false)
 )[opt-ero]
 
 ;eof

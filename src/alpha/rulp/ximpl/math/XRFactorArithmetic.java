@@ -94,11 +94,6 @@ public class XRFactorArithmetic extends AbsAtomFactorAdapter implements IRFactor
 		return rst;
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

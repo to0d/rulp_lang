@@ -16,7 +16,7 @@
 ;=>20
 
 (attribute-of fun1)
-;=>'()
+;=>'('(stable true))
 
 (attribute-of fun2)
 ;=>'(opt-cco)
@@ -25,10 +25,10 @@
 ;=>nil
 ;out:
 (defun fun2 (?m)
-    (do
+    (do[stable]
         (defvar ?x 0)
-        (loop for ?i from 1 to ?m do
-            (setq ?x (+[atom] ?x (cc2[id=0] (fun1 ?i))))
+        (loop[stable] for ?i from 1 to ?m do
+            (setq[stable] ?x (+[atom stable] ?x (cc2[id=0] (fun1 ?i))))
         )
         (return ?x)
     )

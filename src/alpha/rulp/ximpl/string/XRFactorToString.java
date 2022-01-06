@@ -96,11 +96,6 @@ public class XRFactorToString extends AbsAtomFactorAdapter implements IRFactor {
 		return toString(interpreter.compute(frame, args.get(1)), interpreter);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

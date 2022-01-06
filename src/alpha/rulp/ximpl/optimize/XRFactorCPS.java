@@ -65,8 +65,4 @@ public class XRFactorCPS extends AbsAtomFactorAdapter implements IRRebuild, IRFa
 		return true;
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
 }

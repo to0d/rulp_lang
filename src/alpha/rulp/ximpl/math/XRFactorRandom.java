@@ -34,11 +34,6 @@ public class XRFactorRandom extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpFactory.createDouble(Math.random());
 	}
 
-	@Override
-	public boolean isStable() {
-		return false;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

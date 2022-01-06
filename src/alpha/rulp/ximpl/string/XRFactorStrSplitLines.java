@@ -54,11 +54,6 @@ public class XRFactorStrSplitLines extends AbsAtomFactorAdapter implements IRFac
 		return RulpFactory.createListOfString(lines);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

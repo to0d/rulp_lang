@@ -30,7 +30,6 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.error.RReturn;
-import alpha.rulp.ximpl.optimize.StableUtil;
 import alpha.rulp.ximpl.runtime.AbsFunctionAdapter;
 
 public class XRFunction extends AbsFunctionAdapter implements IRFunction {
@@ -194,16 +193,6 @@ public class XRFunction extends AbsFunctionAdapter implements IRFunction {
 	@Override
 	public boolean isList() {
 		return false;
-	}
-
-	@Override
-	public boolean isStable() throws RException {
-
-		if (isStable == null) {
-			isStable = StableUtil.isStable(this, defineFrame);
-		}
-
-		return isStable;
 	}
 
 	public boolean isThreadSafe() {

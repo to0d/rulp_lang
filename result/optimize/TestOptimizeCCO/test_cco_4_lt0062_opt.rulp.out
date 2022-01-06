@@ -20,21 +20,21 @@
 ;=>nil
 ;out:
 (defun uniquePaths (mn)
-    (do
+    (do[stable]
         (if
             (or (= m 0) (= n 0))
             (return 0)
         )
-        (if
+        (if[stable]
             (< m n)
-            (return (cc2[id=0] (uniquePaths n m)))
+            (return[stable] (cc2[id=0] (uniquePaths n m)))
         )
         (if
             (= n 1)
             (return 1)
         )
-        (return
-            (+[atom]
+        (return[stable]
+            (+[atom stable]
                 (cc2[id=0] (uniquePaths (- m 1) n))
                 (cc2[id=0] (uniquePaths m (- n 1)))
             )

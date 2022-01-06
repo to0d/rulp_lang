@@ -78,11 +78,6 @@ public class XRFactorRemove extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpFactory.createList(rstList);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

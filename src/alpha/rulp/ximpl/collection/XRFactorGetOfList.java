@@ -37,11 +37,6 @@ public class XRFactorGetOfList extends AbsAtomFactorAdapter implements IRFactor 
 		return list.get(idx);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

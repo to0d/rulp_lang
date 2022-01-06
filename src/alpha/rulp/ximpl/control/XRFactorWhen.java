@@ -51,11 +51,6 @@ public class XRFactorWhen extends AbsAtomFactorAdapter implements IRFactor {
 		return rstClause;
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

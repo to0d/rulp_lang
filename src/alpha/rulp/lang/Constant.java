@@ -122,19 +122,19 @@ public interface Constant {
 	String A_RETURN_VAR = "?rv";
 
 	String A_ROOT = "root";
-	
+
 	String A_SET = "set";
 
 	String A_SOCKET = "socket";
 
+	String A_STABLE = "stable";
+
 	String A_STACK = "stack";
 
-//	String A_STABLE = "stable";
-
 	String A_STATIC = "static";
-	
+
 	String A_STRING = "string";
-	
+
 	String A_SYSTEM = "system";
 
 	String A_TEMPLATE = "template";

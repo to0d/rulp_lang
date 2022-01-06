@@ -51,11 +51,6 @@ public class XRFactorReverse extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpFactory.createList(rvsList);
 	}
 
-	@Override
-	public boolean isStable() {
-		return true;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

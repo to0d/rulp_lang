@@ -42,11 +42,6 @@ public abstract class AbsAtomFactorAdapter extends AbsAtomCallableAdapter implem
 		return true;
 	}
 
-	@Override
-	public boolean isStable() {
-		return false;
-	}
-
 	public boolean isThreadSafe() {
 		return false;
 	}

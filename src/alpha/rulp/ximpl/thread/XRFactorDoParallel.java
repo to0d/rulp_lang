@@ -166,11 +166,6 @@ public class XRFactorDoParallel extends AbsAtomFactorAdapter implements IRFactor
 		return newText.getResult(0);
 	}
 
-	@Override
-	public boolean isStable() {
-		return false;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

@@ -144,11 +144,6 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 		return O_Nil;
 	}
 
-	@Override
-	public boolean isStable() {
-		return false;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

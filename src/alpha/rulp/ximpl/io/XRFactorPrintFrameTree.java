@@ -23,8 +23,4 @@ public class XRFactorPrintFrameTree extends AbsAtomFactorAdapter implements IRFa
 		return O_Nil;
 	}
 
-	@Override
-	public boolean isStable() {
-		return false;
-	}
 }

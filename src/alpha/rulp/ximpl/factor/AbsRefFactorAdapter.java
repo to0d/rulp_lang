@@ -33,11 +33,6 @@ public abstract class AbsRefFactorAdapter extends AbsRefCallableAdapter implemen
 		return true;
 	}
 
-	@Override
-	public boolean isStable() {
-		return false;
-	}
-
 	public boolean isThreadSafe() {
 		return false;
 	}

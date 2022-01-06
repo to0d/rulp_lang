@@ -9,6 +9,7 @@
 
 package alpha.rulp.ximpl.function;
 
+import static alpha.rulp.lang.Constant.A_STABLE;
 import static alpha.rulp.lang.Constant.O_Nil;
 
 import java.util.ArrayList;
@@ -233,7 +234,8 @@ public class XRFunctionList extends AbsFunctionAdapter implements IRFunctionList
 		RulpUtil.incRef(fun);
 
 		this.signature = null;
-		this.isStable = null;
+
+		RulpUtil.removeAttribute(this, A_STABLE);
 	}
 
 	@Override
@@ -334,22 +336,6 @@ public class XRFunctionList extends AbsFunctionAdapter implements IRFunctionList
 	@Override
 	public boolean isList() {
 		return true;
-	}
-
-	@Override
-	public boolean isStable() throws RException {
-
-		if (isStable == null) {
-			isStable = true;
-			for (IRFunction func : allFuncList) {
-				if (!func.isStable()) {
-					isStable = false;
-					break;
-				}
-			}
-		}
-
-		return isStable;
 	}
 
 	public boolean isThreadSafe() {

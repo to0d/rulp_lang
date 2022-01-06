@@ -188,7 +188,7 @@ public class TCOUtil {
 		case FACTOR:
 
 			// does't support unstable factor
-			if (!RulpUtil.asFactor(e0).isStable()) {
+			if (!StableUtil.isStable(e0, frame)) {
 				return;
 			}
 
@@ -501,6 +501,7 @@ public class TCOUtil {
 	public static int getExprCount() {
 		return exprCount.get();
 	}
+
 	public static int getMaxLevelCount() {
 		return maxLevelCount.get();
 	}

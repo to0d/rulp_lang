@@ -53,11 +53,6 @@ public class XRFactorIsTCORecursive extends AbsAtomFactorAdapter implements IRFa
 		return RulpFactory.createListOfString(nameList);
 	}
 
-	@Override
-	public boolean isStable() {
-		return false;
-	}
-
 	public boolean isThreadSafe() {
 		return true;
 	}

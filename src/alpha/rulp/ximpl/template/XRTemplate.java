@@ -245,11 +245,6 @@ public class XRTemplate extends AbsRefCallableAdapter implements IRTemplate {
 		return false;
 	}
 
-	@Override
-	public boolean isStable() {
-		return false;
-	}
-
 	public boolean isThreadSafe() {
 		return false;
 	}
