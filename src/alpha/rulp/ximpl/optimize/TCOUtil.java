@@ -31,6 +31,7 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
+import alpha.rulp.ximpl.attr.StableUtil;
 
 public class TCOUtil {
 

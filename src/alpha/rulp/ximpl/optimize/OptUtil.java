@@ -27,6 +27,7 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.attr.StableUtil;
 
 public class OptUtil {
 

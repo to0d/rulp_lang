@@ -18,6 +18,7 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.attr.StableUtil;
 
 // (Compute Cache Optimization)
 public class CCOUtil {

@@ -1,4 +1,4 @@
-package alpha.rulp.ximpl.optimize;
+package alpha.rulp.ximpl.attr;
 
 import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.A_STABLE;
@@ -31,6 +31,7 @@ import alpha.rulp.ximpl.error.RInterrupt;
 import alpha.rulp.ximpl.function.XRFunction;
 import alpha.rulp.ximpl.function.XRFunctionLambda;
 import alpha.rulp.ximpl.function.XRFunctionList;
+import alpha.rulp.ximpl.optimize.NameSet;
 
 public class StableUtil {
 
