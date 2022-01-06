@@ -276,7 +276,7 @@ public class SubjectUtil {
 		// Process attribute
 		/*****************************************************/
 		if (RulpUtil.hasAttributeList(mbrExpr)) {
-			for (String attr : RulpUtil.getAttributeList(mbrExpr)) {
+			for (String attr : RulpUtil.getAttributeKeyList(mbrExpr)) {
 				mbr = _processMemberAttribute(mbr, attr, true);
 			}
 		}
@@ -335,7 +335,7 @@ public class SubjectUtil {
 		// Process attribute
 		/*****************************************************/
 		if (RulpUtil.hasAttributeList(mbrExpr)) {
-			for (String attr : RulpUtil.getAttributeList(mbrExpr)) {
+			for (String attr : RulpUtil.getAttributeKeyList(mbrExpr)) {
 				mbr = _processMemberAttribute(mbr, attr, false);
 			}
 		}

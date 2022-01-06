@@ -116,7 +116,7 @@ public class XRFactorDefClass extends AbsAtomFactorAdapter implements IRFactor {
 		}
 
 		if (RulpUtil.hasAttributeList(args)) {
-			for (String attr : RulpUtil.getAttributeList(args)) {
+			for (String attr : RulpUtil.getAttributeKeyList(args)) {
 				switch (attr) {
 				case A_FINAL:
 					defClass.setFinal(true);

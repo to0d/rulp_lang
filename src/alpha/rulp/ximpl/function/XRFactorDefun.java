@@ -224,7 +224,7 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 			attrList = new ArrayList<>();
 
 			Set<String> uniqOptAttributeSet = new HashSet<>();
-			for (String attr : RulpUtil.getAttributeList(args)) {
+			for (String attr : RulpUtil.getAttributeKeyList(args)) {
 
 				switch (attr) {
 				case A_OPT_TCO:

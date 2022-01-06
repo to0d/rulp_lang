@@ -352,13 +352,15 @@ public class RulpUtil {
 
 	private static void _formatAttrList(StringBuffer sb, IRObject obj) throws RException {
 
-		List<String> attrList = RulpUtil.getAttributeList(obj);
-		if (attrList == null || attrList.isEmpty()) {
+		AbsObject absObj = (AbsObject) obj;
+
+		List<String> attrKeyList = absObj.getAttributeKeyList();
+		if (attrKeyList.isEmpty()) {
 			return;
 		}
 
 		sb.append("[");
-		Iterator<String> it = attrList.iterator();
+		Iterator<String> it = attrKeyList.iterator();
 		int i = 0;
 		while (it.hasNext()) {
 
@@ -366,8 +368,16 @@ public class RulpUtil {
 				sb.append(' ');
 			}
 
-			sb.append(it.next());
+			String key = it.next();
+
+			IRObject value = absObj.getAttributeValue(key);
+			if (value == O_Nil) {
+				sb.append(key);
+			} else {
+				sb.append(String.format("%s=%s", key, "" + value));
+			}
 		}
+
 		sb.append("]");
 	}
 
@@ -517,8 +527,8 @@ public class RulpUtil {
 		}
 	}
 
-	public static void addAttribute(IRObject obj, String attr) {
-		((AbsObject) obj).addAttribute(attr);
+	public static void addAttribute(IRObject obj, String key) throws RException {
+		((AbsObject) obj).addAttribute(key);
 	}
 
 	public static void addFactor(IRFrame frame, String factorName, IRFactorBody factorBody) throws RException {
@@ -985,7 +995,7 @@ public class RulpUtil {
 //			System.out.println();
 //		}
 
-//		if ("frame@_$fun$_fun_add".equals(obj.toString())) {
+//		if ("frame@_$fun$_fun1".equals(obj.toString())) {
 //			System.out.print("decRef: " + obj.getRef() + ", " + obj);
 //			System.out.println();
 //		}
@@ -1096,8 +1106,12 @@ public class RulpUtil {
 		return sb.toString();
 	}
 
-	public static List<String> getAttributeList(IRObject obj) {
-		return ((AbsObject) obj).getAttributeList();
+	public static List<String> getAttributeKeyList(IRObject obj) {
+		return ((AbsObject) obj).getAttributeKeyList();
+	}
+
+	public static IRObject getAttributeValue(IRObject obj, String key) throws RException {
+		return ((AbsObject) obj).getAttributeValue(key);
 	}
 
 	public static IRAtom getObjectType(IRObject valObj) throws RException {
@@ -1126,8 +1140,7 @@ public class RulpUtil {
 	}
 
 	public static boolean hasAttributeList(IRObject obj) {
-		List<String> al = ((AbsObject) obj).getAttributeList();
-		return al != null && !al.isEmpty();
+		return ((AbsObject) obj).getAttributeCount() > 0;
 	}
 
 	public static void incRef(IRObject obj) throws RException {
@@ -1143,7 +1156,7 @@ public class RulpUtil {
 //			System.out.println();
 //		}
 
-//		if ("frame@_$fun$_fun_add".equals(obj.toString())) {
+//		if ("frame@_$fun$_fun1".equals(obj.toString())) {
 //			System.out.print("incRef: " + obj.getRef() + ", " + obj);
 //			System.out.println();
 //		}
@@ -1170,6 +1183,10 @@ public class RulpUtil {
 		return obj.getType() == RType.FUNC && ((IRFunction) obj).isLambda();
 	}
 
+	public static boolean isFunctionList(IRObject obj) throws RException {
+		return obj.getType() == RType.FUNC && ((IRFunction) obj).isList();
+	}
+
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
 //
 //		IRObject nsObj = frame.getObject(A_USING_NS);
@@ -1179,10 +1196,6 @@ public class RulpUtil {
 //
 //		return RulpUtil.asSubject(nsObj);
 //	}
-
-	public static boolean isFunctionList(IRObject obj) throws RException {
-		return obj.getType() == RType.FUNC && ((IRFunction) obj).isList();
-	}
 
 	public static boolean isList(IRObject obj) {
 		return obj.getType() == RType.LIST;
@@ -1318,16 +1331,6 @@ public class RulpUtil {
 		return obj;
 	}
 
-	public static boolean matchType(IRAtom typeAtom, IRObject obj) throws RException {
-
-		// Match any object
-		if (typeAtom == O_Nil) {
-			return true;
-		}
-
-		return getObjectType(obj) == typeAtom;
-	}
-
 	public static boolean matchParaType(IRObject paraValue, IRAtom paraTypeAtom) throws RException {
 
 		RType valueType = paraValue.getType();
@@ -1346,6 +1349,16 @@ public class RulpUtil {
 		}
 
 		return false;
+	}
+
+	public static boolean matchType(IRAtom typeAtom, IRObject obj) throws RException {
+
+		// Match any object
+		if (typeAtom == O_Nil) {
+			return true;
+		}
+
+		return getObjectType(obj) == typeAtom;
 	}
 
 	public static String nameOf(IRObject obj, IRFrame frame) throws RException {
@@ -1427,7 +1440,7 @@ public class RulpUtil {
 		});
 	}
 
-	public static boolean removeAttribute(IRObject obj, String attr) {
+	public static IRObject removeAttribute(IRObject obj, String attr) throws RException {
 		return ((AbsObject) obj).removeAttribute(attr);
 	}
 
@@ -1924,6 +1937,10 @@ public class RulpUtil {
 		}
 
 		return attr;
+	}
+
+	public void setAttribute(IRObject obj, String key, IRObject value) throws RException {
+		((AbsObject) obj).setAttribute(key, value);
 	}
 
 }

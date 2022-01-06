@@ -1,76 +1,116 @@
 package alpha.rulp.ximpl.lang;
 
+import static alpha.rulp.lang.Constant.O_Nil;
+
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.RException;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.optimize.OptUtil;
 
 public abstract class AbsObject implements IRObject {
 
-	protected List<String> attributeList = null;
+	protected List<String> _attributeKeyList = null;
+	protected Map<String, IRObject> attributeMap = null;
 
-	public void addAttribute(String attr) {
-
-		if ((attr = RulpUtil.toValidAttribute(attr)) == null) {
-			return;
-		}
-
-		if (attributeList == null) {
-			attributeList = new LinkedList<>();
-		} else if (attributeList.contains(attr)) {
-			return;
-		}
-
-		attributeList.add(attr);
-		Collections.sort(attributeList);
+	public void addAttribute(String key) throws RException {
+		setAttribute(key, null);
 	}
 
-	public boolean containAttribute(String attr) {
+	public boolean containAttribute(String key) {
 
-		if (attributeList == null) {
+		if (attributeMap == null) {
 			return false;
 		}
 
-		if ((attr = RulpUtil.toValidAttribute(attr)) == null) {
+		String attrKey = RulpUtil.toValidAttribute(key);
+		if (attrKey == null) {
 			return false;
 		}
 
-		return attributeList.contains(attr);
+		return attributeMap.containsKey(attrKey);
 	}
 
-	public List<String> getAttributeList() {
-		return attributeList;
+	public int getAttributeCount() {
+		return attributeMap == null ? 0 : attributeMap.size();
 	}
 
-	public boolean removeAttribute(String attr) {
+	public List<String> getAttributeKeyList() {
 
-		if (attributeList == null) {
-			return false;
-		}
+		if (_attributeKeyList == null) {
 
-		if ((attr = RulpUtil.toValidAttribute(attr)) == null) {
-			return false;
-		}
-
-		boolean rc = false;
-
-		Iterator<String> it = attributeList.iterator();
-		while (it.hasNext()) {
-			if (it.next().equals(attr)) {
-				it.remove();
-				rc = true;
-				break;
+			if (attributeMap == null) {
+				return Collections.emptyList();
 			}
+
+			_attributeKeyList = new ArrayList<>(attributeMap.keySet());
+			Collections.sort(_attributeKeyList);
 		}
 
-		if (rc && attributeList.isEmpty()) {
-			attributeList = null;
+		return _attributeKeyList;
+	}
+
+	public IRObject getAttributeValue(String key) throws RException {
+
+		if (attributeMap == null) {
+			return null;
 		}
 
-		return rc;
+		String attrKey = RulpUtil.toValidAttribute(key);
+		if (attrKey == null) {
+			throw new RException("invalid attribute key: " + key);
+		}
+
+		return attributeMap.get(key);
+	}
+
+	public IRObject removeAttribute(String key) throws RException {
+
+		if (attributeMap == null) {
+			return null;
+		}
+
+		String attrKey = RulpUtil.toValidAttribute(key);
+		if (attrKey == null) {
+			throw new RException("invalid attribute key: " + key);
+		}
+
+		IRObject value = attributeMap.remove(attrKey);
+		if (attributeMap.isEmpty()) {
+			attributeMap = null;
+		}
+
+		if (value != null) {
+			_attributeKeyList = null;
+		}
+
+		return value;
+	}
+
+	public void setAttribute(String key, IRObject value) throws RException {
+
+		String attrKey = RulpUtil.toValidAttribute(key);
+		if (attrKey == null) {
+			throw new RException("invalid attribute key: " + key);
+		}
+
+		if (value == null) {
+			value = O_Nil;
+		} else if (!OptUtil.isConstValue(value)) {
+			throw new RException("invalid attribute value: " + value);
+		}
+
+		if (attributeMap == null) {
+			attributeMap = new HashMap<>();
+		}
+
+		attributeMap.put(attrKey, value);
+		_attributeKeyList = null;
 	}
 
 	@Override
