@@ -45,8 +45,4 @@ public class XRFactorGetMbr extends AbsAtomFactorAdapter implements IRFactor {
 		return rst;
 	}
 
-	@Override
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

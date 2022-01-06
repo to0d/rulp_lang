@@ -38,7 +38,4 @@ public class XRFactorStrIndexOf extends AbsAtomFactorAdapter implements IRFactor
 		return RulpFactory.createInteger(a.indexOf(b));
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

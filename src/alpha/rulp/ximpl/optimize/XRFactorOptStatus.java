@@ -40,7 +40,4 @@ public class XRFactorOptStatus extends AbsAtomFactorAdapter implements IRFactor 
 		return O_Nil;
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

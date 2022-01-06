@@ -38,7 +38,4 @@ public class XRFactorStrLastIndexOf extends AbsAtomFactorAdapter implements IRFa
 		return RulpFactory.createInteger(a.lastIndexOf(b));
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

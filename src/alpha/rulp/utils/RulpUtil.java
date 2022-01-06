@@ -177,10 +177,6 @@ public class RulpUtil {
 			return factorBody.compute(args, interpreter, frame);
 		}
 
-		public boolean isThreadSafe() {
-			return threadSafe;
-		}
-
 	}
 
 	static class XRFormater implements IRFormater {

@@ -155,7 +155,4 @@ public class XRFactorNew extends AbsAtomFactorAdapter implements IRFactor {
 		return newInstance(args, interpreter, frame);
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

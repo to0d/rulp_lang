@@ -52,8 +52,4 @@ public class XRFactorAddListToList extends AbsAtomFactorAdapter implements IRFac
 		return RulpFactory.createList(rstList);
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
-
 }

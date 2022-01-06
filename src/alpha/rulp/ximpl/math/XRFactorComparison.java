@@ -42,7 +42,4 @@ public class XRFactorComparison extends AbsAtomFactorAdapter implements IRFactor
 		return RulpFactory.createBoolean(MathUtil.computeRelationalExpression(operator, a, b));
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

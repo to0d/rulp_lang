@@ -125,7 +125,4 @@ public class XRFactorStrFormat extends AbsAtomFactorAdapter implements IRFactor 
 		return RulpFactory.createString(out);
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

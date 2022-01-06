@@ -50,7 +50,4 @@ public class XRFactorIf extends AbsAtomFactorAdapter implements IRFactor {
 		return interpreter.compute(frame, actionClause);
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

@@ -34,8 +34,4 @@ public class XRFactorSystemFreeMemory extends AbsAtomFactorAdapter implements IR
 		return RulpFactory.createLong(Runtime.getRuntime().freeMemory());
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
-
 }

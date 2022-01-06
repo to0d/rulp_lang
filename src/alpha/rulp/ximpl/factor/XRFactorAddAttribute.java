@@ -38,7 +38,4 @@ public class XRFactorAddAttribute extends AbsAtomFactorAdapter implements IRFact
 		return O_Nil;
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

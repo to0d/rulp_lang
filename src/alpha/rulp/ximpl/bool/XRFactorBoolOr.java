@@ -41,8 +41,5 @@ public class XRFactorBoolOr extends AbsAtomFactorAdapter implements IRFactor {
 
 		return O_False;
 	}
-
-	public boolean isThreadSafe() {
-		return true;
-	}
+ 
 }

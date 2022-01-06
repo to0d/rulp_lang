@@ -338,10 +338,6 @@ public class XRFunctionList extends AbsFunctionAdapter implements IRFunctionList
 		return true;
 	}
 
-	public boolean isThreadSafe() {
-		return false;
-	}
-
 	public String toString() {
 		return name;
 	}

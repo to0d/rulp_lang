@@ -25,31 +25,7 @@ import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorSeta extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorSeta(String factorName) {
-		super(factorName);
-	}
-
-	@Override
-	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
-
-		if (args.size() != 4) {
-			throw new RException("Invalid parameters: " + args.toString());
-		}
-
-		IRArray arr = RulpUtil.asArray(interpreter.compute(frame, args.get(1)));
-		int index = RulpUtil.asInteger(interpreter.compute(frame, args.get(2))).asInteger();
-		IRObject obj = interpreter.compute(frame, args.get(3));
-
-		arr.set(index, obj);
-
-		return arr;
-	}
-
-	public boolean isThreadSafe() {
-		return true;
-	}
-
-	public IRVar setVar(IRObject obj, IRObject val, IRInterpreter interpreter, IRFrame frame) throws RException {
+	public static IRVar setVar(IRObject obj, IRObject val, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		IRVar var = null;
 
@@ -89,6 +65,26 @@ public class XRFactorSeta extends AbsAtomFactorAdapter implements IRFactor {
 
 		var.setValue(interpreter.compute(frame, val));
 		return var;
+	}
+
+	public XRFactorSeta(String factorName) {
+		super(factorName);
+	}
+
+	@Override
+	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		if (args.size() != 4) {
+			throw new RException("Invalid parameters: " + args.toString());
+		}
+
+		IRArray arr = RulpUtil.asArray(interpreter.compute(frame, args.get(1)));
+		int index = RulpUtil.asInteger(interpreter.compute(frame, args.get(2))).asInteger();
+		IRObject obj = interpreter.compute(frame, args.get(3));
+
+		arr.set(index, obj);
+
+		return arr;
 	}
 
 }

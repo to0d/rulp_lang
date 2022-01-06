@@ -28,8 +28,4 @@ public class XRFactorBreak extends AbsAtomFactorAdapter implements IRFactor {
 		throw new RBreak(this, frame);
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
-
 }

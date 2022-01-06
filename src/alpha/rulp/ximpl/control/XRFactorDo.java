@@ -49,8 +49,5 @@ public class XRFactorDo extends AbsAtomFactorAdapter implements IRFactor {
 			RulpUtil.decRef(doFrame);
 		}
 	}
-
-	public boolean isThreadSafe() {
-		return true;
-	}
+ 
 }

@@ -35,7 +35,4 @@ public class XRFactorBlobLength extends AbsAtomFactorAdapter implements IRFactor
 		return RulpFactory.createInteger(RulpUtil.asBlob(interpreter.compute(frame, args.get(1))).length());
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

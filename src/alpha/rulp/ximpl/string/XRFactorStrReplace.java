@@ -39,7 +39,4 @@ public class XRFactorStrReplace extends AbsAtomFactorAdapter implements IRFactor
 		return RulpFactory.createString(str.replace(target, replacement));
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

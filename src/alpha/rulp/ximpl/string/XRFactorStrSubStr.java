@@ -73,7 +73,4 @@ public class XRFactorStrSubStr extends AbsAtomFactorAdapter implements IRFactor 
 		}
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

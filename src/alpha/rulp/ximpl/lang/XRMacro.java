@@ -91,10 +91,6 @@ public class XRMacro extends AbsRefCallableAdapter implements IRMacro {
 		return true;
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
-
 	@Override
 	public String toString() {
 		return macroName;

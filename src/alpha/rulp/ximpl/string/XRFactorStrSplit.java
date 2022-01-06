@@ -39,7 +39,4 @@ public class XRFactorStrSplit extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpFactory.createListOfString(StringUtil.splitStringByChar(str, sep.toCharArray()));
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

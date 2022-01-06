@@ -28,15 +28,7 @@ import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorTry extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorTry(String factorName) {
-		super(factorName);
-	}
-
-	public boolean isThreadSafe() {
-		return true;
-	}
-
-	public void defineHandleCase(IRFrame tryFrame, IRExpr handleExpression) throws RException {
+	public static void defineHandleCase(IRFrame tryFrame, IRExpr handleExpression) throws RException {
 
 		// (e1 (action1) (action2))
 
@@ -58,6 +50,10 @@ public class XRFactorTry extends AbsAtomFactorAdapter implements IRFactor {
 			tryFrame.setEntry(C_HANDLE + errId.getName(), RulpFactory.createList(handleExpression.listIterator(1)));
 		}
 
+	}
+
+	public XRFactorTry(String factorName) {
+		super(factorName);
 	}
 
 	@Override

@@ -97,6 +97,8 @@ public interface Constant {
 
 	String A_NULL = "null";
 
+	String A_THREAD_UNSAFE = "thread-unsafe";
+
 	String A_OPT_CCO = "opt-cco";
 
 	String A_OPT_ERO = "opt-ero";

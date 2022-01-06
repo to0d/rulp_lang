@@ -43,7 +43,4 @@ public class XRFactorSizeOfArray extends AbsAtomFactorAdapter implements IRFacto
 		return RulpFactory.createInteger(array.size(dim));
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

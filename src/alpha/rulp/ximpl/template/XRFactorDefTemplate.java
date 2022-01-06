@@ -182,7 +182,4 @@ public class XRFactorDefTemplate extends AbsAtomFactorAdapter implements IRFacto
 		throw new RException("Invalid parameters: " + args);
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

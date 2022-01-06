@@ -37,7 +37,4 @@ public class XRFactorCompare extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpFactory.createInteger(RulpUtil.compare(a, b));
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

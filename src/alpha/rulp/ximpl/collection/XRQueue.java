@@ -38,10 +38,6 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 					return RulpFactory.createInstanceOfQueue(interpreter);
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(queueClass, F_MBR_QUEUE_PUSH_BACK, new AbsAtomFactorAdapter(F_MBR_QUEUE_PUSH_BACK) {
@@ -60,10 +56,6 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 					return O_Nil;
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(queueClass, F_MBR_QUEUE_PUSH_FRONT, new AbsAtomFactorAdapter(F_MBR_QUEUE_PUSH_FRONT) {
@@ -82,10 +74,6 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 					return O_Nil;
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(queueClass, F_MBR_QUEUE_POP_BACK, new AbsAtomFactorAdapter(F_MBR_QUEUE_POP_BACK) {
@@ -100,10 +88,6 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 					return asQueue(interpreter.compute(frame, args.get(1))).pop_back();
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(queueClass, F_MBR_QUEUE_POP_FRONT, new AbsAtomFactorAdapter(F_MBR_QUEUE_POP_FRONT) {
@@ -118,10 +102,6 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 					return asQueue(interpreter.compute(frame, args.get(1))).pop_front();
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(queueClass, F_MBR_QUEUE_PEEK_BACK, new AbsAtomFactorAdapter(F_MBR_QUEUE_PEEK_BACK) {
@@ -136,10 +116,6 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 					return asQueue(interpreter.compute(frame, args.get(1))).peek_back();
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(queueClass, F_MBR_QUEUE_PEEK_FRONT, new AbsAtomFactorAdapter(F_MBR_QUEUE_PEEK_FRONT) {
@@ -154,10 +130,6 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 					return asQueue(interpreter.compute(frame, args.get(1))).peek_front();
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(queueClass, F_MBR_QUEUE_GET, new AbsAtomFactorAdapter(F_MBR_QUEUE_GET) {
@@ -175,10 +147,6 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 					return queue.get(index);
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(queueClass, F_MBR_QUEUE_SIZE_OF, new AbsAtomFactorAdapter(F_MBR_QUEUE_SIZE_OF) {
@@ -193,10 +161,6 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 					return RulpFactory.createInteger(asQueue(interpreter.compute(frame, args.get(1))).size());
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(queueClass, F_MBR_QUEUE_IS_EMTPY, new AbsAtomFactorAdapter(F_MBR_QUEUE_IS_EMTPY) {
@@ -211,10 +175,6 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 					return RulpFactory.createBoolean(asQueue(interpreter.compute(frame, args.get(1))).isEmpty());
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(queueClass, F_MBR_QUEUE_CLEAR, new AbsAtomFactorAdapter(F_MBR_QUEUE_CLEAR) {
@@ -231,10 +191,6 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 					return O_Nil;
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(queueClass, F_MBR_QUEUE_TO_LIST, new AbsAtomFactorAdapter(F_MBR_QUEUE_TO_LIST) {
@@ -249,10 +205,6 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 					return asQueue(interpreter.compute(frame, args.get(1))).toList();
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 		}
 	}

@@ -64,7 +64,4 @@ public class XRFactorSubjectOf extends AbsAtomFactorAdapter implements IRFactor 
 		return subjectOf(args.get(1), interpreter, frame);
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

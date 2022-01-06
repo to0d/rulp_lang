@@ -69,8 +69,5 @@ public class XRFactorCase extends AbsAtomFactorAdapter implements IRFactor {
 
 		return O_Nil;
 	}
-
-	public boolean isThreadSafe() {
-		return true;
-	}
+ 
 }

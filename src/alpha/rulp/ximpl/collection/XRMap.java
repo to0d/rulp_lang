@@ -49,10 +49,6 @@ public class XRMap extends XRDefInstance implements IRCollection {
 					return RulpFactory.createInstanceOfMap(interpreter);
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(mapClass, F_MBR_MAP_PUT, new AbsAtomFactorAdapter(F_MBR_MAP_PUT) {
@@ -71,10 +67,6 @@ public class XRMap extends XRDefInstance implements IRCollection {
 					return O_Nil;
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(mapClass, F_MBR_MAP_GET, new AbsAtomFactorAdapter(F_MBR_MAP_GET) {
@@ -92,10 +84,6 @@ public class XRMap extends XRDefInstance implements IRCollection {
 					return value == null ? O_Nil : value;
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(mapClass, F_MBR_MAP_SIZE_OF, new AbsAtomFactorAdapter(F_MBR_MAP_SIZE_OF) {
@@ -108,11 +96,6 @@ public class XRMap extends XRDefInstance implements IRCollection {
 					}
 
 					return RulpFactory.createInteger(RulpUtil.asMap(interpreter.compute(frame, args.get(1))).size());
-				}
-
-				@Override
-				public boolean isThreadSafe() {
-					return true;
 				}
 
 			}, RAccessType.PRIVATE);
@@ -129,11 +112,6 @@ public class XRMap extends XRDefInstance implements IRCollection {
 					return RulpFactory.createBoolean(RulpUtil.asMap(interpreter.compute(frame, args.get(1))).isEmpty());
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
-
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(mapClass, F_MBR_MAP_CLEAR, new AbsAtomFactorAdapter(F_MBR_MAP_CLEAR) {
@@ -148,11 +126,6 @@ public class XRMap extends XRDefInstance implements IRCollection {
 					RulpUtil.asMap(interpreter.compute(frame, args.get(1))).clear();
 
 					return O_Nil;
-				}
-
-				@Override
-				public boolean isThreadSafe() {
-					return true;
 				}
 
 			}, RAccessType.PRIVATE);

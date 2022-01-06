@@ -59,8 +59,4 @@ public class XRFactorDoWhenVarChanged extends AbsAtomFactorAdapter implements IR
 		return O_Nil;
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
-
 }

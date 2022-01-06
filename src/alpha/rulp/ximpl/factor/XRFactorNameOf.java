@@ -38,7 +38,4 @@ public class XRFactorNameOf extends AbsAtomFactorAdapter implements IRFactor {
 		return name == null ? O_Nil : RulpFactory.createString(name);
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

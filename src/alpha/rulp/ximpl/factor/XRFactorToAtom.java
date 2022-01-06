@@ -32,8 +32,4 @@ public class XRFactorToAtom extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpFactory.createAtom(interpreter.compute(frame, args.get(1)).asString());
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
-
 }

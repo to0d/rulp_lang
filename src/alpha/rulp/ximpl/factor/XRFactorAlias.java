@@ -80,8 +80,4 @@ public class XRFactorAlias extends AbsAtomFactorAdapter implements IRFactor {
 		return srcEntry.getObject();
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
-
 }

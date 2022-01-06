@@ -28,7 +28,4 @@ public class XRFactorContinue extends AbsAtomFactorAdapter implements IRFactor {
 		throw new RContinue(this, frame);
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

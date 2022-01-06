@@ -38,8 +38,4 @@ public class XRFactorCompute extends AbsAtomFactorAdapter implements IRFactor {
 		return obj;
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
-
 }

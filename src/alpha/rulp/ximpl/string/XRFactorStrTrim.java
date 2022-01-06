@@ -42,7 +42,4 @@ public class XRFactorStrTrim extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpFactory.createString(str.trim());
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

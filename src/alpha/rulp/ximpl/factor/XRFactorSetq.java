@@ -27,7 +27,7 @@ public class XRFactorSetq extends AbsAtomFactorAdapter implements IRFactor {
 		super(factorName);
 	}
 
-	public IRVar setVar(IRObject obj, IRObject val, IRInterpreter interpreter, IRFrame frame) throws RException {
+	public static IRVar setVar(IRObject obj, IRObject val, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		IRVar var = null;
 
@@ -77,10 +77,6 @@ public class XRFactorSetq extends AbsAtomFactorAdapter implements IRFactor {
 		}
 
 		return setVar(args.get(1), args.get(2), interpreter, frame);
-	}
-
-	public boolean isThreadSafe() {
-		return true;
 	}
 
 }

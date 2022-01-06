@@ -39,10 +39,6 @@ public class XRSet extends AbsRInstance implements IRCollection {
 					return RulpFactory.createInstanceOfSet(interpreter);
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(setClass, F_MBR_SET_ADD, new AbsAtomFactorAdapter(F_MBR_SET_ADD) {
@@ -61,10 +57,6 @@ public class XRSet extends AbsRInstance implements IRCollection {
 					return O_Nil;
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(setClass, F_MBR_SET_HAS, new AbsAtomFactorAdapter(F_MBR_SET_HAS) {
@@ -82,10 +74,6 @@ public class XRSet extends AbsRInstance implements IRCollection {
 					return RulpFactory.createBoolean(set.has(obj));
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(setClass, F_MBR_SET_SIZE_OF, new AbsAtomFactorAdapter(F_MBR_SET_SIZE_OF) {
@@ -100,10 +88,6 @@ public class XRSet extends AbsRInstance implements IRCollection {
 					return RulpFactory.createInteger(asSet(interpreter.compute(frame, args.get(1))).size());
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(setClass, F_MBR_SET_IS_EMPTY, new AbsAtomFactorAdapter(F_MBR_SET_IS_EMPTY) {
@@ -118,10 +102,6 @@ public class XRSet extends AbsRInstance implements IRCollection {
 					return RulpFactory.createBoolean(asSet(interpreter.compute(frame, args.get(1))).isEmpty());
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(setClass, F_MBR_SET_CLEAR, new AbsAtomFactorAdapter(F_MBR_SET_CLEAR) {
@@ -137,10 +117,6 @@ public class XRSet extends AbsRInstance implements IRCollection {
 					return O_Nil;
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 
 			RulpUtil.setMember(setClass, F_MBR_SET_TO_LIST, new AbsAtomFactorAdapter(F_MBR_SET_TO_LIST) {
@@ -155,10 +131,6 @@ public class XRSet extends AbsRInstance implements IRCollection {
 					return asSet(interpreter.compute(frame, args.get(1))).toList();
 				}
 
-				@Override
-				public boolean isThreadSafe() {
-					return true;
-				}
 			}, RAccessType.PRIVATE);
 		}
 

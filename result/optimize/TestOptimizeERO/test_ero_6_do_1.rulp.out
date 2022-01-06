@@ -11,7 +11,7 @@
 ;=>nil
 ;out:
 (defun fun (?v)
-    (print "" 3)
+    (print[thread-unsafe] "" 3)
 )[opt-ero]
 
 ;eof

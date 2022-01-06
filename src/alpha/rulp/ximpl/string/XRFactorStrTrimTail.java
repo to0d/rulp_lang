@@ -43,7 +43,4 @@ public class XRFactorStrTrimTail extends AbsAtomFactorAdapter implements IRFacto
 		return RulpFactory.createString(StringUtil.trimTail(str, ' '));
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

@@ -34,7 +34,4 @@ public class XRFactorIsThreadSafe extends AbsAtomFactorAdapter implements IRFact
 		return RulpFactory.createBoolean(ThreadSafeUtil.isThreadSafe(args.get(1), frame));
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

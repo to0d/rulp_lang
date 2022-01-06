@@ -195,10 +195,6 @@ public class XRFunction extends AbsFunctionAdapter implements IRFunction {
 		return false;
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
-
 	public String toString() {
 		try {
 			return this.getSignature();

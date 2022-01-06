@@ -39,7 +39,4 @@ public class XRFactorSearchFrameOf extends AbsAtomFactorAdapter implements IRFac
 		return RulpFactory.createList(tgtFrame.getSearchFrameList());
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

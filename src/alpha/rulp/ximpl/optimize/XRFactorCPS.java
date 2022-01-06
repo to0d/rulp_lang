@@ -59,10 +59,4 @@ public class XRFactorCPS extends AbsAtomFactorAdapter implements IRRebuild, IRFa
 	public String getRebuildInformation() {
 		return String.format("id=%d, name=%s, call=%d, expand=%d", id, getName(), callCount, cpsCount);
 	}
-
-	@Override
-	public boolean isThreadSafe() {
-		return true;
-	}
-
 }

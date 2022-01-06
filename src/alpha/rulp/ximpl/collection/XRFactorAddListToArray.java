@@ -47,8 +47,4 @@ public class XRFactorAddListToArray extends AbsAtomFactorAdapter implements IRFa
 		return a1;
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
-
 }

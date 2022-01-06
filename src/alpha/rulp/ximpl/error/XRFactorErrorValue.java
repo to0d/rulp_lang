@@ -37,7 +37,4 @@ public class XRFactorErrorValue extends AbsAtomFactorAdapter implements IRFactor
 		return value == null ? O_Nil : value;
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

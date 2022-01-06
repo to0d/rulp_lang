@@ -34,8 +34,4 @@ public class XRFactorSystemTotalMemory extends AbsAtomFactorAdapter implements I
 		return RulpFactory.createLong(Runtime.getRuntime().totalMemory());
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
-
 }

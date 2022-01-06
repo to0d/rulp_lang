@@ -72,7 +72,4 @@ public class XRFactorLambda extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpFactory.createFunctionLambda(RulpFactory.createFunction(frame, A_LAMBDA, paraAttrs, funBody), frame);
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

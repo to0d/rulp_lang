@@ -40,8 +40,4 @@ public class XRFactorHasMbr extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpFactory.createBoolean(sub.hasMember(name.getName()));
 	}
 
-	@Override
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

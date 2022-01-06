@@ -61,8 +61,4 @@ public class XRFactorDoWhenObjDeleted extends AbsAtomFactorAdapter implements IR
 		return fun;
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
-
 }

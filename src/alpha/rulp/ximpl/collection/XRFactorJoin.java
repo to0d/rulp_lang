@@ -57,7 +57,4 @@ public class XRFactorJoin extends AbsAtomFactorAdapter implements IRFactor {
 		return joinCol.toList();
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

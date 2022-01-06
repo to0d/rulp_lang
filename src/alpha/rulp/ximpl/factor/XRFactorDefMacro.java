@@ -74,8 +74,4 @@ public class XRFactorDefMacro extends AbsAtomFactorAdapter implements IRFactor {
 		return macro;
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
-
 }

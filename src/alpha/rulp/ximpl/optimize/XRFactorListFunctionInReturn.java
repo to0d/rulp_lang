@@ -53,7 +53,4 @@ public class XRFactorListFunctionInReturn extends AbsAtomFactorAdapter implement
 		return RulpFactory.createListOfString(nameList);
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

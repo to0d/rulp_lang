@@ -245,10 +245,6 @@ public class XRTemplate extends AbsRefCallableAdapter implements IRTemplate {
 		return false;
 	}
 
-	public boolean isThreadSafe() {
-		return false;
-	}
-
 	public String toString() {
 		return templateName;
 	}

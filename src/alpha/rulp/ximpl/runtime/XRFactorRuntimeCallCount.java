@@ -43,8 +43,4 @@ public class XRFactorRuntimeCallCount extends AbsAtomFactorAdapter implements IR
 				.createInteger(RulpUtil.asCallable(obj).getCallCount(RuntimeUtil.getCallStatsId()).getTotalCount());
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
-
 }

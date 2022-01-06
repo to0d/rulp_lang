@@ -34,7 +34,4 @@ public class XRFactorClassOf extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpUtil.findClass(args.get(1), frame);
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

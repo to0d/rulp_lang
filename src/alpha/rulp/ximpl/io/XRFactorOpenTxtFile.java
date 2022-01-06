@@ -58,7 +58,4 @@ public class XRFactorOpenTxtFile extends AbsAtomFactorAdapter implements IRFacto
 		}
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

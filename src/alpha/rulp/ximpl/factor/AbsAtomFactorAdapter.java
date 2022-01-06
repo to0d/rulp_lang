@@ -42,10 +42,6 @@ public abstract class AbsAtomFactorAdapter extends AbsAtomCallableAdapter implem
 		return true;
 	}
 
-	public boolean isThreadSafe() {
-		return false;
-	}
-
 	@Override
 	public String toString() {
 		return factorName;

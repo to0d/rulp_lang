@@ -425,7 +425,4 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 		throw new RException("Invalid parameters: " + args);
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

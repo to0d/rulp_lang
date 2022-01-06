@@ -40,7 +40,4 @@ public class XRFactorEqual extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpUtil.equal(a, b) ? O_True : O_False;
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

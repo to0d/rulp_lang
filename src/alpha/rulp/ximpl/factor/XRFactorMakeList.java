@@ -32,7 +32,4 @@ public class XRFactorMakeList extends AbsAtomFactorAdapter implements IRFactor {
 		return varList;
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

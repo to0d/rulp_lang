@@ -31,11 +31,7 @@ public abstract class AbsRefFactorAdapter extends AbsRefCallableAdapter implemen
 	@Override
 	public boolean isConst() {
 		return true;
-	}
-
-	public boolean isThreadSafe() {
-		return false;
-	}
+	} 
 
 	@Override
 	public String toString() {

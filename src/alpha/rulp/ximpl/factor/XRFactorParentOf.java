@@ -33,7 +33,4 @@ public class XRFactorParentOf extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpUtil.asSubject(interpreter.compute(frame, args.get(1))).getParent();
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

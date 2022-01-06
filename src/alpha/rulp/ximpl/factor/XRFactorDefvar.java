@@ -24,9 +24,9 @@ import alpha.rulp.utils.SubjectUtil;
 
 public class XRFactorDefvar extends AbsAtomFactorAdapter implements IRFactor {
 
-	private boolean allowRedefine;
+	private final boolean allowRedefine;
 
-	private boolean returnVar;
+	private final boolean returnVar;
 
 	public XRFactorDefvar(String factorName, boolean rtVar, boolean allowRedefine) {
 		super(factorName);
@@ -78,7 +78,4 @@ public class XRFactorDefvar extends AbsAtomFactorAdapter implements IRFactor {
 		return returnVar ? var : val;
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

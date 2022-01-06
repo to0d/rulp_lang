@@ -40,7 +40,4 @@ public class XRFactorMakeBlob extends AbsAtomFactorAdapter implements IRFactor {
 		return RulpFactory.createBlob(blobLen);
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

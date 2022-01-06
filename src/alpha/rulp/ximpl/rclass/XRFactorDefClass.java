@@ -136,7 +136,4 @@ public class XRFactorDefClass extends AbsAtomFactorAdapter implements IRFactor {
 
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

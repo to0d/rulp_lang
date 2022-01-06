@@ -68,7 +68,4 @@ public class XRFactorUnion extends AbsAtomFactorAdapter implements IRFactor {
 		return unionCol.toList();
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

@@ -155,6 +155,17 @@
 (add-attribute |                     stable)
 (add-attribute ~                     stable)
 
+(add-attribute load              thread-unsafe)
+(add-attribute print             thread-unsafe)
+(add-attribute print-frame-tree  thread-unsafe)
+(add-attribute print-global-info thread-unsafe)
+(add-attribute print-subject     thread-unsafe) 
+(add-attribute print-frame-tree  thread-unsafe) 
+(add-attribute print-impl        thread-unsafe) 
+(add-attribute out-to-file       thread-unsafe) 
+(add-attribute open-txt-file     thread-unsafe)
+(add-attribute save-txt-file     thread-unsafe) 
+
 ;****************************************************;
 ; Enviroment vars
 ;****************************************************;

@@ -39,7 +39,4 @@ public class XRFactorStrEqual extends AbsAtomFactorAdapter implements IRFactor {
 		return a.equals(b) ? O_True : O_False;
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

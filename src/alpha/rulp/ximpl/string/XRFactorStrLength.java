@@ -37,7 +37,4 @@ public class XRFactorStrLength extends AbsAtomFactorAdapter implements IRFactor 
 		return RulpFactory.createInteger(str.length());
 	}
 
-	public boolean isThreadSafe() {
-		return true;
-	}
 }

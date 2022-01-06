@@ -119,9 +119,4 @@ public class XRFunctionLambda extends AbsFunctionAdapter implements IRFunction {
 		return false;
 	}
 
-	@Override
-	public boolean isThreadSafe() {
-		return true;
-	}
-
 }
