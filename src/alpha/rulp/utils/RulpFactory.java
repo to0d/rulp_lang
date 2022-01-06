@@ -62,7 +62,7 @@ import alpha.rulp.runtime.RName;
 import alpha.rulp.ximpl.array.XRArrayVary;
 import alpha.rulp.ximpl.array.XRFactorMakeArray;
 import alpha.rulp.ximpl.array.XRFactorSeta;
-import alpha.rulp.ximpl.attr.XRFactorIsStable;
+import alpha.rulp.ximpl.attribute.XRFactorIsStable;
 import alpha.rulp.ximpl.blob.XRBlob;
 import alpha.rulp.ximpl.blob.XRFactorBlobLength;
 import alpha.rulp.ximpl.blob.XRFactorMakeBlob;

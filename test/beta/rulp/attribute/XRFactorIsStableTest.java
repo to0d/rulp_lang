@@ -1,4 +1,4 @@
-package beta.rulp.optimize;
+package beta.rulp.attribute;
 
 import org.junit.jupiter.api.Test;
 

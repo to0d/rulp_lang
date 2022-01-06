@@ -1,4 +1,4 @@
-package alpha.rulp.ximpl.attr;
+package alpha.rulp.ximpl.attribute;
 
 import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.A_STABLE;

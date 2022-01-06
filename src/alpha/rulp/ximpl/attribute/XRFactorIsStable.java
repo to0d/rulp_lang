@@ -7,7 +7,7 @@
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-package alpha.rulp.ximpl.attr;
+package alpha.rulp.ximpl.attribute;
 
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
