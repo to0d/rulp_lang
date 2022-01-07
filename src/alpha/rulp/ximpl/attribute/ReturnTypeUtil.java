@@ -119,7 +119,7 @@ public class ReturnTypeUtil {
 			return returnTypeOf(entryValue, frame);
 
 		default:
-			return O_Nan;
+			return O_Nil;
 		}
 	}
 }

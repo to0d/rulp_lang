@@ -7,6 +7,12 @@ import alpha.rulp.utils.RulpTestBase;
 class XRFactorReturnTypeOfTest extends RulpTestBase {
 
 	@Test
+	void test_rt_of_0() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
 	void test_rt_of_1_value() {
 
 		_setup();

@@ -1,3 +1,6 @@
 (return-type-of +)
-;=>nan
+;=>nil
+
+(return-type-of and)
+;=>nil
 

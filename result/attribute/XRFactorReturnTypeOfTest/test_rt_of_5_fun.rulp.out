@@ -19,5 +19,8 @@
 ;=>fun1 fun2 fun3
 
 (return-type-of fun1)
-;=>nan
+;=>nil
+
+(return-type-of fun2)
+;=>nil
 

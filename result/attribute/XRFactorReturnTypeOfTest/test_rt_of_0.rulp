@@ -1,0 +1,23 @@
+(defun ls-return-type-of (?subject) 
+    (if (equal ?subject local)
+    
+        (ls-return-type-of (value-of (:: (value-of local::parent) parent)))
+        
+        (loop for ?mbr in (ls ?subject) do 
+            (print "obj=" (name-of $(value-of ?mbr)))
+            (print ", type=" (type-of $(value-of (value-of ?mbr))))
+            (print ", const=" (return-type-of  $(value-of (value-of ?mbr))))
+            (print "\n")
+        )
+    )
+)
+;;;
+
+(ls-return-type-of root)
+;;;
+
+(ls-return-type-of system)
+;;;
+
+(ls-return-type-of main)
+;;;
