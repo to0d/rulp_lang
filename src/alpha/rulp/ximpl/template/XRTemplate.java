@@ -240,11 +240,6 @@ public class XRTemplate extends AbsRefCallableAdapter implements IRTemplate {
 		return RType.TEMPLATE;
 	}
 
-	@Override
-	public boolean isConst() {
-		return false;
-	}
-
 	public String toString() {
 		return templateName;
 	}

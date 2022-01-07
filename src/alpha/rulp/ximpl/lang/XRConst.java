@@ -52,9 +52,4 @@ public class XRConst extends AbsRefObject implements IRConst {
 		return value;
 	}
 
-	@Override
-	public boolean isConst() {
-		return true;
-	}
-
 }

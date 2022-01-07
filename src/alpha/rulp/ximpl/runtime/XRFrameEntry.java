@@ -107,11 +107,6 @@ public class XRFrameEntry extends AbsAtomObject implements IRMember, IRFrameEntr
 	}
 
 	@Override
-	public boolean isConst() {
-		return false;
-	}
-
-	@Override
 	public void setAccessType(RAccessType accessType) throws RException {
 		throw new RException("unable to update accessType for frame entry");
 	}

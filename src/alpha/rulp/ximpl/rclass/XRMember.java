@@ -89,11 +89,6 @@ public class XRMember extends AbsRefObject implements IRMember {
 	}
 
 	@Override
-	public boolean isConst() {
-		return false;
-	}
-
-	@Override
 	public void setAccessType(RAccessType accessType) throws RException {
 		this.accessType = accessType;
 	}

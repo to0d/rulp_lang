@@ -50,9 +50,4 @@ public class XRAtom extends AbsAtomObject implements IRAtom {
 		return RType.ATOM;
 	}
 
-	@Override
-	public boolean isConst() {
-		return true;
-	}
-
 }

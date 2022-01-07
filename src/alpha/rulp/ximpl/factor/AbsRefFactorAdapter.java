@@ -29,11 +29,6 @@ public abstract class AbsRefFactorAdapter extends AbsRefCallableAdapter implemen
 	}
 
 	@Override
-	public boolean isConst() {
-		return true;
-	} 
-
-	@Override
 	public String toString() {
 		return factorName;
 	}

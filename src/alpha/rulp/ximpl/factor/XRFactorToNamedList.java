@@ -15,6 +15,7 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 
@@ -50,7 +51,7 @@ public class XRFactorToNamedList extends AbsAtomFactorAdapter implements IRFacto
 			return list;
 		}
 
-		if (!list.isConst()) {
+		if (!AttrUtil.isConst(list, frame)) {
 			IRList varList = RulpFactory.createVaryNamedList(name);
 			RulpUtil.addAll(varList, list.iterator());
 			return varList;

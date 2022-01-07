@@ -36,9 +36,4 @@ public class XRLong extends AbsAtomObject implements IRLong {
 		return RType.LONG;
 	}
 
-	@Override
-	public boolean isConst() {
-		return true;
-	}
-
 }

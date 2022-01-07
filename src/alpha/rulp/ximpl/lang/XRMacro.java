@@ -87,11 +87,6 @@ public class XRMacro extends AbsRefCallableAdapter implements IRMacro {
 	}
 
 	@Override
-	public boolean isConst() {
-		return true;
-	}
-
-	@Override
 	public String toString() {
 		return macroName;
 	}

@@ -19,6 +19,8 @@ public interface IRClass extends IRObject, IRSubject {
 
 	public IRClass getSuperClass();
 
+	public boolean isConst();
+
 	public IRInstance newInstance(String instanceName, IRList args, IRInterpreter interpreter, IRFrame frame)
 			throws RException;
 

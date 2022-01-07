@@ -29,10 +29,4 @@ public class XRString extends AbsAtomObject implements IRString {
 	public RType getType() {
 		return RType.STRING;
 	}
-
-	@Override
-	public boolean isConst() {
-		return true;
-	}
-
 }

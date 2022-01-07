@@ -38,11 +38,6 @@ public abstract class AbsAtomFactorAdapter extends AbsAtomCallableAdapter implem
 	}
 
 	@Override
-	public boolean isConst() {
-		return true;
-	}
-
-	@Override
 	public String toString() {
 		return factorName;
 	}

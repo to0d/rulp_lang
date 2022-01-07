@@ -27,9 +27,4 @@ public class XRDouble extends AbsAtomObject implements IRDouble {
 		return RType.DOUBLE;
 	}
 
-	@Override
-	public boolean isConst() {
-		return true;
-	}
-
 }

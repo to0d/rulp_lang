@@ -36,9 +36,4 @@ public class XRBoolean extends AbsAtomObject implements IRBoolean {
 		return RType.BOOL;
 	}
 
-	@Override
-	public boolean isConst() {
-		return true;
-	}
-
 }

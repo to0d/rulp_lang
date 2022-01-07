@@ -181,11 +181,6 @@ public class XRFunction extends AbsFunctionAdapter implements IRFunction {
 	}
 
 	@Override
-	public boolean isConst() {
-		return true;
-	}
-
-	@Override
 	public boolean isLambda() {
 		return false;
 	}

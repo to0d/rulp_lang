@@ -27,4 +27,5 @@ public interface IRList extends IRObject {
 
 	public int size() throws RException;
 
+	public boolean isConst();
 }

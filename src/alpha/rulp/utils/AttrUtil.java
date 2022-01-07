@@ -4,11 +4,15 @@ import static alpha.rulp.lang.Constant.A_THREAD_UNSAFE;
 
 import java.util.List;
 
+import alpha.rulp.lang.IRArray;
+import alpha.rulp.lang.IRClass;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
+import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
+import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.ximpl.attribute.StableUtil;
 import alpha.rulp.ximpl.lang.AbsObject;
@@ -35,6 +39,56 @@ public class AttrUtil {
 
 	public static boolean hasAttributeList(IRObject obj) {
 		return ((AbsObject) obj).getAttributeCount() > 0;
+	}
+
+	public static boolean isConst(IRObject obj, IRFrame frame) throws RException {
+
+		switch (obj.getType()) {
+		case STRING:
+		case MACRO:
+		case INT:
+		case FLOAT:
+		case DOUBLE:
+		case BOOL:
+		case LONG:
+		case FACTOR:
+		case CONSTANT:
+		case NIL:
+			return true;
+
+		case CLASS:
+			return ((IRClass) obj).isConst();
+
+		case FUNC:
+			return !((IRFunction) obj).isList();
+
+		case LIST:
+		case EXPR:
+			return ((IRList) obj).isConst();
+
+		case ARRAY:
+			return ((IRArray) obj).isConst();
+
+		case ATOM:
+
+			String atomName = RulpUtil.asAtom(obj).getName();
+
+			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, atomName);
+			// is pure atom
+			if (entry == null) {
+				return true;
+			}
+
+			IRObject entryValue = entry.getObject();
+			if (entryValue == null || entryValue.getType() == RType.ATOM) {
+				return true;
+			}
+
+			return isConst(entryValue, frame);
+
+		default:
+			return false;
+		}
 	}
 
 	public static boolean isStable(IRObject obj, IRFrame frame) throws RException {

@@ -48,10 +48,4 @@ public class XRError extends AbsRInstance implements IRError {
 	public String toString() {
 		return asString();
 	}
-
-	@Override
-	public boolean isConst() {
-		return true;
-	}
-
 }

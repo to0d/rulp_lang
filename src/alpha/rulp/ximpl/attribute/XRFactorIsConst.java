@@ -18,6 +18,7 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorIsConst extends AbsAtomFactorAdapter implements IRFactor {
@@ -33,7 +34,6 @@ public class XRFactorIsConst extends AbsAtomFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		return args.get(1).isConst() ? O_True : O_False;
+		return AttrUtil.isConst(args.get(1), frame) ? O_True : O_False;
 	}
-
 }

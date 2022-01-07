@@ -95,11 +95,6 @@ public class XRBlob extends AbsAtomObject implements IRBlob {
 	}
 
 	@Override
-	public boolean isConst() {
-		return false;
-	}
-
-	@Override
 	public int length() throws RException {
 		return value.length;
 	}
