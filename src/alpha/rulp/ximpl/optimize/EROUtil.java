@@ -1,7 +1,9 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.F_BREAK;
+import static alpha.rulp.lang.Constant.F_B_AND;
+import static alpha.rulp.lang.Constant.F_B_OR;
 import static alpha.rulp.lang.Constant.F_CASE;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_LOOP;
@@ -12,9 +14,12 @@ import static alpha.rulp.lang.Constant.F_O_MOD;
 import static alpha.rulp.lang.Constant.F_O_POWER;
 import static alpha.rulp.lang.Constant.F_O_SUB;
 import static alpha.rulp.lang.Constant.F_RETURN;
+import static alpha.rulp.lang.Constant.O_BY;
+import static alpha.rulp.lang.Constant.O_False;
 import static alpha.rulp.lang.Constant.O_INT_0;
 import static alpha.rulp.lang.Constant.O_INT_1;
 import static alpha.rulp.lang.Constant.O_POWER;
+import static alpha.rulp.lang.Constant.O_True;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,6 +45,25 @@ import alpha.rulp.ximpl.control.XRFactorLoop;
 public class EROUtil {
 
 	static class ArithmeticUtil {
+
+		private static int _rebuildAdd(List<IRObject> list, int fromIndex, int toIndex) throws RException {
+
+			int size = _rebuildAddBy(list, fromIndex, toIndex, RArithmeticOperator.ADD);
+
+			int listSize = size;
+			if (listSize == -1) {
+				listSize = toIndex - fromIndex;
+			}
+
+			if (listSize >= 2) {
+				int size2 = _rebuildSameElement(list, fromIndex, fromIndex + listSize, RArithmeticOperator.BY);
+				if (size2 != -1) {
+					size = size2;
+				}
+			}
+
+			return size;
+		}
 
 		private static int _rebuildAddBy(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
 				throws RException {
@@ -137,25 +161,6 @@ public class EROUtil {
 
 			if (listSize >= 2) {
 				int size2 = _rebuildSameElement(list, fromIndex, fromIndex + listSize, RArithmeticOperator.POWER);
-				if (size2 != -1) {
-					size = size2;
-				}
-			}
-
-			return size;
-		}
-
-		private static int _rebuildAdd(List<IRObject> list, int fromIndex, int toIndex) throws RException {
-
-			int size = _rebuildAddBy(list, fromIndex, toIndex, RArithmeticOperator.ADD);
-
-			int listSize = size;
-			if (listSize == -1) {
-				listSize = toIndex - fromIndex;
-			}
-
-			if (listSize >= 2) {
-				int size2 = _rebuildSameElement(list, fromIndex, fromIndex + listSize, RArithmeticOperator.BY);
 				if (size2 != -1) {
 					size = size2;
 				}
@@ -286,20 +291,23 @@ public class EROUtil {
 				int i = uniqMap.get(uniq);
 				IRObject obj = list.get(i);
 
-				switch (op) {
-				case POWER:
-					obj = RulpFactory.createExpression(O_POWER, obj, RulpFactory.createInteger(count));
-					break;
+				if (op != null) {
 
-				case BY:
-					obj = RulpFactory.createExpression(O_BY, RulpFactory.createInteger(count), obj);
-					break;
+					switch (op) {
+					case POWER:
+						obj = RulpFactory.createExpression(O_POWER, obj, RulpFactory.createInteger(count));
+						break;
 
-				default:
-					throw new RException("not support: " + op);
+					case BY:
+						obj = RulpFactory.createExpression(O_BY, RulpFactory.createInteger(count), obj);
+						break;
+
+					default:
+						throw new RException("not support: " + op);
+					}
+
+					list.set(i, obj);
 				}
-
-				list.set(i, obj);
 			}
 
 			return pos - fromIndex;
@@ -435,7 +443,7 @@ public class EROUtil {
 			return rightSize + 1;
 		}
 
-		public static IRObject rebuildArithmetic(List<IRObject> rebuildList, RArithmeticOperator op) throws RException {
+		public static IRObject rebuild(List<IRObject> rebuildList, RArithmeticOperator op) throws RException {
 
 			int size = rebuildList.size();
 
@@ -491,6 +499,179 @@ public class EROUtil {
 
 		}
 
+	}
+
+	static class BoolUtil {
+
+		public static IRObject rebuildAnd(List<IRObject> rebuildList) throws RException {
+
+			int size = rebuildList.size();
+			size = _rebuildAnd(rebuildList, 1, size);
+			int listSize;
+			if (size == -1) {
+				listSize = rebuildList.size();
+			} else {
+				listSize = size + 1;
+			}
+
+			if (listSize >= 3) {
+				int size2 = ArithmeticUtil._rebuildSameElement(rebuildList, 1, listSize, null);
+				if (size2 != -1) {
+					size = size2;
+				}
+			}
+
+			switch (size) {
+
+			// no change
+			case -1:
+				return null;
+
+			// 0
+			case 0:
+				return O_True;
+
+			case 1:
+				return rebuildList.get(1);
+
+			default:
+				return RulpFactory.createExpression(rebuildList.subList(0, size + 1));
+			}
+
+		}
+
+		public static IRObject rebuildOr(List<IRObject> rebuildList) throws RException {
+
+			int size = rebuildList.size();
+			size = _rebuildOr(rebuildList, 1, size);
+			int listSize;
+			if (size == -1) {
+				listSize = rebuildList.size();
+			} else {
+				listSize = size + 1;
+			}
+
+			if (listSize >= 3) {
+				int size2 = ArithmeticUtil._rebuildSameElement(rebuildList, 1, listSize, null);
+				if (size2 != -1) {
+					size = size2;
+				}
+			}
+
+			switch (size) {
+
+			// no change
+			case -1:
+				return null;
+
+			// 0
+			case 0:
+				return O_True;
+
+			case 1:
+				return rebuildList.get(1);
+
+			default:
+				return RulpFactory.createExpression(rebuildList.subList(0, size + 1));
+			}
+
+		}
+
+		private static int _rebuildAnd(List<IRObject> list, int fromIndex, int toIndex) throws RException {
+
+			int size = toIndex - fromIndex;
+
+			// (and true) => true
+			// (and false) => false
+			// (or true) => true
+			// (or false) => false
+
+			if (size < 2) {
+				return -1;
+			}
+
+			int pos = fromIndex;
+
+			NEXT: for (int i = fromIndex; i < toIndex; ++i) {
+
+				IRObject obj = list.get(i);
+
+				if (obj.getType() == RType.BOOL) {
+
+					// (and a true) ==> (and a)
+					if (RulpUtil.asBoolean(obj).asBoolean()) {
+						continue NEXT;
+					}
+					// (and a false) ==> false
+					else {
+						list.set(fromIndex, O_False);
+						return 1;
+					}
+
+				} else {
+
+					if (pos != i) {
+						list.set(pos, obj);
+					}
+
+					pos++;
+				}
+			}
+
+			if (pos == toIndex) {
+				return -1;
+			}
+
+			return pos - fromIndex;
+		}
+
+		private static int _rebuildOr(List<IRObject> list, int fromIndex, int toIndex) throws RException {
+
+			int size = toIndex - fromIndex;
+
+			// (and true) => true
+			// (and false) => false
+			// (or true) => true
+			// (or false) => false
+
+			if (size < 2) {
+				return -1;
+			}
+
+			int pos = fromIndex;
+
+			NEXT: for (int i = fromIndex; i < toIndex; ++i) {
+
+				IRObject obj = list.get(i);
+
+				if (obj.getType() == RType.BOOL) {
+
+					// (or a true) ==> true
+					if (RulpUtil.asBoolean(obj).asBoolean()) {
+						list.set(fromIndex, O_True);
+						return 1;
+					}
+					// (or a false) ==> (or a)
+					else {
+						continue NEXT;
+					}
+
+				} else {
+
+					if (pos != i) {
+						list.set(pos, obj);
+					}
+
+					pos++;
+				}
+			}
+
+			if (pos == toIndex) {
+				return -1;
+			}
+
+			return pos - fromIndex;
+		}
 	}
 
 	static class ERO {
@@ -667,27 +848,35 @@ public class EROUtil {
 				break;
 
 			case F_O_BY:
-				rebuildObj = ArithmeticUtil.rebuildArithmetic(rebuildList, RArithmeticOperator.BY);
+				rebuildObj = ArithmeticUtil.rebuild(rebuildList, RArithmeticOperator.BY);
 				break;
 
 			case F_O_ADD:
-				rebuildObj = ArithmeticUtil.rebuildArithmetic(rebuildList, RArithmeticOperator.ADD);
+				rebuildObj = ArithmeticUtil.rebuild(rebuildList, RArithmeticOperator.ADD);
 				break;
 
 			case F_O_SUB:
-				rebuildObj = ArithmeticUtil.rebuildArithmetic(rebuildList, RArithmeticOperator.SUB);
+				rebuildObj = ArithmeticUtil.rebuild(rebuildList, RArithmeticOperator.SUB);
 				break;
 
 			case F_O_POWER:
-				rebuildObj = ArithmeticUtil.rebuildArithmetic(rebuildList, RArithmeticOperator.POWER);
+				rebuildObj = ArithmeticUtil.rebuild(rebuildList, RArithmeticOperator.POWER);
 				break;
 
 			case F_O_DIV:
-				rebuildObj = ArithmeticUtil.rebuildArithmetic(rebuildList, RArithmeticOperator.DIV);
+				rebuildObj = ArithmeticUtil.rebuild(rebuildList, RArithmeticOperator.DIV);
 				break;
 
 			case F_O_MOD:
-				rebuildObj = ArithmeticUtil.rebuildArithmetic(rebuildList, RArithmeticOperator.MOD);
+				rebuildObj = ArithmeticUtil.rebuild(rebuildList, RArithmeticOperator.MOD);
+				break;
+
+			case F_B_AND:
+				rebuildObj = BoolUtil.rebuildAnd(rebuildList);
+				break;
+
+			case F_B_OR:
+				rebuildObj = BoolUtil.rebuildOr(rebuildList);
 				break;
 
 			default:

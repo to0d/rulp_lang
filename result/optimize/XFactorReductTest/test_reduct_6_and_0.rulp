@@ -1,3 +1,6 @@
+(reduct (and false a))
+;=>false
+
 (reduct (and false true))
 ;=>false
 

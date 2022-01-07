@@ -1,11 +1,11 @@
 (reduct (or false true))
-;=>false
+;=>true
 
 (reduct (or false false))
 ;=>false
 
 (reduct (or false false true))
-;=>false
+;=>true
 
 (reduct (or true true true))
 ;=>true
