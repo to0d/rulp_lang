@@ -13,7 +13,7 @@ import static alpha.rulp.lang.Constant.F_O_DIV;
 import static alpha.rulp.lang.Constant.F_O_MOD;
 import static alpha.rulp.lang.Constant.F_O_POWER;
 import static alpha.rulp.lang.Constant.F_O_SUB;
-import static alpha.rulp.lang.Constant.F_RETURN;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.O_BY;
 import static alpha.rulp.lang.Constant.O_False;
 import static alpha.rulp.lang.Constant.O_INT_0;
@@ -63,6 +63,61 @@ public class EROUtil {
 			}
 
 			return size;
+		}
+
+		private static int _rebuildDiv(List<IRObject> list, int fromIndex, int toIndex) throws RException {
+
+			int size = toIndex - fromIndex;
+
+			if (size > 1) {
+
+				IRObject e0 = list.get(fromIndex);
+				if (!OptUtil.isConstNumber(e0)) {
+
+					String uniq0 = RulpUtil.toUniqString(e0);
+
+					int findIndex = -1;
+					for (int i = fromIndex + 1; i < toIndex; ++i) {
+						IRObject ex = list.get(i);
+						if (!OptUtil.isConstNumber(ex) && RulpUtil.toUniqString(ex).equals(uniq0)) {
+							findIndex = i;
+							break;
+						}
+					}
+
+					if (findIndex != -1) {
+
+						list.set(fromIndex, O_INT_1);
+						for (int i = findIndex + 1; i < toIndex; ++i) {
+							list.set(i - 1, list.get(i));
+						}
+
+						size--;
+					}
+				}
+
+			}
+
+			int size2 = _rebuildSubDivPower(list, fromIndex, fromIndex + size, RArithmeticOperator.DIV);
+			int listSize;
+			if (size2 == -1) {
+				listSize = size;
+			} else {
+				listSize = size2;
+			}
+
+			if (listSize >= 3) {
+				int size3 = _rebuildSameElement(list, fromIndex + 1, fromIndex + listSize, RArithmeticOperator.POWER);
+				if (size3 != -1) {
+					listSize = size3 + 1;
+				}
+			}
+
+			if ((toIndex - fromIndex) == listSize) {
+				return -1;
+			}
+
+			return listSize;
 		}
 
 		private static int _rebuildAddBy(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
@@ -460,8 +515,11 @@ public class EROUtil {
 			switch (op) {
 			case SUB:
 			case POWER:
-			case DIV:
 				size = _rebuildSubDivPower(rebuildList, 1, size, op);
+				break;
+
+			case DIV:
+				size = _rebuildDiv(rebuildList, 1, size);
 				break;
 
 			case ADD:
@@ -502,80 +560,6 @@ public class EROUtil {
 	}
 
 	static class BoolUtil {
-
-		public static IRObject rebuildAnd(List<IRObject> rebuildList) throws RException {
-
-			int size = rebuildList.size();
-			size = _rebuildAnd(rebuildList, 1, size);
-			int listSize;
-			if (size == -1) {
-				listSize = rebuildList.size();
-			} else {
-				listSize = size + 1;
-			}
-
-			if (listSize >= 3) {
-				int size2 = ArithmeticUtil._rebuildSameElement(rebuildList, 1, listSize, null);
-				if (size2 != -1) {
-					size = size2;
-				}
-			}
-
-			switch (size) {
-
-			// no change
-			case -1:
-				return null;
-
-			// 0
-			case 0:
-				return O_True;
-
-			case 1:
-				return rebuildList.get(1);
-
-			default:
-				return RulpFactory.createExpression(rebuildList.subList(0, size + 1));
-			}
-
-		}
-
-		public static IRObject rebuildOr(List<IRObject> rebuildList) throws RException {
-
-			int size = rebuildList.size();
-			size = _rebuildOr(rebuildList, 1, size);
-			int listSize;
-			if (size == -1) {
-				listSize = rebuildList.size();
-			} else {
-				listSize = size + 1;
-			}
-
-			if (listSize >= 3) {
-				int size2 = ArithmeticUtil._rebuildSameElement(rebuildList, 1, listSize, null);
-				if (size2 != -1) {
-					size = size2;
-				}
-			}
-
-			switch (size) {
-
-			// no change
-			case -1:
-				return null;
-
-			// 0
-			case 0:
-				return O_True;
-
-			case 1:
-				return rebuildList.get(1);
-
-			default:
-				return RulpFactory.createExpression(rebuildList.subList(0, size + 1));
-			}
-
-		}
 
 		private static int _rebuildAnd(List<IRObject> list, int fromIndex, int toIndex) throws RException {
 
@@ -671,6 +655,80 @@ public class EROUtil {
 			}
 
 			return pos - fromIndex;
+		}
+
+		public static IRObject rebuildAnd(List<IRObject> rebuildList) throws RException {
+
+			int size = rebuildList.size();
+			size = _rebuildAnd(rebuildList, 1, size);
+			int listSize;
+			if (size == -1) {
+				listSize = rebuildList.size();
+			} else {
+				listSize = size + 1;
+			}
+
+			if (listSize >= 3) {
+				int size2 = ArithmeticUtil._rebuildSameElement(rebuildList, 1, listSize, null);
+				if (size2 != -1) {
+					size = size2;
+				}
+			}
+
+			switch (size) {
+
+			// no change
+			case -1:
+				return null;
+
+			// 0
+			case 0:
+				return O_True;
+
+			case 1:
+				return rebuildList.get(1);
+
+			default:
+				return RulpFactory.createExpression(rebuildList.subList(0, size + 1));
+			}
+
+		}
+
+		public static IRObject rebuildOr(List<IRObject> rebuildList) throws RException {
+
+			int size = rebuildList.size();
+			size = _rebuildOr(rebuildList, 1, size);
+			int listSize;
+			if (size == -1) {
+				listSize = rebuildList.size();
+			} else {
+				listSize = size + 1;
+			}
+
+			if (listSize >= 3) {
+				int size2 = ArithmeticUtil._rebuildSameElement(rebuildList, 1, listSize, null);
+				if (size2 != -1) {
+					size = size2;
+				}
+			}
+
+			switch (size) {
+
+			// no change
+			case -1:
+				return null;
+
+			// 0
+			case 0:
+				return O_True;
+
+			case 1:
+				return rebuildList.get(1);
+
+			default:
+				return RulpFactory.createExpression(rebuildList.subList(0, size + 1));
+			}
+
 		}
 	}
 

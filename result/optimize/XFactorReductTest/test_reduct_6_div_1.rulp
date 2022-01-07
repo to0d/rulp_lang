@@ -1,3 +1,5 @@
 (reduct (/ a b b b))
 ;=>(/ a (power b 3))
 
+(reduct (/ a b c b))
+;=>(/ a (power b 2) c)

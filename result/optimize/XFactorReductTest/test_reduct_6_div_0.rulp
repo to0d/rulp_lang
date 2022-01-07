@@ -28,5 +28,14 @@
 (reduct (/ a 2D b 3L 1))
 ;=>
 
+(reduct (/ 4 2 a))
+;=>
+
 (reduct (/ a a b))
 ;=>(/ 1 b)
+
+(reduct (/ a b a))
+;=>(/ 1 b)
+
+(reduct (/ a b 4 c 2))
+;=>
