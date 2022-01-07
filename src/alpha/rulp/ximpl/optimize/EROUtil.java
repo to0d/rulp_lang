@@ -14,9 +14,12 @@ import static alpha.rulp.lang.Constant.F_O_SUB;
 import static alpha.rulp.lang.Constant.F_RETURN;
 import static alpha.rulp.lang.Constant.O_INT_0;
 import static alpha.rulp.lang.Constant.O_INT_1;
+import static alpha.rulp.lang.Constant.O_POWER;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import alpha.rulp.lang.IRExpr;
@@ -123,6 +126,25 @@ public class EROUtil {
 			return pos;
 		}
 
+		private static int _rebuildBy(List<IRObject> list, int fromIndex, int toIndex) throws RException {
+
+			int size = _rebuildAddBy(list, fromIndex, toIndex, RArithmeticOperator.BY);
+
+			int listSize = size;
+			if (listSize == -1) {
+				listSize = toIndex - fromIndex;
+			}
+
+			if (listSize >= 2) {
+				int size2 = _rebuildSameElement(list, fromIndex, fromIndex + listSize, RArithmeticOperator.POWER);
+				if (size2 != -1) {
+					size = size2;
+				}
+			}
+
+			return size;
+		}
+
 		private static int _rebuildMod(List<IRObject> list, int fromIndex, int toIndex) throws RException {
 
 			int size = toIndex - fromIndex;
@@ -187,6 +209,73 @@ public class EROUtil {
 			// no change
 			if (pos == toIndex) {
 				return -1;
+			}
+
+			return pos - fromIndex;
+		}
+
+		private static int _rebuildSameElement(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
+				throws RException {
+
+			int size = toIndex - fromIndex;
+			if (size < 2) {
+				return -1;
+			}
+
+			Map<String, Integer> uniqMap = new HashMap<>();
+			Map<String, Integer> countMap = null;
+
+			int pos = fromIndex;
+
+			for (int i = fromIndex; i < toIndex; ++i) {
+
+				IRObject obj = list.get(i);
+
+				String uniq = RulpUtil.toUniqString(list.get(i));
+
+				if (!uniqMap.containsKey(uniq)) {
+
+					uniqMap.put(uniq, pos);
+
+					if (pos != i) {
+						list.set(pos, obj);
+					}
+
+					++pos;
+
+				} else {
+
+					if (countMap == null) {
+						countMap = new HashMap<>();
+					}
+
+					Integer count = countMap.get(uniq);
+					if (count == null) {
+						count = 1;
+					}
+
+					countMap.put(uniq, count + 1);
+				}
+			}
+
+			if (countMap == null) {
+				return -1;
+			}
+
+			for (String uniq : countMap.keySet()) {
+				int count = countMap.get(uniq);
+				int i = uniqMap.get(uniq);
+				IRObject obj = list.get(i);
+
+				switch (op) {
+				case POWER:
+					obj = RulpFactory.createExpression(O_POWER, obj, RulpFactory.createInteger(count));
+					break;
+				default:
+					throw new RException("not support: " + op);
+				}
+
+				list.set(i, obj);
 			}
 
 			return pos - fromIndex;
@@ -344,8 +433,11 @@ public class EROUtil {
 				break;
 
 			case ADD:
-			case BY:
 				size = _rebuildAddBy(rebuildList, 1, size, op);
+				break;
+
+			case BY:
+				size = _rebuildBy(rebuildList, 1, size);
 				break;
 
 			case MOD:

@@ -9,18 +9,14 @@ import static alpha.rulp.lang.Constant.T_Bool;
 import static alpha.rulp.lang.Constant.T_Double;
 import static alpha.rulp.lang.Constant.T_Expr;
 import static alpha.rulp.lang.Constant.T_Float;
-import static alpha.rulp.lang.Constant.T_Frame;
 import static alpha.rulp.lang.Constant.T_Int;
 import static alpha.rulp.lang.Constant.T_List;
 import static alpha.rulp.lang.Constant.T_Long;
-import static alpha.rulp.lang.Constant.T_Macro;
 import static alpha.rulp.lang.Constant.T_Member;
 import static alpha.rulp.lang.Constant.T_Native;
 import static alpha.rulp.lang.Constant.T_String;
-import static alpha.rulp.lang.Constant.T_Template;
 
 import alpha.rulp.lang.IRAtom;
-import alpha.rulp.lang.IRClass;
 import alpha.rulp.lang.IRConst;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
