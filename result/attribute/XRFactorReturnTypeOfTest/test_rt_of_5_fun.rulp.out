@@ -19,8 +19,5 @@
 ;=>fun1 fun2 fun3
 
 (return-type-of fun1)
-;err:
-factor not found: (return-type-of fun1)
-at main: (return-type-of fun1)
-;eof
+;=>nan
 

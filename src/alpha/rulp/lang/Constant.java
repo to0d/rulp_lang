@@ -93,7 +93,7 @@ public interface Constant {
 
 	String A_NOCLASS = "noclass";
 
-	String A_NULL = "null";
+//	String A_NULL = "null";
 
 	String A_OPT_CCO = "opt-cco";
 
@@ -120,6 +120,8 @@ public interface Constant {
 	String A_QUEUE = "queue";
 
 	String A_RETURN_VAR = "?rv";
+	
+	String F_RETURN_TYPE_OF = "return-type-of";
 
 	String A_ROOT = "root";
 
@@ -619,7 +621,7 @@ public interface Constant {
 
 	IRAtom T_Native = RulpFactory.createAtom(A_NATIVE);
 
-	IRAtom T_Null = RulpFactory.createAtom(A_NULL);
+//	IRAtom T_Null = RulpFactory.createAtom(A_NULL);
 
 	IRAtom T_String = RulpFactory.createAtom(A_STRING);
 

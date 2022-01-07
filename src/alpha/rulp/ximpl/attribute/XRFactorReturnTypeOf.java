@@ -10,14 +10,11 @@
 package alpha.rulp.ximpl.attribute;
 
 import alpha.rulp.lang.IRFrame;
-import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
-import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorReturnTypeOf extends AbsAtomFactorAdapter implements IRFactor {
@@ -33,17 +30,7 @@ public class XRFactorReturnTypeOf extends AbsAtomFactorAdapter implements IRFact
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRObject obj = args.get(1);
-		RType type = obj.getType();
-
-		if (type == RType.ATOM) {
-			IRFrameEntry entry = frame.getEntry(RulpUtil.asAtom(obj).getName());
-			if (entry != null) {
-				type = entry.getObject().getType();
-			}
-		}
-
-		return RType.toObject(type);
+		return ReturnTypeUtil.returnTypeOf(args.get(1), frame);
 	}
 
 }

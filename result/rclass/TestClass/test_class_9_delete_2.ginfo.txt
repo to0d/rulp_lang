@@ -132,7 +132,7 @@ name=class1, string=class1, lvl=0, ref=1/3, parent=null, final=false, mbrs=3, fr
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?value               : DEFAULT                      0    1    var        null
+?value               : DEFAULT                      0    1    var        nil
 init                 : DEFAULT                      0    1    func       (init) : frame=frame@main
 ~init                : DEFAULT                      0    1    func       (~init) : frame=frame@main
 ==========================================================================================================================

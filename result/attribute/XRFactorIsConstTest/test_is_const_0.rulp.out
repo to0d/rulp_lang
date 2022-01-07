@@ -116,10 +116,9 @@ obj=namespace, type=class, const=false
 obj=nan, type=atom, const=true
 obj=native, type=atom, const=true
 obj=new, type=factor, const=true
-obj=nil, type=null, const=true
+obj=nil, type=nil, const=true
 obj=noclass, type=class, const=true
 obj=not, type=factor, const=true
-obj=null, type=atom, const=true
 obj=open-txt-file, type=factor, const=true
 obj=opt-status, type=factor, const=true
 obj=or, type=factor, const=true
@@ -139,6 +138,7 @@ obj=reduct, type=factor, const=true
 obj=ref, type=factor, const=true
 obj=remove, type=factor, const=true
 obj=return, type=factor, const=true
+obj=return-type-of, type=factor, const=true
 obj=reverse, type=factor, const=true
 obj=root, type=frame, const=false
 obj=rulp-object-count, type=factor, const=true

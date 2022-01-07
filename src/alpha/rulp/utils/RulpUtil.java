@@ -34,7 +34,6 @@ import static alpha.rulp.lang.Constant.A_MEMBER;
 import static alpha.rulp.lang.Constant.A_NAMESPACE;
 import static alpha.rulp.lang.Constant.A_NATIVE;
 import static alpha.rulp.lang.Constant.A_NIL;
-import static alpha.rulp.lang.Constant.A_NULL;
 import static alpha.rulp.lang.Constant.A_OPT_CCO;
 import static alpha.rulp.lang.Constant.A_OPT_ERO;
 import static alpha.rulp.lang.Constant.A_OPT_ID;
@@ -89,7 +88,6 @@ import static alpha.rulp.lang.Constant.T_Long;
 import static alpha.rulp.lang.Constant.T_Macro;
 import static alpha.rulp.lang.Constant.T_Member;
 import static alpha.rulp.lang.Constant.T_Native;
-import static alpha.rulp.lang.Constant.T_Null;
 import static alpha.rulp.lang.Constant.T_String;
 import static alpha.rulp.lang.Constant.T_Template;
 import static alpha.rulp.lang.Constant.T_Var;
@@ -1561,7 +1559,7 @@ public class RulpUtil {
 	public static IRAtom toAtom(String name) {
 
 		if (name == null) {
-			return T_Null;
+			return O_Nil;
 		}
 
 		switch (name) {
@@ -1610,8 +1608,8 @@ public class RulpUtil {
 		case A_NATIVE:
 			return T_Native;
 
-		case A_NULL:
-			return T_Null;
+		case A_NIL:
+			return O_Nil;
 
 		case A_STRING:
 			return T_String;

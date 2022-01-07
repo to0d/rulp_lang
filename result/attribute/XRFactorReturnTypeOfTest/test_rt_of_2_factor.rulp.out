@@ -1,6 +1,3 @@
 (return-type-of +)
-;err:
-factor not found: (return-type-of +)
-at main: (return-type-of +)
-;eof
+;=>nan
 

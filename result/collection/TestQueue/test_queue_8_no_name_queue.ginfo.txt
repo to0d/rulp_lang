@@ -140,7 +140,7 @@ name=queue, string=queue, lvl=0, ref=1/1, parent=null, final=true, mbrs=28, fram
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE                      0    1    var        null
+?impl                : PRIVATE                      0    1    var        nil
 _queue_clear         : PRIVATE                      0    0    factor     _queue_clear
 _queue_get           : PRIVATE                      0    0    factor     _queue_get
 _queue_init          : PRIVATE                      0    0    factor     _queue_init

@@ -67,6 +67,7 @@ import alpha.rulp.ximpl.attribute.XRFactorAttributeOf;
 import alpha.rulp.ximpl.attribute.XRFactorIsConst;
 import alpha.rulp.ximpl.attribute.XRFactorIsStable;
 import alpha.rulp.ximpl.attribute.XRFactorIsThreadSafe;
+import alpha.rulp.ximpl.attribute.XRFactorReturnTypeOf;
 import alpha.rulp.ximpl.blob.XRBlob;
 import alpha.rulp.ximpl.blob.XRFactorBlobLength;
 import alpha.rulp.ximpl.blob.XRFactorMakeBlob;
@@ -548,7 +549,6 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, O_Static);
 		RulpUtil.addFrameObject(rootFrame, O_From);
 
-		RulpUtil.addFrameObject(rootFrame, T_Null);
 		RulpUtil.addFrameObject(rootFrame, T_Atom);
 		RulpUtil.addFrameObject(rootFrame, T_Bool);
 		RulpUtil.addFrameObject(rootFrame, T_Int);
@@ -593,6 +593,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorCompute(F_COMPUTE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorAttributeOf(F_ATTRIBUTE_OF));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorAddAttribute(F_ADD_ATTRIBUTE));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorReturnTypeOf(F_RETURN_TYPE_OF));
 
 		// Class
 		RulpUtil.addFrameObject(rootFrame, new XRNoClass(A_NOCLASS, rootFrame));

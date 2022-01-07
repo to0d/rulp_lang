@@ -102,7 +102,7 @@ _ginfo               : 10       2        3    funcList   '((_ginfo string) (_gin
                                          1    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
 fun1                 : 11       2        1    func       (fun1 nil) : frame=frame@main
-?f                   : 12       2        1    var        null                
+?f                   : 12       2        1    var        nil                 
 ?rv                  : 14       2        1    var        lambda : type=func  
 ==========================================================================================================================
 

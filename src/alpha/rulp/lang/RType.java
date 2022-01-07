@@ -28,7 +28,7 @@ import static alpha.rulp.lang.Constant.A_LONG;
 import static alpha.rulp.lang.Constant.A_MACRO;
 import static alpha.rulp.lang.Constant.A_MEMBER;
 import static alpha.rulp.lang.Constant.A_NATIVE;
-import static alpha.rulp.lang.Constant.A_NULL;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.A_STRING;
 import static alpha.rulp.lang.Constant.A_TEMPLATE;
 import static alpha.rulp.lang.Constant.A_VAR;
@@ -52,7 +52,7 @@ import static alpha.rulp.lang.Constant.T_Long;
 import static alpha.rulp.lang.Constant.T_Macro;
 import static alpha.rulp.lang.Constant.T_Member;
 import static alpha.rulp.lang.Constant.T_Native;
-import static alpha.rulp.lang.Constant.T_Null;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.T_String;
 import static alpha.rulp.lang.Constant.T_Template;
 import static alpha.rulp.lang.Constant.T_Var;
@@ -61,7 +61,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public enum RType {
 
-	NIL(0, A_NULL), //
+	NIL(0, A_NIL), //
 	ATOM(1, A_ATOM), //
 	BOOL(2, A_BOOL), //
 	INT(3, A_INTEGER), //
@@ -136,7 +136,7 @@ public enum RType {
 			return T_Native;
 
 		case NIL:
-			return T_Null;
+			return O_Nil;
 
 		case STRING:
 			return T_String;
@@ -209,7 +209,7 @@ public enum RType {
 		case A_NATIVE:
 			return NATIVE;
 
-		case A_NULL:
+		case A_NIL:
 			return NIL;
 
 		case A_STRING:

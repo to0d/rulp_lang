@@ -104,7 +104,6 @@ root::new
 root::nil
 root::noclass
 root::not
-root::null
 root::open-txt-file
 root::opt-status
 root::or
@@ -124,6 +123,7 @@ root::reduct
 root::ref
 root::remove
 root::return
+root::return-type-of
 root::reverse
 root::root
 root::rulp-object-count

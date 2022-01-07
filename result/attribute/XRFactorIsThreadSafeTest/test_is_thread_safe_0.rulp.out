@@ -125,10 +125,9 @@ obj=namespace, type=class, stable=false
 obj=nan, type=atom, stable=true
 obj=native, type=atom, stable=true
 obj=new, type=factor, stable=true
-obj=nil, type=null, stable=false
+obj=nil, type=nil, stable=false
 obj=noclass, type=class, stable=false
 obj=not, type=factor, stable=true
-obj=null, type=atom, stable=true
 obj=open-txt-file, type=factor, stable=false
 obj=opt-status, type=factor, stable=true
 obj=or, type=factor, stable=true
@@ -148,6 +147,7 @@ obj=reduct, type=factor, stable=true
 obj=ref, type=factor, stable=true
 obj=remove, type=factor, stable=true
 obj=return, type=factor, stable=true
+obj=return-type-of, type=factor, stable=true
 obj=reverse, type=factor, stable=true
 obj=root, type=frame, stable=false
 obj=rulp-object-count, type=factor, stable=true
