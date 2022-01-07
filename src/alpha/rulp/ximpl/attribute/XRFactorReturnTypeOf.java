@@ -7,7 +7,7 @@
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-package alpha.rulp.ximpl.factor;
+package alpha.rulp.ximpl.attribute;
 
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
@@ -18,6 +18,7 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorReturnTypeOf extends AbsAtomFactorAdapter implements IRFactor {
 
