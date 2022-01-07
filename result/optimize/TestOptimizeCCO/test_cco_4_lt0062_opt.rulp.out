@@ -27,7 +27,7 @@
         )
         (if[stable]
             (< m n)
-            (return[stable] (cc2[id=0] (uniquePaths n m)))
+            (return[stable] (cc2[opt-id=0] (uniquePaths n m)))
         )
         (if
             (= n 1)
@@ -35,8 +35,8 @@
         )
         (return[stable]
             (+[atom stable]
-                (cc2[id=0] (uniquePaths (- m 1) n))
-                (cc2[id=0] (uniquePaths m (- n 1)))
+                (cc2[opt-id=0] (uniquePaths (- m 1) n))
+                (cc2[opt-id=0] (uniquePaths m (- n 1)))
             )
         )
     )

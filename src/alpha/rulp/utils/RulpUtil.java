@@ -9,7 +9,7 @@
 
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.A_ARRAY;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.A_ATOM;
 import static alpha.rulp.lang.Constant.A_BLOB;
 import static alpha.rulp.lang.Constant.A_BOOL;
@@ -130,7 +130,6 @@ import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.runtime.IRTemplate.TemplatePara;
 import alpha.rulp.runtime.IRTemplate.TemplateParaEntry;
 import alpha.rulp.runtime.RName;
-import alpha.rulp.ximpl.attribute.AttrUtil;
 import alpha.rulp.ximpl.collection.XRMap;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.rclass.XRFactorNew;
@@ -1646,6 +1645,24 @@ public class RulpUtil {
 
 		case F_COMPUTE:
 			return O_COMPUTE;
+
+		case A_OPT_ID:
+			return O_OPT_ID;
+
+		case A_STABLE:
+			return O_STABLE;
+
+		case A_THREAD_UNSAFE:
+			return O_THREAD_UNSAFE;
+
+		case A_OPT_CCO:
+			return O_OPT_CCO;
+
+		case A_OPT_ERO:
+			return O_OPT_ERO;
+
+		case A_OPT_TCO:
+			return O_OPT_TCO;
 
 		default:
 			return RulpFactory.createAtom(name);

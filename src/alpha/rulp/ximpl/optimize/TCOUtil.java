@@ -1,7 +1,7 @@
 package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.A_DO;
-import static alpha.rulp.lang.Constant.A_ID;
+import static alpha.rulp.lang.Constant.A_OPT_ID;
 import static alpha.rulp.lang.Constant.F_CPS;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_RETURN;
@@ -28,10 +28,10 @@ import alpha.rulp.runtime.IRCallable;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
-import alpha.rulp.ximpl.attribute.AttrUtil;
 
 public class TCOUtil {
 
@@ -342,7 +342,7 @@ public class TCOUtil {
 				if (e1.getType() == RType.EXPR) {
 					int optId = OptUtil.getNextOptFactorId();
 					XRFactorCPS cps = new XRFactorCPS(optId);
-					AttrUtil.addAttribute(cps, String.format("%s=%d", A_ID, optId));
+					AttrUtil.setAttribute(cps, A_OPT_ID, RulpFactory.createInteger(optId));
 					exprCount.getAndIncrement();
 					return RulpFactory.createExpression(cps, e1);
 				}

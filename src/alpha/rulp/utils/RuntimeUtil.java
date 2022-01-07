@@ -61,7 +61,6 @@ import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRThreadContext;
-import alpha.rulp.ximpl.attribute.AttrUtil;
 import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public final class RuntimeUtil {

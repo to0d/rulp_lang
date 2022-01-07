@@ -28,7 +28,7 @@
     (do[stable]
         (defvar ?x 0)
         (loop[stable] for ?i from 1 to ?m do
-            (setq[stable] ?x (+[atom stable] ?x (cc2[id=0] (fun1 ?i))))
+            (setq[stable] ?x (+[atom stable] ?x (cc2[opt-id=0] (fun1 ?i))))
         )
         (return ?x)
     )

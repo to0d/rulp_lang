@@ -1,4 +1,4 @@
-package alpha.rulp.ximpl.attribute;
+package alpha.rulp.utils;
 
 import static alpha.rulp.lang.Constant.A_THREAD_UNSAFE;
 
@@ -10,8 +10,7 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRIterator;
-import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.utils.RuntimeUtil;
+import alpha.rulp.ximpl.attribute.StableUtil;
 import alpha.rulp.ximpl.lang.AbsObject;
 import alpha.rulp.ximpl.optimize.NameSet;
 import alpha.rulp.ximpl.optimize.OptUtil;

@@ -42,12 +42,12 @@ at main: (fun 4)
     (if[stable]
         (> ?x 3)
         (if[stable]
-            (>[atom stable] (cc2[id=0] (fun (- ?x 1))) 0)
+            (>[atom stable] (cc2[opt-id=0] (fun (- ?x 1))) 0)
             (return 1)
             (return 2)
         )
         (if[stable]
-            (>[atom stable] (cc2[id=0] (fun (+ ?x 1))) 0)
+            (>[atom stable] (cc2[opt-id=0] (fun (+ ?x 1))) 0)
             (return 1)
             (return 2)
         )

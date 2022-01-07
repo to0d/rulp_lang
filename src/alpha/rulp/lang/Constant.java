@@ -57,8 +57,6 @@ public interface Constant {
 
 	String A_FUNCTION = "func";
 
-	String A_ID = "id";
-
 	String A_INSTANCE = "instance";
 
 	String A_INTEGER = "int";
@@ -97,13 +95,13 @@ public interface Constant {
 
 	String A_NULL = "null";
 
-	String A_THREAD_UNSAFE = "thread-unsafe";
-
 	String A_OPT_CCO = "opt-cco";
 
 	String A_OPT_ERO = "opt-ero";
 
 	String A_OPT_FULL = "opt-full";
+
+	String A_OPT_ID = "opt-id";
 
 	String A_OPT_TCO = "opt-tco";
 
@@ -140,6 +138,8 @@ public interface Constant {
 	String A_SYSTEM = "system";
 
 	String A_TEMPLATE = "template";
+
+	String A_THREAD_UNSAFE = "thread-unsafe";
 
 	String A_TOOL = "tool";
 
@@ -545,6 +545,14 @@ public interface Constant {
 
 	IRAtom O_NOT = RulpFactory.createAtom(F_O_NOT);
 
+	IRAtom O_OPT_CCO = RulpFactory.createAtom(A_OPT_CCO);
+
+	IRAtom O_OPT_ERO = RulpFactory.createAtom(A_OPT_ERO);
+
+	IRAtom O_OPT_ID = RulpFactory.createAtom(A_OPT_ID);
+
+	IRAtom O_OPT_TCO = RulpFactory.createAtom(A_OPT_TCO);
+
 	IRAtom O_OR = RulpFactory.createAtom(F_O_OR);
 
 	IRAtom O_POWER = RulpFactory.createAtom(F_O_POWER);
@@ -555,9 +563,13 @@ public interface Constant {
 
 	IRAtom O_QUESTION = RulpFactory.createAtom(A_QUESTION);
 
+	IRAtom O_STABLE = RulpFactory.createAtom(A_STABLE);
+
 	IRAtom O_Static = RulpFactory.createAtom(A_STATIC);
 
 	IRAtom O_SUB = RulpFactory.createAtom(F_O_SUB);
+
+	IRAtom O_THREAD_UNSAFE = RulpFactory.createAtom(A_THREAD_UNSAFE);
 
 	IRBoolean O_True = RulpFactory.createBoolean(true);
 

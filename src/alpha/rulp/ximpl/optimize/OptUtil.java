@@ -30,8 +30,8 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
-import alpha.rulp.ximpl.attribute.AttrUtil;
 
 public class OptUtil {
 

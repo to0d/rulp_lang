@@ -32,9 +32,9 @@ import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRFunctionList;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
-import alpha.rulp.ximpl.attribute.AttrUtil;
 import alpha.rulp.ximpl.runtime.AbsFunctionAdapter;
 
 public class XRFunctionList extends AbsFunctionAdapter implements IRFunctionList {

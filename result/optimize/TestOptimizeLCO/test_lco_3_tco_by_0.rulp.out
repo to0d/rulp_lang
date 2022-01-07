@@ -15,7 +15,7 @@
 ;=>nil
 ;out:
 (defun fact (?v)
-    (do (if (<= ?v -1) (return -1)) (cps[id=0] (* ?v (fact (- ?v 1)))))
+    (do (if (<= ?v -1) (return -1)) (cps[opt-id=0] (* ?v (fact (- ?v 1)))))
 )[opt-tco]
 rebuild: id=0, name=cps, call=1, expand=1
 

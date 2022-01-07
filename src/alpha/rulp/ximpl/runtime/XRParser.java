@@ -31,9 +31,9 @@ import alpha.rulp.runtime.IRTokener;
 import alpha.rulp.runtime.IRTokener.Token;
 import alpha.rulp.runtime.IRTokener.TokenType;
 import alpha.rulp.runtime.RName;
+import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.StringUtil;
-import alpha.rulp.ximpl.attribute.AttrUtil;
 import alpha.rulp.ximpl.error.RParseException;
 import alpha.rulp.ximpl.error.RulpIncompleteException;
 

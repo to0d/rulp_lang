@@ -1,6 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.A_ID;
+import static alpha.rulp.lang.Constant.A_OPT_ID;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,9 +16,9 @@ import alpha.rulp.lang.IRParaAttr;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.attribute.AttrUtil;
 
 // (Compute Cache Optimization)
 public class CCOUtil {
@@ -263,7 +263,7 @@ public class CCOUtil {
 
 								int optId = OptUtil.getNextOptFactorId();
 								cc2 = new XRFactorCC2(optId);
-								AttrUtil.addAttribute(cc2, String.format("%s=%d", A_ID, optId));
+								AttrUtil.setAttribute(cc2, A_OPT_ID, RulpFactory.createInteger(optId));
 								cc2Map.put(funcName, cc2);
 								exprCount.getAndIncrement();
 
