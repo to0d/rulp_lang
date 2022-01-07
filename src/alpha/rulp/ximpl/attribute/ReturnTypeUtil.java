@@ -69,9 +69,6 @@ public class ReturnTypeUtil {
 		case ARRAY:
 			return T_Array;
 
-		case MACRO:
-			return T_Macro;
-
 		case NATIVE:
 			return T_Native;
 
@@ -87,12 +84,6 @@ public class ReturnTypeUtil {
 		case MEMBER:
 			return T_Member;
 
-		case FRAME:
-			return T_Frame;
-
-		case TEMPLATE:
-			return T_Template;
-
 		case FACTOR:
 			IRObject value = AttrUtil.getAttributeValue(obj, A_RETURN_TYPE);
 			if (value == null) {
@@ -105,9 +96,6 @@ public class ReturnTypeUtil {
 
 		case VAR:
 			return returnTypeOf(((IRVar) obj).getValue(), frame);
-
-		case CLASS:
-			return ((IRClass) obj).getClassTypeAtom();
 
 		case ATOM:
 

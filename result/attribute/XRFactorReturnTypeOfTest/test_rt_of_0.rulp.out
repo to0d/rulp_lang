@@ -2,12 +2,17 @@
     (if (equal ?subject local)
     
         (ls-return-type-of (value-of (:: (value-of local::parent) parent)))
-        
-        (loop for ?mbr in (ls ?subject) do 
-            (print "obj=" (name-of $(value-of ?mbr)))
-            (print ", type=" (type-of $(value-of (value-of ?mbr))))
-            (print ", const=" (return-type-of  $(value-of (value-of ?mbr))))
-            (print "\n")
+
+        (loop for ?mbr in (ls ?subject) do
+
+            (defvar ?type (return-type-of  $(value-of (value-of ?mbr))))
+            
+            (if (!= ?type nil)
+                (print (str-format "obj=%-20s, type=%-8s, return=%s\n" 
+                            (name-of $(value-of ?mbr))
+                            (to-string (type-of $(value-of (value-of ?mbr))))
+                            (to-string ?type)))
+            )
         )
     )
 )
@@ -16,230 +21,81 @@
 (ls-return-type-of root)
 ;=>nil
 ;out:
-obj=!=, type=factor, const=nil
-obj=%, type=factor, const=nil
-obj=&, type=factor, const=nil
-obj=*, type=factor, const=nil
-obj=+, type=factor, const=nil
-obj=-, type=factor, const=nil
-obj=/, type=factor, const=nil
-obj=::, type=factor, const=nil
-obj=<, type=factor, const=nil
-obj=<=, type=factor, const=nil
-obj==, type=factor, const=nil
-obj=>, type=factor, const=nil
-obj=>=, type=factor, const=nil
-obj=?file.separator, type=var, const=string
-obj=?os.name, type=var, const=string
-obj=?os.version, type=var, const=string
-obj=?path.separator, type=var, const=string
-obj=?user.dir, type=var, const=string
-obj=?user.home, type=var, const=string
-obj=?user.name, type=var, const=string
-obj=^, type=factor, const=nil
-obj=access, type=factor, const=nil
-obj=add-array-to-list, type=factor, const=nil
-obj=add-attribute, type=factor, const=nil
-obj=add-list-to-array, type=factor, const=nil
-obj=add-list-to-list, type=factor, const=nil
-obj=add_search_frame, type=factor, const=nil
-obj=alias, type=factor, const=nil
-obj=and, type=factor, const=bool
-obj=array, type=atom, const=atom
-obj=atom, type=atom, const=atom
-obj=attribute-of, type=factor, const=nil
-obj=blob, type=atom, const=atom
-obj=blob-length, type=factor, const=nil
-obj=bool, type=atom, const=atom
-obj=break, type=factor, const=nil
-obj=can-cast, type=factor, const=nil
-obj=case, type=factor, const=nil
-obj=class, type=atom, const=atom
-obj=class-of, type=factor, const=nil
-obj=cmp_def, type=factor, const=nil
-obj=compute, type=factor, const=nil
-obj=constant, type=atom, const=atom
-obj=continue, type=factor, const=nil
-obj=date, type=factor, const=nil
-obj=default, type=atom, const=atom
-obj=defclass, type=factor, const=nil
-obj=defconst, type=factor, const=nil
-obj=defmacro, type=factor, const=nil
-obj=deftemplate, type=factor, const=nil
-obj=defun, type=factor, const=nil
-obj=defvar, type=factor, const=nil
-obj=delete, type=factor, const=nil
-obj=do, type=factor, const=nil
-obj=do-p, type=factor, const=nil
-obj=do-when-obj-deleted, type=factor, const=nil
-obj=do-when-var-changed, type=factor, const=nil
-obj=double, type=atom, const=atom
-obj=equal_def, type=factor, const=nil
-obj=error, type=factor, const=nil
-obj=error-value, type=factor, const=nil
-obj=expr, type=atom, const=atom
-obj=factor, type=atom, const=atom
-obj=false, type=bool, const=bool
-obj=final, type=atom, const=atom
-obj=float, type=atom, const=atom
-obj=foreach, type=factor, const=nil
-obj=frame, type=atom, const=atom
-obj=frame-of, type=factor, const=nil
-obj=from, type=atom, const=atom
-obj=func, type=atom, const=atom
-obj=get-of-array, type=factor, const=nil
-obj=get-of-list, type=factor, const=nil
-obj=has-member, type=factor, const=nil
-obj=if, type=factor, const=nil
-obj=instance, type=atom, const=atom
-obj=int, type=atom, const=atom
-obj=is-const, type=factor, const=nil
-obj=is-stable, type=factor, const=nil
-obj=is-thread-safe, type=factor, const=nil
-obj=join, type=factor, const=nil
-obj=lambda, type=factor, const=nil
-obj=let, type=factor, const=nil
-obj=list, type=atom, const=atom
-obj=list-function-in-return, type=factor, const=nil
-obj=load, type=factor, const=nil
-obj=long, type=atom, const=atom
-obj=loop, type=factor, const=nil
-obj=ls, type=factor, const=nil
-obj=macro, type=atom, const=atom
-obj=make-array, type=factor, const=nil
-obj=make-blob, type=factor, const=nil
-obj=make-list, type=factor, const=nil
-obj=make-string, type=factor, const=nil
-obj=member, type=atom, const=atom
-obj=name-of, type=factor, const=nil
-obj=namespace, type=class, const=type#namespace
-obj=nan, type=atom, const=atom
-obj=native, type=atom, const=atom
-obj=new, type=factor, const=nil
-obj=nil, type=nil, const=nil
-obj=noclass, type=class, const=type#noclass
-obj=not, type=factor, const=bool
-obj=open-txt-file, type=factor, const=nil
-obj=opt-status, type=factor, const=nil
-obj=or, type=factor, const=bool
-obj=out-to-file, type=factor, const=nil
-obj=parent-of, type=factor, const=nil
-obj=power, type=factor, const=nil
-obj=print, type=factor, const=nil
-obj=print-frame-tree, type=factor, const=nil
-obj=print-global-info, type=factor, const=nil
-obj=print-impl, type=factor, const=nil
-obj=print-subject, type=factor, const=nil
-obj=private, type=atom, const=atom
-obj=property-of, type=factor, const=nil
-obj=public, type=atom, const=atom
-obj=random, type=factor, const=nil
-obj=reduct, type=factor, const=nil
-obj=ref, type=factor, const=nil
-obj=remove, type=factor, const=nil
-obj=return, type=factor, const=nil
-obj=return-type-of, type=factor, const=nil
-obj=reverse, type=factor, const=nil
-obj=root, type=frame, const=frame
-obj=rulp-object-count, type=factor, const=nil
-obj=runtime-call-count, type=factor, const=nil
-obj=save-txt-file, type=factor, const=nil
-obj=search-frame-of, type=factor, const=nil
-obj=seta, type=factor, const=nil
-obj=setq, type=factor, const=nil
-obj=size-of-array, type=factor, const=nil
-obj=size-of-list, type=factor, const=nil
-obj=sleep, type=factor, const=nil
-obj=sort, type=factor, const=nil
-obj=static, type=atom, const=atom
-obj=str-char-at, type=factor, const=int
-obj=str-end-with, type=factor, const=bool
-obj=str-equal, type=factor, const=bool
-obj=str-equal-nocase, type=factor, const=bool
-obj=str-format, type=factor, const=string
-obj=str-index-of, type=factor, const=int
-obj=str-last-index-of, type=factor, const=int
-obj=str-length, type=factor, const=int
-obj=str-match, type=factor, const=bool
-obj=str-replace, type=factor, const=string
-obj=str-split, type=factor, const=list
-obj=str-split-line, type=factor, const=list
-obj=str-start-with, type=factor, const=bool
-obj=str-substr, type=factor, const=string
-obj=str-trim, type=factor, const=string
-obj=str-trim-head, type=factor, const=string
-obj=str-trim-tail, type=factor, const=string
-obj=str-upper, type=factor, const=string
-obj=strcat, type=factor, const=nil
-obj=string, type=atom, const=atom
-obj=subject-of, type=factor, const=nil
-obj=sys-free-memory, type=factor, const=nil
-obj=sys-gc, type=factor, const=nil
-obj=sys-time, type=factor, const=nil
-obj=sys-total-memory, type=factor, const=nil
-obj=to-atom, type=factor, const=nil
-obj=to-blob, type=factor, const=nil
-obj=to-expr, type=factor, const=nil
-obj=to-int, type=factor, const=nil
-obj=to-named-list, type=factor, const=nil
-obj=to-nonamed-list, type=factor, const=nil
-obj=to-string, type=factor, const=nil
-obj=true, type=bool, const=bool
-obj=try, type=factor, const=nil
-obj=type#namespace, type=atom, const=atom
-obj=type#noclass, type=atom, const=atom
-obj=type-of, type=factor, const=nil
-obj=union, type=factor, const=nil
-obj=uniq, type=factor, const=nil
-obj=value-of, type=factor, const=nil
-obj=value-type-of, type=factor, const=nil
-obj=var, type=atom, const=atom
-obj=when, type=factor, const=nil
-obj=write-blob, type=factor, const=nil
-obj=|, type=factor, const=nil
-obj=~, type=factor, const=nil
+obj=?file.separator     , type=var     , return=string
+obj=?os.name            , type=var     , return=string
+obj=?os.version         , type=var     , return=string
+obj=?path.separator     , type=var     , return=string
+obj=?user.dir           , type=var     , return=string
+obj=?user.home          , type=var     , return=string
+obj=?user.name          , type=var     , return=string
+obj=and                 , type=factor  , return=bool
+obj=array               , type=atom    , return=atom
+obj=atom                , type=atom    , return=atom
+obj=blob                , type=atom    , return=atom
+obj=bool                , type=atom    , return=atom
+obj=class               , type=atom    , return=atom
+obj=constant            , type=atom    , return=atom
+obj=default             , type=atom    , return=atom
+obj=double              , type=atom    , return=atom
+obj=expr                , type=atom    , return=atom
+obj=factor              , type=atom    , return=atom
+obj=false               , type=bool    , return=bool
+obj=final               , type=atom    , return=atom
+obj=float               , type=atom    , return=atom
+obj=frame               , type=atom    , return=atom
+obj=from                , type=atom    , return=atom
+obj=func                , type=atom    , return=atom
+obj=instance            , type=atom    , return=atom
+obj=int                 , type=atom    , return=atom
+obj=list                , type=atom    , return=atom
+obj=long                , type=atom    , return=atom
+obj=macro               , type=atom    , return=atom
+obj=member              , type=atom    , return=atom
+obj=nan                 , type=atom    , return=atom
+obj=native              , type=atom    , return=atom
+obj=not                 , type=factor  , return=bool
+obj=or                  , type=factor  , return=bool
+obj=private             , type=atom    , return=atom
+obj=public              , type=atom    , return=atom
+obj=static              , type=atom    , return=atom
+obj=str-char-at         , type=factor  , return=int
+obj=str-end-with        , type=factor  , return=bool
+obj=str-equal           , type=factor  , return=bool
+obj=str-equal-nocase    , type=factor  , return=bool
+obj=str-format          , type=factor  , return=string
+obj=str-index-of        , type=factor  , return=int
+obj=str-last-index-of   , type=factor  , return=int
+obj=str-length          , type=factor  , return=int
+obj=str-match           , type=factor  , return=bool
+obj=str-replace         , type=factor  , return=string
+obj=str-split           , type=factor  , return=list
+obj=str-split-line      , type=factor  , return=list
+obj=str-start-with      , type=factor  , return=bool
+obj=str-substr          , type=factor  , return=string
+obj=str-trim            , type=factor  , return=string
+obj=str-trim-head       , type=factor  , return=string
+obj=str-trim-tail       , type=factor  , return=string
+obj=str-upper           , type=factor  , return=string
+obj=string              , type=atom    , return=atom
+obj=true                , type=bool    , return=bool
+obj=type#namespace      , type=atom    , return=atom
+obj=type#noclass        , type=atom    , return=atom
+obj=var                 , type=atom    , return=atom
 
 ;eof
 
 (ls-return-type-of system)
 ;=>nil
 ;out:
-obj=++, type=macro, const=macro
-obj=--, type=macro, const=macro
-obj=?load-paths, type=var, const=list
-obj=?trace, type=var, const=bool
-obj=add, type=func, const=nil
-obj=add-all, type=func, const=nil
-obj=cmp, type=func, const=nil
-obj=equal, type=func, const=nil
-obj=get, type=func, const=nil
-obj=is-empty, type=func, const=nil
-obj=length-of, type=func, const=nil
-obj=print-list, type=macro, const=macro
-obj=println, type=func, const=nil
-obj=root, type=frame, const=frame
-obj=size-of, type=func, const=nil
-obj=system, type=frame, const=frame
-obj=to-array, type=func, const=nil
-obj=to-list, type=func, const=nil
-obj=use, type=template, const=template
+obj=?load-paths         , type=var     , return=list
+obj=?trace              , type=var     , return=bool
 
 ;eof
 
 (ls-return-type-of main)
 ;=>nil
 ;out:
-obj=?script-path, type=var, const=string
-obj=_ginfo, type=func, const=nil
-obj=file-prename, type=func, const=nil
-obj=file-subffix, type=func, const=nil
-obj=is-blank, type=func, const=nil
-obj=is-empty, type=func, const=nil
-obj=ls-return-type-of, type=func, const=nil
-obj=main, type=frame, const=frame
-obj=root, type=frame, const=frame
-obj=script_out, type=macro, const=macro
-obj=system, type=frame, const=frame
+obj=?script-path        , type=var     , return=string
 
 ;eof
 

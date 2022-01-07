@@ -13,10 +13,11 @@
         (ls-is-stable-fun (value-of (:: (value-of local::parent) parent)))
         
         (loop for ?mbr in (ls ?subject) do 
-            (print "obj=" (name-of $(value-of ?mbr)))
-            (print ", type=" (type-of $(value-of (value-of ?mbr))))
-            (print ", stable=" (is-stable  $(value-of (value-of ?mbr))))
-            (print "\n")
+            (if (is-stable  $(value-of (value-of ?mbr)))
+                (print (str-format "obj=%-20s, type=%s\n" 
+                            (name-of $(value-of ?mbr)) 
+                             (to-string (type-of $(value-of (value-of ?mbr))))))
+            )
         )
     )
 )

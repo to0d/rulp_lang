@@ -1,0 +1,77 @@
+(load math)
+(load map)
+(load queue)
+(load set)
+(load stack)
+(load string)
+(load tool)
+;=>nil nil nil nil nil nil nil
+
+(defun ls-is-thread-safe-objects (?subject) 
+    (if (equal ?subject local)
+    
+        (ls-is-thread-safe-objects (value-of (:: (value-of local::parent) parent)))
+        
+        (loop for ?mbr in (ls ?subject) do 
+            (if (not (is-thread-safe  $(value-of (value-of ?mbr))))
+                (print (str-format "obj=%-20s, type=%s\n" 
+                            (name-of $(value-of ?mbr)) 
+                             (to-string (type-of $(value-of (value-of ?mbr))))))
+            )
+        )
+    )
+)
+;=>ls-is-thread-safe-objects
+
+(ls-is-thread-safe-objects root)
+;=>nil
+;out:
+obj=?file.separator     , type=var
+obj=?os.name            , type=var
+obj=?os.version         , type=var
+obj=?path.separator     , type=var
+obj=?user.dir           , type=var
+obj=?user.home          , type=var
+obj=?user.name          , type=var
+obj=false               , type=bool
+obj=load                , type=factor
+obj=namespace           , type=class
+obj=nil                 , type=nil
+obj=noclass             , type=class
+obj=open-txt-file       , type=factor
+obj=out-to-file         , type=factor
+obj=print               , type=factor
+obj=print-frame-tree    , type=factor
+obj=print-global-info   , type=factor
+obj=print-impl          , type=factor
+obj=print-subject       , type=factor
+obj=root                , type=frame
+obj=save-txt-file       , type=factor
+obj=true                , type=bool
+
+;eof
+
+(ls-is-thread-safe-objects system)
+;=>nil
+;out:
+obj=?load-paths         , type=var
+obj=?trace              , type=var
+obj=root                , type=frame
+obj=system              , type=frame
+
+;eof
+
+(ls-is-thread-safe-objects main)
+;=>nil
+;out:
+obj=?script-path        , type=var
+obj=main                , type=frame
+obj=map                 , type=class
+obj=queue               , type=class
+obj=root                , type=frame
+obj=set                 , type=class
+obj=stack               , type=class
+obj=system              , type=frame
+
+;eof
+
