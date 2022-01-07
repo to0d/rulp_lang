@@ -18,7 +18,7 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.attribute.StableUtil;
+import alpha.rulp.ximpl.attribute.AttrUtil;
 
 // (Compute Cache Optimization)
 public class CCOUtil {
@@ -98,7 +98,7 @@ public class CCOUtil {
 		CCOUtil ccoUtil = new CCOUtil(interpreter, frame);
 
 		// this function is stable
-		if (StableUtil.isStable(expr, frame)) {
+		if (AttrUtil.isStable(expr, frame)) {
 			ccoUtil.stableFuncNames.add(funcName);
 		}
 
@@ -136,7 +136,7 @@ public class CCOUtil {
 			return false;
 		}
 
-		if (!OptUtil.isStableValue(expr.listIterator(1), nameSet, frame)) {
+		if (!AttrUtil.isStableValue(expr.listIterator(1), nameSet, frame)) {
 			return false;
 		}
 
@@ -149,7 +149,7 @@ public class CCOUtil {
 			return false;
 		}
 
-		if (!StableUtil.isStable(obj, frame)) {
+		if (!AttrUtil.isStable(obj, frame)) {
 			return false;
 		}
 
@@ -166,7 +166,7 @@ public class CCOUtil {
 
 		IRObject e0 = RulpUtil.lookup(expr.get(0), interpreter, frame);
 
-		if (StableUtil.isNewFrameFactor(e0)) {
+		if (OptUtil.isNewFrameFactor(e0)) {
 			nameSet = nameSet.newBranch();
 		}
 
@@ -263,7 +263,7 @@ public class CCOUtil {
 
 								int optId = OptUtil.getNextOptFactorId();
 								cc2 = new XRFactorCC2(optId);
-								RulpUtil.addAttribute(cc2, String.format("%s=%d", A_ID, optId));
+								AttrUtil.addAttribute(cc2, String.format("%s=%d", A_ID, optId));
 								cc2Map.put(funcName, cc2);
 								exprCount.getAndIncrement();
 

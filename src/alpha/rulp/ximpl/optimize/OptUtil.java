@@ -1,6 +1,12 @@
 package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.A_ATOM;
+import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.F_E_TRY;
+import static alpha.rulp.lang.Constant.F_FOREACH;
+import static alpha.rulp.lang.Constant.F_LET;
+import static alpha.rulp.lang.Constant.F_LOOP;
+import static alpha.rulp.lang.Constant.F_OPT;
 import static alpha.rulp.lang.Constant.O_COMPUTE;
 import static alpha.rulp.lang.Constant.O_DOUBLE_0;
 import static alpha.rulp.lang.Constant.O_DOUBLE_1;
@@ -17,7 +23,6 @@ import alpha.rulp.lang.IRConst;
 import alpha.rulp.lang.IRDouble;
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFloat;
-import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRInteger;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRLong;
@@ -26,8 +31,7 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
-import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.attribute.StableUtil;
+import alpha.rulp.ximpl.attribute.AttrUtil;
 
 public class OptUtil {
 
@@ -96,11 +100,28 @@ public class OptUtil {
 			return false;
 		}
 
-		if (!RulpUtil.containAttribute(obj, A_ATOM)) {
+		if (!AttrUtil.containAttribute(obj, A_ATOM)) {
 			return false;
 		}
 
 		return true;
+	}
+
+	public static boolean isConstNumber(IRObject obj) throws RException {
+
+		switch (obj.getType()) {
+		case INT:
+		case FLOAT:
+		case DOUBLE:
+		case LONG:
+			return true;
+
+		case CONSTANT:
+			return isConstNumber(((IRConst) obj).getValue());
+
+		default:
+			return false;
+		}
 	}
 
 	public static boolean isConstNumber(IRObject obj, double value) throws RException {
@@ -120,23 +141,6 @@ public class OptUtil {
 
 		case CONSTANT:
 			return isConstNumber(((IRConst) obj).getValue(), value);
-
-		default:
-			return false;
-		}
-	}
-
-	public static boolean isConstNumber(IRObject obj) throws RException {
-
-		switch (obj.getType()) {
-		case INT:
-		case FLOAT:
-		case DOUBLE:
-		case LONG:
-			return true;
-
-		case CONSTANT:
-			return isConstNumber(((IRConst) obj).getValue());
 
 		default:
 			return false;
@@ -197,25 +201,19 @@ public class OptUtil {
 		return false;
 	}
 
-	public static boolean isStableValue(IRIterator<? extends IRObject> it, NameSet nameSet, IRFrame frame)
-			throws RException {
+	public static boolean isNewFrameFactor(IRObject obj) throws RException {
 
-		while (it.hasNext()) {
-			if (!isStableValue(it.next(), nameSet, frame)) {
-				return false;
-			}
+		if (obj.getType() != RType.ATOM && obj.getType() != RType.FACTOR) {
+			return false;
 		}
 
-		return true;
-	}
-
-	public static boolean isStableValue(IRObject obj, NameSet nameSet, IRFrame frame) throws RException {
-
-		if (isLocalValue(obj, nameSet)) {
-			return true;
-		}
-
-		if (StableUtil.isStable(obj, nameSet.newBranch(), frame)) {
+		switch (obj.asString()) {
+		case F_FOREACH:
+		case F_E_TRY:
+		case A_DO:
+		case F_LET:
+		case F_LOOP:
+		case F_OPT:
 			return true;
 		}
 

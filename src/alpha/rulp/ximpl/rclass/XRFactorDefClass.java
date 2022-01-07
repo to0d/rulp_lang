@@ -27,6 +27,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.SubjectUtil;
+import alpha.rulp.ximpl.attribute.AttrUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorDefClass extends AbsAtomFactorAdapter implements IRFactor {
@@ -115,15 +116,15 @@ public class XRFactorDefClass extends AbsAtomFactorAdapter implements IRFactor {
 			}
 		}
 
-		if (RulpUtil.hasAttributeList(args)) {
-			for (String attr : RulpUtil.getAttributeKeyList(args)) {
+		if (AttrUtil.hasAttributeList(args)) {
+			for (String attr : AttrUtil.getAttributeKeyList(args)) {
 				switch (attr) {
 				case A_FINAL:
 					defClass.setFinal(true);
 					break;
 				}
 
-				RulpUtil.addAttribute(defClass, attr);
+				AttrUtil.addAttribute(defClass, attr);
 			}
 		}
 

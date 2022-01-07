@@ -31,7 +31,7 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
-import alpha.rulp.ximpl.attribute.StableUtil;
+import alpha.rulp.ximpl.attribute.AttrUtil;
 
 public class TCOUtil {
 
@@ -189,7 +189,7 @@ public class TCOUtil {
 		case FACTOR:
 
 			// does't support unstable factor
-			if (!StableUtil.isStable(e0, frame)) {
+			if (!AttrUtil.isStable(e0, frame)) {
 				return;
 			}
 
@@ -342,7 +342,7 @@ public class TCOUtil {
 				if (e1.getType() == RType.EXPR) {
 					int optId = OptUtil.getNextOptFactorId();
 					XRFactorCPS cps = new XRFactorCPS(optId);
-					RulpUtil.addAttribute(cps, String.format("%s=%d", A_ID, optId));
+					AttrUtil.addAttribute(cps, String.format("%s=%d", A_ID, optId));
 					exprCount.getAndIncrement();
 					return RulpFactory.createExpression(cps, e1);
 				}

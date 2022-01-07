@@ -32,8 +32,8 @@ import alpha.rulp.runtime.IRTokener.Token;
 import alpha.rulp.runtime.IRTokener.TokenType;
 import alpha.rulp.runtime.RName;
 import alpha.rulp.utils.RulpFactory;
-import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.StringUtil;
+import alpha.rulp.ximpl.attribute.AttrUtil;
 import alpha.rulp.ximpl.error.RParseException;
 import alpha.rulp.ximpl.error.RulpIncompleteException;
 
@@ -599,7 +599,7 @@ public class XRParser implements IRParser {
 			List<IRObject> list = matchAttrList();
 			if (list != null) {
 				for (IRObject attr : list) {
-					RulpUtil.addAttribute(obj, attr.asString());
+					AttrUtil.addAttribute(obj, attr.asString());
 				}
 			}
 		}

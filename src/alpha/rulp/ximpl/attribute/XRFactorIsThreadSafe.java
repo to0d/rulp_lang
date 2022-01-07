@@ -31,7 +31,7 @@ public class XRFactorIsThreadSafe extends AbsAtomFactorAdapter implements IRFact
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		return RulpFactory.createBoolean(ThreadSafeUtil.isThreadSafe(args.get(1), frame));
+		return RulpFactory.createBoolean(AttrUtil.isThreadSafe(args.get(1), frame));
 	}
 
 }

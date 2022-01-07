@@ -20,6 +20,7 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.attribute.AttrUtil;
 import alpha.rulp.ximpl.error.RReturn;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
@@ -48,7 +49,7 @@ public class XRFactorCPS extends AbsAtomFactorAdapter implements IRRebuild, IRFa
 
 		IRObject rst = TCOUtil.makeCPS(RulpUtil.asExpression(args.get(1)), frame);
 		if (rst.getType() == RType.EXPR) {
-			RulpUtil.addAttribute(rst, A_OPT_TCO);
+			AttrUtil.addAttribute(rst, A_OPT_TCO);
 			++cpsCount;
 		}
 

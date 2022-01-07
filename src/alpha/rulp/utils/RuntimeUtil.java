@@ -61,7 +61,7 @@ import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRThreadContext;
-import alpha.rulp.ximpl.attribute.ThreadSafeUtil;
+import alpha.rulp.ximpl.attribute.AttrUtil;
 import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public final class RuntimeUtil {
@@ -395,7 +395,7 @@ public final class RuntimeUtil {
 					IRObject rst = RuntimeUtil.computeFun((IRFunction) e0, expr, interpreter, frame);
 					if (rst == null) {
 						return O_Nil;
-					} else if (rst.getType() == RType.EXPR && RulpUtil.containAttribute(rst, A_OPT_TCO)) {
+					} else if (rst.getType() == RType.EXPR && AttrUtil.containAttribute(rst, A_OPT_TCO)) {
 						rst = TCOUtil.computeTCO((IRExpr) rst, interpreter, frame);
 					}
 					return rst;
@@ -519,9 +519,9 @@ public final class RuntimeUtil {
 
 		callObject.incCallCount(getCallStatsId(), interpreter.getCallId());
 
-		if (ThreadSafeUtil.isThreadSafe(callObject, frame)) {
+		if (AttrUtil.isThreadSafe(callObject, frame)) {
 			return callObject.compute(args, interpreter, frame);
-		
+
 		} else {
 			synchronized (callObject) {
 				return callObject.compute(args, interpreter, frame);

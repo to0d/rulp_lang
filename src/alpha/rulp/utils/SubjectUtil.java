@@ -24,6 +24,7 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRFunctionList;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.ximpl.attribute.AttrUtil;
 import alpha.rulp.ximpl.function.XRFactorDefun;
 import alpha.rulp.ximpl.function.XRFunctionList;
 
@@ -163,7 +164,7 @@ public class SubjectUtil {
 
 		}
 
-		RulpUtil.addAttribute(mbr, attr);
+		AttrUtil.addAttribute(mbr, attr);
 
 		return mbr;
 	}
@@ -275,8 +276,8 @@ public class SubjectUtil {
 		/*****************************************************/
 		// Process attribute
 		/*****************************************************/
-		if (RulpUtil.hasAttributeList(mbrExpr)) {
-			for (String attr : RulpUtil.getAttributeKeyList(mbrExpr)) {
+		if (AttrUtil.hasAttributeList(mbrExpr)) {
+			for (String attr : AttrUtil.getAttributeKeyList(mbrExpr)) {
 				mbr = _processMemberAttribute(mbr, attr, true);
 			}
 		}
@@ -334,8 +335,8 @@ public class SubjectUtil {
 		/*****************************************************/
 		// Process attribute
 		/*****************************************************/
-		if (RulpUtil.hasAttributeList(mbrExpr)) {
-			for (String attr : RulpUtil.getAttributeKeyList(mbrExpr)) {
+		if (AttrUtil.hasAttributeList(mbrExpr)) {
+			for (String attr : AttrUtil.getAttributeKeyList(mbrExpr)) {
 				mbr = _processMemberAttribute(mbr, attr, false);
 			}
 		}

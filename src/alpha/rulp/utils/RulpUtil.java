@@ -130,9 +130,9 @@ import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.runtime.IRTemplate.TemplatePara;
 import alpha.rulp.runtime.IRTemplate.TemplateParaEntry;
 import alpha.rulp.runtime.RName;
+import alpha.rulp.ximpl.attribute.AttrUtil;
 import alpha.rulp.ximpl.collection.XRMap;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
-import alpha.rulp.ximpl.lang.AbsObject;
 import alpha.rulp.ximpl.rclass.XRFactorNew;
 
 public class RulpUtil {
@@ -348,9 +348,7 @@ public class RulpUtil {
 
 	private static void _formatAttrList(StringBuffer sb, IRObject obj) throws RException {
 
-		AbsObject absObj = (AbsObject) obj;
-
-		List<String> attrKeyList = absObj.getAttributeKeyList();
+		List<String> attrKeyList = AttrUtil.getAttributeKeyList(obj);
 		if (attrKeyList.isEmpty()) {
 			return;
 		}
@@ -366,7 +364,7 @@ public class RulpUtil {
 
 			String key = it.next();
 
-			IRObject value = absObj.getAttributeValue(key);
+			IRObject value = AttrUtil.getAttributeValue(obj, key);
 			if (value == O_Nil) {
 				sb.append(key);
 			} else {
@@ -521,10 +519,6 @@ public class RulpUtil {
 		while (it.hasNext()) {
 			list.add(it.next());
 		}
-	}
-
-	public static void addAttribute(IRObject obj, String key) throws RException {
-		((AbsObject) obj).addAttribute(key);
 	}
 
 	public static void addFactor(IRFrame frame, String factorName, IRFactorBody factorBody) throws RException {
@@ -974,10 +968,6 @@ public class RulpUtil {
 		return resultList;
 	}
 
-	public static boolean containAttribute(IRObject obj, String attr) {
-		return ((AbsObject) obj).containAttribute(attr);
-	}
-
 	public static void decRef(IRObject obj) throws RException {
 
 		if (obj == null) {
@@ -1102,14 +1092,6 @@ public class RulpUtil {
 		return sb.toString();
 	}
 
-	public static List<String> getAttributeKeyList(IRObject obj) {
-		return ((AbsObject) obj).getAttributeKeyList();
-	}
-
-	public static IRObject getAttributeValue(IRObject obj, String key) throws RException {
-		return ((AbsObject) obj).getAttributeValue(key);
-	}
-
 	public static IRAtom getObjectType(IRObject valObj) throws RException {
 
 		IRAtom valAtom = RType.toObject(valObj.getType());
@@ -1133,10 +1115,6 @@ public class RulpUtil {
 		}
 
 		return RulpUtil.asVar(entryValue).getValue();
-	}
-
-	public static boolean hasAttributeList(IRObject obj) {
-		return ((AbsObject) obj).getAttributeCount() > 0;
 	}
 
 	public static void incRef(IRObject obj) throws RException {
@@ -1436,17 +1414,9 @@ public class RulpUtil {
 		});
 	}
 
-	public static IRObject removeAttribute(IRObject obj, String attr) throws RException {
-		return ((AbsObject) obj).removeAttribute(attr);
-	}
-
 	public static void saveObjList(List<IRObject> list, IRObject obj) throws RException {
 		list.add(obj);
 		incRef(obj);
-	}
-
-	public static void setAttribute(IRObject obj, String key, IRObject value) throws RException {
-		((AbsObject) obj).setAttribute(key, value);
 	}
 
 	public static void setLocalVar(IRFrame frame, String varName, IRObject value) throws RException {

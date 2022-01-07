@@ -34,6 +34,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
+import alpha.rulp.ximpl.attribute.AttrUtil;
 import alpha.rulp.ximpl.runtime.AbsFunctionAdapter;
 
 public class XRFunctionList extends AbsFunctionAdapter implements IRFunctionList {
@@ -235,7 +236,7 @@ public class XRFunctionList extends AbsFunctionAdapter implements IRFunctionList
 
 		this.signature = null;
 
-		RulpUtil.removeAttribute(this, A_STABLE);
+		AttrUtil.removeAttribute(this, A_STABLE);
 	}
 
 	@Override

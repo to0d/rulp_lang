@@ -42,6 +42,7 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.SubjectUtil;
+import alpha.rulp.ximpl.attribute.AttrUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.optimize.CCOUtil;
 import alpha.rulp.ximpl.optimize.EROUtil;
@@ -219,12 +220,12 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 		/*****************************************************/
 		// Process function attribute
 		/*****************************************************/
-		if (RulpUtil.hasAttributeList(args)) {
+		if (AttrUtil.hasAttributeList(args)) {
 
 			attrList = new ArrayList<>();
 
 			Set<String> uniqOptAttributeSet = new HashSet<>();
-			for (String attr : RulpUtil.getAttributeKeyList(args)) {
+			for (String attr : AttrUtil.getAttributeKeyList(args)) {
 
 				switch (attr) {
 				case A_OPT_TCO:
@@ -309,7 +310,7 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 		/*****************************************************/
 		if (attrList != null) {
 			for (String attr : attrList) {
-				RulpUtil.addAttribute(newFun, attr);
+				AttrUtil.addAttribute(newFun, attr);
 			}
 		}
 

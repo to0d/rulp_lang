@@ -7,7 +7,7 @@
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-package alpha.rulp.ximpl.factor;
+package alpha.rulp.ximpl.attribute;
 
 import static alpha.rulp.lang.Constant.O_Nil;
 
@@ -18,6 +18,7 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorAddAttribute extends AbsAtomFactorAdapter implements IRFactor {
 
@@ -34,7 +35,7 @@ public class XRFactorAddAttribute extends AbsAtomFactorAdapter implements IRFact
 
 		IRObject obj = RulpUtil.lookup(args.get(1), interpreter, frame);
 		String attr = interpreter.compute(frame, args.get(2)).asString();
-		RulpUtil.addAttribute(obj, attr);
+		AttrUtil.addAttribute(obj, attr);
 		return O_Nil;
 	}
 

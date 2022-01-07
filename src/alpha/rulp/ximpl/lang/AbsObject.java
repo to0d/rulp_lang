@@ -16,6 +16,7 @@ import alpha.rulp.ximpl.optimize.OptUtil;
 public abstract class AbsObject implements IRObject {
 
 	protected List<String> _attributeKeyList = null;
+
 	protected Map<String, IRObject> attributeMap = null;
 
 	public void addAttribute(String key) throws RException {

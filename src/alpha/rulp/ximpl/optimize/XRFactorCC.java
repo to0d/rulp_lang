@@ -20,6 +20,7 @@ import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.attribute.AttrUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorCC extends AbsAtomFactorAdapter implements IRFactor {
@@ -37,7 +38,7 @@ public class XRFactorCC extends AbsAtomFactorAdapter implements IRFactor {
 
 		IRExpr expr = RulpUtil.asExpression(args.get(1));
 		IRFunction fun = RulpUtil.asFunction(RulpUtil.lookup(expr.get(0), interpreter, frame));
-		if (!RulpUtil.containAttribute(fun, A_OPT_CCO)) {
+		if (!AttrUtil.containAttribute(fun, A_OPT_CCO)) {
 
 		}
 
