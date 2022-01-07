@@ -1,6 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.F_BREAK;
 import static alpha.rulp.lang.Constant.F_CASE;
 import static alpha.rulp.lang.Constant.F_IF;
@@ -145,6 +145,25 @@ public class EROUtil {
 			return size;
 		}
 
+		private static int _rebuildAdd(List<IRObject> list, int fromIndex, int toIndex) throws RException {
+
+			int size = _rebuildAddBy(list, fromIndex, toIndex, RArithmeticOperator.ADD);
+
+			int listSize = size;
+			if (listSize == -1) {
+				listSize = toIndex - fromIndex;
+			}
+
+			if (listSize >= 2) {
+				int size2 = _rebuildSameElement(list, fromIndex, fromIndex + listSize, RArithmeticOperator.BY);
+				if (size2 != -1) {
+					size = size2;
+				}
+			}
+
+			return size;
+		}
+
 		private static int _rebuildMod(List<IRObject> list, int fromIndex, int toIndex) throws RException {
 
 			int size = toIndex - fromIndex;
@@ -271,6 +290,11 @@ public class EROUtil {
 				case POWER:
 					obj = RulpFactory.createExpression(O_POWER, obj, RulpFactory.createInteger(count));
 					break;
+
+				case BY:
+					obj = RulpFactory.createExpression(O_BY, RulpFactory.createInteger(count), obj);
+					break;
+
 				default:
 					throw new RException("not support: " + op);
 				}
@@ -433,7 +457,7 @@ public class EROUtil {
 				break;
 
 			case ADD:
-				size = _rebuildAddBy(rebuildList, 1, size, op);
+				size = _rebuildAdd(rebuildList, 1, size);
 				break;
 
 			case BY:
