@@ -120,7 +120,7 @@ public interface Constant {
 	String A_QUEUE = "queue";
 
 	String A_RETURN_VAR = "?rv";
-	
+
 	String F_RETURN_TYPE_OF = "return-type-of";
 
 	String A_ROOT = "root";
@@ -136,6 +136,8 @@ public interface Constant {
 	String A_STATIC = "static";
 
 	String A_STRING = "string";
+
+	String A_RETURN_TYPE = "return-type";
 
 	String A_SYSTEM = "system";
 
@@ -570,6 +572,8 @@ public interface Constant {
 	IRAtom O_Static = RulpFactory.createAtom(A_STATIC);
 
 	IRAtom O_SUB = RulpFactory.createAtom(F_O_SUB);
+
+	IRAtom O_RETURN_TYPE = RulpFactory.createAtom(A_RETURN_TYPE);
 
 	IRAtom O_THREAD_UNSAFE = RulpFactory.createAtom(A_THREAD_UNSAFE);
 

@@ -10,6 +10,7 @@ import java.util.Map;
 
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RType;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.optimize.OptUtil;
 
@@ -102,7 +103,7 @@ public abstract class AbsObject implements IRObject {
 
 		if (value == null) {
 			value = O_Nil;
-		} else if (!OptUtil.isConstValue(value)) {
+		} else if (value.getType() != RType.ATOM && !OptUtil.isConstValue(value)) {
 			throw new RException("invalid attribute value: " + value);
 		}
 

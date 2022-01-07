@@ -1,6 +1,7 @@
 package alpha.rulp.ximpl.attribute;
 
-import static alpha.rulp.lang.Constant.O_Nan;
+import static alpha.rulp.lang.Constant.A_RETURN_TYPE;
+import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.T_Array;
 import static alpha.rulp.lang.Constant.T_Atom;
 import static alpha.rulp.lang.Constant.T_Blob;
@@ -15,7 +16,6 @@ import static alpha.rulp.lang.Constant.T_Long;
 import static alpha.rulp.lang.Constant.T_Macro;
 import static alpha.rulp.lang.Constant.T_Member;
 import static alpha.rulp.lang.Constant.T_Native;
-import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.T_String;
 import static alpha.rulp.lang.Constant.T_Template;
 
@@ -28,6 +28,7 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
+import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 
@@ -91,6 +92,13 @@ public class ReturnTypeUtil {
 
 		case TEMPLATE:
 			return T_Template;
+
+		case FACTOR:
+			IRObject value = AttrUtil.getAttributeValue(obj, A_RETURN_TYPE);
+			if (value == null) {
+				return O_Nil;
+			}
+			return RulpUtil.asAtom(value);
 
 		case CONSTANT:
 			return returnTypeOf(((IRConst) obj).getValue(), frame);

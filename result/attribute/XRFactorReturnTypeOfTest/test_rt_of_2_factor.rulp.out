@@ -2,5 +2,8 @@
 ;=>nil
 
 (return-type-of and)
-;=>nil
+;=>bool
+
+(return-type-of str-trim)
+;=>string
 

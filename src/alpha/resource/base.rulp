@@ -166,6 +166,29 @@
 (add-attribute open-txt-file     thread-unsafe)
 (add-attribute save-txt-file     thread-unsafe) 
 
+(add-attribute and  return-type  bool)
+(add-attribute or   return-type  bool)
+(add-attribute not  return-type  bool)
+
+(add-attribute str-char-at       return-type  int)
+(add-attribute str-end-with      return-type  bool)
+(add-attribute str-equal         return-type  bool)
+(add-attribute str-equal-nocase  return-type  bool)
+(add-attribute str-format        return-type  string)
+(add-attribute str-index-of      return-type  int)
+(add-attribute str-last-index-of return-type  int)
+(add-attribute str-length        return-type  int)
+(add-attribute str-match         return-type  bool)
+(add-attribute str-replace       return-type  string)
+(add-attribute str-split         return-type  list)
+(add-attribute str-split-line    return-type  list)
+(add-attribute str-start-with    return-type  bool)
+(add-attribute str-substr        return-type  string)
+(add-attribute str-trim          return-type  string)
+(add-attribute str-trim-head     return-type  string)
+(add-attribute str-trim-tail     return-type  string)
+(add-attribute str-upper         return-type  string)
+
 ;****************************************************;
 ; Enviroment vars
 ;****************************************************;

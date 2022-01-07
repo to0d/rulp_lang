@@ -30,13 +30,19 @@ public class XRFactorAddAttribute extends AbsAtomFactorAdapter implements IRFact
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() != 3) {
+		if (args.size() != 3 && args.size() != 4) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
 		IRObject obj = RulpUtil.lookup(args.get(1), interpreter, frame);
 		String attr = interpreter.compute(frame, args.get(2)).asString();
-		AttrUtil.addAttribute(obj, attr);
+
+		if (args.size() == 3) {
+			AttrUtil.addAttribute(obj, attr);
+		} else {
+			AttrUtil.setAttribute(obj, attr, RulpUtil.asAtom(args.get(3)));
+		}
+
 		return O_Nil;
 	}
 
