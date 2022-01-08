@@ -1,3 +1,9 @@
 (return-type-of (+ 1 2))
-;=>expr
+;=>int
+
+(return-type-of (+ 1.0 2))
+;=>float
+
+(return-type-of (+ "abc" 2))
+;=>string
 

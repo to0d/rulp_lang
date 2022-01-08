@@ -40,7 +40,7 @@ public class XRFactorAddAttribute extends AbsAtomFactorAdapter implements IRFact
 		if (args.size() == 3) {
 			AttrUtil.addAttribute(obj, attr);
 		} else {
-			AttrUtil.setAttribute(obj, attr, RulpUtil.asAtom(args.get(3)));
+			AttrUtil.setAttribute(obj, attr, args.get(3));
 		}
 
 		return O_Nil;

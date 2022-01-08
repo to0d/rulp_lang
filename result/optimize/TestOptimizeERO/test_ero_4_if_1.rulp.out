@@ -22,7 +22,7 @@
             (<= ?v 0)
             (return 0)
         )
-        (return[stable] (+[atom stable] 1 (fun (- ?v 1))))
+        (return[stable] (+[atom return-type=1 stable] 1 (fun (- ?v 1))))
     )
 )[opt-ero]
 

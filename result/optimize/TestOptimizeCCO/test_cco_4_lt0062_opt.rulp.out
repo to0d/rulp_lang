@@ -34,7 +34,7 @@
             (return 1)
         )
         (return[stable]
-            (+[atom stable]
+            (+[atom return-type=1 stable]
                 (cc2[opt-id=0] (uniquePaths (- m 1) n))
                 (cc2[opt-id=0] (uniquePaths m (- n 1)))
             )

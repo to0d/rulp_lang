@@ -415,7 +415,6 @@ public class MathUtil {
 	public static boolean isNumber(IRObject obj) {
 
 		switch (obj.getType()) {
-
 		case DOUBLE:
 		case FLOAT:
 		case INT:

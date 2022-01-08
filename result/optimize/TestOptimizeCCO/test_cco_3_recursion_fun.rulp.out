@@ -19,7 +19,9 @@
             (<= ?v 0)
             (return 1)
         )
-        (return[stable] (*[atom stable] ?v (cc2[opt-id=0] (fun (- ?v 1)))))
+        (return[stable]
+            (*[atom return-type=1 stable] ?v (cc2[opt-id=0] (fun (- ?v 1))))
+        )
     )
 )[opt-cco]
 rebuild: id=0, name=cc2, call=4, hit=0, func=fun, cache=4, data:[$$i_0/1/D/0] [$$i_1/1/D/0] [$$i_2/2/D/0]...

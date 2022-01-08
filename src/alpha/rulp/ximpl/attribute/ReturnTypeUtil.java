@@ -18,6 +18,7 @@ import static alpha.rulp.lang.Constant.T_String;
 
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRConst;
+import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRObject;
@@ -29,6 +30,46 @@ import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 
 public class ReturnTypeUtil {
+
+	public static IRAtom _exprReturnTypeOf(IRExpr expr, IRFrame frame) throws RException {
+
+		if (expr.size() == 0) {
+			return O_Nil;
+		}
+
+		IRObject e0 = expr.get(0);
+
+		if (e0.getType() == RType.ATOM) {
+
+			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, RulpUtil.asAtom(e0).getName());
+			// unknown factor
+			if (entry != null && entry.getObject() != null) {
+				e0 = entry.getObject();
+			}
+		}
+
+		if (e0.getType() == RType.FACTOR) {
+
+			IRObject value = AttrUtil.getAttributeValue(e0, A_RETURN_TYPE);
+			if (value == null) {
+				return O_Nil;
+			}
+
+			if (value.getType() == RType.ATOM) {
+				return (IRAtom) value;
+			}
+
+			if (value.getType() == RType.INT) {
+
+				int index = RulpUtil.asInteger(value).asInteger();
+				if (index >= 0 && index < expr.size()) {
+					return returnTypeOf(expr.get(index), frame);
+				}
+			}
+		}
+
+		return O_Nil;
+	}
 
 	public static IRAtom returnTypeOf(IRObject obj, IRFrame frame) throws RException {
 
@@ -43,9 +84,6 @@ public class ReturnTypeUtil {
 
 		case INSTANCE:
 			return RulpUtil.asInstance(obj).getRClass().getClassTypeAtom();
-
-		case EXPR:
-			return T_Expr;
 
 		case FLOAT:
 			return T_Float;
@@ -82,16 +120,20 @@ public class ReturnTypeUtil {
 
 		case FACTOR:
 			IRObject value = AttrUtil.getAttributeValue(obj, A_RETURN_TYPE);
-			if (value == null) {
+			if (value == null || value.getType() != RType.ATOM) {
 				return O_Nil;
 			}
-			return RulpUtil.asAtom(value);
+
+			return (IRAtom) value;
 
 		case CONSTANT:
 			return returnTypeOf(((IRConst) obj).getValue(), frame);
 
 		case VAR:
 			return returnTypeOf(((IRVar) obj).getValue(), frame);
+
+		case EXPR:
+			return _exprReturnTypeOf((IRExpr) obj, frame);
 
 		case ATOM:
 

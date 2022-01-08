@@ -170,6 +170,10 @@
 (add-attribute or   return-type  bool)
 (add-attribute not  return-type  bool)
 
+(add-attribute +                 return-type  1)
+(add-attribute -                 return-type  1)
+(add-attribute *                 return-type  1)
+(add-attribute /                 return-type  1)
 (add-attribute str-char-at       return-type  int)
 (add-attribute str-end-with      return-type  bool)
 (add-attribute str-equal         return-type  bool)
