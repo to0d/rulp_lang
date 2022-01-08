@@ -4,6 +4,3 @@
 (reduct (+ b (fun1) (fun1) b (fun1)))
 ;=>(+ (* 2 b) (* 3 (fun1)))
 
-(reduct (+ (+ a b) (+ b a)))
-;=>(* 2 (+ a b))
-

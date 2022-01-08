@@ -767,8 +767,8 @@ public class EROUtil {
 	static class UniqElement {
 		int count = 0;
 		IRObject element;
-		String uniqName;
 		int exprLevel = 0;
+		String uniqName;
 	}
 
 	protected static AtomicInteger computeCount = new AtomicInteger(0);
@@ -801,6 +801,29 @@ public class EROUtil {
 		typePriority[RType.INSTANCE.getIndex()] = 20;
 		typePriority[RType.FRAME.getIndex()] = 21;
 		typePriority[RType.MEMBER.getIndex()] = 22;
+	}
+
+	private static int _getExprLevel(IRObject obj) throws RException {
+
+		switch (obj.getType()) {
+		case LIST:
+		case EXPR:
+
+			int max_level = 0;
+			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
+			while (it.hasNext()) {
+
+				int level = _getExprLevel(it.next());
+				if (max_level < level) {
+					max_level = level;
+				}
+			}
+
+			return obj.getType() == RType.LIST ? max_level : (max_level + 1);
+
+		default:
+			return 0;
+		}
 	}
 
 	static boolean _hasBreakExpr(IRObject obj) throws RException {
@@ -1166,29 +1189,6 @@ public class EROUtil {
 		}
 
 		return null;
-	}
-
-	private static int _getExprLevel(IRObject obj) throws RException {
-
-		switch (obj.getType()) {
-		case LIST:
-		case EXPR:
-
-			int max_level = 0;
-			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
-			while (it.hasNext()) {
-
-				int level = _getExprLevel(it.next());
-				if (max_level < level) {
-					max_level = level;
-				}
-			}
-
-			return obj.getType() == RType.LIST ? max_level : (max_level + 1);
-
-		default:
-			return 0;
-		}
 	}
 
 	private static int _rebuildSameElement(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
