@@ -1,7 +1,6 @@
 package alpha.rulp.ximpl.attribute;
 
 import static alpha.rulp.lang.Constant.A_RETURN_TYPE;
-import static alpha.rulp.lang.Constant.A_STABLE;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.T_Array;
 import static alpha.rulp.lang.Constant.T_Atom;

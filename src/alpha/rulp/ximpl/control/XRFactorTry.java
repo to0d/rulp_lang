@@ -9,9 +9,11 @@
 
 package alpha.rulp.ximpl.control;
 
+import static alpha.rulp.lang.Constant.A_CATCH;
 import static alpha.rulp.lang.Constant.C_ERROR_DEFAULT;
 import static alpha.rulp.lang.Constant.C_HANDLE;
 import static alpha.rulp.lang.Constant.C_HANDLE_ANY;
+import static alpha.rulp.lang.Constant.O_Nil;
 
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRExpr;
@@ -19,37 +21,36 @@ import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorTry extends AbsAtomFactorAdapter implements IRFactor {
 
-	public static void defineHandleCase(IRFrame tryFrame, IRExpr handleExpression) throws RException {
+	private static void _addCatchExpr(IRFrame tryFrame, IRExpr expr) throws RException {
 
 		// (e1 (action1) (action2))
-
-		if (handleExpression.size() < 2) {
-			throw new RException("invalid handle expression: " + handleExpression);
-		}
-
-		IRAtom errId = RulpUtil.asAtom(handleExpression.get(0));
+		IRAtom errId = RulpUtil.asAtom(expr.get(1));
 
 		if (RulpUtil.isVarAtom(errId)) {
 
-			tryFrame.setEntry(C_HANDLE_ANY, RulpFactory.createList(handleExpression.listIterator(1)));
+			tryFrame.setEntry(C_HANDLE_ANY, expr);
 
 			// Save default error id
 			tryFrame.setEntry(C_ERROR_DEFAULT, errId);
 
 		} else {
 
-			tryFrame.setEntry(C_HANDLE + errId.getName(), RulpFactory.createList(handleExpression.listIterator(1)));
+			tryFrame.setEntry(C_HANDLE + errId.getName(), expr);
 		}
 
+	}
+
+	private static boolean _isCatchExpr(IRExpr expr) throws RException {
+		return expr.size() >= 3 && RulpUtil.isAtom(expr.get(0), A_CATCH) && expr.get(1).getType() == RType.ATOM;
 	}
 
 	public XRFactorTry(String factorName) {
@@ -59,23 +60,43 @@ public class XRFactorTry extends AbsAtomFactorAdapter implements IRFactor {
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() < 2) {
+		if (args.size() < 3) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRObject try_exp = args.get(1);
 		IRFrame tryFrame = RulpFactory.createFrame(frame, "TRY");
+		int stmtEnd = args.size() - 1;
 
 		try {
 
 			RulpUtil.incRef(tryFrame);
+			int catchCount = 0;
 
-			IRIterator<? extends IRObject> iter = args.listIterator(2);
-			while (iter.hasNext()) {
-				defineHandleCase(tryFrame, RulpUtil.asExpression(iter.next()));
+			while (stmtEnd > 0) {
+
+				IRExpr expr = RulpUtil.asExpression(args.get(stmtEnd));
+				if (!_isCatchExpr(expr)) {
+					break;
+				}
+
+				_addCatchExpr(tryFrame, expr);
+				stmtEnd--;
+				catchCount++;
 			}
 
-			return interpreter.compute(tryFrame, try_exp);
+			if (stmtEnd == 0) {
+				throw new RException("no action expr: " + args);
+			}
+
+			if (catchCount == 0) {
+				throw new RException("no catch expr: " + args);
+			}
+
+			for (int i = 1; i <= stmtEnd; ++i) {
+				interpreter.compute(tryFrame, args.get(i));
+			}
+
+			return O_Nil;
 
 		} finally {
 			tryFrame.release();

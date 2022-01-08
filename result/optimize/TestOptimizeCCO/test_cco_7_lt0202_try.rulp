@@ -15,7 +15,7 @@
     
     (try 
         (return (isHappy ?n2))
-        (?e (return false))
+        (catch ?e (return false))
     )
 )[opt-cco]
 ;=>

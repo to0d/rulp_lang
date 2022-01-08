@@ -69,7 +69,6 @@ obj=do-when-obj-deleted , type=factor
 obj=do-when-var-changed , type=factor
 obj=double              , type=atom
 obj=equal_def           , type=factor
-obj=error               , type=factor
 obj=error-value         , type=factor
 obj=expr                , type=atom
 obj=factor              , type=atom
@@ -169,6 +168,7 @@ obj=sys-free-memory     , type=factor
 obj=sys-gc              , type=factor
 obj=sys-time            , type=factor
 obj=sys-total-memory    , type=factor
+obj=throw               , type=factor
 obj=to-atom             , type=factor
 obj=to-blob             , type=factor
 obj=to-expr             , type=factor

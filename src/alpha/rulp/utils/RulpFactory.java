@@ -97,10 +97,10 @@ import alpha.rulp.ximpl.collection.XRQueue;
 import alpha.rulp.ximpl.collection.XRSet;
 import alpha.rulp.ximpl.control.XRFactorCase;
 import alpha.rulp.ximpl.control.XRFactorDo;
-import alpha.rulp.ximpl.control.XRFactorError;
 import alpha.rulp.ximpl.control.XRFactorIf;
 import alpha.rulp.ximpl.control.XRFactorLet;
 import alpha.rulp.ximpl.control.XRFactorLoop;
+import alpha.rulp.ximpl.control.XRFactorThrow;
 import alpha.rulp.ximpl.control.XRFactorTry;
 import alpha.rulp.ximpl.control.XRFactorWhen;
 import alpha.rulp.ximpl.error.XRError;
@@ -710,7 +710,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorCase(F_CASE));
 
 		// Exception
-		RulpUtil.addFrameObject(rootFrame, new XRFactorError(F_E_ERROR));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorThrow(F_THROW));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorErrorValue(F_E_ERROR_VALUE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorTry(F_E_TRY));
 

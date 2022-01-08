@@ -1,5 +1,14 @@
-(try (error e1 "msg1") (e2 (print e2)))
+(try 
+    (throw e1 "msg1") 
+    (catch e2 (print e2))
+)
 ;;;
 
-(try (try (error e1 "msg1") (e2 (print e2))) (?e (print ?e)))
+(try 
+    (try 
+        (throw e1 "msg1") 
+        (catch e2 (print e2))
+    ) 
+    (catch ?e (print ?e))
+)
 ;;;

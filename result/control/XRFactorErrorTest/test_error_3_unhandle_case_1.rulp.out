@@ -1,11 +1,20 @@
-(try (error e1 "msg1") (e2 (print e2)))
+(try 
+    (throw e1 "msg1") 
+    (catch e2 (print e2))
+)
 ;err:
 error: e1, msg1
-at TRY: (error e1 "msg1")
-at main: (try (error e1 "msg1") (e2 (print e2)))
+at TRY: (throw e1 "msg1")
+at main: (try (throw e1 "msg1") (catch e2 (print e2)))
 ;eof
 
-(try (try (error e1 "msg1") (e2 (print e2))) (?e (print ?e)))
+(try 
+    (try 
+        (throw e1 "msg1") 
+        (catch e2 (print e2))
+    ) 
+    (catch ?e (print ?e))
+)
 ;=>nil
 ;out:
 error: e1, msg1

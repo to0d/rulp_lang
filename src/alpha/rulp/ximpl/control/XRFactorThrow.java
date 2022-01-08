@@ -16,6 +16,7 @@ import static alpha.rulp.lang.Constant.O_Nil;
 
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRError;
+import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
@@ -29,9 +30,9 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorError extends AbsAtomFactorAdapter implements IRFactor {
+public class XRFactorThrow extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorError(String factorName) {
+	public XRFactorThrow(String factorName) {
 		super(factorName);
 	}
 
@@ -64,10 +65,10 @@ public class XRFactorError extends AbsAtomFactorAdapter implements IRFactor {
 			valueName = RulpUtil.asAtom(frame.getEntry(C_ERROR_DEFAULT).getObject()).getName();
 		}
 
-		IRList actionList = RulpUtil.asList(handlEntry.getObject());
+		IRExpr catchExpr = RulpUtil.asExpression(handlEntry.getObject());
 		frame.setEntry(valueName, err);
 
-		IRIterator<? extends IRObject> iter = actionList.iterator();
+		IRIterator<? extends IRObject> iter = catchExpr.listIterator(2);
 		while (iter.hasNext()) {
 			interpreter.compute(frame, iter.next());
 		}

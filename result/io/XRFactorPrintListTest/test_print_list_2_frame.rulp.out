@@ -60,7 +60,6 @@ root::do-when-obj-deleted
 root::do-when-var-changed
 root::double
 root::equal_def
-root::error
 root::error-value
 root::expr
 root::factor
@@ -162,6 +161,7 @@ root::sys-free-memory
 root::sys-gc
 root::sys-time
 root::sys-total-memory
+root::throw
 root::to-atom
 root::to-blob
 root::to-expr

@@ -237,7 +237,7 @@
 )
 
 (deftemplate use (namespace ?ns)
-    (error bad-type (strcat "namespace not found: " (to-string ?ns)))
+    (throw bad-type (strcat "namespace not found: " (to-string ?ns)))
 )
 
 ;****************************************************;

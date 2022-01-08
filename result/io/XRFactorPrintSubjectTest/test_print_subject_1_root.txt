@@ -36,7 +36,7 @@ get-of-list          : -154     0        0    factor     get-of-list
 foreach              : -153     0        0    factor     foreach             
 try                  : -152     0        0    factor     try                 
 error-value          : -151     0        0    factor     error-value         
-error                : -150     0        0    factor     error               
+throw                : -150     0        0    factor     throw               
 case                 : -149     0        0    factor     case                
 do                   : -148     0        0    factor     do                  
 break                : -147     0        0    factor     break               

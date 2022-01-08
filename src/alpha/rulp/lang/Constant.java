@@ -21,6 +21,8 @@ public interface Constant {
 
 	String A_BOOL = "bool";
 
+	String A_CATCH = "catch";
+
 	String A_CLASS = "class";
 
 	String A_COLUMN = "column";
@@ -70,8 +72,6 @@ public interface Constant {
 	String A_LOAD_PATHS = "?load-paths";
 
 	String A_LOCAL = "local";
-
-	String A_CATCH = "catch";
 
 	String A_LONG = "long";
 
@@ -234,8 +234,6 @@ public interface Constant {
 	String F_DO_WHEN_OBJ_DELETED = "do-when-obj-deleted";
 
 	String F_DO_WHEN_VAR_CHANGED = "do-when-var-changed";
-
-	String F_E_ERROR = "error";
 
 	String F_E_ERROR_VALUE = "error-value";
 
@@ -440,6 +438,8 @@ public interface Constant {
 	String F_SYS_TIME = "sys-time";
 
 	String F_SYS_TOTAL_MEMORY = "sys-total-memory";
+
+	String F_THROW = "throw";
 
 	String F_TO = "to";
 
