@@ -1,6 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.F_BREAK;
 import static alpha.rulp.lang.Constant.F_B_AND;
 import static alpha.rulp.lang.Constant.F_B_OR;
@@ -13,7 +13,7 @@ import static alpha.rulp.lang.Constant.F_O_DIV;
 import static alpha.rulp.lang.Constant.F_O_MOD;
 import static alpha.rulp.lang.Constant.F_O_POWER;
 import static alpha.rulp.lang.Constant.F_O_SUB;
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.F_RETURN;
 import static alpha.rulp.lang.Constant.O_BY;
 import static alpha.rulp.lang.Constant.O_False;
 import static alpha.rulp.lang.Constant.O_INT_0;
@@ -63,188 +63,6 @@ public class EROUtil {
 			}
 
 			return size;
-		}
-
-		private static int _rebuildPower(List<IRObject> list, int fromIndex, int toIndex) throws RException {
-
-			int size = toIndex - fromIndex;
-
-			// (power)
-			// (- 1)
-			// (/ 5)
-			if (size < 2) {
-				return -1;
-			}
-
-			IRObject e1 = list.get(fromIndex);
-
-			// (power 1 e2 e3 e4...) ==> 1
-			if (OptUtil.isConstNumber(e1, 1)) {
-				list.set(fromIndex, O_INT_1);
-				return 1;
-			}
-
-			int listSize = size;
-			boolean update = false;
-
-			// (power a b c) == (power a (* b c))
-			if (listSize >= 3) {
-
-				int size2 = _rebuildBy(list, fromIndex + 1, fromIndex + listSize);
-				if (size2 == -1) {
-					size2 = listSize - 1;
-				} else {
-					update = true;
-				}
-
-				if (size2 > 1) {
-
-					IRObject[] byExpr = new IRObject[size2 + 1];
-					byExpr[0] = O_BY;
-
-					for (int i = 0; i < size2; ++i) {
-						byExpr[i + 1] = list.get(fromIndex + 1 + i);
-					}
-
-					list.set(fromIndex + 1, RulpFactory.createExpression(byExpr));
-					listSize = 2;
-					update = true;
-
-				} else {
-					listSize = size2 + 1;
-				}
-			}
-
-			if (listSize == 2) {
-
-				// (power a 0) ==> 1
-				if (OptUtil.isConstNumber(list.get(fromIndex + 1), 0)) {
-					list.set(fromIndex, O_INT_1);
-					return 1;
-				}
-
-				// (power a 1) ==> a
-				if (OptUtil.isConstNumber(list.get(fromIndex + 1), 1)) {
-					list.set(fromIndex, e1);
-					return 1;
-				}
-			}
-
-			if (!update) {
-				return -1;
-			}
-
-			return listSize;
-		}
-
-		private static int _rebuildDiv(List<IRObject> list, int fromIndex, int toIndex) throws RException {
-
-			int size = toIndex - fromIndex;
-
-			if (size > 1) {
-
-				IRObject e0 = list.get(fromIndex);
-				if (!OptUtil.isConstNumber(e0)) {
-
-					String uniq0 = RulpUtil.toUniqString(e0);
-
-					int findIndex = -1;
-					for (int i = fromIndex + 1; i < toIndex; ++i) {
-						IRObject ex = list.get(i);
-						if (!OptUtil.isConstNumber(ex) && RulpUtil.toUniqString(ex).equals(uniq0)) {
-							findIndex = i;
-							break;
-						}
-					}
-
-					if (findIndex != -1) {
-
-						list.set(fromIndex, O_INT_1);
-						for (int i = findIndex + 1; i < toIndex; ++i) {
-							list.set(i - 1, list.get(i));
-						}
-
-						size--;
-					}
-				}
-
-			}
-
-			int size2 = _rebuildSubDivPower(list, fromIndex, fromIndex + size, RArithmeticOperator.DIV);
-			int listSize;
-			if (size2 == -1) {
-				listSize = size;
-			} else {
-				listSize = size2;
-			}
-
-			if (listSize >= 3) {
-				int size3 = _rebuildSameElement(list, fromIndex + 1, fromIndex + listSize, RArithmeticOperator.POWER);
-				if (size3 != -1) {
-					listSize = size3 + 1;
-				}
-			}
-
-			if ((toIndex - fromIndex) == listSize) {
-				return -1;
-			}
-
-			return listSize;
-		}
-
-		private static int _rebuildSub(List<IRObject> list, int fromIndex, int toIndex) throws RException {
-
-			int size = toIndex - fromIndex;
-
-			if (size > 1) {
-
-				IRObject e0 = list.get(fromIndex);
-				if (!OptUtil.isConstNumber(e0)) {
-
-					String uniq0 = RulpUtil.toUniqString(e0);
-
-					int findIndex = -1;
-					for (int i = fromIndex + 1; i < toIndex; ++i) {
-						IRObject ex = list.get(i);
-						if (!OptUtil.isConstNumber(ex) && RulpUtil.toUniqString(ex).equals(uniq0)) {
-							findIndex = i;
-							break;
-						}
-					}
-
-					if (findIndex != -1) {
-
-						list.set(fromIndex, O_INT_0);
-						for (int i = findIndex + 1; i < toIndex; ++i) {
-							list.set(i - 1, list.get(i));
-						}
-
-						size--;
-					}
-				}
-
-			}
-
-			int size2 = _rebuildSubDivPower(list, fromIndex, fromIndex + size, RArithmeticOperator.SUB);
-			int listSize;
-			if (size2 == -1) {
-				listSize = size;
-			} else {
-				listSize = size2;
-			}
-
-			if (listSize >= 3) {
-				int size3 = _rebuildSameElement(list, fromIndex + 1, fromIndex + listSize, RArithmeticOperator.BY);
-				if (size3 != -1) {
-					listSize = size3 + 1;
-				}
-			}
-
-			if ((toIndex - fromIndex) == listSize) {
-				return -1;
-			}
-
-			return listSize;
 		}
 
 		private static int _rebuildAddBy(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
@@ -351,6 +169,61 @@ public class EROUtil {
 			return size;
 		}
 
+		private static int _rebuildDiv(List<IRObject> list, int fromIndex, int toIndex) throws RException {
+
+			int size = toIndex - fromIndex;
+
+			if (size > 1) {
+
+				IRObject e0 = list.get(fromIndex);
+				if (!OptUtil.isConstNumber(e0)) {
+
+					String uniq0 = RulpUtil.toUniqString(e0);
+
+					int findIndex = -1;
+					for (int i = fromIndex + 1; i < toIndex; ++i) {
+						IRObject ex = list.get(i);
+						if (!OptUtil.isConstNumber(ex) && RulpUtil.toUniqString(ex).equals(uniq0)) {
+							findIndex = i;
+							break;
+						}
+					}
+
+					if (findIndex != -1) {
+
+						list.set(fromIndex, O_INT_1);
+						for (int i = findIndex + 1; i < toIndex; ++i) {
+							list.set(i - 1, list.get(i));
+						}
+
+						size--;
+					}
+				}
+
+			}
+
+			int size2 = _rebuildSubDivPower(list, fromIndex, fromIndex + size, RArithmeticOperator.DIV);
+			int listSize;
+			if (size2 == -1) {
+				listSize = size;
+			} else {
+				listSize = size2;
+			}
+
+			if (listSize >= 3) {
+				int size3 = _rebuildSameElement(list, fromIndex + 1, fromIndex + listSize, RArithmeticOperator.POWER);
+				if (size3 != -1) {
+					listSize = size3 + 1;
+				}
+			}
+
+			if ((toIndex - fromIndex) == listSize) {
+				return -1;
+			}
+
+			return listSize;
+		}
+
 		private static int _rebuildMod(List<IRObject> list, int fromIndex, int toIndex) throws RException {
 
 			int size = toIndex - fromIndex;
@@ -418,6 +291,78 @@ public class EROUtil {
 			}
 
 			return pos - fromIndex;
+		}
+
+		private static int _rebuildPower(List<IRObject> list, int fromIndex, int toIndex) throws RException {
+
+			int size = toIndex - fromIndex;
+
+			// (power)
+			// (- 1)
+			// (/ 5)
+			if (size < 2) {
+				return -1;
+			}
+
+			IRObject e1 = list.get(fromIndex);
+
+			// (power 1 e2 e3 e4...) ==> 1
+			if (OptUtil.isConstNumber(e1, 1)) {
+				list.set(fromIndex, O_INT_1);
+				return 1;
+			}
+
+			int listSize = size;
+			boolean update = false;
+
+			// (power a b c) == (power a (* b c))
+			if (listSize >= 3) {
+
+				int size2 = _rebuildBy(list, fromIndex + 1, fromIndex + listSize);
+				if (size2 == -1) {
+					size2 = listSize - 1;
+				} else {
+					update = true;
+				}
+
+				if (size2 > 1) {
+
+					IRObject[] byExpr = new IRObject[size2 + 1];
+					byExpr[0] = O_BY;
+
+					for (int i = 0; i < size2; ++i) {
+						byExpr[i + 1] = list.get(fromIndex + 1 + i);
+					}
+
+					list.set(fromIndex + 1, RulpFactory.createExpression(byExpr));
+					listSize = 2;
+					update = true;
+
+				} else {
+					listSize = size2 + 1;
+				}
+			}
+
+			if (listSize == 2) {
+
+				// (power a 0) ==> 1
+				if (OptUtil.isConstNumber(list.get(fromIndex + 1), 0)) {
+					list.set(fromIndex, O_INT_1);
+					return 1;
+				}
+
+				// (power a 1) ==> a
+				if (OptUtil.isConstNumber(list.get(fromIndex + 1), 1)) {
+					list.set(fromIndex, e1);
+					return 1;
+				}
+			}
+
+			if (!update) {
+				return -1;
+			}
+
+			return listSize;
 		}
 
 		private static int _rebuildSameElement(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
@@ -493,6 +438,61 @@ public class EROUtil {
 			}
 
 			return pos - fromIndex;
+		}
+
+		private static int _rebuildSub(List<IRObject> list, int fromIndex, int toIndex) throws RException {
+
+			int size = toIndex - fromIndex;
+
+			if (size > 1) {
+
+				IRObject e0 = list.get(fromIndex);
+				if (!OptUtil.isConstNumber(e0)) {
+
+					String uniq0 = RulpUtil.toUniqString(e0);
+
+					int findIndex = -1;
+					for (int i = fromIndex + 1; i < toIndex; ++i) {
+						IRObject ex = list.get(i);
+						if (!OptUtil.isConstNumber(ex) && RulpUtil.toUniqString(ex).equals(uniq0)) {
+							findIndex = i;
+							break;
+						}
+					}
+
+					if (findIndex != -1) {
+
+						list.set(fromIndex, O_INT_0);
+						for (int i = findIndex + 1; i < toIndex; ++i) {
+							list.set(i - 1, list.get(i));
+						}
+
+						size--;
+					}
+				}
+
+			}
+
+			int size2 = _rebuildSubDivPower(list, fromIndex, fromIndex + size, RArithmeticOperator.SUB);
+			int listSize;
+			if (size2 == -1) {
+				listSize = size;
+			} else {
+				listSize = size2;
+			}
+
+			if (listSize >= 3) {
+				int size3 = _rebuildSameElement(list, fromIndex + 1, fromIndex + listSize, RArithmeticOperator.BY);
+				if (size3 != -1) {
+					listSize = size3 + 1;
+				}
+			}
+
+			if ((toIndex - fromIndex) == listSize) {
+				return -1;
+			}
+
+			return listSize;
 		}
 
 		private static int _rebuildSubDivPower(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
