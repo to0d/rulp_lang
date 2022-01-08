@@ -1,6 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.F_BREAK;
 import static alpha.rulp.lang.Constant.F_B_AND;
 import static alpha.rulp.lang.Constant.F_B_OR;
@@ -108,6 +108,61 @@ public class EROUtil {
 
 			if (listSize >= 3) {
 				int size3 = _rebuildSameElement(list, fromIndex + 1, fromIndex + listSize, RArithmeticOperator.POWER);
+				if (size3 != -1) {
+					listSize = size3 + 1;
+				}
+			}
+
+			if ((toIndex - fromIndex) == listSize) {
+				return -1;
+			}
+
+			return listSize;
+		}
+
+		private static int _rebuildSub(List<IRObject> list, int fromIndex, int toIndex) throws RException {
+
+			int size = toIndex - fromIndex;
+
+			if (size > 1) {
+
+				IRObject e0 = list.get(fromIndex);
+				if (!OptUtil.isConstNumber(e0)) {
+
+					String uniq0 = RulpUtil.toUniqString(e0);
+
+					int findIndex = -1;
+					for (int i = fromIndex + 1; i < toIndex; ++i) {
+						IRObject ex = list.get(i);
+						if (!OptUtil.isConstNumber(ex) && RulpUtil.toUniqString(ex).equals(uniq0)) {
+							findIndex = i;
+							break;
+						}
+					}
+
+					if (findIndex != -1) {
+
+						list.set(fromIndex, O_INT_0);
+						for (int i = findIndex + 1; i < toIndex; ++i) {
+							list.set(i - 1, list.get(i));
+						}
+
+						size--;
+					}
+				}
+
+			}
+
+			int size2 = _rebuildSubDivPower(list, fromIndex, fromIndex + size, RArithmeticOperator.SUB);
+			int listSize;
+			if (size2 == -1) {
+				listSize = size;
+			} else {
+				listSize = size2;
+			}
+
+			if (listSize >= 3) {
+				int size3 = _rebuildSameElement(list, fromIndex + 1, fromIndex + listSize, RArithmeticOperator.BY);
 				if (size3 != -1) {
 					listSize = size3 + 1;
 				}
@@ -514,6 +569,9 @@ public class EROUtil {
 
 			switch (op) {
 			case SUB:
+				size = _rebuildSub(rebuildList, 1, size);
+				break;
+
 			case POWER:
 				size = _rebuildSubDivPower(rebuildList, 1, size, op);
 				break;

@@ -38,5 +38,11 @@
 ;=>(- a 6.0D b)
 
 (reduct (- a a))
-;=>(- a a)
+;=>0
+
+(reduct (- a b a))
+;=>(- 0 b)
+
+(reduct (- a b a c))
+;=>(- 0 b c)
 
