@@ -1,4 +1,4 @@
-package beta.rulp.error;
+package beta.rulp.control;
 
 import org.junit.jupiter.api.Test;
 

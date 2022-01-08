@@ -7,7 +7,7 @@
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-package alpha.rulp.ximpl.error;
+package alpha.rulp.ximpl.control;
 
 import static alpha.rulp.lang.Constant.C_ERROR_DEFAULT;
 import static alpha.rulp.lang.Constant.C_HANDLE;

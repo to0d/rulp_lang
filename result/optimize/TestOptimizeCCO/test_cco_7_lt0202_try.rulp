@@ -13,8 +13,9 @@
         (setq ?n2 (+ ?n2 (power ?x 2)))
     )
     
-    (try (return (isHappy ?n2))
-         (?e (return false))
+    (try 
+        (return (isHappy ?n2))
+        (?e (return false))
     )
 )[opt-cco]
 ;=>

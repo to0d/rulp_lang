@@ -71,6 +71,8 @@ public interface Constant {
 
 	String A_LOCAL = "local";
 
+	String A_CATCH = "catch";
+
 	String A_LONG = "long";
 
 	String A_MACRO = "macro";
@@ -119,9 +121,9 @@ public interface Constant {
 
 	String A_QUEUE = "queue";
 
-	String A_RETURN_VAR = "?rv";
+	String A_RETURN_TYPE = "return-type";
 
-	String F_RETURN_TYPE_OF = "return-type-of";
+	String A_RETURN_VAR = "?rv";
 
 	String A_ROOT = "root";
 
@@ -136,8 +138,6 @@ public interface Constant {
 	String A_STATIC = "static";
 
 	String A_STRING = "string";
-
-	String A_RETURN_TYPE = "return-type";
 
 	String A_SYSTEM = "system";
 
@@ -369,6 +369,8 @@ public interface Constant {
 
 	String F_RETURN = "return";
 
+	String F_RETURN_TYPE_OF = "return-type-of";
+
 	String F_REVERSE = "reverse";
 
 	String F_RULP_OBJ_COUNT = "rulp-object-count";
@@ -567,13 +569,13 @@ public interface Constant {
 
 	IRAtom O_QUESTION = RulpFactory.createAtom(A_QUESTION);
 
+	IRAtom O_RETURN_TYPE = RulpFactory.createAtom(A_RETURN_TYPE);
+
 	IRAtom O_STABLE = RulpFactory.createAtom(A_STABLE);
 
 	IRAtom O_Static = RulpFactory.createAtom(A_STATIC);
 
 	IRAtom O_SUB = RulpFactory.createAtom(F_O_SUB);
-
-	IRAtom O_RETURN_TYPE = RulpFactory.createAtom(A_RETURN_TYPE);
 
 	IRAtom O_THREAD_UNSAFE = RulpFactory.createAtom(A_THREAD_UNSAFE);
 
