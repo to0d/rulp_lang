@@ -67,19 +67,34 @@ public class EROUtil {
 
 		private static int _rebuildPower(List<IRObject> list, int fromIndex, int toIndex) throws RException {
 
-			int size = _rebuildSubDivPower(list, fromIndex, toIndex, RArithmeticOperator.POWER);
+			int size = toIndex - fromIndex;
 
-			int listSize = size;
-			if (listSize == -1) {
-				listSize = toIndex - fromIndex;
+			// (power)
+			// (- 1)
+			// (/ 5)
+			if (size < 2) {
+				return -1;
 			}
 
+			IRObject e1 = list.get(fromIndex);
+
+			// (power 1 e2 e3 e4...) ==> 1
+			if (OptUtil.isConstNumber(e1, 1)) {
+				list.set(fromIndex, O_INT_1);
+				return 1;
+			}
+
+			int listSize = size;
+			boolean update = false;
+
 			// (power a b c) == (power a (* b c))
-			if (listSize >= 2) {
+			if (listSize >= 3) {
 
 				int size2 = _rebuildBy(list, fromIndex + 1, fromIndex + listSize);
 				if (size2 == -1) {
 					size2 = listSize - 1;
+				} else {
+					update = true;
 				}
 
 				if (size2 > 1) {
@@ -92,11 +107,34 @@ public class EROUtil {
 					}
 
 					list.set(fromIndex + 1, RulpFactory.createExpression(byExpr));
-					size = 2;
+					listSize = 2;
+					update = true;
+
+				} else {
+					listSize = size2 + 1;
 				}
 			}
 
-			return size;
+			if (listSize == 2) {
+
+				// (power a 0) ==> 1
+				if (OptUtil.isConstNumber(list.get(fromIndex + 1), 0)) {
+					list.set(fromIndex, O_INT_1);
+					return 1;
+				}
+
+				// (power a 1) ==> a
+				if (OptUtil.isConstNumber(list.get(fromIndex + 1), 1)) {
+					list.set(fromIndex, e1);
+					return 1;
+				}
+			}
+
+			if (!update) {
+				return -1;
+			}
+
+			return listSize;
 		}
 
 		private static int _rebuildDiv(List<IRObject> list, int fromIndex, int toIndex) throws RException {
@@ -477,14 +515,6 @@ public class EROUtil {
 
 			RArithmeticOperator op2 = null;
 			switch (op) {
-			case POWER:
-				op2 = RArithmeticOperator.BY;
-				// (power 1 e2 e3 e4...) ==> 1
-				if (OptUtil.isConstNumber(e1, 1)) {
-					list.set(fromIndex, O_INT_1);
-					return 1;
-				}
-				break;
 
 			case SUB:
 				op2 = RArithmeticOperator.ADD;
@@ -508,31 +538,9 @@ public class EROUtil {
 				rightSize = size - 1;
 			}
 
-			// (power a 1 b) => (power a b)
-			if (rightSize > 0 && RArithmeticOperator.POWER == op && OptUtil.isConstNumber(list.get(fromIndex + 1), 1)) {
-
-				if (rightSize == 1) {
-					list.set(fromIndex, e1);
-					return 1;
-				}
-
-				// Move left
-				// (power a 2 b c) ==> (power a b c)
-				for (int i = 0; i < rightSize - 1; ++i) {
-					list.set(i + fromIndex + 1, list.get(i + fromIndex + 2));
-				}
-
-				rightSize--;
-			}
-
 			if (rightSize == 0 || (rightSize == 1 && OptUtil.isConstNumber(list.get(fromIndex + 1), 0))) {
 
 				switch (op) {
-
-				// (power a 0) ==> 1
-				case POWER:
-					list.set(fromIndex, O_INT_1);
-					return 1;
 
 				// (- a 0) ==> a
 				case SUB:
@@ -562,12 +570,6 @@ public class EROUtil {
 				// (/ 0 a b) => 0
 				if (RArithmeticOperator.DIV == op && OptUtil.isConstNumber(e1, 0)) {
 					return 0;
-				}
-
-				// (power 1 a b)
-				if (RArithmeticOperator.POWER == op && OptUtil.isConstNumber(e1, 1)) {
-					list.set(fromIndex, O_INT_1);
-					return 1;
 				}
 
 				// Move left
