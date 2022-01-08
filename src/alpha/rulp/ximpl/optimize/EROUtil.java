@@ -22,6 +22,7 @@ import static alpha.rulp.lang.Constant.O_POWER;
 import static alpha.rulp.lang.Constant.O_True;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -178,12 +179,12 @@ public class EROUtil {
 				IRObject e0 = list.get(fromIndex);
 				if (!OptUtil.isConstNumber(e0)) {
 
-					String uniq0 = RulpUtil.toUniqString(e0);
+					String uniq0 = toUniqString(e0);
 
 					int findIndex = -1;
 					for (int i = fromIndex + 1; i < toIndex; ++i) {
 						IRObject ex = list.get(i);
-						if (!OptUtil.isConstNumber(ex) && RulpUtil.toUniqString(ex).equals(uniq0)) {
+						if (!OptUtil.isConstNumber(ex) && toUniqString(ex).equals(uniq0)) {
 							findIndex = i;
 							break;
 						}
@@ -365,81 +366,6 @@ public class EROUtil {
 			return listSize;
 		}
 
-		private static int _rebuildSameElement(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
-				throws RException {
-
-			int size = toIndex - fromIndex;
-			if (size < 2) {
-				return -1;
-			}
-
-			Map<String, Integer> uniqMap = new HashMap<>();
-			Map<String, Integer> countMap = null;
-
-			int pos = fromIndex;
-
-			for (int i = fromIndex; i < toIndex; ++i) {
-
-				IRObject obj = list.get(i);
-
-				String uniq = RulpUtil.toUniqString(list.get(i));
-
-				if (!uniqMap.containsKey(uniq)) {
-
-					uniqMap.put(uniq, pos);
-
-					if (pos != i) {
-						list.set(pos, obj);
-					}
-
-					++pos;
-
-				} else {
-
-					if (countMap == null) {
-						countMap = new HashMap<>();
-					}
-
-					Integer count = countMap.get(uniq);
-					if (count == null) {
-						count = 1;
-					}
-
-					countMap.put(uniq, count + 1);
-				}
-			}
-
-			if (countMap == null) {
-				return -1;
-			}
-
-			for (String uniq : countMap.keySet()) {
-				int count = countMap.get(uniq);
-				int i = uniqMap.get(uniq);
-				IRObject obj = list.get(i);
-
-				if (op != null) {
-
-					switch (op) {
-					case POWER:
-						obj = RulpFactory.createExpression(O_POWER, obj, RulpFactory.createInteger(count));
-						break;
-
-					case BY:
-						obj = RulpFactory.createExpression(O_BY, RulpFactory.createInteger(count), obj);
-						break;
-
-					default:
-						throw new RException("not support: " + op);
-					}
-
-					list.set(i, obj);
-				}
-			}
-
-			return pos - fromIndex;
-		}
-
 		private static int _rebuildSub(List<IRObject> list, int fromIndex, int toIndex) throws RException {
 
 			int size = toIndex - fromIndex;
@@ -449,12 +375,12 @@ public class EROUtil {
 				IRObject e0 = list.get(fromIndex);
 				if (!OptUtil.isConstNumber(e0)) {
 
-					String uniq0 = RulpUtil.toUniqString(e0);
+					String uniq0 = toUniqString(e0);
 
 					int findIndex = -1;
 					for (int i = fromIndex + 1; i < toIndex; ++i) {
 						IRObject ex = list.get(i);
-						if (!OptUtil.isConstNumber(ex) && RulpUtil.toUniqString(ex).equals(uniq0)) {
+						if (!OptUtil.isConstNumber(ex) && toUniqString(ex).equals(uniq0)) {
 							findIndex = i;
 							break;
 						}
@@ -763,7 +689,7 @@ public class EROUtil {
 			}
 
 			if (listSize >= 3) {
-				int size2 = ArithmeticUtil._rebuildSameElement(rebuildList, 1, listSize, null);
+				int size2 = _rebuildSameElement(rebuildList, 1, listSize, null);
 				if (size2 != -1) {
 					size = size2;
 				}
@@ -800,7 +726,7 @@ public class EROUtil {
 			}
 
 			if (listSize >= 3) {
-				int size2 = ArithmeticUtil._rebuildSameElement(rebuildList, 1, listSize, null);
+				int size2 = _rebuildSameElement(rebuildList, 1, listSize, null);
 				if (size2 != -1) {
 					size = size2;
 				}
@@ -838,9 +764,43 @@ public class EROUtil {
 		}
 	}
 
+	static class UniqElement {
+		int count = 0;
+		IRObject element;
+		String uniqName;
+	}
+
 	protected static AtomicInteger computeCount = new AtomicInteger(0);
 
 	protected static AtomicInteger rebuildCount = new AtomicInteger(0);
+
+	static int typePriority[] = new int[RType.TYPE_NUM];
+
+	static {
+		typePriority[RType.INT.getIndex()] = 0;
+		typePriority[RType.LONG.getIndex()] = 1;
+		typePriority[RType.FLOAT.getIndex()] = 2;
+		typePriority[RType.DOUBLE.getIndex()] = 3;
+		typePriority[RType.CONSTANT.getIndex()] = 4;
+		typePriority[RType.BOOL.getIndex()] = 5;
+		typePriority[RType.STRING.getIndex()] = 6;
+		typePriority[RType.NIL.getIndex()] = 7;
+		typePriority[RType.ATOM.getIndex()] = 8;
+		typePriority[RType.BLOB.getIndex()] = 9;
+		typePriority[RType.ARRAY.getIndex()] = 10;
+		typePriority[RType.LIST.getIndex()] = 11;
+		typePriority[RType.FACTOR.getIndex()] = 12;
+		typePriority[RType.MACRO.getIndex()] = 13;
+		typePriority[RType.NATIVE.getIndex()] = 14;
+		typePriority[RType.EXPR.getIndex()] = 15;
+		typePriority[RType.FUNC.getIndex()] = 16;
+		typePriority[RType.TEMPLATE.getIndex()] = 17;
+		typePriority[RType.VAR.getIndex()] = 18;
+		typePriority[RType.CLASS.getIndex()] = 19;
+		typePriority[RType.INSTANCE.getIndex()] = 20;
+		typePriority[RType.FRAME.getIndex()] = 21;
+		typePriority[RType.MEMBER.getIndex()] = 22;
+	}
 
 	static boolean _hasBreakExpr(IRObject obj) throws RException {
 
@@ -1207,6 +1167,91 @@ public class EROUtil {
 		return null;
 	}
 
+	private static String toUniqString(IRObject obj) throws RException {
+		return RulpUtil.toString(obj);
+	}
+
+	private static int _rebuildSameElement(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
+			throws RException {
+
+		int size = toIndex - fromIndex;
+		if (size < 2) {
+			return -1;
+		}
+
+		ArrayList<UniqElement> uniqList = new ArrayList<>();
+		Map<String, UniqElement> uniqMap = new HashMap<>();
+
+		AtomicInteger update = new AtomicInteger(0);
+
+		for (int i = fromIndex; i < toIndex; ++i) {
+
+			IRObject obj = list.get(i);
+			String uniqName = toUniqString(list.get(i));
+
+			UniqElement uniqElement = uniqMap.get(uniqName);
+			if (uniqElement == null) {
+				uniqElement = new UniqElement();
+				uniqElement.element = obj;
+				uniqElement.count = 1;
+				uniqElement.uniqName = uniqName;
+
+				uniqMap.put(uniqName, uniqElement);
+				uniqList.add(uniqElement);
+
+			} else {
+
+				uniqElement.count++;
+				update.incrementAndGet();
+			}
+		}
+
+		Collections.sort(uniqList, (e1, e2) -> {
+
+			int d = getTypePriority(e1.element.getType()) - getTypePriority(e2.element.getType());
+			if (d == 0) {
+				d = e1.uniqName.compareTo(e2.uniqName);
+			}
+
+			if (d < 0) {
+				update.incrementAndGet();
+			}
+
+			return d;
+		});
+
+		if (update.get() == 0) {
+			return -1;
+		}
+
+		int pos = fromIndex;
+		for (UniqElement e : uniqList) {
+
+			IRObject obj = e.element;
+
+			if (op != null && e.count > 1) {
+
+				switch (op) {
+				case POWER:
+					obj = RulpFactory.createExpression(O_POWER, obj, RulpFactory.createInteger(e.count));
+					break;
+
+				case BY:
+					obj = RulpFactory.createExpression(O_BY, RulpFactory.createInteger(e.count), obj);
+					break;
+
+				default:
+					throw new RException("not support: " + op);
+				}
+			}
+
+			list.set(pos, obj);
+			pos++;
+		}
+
+		return pos - fromIndex;
+	}
+
 	private static int _removeEmptyExpr(List<IRObject> exprList, int fromIndex) throws RException {
 
 		int size = exprList.size();
@@ -1238,6 +1283,10 @@ public class EROUtil {
 
 	public static int getRebuildCount() {
 		return rebuildCount.get();
+	}
+
+	private static int getTypePriority(RType type) {
+		return typePriority[type.getIndex()];
 	}
 
 	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value
