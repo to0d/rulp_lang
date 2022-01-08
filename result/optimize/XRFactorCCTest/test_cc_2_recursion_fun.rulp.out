@@ -17,6 +17,6 @@
 (cc (fun2 0))
 ;err:
 factor not found: (cc (fun2 0))
-at main: (cc (fun2 0))
+at (cc (fun2 0)) ; main-2
 ;eof
 

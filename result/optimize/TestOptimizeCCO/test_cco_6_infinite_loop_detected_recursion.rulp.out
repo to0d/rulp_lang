@@ -15,21 +15,21 @@
 (fun 4)
 ;err:
 infinite loop detected: (cc2 (fun 3))
-at _$fun$_fun: (cc2 (fun (- ?x 1)))
-at _$fun$_fun: (> (cc2 (fun (- ?x 1))) 0)
-at _$fun$_fun: (if (> (cc2 (fun (- ?x 1))) 0) (return 1) (return 2))
-at _$fun$_fun: (if (> ?x 3) (if (> (cc2 (fun (- ?x 1))) 0) (return 1) (return 2)) (if (> (cc...
-at _$fun$_fun: (fun 4)
-at _$fun$_fun: (cc2 (fun (+ ?x 1)))
-at _$fun$_fun: (> (cc2 (fun (+ ?x 1))) 0)
-at _$fun$_fun: (if (> (cc2 (fun (+ ?x 1))) 0) (return 1) (return 2))
-at _$fun$_fun: (if (> ?x 3) (if (> (cc2 (fun (- ?x 1))) 0) (return 1) (return 2)) (if (> (cc...
-at _$fun$_fun: (fun 3)
-at _$fun$_fun: (cc2 (fun (- ?x 1)))
-at _$fun$_fun: (> (cc2 (fun (- ?x 1))) 0)
-at _$fun$_fun: (if (> (cc2 (fun (- ?x 1))) 0) (return 1) (return 2))
-at _$fun$_fun: (if (> ?x 3) (if (> (cc2 (fun (- ?x 1))) 0) (return 1) (return 2)) (if (> (cc...
-at main: (fun 4)
+at (cc2 (fun (- ?x 1))) ; _$fun$_fun-5
+at (> (cc2 (fun (- ?x 1))) 0) ; _$fun$_fun-5
+at (if (> (cc2 (fun (- ?x 1))) 0) (return 1) (return 2)) ; _$fun$_fun-5
+at (if (> ?x 3) (if (> (cc2 (fun (- ?x 1))) 0) (return 1) (return 2)) (if (> (cc... ; _$fun$_fun-5
+at (fun 4) ; _$fun$_fun-4
+at (cc2 (fun (+ ?x 1))) ; _$fun$_fun-4
+at (> (cc2 (fun (+ ?x 1))) 0) ; _$fun$_fun-4
+at (if (> (cc2 (fun (+ ?x 1))) 0) (return 1) (return 2)) ; _$fun$_fun-4
+at (if (> ?x 3) (if (> (cc2 (fun (- ?x 1))) 0) (return 1) (return 2)) (if (> (cc... ; _$fun$_fun-4
+at (fun 3) ; _$fun$_fun-3
+at (cc2 (fun (- ?x 1))) ; _$fun$_fun-3
+at (> (cc2 (fun (- ?x 1))) 0) ; _$fun$_fun-3
+at (if (> (cc2 (fun (- ?x 1))) 0) (return 1) (return 2)) ; _$fun$_fun-3
+at (if (> ?x 3) (if (> (cc2 (fun (- ?x 1))) 0) (return 1) (return 2)) (if (> (cc... ; _$fun$_fun-3
+at (fun 4) ; main-2
 ;eof
 
 (attribute-of fun)

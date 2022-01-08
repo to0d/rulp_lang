@@ -1,12 +1,12 @@
 (defun fun2 (?x ?x) (print ?x))
 ;err:
 duplicate parameter: ?x
-at main: (defun fun2 (?x ?x) (print ?x))
+at (defun fun2 (?x ?x) (print ?x)) ; main-2
 ;eof
 
 (defun main::fun2 (?x ?x) (print ?x))
 ;err:
 duplicate parameter: ?x
-at main: (defun main::fun2 (?x ?x) (print ?x))
+at (defun main::fun2 (?x ?x) (print ?x)) ; main-2
 ;eof
 

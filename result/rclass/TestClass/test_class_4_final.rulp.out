@@ -24,19 +24,19 @@
 (setq class1::?v2 3)
 ;err:
 Can't update final member: class1::?v2
-at main: (setq class1::?v2 3)
+at (setq class1::?v2 3) ; main-2
 ;eof
 
 (defun class1::add (?x) (setq ?value (+ ?value ?x 1)))
 ;err:
 can't redefine final member: class1::add
-at main: (defun class1::add (?x) (setq ?value (+ ?value ?x 1)))
+at (defun class1::add (?x) (setq ?value (+ ?value ?x 1))) ; main-2
 ;eof
 
 (defun class1::sub (?x) (setq ?value (- ?value ?x 1)))
 ;err:
 duplicate funcion: (sub nil)
-at main: (defun class1::sub (?x) (setq ?value (- ?value ?x 1)))
+at (defun class1::sub (?x) (setq ?value (- ?value ?x 1))) ; main-2
 ;eof
 
 (defun class1::sub (?x ?y) (setq ?value (- ?value ?x ?y)))

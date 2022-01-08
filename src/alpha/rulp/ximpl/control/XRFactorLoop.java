@@ -13,6 +13,7 @@ import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.A_FROM;
 import static alpha.rulp.lang.Constant.F_FOR;
 import static alpha.rulp.lang.Constant.F_IN;
+import static alpha.rulp.lang.Constant.F_LOOP;
 import static alpha.rulp.lang.Constant.F_TO;
 import static alpha.rulp.lang.Constant.O_Nil;
 
@@ -56,7 +57,7 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 			loopFrame.setEntry(indexName, valIter.next());
 			IRIterator<? extends IRObject> argIter = args.listIterator(6);
 
-			IRFrame loopDoFrame = RulpFactory.createFrame(loopFrame, "LOOP-DO");
+			IRFrame loopDoFrame = RulpFactory.createFrame(loopFrame, F_LOOP);
 			RulpUtil.incRef(loopDoFrame);
 
 			try {
@@ -91,7 +92,7 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 			loopFrame.setEntry(indexName, RulpFactory.createInteger(i));
 			IRIterator<? extends IRObject> iter = getLoop2DoList(args);
 
-			IRFrame loopDoFrame = RulpFactory.createFrame(loopFrame, "LOOP-DO");
+			IRFrame loopDoFrame = RulpFactory.createFrame(loopFrame, F_LOOP);
 			RulpUtil.incRef(loopDoFrame);
 
 			try {
@@ -137,7 +138,7 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 						RulpUtil.decRef(loopDoFrame);
 					}
 
-					loopDoFrame = RulpFactory.createFrame(loopFrame, "LOOP-DO");
+					loopDoFrame = RulpFactory.createFrame(loopFrame, F_LOOP);
 					RulpUtil.incRef(loopDoFrame);
 				}
 
@@ -195,7 +196,7 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRFrame loopFrame = RulpFactory.createFrame(frame, "LOOP");
+		IRFrame loopFrame = RulpFactory.createFrame(frame, F_LOOP);
 		RulpUtil.incRef(loopFrame);
 
 		try {

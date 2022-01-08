@@ -7,9 +7,9 @@
 (get {{a, b, c}, x, y} -1 0)
 ;err:
 Invalid index: -1
-at _$fun$_get: (get-of-array ?arr ?i1 ?i2)
-at _$fun$_get: (return (get-of-array ?arr ?i1 ?i2))
-at main: (get {{a,b,c},x,y} -1 0)
+at (get-of-array ?arr ?i1 ?i2) ; _$fun$_get-3
+at (return (get-of-array ?arr ?i1 ?i2)) ; _$fun$_get-3
+at (get {{a,b,c},x,y} -1 0) ; main-2
 ;eof
 
 

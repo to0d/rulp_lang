@@ -9,6 +9,8 @@
 
 package alpha.rulp.ximpl.thread;
 
+import static alpha.rulp.lang.Constant.F_DO_Parallel;
+
 import java.util.ArrayList;
 
 import alpha.rulp.lang.IRExpr;
@@ -38,7 +40,7 @@ public class XRFactorDoParallel extends AbsAtomFactorAdapter implements IRFactor
 			trace("doParallel: " + expr);
 		}
 
-		IRFrame dopFrame = RulpFactory.createFrame(frame, "DO-P");
+		IRFrame dopFrame = RulpFactory.createFrame(frame, F_DO_Parallel);
 
 		try {
 

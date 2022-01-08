@@ -32,9 +32,9 @@
 (o1::fun3x)
 ;err:
 Unexpect argument number in fun<to-string>: expect=0, actual=1
-at _$fun$_fun3x: (to-string this)
-at _$fun$_fun3x: (+ "fun3x: " (to-string this))
-at _$fun$_fun3x: (return (+ "fun3x: " (to-string this)))
-at main: (o1::fun3x)
+at (to-string this) ; _$fun$_fun3x-5
+at (+ "fun3x: " (to-string this)) ; _$fun$_fun3x-5
+at (return (+ "fun3x: " (to-string this))) ; _$fun$_fun3x-5
+at (o1::fun3x) ; main-2
 ;eof
 

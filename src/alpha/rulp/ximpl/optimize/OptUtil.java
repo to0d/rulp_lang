@@ -3,13 +3,13 @@ package alpha.rulp.ximpl.optimize;
 import static alpha.rulp.lang.Constant.A_ATOM;
 import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.F_CPS;
-import static alpha.rulp.lang.Constant.F_E_TRY;
 import static alpha.rulp.lang.Constant.F_FOREACH;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_LET;
 import static alpha.rulp.lang.Constant.F_LOOP;
 import static alpha.rulp.lang.Constant.F_OPT;
 import static alpha.rulp.lang.Constant.F_RETURN;
+import static alpha.rulp.lang.Constant.F_TRY;
 import static alpha.rulp.lang.Constant.O_COMPUTE;
 import static alpha.rulp.lang.Constant.O_DOUBLE_0;
 import static alpha.rulp.lang.Constant.O_DOUBLE_1;
@@ -213,7 +213,7 @@ public class OptUtil {
 
 		switch (obj.asString()) {
 		case F_FOREACH:
-		case F_E_TRY:
+		case F_TRY:
 		case A_DO:
 		case F_LET:
 		case F_LOOP:

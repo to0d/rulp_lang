@@ -1,0 +1,21 @@
+(load "load/load2.rulp")
+;err:
+file not found: load/load2.rulp
+at (load "load/load2.rulp") ; main-2
+;eof
+
+(print ?load-paths)
+;=>nil
+;out:
+'()
+;eof
+
+(setq ?load-paths (add ?load-paths "load/path2"))
+;=>&?load-paths
+
+(load "load2.rulp")
+;=>nil
+
+(ls)
+;=>'(main::?rv main::?script-path main::_ginfo main::file-prename main::file-subffix main::is-blank main::is-empty main::main main::root main::script_out main::system main::x2)
+

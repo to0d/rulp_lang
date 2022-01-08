@@ -21,9 +21,9 @@
 (fun1 ?o1)
 ;err:
 Unexpect argument number in fun<fun1>: expect=1, actual=0
-at _$fun$_fun1: (?o::fun1)
-at _$fun$_fun1: (?o2::set_value (?o::fun1))
-at _$fun$_fun1: (return (?o2::set_value (?o::fun1)))
-at main: (fun1 ?o1)
+at (?o::fun1) ; _$fun$_fun1-5
+at (?o2::set_value (?o::fun1)) ; _$fun$_fun1-5
+at (return (?o2::set_value (?o::fun1))) ; _$fun$_fun1-5
+at (fun1 ?o1) ; main-2
 ;eof
 

@@ -71,7 +71,7 @@ mbr=super, mbr-property='(default), mbr-attribute='(), obj=class1, obj-type=clas
 )
 ;err:
 duplicate member variable: class4::?value
-at main: (defclass class4 (super class1) (defvar ?value 2) (defvar ?value 2))
+at (defclass class4 (super class1) (defvar ?value 2) (defvar ?value 2)) ; main-2
 ;eof
 
 (defclass class5 
@@ -81,6 +81,6 @@ at main: (defclass class4 (super class1) (defvar ?value 2) (defvar ?value 2))
 )
 ;err:
 duplicate funcion: (get)
-at main: (defclass class5 (super class1) (defun get () (return ?value)) (defun get () ...
+at (defclass class5 (super class1) (defun get () (return ?value)) (defun get () ... ; main-2
 ;eof
 

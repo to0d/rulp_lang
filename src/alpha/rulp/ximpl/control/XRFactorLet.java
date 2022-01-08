@@ -9,6 +9,8 @@
 
 package alpha.rulp.ximpl.control;
 
+import static alpha.rulp.lang.Constant.F_LET;
+
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -20,7 +22,6 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
-
 public class XRFactorLet extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorLet(String factorName) {
@@ -39,7 +40,7 @@ public class XRFactorLet extends AbsAtomFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRFrame letFrame = RulpFactory.createFrame(frame, "LET");
+		IRFrame letFrame = RulpFactory.createFrame(frame, F_LET);
 
 		try {
 
@@ -62,5 +63,4 @@ public class XRFactorLet extends AbsAtomFactorAdapter implements IRFactor {
 		}
 	}
 
- 
 }

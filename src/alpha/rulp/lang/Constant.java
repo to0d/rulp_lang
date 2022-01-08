@@ -237,8 +237,6 @@ public interface Constant {
 
 	String F_E_ERROR_VALUE = "error-value";
 
-	String F_E_TRY = "try";
-
 	String F_EQUAL = "equal";
 
 	String F_EQUAL_DEFAULT = F_EQUAL + "_def";
@@ -456,6 +454,8 @@ public interface Constant {
 	String F_TO_NONAMED_LIST = "to-nonamed-list";
 
 	String F_TO_STRING = "to-string";
+
+	String F_TRY = "try";
 
 	String F_TYPE_OF = "type-of";
 

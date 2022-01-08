@@ -6,7 +6,7 @@
 )[opt-ero]
 ;err:
 infinite loop detected: input=(loop (if (> 1 2) (break))), output=(loop)
-at main: (defun fun1 (?v) (loop (if (> 1 2) (break))))
+at (defun fun1 (?v) (loop (if (> 1 2) (break)))) ; main-2
 ;eof
 
 (defun fun2 (?v)
@@ -18,6 +18,6 @@ at main: (defun fun1 (?v) (loop (if (> 1 2) (break))))
 )[opt-ero]
 ;err:
 infinite loop detected: input=(loop (print ?v ",") (if (> 1 2) (break))), output=(loop (print ?v ","))
-at main: (defun fun2 (?v) (loop (print ?v ",") (if (> 1 2) (break))))
+at (defun fun2 (?v) (loop (print ?v ",") (if (> 1 2) (break)))) ; main-2
 ;eof
 

@@ -1,0 +1,14 @@
+(load "load/load2.rulp")
+;err
+
+(print ?load-paths)
+;=>
+
+(setq ?load-paths (add ?load-paths "load/path2"))
+;=>
+
+(load "load2.rulp")
+;=>
+
+(ls)
+;=>

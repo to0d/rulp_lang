@@ -52,6 +52,6 @@
 (fun2 $(+ 1 2)) ; pass early expression
 ;err:
 the 0 argument<3> not match type <expr>
-at main: (fun2 $(+ 1 2))
+at (fun2 $(+ 1 2)) ; main-2
 ;eof
 

@@ -454,9 +454,7 @@ public final class RuntimeUtil {
 			if (atExprStr.length() > 80) {
 				atExprStr = atExprStr.substring(0, 77) + "...";
 			}
-
-			e.addMessage("at " + frame.getFrameName() + ": " + atExprStr);
-
+			e.addMessage(String.format("at %s ; %s-%d", atExprStr, frame.getFrameName(), frame.getFrameId()));
 			throw e;
 		}
 	}

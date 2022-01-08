@@ -4,8 +4,8 @@
 )
 ;err:
 error: e1, msg1
-at TRY: (throw e1 "msg1")
-at main: (try (throw e1 "msg1") (catch e2 (print e2)))
+at (throw e1 "msg1") ; try-3
+at (try (throw e1 "msg1") (catch e2 (print e2))) ; main-2
 ;eof
 
 (try 

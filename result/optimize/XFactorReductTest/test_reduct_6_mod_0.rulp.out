@@ -16,13 +16,13 @@
 (reduct (% a 0))
 ;err:
 Can't mode 0: [a, 0]
-at main: (reduct (% a 0))
+at (reduct (% a 0)) ; main-2
 ;eof
 
 (reduct (% a 0 b))
 ;err:
 Can't mode 0: [a, 0, b]
-at main: (reduct (% a 0 b))
+at (reduct (% a 0 b)) ; main-2
 ;eof
 
 (reduct (% 1 a))

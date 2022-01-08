@@ -1,12 +1,12 @@
 (setq x 10)
 ;err:
 var not found: x
-at main: (setq x 10)
+at (setq x 10) ; main-2
 ;eof
 
 (setq x)
 ;err:
 Invalid parameters: (setq x)
-at main: (setq x)
+at (setq x) ; main-2
 ;eof
 

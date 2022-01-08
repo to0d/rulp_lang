@@ -19,7 +19,7 @@ student say: no, I don't know (+ 1 1).
 (ask other (+ 1 1))
 ;err:
 no template match
-at main: (ask other (+ 1 1))
+at (ask other (+ 1 1)) ; main-2
 ;eof
 
 (_ginfo)

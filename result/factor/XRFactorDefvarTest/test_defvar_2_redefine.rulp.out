@@ -4,7 +4,7 @@
 (defvar x 9) ; Can't redefine
 ;err:
 duplicate local variable: x
-at main: (defvar x 9)
+at (defvar x 9) ; main-2
 ;eof
 
 x

@@ -10,7 +10,7 @@
 (size-of {{a, b, c}, x} -1)
 ;err:
 Invalid dim: -1
-at _$fun$_size-of: (size-of-array ?arr ?dim)
-at _$fun$_size-of: (return (size-of-array ?arr ?dim))
-at main: (size-of {{a,b,c},x} -1)
+at (size-of-array ?arr ?dim) ; _$fun$_size-of-3
+at (return (size-of-array ?arr ?dim)) ; _$fun$_size-of-3
+at (size-of {{a,b,c},x} -1) ; main-2
 ;eof

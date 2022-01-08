@@ -13,6 +13,7 @@ import static alpha.rulp.lang.Constant.A_CATCH;
 import static alpha.rulp.lang.Constant.C_ERROR_DEFAULT;
 import static alpha.rulp.lang.Constant.C_HANDLE;
 import static alpha.rulp.lang.Constant.C_HANDLE_ANY;
+import static alpha.rulp.lang.Constant.F_TRY;
 import static alpha.rulp.lang.Constant.O_Nil;
 
 import alpha.rulp.lang.IRAtom;
@@ -64,7 +65,7 @@ public class XRFactorTry extends AbsAtomFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRFrame tryFrame = RulpFactory.createFrame(frame, "TRY");
+		IRFrame tryFrame = RulpFactory.createFrame(frame, F_TRY);
 		int stmtEnd = args.size() - 1;
 
 		try {

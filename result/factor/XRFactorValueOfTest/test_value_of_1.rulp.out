@@ -28,6 +28,6 @@
 (value-of a)
 ;err:
 object not found: a
-at main: (value-of a)
+at (value-of a) ; main-2
 ;eof
 

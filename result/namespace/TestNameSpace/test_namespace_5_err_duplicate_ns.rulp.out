@@ -4,6 +4,6 @@
 (new namespace ns1)
 ;err:
 duplicate object<ns1> found: namespace@ns1
-at main: (new namespace ns1)
+at (new namespace ns1) ; main-2
 ;eof
 

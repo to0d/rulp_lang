@@ -67,13 +67,13 @@
 (defvar ns1::var1 1)
 ;err:
 duplicate member variable: namespace@ns1::var1
-at main: (defvar ns1::var1 1)
+at (defvar ns1::var1 1) ; main-2
 ;eof
 
 (defun ns1::f1 () (return 2))
 ;err:
 duplicate funcion: (f1)
-at main: (defun ns1::f1 () (return 2))
+at (defun ns1::f1 () (return 2)) ; main-2
 ;eof
 
 (ls)
@@ -86,13 +86,13 @@ at main: (defun ns1::f1 () (return 2))
 (value-of var2)
 ;err:
 object not found: var2
-at main: (value-of var2)
+at (value-of var2) ; main-2
 ;eof
 
 (f2)
 ;err:
 factor not found: (f2)
-at main: (f2)
+at (f2) ; main-2
 ;eof
 
 (ls)

@@ -4,18 +4,18 @@
 (defclass class1 (set))
 ;err:
 Invalid member expression: (set)
-at main: (defclass class1 (set))
+at (defclass class1 (set)) ; main-2
 ;eof
 
 (defvar set::?v2 0)
 ;err:
 can't define member variable<?v2> for final subject: set
-at main: (defvar set::?v2 0)
+at (defvar set::?v2 0) ; main-2
 ;eof
 
 (defun set::fun () ())
 ;err:
 can't define member<fun> for final subject: set
-at main: (defun set::fun () ())
+at (defun set::fun () ()) ; main-2
 ;eof
 
