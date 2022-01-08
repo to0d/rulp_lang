@@ -29,35 +29,9 @@ obj=?user.dir           , type=var     , return=string
 obj=?user.home          , type=var     , return=string
 obj=?user.name          , type=var     , return=string
 obj=and                 , type=factor  , return=bool
-obj=array               , type=atom    , return=atom
-obj=atom                , type=atom    , return=atom
-obj=blob                , type=atom    , return=atom
-obj=bool                , type=atom    , return=atom
-obj=class               , type=atom    , return=atom
-obj=constant            , type=atom    , return=atom
-obj=default             , type=atom    , return=atom
-obj=double              , type=atom    , return=atom
-obj=expr                , type=atom    , return=atom
-obj=factor              , type=atom    , return=atom
 obj=false               , type=bool    , return=bool
-obj=final               , type=atom    , return=atom
-obj=float               , type=atom    , return=atom
-obj=frame               , type=atom    , return=atom
-obj=from                , type=atom    , return=atom
-obj=func                , type=atom    , return=atom
-obj=instance            , type=atom    , return=atom
-obj=int                 , type=atom    , return=atom
-obj=list                , type=atom    , return=atom
-obj=long                , type=atom    , return=atom
-obj=macro               , type=atom    , return=atom
-obj=member              , type=atom    , return=atom
-obj=nan                 , type=atom    , return=atom
-obj=native              , type=atom    , return=atom
 obj=not                 , type=factor  , return=bool
 obj=or                  , type=factor  , return=bool
-obj=private             , type=atom    , return=atom
-obj=public              , type=atom    , return=atom
-obj=static              , type=atom    , return=atom
 obj=str-char-at         , type=factor  , return=int
 obj=str-end-with        , type=factor  , return=bool
 obj=str-equal           , type=factor  , return=bool
@@ -76,11 +50,7 @@ obj=str-trim            , type=factor  , return=string
 obj=str-trim-head       , type=factor  , return=string
 obj=str-trim-tail       , type=factor  , return=string
 obj=str-upper           , type=factor  , return=string
-obj=string              , type=atom    , return=atom
 obj=true                , type=bool    , return=bool
-obj=type#namespace      , type=atom    , return=atom
-obj=type#noclass        , type=atom    , return=atom
-obj=var                 , type=atom    , return=atom
 
 ;eof
 

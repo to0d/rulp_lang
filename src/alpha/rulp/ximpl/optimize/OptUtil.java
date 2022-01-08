@@ -2,11 +2,14 @@ package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.A_ATOM;
 import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.F_CPS;
 import static alpha.rulp.lang.Constant.F_E_TRY;
 import static alpha.rulp.lang.Constant.F_FOREACH;
+import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_LET;
 import static alpha.rulp.lang.Constant.F_LOOP;
 import static alpha.rulp.lang.Constant.F_OPT;
+import static alpha.rulp.lang.Constant.F_RETURN;
 import static alpha.rulp.lang.Constant.O_COMPUTE;
 import static alpha.rulp.lang.Constant.O_DOUBLE_0;
 import static alpha.rulp.lang.Constant.O_DOUBLE_1;
@@ -17,6 +20,7 @@ import static alpha.rulp.lang.Constant.O_INT_1;
 import static alpha.rulp.lang.Constant.O_LONG_0;
 import static alpha.rulp.lang.Constant.O_LONG_1;
 
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import alpha.rulp.lang.IRConst;
@@ -218,6 +222,57 @@ public class OptUtil {
 		}
 
 		return false;
+	}
+
+	public static void listReturnObject(IRExpr expr, ArrayList<IRObject> exprList) throws RException {
+
+//		if (expr == null) {
+//			System.out.println();
+//		}
+
+		IRObject e0 = expr.get(0);
+		if (e0.getType() != RType.ATOM && e0.getType() != RType.FACTOR) {
+			return;
+		}
+
+		IRIterator<? extends IRObject> it = null;
+
+		switch (e0.asString()) {
+		case A_DO: {
+			it = expr.listIterator(1);
+			while (it.hasNext()) {
+				IRObject e = it.next();
+				if (e.getType() == RType.EXPR) {
+					listReturnObject((IRExpr) e, exprList);
+				}
+			}
+		}
+			break;
+
+		case F_IF: {
+
+			it = expr.listIterator(2);
+			while (it.hasNext()) {
+				IRObject e = it.next();
+				if (e.getType() == RType.EXPR) {
+					listReturnObject((IRExpr) e, exprList);
+				}
+			}
+		}
+			break;
+
+		case F_RETURN:
+		case F_CPS:
+
+			if (expr.size() > 1) {
+				exprList.add(expr.get(1));
+			}
+
+			break;
+
+		default:
+
+		}
 	}
 
 	public static void reset() {

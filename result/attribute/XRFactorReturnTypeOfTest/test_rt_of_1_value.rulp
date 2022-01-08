@@ -11,7 +11,7 @@
 ;=>double
 
 (return-type-of abc)
-;=>atom
+;=>nil
 
 (return-type-of "abc")
 ;=>string

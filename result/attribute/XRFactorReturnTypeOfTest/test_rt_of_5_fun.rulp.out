@@ -16,11 +16,29 @@
     (return "abc")
 )
 
-;=>fun1 fun2 fun3
+(defun fun4 ((?x int) (?y int))
+    (return (+ ?x ?y))
+)
+
+(defun fun5 ((?path string))    
+    (defvar ?new-path ?path)
+    (return ?new-path)
+)
+
+;=>fun1 fun2 fun3 fun4 fun5
 
 (return-type-of fun1)
 ;=>nil
 
 (return-type-of fun2)
+;=>int
+
+(return-type-of fun3)
+;=>nil
+
+(return-type-of fun4)
+;=>int
+
+(return-type-of fun5)
 ;=>nil
 

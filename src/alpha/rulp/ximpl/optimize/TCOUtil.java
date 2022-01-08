@@ -2,12 +2,12 @@ package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.A_OPT_ID;
-import static alpha.rulp.lang.Constant.F_CPS;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_RETURN;
 import static alpha.rulp.lang.Constant.O_Nil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
@@ -220,58 +220,6 @@ public class TCOUtil {
 
 			_findTCOCalleeInReturn(ex.get(0), ex, calleeNames, frame);
 		}
-	}
-
-	private static boolean _listFunctionInReturn(IRExpr expr, Set<String> calleeNames, IRFrame frame)
-			throws RException {
-
-		IRObject e0 = expr.get(0);
-		if (e0.getType() != RType.ATOM && e0.getType() != RType.FACTOR) {
-			return true;
-		}
-
-		IRIterator<? extends IRObject> it = null;
-
-		switch (e0.asString()) {
-		case A_DO: {
-			it = expr.listIterator(1);
-			while (it.hasNext()) {
-				IRObject e = it.next();
-				if (e.getType() == RType.EXPR) {
-					_listFunctionInReturn((IRExpr) e, calleeNames, frame);
-				}
-			}
-		}
-			break;
-
-		case F_IF: {
-
-			it = expr.listIterator(2);
-			while (it.hasNext()) {
-				IRObject e = it.next();
-				if (e.getType() == RType.EXPR) {
-					_listFunctionInReturn((IRExpr) e, calleeNames, frame);
-				}
-			}
-		}
-			break;
-
-		case F_RETURN:
-		case F_CPS:
-
-			if (expr.size() > 1 && expr.get(1).getType() == RType.EXPR) {
-				IRExpr e1 = (IRExpr) expr.get(1);
-				if (e1.size() > 0) {
-					_findTCOCalleeInReturn(e1.get(0), e1, calleeNames, frame);
-				}
-			}
-
-			return true;
-
-		default:
-
-		}
-		return true;
 	}
 
 	private static TCONode _makeTCONode(TCONode parrent, int indexOfParent, IRExpr expr) throws RException {
@@ -532,8 +480,26 @@ public class TCOUtil {
 	}
 
 	public static Set<String> listFunctionInReturn(IRExpr expr, IRFrame frame) throws RException {
+
+		ArrayList<IRObject> returnList = new ArrayList<>();
+		OptUtil.listReturnObject(expr, returnList);
+		if (returnList.isEmpty()) {
+			return Collections.emptySet();
+		}
+
 		HashSet<String> calleeNames = new HashSet<>();
-		_listFunctionInReturn(expr, calleeNames, frame);
+		for (IRObject rtObj : returnList) {
+			if (rtObj.getType() == RType.EXPR) {
+
+				IRExpr rtExpr = (IRExpr) rtObj;
+				if (rtExpr.size() > 0) {
+					_findTCOCalleeInReturn(rtExpr.get(0), rtExpr, calleeNames, frame);
+				}
+
+			}
+
+		}
+
 		return calleeNames;
 	}
 

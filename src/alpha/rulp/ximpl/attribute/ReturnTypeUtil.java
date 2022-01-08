@@ -7,8 +7,8 @@ import static alpha.rulp.lang.Constant.T_Atom;
 import static alpha.rulp.lang.Constant.T_Blob;
 import static alpha.rulp.lang.Constant.T_Bool;
 import static alpha.rulp.lang.Constant.T_Double;
-import static alpha.rulp.lang.Constant.T_Expr;
 import static alpha.rulp.lang.Constant.T_Float;
+import static alpha.rulp.lang.Constant.T_Func;
 import static alpha.rulp.lang.Constant.T_Int;
 import static alpha.rulp.lang.Constant.T_List;
 import static alpha.rulp.lang.Constant.T_Long;
@@ -16,22 +16,84 @@ import static alpha.rulp.lang.Constant.T_Member;
 import static alpha.rulp.lang.Constant.T_Native;
 import static alpha.rulp.lang.Constant.T_String;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRConst;
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.IRParaAttr;
 import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
+import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
+import alpha.rulp.ximpl.function.XRFunctionList;
+import alpha.rulp.ximpl.optimize.OptUtil;
 
 public class ReturnTypeUtil {
 
-	public static IRAtom _exprReturnTypeOf(IRExpr expr, IRFrame frame) throws RException {
+	static class TypeMap {
+
+		private Map<String, IRAtom> localObjTypeMap;
+
+		private TypeMap parent = null;
+
+		public TypeMap() {
+		}
+
+		public TypeMap(TypeMap parent) {
+			this.parent = parent;
+		}
+
+		private Map<String, IRAtom> _buildMap() {
+
+			if (localObjTypeMap == null) {
+				localObjTypeMap = new HashMap<>();
+				if (parent != null) {
+					localObjTypeMap.putAll(parent._findMap());
+				}
+			}
+
+			return localObjTypeMap;
+		}
+
+		private Map<String, IRAtom> _findMap() {
+
+			if (localObjTypeMap != null) {
+				return localObjTypeMap;
+			}
+
+			return parent == null ? Collections.emptyMap() : parent._findMap();
+		}
+
+		public void addType(String name, IRAtom type) {
+			_buildMap().put(name, type);
+		}
+
+		public IRAtom lookupType(String name) {
+
+			if (localObjTypeMap != null) {
+				return localObjTypeMap.get(name);
+			}
+
+			return parent == null ? null : parent.lookupType(name);
+		}
+
+		public TypeMap newBranch() {
+			return new TypeMap(this);
+		}
+
+	}
+
+	private static IRAtom _exprReturnTypeOf(IRExpr expr, TypeMap typeMap, IRFrame frame) throws RException {
 
 		if (expr.size() == 0) {
 			return O_Nil;
@@ -63,7 +125,7 @@ public class ReturnTypeUtil {
 
 				int index = RulpUtil.asInteger(value).asInteger();
 				if (index >= 0 && index < expr.size()) {
-					return returnTypeOf(expr.get(index), frame);
+					return _returnTypeOf(expr.get(index), typeMap, frame);
 				}
 			}
 		}
@@ -71,7 +133,72 @@ public class ReturnTypeUtil {
 		return O_Nil;
 	}
 
-	public static IRAtom returnTypeOf(IRObject obj, IRFrame frame) throws RException {
+	private static IRAtom _funReturnTypeOf(IRFunction func, TypeMap typeMap, IRFrame frame) throws RException {
+
+		if (func.isList()) {
+
+			XRFunctionList listFunc = (XRFunctionList) func;
+			IRAtom listRT = null;
+
+			for (IRFunction childFunc : listFunc.getAllFuncList()) {
+
+				IRAtom childType = _funReturnTypeOf(childFunc, typeMap, frame);
+				if (listRT == null) {
+					listRT = childType;
+				} else {
+					if (!RulpUtil.equal(childType, listRT)) {
+						return O_Nil;
+					}
+				}
+			}
+
+			if (listRT == null) {
+				return O_Nil;
+			}
+
+			return listRT;
+		}
+
+		typeMap = typeMap.newBranch();
+		typeMap.addType(func.getName(), T_Func);
+		if (func.getParaAttrs() != null) {
+			for (IRParaAttr para : func.getParaAttrs()) {
+				IRAtom paraType = para.getParaType();
+				if (paraType != T_Atom) {
+					typeMap.addType(para.getParaName(), paraType);
+				}
+			}
+		}
+
+		ArrayList<IRObject> returnList = new ArrayList<>();
+		OptUtil.listReturnObject(func.getFunBody(), returnList);
+		if (returnList.isEmpty()) {
+			return O_Nil;
+		}
+
+		IRAtom funcRT = null;
+
+		for (IRObject rtObj : returnList) {
+
+			IRAtom type = _returnTypeOf(rtObj, typeMap, frame);
+			if (funcRT == null) {
+				funcRT = type;
+			} else {
+				if (!RulpUtil.equal(funcRT, type)) {
+					return O_Nil;
+				}
+			}
+		}
+
+		if (funcRT == null) {
+			return O_Nil;
+		}
+
+		return funcRT;
+
+	}
+
+	private static IRAtom _returnTypeOf(IRObject obj, TypeMap typeMap, IRFrame frame) throws RException {
 
 		if (obj == null) {
 			return O_Nil;
@@ -127,33 +254,45 @@ public class ReturnTypeUtil {
 			return (IRAtom) value;
 
 		case CONSTANT:
-			return returnTypeOf(((IRConst) obj).getValue(), frame);
+			return _returnTypeOf(((IRConst) obj).getValue(), typeMap, frame);
 
 		case VAR:
-			return returnTypeOf(((IRVar) obj).getValue(), frame);
+			return _returnTypeOf(((IRVar) obj).getValue(), typeMap, frame);
 
 		case EXPR:
-			return _exprReturnTypeOf((IRExpr) obj, frame);
+			return _exprReturnTypeOf((IRExpr) obj, typeMap, frame);
+
+		case FUNC:
+			return _funReturnTypeOf((IRFunction) obj, typeMap, frame);
 
 		case ATOM:
 
 			String atomName = RulpUtil.asAtom(obj).getName();
 
+			IRAtom _type = typeMap.lookupType(atomName);
+			if (_type != null) {
+				return _type;
+			}
+
 			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, atomName);
 			// is pure atom
 			if (entry == null) {
-				return T_Atom;
+				return O_Nil;
 			}
 
 			IRObject entryValue = entry.getObject();
 			if (entryValue == null || entryValue.getType() == RType.ATOM) {
-				return T_Atom;
+				return O_Nil;
 			}
 
-			return returnTypeOf(entryValue, frame);
+			return _returnTypeOf(entryValue, typeMap, frame);
 
 		default:
 			return O_Nil;
 		}
+	}
+
+	public static IRAtom returnTypeOf(IRObject obj, IRFrame frame) throws RException {
+		return _returnTypeOf(obj, new TypeMap(), frame);
 	}
 }
