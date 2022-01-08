@@ -179,12 +179,12 @@ public class EROUtil {
 				IRObject e0 = list.get(fromIndex);
 				if (!OptUtil.isConstNumber(e0)) {
 
-					String uniq0 = toUniqString(e0);
+					String uniq0 = _toUniqString(e0);
 
 					int findIndex = -1;
 					for (int i = fromIndex + 1; i < toIndex; ++i) {
 						IRObject ex = list.get(i);
-						if (!OptUtil.isConstNumber(ex) && toUniqString(ex).equals(uniq0)) {
+						if (!OptUtil.isConstNumber(ex) && _toUniqString(ex).equals(uniq0)) {
 							findIndex = i;
 							break;
 						}
@@ -375,12 +375,12 @@ public class EROUtil {
 				IRObject e0 = list.get(fromIndex);
 				if (!OptUtil.isConstNumber(e0)) {
 
-					String uniq0 = toUniqString(e0);
+					String uniq0 = _toUniqString(e0);
 
 					int findIndex = -1;
 					for (int i = fromIndex + 1; i < toIndex; ++i) {
 						IRObject ex = list.get(i);
-						if (!OptUtil.isConstNumber(ex) && toUniqString(ex).equals(uniq0)) {
+						if (!OptUtil.isConstNumber(ex) && _toUniqString(ex).equals(uniq0)) {
 							findIndex = i;
 							break;
 						}
@@ -768,6 +768,7 @@ public class EROUtil {
 		int count = 0;
 		IRObject element;
 		String uniqName;
+		int exprLevel = 0;
 	}
 
 	protected static AtomicInteger computeCount = new AtomicInteger(0);
@@ -1167,8 +1168,27 @@ public class EROUtil {
 		return null;
 	}
 
-	private static String toUniqString(IRObject obj) throws RException {
-		return RulpUtil.toString(obj);
+	private static int _getExprLevel(IRObject obj) throws RException {
+
+		switch (obj.getType()) {
+		case LIST:
+		case EXPR:
+
+			int max_level = 0;
+			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
+			while (it.hasNext()) {
+
+				int level = _getExprLevel(it.next());
+				if (max_level < level) {
+					max_level = level;
+				}
+			}
+
+			return obj.getType() == RType.LIST ? max_level : (max_level + 1);
+
+		default:
+			return 0;
+		}
 	}
 
 	private static int _rebuildSameElement(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
@@ -1187,7 +1207,7 @@ public class EROUtil {
 		for (int i = fromIndex; i < toIndex; ++i) {
 
 			IRObject obj = list.get(i);
-			String uniqName = toUniqString(list.get(i));
+			String uniqName = _toUniqString(list.get(i));
 
 			UniqElement uniqElement = uniqMap.get(uniqName);
 			if (uniqElement == null) {
@@ -1195,6 +1215,7 @@ public class EROUtil {
 				uniqElement.element = obj;
 				uniqElement.count = 1;
 				uniqElement.uniqName = uniqName;
+				uniqElement.exprLevel = _getExprLevel(obj);
 
 				uniqMap.put(uniqName, uniqElement);
 				uniqList.add(uniqElement);
@@ -1206,9 +1227,34 @@ public class EROUtil {
 			}
 		}
 
+		if (update.get() > 0) {
+			for (UniqElement e : uniqList) {
+				IRObject obj = e.element;
+				if (op != null && e.count > 1) {
+					switch (op) {
+					case POWER:
+						obj = RulpFactory.createExpression(O_POWER, obj, RulpFactory.createInteger(e.count));
+						break;
+
+					case BY:
+						obj = RulpFactory.createExpression(O_BY, RulpFactory.createInteger(e.count), obj);
+						break;
+
+					default:
+						throw new RException("not support: " + op);
+					}
+				}
+				e.element = obj;
+			}
+		}
+
 		Collections.sort(uniqList, (e1, e2) -> {
 
 			int d = getTypePriority(e1.element.getType()) - getTypePriority(e2.element.getType());
+			if (d == 0) {
+				d = e1.exprLevel - e2.exprLevel;
+			}
+
 			if (d == 0) {
 				d = e1.uniqName.compareTo(e2.uniqName);
 			}
@@ -1226,27 +1272,7 @@ public class EROUtil {
 
 		int pos = fromIndex;
 		for (UniqElement e : uniqList) {
-
-			IRObject obj = e.element;
-
-			if (op != null && e.count > 1) {
-
-				switch (op) {
-				case POWER:
-					obj = RulpFactory.createExpression(O_POWER, obj, RulpFactory.createInteger(e.count));
-					break;
-
-				case BY:
-					obj = RulpFactory.createExpression(O_BY, RulpFactory.createInteger(e.count), obj);
-					break;
-
-				default:
-					throw new RException("not support: " + op);
-				}
-			}
-
-			list.set(pos, obj);
-			pos++;
+			list.set(pos++, e.element);
 		}
 
 		return pos - fromIndex;
@@ -1275,6 +1301,10 @@ public class EROUtil {
 		}
 
 		return pos;
+	}
+
+	private static String _toUniqString(IRObject obj) throws RException {
+		return RulpUtil.toString(obj);
 	}
 
 	public static int getComputeCount() {

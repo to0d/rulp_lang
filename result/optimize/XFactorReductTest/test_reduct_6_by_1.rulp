@@ -3,3 +3,7 @@
 
 (reduct (* a b a a b))
 ;=>(* (power a 3) (power b 2))
+
+(reduct (* a (+ b a) a (+ a b) b))
+;=>
+
