@@ -50,7 +50,7 @@
 ;=>a
 
 (reduct (power a 1 b c))
-;=>(power a b c)
+;=>(power a (* b c))
 
 ; (power e1 e2 e3 m n e4) ==> (power e1 (* m n e2 e3 e4))
 
@@ -58,8 +58,8 @@
 ;=>(power a 6)
 
 (reduct (power a 3 b 4))
-;=>(power a 12 b)
+;=>(power a (* 12 b))
 
 (reduct (power a 3 b 3 c))
-;=>(power a 9 b c)
+;=>(power a (* 9 b c))
 

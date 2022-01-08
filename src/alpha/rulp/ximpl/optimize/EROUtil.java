@@ -65,6 +65,40 @@ public class EROUtil {
 			return size;
 		}
 
+		private static int _rebuildPower(List<IRObject> list, int fromIndex, int toIndex) throws RException {
+
+			int size = _rebuildSubDivPower(list, fromIndex, toIndex, RArithmeticOperator.POWER);
+
+			int listSize = size;
+			if (listSize == -1) {
+				listSize = toIndex - fromIndex;
+			}
+
+			// (power a b c) == (power a (* b c))
+			if (listSize >= 2) {
+
+				int size2 = _rebuildBy(list, fromIndex + 1, fromIndex + listSize);
+				if (size2 == -1) {
+					size2 = listSize - 1;
+				}
+
+				if (size2 > 1) {
+
+					IRObject[] byExpr = new IRObject[size2 + 1];
+					byExpr[0] = O_BY;
+
+					for (int i = 0; i < size2; ++i) {
+						byExpr[i + 1] = list.get(fromIndex + 1 + i);
+					}
+
+					list.set(fromIndex + 1, RulpFactory.createExpression(byExpr));
+					size = 2;
+				}
+			}
+
+			return size;
+		}
+
 		private static int _rebuildDiv(List<IRObject> list, int fromIndex, int toIndex) throws RException {
 
 			int size = toIndex - fromIndex;
@@ -573,7 +607,7 @@ public class EROUtil {
 				break;
 
 			case POWER:
-				size = _rebuildSubDivPower(rebuildList, 1, size, op);
+				size = _rebuildPower(rebuildList, 1, size);
 				break;
 
 			case DIV:
