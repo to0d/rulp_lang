@@ -242,7 +242,7 @@ public interface Constant {
 	String F_EQUAL = "equal";
 
 	String F_EQUAL_DEFAULT = F_EQUAL + "_def";
-	
+
 	String F_EXTENDS = "extends";
 
 	String F_FOR = "for";
@@ -590,6 +590,8 @@ public interface Constant {
 	int P_INHERIT = 0x0004;
 
 	int P_STATIC = 0x0002;
+
+	IRString S_EMPTY = RulpFactory.createString();
 
 	IRAtom T_Array = RulpFactory.createAtom(A_ARRAY);
 

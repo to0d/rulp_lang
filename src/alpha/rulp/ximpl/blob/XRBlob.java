@@ -96,7 +96,7 @@ public class XRBlob extends AbsAtomObject implements IRBlob {
 
 	@Override
 	public int length() throws RException {
-		return value.length;
+		return value == null ? 0 : value.length;
 	}
 
 	public int read(int blob_pos, byte[] buf, int buf_pos, int length) throws RException {

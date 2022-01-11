@@ -9,6 +9,8 @@
 
 package alpha.rulp.ximpl.string;
 
+import static alpha.rulp.lang.Constant.S_EMPTY;
+
 import alpha.rulp.lang.IRBlob;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
@@ -27,7 +29,12 @@ public class XRFactorMakeString extends AbsAtomFactorAdapter implements IRFactor
 		super(factorName);
 	}
 
-	static IRString makeString(IRBlob blob) {
+	static IRString makeString(IRBlob blob) throws RException {
+
+		if (blob.length() == 0) {
+			return S_EMPTY;
+		}
+
 		return RulpFactory.createString(new String(blob.getValue()));
 	}
 

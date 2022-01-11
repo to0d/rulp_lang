@@ -33,7 +33,7 @@ public class XRFactorMakeBlob extends AbsAtomFactorAdapter implements IRFactor {
 		}
 
 		int blobLen = RulpUtil.asInteger(interpreter.compute(frame, args.get(1))).asInteger();
-		if (blobLen <= 0) {
+		if (blobLen < 0) {
 			throw new RException("invalid blob length: " + blobLen);
 		}
 
