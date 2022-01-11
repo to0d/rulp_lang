@@ -986,7 +986,7 @@ public final class RulpFactory {
 
 	public static IRArray createVaryArray() throws RException {
 		RType.ARRAY.incCreateCount();
-		return XRArrayVary.build();
+		return XRArrayVary.build(0);
 	}
 
 	public static IRArray createVaryArray(int[] sizes) throws RException {

@@ -15,13 +15,13 @@ import alpha.rulp.ximpl.lang.AbsRefObject;
 
 public class XRArrayVary extends AbsRefObject implements IRArray {
 
-	public static XRArrayVary build() throws RException {
+	public static XRArrayVary build(int size) throws RException {
 
 		XRArrayVary array = new XRArrayVary();
 		array.elementCount = 0;
 		array.arrayDimension = 1;
 		array.arraySize = new int[1];
-		array.arraySize[0] = 0;
+		array.arraySize[0] = size;
 
 		return array;
 	}
@@ -34,19 +34,19 @@ public class XRArrayVary extends AbsRefObject implements IRArray {
 			throw new RException("support dimension: " + dimension);
 		}
 
+		if (dimension == 1) {
+			return build(sizes[0]);
+		}
+
 		XRArrayVary array = new XRArrayVary();
 		array.elementCount = 0;
 		array.arrayDimension = dimension;
 		array.arraySize = new int[dimension];
+		array.arraySize[0] = 0;
+		array.arraySize[1] = 0;
 
-		for (int i = 0; i < dimension; ++i) {
-
-			int size = sizes[i];
-			if (size < 1) {
-				throw new RException("support size: " + size);
-			}
-
-			array.arraySize[i] = size;
+		for (int i = 0; i < sizes[0]; ++i) {
+			array.add(build(sizes[1]));
 		}
 
 		return array;
@@ -67,23 +67,16 @@ public class XRArrayVary extends AbsRefObject implements IRArray {
 		return array;
 	}
 
-	protected int arrayDimension;
+	protected int arrayDimension = 0;
 
 	protected int arraySize[];
 
-	protected int elementCount;
+	protected int elementCount = 0;
 
 	protected List<IRObject> elements = new ArrayList<>();
 
-	public XRArrayVary() {
-
-		super();
-
-		arrayDimension = 0;
-		elementCount = 0;
-	}
-
 	protected void _add(IRObject obj) throws RException {
+
 		elements.add(obj);
 		arraySize[0]++;
 
@@ -154,9 +147,9 @@ public class XRArrayVary extends AbsRefObject implements IRArray {
 			throw new RException("Invalid element: " + obj);
 		}
 
-		if (ei.getElementCount() == 0) {
-			return;
-		}
+//		if (ei.getElementCount() == 0) {
+//			return;
+//		}
 
 		if (this.arrayDimension > 2) {
 			throw new RException("Invalid array: " + this);

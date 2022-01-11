@@ -47,7 +47,6 @@ public class XRFactorMakeArray extends AbsAtomFactorAdapter implements IRFactor 
 		}
 
 		return RulpFactory.createVaryArray(sizes);
-
 	}
 
 }

@@ -37,7 +37,6 @@ public class XRFactorAddListToArray extends AbsAtomFactorAdapter implements IRFa
 		IRList l2 = RulpUtil.asList(interpreter.compute(frame, args.get(2)));
 
 		if (!l2.isEmpty()) {
-
 			IRIterator<? extends IRObject> it = l2.iterator();
 			while (it.hasNext()) {
 				a1.add(it.next());
