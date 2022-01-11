@@ -359,9 +359,11 @@ public final class RuntimeUtil {
 				case VAR:
 					rst = ((IRVar) rst).getValue();
 					break;
+
 				case CONSTANT:
 					rst = ((IRConst) rst).getValue();
 					break;
+
 				default:
 				}
 
@@ -412,7 +414,6 @@ public final class RuntimeUtil {
 					return RuntimeUtil.computeFun((IRFunction) e1m, expr, interpreter, frame);
 
 				default:
-
 					throw new RException("factor not found: " + obj);
 				}
 
@@ -776,13 +777,19 @@ public final class RuntimeUtil {
 		}
 
 		// Searching the using name space if it was specified
-
 		for (IRFrame searchFrame : searchFrameList) {
 			IRFrameEntry entry = searchFrame.getEntry(name);
 			if (entry != null) {
 				return entry;
 			}
 		}
+
+//		switch (name) {
+//		case A_SUPER:
+//			
+//			
+//			break;
+//		}
 
 		return null;
 	}

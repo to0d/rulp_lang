@@ -12,7 +12,7 @@ package alpha.rulp.ximpl.rclass;
 import static alpha.rulp.lang.Constant.A_FINAL;
 import static alpha.rulp.lang.Constant.F_DEFUN;
 import static alpha.rulp.lang.Constant.F_DEFVAR;
-import static alpha.rulp.lang.Constant.F_MBR_SUPER;
+import static alpha.rulp.lang.Constant.F_EXTENDS;
 
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRClass;
@@ -55,16 +55,17 @@ public class XRFactorDefClass extends AbsAtomFactorAdapter implements IRFactor {
 		IRClass superClass = null;
 		int superExprIndex = -1;
 		for (int i = 2; i < argSize; ++i) {
-			IRExpr superExpr = RulpUtil.asExpression(args.get(i));
 
-			if (!superExpr.isEmpty() && superExpr.get(0).asString().equals(F_MBR_SUPER)) {
+			IRExpr extendsExpr = RulpUtil.asExpression(args.get(i));
 
-				if (superExpr.size() != 2) {
-					throw new RException("Invalid super expression: " + superExpr);
+			if (!extendsExpr.isEmpty() && extendsExpr.get(0).asString().equals(F_EXTENDS)) {
+
+				if (extendsExpr.size() != 2) {
+					throw new RException("Invalid super expression: " + extendsExpr);
 				}
 
 				superExprIndex = i;
-				superClass = RulpUtil.asClass(interpreter.compute(frame, superExpr.get(1)));
+				superClass = RulpUtil.asClass(interpreter.compute(frame, extendsExpr.get(1)));
 				if (superClass.isFinal()) {
 					throw new RException("Can't inherit final class: " + superClass);
 				}
@@ -74,7 +75,7 @@ public class XRFactorDefClass extends AbsAtomFactorAdapter implements IRFactor {
 
 		IRClass defClass = RulpFactory.createClassDefClass(className, frame, superClass);
 		if (superClass != null) {
-			RulpUtil.setMember(defClass, F_MBR_SUPER, superClass);
+			RulpUtil.setMember(defClass, F_EXTENDS, superClass);
 		}
 
 		/*****************************************************/
@@ -104,7 +105,7 @@ public class XRFactorDefClass extends AbsAtomFactorAdapter implements IRFactor {
 						frame);
 				break;
 
-			case F_MBR_SUPER:
+			case F_EXTENDS:
 				if (superExprIndex != i) {
 					throw new RException("duplicated super expression: " + mbrExpr);
 				}

@@ -2,7 +2,7 @@ name=class2, string=class2, lvl=1, ref=1/3, parent=class1, final=false, mbrs=2, 
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
+extends              : DEFAULT                      0    2    class      class1
 fun1                 : DEFAULT                      0    1    func       (fun1 nil) : frame=frame@SF-class2-1, type=lambda
-super                : DEFAULT                      0    2    class      class1
 ==========================================================================================================================
 

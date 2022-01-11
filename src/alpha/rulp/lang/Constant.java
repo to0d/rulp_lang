@@ -139,6 +139,8 @@ public interface Constant {
 
 	String A_STRING = "string";
 
+	String A_SUPER = "super";
+
 	String A_SYSTEM = "system";
 
 	String A_TEMPLATE = "template";
@@ -240,6 +242,8 @@ public interface Constant {
 	String F_EQUAL = "equal";
 
 	String F_EQUAL_DEFAULT = F_EQUAL + "_def";
+	
+	String F_EXTENDS = "extends";
 
 	String F_FOR = "for";
 
@@ -286,8 +290,6 @@ public interface Constant {
 	String F_MAKE_STRING = "make-string";
 
 	String F_MBR_INIT = "init";
-
-	String F_MBR_SUPER = "super";
 
 	String F_MBR_THIS = "this";
 

@@ -1,0 +1,62 @@
+(load tool)
+;=>nil
+
+(defclass class1
+    (defvar ?value1 0)
+    (defun init (?x) (setq ?value1 ?x))
+    (defun get1 ()   (return ?value1))
+)
+
+(defclass class2 (extends class1))
+;=>class1 class2
+
+(new class1 o1)
+;err:
+Unexpect argument number in fun<init>: expect=1, actual=0
+at (init) ; SF-o1-1-4
+at (new class1 o1) ; main-2
+;eof
+
+(new class1 o2 '(1))
+;=>o2
+
+(new class2 o3)
+;err:
+Unexpect argument number in fun<init>: expect=1, actual=0
+at (init) ; SF-o3-4-7
+at (new class2 o3) ; main-2
+;eof
+
+(defvar o4 (new class2))
+;err:
+Unexpect argument number in fun<init>: expect=1, actual=0
+at (init) ; SF-un-0-5-8
+at (new class2) ; main-2
+at (defvar o4 (new class2)) ; main-2
+;eof
+
+(defvar o5 (new class2 '(1)))
+;=>&o5
+
+(o5::get1)
+;=>1
+
+(defclass class3 (extends class1)
+    (defun init (?x) (class1::init (+ ?x 1)))
+)
+;=>class3
+
+(defvar o6 (new class3))
+;err:
+Unexpect argument number in fun<init>: expect=1, actual=0
+at (init) ; SF-un-2-8-11
+at (new class3) ; main-2
+at (defvar o6 (new class3)) ; main-2
+;eof
+
+(defvar o7 (new class3 '(1)))
+;=>&o7
+
+(o7::get1)
+;=>2
+

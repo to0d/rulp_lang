@@ -2,7 +2,7 @@
     (defun fun1 (?x) (return (+ ?x 1)))
 )
 (defclass class2 
-    (super class1)
+    (extends class1)
     (defun fun1 (?x) (return (+ ?x 2)))
 )
 ;;;

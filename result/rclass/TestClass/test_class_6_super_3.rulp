@@ -1,0 +1,30 @@
+(defclass class1
+    (defun fun1 ((?x int)) (return ?x))
+    (defun fun1 ((?x string)) (return ?x))
+)
+
+(defclass class2 (extends class1)
+    (defvar ?is)
+    (defun fun1 ((?x string)) 
+        (if ?is 
+            (return (class1::fun1 ?x))
+            (return (+ "1: " ?x))
+        )
+    )
+)
+;=>
+
+(ls class1)
+;=>
+
+(ls class2)
+;=>
+
+(new class2 o2)
+;=>
+
+(o2::fun1 1)
+;=>
+
+(o2::fun1 "abc")
+;=>

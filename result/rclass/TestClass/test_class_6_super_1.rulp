@@ -11,8 +11,7 @@
 (ls class1)
 ;;;
 
-(defclass class2 
-    (super class1)
+(defclass class2 (extends class1)
     (defun add (?x) (setq ?value (+ ?value ?x 1)))
 )
 ;;;
@@ -47,8 +46,7 @@
 (o2::get)
 ;;;
 
-(defclass class3 
-    (super class1)
+(defclass class3 (extends class1)
     (defvar ?value 1)
 )
 ;;;
@@ -59,15 +57,13 @@
 (o3::get)
 ;;;
 
-(defclass class4 
-    (super class1)
+(defclass class4 (extends class1)
     (defvar ?value 2)
     (defvar ?value 2)
 )
 ;;;
 
-(defclass class5 
-    (super class1)
+(defclass class5 (extends class1)
     (defun get () (return ?value))
     (defun get () (return ?value))
 )

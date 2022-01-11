@@ -1,0 +1,31 @@
+(defclass class1
+    (defun fun1 ((?x int)) (return ?x))
+    (defun fun1 ((?x string)) (return ?x))
+)
+
+(defclass class2 (extends class1)
+    (defvar ?is)
+    (defun fun1 ((?x string)) 
+        (if ?is 
+            (return (class1::fun1 ?x))
+            (return (+ "1: " ?x))
+        )
+    )
+)
+;=>class1 class2
+
+(ls class1)
+;=>'(class1::fun1)
+
+(ls class2)
+;=>'(class2::?is class2::extends class2::fun1)
+
+(new class2 o2)
+;=>o2
+
+(o2::fun1 1)
+;err:
+the 0 argument<1> not match type <string>
+at (o2::fun1 1) ; main-2
+;eof
+

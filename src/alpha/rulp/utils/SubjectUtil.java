@@ -10,8 +10,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import alpha.rulp.lang.IRClass;
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
+import alpha.rulp.lang.IRInstance;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRMember;
 import alpha.rulp.lang.IRObject;
@@ -26,6 +28,7 @@ import alpha.rulp.runtime.IRFunctionList;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.ximpl.function.XRFactorDefun;
 import alpha.rulp.ximpl.function.XRFunctionList;
+import alpha.rulp.ximpl.rclass.AbsRInstance;
 
 public class SubjectUtil {
 
@@ -61,6 +64,43 @@ public class SubjectUtil {
 		}
 
 		return RulpFactory.createMember(sub, mbrName, var);
+	}
+
+	private static IRMember _processMemberAttribute(IRMember mbr, String attr, boolean fun) throws RException {
+
+		switch (attr) {
+		case A_PUBLIC:
+			mbr.setAccessType(RAccessType.PUBLIC);
+			break;
+
+		case A_PRIVATE:
+			mbr.setAccessType(RAccessType.PRIVATE);
+			break;
+
+		case A_DEFAULT:
+			mbr.setAccessType(RAccessType.DEFAULT);
+			break;
+
+		case A_FINAL:
+			RulpUtil.setPropertyFinal(mbr, true);
+			break;
+
+		case A_STATIC:
+			RulpUtil.setPropertyStatic(mbr, true);
+			/****************************************************/
+			// set subject frame for static function
+			/****************************************************/
+			if (fun) {
+				mbr = RulpFactory.createMember(mbr.getSubject(), mbr.getName(), RulpFactory.createFunctionLambda(
+						RulpUtil.asFunction(mbr.getValue()), RulpUtil.asSubject(mbr.getSubject()).getSubjectFrame()));
+			}
+			break;
+
+		}
+
+		AttrUtil.addAttribute(mbr, attr);
+
+		return mbr;
 	}
 
 	private static IRMember _processModifier(IRMember mbr, IRList mbrExpr, int fromIdx, int endIdx, boolean fun)
@@ -131,49 +171,16 @@ public class SubjectUtil {
 		return mbr;
 	}
 
-	private static IRMember _processMemberAttribute(IRMember mbr, String attr, boolean fun) throws RException {
-
-		switch (attr) {
-		case A_PUBLIC:
-			mbr.setAccessType(RAccessType.PUBLIC);
-			break;
-
-		case A_PRIVATE:
-			mbr.setAccessType(RAccessType.PRIVATE);
-			break;
-
-		case A_DEFAULT:
-			mbr.setAccessType(RAccessType.DEFAULT);
-			break;
-
-		case A_FINAL:
-			RulpUtil.setPropertyFinal(mbr, true);
-			break;
-
-		case A_STATIC:
-			RulpUtil.setPropertyStatic(mbr, true);
-			/****************************************************/
-			// set subject frame for static function
-			/****************************************************/
-			if (fun) {
-				mbr = RulpFactory.createMember(mbr.getSubject(), mbr.getName(), RulpFactory.createFunctionLambda(
-						RulpUtil.asFunction(mbr.getValue()), RulpUtil.asSubject(mbr.getSubject()).getSubjectFrame()));
-			}
-			break;
-
-		}
-
-		AttrUtil.addAttribute(mbr, attr);
-
-		return mbr;
-	}
-
 	public static IRMember defineMemberFun(IRSubject sub, String mbrName, IRList mbrExpr, IRInterpreter interpreter,
 			IRFrame frame) throws RException {
 
 		int mbrExprSize = mbrExpr.size();
 		if (mbrExprSize < 4) {
 			throw new RException("Invalid member parameters:" + mbrExpr);
+		}
+
+		if (sub.isFinal()) {
+			throw new RException("can't define member<" + mbrName + "> for final subject: " + sub);
 		}
 
 		IRMember mbr = null;
@@ -209,6 +216,7 @@ public class SubjectUtil {
 		// Member
 		/*****************************************************/
 		IRMember oldMbr = sub.getMember(mbrName);
+
 		if (oldMbr != null) {
 
 			if (oldMbr.getValue().getType() != RType.FUNC) {
@@ -219,11 +227,6 @@ public class SubjectUtil {
 				throw new RException("can't redefine static member: " + oldMbr);
 			}
 
-		} else {
-
-			if (sub.isFinal()) {
-				throw new RException("can't define member<" + mbrName + "> for final subject: " + sub);
-			}
 		}
 
 		IRFunction newFunc = RulpFactory.createFunction(frame, mbrName, paraAttrs, funBody);
@@ -341,5 +344,111 @@ public class SubjectUtil {
 		}
 
 		sub.setMember(mbrName, mbr);
+	}
+
+	public static IRMember findSuperMember(IRClass superClass, String name) throws RException {
+
+		IRMember classMbr = null;
+		while (classMbr == null && superClass != null) {
+			classMbr = superClass.getMember(name);
+			superClass = superClass.getSuperClass();
+		}
+
+		return classMbr;
+	}
+
+	public static IRMember getClassMember(IRInstance instance, IRClass rClass, String name) throws RException {
+
+		if (name == null) {
+			return null;
+		}
+
+		IRMember classMbr = rClass.getMember(name);
+		if (classMbr == null) {
+			classMbr = SubjectUtil.findSuperMember(rClass.getSuperClass(), name);
+		}
+
+		if (classMbr == null) {
+			return null;
+		}
+
+		IRObject classMbrVal = classMbr.getValue();
+		IRObject insMbrVal = null;
+
+		// for static member, use it directly
+		if (RulpUtil.isPropertyStatic(classMbr)) {
+
+			switch (classMbrVal.getType()) {
+			case FUNC:
+
+				if (RulpUtil.isFunctionList(classMbrVal)) {
+
+					IRFunctionList oldFunList = RulpUtil.asFunctionList(classMbrVal);
+					IRFunctionList newFunList = RulpFactory.createFunctionList(oldFunList.getName());
+
+					for (IRFunction f : oldFunList.getAllFuncList()) {
+						newFunList.addFunc(f);
+					}
+
+					insMbrVal = newFunList;
+
+				} else {
+
+					insMbrVal = classMbrVal;
+				}
+
+				break;
+
+			case VAR:
+				insMbrVal = classMbrVal;
+				break;
+
+			default:
+				throw new RException("Invalid member obj: " + classMbrVal);
+			}
+
+		} else {
+
+			switch (classMbrVal.getType()) {
+			case FUNC:
+
+				if (RulpUtil.isFunctionList(classMbrVal)) {
+
+					IRFunctionList oldFunList = RulpUtil.asFunctionList(classMbrVal);
+					IRFunctionList newFunList = RulpFactory.createFunctionList(oldFunList.getName());
+
+					for (IRFunction f : oldFunList.getAllFuncList()) {
+						newFunList.addFunc(RulpFactory.createFunctionLambda(f, instance.getSubjectFrame()));
+					}
+
+					insMbrVal = newFunList;
+
+				} else {
+
+					insMbrVal = RulpFactory.createFunctionLambda(RulpUtil.asFunction(classMbrVal),
+							instance.getSubjectFrame());
+				}
+
+				break;
+
+			case VAR:
+
+				IRVar var = RulpFactory.createVar(name);
+				var.setValue(RulpUtil.asVar(classMbrVal).getValue());
+				insMbrVal = var;
+
+				break;
+
+			default:
+				throw new RException("Invalid member obj: " + classMbrVal);
+			}
+		}
+
+		IRMember objMbr = RulpFactory.createMember(instance, name, insMbrVal);
+		objMbr.setAccessType(classMbr.getAccessType());
+		objMbr.setProperty(classMbr.getProperty());
+		RulpUtil.setPropertyInherit(objMbr, true);
+
+		return objMbr;
 	}
 }

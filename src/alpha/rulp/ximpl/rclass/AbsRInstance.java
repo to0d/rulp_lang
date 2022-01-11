@@ -24,6 +24,7 @@ import alpha.rulp.runtime.IRFunctionList;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.utils.SubjectUtil;
 import alpha.rulp.ximpl.subject.AbsRSubject;
 
 public abstract class AbsRInstance extends AbsRSubject implements IRInstance {
@@ -73,97 +74,10 @@ public abstract class AbsRInstance extends AbsRSubject implements IRInstance {
 
 		// Instance local member
 		IRMember objMbr = super.getMember(name);
-
 		if (objMbr == null) {
 
-			IRMember classMbr = rClass.getMember(name);
-			if (classMbr == null) {
-				IRClass superClass = rClass.getSuperClass();
-				while (classMbr == null && superClass != null) {
-					classMbr = superClass.getMember(name);
-					superClass = superClass.getSuperClass();
-				}
-			}
-
-			if (classMbr != null) {
-
-				IRObject classMbrVal = classMbr.getValue();
-				IRObject insMbrVal = null;
-
-				// for static member, use it directly
-				if (RulpUtil.isPropertyStatic(classMbr)) {
-
-					switch (classMbrVal.getType()) {
-					case FUNC:
-
-						if (RulpUtil.isFunctionList(classMbrVal)) {
-
-							IRFunctionList oldFunList = RulpUtil.asFunctionList(classMbrVal);
-							IRFunctionList newFunList = RulpFactory.createFunctionList(oldFunList.getName());
-
-							for (IRFunction f : oldFunList.getAllFuncList()) {
-								newFunList.addFunc(f);
-							}
-
-							insMbrVal = newFunList;
-
-						} else {
-
-							insMbrVal = classMbrVal;
-						}
-
-						break;
-
-					case VAR:
-						insMbrVal = classMbrVal;
-						break;
-
-					default:
-						throw new RException("Invalid member obj: " + classMbrVal);
-					}
-
-				} else {
-
-					switch (classMbrVal.getType()) {
-					case FUNC:
-
-						if (RulpUtil.isFunctionList(classMbrVal)) {
-
-							IRFunctionList oldFunList = RulpUtil.asFunctionList(classMbrVal);
-							IRFunctionList newFunList = RulpFactory.createFunctionList(oldFunList.getName());
-
-							for (IRFunction f : oldFunList.getAllFuncList()) {
-								newFunList.addFunc(RulpFactory.createFunctionLambda(f, this.getSubjectFrame()));
-							}
-
-							insMbrVal = newFunList;
-
-						} else {
-
-							insMbrVal = RulpFactory.createFunctionLambda(RulpUtil.asFunction(classMbrVal),
-									this.getSubjectFrame());
-						}
-
-						break;
-
-					case VAR:
-
-						IRVar var = RulpFactory.createVar(name);
-						var.setValue(RulpUtil.asVar(classMbrVal).getValue());
-						insMbrVal = var;
-
-						break;
-
-					default:
-						throw new RException("Invalid member obj: " + classMbrVal);
-					}
-				}
-
-				objMbr = RulpFactory.createMember(this, name, insMbrVal);
-				objMbr.setAccessType(classMbr.getAccessType());
-				objMbr.setProperty(classMbr.getProperty());
-				RulpUtil.setPropertyInherit(objMbr, true);
-
+			objMbr = SubjectUtil.getClassMember(this, rClass, name);
+			if (objMbr != null) {
 				this.setMember(name, objMbr);
 			}
 		}

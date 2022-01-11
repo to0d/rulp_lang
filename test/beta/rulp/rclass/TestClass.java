@@ -42,7 +42,21 @@ public class TestClass extends RulpTestBase {
 	}
 
 	@Test
-	public void test_class_6_super() {
+	public void test_class_6_super_1() {
+
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	public void test_class_6_super_3() {
+
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	public void test_class_6_super_2_inherit_init() {
 
 		_setup();
 		_run_script();
