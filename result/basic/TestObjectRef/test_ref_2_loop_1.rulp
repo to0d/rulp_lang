@@ -3,7 +3,7 @@
 )
 ;;;
 
-(defvar ?arr {})
+(defvar ?arr (make-array))
 ;;;
 
 (add ?arr (new class1))

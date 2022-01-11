@@ -13,11 +13,4 @@ class XRFactorSetaTest extends RulpTestBase {
 		_run_script();
 	}
 
-	@Test
-	public void test_seta_2_list() {
-
-		_setup();
-		_run_script();
-
-	}
 }

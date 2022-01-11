@@ -253,7 +253,7 @@
 (defun to-list ((?l list)) (return ?l))
 (defun to-list  ((?arr array)) (return (add-array-to-list '() ?arr)))
 
-(defun to-array  ((?l list)) (return (add-list-to-array {} ?l)))
+(defun to-array  ((?l list)) (return (add-list-to-array (make-array) ?l)))
 
 (defun add ((?l list) ?e0) (return (add-list-to-list ?l '(?e0))))
 (defun add ((?l list) ?e0 ?e1) (return (add-list-to-list ?l '(?e0 ?e1))))

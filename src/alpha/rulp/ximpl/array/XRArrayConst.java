@@ -2,7 +2,6 @@ package alpha.rulp.ximpl.array;
 
 import static alpha.rulp.lang.Constant.MAX_TOSTRING_LEN;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import alpha.rulp.lang.IRArray;
@@ -16,69 +15,76 @@ public class XRArrayConst extends AbsRefObject implements IRArray {
 
 	public static XRArrayConst build(List<? extends IRObject> elements) throws RException {
 
-		XRArrayConst array = new XRArrayConst();
-		array.elementCount = 0;
-		array.arrayDimension = 1;
-
-		for (IRObject e : elements) {
-			if (e.getType() == RType.ARRAY) {
-				IRArray ea = (IRArray) e;
-				if (ea.getDimension() > 1) {
-					throw new RException("Invalid array: " + ea);
+		int dimension = 1;
+		for (IRObject element : elements) {
+			if (element.getType() == RType.ARRAY) {
+				IRArray elementArray = RulpUtil.asArray(element);
+				if (elementArray.getDimension() >= dimension) {
+					dimension = elementArray.getDimension() + 1;
 				}
-
-				array.arrayDimension = 2;
 			}
 		}
 
-		array.arraySize = new int[array.arrayDimension];
-		array.arraySize[0] = 0;
-		if (array.arrayDimension > 1) {
-			array.arraySize[1] = 0;
+		if (dimension < 1 || dimension > 2) {
+			throw new RException("support dimension: " + dimension);
 		}
 
-		for (IRObject e : elements) {
-			array.add(e);
+		XRArrayConst array = new XRArrayConst();
+		array.elementCount = 0;
+		array.arrayDimension = dimension;
+		array.arraySize = new int[dimension];
+
+		for (int i = 0; i < dimension; ++i) {
+			array.arraySize[i] = 0;
+		}
+
+		int size0 = elements.size();
+		array.arraySize[0] = size0;
+		array.elements = new IRObject[size0];
+
+		int i = 0;
+		for (IRObject element : elements) {
+
+			array.elements[i++] = element;
+
+			if (element != null && element.getType() != RType.NIL) {
+
+				array.elementCount++;
+				RulpUtil.incRef(element);
+
+				if (element.getType() == RType.ARRAY) {
+					IRArray elementArray = RulpUtil.asArray(element);
+					int size1 = elementArray.size();
+					if (size1 > array.arraySize[1]) {
+						array.arraySize[1] = size1;
+					}
+				}
+			}
+
 		}
 
 		return array;
 	}
 
-	protected int arrayDimension;
+	protected int arrayDimension = 0;
 
 	protected int arraySize[];
 
 	protected int elementCount;
 
-	protected List<IRObject> elements = new ArrayList<>();
+	protected IRObject[] elements;
 
-	public XRArrayConst() {
+	private XRArrayConst() {
 
-		super();
-
-		arrayDimension = 0;
-		elementCount = 0;
-	}
-
-	protected void _add(IRObject obj) throws RException {
-		elements.add(obj);
-		arraySize[0]++;
-
-		if (obj != null && obj.getType() != RType.NIL) {
-			elementCount++;
-			RulpUtil.incRef(obj);
-		}
 	}
 
 	@Override
 	protected void _delete() throws RException {
 
 		if (elements != null) {
-
 			for (IRObject e : elements) {
 				RulpUtil.decRef(e);
 			}
-
 			elements = null;
 		}
 
@@ -115,44 +121,7 @@ public class XRArrayConst extends AbsRefObject implements IRArray {
 
 	@Override
 	public void add(IRObject obj) throws RException {
-
-		if (obj == null || obj.getType() == RType.NIL) {
-			_add(obj);
-			return;
-		}
-
-		if (obj.getType() != RType.ARRAY) {
-			_add(obj);
-			return;
-		}
-
-		IRArray ei = RulpUtil.asArray(obj);
-		if (ei.getDimension() != 1) {
-			throw new RException("Invalid element: " + obj);
-		}
-
-		if (ei.getElementCount() == 0) {
-			return;
-		}
-
-		if (this.arrayDimension > 2) {
-			throw new RException("Invalid array: " + this);
-		}
-
-		if (this.arrayDimension == 1) {
-			int size = this.arraySize[0];
-			this.arraySize = new int[2];
-			this.arraySize[0] = size;
-			this.arraySize[1] = 0;
-			this.arrayDimension = 2;
-		}
-
-		_add(ei);
-
-		int elementSize = ei.size();
-		if (this.arraySize[1] < elementSize) {
-			this.arraySize[1] = elementSize;
-		}
+		throw new RException("not support");
 	}
 
 	@Override
@@ -168,7 +137,7 @@ public class XRArrayConst extends AbsRefObject implements IRArray {
 
 	@Override
 	public IRObject get(int index) throws RException {
-		return elements.get(index);
+		return elements == null ? null : elements[index];
 	}
 
 	@Override
@@ -181,7 +150,7 @@ public class XRArrayConst extends AbsRefObject implements IRArray {
 				throw new RException("Invalid index: " + index);
 			}
 
-			return (elements != null && index < elements.size()) ? elements.get(index) : null;
+			return (elements != null && index < elements.length) ? elements[index] : null;
 
 		} else {
 

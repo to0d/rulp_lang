@@ -15,18 +15,7 @@ import alpha.rulp.ximpl.lang.AbsRefObject;
 
 public class XRArrayVary extends AbsRefObject implements IRArray {
 
-	public static XRArrayVary build(int size) throws RException {
-
-		XRArrayVary array = new XRArrayVary();
-		array.elementCount = 0;
-		array.arrayDimension = 1;
-		array.arraySize = new int[1];
-		array.arraySize[0] = size;
-
-		return array;
-	}
-
-	public static XRArrayVary build(int[] sizes) throws RException {
+	public static XRArrayVary build(int... sizes) throws RException {
 
 		int dimension = sizes.length;
 
@@ -34,34 +23,20 @@ public class XRArrayVary extends AbsRefObject implements IRArray {
 			throw new RException("support dimension: " + dimension);
 		}
 
-		if (dimension == 1) {
-			return build(sizes[0]);
-		}
-
 		XRArrayVary array = new XRArrayVary();
-		array.elementCount = 0;
 		array.arrayDimension = dimension;
 		array.arraySize = new int[dimension];
-		array.arraySize[0] = 0;
-		array.arraySize[1] = 0;
 
-		for (int i = 0; i < sizes[0]; ++i) {
-			array.add(build(sizes[1]));
+		for (int i = 0; i < dimension; ++i) {
+			array.arraySize[i] = sizes[i];
 		}
 
-		return array;
-	}
-
-	public static XRArrayVary build(List<? extends IRObject> elements) throws RException {
-
-		XRArrayVary array = new XRArrayVary();
-		array.elementCount = 0;
-		array.arrayDimension = 1;
-		array.arraySize = new int[1];
-		array.arraySize[0] = 0;
-
-		for (IRObject e : elements) {
-			array.add(e);
+		if (dimension == 2) {
+			array.arraySize[0] = 0;
+			int size1 = sizes[1];
+			for (int i = 0; i < sizes[0]; ++i) {
+				array.add(build(size1));
+			}
 		}
 
 		return array;
@@ -74,6 +49,10 @@ public class XRArrayVary extends AbsRefObject implements IRArray {
 	protected int elementCount = 0;
 
 	protected List<IRObject> elements = new ArrayList<>();
+
+	private XRArrayVary() {
+
+	}
 
 	protected void _add(IRObject obj) throws RException {
 
@@ -127,6 +106,15 @@ public class XRArrayVary extends AbsRefObject implements IRArray {
 		}
 
 		return _get(obj, indexs, from + 1);
+	}
+
+	private void _set(int index, IRObject newObj) {
+
+		for (int i = elements.size(); i <= index; ++i) {
+			elements.add(null);
+		}
+
+		elements.set(index, newObj);
 	}
 
 	@Override
@@ -238,7 +226,7 @@ public class XRArrayVary extends AbsRefObject implements IRArray {
 			throw new RException("invalid index: " + index);
 		}
 
-		IRObject oldObj = elements.get(index);
+		IRObject oldObj = get(index);
 		int on = oldObj == null ? 0 : 1;
 		int nn = 0;
 
@@ -247,7 +235,7 @@ public class XRArrayVary extends AbsRefObject implements IRArray {
 			RulpUtil.incRef(newObj);
 		}
 
-		elements.set(index, nn == 1 ? newObj : null);
+		_set(index, nn == 1 ? newObj : null);
 		elementCount += nn - on;
 
 		RulpUtil.decRef(oldObj);

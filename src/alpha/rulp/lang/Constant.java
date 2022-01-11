@@ -457,6 +457,8 @@ public interface Constant {
 
 	String F_TO_STRING = "to-string";
 
+	String F_TO_VARY = "to-vary";
+
 	String F_TRY = "try";
 
 	String F_TYPE_OF = "type-of";

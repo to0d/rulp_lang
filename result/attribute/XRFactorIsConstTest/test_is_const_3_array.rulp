@@ -2,10 +2,10 @@
 ;=>
 
 (is-const $(add {a} c))
-;=>
+;err
 
 (is-const $(add {} c))
-;=>
+;err
 
 (is-const (make-array 3))
 ;=>

@@ -1,9 +1,11 @@
 (add {} a b)
-;=>
+;err
 
 (add {a,b} c)
+;err
+
+(add (make-array) a b)
 ;=>
 
-(add {a,b} c d)
+(add (add (make-array) a b) c d)
 ;=>
-

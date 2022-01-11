@@ -7,7 +7,7 @@
 (defclass class2
     (defvar ?descriptors nil)[public]
     (defun load (?count)
-        (defvar ?_descriptors {})    
+        (defvar ?_descriptors (make-array))    
         (loop for ?x from 1 to ?count do
             (defvar ?descriptor (new class1))
             (setq ?descriptor::?value ?x)

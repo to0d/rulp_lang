@@ -3,7 +3,7 @@
 )
 ;=>class1
 
-(defvar ?arr {})
+(defvar ?arr (make-array))
 ;=>&?arr
 
 (add ?arr (new class1))

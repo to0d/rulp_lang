@@ -9,21 +9,15 @@ public class TestArray extends RulpTestBase {
 	@Test
 	void test_array_1() {
 		_setup();
-		_run_script(); 
+		_run_script();
 	}
 
 	@Test
 	public void test_array_2_add() {
 		_setup();
-		_run_script();  
+		_run_script();
 	}
 
-	@Test
-	public void test_array_3_seta() {
-		_setup();
-		_run_script();  
-	}
-	
 	@Test
 	public void test_array_4_const() {
 

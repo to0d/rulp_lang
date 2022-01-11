@@ -176,6 +176,7 @@ obj=get                 , type=func
 obj=is-empty            , type=func
 obj=length-of           , type=func
 obj=size-of             , type=func
+obj=to-array            , type=func
 obj=to-list             , type=func
 
 ;eof

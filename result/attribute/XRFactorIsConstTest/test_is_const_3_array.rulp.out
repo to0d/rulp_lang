@@ -2,10 +2,22 @@
 ;=>true
 
 (is-const $(add {a} c))
-;=>false
+;err:
+Can't add const vary: {a}
+at (add-list-to-array ?a '(?e0)) ; _$fun$_add-3
+at (return (add-list-to-array ?a '(?e0))) ; _$fun$_add-3
+at $(add {a} c) ; main-2
+at (is-const $(add {a} c)) ; main-2
+;eof
 
 (is-const $(add {} c))
-;=>false
+;err:
+Can't add const vary: {}
+at (add-list-to-array ?a '(?e0)) ; _$fun$_add-3
+at (return (add-list-to-array ?a '(?e0))) ; _$fun$_add-3
+at $(add {} c) ; main-2
+at (is-const $(add {} c)) ; main-2
+;eof
 
 (is-const (make-array 3))
 ;=>true
@@ -17,5 +29,8 @@
 ;=>false
 
 (is-const {})
-;=>false
+;=>true
+
+(is-const {a, b, c})
+;=>true
 

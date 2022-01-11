@@ -1,9 +1,22 @@
 (add {} a b)
-;=>{a,b}
+;err:
+Can't add const vary: {}
+at (add-list-to-array ?a '(?e0 ?e1)) ; _$fun$_add-3
+at (return (add-list-to-array ?a '(?e0 ?e1))) ; _$fun$_add-3
+at (add {} a b) ; main-2
+;eof
 
 (add {a,b} c)
-;=>{a,b,c}
+;err:
+Can't add const vary: {a,b}
+at (add-list-to-array ?a '(?e0)) ; _$fun$_add-3
+at (return (add-list-to-array ?a '(?e0))) ; _$fun$_add-3
+at (add {a,b} c) ; main-2
+;eof
 
-(add {a,b} c d)
+(add (make-array) a b)
+;=>{a,b}
+
+(add (add (make-array) a b) c d)
 ;=>{a,b,c,d}
 

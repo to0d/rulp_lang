@@ -1,12 +1,10 @@
 (defun fun1 ((?line string))
     (defvar ?out (make-array))
-    (add ?out ?line)
-    (return (to-list ?out))
+    (return (to-list (add ?out ?line)))
 )
 (defun fun2 ((?line string))
     (defvar ?out {})
-    (add ?out ?line)
-    (return (to-list ?out))
+    (return (to-list (add (to-vary ?out) ?line)))
 )
 ;=>
 

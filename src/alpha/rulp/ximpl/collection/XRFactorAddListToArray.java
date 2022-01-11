@@ -36,6 +36,10 @@ public class XRFactorAddListToArray extends AbsAtomFactorAdapter implements IRFa
 		IRArray a1 = RulpUtil.asArray(interpreter.compute(frame, args.get(1)));
 		IRList l2 = RulpUtil.asList(interpreter.compute(frame, args.get(2)));
 
+		if (a1.isConst()) {
+			throw new RException("Can't add const vary: " + a1);
+		}
+
 		if (!l2.isEmpty()) {
 			IRIterator<? extends IRObject> it = l2.iterator();
 			while (it.hasNext()) {

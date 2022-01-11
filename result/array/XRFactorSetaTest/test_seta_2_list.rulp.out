@@ -1,7 +1,0 @@
-(seta (a b) 1 x)
-;err:
-factor not found: (a b)
-at (a b) ; main-2
-at (seta (a b) 1 x) ; main-2
-;eof
-

@@ -59,6 +59,7 @@ import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.runtime.IRThreadContext;
 import alpha.rulp.runtime.IRTokener;
 import alpha.rulp.runtime.RName;
+import alpha.rulp.ximpl.array.XRArrayConst;
 import alpha.rulp.ximpl.array.XRArrayVary;
 import alpha.rulp.ximpl.array.XRFactorMakeArray;
 import alpha.rulp.ximpl.array.XRFactorSeta;
@@ -132,6 +133,7 @@ import alpha.rulp.ximpl.factor.XRFactorToAtom;
 import alpha.rulp.ximpl.factor.XRFactorToExpr;
 import alpha.rulp.ximpl.factor.XRFactorToNamedList;
 import alpha.rulp.ximpl.factor.XRFactorToNoNamedList;
+import alpha.rulp.ximpl.factor.XRFactorToVary;
 import alpha.rulp.ximpl.factor.XRFactorTypeOf;
 import alpha.rulp.ximpl.factor.XRFactorValueOf;
 import alpha.rulp.ximpl.factor.XRFactorValueTypeOf;
@@ -731,6 +733,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorAddListToArray(F_ADD_LIST_TO_ARRAY));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorAddArrayToList(F_ADD_ARRAY_TO_LIST));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSeta(F_SETA));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorToVary(F_TO_VARY));
 
 		// Thread
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSleep(F_SLEEP));
@@ -994,9 +997,9 @@ public final class RulpFactory {
 		return XRArrayVary.build(sizes);
 	}
 
-	public static IRArray createVaryArray(List<? extends IRObject> elements) throws RException {
+	public static IRArray createConstArray(List<? extends IRObject> elements) throws RException {
 		RType.ARRAY.incCreateCount();
-		return XRArrayVary.build(elements);
+		return XRArrayConst.build(elements);
 	}
 
 	public static IRList createVaryList() {
