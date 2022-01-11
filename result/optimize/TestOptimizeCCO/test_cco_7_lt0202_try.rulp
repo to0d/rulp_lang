@@ -20,6 +20,10 @@
 )[opt-cco]
 ;=>
 
+(print-impl isHappy)
+;;;
+
+
 (isHappy 1999999999)
 ;=>
 
