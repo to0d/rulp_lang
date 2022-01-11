@@ -24,8 +24,8 @@
 ;=>o2
 
 (o2::fun1 1)
-;err:
-the 0 argument<1> not match type <string>
-at (o2::fun1 1) ; main-2
-;eof
+;=>1
+
+(o2::fun1 "abc")
+;=>"1: abc"
 

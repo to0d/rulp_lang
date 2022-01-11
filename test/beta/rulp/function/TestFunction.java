@@ -12,4 +12,11 @@ public class TestFunction extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+
+	@Test
+	void test_fun_1_para_class() {
+
+		_setup();
+		_run_script();
+	}
 }

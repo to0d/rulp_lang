@@ -1320,7 +1320,7 @@ public class RulpUtil {
 
 		RType valueType = paraValue.getType();
 		if (valueType == RType.INSTANCE) {
-			return RulpUtil.asInstance(paraValue).getRClass().getClassTypeAtom() == paraTypeAtom;
+			return SubjectUtil.findMatchClass(RulpUtil.asInstance(paraValue), paraTypeAtom) != null;
 		}
 
 		RType expectType = RType.toType(paraTypeAtom.asString());
@@ -1675,7 +1675,7 @@ public class RulpUtil {
 
 		case A_OPT_TCO:
 			return O_OPT_TCO;
-			
+
 		case A_RETURN_TYPE:
 			return O_RETURN_TYPE;
 

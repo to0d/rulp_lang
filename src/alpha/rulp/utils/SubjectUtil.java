@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRClass;
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
@@ -28,9 +29,18 @@ import alpha.rulp.runtime.IRFunctionList;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.ximpl.function.XRFactorDefun;
 import alpha.rulp.ximpl.function.XRFunctionList;
-import alpha.rulp.ximpl.rclass.AbsRInstance;
 
 public class SubjectUtil {
+
+	public static IRClass findMatchClass(IRInstance instance, IRAtom classAtom) throws RException {
+
+		IRClass rClass = instance.getRClass();
+		while (rClass != null && !RulpUtil.equal(rClass.getClassTypeAtom(), classAtom)) {
+			rClass = rClass.getSuperClass();
+		}
+
+		return rClass;
+	}
 
 	private static IRMember _createMemberVar(IRSubject sub, String mbrName, IRObject varValue) throws RException {
 
@@ -213,10 +223,10 @@ public class SubjectUtil {
 		}
 
 		/*****************************************************/
-		// Member
+		// Check old Member
 		/*****************************************************/
 		IRMember oldMbr = sub.getMember(mbrName);
-
+		boolean inherit = false;
 		if (oldMbr != null) {
 
 			if (oldMbr.getValue().getType() != RType.FUNC) {
@@ -227,6 +237,14 @@ public class SubjectUtil {
 				throw new RException("can't redefine static member: " + oldMbr);
 			}
 
+		} else {
+
+			IRMember parentMbr = SubjectUtil.lookUpMember(sub.getParent(), mbrName);
+			if (parentMbr != null && parentMbr.getValue().getType() == RType.FUNC
+					&& !RulpUtil.isPropertyStatic(parentMbr)) {
+				oldMbr = parentMbr;
+				inherit = true;
+			}
 		}
 
 		IRFunction newFunc = RulpFactory.createFunction(frame, mbrName, paraAttrs, funBody);
@@ -239,14 +257,15 @@ public class SubjectUtil {
 				/*****************************************************/
 				// Override
 				/*****************************************************/
-				if (oldFunc.getSignature().contentEquals(newFunc.getSignature())) {
+				if (oldFunc.getSignature().equals(newFunc.getSignature())) {
 
 					if (RulpUtil.isPropertyFinal(oldMbr)) {
 						throw new RException("can't redefine final member: " + oldMbr);
 					}
 
-					XRFunctionList.tryOverride(oldFunc, newFunc);
-
+					if (!inherit) {
+						XRFunctionList.tryOverride(oldFunc, newFunc);
+					}
 				}
 				/*****************************************************/
 				// Create Function List
@@ -265,7 +284,9 @@ public class SubjectUtil {
 				IRFunctionList newFunList = RulpFactory.createFunctionList(oldFunList.getName());
 
 				for (IRFunction f : oldFunList.getAllFuncList()) {
-					newFunList.addFunc(f);
+					if (!f.getSignature().equals(newFunc.getSignature())) {
+						newFunList.addFunc(f);
+					}
 				}
 
 				newFunList.addFunc(newFunc);
@@ -346,15 +367,15 @@ public class SubjectUtil {
 		sub.setMember(mbrName, mbr);
 	}
 
-	public static IRMember findSuperMember(IRClass superClass, String name) throws RException {
+	public static IRMember lookUpMember(IRSubject subject, String name) throws RException {
 
-		IRMember classMbr = null;
-		while (classMbr == null && superClass != null) {
-			classMbr = superClass.getMember(name);
-			superClass = superClass.getSuperClass();
+		IRMember mbr = null;
+		while (mbr == null && subject != null) {
+			mbr = subject.getMember(name);
+			subject = subject.getParent();
 		}
 
-		return classMbr;
+		return mbr;
 	}
 
 	public static IRMember getClassMember(IRInstance instance, IRClass rClass, String name) throws RException {
@@ -365,7 +386,7 @@ public class SubjectUtil {
 
 		IRMember classMbr = rClass.getMember(name);
 		if (classMbr == null) {
-			classMbr = SubjectUtil.findSuperMember(rClass.getSuperClass(), name);
+			classMbr = SubjectUtil.lookUpMember(rClass.getSuperClass(), name);
 		}
 
 		if (classMbr == null) {

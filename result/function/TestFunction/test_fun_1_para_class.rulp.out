@@ -1,0 +1,22 @@
+(defclass class1
+    (defvar ?value1 0)
+    (defun init (?x) (setq ?value1 ?x))
+    (defun get1 ()   (return ?value1))
+)
+
+(defclass class2 (extends class1)
+    (defun get1 () (return (+ ?value1 1)))
+)
+;=>class1 class2
+
+(defun fun1 ((?o class1)) 
+    (return (?o::get1))
+)
+;=>fun1
+
+(fun1 (new class1 '(1)))
+;=>1
+
+(fun1 (new class2 '(1)))
+;=>2
+

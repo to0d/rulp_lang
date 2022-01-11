@@ -14,16 +14,11 @@ import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRInstance;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRMember;
-import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRSubject;
-import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
-import alpha.rulp.runtime.IRFunction;
-import alpha.rulp.runtime.IRFunctionList;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
-import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.SubjectUtil;
 import alpha.rulp.ximpl.subject.AbsRSubject;
 

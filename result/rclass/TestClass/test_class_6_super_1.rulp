@@ -6,65 +6,65 @@
     (defun add (?x) (setq ?value (+ ?value ?x)))
     (defun get ()   (return ?value))
 )
-;;;
+;=>
 
 (ls class1)
-;;;
+;=>
 
 (defclass class2 (extends class1)
     (defun add (?x) (setq ?value (+ ?value ?x 1)))
 )
-;;;
+;=>
 
 (ls class2)
-;;;
+;=>
 
 (ls-print class2)
-;;;
+;=>
 
 (new class1 o1)
-;;;
+;=>
 
 (o1::get)
-;;;
+;=>
 
 (new class2 o2)
-;;;
+;=>
 
 (o1::get)
-;;;
+;=>
 
 (o1::add 1)
-;;;
+;=>
 
 (o1::get)
-;;;
+;=>
 
 (o2::add 1)
-;;;
+;=>
 
 (o2::get)
-;;;
+;=>
 
 (defclass class3 (extends class1)
     (defvar ?value 1)
 )
-;;;
+;=>
 
 (new class3 o3)
-;;;
+;=>
 
 (o3::get)
-;;;
+;=>
 
 (defclass class4 (extends class1)
     (defvar ?value 2)
     (defvar ?value 2)
 )
-;;;
+;err
 
 (defclass class5 (extends class1)
     (defun get () (return ?value))
     (defun get () (return ?value))
 )
-;;;
+;err
