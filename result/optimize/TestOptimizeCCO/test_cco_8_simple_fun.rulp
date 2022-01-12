@@ -1,0 +1,8 @@
+(load math)
+;=>
+
+(is-stable max)
+;=>false
+
+(is-stable min)
+;=>false
