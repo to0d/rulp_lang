@@ -44,7 +44,10 @@
             (setq ?n (/ ?n 10))
             (setq ?n2 (+ ?n2 (power ?x 2)))
         )
-        (try (return (isHappy ?n2)) (catch ?e (return false)))
+        (try
+            (return (isHappy ?n2))
+            (catch ?e (return false))
+        )
     )
 )
 

@@ -9,7 +9,7 @@
 
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.A_NIL;
 import static alpha.rulp.lang.Constant.F_DEFUN;
 import static alpha.rulp.lang.Constant.F_IF;
@@ -120,12 +120,14 @@ public class FormatUtil {
 
 			switch (((IRList) obj).get(0).asString()) {
 			case F_IF:
-				_output_if((IRList) obj, outLines, level);
+				_output_factor1((IRList) obj, outLines, level);
 				return;
 			case F_DEFUN:
 				_output_defun((IRList) obj, outLines, level);
 				return;
 			case F_LOOP:
+			case F_TRY:
+			case A_DO:
 				_output_loop((IRList) obj, outLines, level);
 				return;
 			case "add-rule":
@@ -240,7 +242,7 @@ public class FormatUtil {
 		outLines.add(_getSpaceLine(level) + ")");
 	}
 
-	private static void _output_if(IRList expr, List<String> outLines, int level) throws RException {
+	private static void _output_factor1(IRList expr, List<String> outLines, int level) throws RException {
 
 		outLines.add(_getSpaceLine(level) + "(" + toString(expr.get(0)));
 
@@ -298,14 +300,7 @@ public class FormatUtil {
 		// (loop
 		// action
 		// )
-
-		outLines.add(_getSpaceLine(level) + "(" + toString(expr.get(0)));
-
-		for (int i = 1; i < expr.size(); ++i) {
-			_output(expr.get(i), outLines, level + 1);
-		}
-
-		outLines.add(_getSpaceLine(level) + ")");
+		_output_factor1(expr, outLines, level);
 	}
 
 	public static void format(IRObject obj, List<String> outLines, int level) throws RException {
