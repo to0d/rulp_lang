@@ -169,6 +169,10 @@ public interface Constant {
 
 	String C_HANDLE_ANY = "_$handle$any$_";
 
+	String E_INFINITE_LOOP = "infinite-loop";
+
+	IRAtom O_INFINITE_LOOP = RulpFactory.createAtom(E_INFINITE_LOOP);
+
 	String F_ACCESS = "access";
 
 	String F_ADD_ARRAY_TO_LIST = "add-array-to-list";

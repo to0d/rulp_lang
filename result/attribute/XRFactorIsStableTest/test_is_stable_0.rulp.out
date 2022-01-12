@@ -53,6 +53,7 @@ obj=attribute-of        , type=factor
 obj=blob                , type=atom
 obj=blob-length         , type=factor
 obj=bool                , type=atom
+obj=break               , type=factor
 obj=can-cast            , type=factor
 obj=case                , type=factor
 obj=class               , type=atom
@@ -60,6 +61,7 @@ obj=class-of            , type=factor
 obj=cmp_def             , type=factor
 obj=compute             , type=factor
 obj=constant            , type=atom
+obj=continue            , type=factor
 obj=default             , type=atom
 obj=defclass            , type=factor
 obj=defconst            , type=factor

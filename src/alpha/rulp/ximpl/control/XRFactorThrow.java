@@ -36,6 +36,35 @@ public class XRFactorThrow extends AbsAtomFactorAdapter implements IRFactor {
 		super(factorName);
 	}
 
+	public static boolean handle(IRError err, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		String errId = err.getId().getName();
+
+		String handleName = C_HANDLE + errId;
+		String valueName = errId;
+
+		IRFrameEntry handlEntry = frame.getEntry(handleName);
+		if (handlEntry == null) {
+
+			handlEntry = frame.getEntry(C_HANDLE_ANY);
+			if (handlEntry == null) {
+				return false;
+			}
+
+			valueName = RulpUtil.asAtom(frame.getEntry(C_ERROR_DEFAULT).getObject()).getName();
+		}
+
+		IRExpr catchExpr = RulpUtil.asExpression(handlEntry.getObject());
+		frame.setEntry(valueName, err);
+
+		IRIterator<? extends IRObject> iter = catchExpr.listIterator(2);
+		while (iter.hasNext()) {
+			interpreter.compute(frame, iter.next());
+		}
+
+		return true;
+	}
+
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
@@ -50,27 +79,8 @@ public class XRFactorThrow extends AbsAtomFactorAdapter implements IRFactor {
 		}
 
 		IRError err = RulpFactory.createError(interpreter, errId, errValue);
-
-		String handleName = C_HANDLE + errId.getName();
-		String valueName = errId.getName();
-
-		IRFrameEntry handlEntry = frame.getEntry(handleName);
-		if (handlEntry == null) {
-
-			handlEntry = frame.getEntry(C_HANDLE_ANY);
-			if (handlEntry == null) {
-				throw new RError(frame, this, err);
-			}
-
-			valueName = RulpUtil.asAtom(frame.getEntry(C_ERROR_DEFAULT).getObject()).getName();
-		}
-
-		IRExpr catchExpr = RulpUtil.asExpression(handlEntry.getObject());
-		frame.setEntry(valueName, err);
-
-		IRIterator<? extends IRObject> iter = catchExpr.listIterator(2);
-		while (iter.hasNext()) {
-			interpreter.compute(frame, iter.next());
+		if (!handle(err, interpreter, frame)) {
+			throw new RError(frame, this, err);
 		}
 
 		return O_Nil;

@@ -21,6 +21,7 @@ import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.RError;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
@@ -99,7 +100,16 @@ public class XRFactorTry extends AbsAtomFactorAdapter implements IRFactor {
 
 			return O_Nil;
 
+		} catch (RError err) {
+
+			if (XRFactorThrow.handle(err.getError(), interpreter, tryFrame)) {
+				return O_Nil;
+			}
+
+			throw err;
+
 		} finally {
+
 			tryFrame.release();
 			RulpUtil.decRef(tryFrame);
 		}

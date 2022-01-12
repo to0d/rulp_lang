@@ -9,22 +9,25 @@
 
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.F_CC2;
+import static alpha.rulp.lang.Constant.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import alpha.rulp.lang.IRError;
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.RError;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.error.RInfiniteLoop;
@@ -171,7 +174,7 @@ public class XRFactorCC2 extends AbsRefFactorAdapter implements IRRebuild, IRFac
 			switch (cc2.status) {
 
 			case WORK:
-				throw new RInfiniteLoop("infinite loop detected: (cc2 " + expr + ")");
+				throw new RError(frame, this, RulpFactory.createError(interpreter, O_INFINITE_LOOP, expr));
 
 			case DONE:
 				CCOUtil.incCC2CacheCount();

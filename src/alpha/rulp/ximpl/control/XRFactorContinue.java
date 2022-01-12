@@ -7,9 +7,7 @@
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-package alpha.rulp.ximpl.error;
-
-import static alpha.rulp.lang.Constant.O_Nan;
+package alpha.rulp.ximpl.control;
 
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
@@ -17,23 +15,18 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.ximpl.error.RContinue;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorReturn extends AbsAtomFactorAdapter implements IRFactor {
+public class XRFactorContinue extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorReturn(String factorName) {
+	public XRFactorContinue(String factorName) {
 		super(factorName);
 	}
 
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
-
-		int size = args.size();
-		if (size > 2) {
-			throw new RException("Invalid parameters: " + args);
-		}
-
-		throw new RReturn(this, frame, size == 1 ? O_Nan : interpreter.compute(frame, args.get(1)));
+		throw new RContinue(this, frame);
 	}
 
 }

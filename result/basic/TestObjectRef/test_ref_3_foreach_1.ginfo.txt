@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      233
+           Interpreter call id:      235
     Interpreter call level/max:        0        5
                Frame max level:        4
                   Frame max id:        6
@@ -24,27 +24,27 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      250
+    factor:      252
       func:        3
 ==========================================================================================================================
 
-Callable stats info: callId=233, row=17, column=59(4), value-max=5, value-unit=2^x
+Callable stats info: callId=235, row=17, column=59(4), value-max=5, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         33333333333333333333333333333333333333333333333333333333445 max=14, unit=2^x
+   Frame    RType  Count  Ref Object                         33333333333333333333333333333333333333333333333333333333436 max=20, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor    177    0 add-attribute                   133333333333333333333333333333333333333333333             
-    root   factor     39    0 defun                                                                        3333 3333341 
+    root   factor    179    0 add-attribute                   1333333333333333333333333333333333333333333332            
+    root   factor     39    0 defun                                                                        133321333342 
     root   factor      6    0 alias                          33                                                         
-    root   factor      5    0 return                                                                                  13
+    root   factor      5    0 return                                                                                   4
     root   factor      4    0 value-of                                                                                 3
-    root   factor      4    0 defmacro                                                                         2    11  
-    root   factor      3    0 defvar                                                                       1         11 
-    root   factor      3    0 deftemplate                                                                      21       
-    root   factor      2    0 new                                                                                     11
-    root   factor      2    0 add-list-to-array                                                                       11
-  system funcList      2    1 add                                                                                     11
+    root   factor      4    0 defmacro                                                                         2     11 
+    root   factor      3    0 defvar                                                                       1         1 1
+    root   factor      3    0 deftemplate                                                                       3       
+    root   factor      2    0 new                                                                                      2
+    root   factor      2    0 add-list-to-array                                                                        2
+  system funcList      2    1 add                                                                                      2
   system funcList      1    1 to-list                                                                                  1
-    root   factor      1    0 make-array                                                                              1 
+    root   factor      1    0 make-array                                                                               1
     root   factor      1    0 load                                                                                   1  
     root   factor      1    0 foreach                                                                                  1
     root   factor      1    0 defclass                                                                                1 
@@ -55,10 +55,10 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1085            0         1085
+        atom:         1091            0         1091
       string:           25            0           25
         list:           10            2            8
-        expr:          441            3          438
+        expr:          443            3          440
        array:            1            0            1
          var:           22            6           16
         func:           52            0           52

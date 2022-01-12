@@ -14,7 +14,7 @@
 
 (fun 4)
 ;err:
-infinite loop detected: (cc2 (fun 3))
+error: infinite-loop, (fun 3)
 at (cc2 (fun (- ?x 1))) ; _$fun$_fun-5
 at (> (cc2 (fun (- ?x 1))) 0) ; _$fun$_fun-5
 at (if (> (cc2 (fun (- ?x 1))) 0) (return 1) (return 2)) ; _$fun$_fun-5
@@ -53,7 +53,7 @@ at (fun 4) ; main-2
         )
     )
 )[opt-cco]
-rebuild: id=0, name=cc2, call=3, hit=0, func=fun, cache=2, data:[$$i_3/null/I/0] [$$i_4/null/I/0]
+rebuild: id=0, name=cc2, call=3, hit=0, func=fun, cache=2, data:[$$i_3/null/E/0] [$$i_4/null/E/0]
 
 ;eof
 
