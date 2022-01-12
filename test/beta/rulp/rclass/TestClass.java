@@ -131,4 +131,10 @@ public class TestClass extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	public void test_class_e_polymorphism() {
+		_setup();
+		_run_script();
+	}
 }

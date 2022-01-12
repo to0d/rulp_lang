@@ -9,10 +9,12 @@
     (defun fun3x () (return (+ "fun3x: " (to-string this))))
     (defun fun2y (?x) (return (fun2)))    
 )
-;;;
 
 (new class1 o1)
-;;;
+;=>
+
+(o1::fun3x)
+;=>
 
 (o1::fun1 1)
 ;=>3

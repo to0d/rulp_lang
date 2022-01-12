@@ -766,6 +766,11 @@ public final class RuntimeUtil {
 	}
 
 	public static IRFrameEntry lookupFrameEntry(IRFrame frame, String name) throws RException {
+		
+//		if(name.equals("to-string"))
+//		{
+//			System.out.println("");
+//		}
 
 		if (isForceLocalEntryName(name)) {
 			return frame.getEntry(name);

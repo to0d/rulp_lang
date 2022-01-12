@@ -1,0 +1,19 @@
+(defclass class1
+    (defun fun1 () (println "class1::fun1"))
+    (defun fun2 () (println "class1::fun2"))
+    (defun fun () 
+        (fun1)
+        (fun2)
+    )
+)
+
+(defclass class2 (extends class1)
+    (defun fun2 () (println "class2::fun2"))
+)
+
+(defvar ?o2 (new class2))
+;=>
+
+(?o2::fun)
+;=>
+
