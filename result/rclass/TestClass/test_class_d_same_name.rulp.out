@@ -4,7 +4,7 @@
 
 (defclass class2
     (defvar ?value)
-    (defun set_value (?x) (setq ?value ?x))
+    (defun set_value (?x) (setq ?value ?x) (return ?value))
 )
 
 (defvar ?o1)
@@ -14,16 +14,10 @@
 (setq ?o2 (new class2))
 
 (defun fun1 (?o)
-    (return (?o2::set_value (?o::fun1)))
+    (return (?o2::set_value (?o::fun1 1)))
 )
 ;=>class1 class2 &?o1 &?o2 &?o1 &?o2 fun1
 
 (fun1 ?o1)
-;err:
-Unexpect argument number in fun<fun1>: expect=1, actual=0
-at (?o::fun1) ; _$fun$_fun1-5
-at (?o2::set_value (?o::fun1)) ; _$fun$_fun1-5
-at (return (?o2::set_value (?o::fun1))) ; _$fun$_fun1-5
-at (fun1 ?o1) ; main-2
-;eof
+;=>2
 

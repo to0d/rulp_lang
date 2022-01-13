@@ -4,7 +4,7 @@
 
 (defclass class2
     (defvar ?value)
-    (defun set_value (?x) (setq ?value ?x))
+    (defun set_value (?x) (setq ?value ?x) (return ?value))
 )
 
 (defvar ?o1)
@@ -14,7 +14,7 @@
 (setq ?o2 (new class2))
 
 (defun fun1 (?o)
-    (return (?o2::set_value (?o::fun1)))
+    (return (?o2::set_value (?o::fun1 1)))
 )
 ;=>
 
