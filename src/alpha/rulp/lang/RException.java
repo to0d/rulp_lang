@@ -1,5 +1,6 @@
 package alpha.rulp.lang;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,7 +34,6 @@ public class RException extends Exception {
 	public RException(IRObject fromObject, String message) {
 		super(message);
 		this.fromObject = fromObject;
-
 	}
 
 	public RException(String message) {
@@ -50,11 +50,15 @@ public class RException extends Exception {
 	}
 
 	public List<String> getAdditionalMessages() {
-		return additionalMessages;
+		return additionalMessages == null ? Collections.emptyList() : additionalMessages;
 	}
 
 	public IRObject getFromObject() {
 		return fromObject;
+	}
+
+	public String getExceptionMessage() {
+		return super.getMessage();
 	}
 
 	@Override

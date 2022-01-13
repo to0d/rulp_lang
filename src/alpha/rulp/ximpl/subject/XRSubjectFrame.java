@@ -29,6 +29,17 @@ public class XRSubjectFrame extends XRFrame implements IRFrame {
 	private IRSubject subject;
 
 	@Override
+	public IRObject findLocalObject(String name) throws RException {
+
+		IRMember mbr = subject.getMember(name);
+		if (mbr == null || mbr.getSubject() != this.subject) {
+			return null;
+		}
+
+		return mbr.getValue();
+	}
+
+	@Override
 	public synchronized IRFrameEntry getEntry(String name) throws RException {
 
 		IRMember mbr = subject.getMember(name);
@@ -72,17 +83,6 @@ public class XRSubjectFrame extends XRFrame implements IRFrame {
 		}
 
 		subject.setMember(name, RulpFactory.createMember(subject, name, obj));
-	}
-
-	@Override
-	public IRObject findLocalObject(String name) throws RException {
-
-		IRMember mbr = subject.getMember(name);
-		if (mbr == null || mbr.getSubject() != this.subject) {
-			return null;
-		}
-
-		return mbr.getValue();
 	}
 
 	@Override

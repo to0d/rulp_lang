@@ -171,7 +171,17 @@ public class XRInterpreter implements IRInterpreter {
 				e.printStackTrace();
 			}
 
-			throw new RException("Unhandled internal exception: " + e.toString());
+			if (!e.isHandle()) {
+				throw new RException("Unhandled internal exception: " + e.toString());
+			}
+
+			RException newExp = new RException("" + e.getExceptionMessage());
+
+			for (String addMsg : e.getAdditionalMessages()) {
+				newExp.addMessage(addMsg);
+			}
+
+			throw newExp;
 
 		} catch (RError e) {
 
@@ -180,7 +190,6 @@ public class XRInterpreter implements IRInterpreter {
 			}
 
 			RException newExp = new RException("" + e.getError());
-
 			for (String addMsg : e.getAdditionalMessages()) {
 				newExp.addMessage(addMsg);
 			}

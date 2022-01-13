@@ -30,6 +30,7 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.error.RReturn;
+import alpha.rulp.ximpl.error.RUnmatchParaException;
 import alpha.rulp.ximpl.runtime.AbsFunctionAdapter;
 
 public class XRFunction extends AbsFunctionAdapter implements IRFunction {
@@ -55,10 +56,10 @@ public class XRFunction extends AbsFunctionAdapter implements IRFunction {
 		this.funBody = funBody;
 	}
 
-	protected void _matchTypeList(IRList args) throws RException {
+	protected void _matchTypeList(IRList args, IRFrame frame) throws RException {
 
 		if ((paraCount + 1) != args.size()) {
-			throw new RException("Invalid parameter count: " + paraCount);
+			throw new RUnmatchParaException(this, frame, "Invalid parameter count: " + paraCount);
 		}
 
 		Iterator<IRParaAttr> attrIter = paraAttrList.iterator();
@@ -79,7 +80,7 @@ public class XRFunction extends AbsFunctionAdapter implements IRFunction {
 			}
 
 			if (!RulpUtil.matchParaType(valObj, typeAtom)) {
-				throw new RException(
+				throw new RUnmatchParaException(this, frame,
 						String.format("the %d argument<%s> not match type <%s>", argIndex, valObj, typeAtom));
 			}
 
@@ -95,7 +96,7 @@ public class XRFunction extends AbsFunctionAdapter implements IRFunction {
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		_matchTypeList(args);
+		_matchTypeList(args, frame);
 
 		IRFrame funFrame = RulpFactory.createFrame(frame, A_FUN_PRE + name);
 

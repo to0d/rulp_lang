@@ -13,12 +13,24 @@
 (new class1 o1)
 ;=>fun1 fun2 class1 o1
 
+(o1::fun1 1)
+;=>3
+
+(o1::fun2 1)
+;=>3
+
+(o1::to-string)
+;=>"class1::to-string"
+
+(o1::fun1x 1)
+;=>3
+
+(o1::fun2x 1)
+;=>3
+
 (o1::fun3x)
-;err:
-Unexpect argument number in fun<to-string>: expect=0, actual=1
-at (to-string this) ; _$fun$_fun3x-5
-at (+ "fun3x: " (to-string this)) ; _$fun$_fun3x-5
-at (return (+ "fun3x: " (to-string this))) ; _$fun$_fun3x-5
-at (o1::fun3x) ; main-2
-;eof
+;=>"fun3x: class1::to-string"
+
+(o1::fun2y 1)
+;=>1
 

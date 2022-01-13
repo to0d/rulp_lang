@@ -61,6 +61,7 @@ import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRThreadContext;
+import alpha.rulp.ximpl.error.RUnmatchParaException;
 import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public final class RuntimeUtil {
@@ -256,6 +257,30 @@ public final class RuntimeUtil {
 		}
 	}
 
+	private static IRObject _lookupNonSubjectObject(String name, IRFrame frame) throws RException {
+
+		IRFrame nonSubFrame = frame.getParentFrame();
+		while (nonSubFrame != null && isSubjectFrame(nonSubFrame)) {
+			nonSubFrame = nonSubFrame.getParentFrame();
+		}
+
+		if (nonSubFrame == null) {
+			return null;
+		}
+
+		IRFrameEntry entry = lookupFrameEntry(nonSubFrame, name);
+		if (entry == null) {
+			return null;
+		}
+
+		IRObject obj = entry.getObject();
+		if (obj == null) {
+			return null;
+		}
+
+		return obj;
+	}
+
 	public static boolean canAccess(IRObject obj, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		if (obj == null) {
@@ -380,42 +405,8 @@ public final class RuntimeUtil {
 					return obj;
 				}
 
-				IRObject e0 = compute(expr.get(0), interpreter, frame);
-
-				switch (e0.getType()) {
-				case FACTOR:
-					exprComputeFactorCount.getAndIncrement();
-					return RuntimeUtil.computeCallable((IRCallable) e0, expr, interpreter, frame);
-
-				case MACRO:
-					exprComputeMacroCount.getAndIncrement();
-					return RuntimeUtil.computeCallable((IRCallable) e0, expr, interpreter, frame);
-
-				case FUNC:
-					exprComputeFuncCount.getAndIncrement();
-					IRObject rst = RuntimeUtil.computeFun((IRFunction) e0, expr, interpreter, frame);
-					if (rst == null) {
-						return O_Nil;
-					} else if (rst.getType() == RType.EXPR && AttrUtil.containAttribute(rst, A_OPT_TCO)) {
-						rst = TCOUtil.computeTCO((IRExpr) rst, interpreter, frame);
-					}
-					return rst;
-
-				case TEMPLATE:
-					return RuntimeUtil.computeCallable((IRCallable) e0, expr, interpreter, frame);
-
-				case MEMBER:
-					exprComputeMemberCount.getAndIncrement();
-					IRObject e1m = ((IRMember) e0).getValue();
-					if (e1m.getType() != RType.FUNC) {
-						throw new RException("factor not found: " + obj);
-					}
-
-					return RuntimeUtil.computeFun((IRFunction) e1m, expr, interpreter, frame);
-
-				default:
-					throw new RException("factor not found: " + obj);
-				}
+				IRObject e0 = compute(expr.get(0), interpreter, frame);				
+				return computeExpr(e0,expr,interpreter, frame); 
 
 			case LIST:
 
@@ -527,6 +518,68 @@ public final class RuntimeUtil {
 		}
 	}
 
+	public static IRObject computeExpr(IRObject e0, IRList expr, IRInterpreter interpreter, IRFrame frame)
+			throws RException {
+
+		switch (e0.getType()) {
+		case FACTOR:
+			exprComputeFactorCount.getAndIncrement();
+			return RuntimeUtil.computeCallable((IRCallable) e0, expr, interpreter, frame);
+
+		case MACRO:
+			exprComputeMacroCount.getAndIncrement();
+			return RuntimeUtil.computeCallable((IRCallable) e0, expr, interpreter, frame);
+
+		case FUNC:
+
+			IRFunction func = (IRFunction) e0;
+
+			try {
+
+				exprComputeFuncCount.getAndIncrement();
+				IRObject rst = RuntimeUtil.computeFun(func, expr, interpreter, frame);
+				if (rst == null) {
+					return O_Nil;
+				} else if (rst.getType() == RType.EXPR && AttrUtil.containAttribute(rst, A_OPT_TCO)) {
+					rst = TCOUtil.computeTCO((IRExpr) rst, interpreter, frame);
+				}
+
+				return rst;
+
+			} catch (RUnmatchParaException excep1) {
+
+				if (!isSubjectFrame(func.getDefineFrame())) {
+					excep1.setHandle(true);
+					throw excep1;
+				}
+
+				IRObject o2 = _lookupNonSubjectObject(func.getName(), frame);
+				if (o2 == null) {
+					excep1.setHandle(true);
+					throw excep1;
+				}
+
+				return computeExpr(o2, expr, interpreter, frame);
+			}
+		case TEMPLATE:
+			return RuntimeUtil.computeCallable((IRCallable) e0, expr, interpreter, frame);
+		
+		case MEMBER:
+			
+			exprComputeMemberCount.getAndIncrement();
+			IRObject e1m = ((IRMember) e0).getValue();
+			if (e1m.getType() != RType.FUNC) {
+				throw new RException("factor not found: " + expr);
+			}
+
+			return RuntimeUtil.computeFun((IRFunction) e1m, expr, interpreter, frame);
+		
+		default:
+
+			throw new RException("factor not found: " + expr);
+		}
+	}
+
 	public static IRObject computeFun(IRFunction fun, IRList expr, IRInterpreter interpreter, IRFrame frame)
 			throws RException {
 
@@ -536,8 +589,9 @@ public final class RuntimeUtil {
 		// For Function List, the argCount is -1
 		int argCount = fun.getArgCount();
 		if (argCount != -1 && expr.size() != (argCount + 1)) {
-			throw new RException(String.format("Unexpect argument number in fun<%s>: expect=%d, actual=%d",
-					fun.getName(), argCount, expr.size() - 1));
+			throw new RUnmatchParaException(fun, frame,
+					String.format("Unexpect argument number in fun<%s>: expect=%d, actual=%d", fun.getName(), argCount,
+							expr.size() - 1));
 		}
 
 		RulpUtil.incRef(fun);
@@ -761,14 +815,17 @@ public final class RuntimeUtil {
 		return false;
 	}
 
+	public static boolean isSubjectFrame(IRFrame frame) {
+		return frame.getSubject() != frame;
+	}
+
 	public static boolean isTrace(IRFrame frame) throws RException {
 		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_TRACE)).asBoolean();
 	}
 
 	public static IRFrameEntry lookupFrameEntry(IRFrame frame, String name) throws RException {
-		
-//		if(name.equals("to-string"))
-//		{
+
+//		if (name.equals("to-string")) {
 //			System.out.println("");
 //		}
 

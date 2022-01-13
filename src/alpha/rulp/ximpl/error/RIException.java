@@ -19,8 +19,23 @@ public class RIException extends RException {
 
 	protected IRFrame fromFrame;
 
+	protected boolean handle = false;
+
 	public RIException(IRObject fromObject, IRFrame fromFrame) {
 		super(fromObject);
 		this.fromFrame = fromFrame;
+	}
+
+	public RIException(IRObject fromObject, IRFrame fromFrame, String message) {
+		super(fromObject, message);
+		this.fromFrame = fromFrame;
+	}
+
+	public boolean isHandle() {
+		return handle;
+	}
+
+	public void setHandle(boolean handle) {
+		this.handle = handle;
 	}
 }

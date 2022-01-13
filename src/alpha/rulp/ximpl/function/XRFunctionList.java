@@ -36,6 +36,7 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
+import alpha.rulp.ximpl.error.RUnmatchParaException;
 import alpha.rulp.ximpl.runtime.AbsFunctionAdapter;
 
 public class XRFunctionList extends AbsFunctionAdapter implements IRFunctionList {
@@ -257,7 +258,7 @@ public class XRFunctionList extends AbsFunctionAdapter implements IRFunctionList
 
 		IRFunction matchFun = funcList.findMatchFun(args);
 		if (matchFun == null) {
-			throw new RException(String.format("match funcion not found:  expr=%s", args));
+			throw new RUnmatchParaException(this, frame, String.format("match funcion not found:  expr=%s", args));
 		}
 
 		return RuntimeUtil.computeCallable(matchFun, args, interpreter, frame);
