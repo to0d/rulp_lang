@@ -1,6 +1,6 @@
 package alpha.rulp.lang;
 
-public interface IRParaAttr {
+public interface IRParaAttr extends IRObject {
 
 	public String getParaName();
 

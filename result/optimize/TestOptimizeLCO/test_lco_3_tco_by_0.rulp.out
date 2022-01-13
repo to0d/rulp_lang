@@ -2,7 +2,7 @@
 (defun fact (?v)
     (if (<= ?v -1)(return -1))
     (return (* ?v (fact (- ?v 1))))
-)[opt-tco opt-lco]
+)[opt-tco]
 ;=>fact
 
 (fact 0)

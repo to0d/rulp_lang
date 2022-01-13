@@ -9,11 +9,13 @@
 
 package alpha.rulp.ximpl.function;
 
+//import static alpha.rulp.lang.Constant.A_OPT_CC3;
 import static alpha.rulp.lang.Constant.A_OPT_CCO;
 import static alpha.rulp.lang.Constant.A_OPT_ERO;
-//import static alpha.rulp.lang.Constant.A_OPT_CC3;
 import static alpha.rulp.lang.Constant.A_OPT_FULL;
+import static alpha.rulp.lang.Constant.A_OPT_LCO;
 import static alpha.rulp.lang.Constant.A_OPT_TCO;
+import static alpha.rulp.lang.Constant.T_Expr;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,6 +63,7 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 	}
 
 	static int _getOptOrder(String optName) {
+
 		switch (optName) {
 		case A_OPT_ERO:
 			return 0;
@@ -96,6 +99,19 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
 		opt.funBody = newExpr;
 		return true;
+	}
+
+	private static boolean _optLCO(OPT opt) throws RException {
+
+		int update = 0;
+		for (IRParaAttr attr : opt.paraAttrs) {
+			if (attr.getParaType() != T_Expr) {
+				AttrUtil.addAttribute(attr, A_OPT_LCO);
+				update++;
+			}
+		}
+
+		return update > 0;
 	}
 
 	private static boolean _optTCO(OPT opt) throws RException {
@@ -240,9 +256,14 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 					uniqOptAttributeSet.add(A_OPT_CCO);
 					break;
 
+				case A_OPT_LCO:
+					uniqOptAttributeSet.add(A_OPT_LCO);
+					break;
+
 				case A_OPT_FULL:
 					uniqOptAttributeSet.add(A_OPT_ERO);
 					uniqOptAttributeSet.add(A_OPT_CCO);
+					uniqOptAttributeSet.add(A_OPT_LCO);
 					uniqOptAttributeSet.add(A_OPT_TCO);
 					break;
 
@@ -284,6 +305,10 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
 				case A_OPT_CCO:
 					update = _optCC2(opt);
+					break;
+
+				case A_OPT_LCO:
+					update = _optLCO(opt);
 					break;
 
 				default:

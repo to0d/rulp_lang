@@ -2,22 +2,20 @@ package alpha.rulp.ximpl.runtime;
 
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRParaAttr;
+import alpha.rulp.ximpl.lang.XRVar;
 
-public class XRParaAttr implements IRParaAttr {
-
-	private String paraName;
+public class XRParaAttr extends XRVar implements IRParaAttr {
 
 	private IRAtom paraType;
 
 	public XRParaAttr(String paraName, IRAtom paraType) {
-		super();
-		this.paraName = paraName;
+		super(paraName);
 		this.paraType = paraType;
 	}
 
 	@Override
 	public String getParaName() {
-		return paraName;
+		return this.getName();
 	}
 
 	@Override
