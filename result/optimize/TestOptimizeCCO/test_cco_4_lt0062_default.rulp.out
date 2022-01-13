@@ -19,7 +19,7 @@
 (print-impl uniquePaths)
 ;=>nil
 ;out:
-(defun uniquePaths (mn)
+(defun uniquePaths (m n)
     (do
         (if
             (or (= m 0) (= n 0))

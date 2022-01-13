@@ -66,12 +66,12 @@ Object create count:
         atom:         1081            0         1081
       string:           27            0           27
         list:            6            0            6
-        expr:          443            4          439
-         var:           18            3           15
+        expr:          443            5          438
+         var:           18            5           13
         func:           55            0           55
     template:            1            0            1
        macro:            4            0            4
-       frame:            6            4            2
+       frame:            6            8           -2
  interpreter:            1            0
   frameEntry:          221            0
       lambda:            1            0

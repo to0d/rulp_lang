@@ -41,10 +41,13 @@ public class LCOUtil {
 
 	public static boolean rebuild(List<IRParaAttr> paras) throws RException {
 
+		rebuildCount.incrementAndGet();
+
 		int update = 0;
 		for (IRParaAttr attr : paras) {
 			if (attr.getParaType() != T_Expr) {
 				AttrUtil.addAttribute(attr, A_OPT_LCO);
+				argCount.incrementAndGet();
 				update++;
 			}
 		}

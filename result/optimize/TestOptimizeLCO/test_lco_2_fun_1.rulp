@@ -10,6 +10,12 @@
 )
 ;=>
 
+(print-impl fun1)
+;;;
+
+(opt-status)
+;=>
+
 (fun1 0 (fun2))
 ;=>
 

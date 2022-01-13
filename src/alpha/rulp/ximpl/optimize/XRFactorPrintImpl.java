@@ -68,14 +68,18 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 		List<IRParaAttr> paraList = func.getParaAttrs();
 		int index = 0;
 		if (paraList != null && !paraList.isEmpty()) {
-			if (index++ != 0) {
-				sb.append(" ");
-			}
+
 			for (IRParaAttr para : paraList) {
+
+				if (index++ != 0) {
+					sb.append(" ");
+				}
+
 				if (para.getParaType() == O_Nil) {
-					sb.append(para.getParaName());
+					sb.append(para.getParaName() + RulpUtil.formatAttribute(para));
 				} else {
-					sb.append(String.format("(%s %s)", para.getParaName(), "" + para.getParaType()));
+					sb.append(String.format("(%s %s)", para.getParaName() + RulpUtil.formatAttribute(para),
+							"" + para.getParaType()));
 				}
 			}
 		}
