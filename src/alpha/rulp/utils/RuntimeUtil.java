@@ -405,8 +405,8 @@ public final class RuntimeUtil {
 					return obj;
 				}
 
-				IRObject e0 = compute(expr.get(0), interpreter, frame);				
-				return computeExpr(e0,expr,interpreter, frame); 
+				IRObject e0 = compute(expr.get(0), interpreter, frame);
+				return computeExpr(e0, expr, interpreter, frame);
 
 			case LIST:
 
@@ -562,10 +562,11 @@ public final class RuntimeUtil {
 				return computeExpr(o2, expr, interpreter, frame);
 			}
 		case TEMPLATE:
+			exprComputeTemplateCount.getAndIncrement();
 			return RuntimeUtil.computeCallable((IRCallable) e0, expr, interpreter, frame);
-		
+
 		case MEMBER:
-			
+
 			exprComputeMemberCount.getAndIncrement();
 			IRObject e1m = ((IRMember) e0).getValue();
 			if (e1m.getType() != RType.FUNC) {
@@ -573,7 +574,7 @@ public final class RuntimeUtil {
 			}
 
 			return RuntimeUtil.computeFun((IRFunction) e1m, expr, interpreter, frame);
-		
+
 		default:
 
 			throw new RException("factor not found: " + expr);
