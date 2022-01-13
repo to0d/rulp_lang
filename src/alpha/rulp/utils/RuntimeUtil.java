@@ -124,7 +124,7 @@ public final class RuntimeUtil {
 		}
 	}
 
-	public static boolean _findCallee_expr(IRList stmtList, Set<String> calleeNames, IRFrame frame, boolean tailCall)
+	private static boolean _findCallee_expr(IRList stmtList, Set<String> calleeNames, IRFrame frame, boolean tailCall)
 			throws RException {
 
 		int size = stmtList.size();
@@ -141,7 +141,7 @@ public final class RuntimeUtil {
 		return true;
 	}
 
-	public static boolean _findCallee_factor(IRFactor factor, Set<String> calleeNames, IRFrame frame, boolean tailCall)
+	private static boolean _findCallee_factor(IRFactor factor, Set<String> calleeNames, IRFrame frame, boolean tailCall)
 			throws RException {
 
 		switch (factor.getName()) {
@@ -182,7 +182,7 @@ public final class RuntimeUtil {
 		return true;
 	}
 
-	public static boolean _findCallee_list(IRList stmtList, Set<String> calleeNames, IRFrame frame, boolean tailCall)
+	private static boolean _findCallee_list(IRList stmtList, Set<String> calleeNames, IRFrame frame, boolean tailCall)
 			throws RException {
 
 		int size = stmtList.size();
@@ -193,7 +193,7 @@ public final class RuntimeUtil {
 		return true;
 	}
 
-	public static boolean _findCallee_obj(IRObject obj, Set<String> calleeNames, IRFrame frame, boolean isHead,
+	private static boolean _findCallee_obj(IRObject obj, Set<String> calleeNames, IRFrame frame, boolean isHead,
 			boolean tailCall) throws RException {
 
 		if (obj == null) {

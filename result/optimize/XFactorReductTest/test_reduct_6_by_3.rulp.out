@@ -1,0 +1,3 @@
+(reduct (* a (power a 2)))
+;=>(* a (power a 2))
+

@@ -49,21 +49,33 @@ public class EROUtil {
 
 		private static int _rebuildAdd(List<IRObject> list, int fromIndex, int toIndex) throws RException {
 
-			int size = _rebuildAddBy(list, fromIndex, toIndex, RArithmeticOperator.ADD);
+			int update = 0;
+			int endIndex = _expandExpr(list, fromIndex, toIndex, F_O_ADD);
+			if (endIndex != -1) {
+				++update;
+			} else {
+				endIndex = toIndex;
+			}
+
+			int size = _rebuildAddBy(list, fromIndex, endIndex, RArithmeticOperator.ADD);
+			if (size != -1) {
+				update++;
+			}
 
 			int listSize = size;
 			if (listSize == -1) {
-				listSize = toIndex - fromIndex;
+				listSize = endIndex - fromIndex;
 			}
 
 			if (listSize >= 2) {
 				int size2 = _rebuildSameElement(list, fromIndex, fromIndex + listSize, RArithmeticOperator.BY);
 				if (size2 != -1) {
 					size = size2;
+					update++;
 				}
 			}
 
-			return size;
+			return update == 0 ? -1 : size;
 		}
 
 		private static int _rebuildAddBy(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
@@ -153,21 +165,33 @@ public class EROUtil {
 
 		private static int _rebuildBy(List<IRObject> list, int fromIndex, int toIndex) throws RException {
 
-			int size = _rebuildAddBy(list, fromIndex, toIndex, RArithmeticOperator.BY);
+			int update = 0;
+			int endIndex = _expandExpr(list, fromIndex, toIndex, F_O_BY);
+			if (endIndex != -1) {
+				++update;
+			} else {
+				endIndex = toIndex;
+			}
+
+			int size = _rebuildAddBy(list, fromIndex, endIndex, RArithmeticOperator.BY);
+			if (size != -1) {
+				update++;
+			}
 
 			int listSize = size;
 			if (listSize == -1) {
-				listSize = toIndex - fromIndex;
+				listSize = endIndex - fromIndex;
 			}
 
 			if (listSize >= 2) {
 				int size2 = _rebuildSameElement(list, fromIndex, fromIndex + listSize, RArithmeticOperator.POWER);
 				if (size2 != -1) {
 					size = size2;
+					update++;
 				}
 			}
 
-			return size;
+			return update == 0 ? -1 : size;
 		}
 
 		private static int _rebuildDiv(List<IRObject> list, int fromIndex, int toIndex) throws RException {
@@ -803,6 +827,36 @@ public class EROUtil {
 		typePriority[RType.MEMBER.getIndex()] = 22;
 	}
 
+	private static int _expandExpr(List<IRObject> list, int fromIndex, int toIndex, String name) throws RException {
+
+		int endIndex = toIndex;
+		int update = 0;
+
+		// expand: (+ a (+ b c)) ==> (+ a b c)
+		for (int i = fromIndex; i < toIndex; ++i) {
+
+			IRObject obj = list.get(i);
+			if (obj.getType() != RType.EXPR) {
+				continue;
+			}
+
+			IRExpr expr = (IRExpr) obj;
+			if (expr.size() <= 1 || !OptUtil.isFactor(expr.get(0), name)) {
+				continue;
+			}
+
+			_set(list, i, expr.get(1));
+
+			for (int j = 2; j < expr.size(); ++j) {
+				_set(list, endIndex++, expr.get(j));
+			}
+
+			++update;
+		}
+
+		return update == 0 ? -1 : endIndex;
+	}
+
 	private static int _getExprLevel(IRObject obj) throws RException {
 
 		switch (obj.getType()) {
@@ -1301,6 +1355,17 @@ public class EROUtil {
 		}
 
 		return pos;
+	}
+
+	static <T> void _set(List<T> list, int index, T obj) {
+
+		if (index >= list.size()) {
+			for (int i = list.size(); i <= index; ++i) {
+				list.add(null);
+			}
+		}
+
+		list.set(index, obj);
 	}
 
 	private static String _toUniqString(IRObject obj) throws RException {
