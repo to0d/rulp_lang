@@ -25,7 +25,7 @@ import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.runtime.IRThreadContext;
-import alpha.rulp.ximpl.optimize.CCOUtil;
+import alpha.rulp.ximpl.optimize.*;
 import alpha.rulp.ximpl.optimize.EROUtil;
 import alpha.rulp.ximpl.optimize.TCOUtil;
 
@@ -660,6 +660,8 @@ public class TraceUtil {
 		sb.append(String.format("%10s: rebuild=%d, expr=%d, call=%d, compute=%d, max-level=%d, node=%d\n", "TCO",
 				TCOUtil.getRebuildCount(), TCOUtil.getExprCount(), TCOUtil.getCallCount(), TCOUtil.getComputeCount(),
 				TCOUtil.getMaxLevelCount(), TCOUtil.getNodeCount()));
+		sb.append(String.format("%10s: rebuild=%d, arg=%d, pass=%d, hit=%d\n", "LCO", LCOUtil.getRebuildCount(),
+				LCOUtil.getArgCount(), LCOUtil.getPassCount(), LCOUtil.getHitCount()));
 		sb.append(SEP_LINE1);
 
 	}

@@ -54,6 +54,7 @@ rebuild: id=0, name=cc2, call=6, hit=5, func=fun1, cache=1, data:[$$i_1/2/D/5]
        ERO: rebuild=0, compute=0
        CCO: rebuild=1, expr=1, call=6, cache=5, reuse=1
        TCO: rebuild=0, expr=0, call=0, compute=0, max-level=0, node=0
+       LCO: rebuild=0, arg=0, pass=0, hit=0
 ==========================================================================================================================
 
 ;eof

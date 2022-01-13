@@ -48,6 +48,7 @@ import alpha.rulp.utils.SubjectUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.optimize.CCOUtil;
 import alpha.rulp.ximpl.optimize.EROUtil;
+import alpha.rulp.ximpl.optimize.LCOUtil;
 import alpha.rulp.ximpl.optimize.OptUtil;
 import alpha.rulp.ximpl.optimize.TCOUtil;
 
@@ -102,16 +103,7 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 	}
 
 	private static boolean _optLCO(OPT opt) throws RException {
-
-		int update = 0;
-		for (IRParaAttr attr : opt.paraAttrs) {
-			if (attr.getParaType() != T_Expr) {
-				AttrUtil.addAttribute(attr, A_OPT_LCO);
-				update++;
-			}
-		}
-
-		return update > 0;
+		return LCOUtil.rebuild(opt.paraAttrs);
 	}
 
 	private static boolean _optTCO(OPT opt) throws RException {

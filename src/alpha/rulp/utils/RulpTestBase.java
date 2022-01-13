@@ -25,6 +25,7 @@ import alpha.rulp.runtime.IRParser;
 import alpha.rulp.utils.RulpUtil.RResultList;
 import alpha.rulp.ximpl.optimize.CCOUtil;
 import alpha.rulp.ximpl.optimize.EROUtil;
+import alpha.rulp.ximpl.optimize.LCOUtil;
 import alpha.rulp.ximpl.optimize.OptUtil;
 import alpha.rulp.ximpl.optimize.TCOUtil;
 
@@ -356,6 +357,7 @@ public class RulpTestBase {
 		CCOUtil.reset();
 		EROUtil.reset();
 		OptUtil.reset();
+		LCOUtil.reset();
 
 		RulpFactory.reset();
 		RuntimeUtil.reset();

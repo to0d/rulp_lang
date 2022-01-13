@@ -69,6 +69,7 @@ rebuild: id=0, name=cc2, call=10, hit=0, func=isHappy, cache=9, data:[$$i_145/fa
        ERO: rebuild=0, compute=0
        CCO: rebuild=1, expr=1, call=10, cache=0, reuse=0
        TCO: rebuild=0, expr=0, call=0, compute=0, max-level=0, node=0
+       LCO: rebuild=0, arg=0, pass=0, hit=0
 ==========================================================================================================================
 
 ;eof
