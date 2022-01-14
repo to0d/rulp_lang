@@ -31,6 +31,7 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.attribute.ReturnTypeUtil;
 import alpha.rulp.ximpl.error.RReturn;
 import alpha.rulp.ximpl.error.RUnmatchParaException;
 import alpha.rulp.ximpl.optimize.LCOUtil;
@@ -75,16 +76,25 @@ public class XRFunction extends AbsFunctionAdapter implements IRFunction {
 			IRParaAttr attr = attrIter.next();
 
 			IRAtom typeAtom = attr.getParaType();
-			IRObject valObj = valIter.next();
+			IRObject value = valIter.next();
 
 			// Match any type
-			if (typeAtom == O_Nil || valObj == null) {
+			if (typeAtom == O_Nil || value == null) {
 				continue;
 			}
 
-			if (!RulpUtil.matchParaType(valObj, typeAtom)) {
+			if (!RulpUtil.matchParaType(value, typeAtom)) {
+
+				if (value.getType() == RType.EXPR && AttrUtil.containAttribute(attr, A_OPT_LCO)) {
+
+					IRAtom exprTypeAtom = ReturnTypeUtil.returnTypeOf(value, frame);
+					if (exprTypeAtom != O_Nil && RulpUtil.equal(exprTypeAtom, typeAtom)) {
+						continue;
+					}
+				}
+
 				throw new RUnmatchParaException(this, frame,
-						String.format("the %d argument<%s> not match type <%s>", argIndex, valObj, typeAtom));
+						String.format("the %d argument<%s> not match type <%s>", argIndex, value, typeAtom));
 			}
 
 			++argIndex;

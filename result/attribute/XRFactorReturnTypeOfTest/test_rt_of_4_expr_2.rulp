@@ -1,0 +1,15 @@
+(defun fun1 (?x ?y)
+    (if (<= ?x 0)
+        (return 0))
+    (return ?y)
+)
+
+;=>
+
+
+(return-type-of fun1)
+;=>nil
+
+(return-type-of (fun1 1 1))
+;=>int
+

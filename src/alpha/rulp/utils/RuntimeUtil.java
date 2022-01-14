@@ -33,6 +33,7 @@ import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRThreadContext;
+import alpha.rulp.ximpl.attribute.ReturnTypeUtil;
 import alpha.rulp.ximpl.error.RUnmatchParaException;
 import alpha.rulp.ximpl.optimize.LCOUtil;
 import alpha.rulp.ximpl.optimize.TCOUtil;
@@ -252,6 +253,44 @@ public final class RuntimeUtil {
 		}
 
 		return obj;
+	}
+
+	private static boolean _needRebuildPara(IRFunction fun, int index, IRParaAttr attr, IRObject value, IRFrame frame)
+			throws RException {
+
+		// pass by default
+		if (attr == null) {
+			return true;
+		}
+
+		// pass by expression
+		if (attr.getParaType() == T_Expr) {
+			return false;
+		}
+
+		// Lazy compute
+		if (value.getType() == RType.EXPR && AttrUtil.containAttribute(attr, A_OPT_LCO)) {
+
+			IRAtom typeAtom = attr.getParaType();
+
+			// Match any type
+			if (typeAtom == O_Nil) {
+				return false;
+			}
+
+			IRAtom exprTypeAtom = ReturnTypeUtil.returnTypeOf(value, frame);
+			if (exprTypeAtom != O_Nil) {
+				if (RulpUtil.equal(exprTypeAtom, typeAtom)) {
+					return false;
+				} else {
+					throw new RUnmatchParaException(fun, frame,
+							String.format("the %d argument<%s> not match type <%s>", index, value, typeAtom));
+				}
+			}
+		}
+
+		// other, pass by value
+		return true;
 	}
 
 	public static boolean canAccess(IRObject obj, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -1021,27 +1060,6 @@ public final class RuntimeUtil {
 		}
 	}
 
-	private static boolean _needRebuildPara(IRParaAttr attr) {
-
-		// pass by default
-		if (attr == null) {
-			return true;
-		}
-
-		// pass by expression
-		if (attr.getParaType() == T_Expr) {
-			return false;
-		}
-
-		// Lazy compute
-		if (AttrUtil.containAttribute(attr, A_OPT_LCO)) {
-			return false;
-		}
-
-		// other, pass by value
-		return true;
-	}
-
 	public static IRList rebuildFuncExpr(IRFunction fun, IRList expr, IRInterpreter interpreter, IRFrame frame)
 			throws RException {
 
@@ -1056,7 +1074,7 @@ public final class RuntimeUtil {
 			boolean rebuild = false;
 
 			// Check parameter attribute whether there is any pass-value parameter
-			if (_needRebuildPara(para)) {
+			if (_needRebuildPara(fun, i - 1, para, value, frame)) {
 				value = compute(value, interpreter, frame);
 				rebuild = true;
 			}

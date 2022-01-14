@@ -34,7 +34,14 @@ class XRFactorReturnTypeOfTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_rt_of_4_expr() {
+	void test_rt_of_4_expr_1() {
+
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_rt_of_4_expr_2() {
 
 		_setup();
 		_run_script();

@@ -16,8 +16,61 @@
 ;=>fun3
 
 (fun1 (* 0 1) (fun2))
+;=>0
+
+(runtime-call-count fun2) ; The fun2 should not be called at all
+;=>0
+
+(fun1 (fun2) (fun3))      ; the return type of fun3 does not match int
 ;err:
-the 0 argument<(* 0 1)> not match type <int>
-at (fun1 (* 0 1) (fun2)) ; main-2
+the 1 argument<(fun3)> not match type <int>
+at (fun1 (fun2) (fun3)) ; main-2
 ;eof
+
+(runtime-call-count fun2) ; the fun2 should not be called either
+;=>0
+
+(attribute-of fun1)
+;=>'(opt-lco)
+
+(return-type-of fun1)
+;=>int
+
+(return-type-of fun2)
+;=>int
+
+(return-type-of fun3)
+;=>string
+
+(print-impl fun1)
+;=>nil
+;out:
+(defun fun1 ((?x[opt-lco] int) (?y[opt-lco] int))
+    (do
+        (if
+            (<= ?x 0)
+            (return 0)
+        )
+        (return ?y)
+    )
+)[opt-lco return-type=int]
+
+;eof
+
+(opt-status)
+;=>nil
+;out:
+==========================================================================================================================
+      Name: Status
+--------------------------------------------------------------------------------------------------------------------------
+       ERO: rebuild=0, compute=0
+       CCO: rebuild=0, expr=0, call=0, cache=0, reuse=0
+       TCO: rebuild=0, expr=0, call=0, compute=0, max-level=0, node=0
+       LCO: rebuild=1, arg=2, pass=2, hit=1
+==========================================================================================================================
+
+;eof
+
+(_ginfo)
+;=>nil
 

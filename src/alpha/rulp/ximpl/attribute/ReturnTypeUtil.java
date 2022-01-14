@@ -130,10 +130,24 @@ public class ReturnTypeUtil {
 			}
 		}
 
+		if (e0.getType() == RType.FUNC) {
+
+			IRAtom attrValue = _returnTypeOf(e0, typeMap, frame);
+			if (attrValue != O_Nil) {
+				return attrValue;
+			}
+
+			if (!((IRFunction) e0).isList() && expr.size() > 1) {
+				return _funcRuntimeReturnTypeOf((IRFunction) e0, expr, typeMap, frame);
+			}
+
+//			return _funReturnTypeOf(e0, TypeMap, frame);
+		}
+
 		return O_Nil;
 	}
 
-	private static IRAtom _funReturnTypeOf(IRFunction func, TypeMap typeMap, IRFrame frame) throws RException {
+	private static IRAtom _funcDefinedReturnTypeOf(IRFunction func, TypeMap typeMap, IRFrame frame) throws RException {
 
 		if (func.isList()) {
 
@@ -142,7 +156,7 @@ public class ReturnTypeUtil {
 
 			for (IRFunction childFunc : listFunc.getAllFuncList()) {
 
-				IRAtom childType = _funReturnTypeOf(childFunc, typeMap, frame);
+				IRAtom childType = _funcDefinedReturnTypeOf(childFunc, typeMap, frame);
 				if (listRT == null) {
 					listRT = childType;
 				} else {
@@ -164,7 +178,7 @@ public class ReturnTypeUtil {
 		if (func.getParaAttrs() != null) {
 			for (IRParaAttr para : func.getParaAttrs()) {
 				IRAtom paraType = para.getParaType();
-				if (paraType != T_Atom) {
+				if (paraType != O_Nil) {
 					typeMap.addType(para.getParaName(), paraType);
 				}
 			}
@@ -190,12 +204,52 @@ public class ReturnTypeUtil {
 			}
 		}
 
-		if (funcRT == null) {
+		return funcRT == null ? O_Nil : funcRT;
+	}
+
+	private static IRAtom _funcRuntimeReturnTypeOf(IRFunction func, IRExpr expr, TypeMap typeMap, IRFrame frame)
+			throws RException {
+
+		typeMap = typeMap.newBranch();
+		typeMap.addType(func.getName(), T_Func);
+		if (func.getParaAttrs() != null) {
+
+			int index = 1;
+			for (IRParaAttr para : func.getParaAttrs()) {
+				IRAtom paraType = para.getParaType();
+				if (paraType != O_Nil) {
+					typeMap.addType(para.getParaName(), paraType);
+				} else {
+					IRObject value = expr.get(index);
+					IRAtom valueType = _returnTypeOf(value, typeMap, frame);
+					typeMap.addType(para.getParaName(), valueType);
+				}
+
+				++index;
+			}
+		}
+
+		ArrayList<IRObject> returnList = new ArrayList<>();
+		OptUtil.listReturnObject(func.getFunBody(), returnList);
+		if (returnList.isEmpty()) {
 			return O_Nil;
 		}
 
-		return funcRT;
+		IRAtom funcRT = null;
 
+		for (IRObject rtObj : returnList) {
+
+			IRAtom type = _returnTypeOf(rtObj, typeMap, frame);
+			if (funcRT == null) {
+				funcRT = type;
+			} else {
+				if (!RulpUtil.equal(funcRT, type)) {
+					return O_Nil;
+				}
+			}
+		}
+
+		return funcRT == null ? O_Nil : funcRT;
 	}
 
 	private static IRAtom _returnTypeOf(IRObject obj, TypeMap typeMap, IRFrame frame) throws RException {
@@ -266,7 +320,7 @@ public class ReturnTypeUtil {
 		case FUNC: {
 			IRObject attrValue = AttrUtil.getAttributeValue(obj, A_RETURN_TYPE);
 			if (attrValue == null) {
-				attrValue = _funReturnTypeOf((IRFunction) obj, typeMap, frame);
+				attrValue = _funcDefinedReturnTypeOf((IRFunction) obj, typeMap, frame);
 				AttrUtil.setAttribute(obj, A_RETURN_TYPE, attrValue);
 			}
 
