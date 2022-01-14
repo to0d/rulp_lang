@@ -56,7 +56,7 @@ Callable stats info: callId=238, row=25, column=60(4), value-max=5, value-unit=2
     main     func      1    1 (file-prename string)                                                                     1
     root   factor      1    0 do                                                                                        1
     root   factor      1    0 attribute-of                                                                             1 
-    main funcList      1    3 _ginfo                                                                                    1
+    main funcList      1    2 _ginfo                                                                                    1
     root   factor      1    0 +                                                                                         1
     root   factor      1    0 !=                                                                                        1
 ==========================================================================================================================
@@ -68,7 +68,7 @@ Object create count:
         atom:         1080            0         1080
       string:           29            0           29
         list:            7            1            6
-        expr:          442            3          439
+        expr:          441            3          438
          var:           15            3           12
         func:           53            0           53
     template:            1            0            1
@@ -97,7 +97,7 @@ file-prename         : 6        2        1    func       (file-prename string) :
 file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
 ?script-path         : 8        2        1    var        result\optimize\TestOptimizeERO\test_ero_2_str_expr_1.rulp : type=string
 script_out           : 9        2        1    macro      script_out          
-_ginfo               : 10       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+_ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          1    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
 fun                  : 11       2        1    func       (fun) : frame=frame@main

@@ -58,7 +58,7 @@ Callable stats info: callId=236, row=26, column=60(4), value-max=1000, value-uni
     root   factor      1    0 list-function-in-return                                                                  1 
     main     func      1    1 (file-prename string)                                                                     1
     root   factor      1    0 attribute-of                                                                             1 
-    main funcList      1    3 _ginfo                                                                                    1
+    main funcList      1    2 _ginfo                                                                                    1
     root   factor      1    0 !=                                                                                        1
 ==========================================================================================================================
 
@@ -70,7 +70,7 @@ Object create count:
          int:          375            0          375
       string:           28            0           28
         list:            8            2            6
-        expr:         2449         1499          950
+        expr:         2448         1499          949
          var:          515          503           12
         func:           53            0           53
     template:            1            0            1
@@ -99,7 +99,7 @@ file-prename         : 6        2        1    func       (file-prename string) :
 file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
 ?script-path         : 8        2        1    var        result\optimize\TestOptimizeTCO\test_tco_2_overflow_a.rulp : type=string
 script_out           : 9        2        1    macro      script_out          
-_ginfo               : 10       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+_ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          1    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
 fact1                : 11       2        500  func       (fact1 nil) : frame=frame@main

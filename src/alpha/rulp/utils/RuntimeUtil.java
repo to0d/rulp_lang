@@ -1031,66 +1031,56 @@ public final class RuntimeUtil {
 		}
 	}
 
+	public static boolean needRebuildPara(IRParaAttr attr) {
+
+		// pass by default
+		if (attr == null) {
+			return true;
+		}
+
+		// pass by expression
+		if (attr.getParaType() == T_Expr) {
+			return false;
+		}
+
+		// other, pass by value
+		return true;
+	}
+
 	public static IRList rebuildFuncExpr(IRFunction fun, IRList expr, IRInterpreter interpreter, IRFrame frame)
 			throws RException {
 
-		List<IRParaAttr> paraAttrs = fun.getParaAttrs();
+		ArrayList<IRObject> argList = null;
+		int size = expr.size();
+		Iterator<IRParaAttr> attrIt = fun.getParaAttrs() != null ? fun.getParaAttrs().iterator() : null;
 
-		/*********************************************/
-		// Check parameter attribute whether there is any pass-value parameter
-		/*********************************************/
-		boolean rebuildArgValues = false;
-		if (paraAttrs == null) {
-			rebuildArgValues = true;
-		} else {
-			for (IRParaAttr attr : fun.getParaAttrs()) {
-				if (attr.getParaType() != T_Expr) {
-					rebuildArgValues = true;
-					break;
+		for (int i = 1; i < size; ++i) {// Skip factor head element
+
+			IRObject value = expr.get(i);
+			IRParaAttr para = attrIt != null ? attrIt.next() : null;
+			boolean rebuild = false;
+
+			// Check parameter attribute whether there is any pass-value parameter
+			if (needRebuildPara(para)) {
+				value = compute(value, interpreter, frame);
+				rebuild = true;
+			}
+
+			// rebuild argument value list
+			if (rebuild && argList == null) {
+				argList = new ArrayList<>();
+				for (int j = 0; j < i; ++j) {
+					argList.add(expr.get(j));
 				}
 			}
+
+			if (argList != null) {
+				argList.add(value);
+			}
 		}
 
-		if (!rebuildArgValues) {
+		if (argList == null) {
 			return expr;
-		}
-
-		/*********************************************/
-		// rebuild argument value list
-		/*********************************************/
-		ArrayList<IRObject> argList = new ArrayList<>();
-		argList.add(fun);
-
-		IRIterator<? extends IRObject> argIter = expr.listIterator(1); // Skip factor head element
-
-		Iterator<IRParaAttr> attrIt = null;
-		if (paraAttrs != null) {
-			attrIt = paraAttrs.iterator();
-		}
-
-		while (argIter.hasNext()) {
-
-			IRAtom paraType = null;
-			if (attrIt != null) {
-				paraType = attrIt.next().getParaType();
-			}
-
-			IRObject argValue = argIter.next();
-
-			// pass by default
-			if (paraType == null) {
-				argValue = compute(argValue, interpreter, frame);
-			}
-			// pass by expression
-			else if (paraType == T_Expr) {
-				rebuildArgValues = true;
-			}
-			// other, pass by value
-			else {
-				argValue = compute(argValue, interpreter, frame);
-			}
-
-			argList.add(argValue);
 		}
 
 		return RulpFactory.createExpression(argList);

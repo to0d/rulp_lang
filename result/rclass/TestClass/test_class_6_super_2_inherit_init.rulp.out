@@ -13,7 +13,7 @@
 (new class1 o1)
 ;err:
 Unexpect argument number in fun<init>: expect=1, actual=0
-at (init) ; SF-o1-1-4
+at (o1::init) ; SF-o1-1-4
 at (new class1 o1) ; main-2
 ;eof
 
@@ -23,14 +23,14 @@ at (new class1 o1) ; main-2
 (new class2 o3)
 ;err:
 Unexpect argument number in fun<init>: expect=1, actual=0
-at (init) ; SF-o3-4-7
+at (o3::init) ; SF-o3-4-7
 at (new class2 o3) ; main-2
 ;eof
 
 (defvar o4 (new class2))
 ;err:
 Unexpect argument number in fun<init>: expect=1, actual=0
-at (init) ; SF-un-0-5-8
+at (un-0::init) ; SF-un-0-5-8
 at (new class2) ; main-2
 at (defvar o4 (new class2)) ; main-2
 ;eof
@@ -49,7 +49,7 @@ at (defvar o4 (new class2)) ; main-2
 (defvar o6 (new class3))
 ;err:
 Unexpect argument number in fun<init>: expect=1, actual=0
-at (init) ; SF-un-2-8-11
+at (un-2::init) ; SF-un-2-8-11
 at (new class3) ; main-2
 at (defvar o6 (new class3)) ; main-2
 ;eof

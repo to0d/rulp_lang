@@ -58,7 +58,7 @@ Callable stats info: callId=238, row=25, column=60(4), value-max=5, value-unit=2
     root   factor      1    0 do                                                                                        1
     root   factor      1    0 defclass                                                                                1  
     main   member      1    1 class1@?o1::inc                                                                           1
-    main funcList      1    3 _ginfo                                                                                    1
+    main funcList      1    2 _ginfo                                                                                    1
     root   factor      1    0 !=                                                                                        1
 ==========================================================================================================================
 
@@ -69,7 +69,7 @@ Object create count:
         atom:         1102            0         1102
       string:           27            0           27
         list:            6            0            6
-        expr:          451            5          446
+        expr:          450            5          445
          var:           20            6           14
         func:           57            0           57
     template:            2            0            2
@@ -101,7 +101,7 @@ file-prename         : 6        2        1    func       (file-prename string) :
 file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
 ?script-path         : 8        2        1    var        result\template\XRFactorDefTemplateTest\test_deftemplate_5_overwrite_1.rulp : type=string
 script_out           : 9        2        1    macro      script_out          
-_ginfo               : 10       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+_ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          1    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
 class1               : 11       2        1    class      class1              

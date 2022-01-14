@@ -41,7 +41,7 @@ Callable stats info: callId=236, row=28, column=60(4), value-max=57, value-unit=
     root   factor     22    0 -                                                                                        6 
     root   factor     21    0 return                                                                                   61
     root   factor     21    0 do                                                                                       61
-    main     func     20   26 (uniquePaths nil nil)                                                                    6 
+    main     func     20    1 (uniquePaths nil nil)                                                                    6 
     root   factor     20    0 or                                                                                       6 
     root   factor     20    0 <                                                                                        6 
     root   factor     12    0 +                                                                                        51
@@ -60,7 +60,7 @@ Callable stats info: callId=236, row=28, column=60(4), value-max=57, value-unit=
     root   factor      1    0 load                                                                                   1   
     main     func      1    1 (file-prename string)                                                                     1
     root   factor      1    0 attribute-of                                                                             1 
-    main funcList      1    3 _ginfo                                                                                    1
+    main funcList      1    2 _ginfo                                                                                    1
     root   factor      1    0 !=                                                                                        1
 ==========================================================================================================================
 
@@ -71,7 +71,7 @@ Object create count:
         atom:         1108            0         1108
       string:           27            0           27
         list:            7            1            6
-        expr:          510           21          489
+        expr:          509           21          488
          var:           69           57           12
         func:           53            0           53
     template:            1            0            1
@@ -100,10 +100,10 @@ file-prename         : 6        2        1    func       (file-prename string) :
 file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
 ?script-path         : 8        2        1    var        result\optimize\TestOptimizeCCO\test_cco_4_lt0062_opt.rulp : type=string
 script_out           : 9        2        1    macro      script_out          
-_ginfo               : 10       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+_ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          1    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
-uniquePaths          : 11       2        26   func       (uniquePaths nil nil) : frame=frame@main
+uniquePaths          : 11       2        1    func       (uniquePaths nil nil) : frame=frame@main
 ?rv                  : 66       2        1    var        28 : type=int       
 ==========================================================================================================================
 

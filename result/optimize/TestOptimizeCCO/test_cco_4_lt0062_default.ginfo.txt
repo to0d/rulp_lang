@@ -60,7 +60,7 @@ Callable stats info: callId=236, row=28, column=60(4), value-max=181, value-unit
     root   factor      1    0 load                                                                                   1   
     main     func      1    1 (file-prename string)                                                                     1
     root   factor      1    0 attribute-of                                                                             1 
-    main funcList      1    3 _ginfo                                                                                    1
+    main funcList      1    2 _ginfo                                                                                    1
     root   factor      1    0 !=                                                                                        1
 ==========================================================================================================================
 
@@ -71,7 +71,7 @@ Object create count:
         atom:         1107            0         1107
       string:           27            0           27
         list:            6            0            6
-        expr:          520           64          456
+        expr:          519           64          455
          var:          176          164           12
         func:           53            0           53
     template:            1            0            1
@@ -100,7 +100,7 @@ file-prename         : 6        2        1    func       (file-prename string) :
 file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
 ?script-path         : 8        2        1    var        result\optimize\TestOptimizeCCO\test_cco_4_lt0062_default.rulp : type=string
 script_out           : 9        2        1    macro      script_out          
-_ginfo               : 10       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+_ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          1    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
 uniquePaths          : 11       2        1    func       (uniquePaths nil nil) : frame=frame@main

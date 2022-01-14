@@ -53,7 +53,7 @@ Callable stats info: callId=237, row=26, column=60(4), value-max=6, value-unit=2
     root   factor      2    0 out-to-file                                                                              11
   system funcList      2    1 length-of                                                                                11
     main     func      2    1 (file-prename string)                                                                    11
-    main funcList      2    3 _ginfo                                                                                   11
+    main funcList      2    2 _ginfo                                                                                   11
     root   factor      2    0 >                                                                                        11
     root   factor      2    0 *                                                                                        2 
     root   factor      2    0 !=                                                                                       11
@@ -98,7 +98,7 @@ file-prename         : 6        2        1    func       (file-prename string) :
 file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
 ?script-path         : 8        2        1    var        result\function\XRFactorLambdaTest\test_lambda_5.rulp : type=string
 script_out           : 9        2        1    macro      script_out          
-_ginfo               : 10       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+_ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          1    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
 fun1                 : 11       2        1    func       (fun1 nil) : frame=frame@main

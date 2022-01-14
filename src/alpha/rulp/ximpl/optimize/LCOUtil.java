@@ -39,6 +39,14 @@ public class LCOUtil {
 		return rebuildCount.get();
 	}
 
+	public static void incHitCount() {
+		hitCount.incrementAndGet();
+	}
+
+	public static void incPassCount() {
+		passCount.incrementAndGet();
+	}
+
 	public static boolean rebuild(List<IRParaAttr> paras) throws RException {
 
 		rebuildCount.incrementAndGet();

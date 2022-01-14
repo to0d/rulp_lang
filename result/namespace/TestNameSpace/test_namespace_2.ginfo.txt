@@ -59,7 +59,7 @@ Callable stats info: callId=246, row=27, column=62(4), value-max=5, value-unit=2
     root   factor      1    0 if                                                                                          1
     main     func      1    1 (file-prename string)                                                                       1
     root   factor      1    0 do                                                                                          1
-    main funcList      1    3 _ginfo                                                                                      1
+    main funcList      1    2 _ginfo                                                                                      1
     root   factor      1    0 +                                                                                           1
     root   factor      1    0 !=                                                                                          1
 ==========================================================================================================================
@@ -71,7 +71,7 @@ Object create count:
         atom:         1101            0         1101
       string:           27            0           27
         list:            6            0            6
-        expr:          455            7          448
+        expr:          454            7          447
          var:           23            9           14
         func:           54            0           54
     template:            1            0            1
@@ -102,7 +102,7 @@ file-prename         : 6        2        1    func       (file-prename string) :
 file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
 ?script-path         : 8        2        1    var        result\namespace\TestNameSpace\test_namespace_2.rulp : type=string
 script_out           : 9        2        1    macro      script_out          
-_ginfo               : 10       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+_ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          1    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
 ns1                  : 11       2        3    instance   namespace@ns1       

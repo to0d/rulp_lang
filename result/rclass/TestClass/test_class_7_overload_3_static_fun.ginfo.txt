@@ -58,7 +58,7 @@ Callable stats info: callId=240, row=25, column=61(4), value-max=5, value-unit=2
     root   factor      1    0 load                                                                                   1    
     main   member      1    1 class2@o2::fun1                                                                           1 
     main   member      1    1 class1@o1::fun1                                                                          1  
-    main funcList      1    3 _ginfo                                                                                     1
+    main funcList      1    2 _ginfo                                                                                     1
 ==========================================================================================================================
 
 Object create count:
@@ -68,7 +68,7 @@ Object create count:
         atom:         1106            0         1106
       string:           36            0           36
         list:            6            0            6
-        expr:          467            6          461
+        expr:          466            6          460
          var:           28           14           14
         func:           58            0           58
     template:            1            0            1
@@ -100,7 +100,7 @@ file-prename         : 6        2        1    func       (file-prename string) :
 file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
 ?script-path         : 8        2        1    var        result\rclass\TestClass\test_class_7_overload_3_static_fun.rulp : type=string
 script_out           : 9        2        1    macro      script_out          
-_ginfo               : 10       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+_ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          1    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
 class1               : 11       2        2    class      class1              
