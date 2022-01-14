@@ -1,7 +1,9 @@
 (defun fun1 (?x ?y)
     (if (<= ?x 0)
         (return 0))
-    (return ?y)
+    (if (<= ?x 10)
+        (return ?y))
+    (return (* ?y ?y))
 )[opt-lco]
 ;=>fun1
 
@@ -9,6 +11,27 @@
     (return (+ 1 2))
 )
 ;=>fun2
+
+(fun1 0 (fun2))
+;=>0
+
+(runtime-call-count fun2) ; The fun2 should not be called at all
+;=>0
+
+(fun1 1 (fun2))
+;=>3
+
+(runtime-call-count fun2) ; The fun2 will called only once
+;=>1
+
+(fun1 11 (fun2))
+;=>9
+
+(runtime-call-count fun2) ; The fun2 will called only once
+;=>2
+
+(attribute-of fun1)
+;=>'(opt-lco)
 
 (print-impl fun1)
 ;=>nil
@@ -19,7 +42,11 @@
             (<= ?x 0)
             (return 0)
         )
-        (return ?y)
+        (if
+            (<= ?x 10)
+            (return ?y)
+        )
+        (return (* ?y ?y))
     )
 )[opt-lco]
 
@@ -34,14 +61,11 @@
        ERO: rebuild=0, compute=0
        CCO: rebuild=0, expr=0, call=0, cache=0, reuse=0
        TCO: rebuild=0, expr=0, call=0, compute=0, max-level=0, node=0
-       LCO: rebuild=1, arg=2, pass=0, hit=0
+       LCO: rebuild=1, arg=2, pass=3, hit=2
 ==========================================================================================================================
 
 ;eof
 
-(fun1 0 (fun2))
-;=>0
-
-(runtime-call-count fun2) ; The fun2 should not be called at all
-;=>1
+(_ginfo)
+;=>nil
 

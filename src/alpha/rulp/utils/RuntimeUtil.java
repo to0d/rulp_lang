@@ -1,34 +1,6 @@
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.A_LOCAL;
-import static alpha.rulp.lang.Constant.A_NOCLASS;
-import static alpha.rulp.lang.Constant.A_OPT_TCO;
-import static alpha.rulp.lang.Constant.A_PARENT;
-import static alpha.rulp.lang.Constant.A_TRACE;
-import static alpha.rulp.lang.Constant.F_IF;
-import static alpha.rulp.lang.Constant.F_MBR_THIS;
-import static alpha.rulp.lang.Constant.F_O_ADD;
-import static alpha.rulp.lang.Constant.F_O_AND;
-import static alpha.rulp.lang.Constant.F_O_BY;
-import static alpha.rulp.lang.Constant.F_O_DIV;
-import static alpha.rulp.lang.Constant.F_O_EQ;
-import static alpha.rulp.lang.Constant.F_O_GE;
-import static alpha.rulp.lang.Constant.F_O_GT;
-import static alpha.rulp.lang.Constant.F_O_LE;
-import static alpha.rulp.lang.Constant.F_O_LT;
-import static alpha.rulp.lang.Constant.F_O_MBR;
-import static alpha.rulp.lang.Constant.F_O_MOD;
-import static alpha.rulp.lang.Constant.F_O_NE;
-import static alpha.rulp.lang.Constant.F_O_NOT;
-import static alpha.rulp.lang.Constant.F_O_OR;
-import static alpha.rulp.lang.Constant.F_O_POWER;
-import static alpha.rulp.lang.Constant.F_O_SUB;
-import static alpha.rulp.lang.Constant.F_O_XOR;
-import static alpha.rulp.lang.Constant.F_RETURN;
-import static alpha.rulp.lang.Constant.O_False;
-import static alpha.rulp.lang.Constant.O_Nil;
-import static alpha.rulp.lang.Constant.O_True;
-import static alpha.rulp.lang.Constant.T_Expr;
+import static alpha.rulp.lang.Constant.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -62,6 +34,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRThreadContext;
 import alpha.rulp.ximpl.error.RUnmatchParaException;
+import alpha.rulp.ximpl.optimize.LCOUtil;
 import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public final class RuntimeUtil {
@@ -382,7 +355,24 @@ public final class RuntimeUtil {
 
 				switch (rst.getType()) {
 				case VAR:
-					rst = ((IRVar) rst).getValue();
+
+					IRObject value = ((IRVar) rst).getValue();
+
+					if (value.getType() == RType.EXPR && AttrUtil.containAttribute(rst, A_OPT_LCO)) {
+
+						LCOUtil.incHitCount();
+						IRFrame lcoFrame = RulpFactory.createFrame(frame, A_OPT_LCO);
+						try {
+							RulpUtil.incRef(lcoFrame);
+							value = interpreter.compute(lcoFrame, value);
+							((IRVar) rst).setValue(value);
+						} finally {
+							lcoFrame.release();
+							RulpUtil.decRef(lcoFrame);
+						}
+					}
+
+					rst = value;
 					break;
 
 				case CONSTANT:
@@ -1031,7 +1021,7 @@ public final class RuntimeUtil {
 		}
 	}
 
-	public static boolean needRebuildPara(IRParaAttr attr) {
+	private static boolean _needRebuildPara(IRParaAttr attr) {
 
 		// pass by default
 		if (attr == null) {
@@ -1040,6 +1030,11 @@ public final class RuntimeUtil {
 
 		// pass by expression
 		if (attr.getParaType() == T_Expr) {
+			return false;
+		}
+
+		// Lazy compute
+		if (AttrUtil.containAttribute(attr, A_OPT_LCO)) {
 			return false;
 		}
 
@@ -1061,7 +1056,7 @@ public final class RuntimeUtil {
 			boolean rebuild = false;
 
 			// Check parameter attribute whether there is any pass-value parameter
-			if (needRebuildPara(para)) {
+			if (_needRebuildPara(para)) {
 				value = compute(value, interpreter, frame);
 				rebuild = true;
 			}

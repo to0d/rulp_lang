@@ -10,6 +10,7 @@
 package alpha.rulp.ximpl.function;
 
 import static alpha.rulp.lang.Constant.A_FUN_PRE;
+import static alpha.rulp.lang.Constant.A_OPT_LCO;
 import static alpha.rulp.lang.Constant.O_Nil;
 
 import java.util.ArrayList;
@@ -27,10 +28,12 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.error.RReturn;
 import alpha.rulp.ximpl.error.RUnmatchParaException;
+import alpha.rulp.ximpl.optimize.LCOUtil;
 import alpha.rulp.ximpl.runtime.AbsFunctionAdapter;
 
 public class XRFunction extends AbsFunctionAdapter implements IRFunction {
@@ -114,8 +117,21 @@ public class XRFunction extends AbsFunctionAdapter implements IRFunction {
 				IRObject arg = argIter.next();
 				if (arg == null) {
 					arg = O_Nil;
+
 				} else if (arg.getType() != RType.VAR) {
+
+					boolean lazyLoad = false;
+
+					// Lazy compute
+					if (arg.getType() == RType.EXPR && AttrUtil.containAttribute(attr, A_OPT_LCO)) {
+						LCOUtil.incPassCount();
+						lazyLoad = true;
+					}
+
 					arg = RulpFactory.createVar(paraName, arg);
+					if (lazyLoad) {
+						AttrUtil.addAttribute(arg, A_OPT_LCO);
+					}
 				}
 
 				funFrame.setEntry(paraName, arg);

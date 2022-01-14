@@ -16,8 +16,8 @@
 ;=>fun3
 
 (fun1 (* 0 1) (fun2))
-;=>0
-
-(runtime-call-count fun2) ; The fun2 should not be called at all
-;=>1
+;err:
+the 0 argument<(* 0 1)> not match type <int>
+at (fun1 (* 0 1) (fun2)) ; main-2
+;eof
 
