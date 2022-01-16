@@ -425,8 +425,7 @@ public final class RuntimeUtil {
 				case VAR:
 
 					IRObject value = ((IRVar) rst).getValue();
-
-					if (value.getType() == RType.EXPR && AttrUtil.containAttribute(rst, A_OPT_LCO)) {
+					if (value != null && value.getType() == RType.EXPR && AttrUtil.containAttribute(rst, A_OPT_LCO)) {
 
 						LCOUtil.incHitCount();
 						IRFrame lcoFrame = RulpFactory.createFrame(frame, A_OPT_LCO);
@@ -1056,7 +1055,6 @@ public final class RuntimeUtil {
 			}
 
 			IRExpr expr = (IRExpr) obj;
-
 			return expr.isEarly() ? RulpFactory.createExpressionEarly(newList) : RulpFactory.createExpression(newList);
 
 		case MEMBER:

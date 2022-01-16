@@ -68,9 +68,7 @@ public class XRFactorDefMacro extends AbsAtomFactorAdapter implements IRFactor {
 		}
 
 		IRMacro macro = RulpFactory.createMacro(macroName, macroParaList, RulpUtil.asExpression(bodyObj));
-
 		macroFrame.setEntry(macroName, macro);
-
 		return macro;
 	}
 

@@ -75,6 +75,7 @@ root::frame
 root::frame-of
 root::from
 root::func
+root::get-attribute
 root::get-of-array
 root::get-of-list
 root::has-member
@@ -140,6 +141,7 @@ root::size-of-list
 root::sleep
 root::sort
 root::static
+root::stmt-count-of
 root::str-char-at
 root::str-end-with
 root::str-equal

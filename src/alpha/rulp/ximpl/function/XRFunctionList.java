@@ -9,8 +9,6 @@
 
 package alpha.rulp.ximpl.function;
 
-import static alpha.rulp.lang.Constant.A_RETURN_TYPE;
-import static alpha.rulp.lang.Constant.A_STABLE;
 import static alpha.rulp.lang.Constant.O_Nil;
 
 import java.util.ArrayList;
@@ -237,9 +235,8 @@ public class XRFunctionList extends AbsFunctionAdapter implements IRFunctionList
 		RulpUtil.incRef(fun);
 
 		this.signature = null;
-
-		AttrUtil.removeAttribute(this, A_STABLE);
-		AttrUtil.removeAttribute(this, A_RETURN_TYPE);
+		
+		AttrUtil.removeAllAttributes(this);
 	}
 
 	@Override

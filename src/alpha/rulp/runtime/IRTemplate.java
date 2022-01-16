@@ -12,6 +12,7 @@ import alpha.rulp.lang.RException;
 public interface IRTemplate extends IRObject, IRCallable {
 
 	public static class TemplatePara {
+
 		public boolean isVar;
 		public IRAtom paraType;
 		public IRObject paraValue;
@@ -44,8 +45,11 @@ public interface IRTemplate extends IRObject, IRCallable {
 	public static class TemplateParaEntry {
 
 		public IRCallable body;
+
 		public int fixedParaCount;
+
 		public TemplatePara[] fixedParas;
+
 		public boolean isVary;
 
 		@Override

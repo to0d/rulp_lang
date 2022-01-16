@@ -857,29 +857,6 @@ public class EROUtil {
 		return update == 0 ? -1 : endIndex;
 	}
 
-	private static int _getExprLevel(IRObject obj) throws RException {
-
-		switch (obj.getType()) {
-		case LIST:
-		case EXPR:
-
-			int max_level = 0;
-			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
-			while (it.hasNext()) {
-
-				int level = _getExprLevel(it.next());
-				if (max_level < level) {
-					max_level = level;
-				}
-			}
-
-			return obj.getType() == RType.LIST ? max_level : (max_level + 1);
-
-		default:
-			return 0;
-		}
-	}
-
 	static boolean _hasBreakExpr(IRObject obj) throws RException {
 
 		if (obj == null) {
@@ -1269,7 +1246,7 @@ public class EROUtil {
 				uniqElement.element = obj;
 				uniqElement.count = 1;
 				uniqElement.uniqName = uniqName;
-				uniqElement.exprLevel = _getExprLevel(obj);
+				uniqElement.exprLevel = OptUtil.getExprLevel(obj);
 
 				uniqMap.put(uniqName, uniqElement);
 				uniqList.add(uniqElement);

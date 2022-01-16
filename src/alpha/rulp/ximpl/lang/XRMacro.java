@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -29,17 +30,16 @@ public class XRMacro extends AbsRefCallableAdapter implements IRMacro {
 
 	private String _macroSignature;
 
-	protected IRList bodyList;
+	protected IRExpr macroBody;
 
 	protected String macroName;
 
 	protected final List<String> paraNameList;
 
-	public XRMacro(String macroName, List<String> paraNameList, IRList bodyList) throws RException {
+	public XRMacro(String macroName, List<String> paraNameList, IRExpr macroBody) throws RException {
 		this.macroName = macroName;
 		this.paraNameList = paraNameList;
-		this.bodyList = bodyList;
-		;
+		this.macroBody = macroBody;
 	}
 
 	@Override
@@ -63,7 +63,12 @@ public class XRMacro extends AbsRefCallableAdapter implements IRMacro {
 			}
 		}
 
-		return intepreter.compute(frame, RuntimeUtil.rebuild(bodyList, macroMap));
+		return intepreter.compute(frame, RuntimeUtil.rebuild(macroBody, macroMap));
+	}
+
+	@Override
+	public IRExpr getMacroBody() {
+		return macroBody;
 	}
 
 	@Override

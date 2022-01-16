@@ -1,0 +1,28 @@
+(defun list-stmt-count (?subject) 
+    (if (equal ?subject local)
+    
+        (list-stmt-count (value-of (:: (value-of local::parent) parent)))
+
+        (loop for ?mbr in (list-of ?subject) do
+
+            (defvar ?count (get-attribute $(value-of (value-of ?mbr)) "stmt-count"))
+            
+            (if (!= ?count nil)
+                (print (str-format "obj=%-20s, type=%-8s, stmt-count=%d\n" 
+                            (name-of $(value-of ?mbr))
+                            (to-string (type-of $(value-of (value-of ?mbr))))
+                            ?count))
+            )
+        )
+    )
+)
+;;;
+
+(list-stmt-count root)
+;=>
+
+(list-stmt-count system)
+;=>
+
+(list-stmt-count main)
+;=>

@@ -9,6 +9,7 @@
 
 package alpha.rulp.runtime;
 
+import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRObject;
 
 public interface IRMacro extends IRObject, IRCallable {
@@ -16,4 +17,6 @@ public interface IRMacro extends IRObject, IRCallable {
 	public String getName();
 
 	public String getSignature();
+
+	public IRExpr getMacroBody();
 }

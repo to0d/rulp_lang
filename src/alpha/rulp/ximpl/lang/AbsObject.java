@@ -71,6 +71,11 @@ public abstract class AbsObject implements IRObject {
 		return attributeMap.get(key);
 	}
 
+	public void removeAllAttributes() throws RException {
+		attributeMap = null;
+		_attributeKeyList = null;
+	}
+
 	public IRObject removeAttribute(String key) throws RException {
 
 		if (attributeMap == null) {

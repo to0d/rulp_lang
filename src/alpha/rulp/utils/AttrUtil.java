@@ -153,6 +153,10 @@ public class AttrUtil {
 		}
 	}
 
+	public static void removeAllAttributes(IRObject obj) throws RException {
+		((AbsObject) obj).removeAllAttributes();
+	}
+
 	public static IRObject removeAttribute(IRObject obj, String attr) throws RException {
 		return ((AbsObject) obj).removeAttribute(attr);
 	}

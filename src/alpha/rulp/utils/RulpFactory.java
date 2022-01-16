@@ -65,10 +65,12 @@ import alpha.rulp.ximpl.array.XRFactorMakeArray;
 import alpha.rulp.ximpl.array.XRFactorSeta;
 import alpha.rulp.ximpl.attribute.XRFactorAddAttribute;
 import alpha.rulp.ximpl.attribute.XRFactorAttributeOf;
+import alpha.rulp.ximpl.attribute.XRFactorGetAttribute;
 import alpha.rulp.ximpl.attribute.XRFactorIsConst;
 import alpha.rulp.ximpl.attribute.XRFactorIsStable;
 import alpha.rulp.ximpl.attribute.XRFactorIsThreadSafe;
 import alpha.rulp.ximpl.attribute.XRFactorReturnTypeOf;
+import alpha.rulp.ximpl.attribute.XRFactorStmtCountOf;
 import alpha.rulp.ximpl.blob.XRBlob;
 import alpha.rulp.ximpl.blob.XRFactorBlobLength;
 import alpha.rulp.ximpl.blob.XRFactorMakeBlob;
@@ -597,7 +599,8 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorAttributeOf(F_ATTRIBUTE_OF));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorAddAttribute(F_ADD_ATTRIBUTE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorReturnTypeOf(F_RETURN_TYPE_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorCC(F_CC));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorGetAttribute(F_GET_ATTRIBUTE));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorStmtCountOf(F_STMT_COUNT_OF));
 
 		// Class
 		RulpUtil.addFrameObject(rootFrame, new XRNoClass(A_NOCLASS, rootFrame));
@@ -698,6 +701,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorIsStable(F_IS_STABLE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorIsThreadSafe(F_IS_THREAD_SAFE));
 		RulpUtil.addFrameObject(rootFrame, new XFactorReduct(F_Reduct));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorCC(F_CC));
 
 		// Lambda
 		RulpUtil.addFrameObject(rootFrame, new XRFactorLet(F_LET));
@@ -832,7 +836,7 @@ public final class RulpFactory {
 		return new XRLong(value);
 	}
 
-	public static IRMacro createMacro(String macroName, List<String> paraNames, IRList macroBody) throws RException {
+	public static IRMacro createMacro(String macroName, List<String> paraNames, IRExpr macroBody) throws RException {
 		RType.MACRO.incCreateCount();
 		return new XRMacro(macroName, paraNames, macroBody);
 	}

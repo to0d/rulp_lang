@@ -98,7 +98,7 @@ public interface Constant {
 //	String A_NULL = "null";
 
 	String A_OPT_CCO = "opt-cco";
-	
+
 	String A_OPT_ERO = "opt-ero";
 
 	String A_OPT_FULL = "opt-full";
@@ -138,6 +138,8 @@ public interface Constant {
 	String A_STACK = "stack";
 
 	String A_STATIC = "static";
+
+	String A_STMT_COUNT = "stmt-count";
 
 	String A_STRING = "string";
 
@@ -188,6 +190,8 @@ public interface Constant {
 	String F_ALIAS = "alias";
 
 	String F_ATTRIBUTE_OF = "attribute-of";
+	
+	String F_GET_ATTRIBUTE = "get-attribute";
 
 	String F_B_AND = "and";
 
@@ -362,7 +366,7 @@ public interface Constant {
 	String F_PROPERTY_OF = "property-of";
 
 	String F_RANDOM = "random";
-
+	
 	String F_Reduct = "reduct";
 
 	String F_REF = "ref";
@@ -394,6 +398,8 @@ public interface Constant {
 	String F_SLEEP = "sleep";
 
 	String F_SORT = "sort";
+
+	String F_STMT_COUNT_OF = "stmt-count-of";
 
 	String F_STR_CHAR_AT = "str-char-at";
 
