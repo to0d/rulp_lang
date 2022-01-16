@@ -1,0 +1,15 @@
+(defun fun1 (?x)
+    (if (<= ?x 0)
+        (return 0))
+    (return (* (fun1 (- ?x 1)) 2))
+)[opt-lco]
+;=>fun1
+
+(fun1 0)
+;=>0
+
+(fun1 2)
+;err:
+java.lang.StackOverflowError
+;eof
+

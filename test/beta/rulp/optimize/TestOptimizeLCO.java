@@ -23,4 +23,17 @@ public class TestOptimizeLCO extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+
+	@Test
+	void test_lco_4_recursion_1() {
+		_setup();
+		_run_script();
+	}
+	
+
+	@Test
+	void test_lco_4_recursion_2() {
+		_setup();
+		_run_script();
+	}
 }

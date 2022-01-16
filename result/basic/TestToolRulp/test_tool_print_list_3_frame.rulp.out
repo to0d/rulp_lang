@@ -223,7 +223,7 @@ mbr=use, mbr-property='(public), mbr-attribute='(), obj=use, obj-type=template, 
 (print-list main)
 ;=>nil
 ;out:
-mbr=?script-path, mbr-property='(public), mbr-attribute='(), obj=?script-path, obj-type=var, obj-attribute='(), var-value="result\basic\TestToolRulp\test_tool_1_ls_print_frame.rulp"
+mbr=?script-path, mbr-property='(public), mbr-attribute='(), obj=?script-path, obj-type=var, obj-attribute='(), var-value="result\basic\TestToolRulp\test_tool_print_list_3_frame.rulp"
 mbr=_ginfo, mbr-property='(public), mbr-attribute='(), obj='((_ginfo string) (_ginfo)), obj-type=func, obj-attribute='()
 mbr=clear, mbr-property='(public), mbr-attribute='(), obj='((clear type#map) (clear type#queue) (clear type#set) (clear type#stack)), obj-type=func, obj-attribute='()
 mbr=file-prename, mbr-property='(public), mbr-attribute='(), obj=(file-prename string), obj-type=func, obj-attribute='()
