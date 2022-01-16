@@ -99,13 +99,13 @@ public interface Constant {
 
 	String A_OPT_CCO = "opt-cco";
 	
-	String A_OPT_LCO = "opt-lco";
-
 	String A_OPT_ERO = "opt-ero";
 
 	String A_OPT_FULL = "opt-full";
 
 	String A_OPT_ID = "opt-id";
+
+	String A_OPT_LCO = "opt-lco";
 
 	String A_OPT_TCO = "opt-tco";
 
@@ -172,8 +172,6 @@ public interface Constant {
 	String C_HANDLE_ANY = "_$handle$any$_";
 
 	String E_INFINITE_LOOP = "infinite-loop";
-
-	IRAtom O_INFINITE_LOOP = RulpFactory.createAtom(E_INFINITE_LOOP);
 
 	String F_ACCESS = "access";
 
@@ -281,11 +279,11 @@ public interface Constant {
 
 	String F_LIST_FUNC_IN_RETURN = "list-function-in-return";
 
+	String F_LIST_OF = "list-of";
+
 	String F_LOAD = "load";
 
 	String F_LOOP = "loop";
-
-	String F_LS = "ls";
 
 	String F_MAKE_ARRAY = "make-array";
 
@@ -534,6 +532,8 @@ public interface Constant {
 	IRAtom O_GE = RulpFactory.createAtom(F_O_GE);
 
 	IRAtom O_GT = RulpFactory.createAtom(F_O_GT);
+
+	IRAtom O_INFINITE_LOOP = RulpFactory.createAtom(E_INFINITE_LOOP);
 
 	IRInteger O_INT_0 = RulpFactory.createInteger(0);
 

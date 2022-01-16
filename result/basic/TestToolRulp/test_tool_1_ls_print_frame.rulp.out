@@ -7,7 +7,7 @@
 (load tool)
 ;=>nil nil nil nil nil nil nil
 
-(ls-print root)
+(print-list root)
 ;=>nil
 ;out:
 mbr=!=, mbr-property='(public), mbr-attribute='(), obj=!=, obj-type=factor, obj-attribute='(atom stable)
@@ -94,10 +94,10 @@ mbr=lambda, mbr-property='(public), mbr-attribute='(), obj=lambda, obj-type=fact
 mbr=let, mbr-property='(public), mbr-attribute='(), obj=let, obj-type=factor, obj-attribute='(stable)
 mbr=list, mbr-property='(public), mbr-attribute='(), obj=list, obj-type=atom, obj-attribute='()
 mbr=list-function-in-return, mbr-property='(public), mbr-attribute='(), obj=list-function-in-return, obj-type=factor, obj-attribute='()
+mbr=list-of, mbr-property='(public), mbr-attribute='(), obj=list-of, obj-type=factor, obj-attribute='(stable)
 mbr=load, mbr-property='(public), mbr-attribute='(), obj=load, obj-type=factor, obj-attribute='(thread-unsafe)
 mbr=long, mbr-property='(public), mbr-attribute='(), obj=long, obj-type=atom, obj-attribute='()
 mbr=loop, mbr-property='(public), mbr-attribute='(), obj=loop, obj-type=factor, obj-attribute='(stable)
-mbr=ls, mbr-property='(public), mbr-attribute='(), obj=ls, obj-type=factor, obj-attribute='(stable)
 mbr=macro, mbr-property='(public), mbr-attribute='(), obj=macro, obj-type=atom, obj-attribute='()
 mbr=make-array, mbr-property='(public), mbr-attribute='(), obj=make-array, obj-type=factor, obj-attribute='(stable)
 mbr=make-blob, mbr-property='(public), mbr-attribute='(), obj=make-blob, obj-type=factor, obj-attribute='(stable)
@@ -196,7 +196,7 @@ mbr=~, mbr-property='(public), mbr-attribute='(), obj=~, obj-type=factor, obj-at
 
 ;eof
 
-(ls-print system)
+(print-list system)
 ;=>nil
 ;out:
 mbr=++, mbr-property='(public), mbr-attribute='(), obj=++, obj-type=macro, obj-attribute='()
@@ -210,7 +210,6 @@ mbr=equal, mbr-property='(public), mbr-attribute='(), obj='((equal nil nil) (equ
 mbr=get, mbr-property='(public), mbr-attribute='(), obj='((get array int int) (get array int) (get list int)), obj-type=func, obj-attribute='()
 mbr=is-empty, mbr-property='(public), mbr-attribute='(), obj='((is-empty array) (is-empty list)), obj-type=func, obj-attribute='()
 mbr=length-of, mbr-property='(public), mbr-attribute='(), obj='((length-of blob) (length-of string)), obj-type=func, obj-attribute='()
-mbr=print-list, mbr-property='(public), mbr-attribute='(), obj=print-list, obj-type=macro, obj-attribute='()
 mbr=println, mbr-property='(public), mbr-attribute='(), obj='((println nil nil nil nil nil nil nil nil nil) (println nil nil nil nil nil nil nil nil) (println nil nil nil nil nil nil nil) (println nil nil nil nil nil nil) (println nil nil nil nil nil) (println nil nil nil nil) (println nil nil nil) (println nil nil) (println nil) (println)), obj-type=func, obj-attribute='()
 mbr=root, mbr-property='(public), mbr-attribute='(), obj=root, obj-type=frame, obj-attribute='()
 mbr=size-of, mbr-property='(public), mbr-attribute='(), obj='((size-of array int) (size-of array) (size-of list)), obj-type=func, obj-attribute='()
@@ -221,7 +220,7 @@ mbr=use, mbr-property='(public), mbr-attribute='(), obj=use, obj-type=template, 
 
 ;eof
 
-(ls-print main)
+(print-list main)
 ;=>nil
 ;out:
 mbr=?script-path, mbr-property='(public), mbr-attribute='(), obj=?script-path, obj-type=var, obj-attribute='(), var-value="result\basic\TestToolRulp\test_tool_1_ls_print_frame.rulp"
@@ -232,11 +231,11 @@ mbr=file-subffix, mbr-property='(public), mbr-attribute='(), obj=(file-subffix s
 mbr=get, mbr-property='(public), mbr-attribute='(), obj='((get array int int) (get array int) (get list int) (get type#queue int)), obj-type=func, obj-attribute='()
 mbr=is-blank, mbr-property='(public), mbr-attribute='(), obj=(is-blank string), obj-type=func, obj-attribute='()
 mbr=is-empty, mbr-property='(public), mbr-attribute='(), obj='((is-empty array) (is-empty list) (is-empty string) (is-empty type#map) (is-empty type#queue) (is-empty type#set) (is-empty type#stack)), obj-type=func, obj-attribute='()
-mbr=ls-print, mbr-property='(public), mbr-attribute='(), obj='((ls-print nil nil) (ls-print nil)), obj-type=func, obj-attribute='()
 mbr=main, mbr-property='(public), mbr-attribute='(), obj=main, obj-type=frame, obj-attribute='()
 mbr=map, mbr-property='(public), mbr-attribute='(), obj=map, obj-type=class, obj-attribute='(final), class-property='(final)
 mbr=max, mbr-property='(public), mbr-attribute='(), obj=(max nil nil), obj-type=func, obj-attribute='()
 mbr=min, mbr-property='(public), mbr-attribute='(), obj=(min nil nil), obj-type=func, obj-attribute='()
+mbr=print-list, mbr-property='(public), mbr-attribute='(), obj='((print-list list) (print-list nil nil) (print-list nil)), obj-type=func, obj-attribute='()
 mbr=queue, mbr-property='(public), mbr-attribute='(), obj=queue, obj-type=class, obj-attribute='(final), class-property='(final)
 mbr=root, mbr-property='(public), mbr-attribute='(), obj=root, obj-type=frame, obj-attribute='()
 mbr=script_out, mbr-property='(public), mbr-attribute='(), obj=script_out, obj-type=macro, obj-attribute='()

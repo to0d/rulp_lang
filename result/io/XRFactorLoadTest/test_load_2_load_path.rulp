@@ -10,5 +10,5 @@
 (load "load2.rulp")
 ;=>
 
-(ls)
+(list-of)
 ;=>

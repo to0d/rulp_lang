@@ -14,7 +14,7 @@
 )
 ;=>class1
 
-(ls class1)
+(list-of class1)
 ;=>'(class1::?value class1::init class1::~init)
 
 (new class1 o1)

@@ -1,9 +1,9 @@
-(defun ls-is-const (?subject) 
+(defun list-of-is-const (?subject) 
     (if (equal ?subject local)
     
-        (ls-is-const (value-of (:: (value-of local::parent) parent)))
+        (list-of-is-const (value-of (:: (value-of local::parent) parent)))
         
-        (loop for ?mbr in (ls ?subject) do 
+        (loop for ?mbr in (list-of ?subject) do 
             (if (is-const  $(value-of (value-of ?mbr)))
                 (print (str-format "obj=%-20s, type=%s\n" 
                             (name-of $(value-of ?mbr)) 
@@ -12,9 +12,9 @@
         )
     )
 )
-;=>ls-is-const
+;=>list-of-is-const
 
-(ls-is-const root)
+(list-of-is-const root)
 ;=>nil
 ;out:
 obj=!=                  , type=factor
@@ -94,10 +94,10 @@ obj=lambda              , type=factor
 obj=let                 , type=factor
 obj=list                , type=atom
 obj=list-function-in-return, type=factor
+obj=list-of             , type=factor
 obj=load                , type=factor
 obj=long                , type=atom
 obj=loop                , type=factor
-obj=ls                  , type=factor
 obj=macro               , type=atom
 obj=make-array          , type=factor
 obj=make-blob           , type=factor
@@ -194,25 +194,24 @@ obj=~                   , type=factor
 
 ;eof
 
-(ls-is-const system)
+(list-of-is-const system)
 ;=>nil
 ;out:
 obj=++                  , type=macro
 obj=--                  , type=macro
 obj=add-all             , type=func
 obj=cmp                 , type=func
-obj=print-list          , type=macro
 obj=to-array            , type=func
 
 ;eof
 
-(ls-is-const main)
+(list-of-is-const main)
 ;=>nil
 ;out:
 obj=file-prename        , type=func
 obj=file-subffix        , type=func
 obj=is-blank            , type=func
-obj=ls-is-const         , type=func
+obj=list-of-is-const    , type=func
 obj=script_out          , type=macro
 
 ;eof

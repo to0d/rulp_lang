@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      233
+           Interpreter call id:      232
     Interpreter call level/max:        4       10
                Frame max level:        5
                   Frame max id:        7
@@ -25,33 +25,33 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      276
+    factor:      275
       func:        4
      macro:        3
 ==========================================================================================================================
 
-Callable stats info: callId=233, row=25, column=59(4), value-max=5, value-unit=2^x
+Callable stats info: callId=232, row=25, column=59(4), value-max=5, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         33333333333333333333333333333333333333333333333333333333466 max=29, unit=2^x
+   Frame    RType  Count  Ref Object                         33333333333333333333333333333333333333333333333333333333475 max=36, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
     root   factor    179    0 add-attribute                   1333333333333333333333333333333333333333333332            
     root   factor     39    0 defun                                                                        133321333342 
-    root   factor      9    0 defvar                                                                       1         133
+    root   factor      9    0 defvar                                                                       1         142
     root   factor      6    0 alias                          33                                                         
-    root   factor      4    0 do                                                                                      22
-    root   factor      4    0 defmacro                                                                         2     11 
-    root   factor      3    0 str-substr                                                                              12
-    root   factor      3    0 str-last-index-of                                                                       12
-    root   factor      3    0 setq                                                                                    12
-    main    macro      3    1 script_out                                                                              12
-    root   factor      3    0 return                                                                                  12
-    root   factor      3    0 out-to-file                                                                             12
-    root   factor      3    0 if                                                                                      12
-    main     func      3    1 (file-prename string)                                                                   12
+    root   factor      4    0 do                                                                                      31
+    root   factor      3    0 str-substr                                                                              21
+    root   factor      3    0 str-last-index-of                                                                       21
+    root   factor      3    0 setq                                                                                    21
+    main    macro      3    1 script_out                                                                              21
+    root   factor      3    0 return                                                                                  21
+    root   factor      3    0 out-to-file                                                                             21
+    root   factor      3    0 if                                                                                      21
+    main     func      3    1 (file-prename string)                                                                   21
     root   factor      3    0 deftemplate                                                                       3       
-    root   factor      3    0 +                                                                                       12
-    root   factor      3    0 !=                                                                                      12
-    root   factor      2    0 print-subject                                                                           11
+    root   factor      3    0 defmacro                                                                         2     1  
+    root   factor      3    0 +                                                                                       21
+    root   factor      3    0 !=                                                                                      21
+    root   factor      2    0 print-subject                                                                           2 
     root   factor      1    0 print-global-info                                                                        1
     root   factor      1    0 print                                                                                   1 
     root   factor      1    0 name-of                                                                                 1 
@@ -65,17 +65,17 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1083            0         1083
-      string:           36            0           36
+        atom:         1072            0         1072
+      string:           35            0           35
         list:            7            0            7
-        expr:          450            3          447
+        expr:          446            3          443
          var:           23           11           12
         func:           54            0           54
     template:            1            0            1
-       macro:            4            0            4
+       macro:            3            0            3
        frame:            9            7            2
  interpreter:            1            0
-  frameEntry:          228            0
+  frameEntry:          227            0
       lambda:            1            0
 ==========================================================================================================================
 

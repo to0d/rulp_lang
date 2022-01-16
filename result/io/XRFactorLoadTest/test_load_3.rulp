@@ -1,5 +1,5 @@
 (do (load "load/load1.rulp"))
 ;=>
 
-(ls)
+(list-of)
 ;=>

@@ -2,6 +2,6 @@
 (defvar y)
 ;=>&x &y
 
-(ls local)
+(list-of local)
 ;=>'(main::?script-path main::_ginfo main::file-prename main::file-subffix main::is-blank main::is-empty main::local main::main main::root main::script_out main::system main::x main::y)
 

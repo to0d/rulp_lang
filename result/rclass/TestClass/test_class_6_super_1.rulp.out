@@ -8,7 +8,7 @@
 )
 ;=>class1
 
-(ls class1)
+(list-of class1)
 ;=>'(class1::?value class1::add class1::get)
 
 (defclass class2 (extends class1)
@@ -16,10 +16,10 @@
 )
 ;=>class2
 
-(ls class2)
+(list-of class2)
 ;=>'(class2::add class2::extends)
 
-(ls-print class2)
+(print-list class2)
 ;=>nil
 ;out:
 mbr=add, mbr-property='(default), mbr-attribute='(), obj=(add nil), obj-type=func, obj-attribute='()

@@ -5,7 +5,7 @@
 (defvar y)
 ;=>&x &y
 
-(ls-print local var)
+(print-list local var)
 ;=>nil
 ;out:
 mbr=?script-path, mbr-property='(public), mbr-attribute='(), obj=?script-path, obj-type=var, obj-attribute='(), var-value="result\basic\TestToolRulp\test_tool_1_ls_print_usr_vars.rulp"

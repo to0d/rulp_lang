@@ -10,10 +10,10 @@
 (new class1 o1)
 ;=>o1
 
-(ls class1)
+(list-of class1)
 ;=>'(class1::?value class1::add class1::get class1::set class1::sub)
 
-(ls o1)
+(list-of o1)
 ;=>'(o1::this)
 
 (defvar var1 0)
@@ -22,10 +22,10 @@
 (defvar o1::var1 1)
 ;=>&var1
 
-(ls class1)
+(list-of class1)
 ;=>'(class1::?value class1::add class1::get class1::set class1::sub)
 
-(ls o1)
+(list-of o1)
 ;=>'(o1::this o1::var1)
 
 (value-of var1)

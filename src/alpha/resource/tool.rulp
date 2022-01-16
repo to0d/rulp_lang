@@ -1,12 +1,19 @@
+
+(defun print-list ((?list list)) 
+    (loop for ?e in ?list do 
+        (print ?e "\n")
+    )
+)
+
 ;****************************************************;
 ; Subject tools
 ;****************************************************;
-(defun ls-print (?subject ?type) 
+(defun print-list (?subject ?type) 
     (if (equal ?subject local)
     
-        (ls-print (value-of (:: (value-of local::parent) parent)) ?type)
+        (print-list (value-of (:: (value-of local::parent) parent)) ?type)
         
-        (loop for ?mbr in (ls ?subject) do 
+        (loop for ?mbr in (list-of ?subject) do 
             (if (and (not (equal ?type nil)) 
                      (not (equal ?type (type-of $(value-of (value-of ?mbr))))))
                 (continue)
@@ -43,6 +50,6 @@
     )
 )
 
-(defun ls-print (?subject)
-    (ls-print ?subject nil)
+(defun print-list (?subject)
+    (print-list ?subject nil)
 )

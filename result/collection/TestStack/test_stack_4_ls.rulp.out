@@ -2,22 +2,22 @@
 (load tool)
 ;=>nil nil
 
-(ls stack)
+(list-of stack)
 ;=>'(stack::?impl stack::clear stack::init stack::is-empty stack::peek stack::pop stack::push stack::size-of stack::to-list)
 
 (new stack s1)
 ;=>s1
 
-(ls s1)
+(list-of s1)
 ;=>'(s1::?impl s1::init s1::this)
 
 (s1::push 1)
 ;=>nil
 
-(ls s1)
+(list-of s1)
 ;=>'(s1::?impl s1::init s1::push s1::this)
 
-(ls-print stack)
+(print-list stack)
 ;=>nil
 ;out:
 mbr=?impl, access deny

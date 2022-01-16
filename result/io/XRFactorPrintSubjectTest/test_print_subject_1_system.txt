@@ -1,8 +1,7 @@
-id=1, name=system, lvl=1, ref=0/0, entry=19, pid=0(root), subject=system
+id=1, name=system, lvl=1, ref=0/0, entry=18, pid=0(root), subject=system
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-print-list           : -195     1        1    macro      print-list          
 get                  : -194     1        1    funcList   '((get array int int) (get array int) (get list int)) : frame=null, type=list
                                          1    func       (get list int) : frame=frame@system
                                          1    func       (get array int) : frame=frame@system

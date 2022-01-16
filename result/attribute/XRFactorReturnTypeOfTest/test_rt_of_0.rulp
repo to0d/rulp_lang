@@ -1,9 +1,9 @@
-(defun ls-return-type-of (?subject) 
+(defun list-of-return-type-of (?subject) 
     (if (equal ?subject local)
     
-        (ls-return-type-of (value-of (:: (value-of local::parent) parent)))
+        (list-of-return-type-of (value-of (:: (value-of local::parent) parent)))
 
-        (loop for ?mbr in (ls ?subject) do
+        (loop for ?mbr in (list-of ?subject) do
 
             (defvar ?type (return-type-of $(value-of (value-of ?mbr))))
             
@@ -18,11 +18,11 @@
 )
 ;;;
 
-(ls-return-type-of root)
+(list-of-return-type-of root)
 ;=>
 
-(ls-return-type-of system)
+(list-of-return-type-of system)
 ;=>
 
-(ls-return-type-of main)
+(list-of-return-type-of main)
 ;=>

@@ -7,19 +7,19 @@
 )
 ;=>class1
 
-(ls class1)
+(list-of class1)
 ;=>'(class1::?value class1::add class1::get class1::set class1::sub)
 
 (new class1 o1)
 ;=>o1
 
-(ls o1)
+(list-of o1)
 ;=>'(o1::this)
 
 (o1::get)
 ;=>0
 
-(ls o1)
+(list-of o1)
 ;=>'(o1::?rv o1::?value o1::get o1::this)
 
 (o1::set 5)

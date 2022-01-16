@@ -16,6 +16,6 @@ at (load "load/load2.rulp") ; main-2
 (load "load2.rulp")
 ;=>nil
 
-(ls)
+(list-of)
 ;=>'(main::?rv main::?script-path main::_ginfo main::file-prename main::file-subffix main::is-blank main::is-empty main::main main::root main::script_out main::system main::x2)
 

@@ -1,9 +1,9 @@
-(defun ls-is-const (?subject) 
+(defun list-of-is-const (?subject) 
     (if (equal ?subject local)
     
-        (ls-is-const (value-of (:: (value-of local::parent) parent)))
+        (list-of-is-const (value-of (:: (value-of local::parent) parent)))
         
-        (loop for ?mbr in (ls ?subject) do 
+        (loop for ?mbr in (list-of ?subject) do 
             (if (is-const  $(value-of (value-of ?mbr)))
                 (print (str-format "obj=%-20s, type=%s\n" 
                             (name-of $(value-of ?mbr)) 
@@ -14,11 +14,11 @@
 )
 ;;;
 
-(ls-is-const root)
+(list-of-is-const root)
 ;;;
 
-(ls-is-const system)
+(list-of-is-const system)
 ;;;
 
-(ls-is-const main)
+(list-of-is-const main)
 ;;;

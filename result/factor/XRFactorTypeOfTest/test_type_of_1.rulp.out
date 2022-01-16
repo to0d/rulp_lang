@@ -17,7 +17,7 @@
 ;=>list
 
 (type-of print-list)
-;=>macro
+;=>atom
 
 (type-of "abc")
 ;=>string

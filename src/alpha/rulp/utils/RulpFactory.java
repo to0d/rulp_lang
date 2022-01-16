@@ -120,7 +120,7 @@ import alpha.rulp.ximpl.factor.XRFactorDefvar;
 import alpha.rulp.ximpl.factor.XRFactorDoWhenObjDeleted;
 import alpha.rulp.ximpl.factor.XRFactorDoWhenVarChanged;
 import alpha.rulp.ximpl.factor.XRFactorFrameOf;
-import alpha.rulp.ximpl.factor.XRFactorLs;
+import alpha.rulp.ximpl.factor.XRFactorListOf;
 import alpha.rulp.ximpl.factor.XRFactorMakeList;
 import alpha.rulp.ximpl.factor.XRFactorNameOf;
 import alpha.rulp.ximpl.factor.XRFactorParentOf;
@@ -607,7 +607,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefClass(F_DEFCLASS));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorGetMbr(F_O_MBR));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorHasMbr(F_HAS_MBR));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorLs(F_LS));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorListOf(F_LIST_OF));
 		RulpUtil.addFrameObject(rootFrame, new XRNameSpaceClass(A_NAMESPACE, rootFrame));
 
 		// IO

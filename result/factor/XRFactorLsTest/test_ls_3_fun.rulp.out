@@ -1,22 +1,25 @@
-(defun ls1 () (return (ls)))
+(load tool)
+;=>nil
+
+(defun ls1 () (return (list-of)))
 ;=>ls1
 
-(defun ls2 () (return (ls local)))
+(defun ls2 () (return (list-of local)))
 ;=>ls2
 
-(defun ls3 (?v1) (return (ls)))
+(defun ls3 (?v1) (return (list-of)))
 ;=>ls3
 
-(defun ls4 (?v2) (return (ls local)))
+(defun ls4 (?v2) (return (list-of local)))
 ;=>ls4
 
-(defun ls5 () (print-list (ls root)))
+(defun ls5 () (print-list (list-of root)))
 ;=>ls5
 
-(defun ls6 () (print-list (ls system)))
+(defun ls6 () (print-list (list-of system)))
 ;=>ls6
 
-(defun ls7 () (print-list (ls main)))
+(defun ls7 () (print-list (list-of main)))
 ;=>ls7
 
 (ls1)
@@ -118,10 +121,10 @@ root::lambda
 root::let
 root::list
 root::list-function-in-return
+root::list-of
 root::load
 root::long
 root::loop
-root::ls
 root::macro
 root::make-array
 root::make-blob
@@ -234,7 +237,6 @@ system::equal
 system::get
 system::is-empty
 system::length-of
-system::print-list
 system::println
 system::root
 system::size-of
@@ -263,6 +265,7 @@ main::ls5
 main::ls6
 main::ls7
 main::main
+main::print-list
 main::root
 main::script_out
 main::system

@@ -2,21 +2,21 @@
 (load tool)
 ;=>
 
-(ls stack)
+(list-of stack)
 ;=>
 
 (new stack s1)
 ;=>
 
-(ls s1)
+(list-of s1)
 ;=>
 
 (s1::push 1)
 ;=>
 
-(ls s1)
+(list-of s1)
 ;=>
 
-(ls-print stack)
+(print-list stack)
 ;=>
 

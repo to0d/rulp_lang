@@ -4,6 +4,6 @@
 (defvar y) y
 ;=>
 
-(ls)
+(list-of)
 ;=>
 

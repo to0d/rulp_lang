@@ -38,7 +38,7 @@
 (class1::fun1)
 ;=>1
 
-(ls-print class1)
+(print-list class1)
 ;=>nil
 ;out:
 mbr=?rv, mbr-property='(default), mbr-attribute='(), obj=?rv, obj-type=var, obj-attribute='(), var-value="1"
@@ -48,7 +48,7 @@ mbr=fun1, mbr-property='(default), mbr-attribute='(static), obj=(fun1), obj-type
 
 ;eof
 
-(ls-print o1)
+(print-list o1)
 ;=>nil
 ;out:
 mbr=?v1, mbr-property='(default), mbr-attribute='(), obj=?v1, obj-type=var, obj-attribute='(), var-value="0"

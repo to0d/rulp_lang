@@ -1,22 +1,25 @@
-(defun ls1 () (return (ls)))
+(load tool)
 ;;;
 
-(defun ls2 () (return (ls local)))
+(defun ls1 () (return (list-of)))
 ;;;
 
-(defun ls3 (?v1) (return (ls)))
+(defun ls2 () (return (list-of local)))
 ;;;
 
-(defun ls4 (?v2) (return (ls local)))
+(defun ls3 (?v1) (return (list-of)))
 ;;;
 
-(defun ls5 () (print-list (ls root)))
+(defun ls4 (?v2) (return (list-of local)))
 ;;;
 
-(defun ls6 () (print-list (ls system)))
+(defun ls5 () (print-list (list-of root)))
 ;;;
 
-(defun ls7 () (print-list (ls main)))
+(defun ls6 () (print-list (list-of system)))
+;;;
+
+(defun ls7 () (print-list (list-of main)))
 ;;;
 
 (ls1)

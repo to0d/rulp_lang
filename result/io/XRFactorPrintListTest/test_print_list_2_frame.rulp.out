@@ -1,4 +1,7 @@
-(print-list (ls root))
+(load tool)
+;=>nil
+
+(print-list (list-of root))
 ;=>nil
 ;out:
 root::!=
@@ -85,10 +88,10 @@ root::lambda
 root::let
 root::list
 root::list-function-in-return
+root::list-of
 root::load
 root::long
 root::loop
-root::ls
 root::macro
 root::make-array
 root::make-blob
@@ -187,7 +190,7 @@ root::~
 
 ;eof
 
-(print-list (ls system))
+(print-list (list-of system))
 ;=>nil
 ;out:
 system::++
@@ -201,7 +204,6 @@ system::equal
 system::get
 system::is-empty
 system::length-of
-system::print-list
 system::println
 system::root
 system::size-of

@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      234
+           Interpreter call id:      233
     Interpreter call level/max:        4       10
                Frame max level:        5
                   Frame max id:        6
@@ -25,24 +25,24 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      255
+    factor:      254
       func:        5
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=234, row=24, column=59(4), value-max=5, value-unit=2^x
+Callable stats info: callId=233, row=24, column=59(4), value-max=5, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         33333333333333333333333333333333333333333333333333333333436 max=26, unit=2^x
+   Frame    RType  Count  Ref Object                         33333333333333333333333333333333333333333333333333333333455 max=16, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
     root   factor    179    0 add-attribute                   1333333333333333333333333333333333333333333332            
     root   factor     40    0 defun                                                                        133321333343 
     root   factor      6    0 alias                          33                                                         
-    root   factor      4    0 return                                                                                   3
+    root   factor      4    0 return                                                                                  31
     root   factor      4    0 defvar                                                                       1         1 2
-    root   factor      4    0 defmacro                                                                         2     11 
-    root   factor      3    0 print                                                                                    3
-    main     func      3    1 (fun1 nil)                                                                               3
+    root   factor      3    0 print                                                                                   3 
+    main     func      3    1 (fun1 nil)                                                                              3 
     root   factor      3    0 deftemplate                                                                       3       
+    root   factor      3    0 defmacro                                                                         2     1  
     root   factor      1    0 str-substr                                                                               1
     root   factor      1    0 str-last-index-of                                                                        1
     root   factor      1    0 setq                                                                                     1
@@ -50,7 +50,7 @@ Callable stats info: callId=234, row=24, column=59(4), value-max=5, value-unit=2
     root   factor      1    0 runtime-call-count                                                                       1
     root   factor      1    0 print-global-info                                                                        1
     root   factor      1    0 out-to-file                                                                              1
-    root   factor      1    0 loop                                                                                     1
+    root   factor      1    0 loop                                                                                    1 
     root   factor      1    0 load                                                                                   1  
     root   factor      1    0 if                                                                                       1
     main     func      1    1 (file-prename string)                                                                    1
@@ -64,17 +64,17 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1083            0         1083
-      string:           28            0           28
+        atom:         1072            0         1072
+      string:           27            0           27
         list:            6            0            6
-        expr:          441            4          437
+        expr:          437            4          433
          var:           20            9           11
         func:           53            0           53
     template:            1            0            1
-       macro:            4            0            4
+       macro:            3            0            3
        frame:           10            9            1
  interpreter:            1            0
-  frameEntry:          224            0
+  frameEntry:          223            0
       lambda:            0            0
 ==========================================================================================================================
 

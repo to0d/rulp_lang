@@ -1,5 +1,5 @@
 (let ($idx 1) 
-    (loop for ?x in (ls root) do 
+    (loop for ?x in (list-of root) do 
         (if (not (equal (type-of $(value-of (value-of ?x))) var)) 
             (continue))
         (print $idx ":"  (type-of $(value-of (value-of ?x))) ", name=" (name-of ?x) "\n") 
@@ -7,7 +7,7 @@
 ;;;
 
 (let ($idx 1) 
-    (loop for ?x in (ls system) do 
+    (loop for ?x in (list-of system) do 
         (if (not (equal (type-of $(value-of (value-of ?x))) var)) 
             (continue))
         (print $idx ":"  (type-of $(value-of (value-of ?x))) ", name=" (name-of ?x) "\n") 
@@ -15,7 +15,7 @@
 ;;;
 
 (let ($idx 1) 
-    (loop for ?x in (ls main) do 
+    (loop for ?x in (list-of main) do 
         (if (not (equal (type-of $(value-of (value-of ?x))) var)) 
             (continue))
         (print $idx ":"  (type-of $(value-of (value-of ?x))) ", name=" (name-of ?x) "\n") 

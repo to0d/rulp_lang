@@ -1,9 +1,9 @@
-(defun ls-return-type-of (?subject) 
+(defun list-of-return-type-of (?subject) 
     (if (equal ?subject local)
     
-        (ls-return-type-of (value-of (:: (value-of local::parent) parent)))
+        (list-of-return-type-of (value-of (:: (value-of local::parent) parent)))
 
-        (loop for ?mbr in (ls ?subject) do
+        (loop for ?mbr in (list-of ?subject) do
 
             (defvar ?type (return-type-of $(value-of (value-of ?mbr))))
             
@@ -16,9 +16,9 @@
         )
     )
 )
-;=>ls-return-type-of
+;=>list-of-return-type-of
 
-(ls-return-type-of root)
+(list-of-return-type-of root)
 ;=>nil
 ;out:
 obj=?file.separator     , type=var     , return=string
@@ -54,7 +54,7 @@ obj=true                , type=bool    , return=bool
 
 ;eof
 
-(ls-return-type-of system)
+(list-of-return-type-of system)
 ;=>nil
 ;out:
 obj=?load-paths         , type=var     , return=list
@@ -62,7 +62,7 @@ obj=?trace              , type=var     , return=bool
 
 ;eof
 
-(ls-return-type-of main)
+(list-of-return-type-of main)
 ;=>nil
 ;out:
 obj=?script-path        , type=var     , return=string

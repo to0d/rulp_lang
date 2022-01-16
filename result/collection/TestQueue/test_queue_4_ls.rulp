@@ -2,21 +2,21 @@
 (load tool)
 ;=>
 
-(ls queue)
+(list-of queue)
 ;=>
 
 (new queue q1)
 ;=>
 
-(ls q1)
+(list-of q1)
 ;=>
 
 (q1::push 1)
 ;=>
 
-(ls q1)
+(list-of q1)
 ;=>
 
-(ls-print queue)
+(print-list queue)
 ;=>
 

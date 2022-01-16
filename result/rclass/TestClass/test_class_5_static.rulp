@@ -38,8 +38,8 @@
 (class1::fun1)
 ;;;
 
-(ls-print class1)
+(print-list class1)
 ;;;
 
-(ls-print o1)
+(print-list o1)
 ;;;

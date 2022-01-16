@@ -1,5 +1,8 @@
-(print-list (ls root))
+(load tool)
+;;;
+
+(print-list (list-of root))
 ;=>
 
-(print-list (ls system))
+(print-list (list-of system))
 ;=>

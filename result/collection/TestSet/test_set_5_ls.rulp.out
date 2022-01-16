@@ -2,7 +2,7 @@
 (load tool)
 ;=>nil nil
 
-(print-list (ls set))
+(print-list (list-of set))
 ;=>nil
 ;out:
 set::?impl
@@ -23,7 +23,7 @@ set::to-list
 
 ;eof
 
-(ls-print set)
+(print-list set)
 ;=>nil
 ;out:
 mbr=?impl, access deny
@@ -47,7 +47,7 @@ mbr=to-list, mbr-property='(default final), mbr-attribute='(final), obj=(to-list
 (new set set1)
 ;=>set1
 
-(print-list (ls set1))
+(print-list (list-of set1))
 ;=>nil
 ;out:
 set1::?impl
@@ -59,7 +59,7 @@ set1::this
 (set1::add 1)
 ;=>nil
 
-(print-list (ls set1))
+(print-list (list-of set1))
 ;=>nil
 ;out:
 set1::?impl
@@ -69,7 +69,7 @@ set1::this
 
 ;eof
 
-(ls-print set1)
+(print-list set1)
 ;=>nil
 ;out:
 mbr=?impl, access deny

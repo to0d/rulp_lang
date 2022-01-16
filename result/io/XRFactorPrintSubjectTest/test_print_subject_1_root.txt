@@ -2,13 +2,13 @@ id=0, name=root, lvl=0, ref=0/0, entry=183, subject=root
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?os.version          : -202     0        1    var        10.0 : type=string  
-?os.name             : -201     0        1    var        Windows 10 : type=string
-?path.separator      : -200     0        1    var        ; : type=string     
-?file.separator      : -199     0        1    var        \ : type=string     
-?user.dir            : -198     0        1    var        C:\data\itool\irulp_base : type=string
-?user.name           : -197     0        1    var        to0d : type=string  
-?user.home           : -196     0        1    var        C:\Users\to0d : type=string
+?os.version          : -201     0        1    var        10.0 : type=string  
+?os.name             : -200     0        1    var        Windows 10 : type=string
+?path.separator      : -199     0        1    var        ; : type=string     
+?file.separator      : -198     0        1    var        \ : type=string     
+?user.dir            : -197     0        1    var        C:\data\itool\irulp_base : type=string
+?user.name           : -196     0        1    var        to0d : type=string  
+?user.home           : -195     0        1    var        C:\Users\to0d : type=string
 rulp-object-count    : -178     0        0    factor     rulp-object-count   
 runtime-call-count   : -177     0        0    factor     runtime-call-count  
 sys-free-memory      : -176     0        0    factor     sys-free-memory     
@@ -120,7 +120,7 @@ load                 : -71      0        0    factor     load
 print                : -70      0        0    factor     print               
 type#namespace       : -69      0        0    atom       type#namespace      
 namespace            : -68      0        1    class      namespace           
-ls                   : -67      0        0    factor     ls                  
+list-of              : -67      0        0    factor     list-of             
 has-member           : -66      0        0    factor     has-member          
 ::                   : -65      0        0    factor     ::                  
 defclass             : -64      0        0    factor     defclass            

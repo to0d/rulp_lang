@@ -8,7 +8,7 @@
 )
 ;=>
 
-(ls class1)
+(list-of class1)
 ;=>
 
 (defclass class2 (extends class1)
@@ -16,10 +16,10 @@
 )
 ;=>
 
-(ls class2)
+(list-of class2)
 ;=>
 
-(ls-print class2)
+(print-list class2)
 ;=>
 
 (new class1 o1)

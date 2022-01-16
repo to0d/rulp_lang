@@ -7,12 +7,12 @@
 (load tool)
 ;=>nil nil nil nil nil nil nil
 
-(defun ls-is-stable-fun (?subject) 
+(defun list-of-is-stable-fun (?subject) 
     (if (equal ?subject local)
     
-        (ls-is-stable-fun (value-of (:: (value-of local::parent) parent)))
+        (list-of-is-stable-fun (value-of (:: (value-of local::parent) parent)))
         
-        (loop for ?mbr in (ls ?subject) do 
+        (loop for ?mbr in (list-of ?subject) do 
             (if (is-stable  $(value-of (value-of ?mbr)))
                 (print (str-format "obj=%-20s, type=%s\n" 
                             (name-of $(value-of ?mbr)) 
@@ -21,9 +21,9 @@
         )
     )
 )
-;=>ls-is-stable-fun
+;=>list-of-is-stable-fun
 
-(ls-is-stable-fun root)
+(list-of-is-stable-fun root)
 ;=>nil
 ;out:
 obj=!=                  , type=factor
@@ -93,9 +93,9 @@ obj=join                , type=factor
 obj=lambda              , type=factor
 obj=let                 , type=factor
 obj=list                , type=atom
+obj=list-of             , type=factor
 obj=long                , type=atom
 obj=loop                , type=factor
-obj=ls                  , type=factor
 obj=macro               , type=atom
 obj=make-array          , type=factor
 obj=make-blob           , type=factor
@@ -167,7 +167,7 @@ obj=~                   , type=factor
 
 ;eof
 
-(ls-is-stable-fun system)
+(list-of-is-stable-fun system)
 ;=>nil
 ;out:
 obj=add                 , type=func
@@ -183,7 +183,7 @@ obj=to-list             , type=func
 
 ;eof
 
-(ls-is-stable-fun main)
+(list-of-is-stable-fun main)
 ;=>nil
 ;out:
 obj=file-prename        , type=func

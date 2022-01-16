@@ -14,10 +14,10 @@
 )
 ;=>class1 class2
 
-(ls class1)
+(list-of class1)
 ;=>'(class1::fun1)
 
-(ls class2)
+(list-of class2)
 ;=>'(class2::?is class2::extends class2::fun1)
 
 (new class2 o2)

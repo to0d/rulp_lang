@@ -14,7 +14,7 @@
 )
 ;;;
 
-(ls class1)
+(list-of class1)
 ;;;
 
 (new class1 o1)

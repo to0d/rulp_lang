@@ -29,10 +29,10 @@
 (value-of (value-of ns1::var2))
 ;=>3
 
-(ls)
+(list-of)
 ;=>'(main::?script-path main::_ginfo main::f1 main::file-prename main::file-subffix main::is-blank main::is-empty main::main main::ns1 main::root main::script_out main::system main::var1)
 
-(ls ns1)
+(list-of ns1)
 ;=>'(ns1::this ns1::var1 ns1::var2)
 
 (has-member ns1 var1)
@@ -57,10 +57,10 @@
 (ns1::f2)
 ;=>3
 
-(ls)
+(list-of)
 ;=>'(main::?rv main::?script-path main::_ginfo main::f1 main::file-prename main::file-subffix main::is-blank main::is-empty main::main main::ns1 main::root main::script_out main::system main::var1)
 
-(ls ns1)
+(list-of ns1)
 ;=>'(ns1::f1 ns1::f2 ns1::this ns1::var1 ns1::var2)
 
 ;;;;; Can't define same name item
@@ -76,10 +76,10 @@ duplicate funcion: (f1)
 at (defun ns1::f1 () (return 2)) ; main-2
 ;eof
 
-(ls)
+(list-of)
 ;=>'(main::?rv main::?script-path main::_ginfo main::f1 main::file-prename main::file-subffix main::is-blank main::is-empty main::main main::ns1 main::root main::script_out main::system main::var1)
 
-(ls ns1)
+(list-of ns1)
 ;=>'(ns1::f1 ns1::f2 ns1::this ns1::var1 ns1::var2)
 
 ;;;;; Can't find item if the using the name space is not specified
@@ -95,10 +95,10 @@ factor not found: (f2)
 at (f2) ; main-2
 ;eof
 
-(ls)
+(list-of)
 ;=>'(main::?rv main::?script-path main::_ginfo main::f1 main::file-prename main::file-subffix main::is-blank main::is-empty main::main main::ns1 main::root main::script_out main::system main::var1)
 
-(ls ns1)
+(list-of ns1)
 ;=>'(ns1::f1 ns1::f2 ns1::this ns1::var1 ns1::var2)
 
 ;;;;  Search item in a name space

@@ -1,9 +1,9 @@
-(defun ls-attribute-of (?subject) 
+(defun list-of-attribute-of (?subject) 
     (if (equal ?subject local)
     
-        (ls-is-const (value-of (:: (value-of local::parent) parent)))
+        (list-of-is-const (value-of (:: (value-of local::parent) parent)))
         
-        (loop for ?mbr in (ls ?subject) do 
+        (loop for ?mbr in (list-of ?subject) do 
             (print "obj=" (name-of $(value-of ?mbr)))
             (print ", type=" (type-of $(value-of (value-of ?mbr))))
             (print ", attribute=" (attribute-of  $(value-of (value-of ?mbr))))
@@ -11,9 +11,9 @@
         )
     )
 )
-;=>ls-attribute-of
+;=>list-of-attribute-of
 
-(ls-attribute-of root)
+(list-of-attribute-of root)
 ;=>nil
 ;out:
 obj=!=, type=factor, attribute='(atom stable)
@@ -100,10 +100,10 @@ obj=lambda, type=factor, attribute='(stable)
 obj=let, type=factor, attribute='(stable)
 obj=list, type=atom, attribute='()
 obj=list-function-in-return, type=factor, attribute='()
+obj=list-of, type=factor, attribute='(stable)
 obj=load, type=factor, attribute='(thread-unsafe)
 obj=long, type=atom, attribute='()
 obj=loop, type=factor, attribute='(stable)
-obj=ls, type=factor, attribute='(stable)
 obj=macro, type=atom, attribute='()
 obj=make-array, type=factor, attribute='(stable)
 obj=make-blob, type=factor, attribute='(stable)
@@ -202,7 +202,7 @@ obj=~, type=factor, attribute='(atom stable)
 
 ;eof
 
-(ls-attribute-of system)
+(list-of-attribute-of system)
 ;=>nil
 ;out:
 obj=++, type=macro, attribute='()
@@ -216,7 +216,6 @@ obj=equal, type=func, attribute='()
 obj=get, type=func, attribute='()
 obj=is-empty, type=func, attribute='()
 obj=length-of, type=func, attribute='()
-obj=print-list, type=macro, attribute='()
 obj=println, type=func, attribute='()
 obj=root, type=frame, attribute='()
 obj=size-of, type=func, attribute='()
@@ -227,7 +226,7 @@ obj=use, type=template, attribute='()
 
 ;eof
 
-(ls-attribute-of main)
+(list-of-attribute-of main)
 ;=>nil
 ;out:
 obj=?script-path, type=var, attribute='()
@@ -236,7 +235,7 @@ obj=file-prename, type=func, attribute='()
 obj=file-subffix, type=func, attribute='()
 obj=is-blank, type=func, attribute='()
 obj=is-empty, type=func, attribute='()
-obj=ls-attribute-of, type=func, attribute='()
+obj=list-of-attribute-of, type=func, attribute='()
 obj=main, type=frame, attribute='()
 obj=root, type=frame, attribute='()
 obj=script_out, type=macro, attribute='()

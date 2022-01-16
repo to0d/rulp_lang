@@ -7,12 +7,12 @@
 (load tool)
 ;=>nil nil nil nil nil nil nil
 
-(defun ls-is-thread-safe-objects (?subject) 
+(defun list-of-is-thread-safe-objects (?subject) 
     (if (equal ?subject local)
     
-        (ls-is-thread-safe-objects (value-of (:: (value-of local::parent) parent)))
+        (list-of-is-thread-safe-objects (value-of (:: (value-of local::parent) parent)))
         
-        (loop for ?mbr in (ls ?subject) do 
+        (loop for ?mbr in (list-of ?subject) do 
             (if (not (is-thread-safe  $(value-of (value-of ?mbr))))
                 (print (str-format "obj=%-20s, type=%s\n" 
                             (name-of $(value-of ?mbr)) 
@@ -21,9 +21,9 @@
         )
     )
 )
-;=>ls-is-thread-safe-objects
+;=>list-of-is-thread-safe-objects
 
-(ls-is-thread-safe-objects root)
+(list-of-is-thread-safe-objects root)
 ;=>nil
 ;out:
 obj=?file.separator     , type=var
@@ -51,7 +51,7 @@ obj=true                , type=bool
 
 ;eof
 
-(ls-is-thread-safe-objects system)
+(list-of-is-thread-safe-objects system)
 ;=>nil
 ;out:
 obj=?load-paths         , type=var
@@ -61,7 +61,7 @@ obj=system              , type=frame
 
 ;eof
 
-(ls-is-thread-safe-objects main)
+(list-of-is-thread-safe-objects main)
 ;=>nil
 ;out:
 obj=?script-path        , type=var

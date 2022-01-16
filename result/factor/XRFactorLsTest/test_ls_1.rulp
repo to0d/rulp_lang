@@ -1,8 +1,8 @@
-(ls)
+(list-of)
 ;=>
 
-(ls local)
+(list-of local)
 ;=>
 
-(ls main)
+(list-of main)
 ;=>

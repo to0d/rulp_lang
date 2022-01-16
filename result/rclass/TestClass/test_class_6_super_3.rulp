@@ -14,10 +14,10 @@
 )
 ;=>
 
-(ls class1)
+(list-of class1)
 ;=>
 
-(ls class2)
+(list-of class2)
 ;=>
 
 (new class2 o2)

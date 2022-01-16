@@ -2,5 +2,5 @@
 (defvar y)
 ;=>
 
-(ls local)
+(list-of local)
 ;=>

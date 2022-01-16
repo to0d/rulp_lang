@@ -8,7 +8,7 @@
 ;;;
 
 (let (?idx 1) 
-    (loop for ?x in (ls main) do
+    (loop for ?x in (list-of main) do
         (defvar ?v (value-of (value-of ?x)))
         (if (not (equal (type-of $(value-of ?v)) var)) 
             (continue))        

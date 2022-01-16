@@ -29,10 +29,10 @@
 (value-of (value-of ns1::var2))
 ;=>
 
-(ls)
+(list-of)
 ;=>
 
-(ls ns1)
+(list-of ns1)
 ;=>
 
 (has-member ns1 var1)
@@ -57,10 +57,10 @@
 (ns1::f2)
 ;=>
 
-(ls)
+(list-of)
 ;=>
 
-(ls ns1)
+(list-of ns1)
 ;=>
 
 ;;;;; Can't define same name item
@@ -70,10 +70,10 @@
 (defun ns1::f1 () (return 2))
 ;err
 
-(ls)
+(list-of)
 ;=>
 
-(ls ns1)
+(list-of ns1)
 ;=>
 
 ;;;;; Can't find item if the using the name space is not specified
@@ -83,10 +83,10 @@
 (f2)
 ;err
 
-(ls)
+(list-of)
 ;=>
 
-(ls ns1)
+(list-of ns1)
 ;=>
 
 ;;;;  Search item in a name space

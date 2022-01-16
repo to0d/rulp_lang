@@ -5,5 +5,5 @@
 (defvar y)
 ;=>
 
-(ls-print local var)
+(print-list local var)
 ;=>

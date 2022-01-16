@@ -2,23 +2,23 @@
 (load tool)
 ;=>
 
-(print-list (ls set))
+(print-list (list-of set))
 ;;;
 
-(ls-print set)
+(print-list set)
 ;;;
 
 (new set set1)
 ;;;
 
-(print-list (ls set1))
+(print-list (list-of set1))
 ;;;
 
 (set1::add 1)
 ;;;
 
-(print-list (ls set1))
+(print-list (list-of set1))
 ;;;
 
-(ls-print set1)
+(print-list set1)
 ;;;

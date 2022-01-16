@@ -100,7 +100,7 @@
 (add-attribute lambda                stable)
 (add-attribute let                   stable)
 (add-attribute loop                  stable)
-(add-attribute ls                    stable)
+(add-attribute list-of               stable)
 (add-attribute make-array            stable)
 (add-attribute make-blob             stable)
 (add-attribute make-list             stable)
@@ -269,9 +269,3 @@
 (defun get ((?l list) (?i int)) (return (get-of-list ?l ?i)))
 (defun get ((?arr array) (?i1 int)) (return (get-of-array ?arr ?i1)))
 (defun get ((?arr array) (?i1 int) (?i2 int)) (return (get-of-array ?arr ?i1 ?i2)))
-
-(defmacro print-list (?list) 
-    (loop for ?e in ?list do 
-        (print ?e "\n")
-    )
-)

@@ -2,21 +2,21 @@
 (load tool)
 ;=>
 
-(ls map)
+(list-of map)
 ;=>
 
 (new map map1)
 ;=>
 
-(ls map1)
+(list-of map1)
 ;=>
 
 (map1::put 1 2)
 ;=>
 
-(ls map1)
+(list-of map1)
 ;=>
 
-(ls-print map)
+(print-list map)
 ;=>
 

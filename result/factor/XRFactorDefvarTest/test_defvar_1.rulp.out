@@ -4,6 +4,6 @@
 (defvar y) y
 ;=>&y nil
 
-(ls)
+(list-of)
 ;=>'(main::?script-path main::_ginfo main::file-prename main::file-subffix main::is-blank main::is-empty main::main main::root main::script_out main::system main::x main::y)
 

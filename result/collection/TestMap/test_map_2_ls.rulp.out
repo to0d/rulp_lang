@@ -2,22 +2,22 @@
 (load tool)
 ;=>nil nil
 
-(ls map)
+(list-of map)
 ;=>'(map::?impl map::_map_clear map::_map_get map::_map_init map::_map_is_empty map::_map_put map::_map_size_of map::clear map::get map::init map::is-empty map::put map::size-of)
 
 (new map map1)
 ;=>map1
 
-(ls map1)
+(list-of map1)
 ;=>'(map1::?impl map1::init map1::this)
 
 (map1::put 1 2)
 ;=>nil
 
-(ls map1)
+(list-of map1)
 ;=>'(map1::?impl map1::init map1::put map1::this)
 
-(ls-print map)
+(print-list map)
 ;=>nil
 ;out:
 mbr=?impl, access deny

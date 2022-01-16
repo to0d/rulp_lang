@@ -7,12 +7,12 @@
 (load tool)
 ;=>
 
-(defun ls-is-thread-safe-objects (?subject) 
+(defun list-of-is-thread-safe-objects (?subject) 
     (if (equal ?subject local)
     
-        (ls-is-thread-safe-objects (value-of (:: (value-of local::parent) parent)))
+        (list-of-is-thread-safe-objects (value-of (:: (value-of local::parent) parent)))
         
-        (loop for ?mbr in (ls ?subject) do 
+        (loop for ?mbr in (list-of ?subject) do 
             (if (not (is-thread-safe  $(value-of (value-of ?mbr))))
                 (print (str-format "obj=%-20s, type=%s\n" 
                             (name-of $(value-of ?mbr)) 
@@ -23,11 +23,11 @@
 )
 ;;;
 
-(ls-is-thread-safe-objects root)
+(list-of-is-thread-safe-objects root)
 ;;;
 
-(ls-is-thread-safe-objects system)
+(list-of-is-thread-safe-objects system)
 ;;;
 
-(ls-is-thread-safe-objects main)
+(list-of-is-thread-safe-objects main)
 ;;;
