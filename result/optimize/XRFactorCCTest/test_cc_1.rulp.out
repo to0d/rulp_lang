@@ -21,20 +21,24 @@
 ;=>'('(stable true))
 
 (attribute-of fun2)
-;=>'()
+;=>'(opt-cco)
 
 (print-impl fun2)
 ;=>nil
 ;out:
 (defun fun2 (?m)
-    (do
+    (do[stable]
         (defvar ?x 0)
-        (loop for ?i from 1 to ?m do
-            (setq ?x (+ ?x (fun1 (+ ?i 1))))
+        (loop[stable] for ?i from 1 to ?m do
+            (setq[stable]
+                ?x
+                (+[atom return-type=1 stable] ?x (cc2[opt-id=0] (fun1 (+ ?i 1))))
+            )
         )
         (return ?x)
     )
-)
+)[opt-cco]
+rebuild: id=0, name=cc2, call=5, hit=0, func=fun1, cache=5, data:[$$i_2/2/D/0] [$$i_3/3/D/0] [$$i_4/4/D/0]...
 
 ;eof
 

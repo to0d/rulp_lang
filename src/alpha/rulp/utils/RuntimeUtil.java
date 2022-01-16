@@ -1,6 +1,35 @@
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_LOCAL;
+import static alpha.rulp.lang.Constant.A_NOCLASS;
+import static alpha.rulp.lang.Constant.A_OPT_LCO;
+import static alpha.rulp.lang.Constant.A_OPT_TCO;
+import static alpha.rulp.lang.Constant.A_PARENT;
+import static alpha.rulp.lang.Constant.A_TRACE;
+import static alpha.rulp.lang.Constant.F_IF;
+import static alpha.rulp.lang.Constant.F_MBR_THIS;
+import static alpha.rulp.lang.Constant.F_O_ADD;
+import static alpha.rulp.lang.Constant.F_O_AND;
+import static alpha.rulp.lang.Constant.F_O_BY;
+import static alpha.rulp.lang.Constant.F_O_DIV;
+import static alpha.rulp.lang.Constant.F_O_EQ;
+import static alpha.rulp.lang.Constant.F_O_GE;
+import static alpha.rulp.lang.Constant.F_O_GT;
+import static alpha.rulp.lang.Constant.F_O_LE;
+import static alpha.rulp.lang.Constant.F_O_LT;
+import static alpha.rulp.lang.Constant.F_O_MBR;
+import static alpha.rulp.lang.Constant.F_O_MOD;
+import static alpha.rulp.lang.Constant.F_O_NE;
+import static alpha.rulp.lang.Constant.F_O_NOT;
+import static alpha.rulp.lang.Constant.F_O_OR;
+import static alpha.rulp.lang.Constant.F_O_POWER;
+import static alpha.rulp.lang.Constant.F_O_SUB;
+import static alpha.rulp.lang.Constant.F_O_XOR;
+import static alpha.rulp.lang.Constant.F_RETURN;
+import static alpha.rulp.lang.Constant.O_False;
+import static alpha.rulp.lang.Constant.O_Nil;
+import static alpha.rulp.lang.Constant.O_True;
+import static alpha.rulp.lang.Constant.T_Expr;
 
 import java.util.ArrayList;
 import java.util.Collection;

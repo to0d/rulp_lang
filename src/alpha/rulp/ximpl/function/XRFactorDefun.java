@@ -15,7 +15,6 @@ import static alpha.rulp.lang.Constant.A_OPT_ERO;
 import static alpha.rulp.lang.Constant.A_OPT_FULL;
 import static alpha.rulp.lang.Constant.A_OPT_LCO;
 import static alpha.rulp.lang.Constant.A_OPT_TCO;
-import static alpha.rulp.lang.Constant.T_Expr;
 
 import java.util.ArrayList;
 import java.util.Collections;

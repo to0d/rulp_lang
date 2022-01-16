@@ -36,32 +36,50 @@
 ;=>'()
 
 (attribute-of fun2)
-;=>'('(stable true))
+;=>'(opt-cco)
 
 (print-impl fun2)
 ;=>nil
 ;out:
 (defun fun2 (?v)
-    (do
+    (do[stable]
         (if
             (<= ?v 0)
             (return 0)
         )
-        (if
+        (if[stable]
             (<= ?v 10)
-            (return (+ ?v (fun2 (- ?v 1))))
+            (return[stable]
+                (+[atom return-type=1 stable] ?v (cc2[opt-id=0] (fun2 (- ?v 1))))
+            )
         )
-        (if
+        (if[stable]
             (<= ?v 100)
-            (return (+ (fun2 (- ?v 1)) (fun2 (- (/ ?v 2) 1))))
+            (return[stable]
+                (+[atom return-type=1 stable]
+                    (cc2[opt-id=0] (fun2 (- ?v 1)))
+                    (cc2[opt-id=0] (fun2 (- (/ ?v 2) 1)))
+                )
+            )
         )
-        (if
+        (if[stable]
             (<= ?v 1000)
-            (return (+ (fun2 (- ?v 1)) (fun2 (- (/ ?v 4) 1))))
+            (return[stable]
+                (+[atom return-type=1 stable]
+                    (cc2[opt-id=0] (fun2 (- ?v 1)))
+                    (cc2[opt-id=0] (fun2 (- (/ ?v 4) 1)))
+                )
+            )
         )
-        (return (+ (fun2 (- ?v 1)) (fun2 (- (/ ?v 8) 1))))
+        (return[stable]
+            (+[atom return-type=1 stable]
+                (cc2[opt-id=0] (fun2 (- ?v 1)))
+                (cc2[opt-id=0] (fun2 (- (/ ?v 8) 1)))
+            )
+        )
     )
-)[stable=true]
+)[opt-cco]
+rebuild: id=0, name=cc2, call=197, hit=96, func=fun2, cache=101, data:[$$i_0/0/D/1] [$$i_1/1/D/1] [$$i_10/55/D/3]...
 
 ;eof
 
@@ -72,7 +90,7 @@
       Name: Status
 --------------------------------------------------------------------------------------------------------------------------
        ERO: rebuild=0, compute=0
-       CCO: rebuild=6, expr=6, call=7, cache=0, reuse=36
+       CCO: rebuild=1, expr=1, call=197, cache=96, reuse=6
        TCO: rebuild=0, expr=0, call=0, compute=0, max-level=0, node=0
        LCO: rebuild=0, arg=0, pass=0, hit=0
 ==========================================================================================================================

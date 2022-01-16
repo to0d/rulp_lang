@@ -6,11 +6,8 @@ import static alpha.rulp.lang.Constant.T_Expr;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import alpha.rulp.lang.IRExpr;
-import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRParaAttr;
 import alpha.rulp.lang.RException;
-import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.AttrUtil;
 
 public class LCOUtil {
