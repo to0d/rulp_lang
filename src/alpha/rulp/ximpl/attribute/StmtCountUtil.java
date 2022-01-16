@@ -4,9 +4,11 @@ import static alpha.rulp.lang.Constant.A_STMT_COUNT;
 
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
+import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRFunctionList;
@@ -16,6 +18,7 @@ import alpha.rulp.runtime.IRMacro;
 import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.utils.RuntimeUtil;
 
 public class StmtCountUtil {
 
@@ -26,11 +29,11 @@ public class StmtCountUtil {
 		}
 
 		IRObject e0 = RulpUtil.lookup(expr.get(0), interpreter, frame);
-		int count = 1 + getStmtCount(e0, interpreter, frame);
+		int count = 1 + _getStmtCount(e0, interpreter, frame);
 
 		IRIterator<? extends IRObject> it = expr.listIterator(1);
 		while (it.hasNext()) {
-			count += getStmtCount(it.next(), interpreter, frame);
+			count += _getStmtCount(it.next(), interpreter, frame);
 		}
 
 		return count;
@@ -68,7 +71,7 @@ public class StmtCountUtil {
 
 		} else {
 
-			count = getStmtCount(func.getFunBody(), interpreter, frame);
+			count = _getStmtCount(func.getFunBody(), interpreter, frame);
 		}
 
 		AttrUtil.setAttribute(func, A_STMT_COUNT, RulpFactory.createInteger(count));
@@ -81,7 +84,7 @@ public class StmtCountUtil {
 
 		IRIterator<? extends IRObject> it = list.iterator();
 		while (it.hasNext()) {
-			count += getStmtCount(it.next(), interpreter, frame);
+			count += _getStmtCount(it.next(), interpreter, frame);
 		}
 
 		return count;
@@ -94,12 +97,16 @@ public class StmtCountUtil {
 			return RulpUtil.asInteger(attrValue).asInteger();
 		}
 
-		int count = getStmtCount(macro.getMacroBody(), interpreter, frame);
+		int count = _getStmtCount(macro.getMacroBody(), interpreter, frame);
 		AttrUtil.setAttribute(macro, A_STMT_COUNT, RulpFactory.createInteger(count));
 		return count;
 	}
 
-	public static int getStmtCount(IRObject obj, IRInterpreter interpreter, IRFrame frame) throws RException {
+	private static int _getStmtCount(IRObject obj, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		if (level++ > 100) {
+			System.out.println();
+		}
 
 		switch (obj.getType()) {
 
@@ -121,8 +128,34 @@ public class StmtCountUtil {
 		case LIST:
 			return _getListStmtCount((IRList) obj, interpreter, frame);
 
+		case ATOM:
+
+			String atomName = RulpUtil.asAtom(obj).getName();
+
+			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, atomName);
+			// is pure atom
+			if (entry == null) {
+				return 0;
+			}
+
+			IRObject entryValue = entry.getObject();
+			if (entryValue == null || entryValue.getType() == RType.ATOM) {
+				return 0;
+			}
+
+			return _getStmtCount(entryValue, interpreter, frame);
+
 		default:
 			return 0;
 		}
+	}
+
+	static int level = 0;
+
+	public static int getStmtCount(IRObject obj, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		level = 0;
+
+		return _getStmtCount(obj, interpreter, frame);
 	}
 }

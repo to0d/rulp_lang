@@ -95,6 +95,10 @@ public class AttrUtil {
 		return StableUtil.isStable(obj, null, frame);
 	}
 
+	public static boolean isRecursive(IRFunction func) throws RException {
+
+	}
+
 	public static boolean isStableValue(IRIterator<? extends IRObject> it, NameSet nameSet, IRFrame frame)
 			throws RException {
 

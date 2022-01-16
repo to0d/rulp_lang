@@ -1,0 +1,43 @@
+(defun list-stmt-count (?subject) 
+    (if (equal ?subject local)
+    
+        (list-stmt-count (value-of (:: (value-of local::parent) parent)))
+
+        (loop for ?mbr in (list-of ?subject) do
+            (defvar ?type (type-of $(value-of (value-of ?mbr))))            
+            (if (= ?type func)
+                (print (str-format "obj=%-20s, type=%-8s, stmt-count=%d\n" 
+                            (name-of $(value-of ?mbr))
+                            (to-string ?type)
+                            (stmt-count-of $(value-of (value-of ?mbr)))))
+            )
+        )
+    )
+)
+;=>list-stmt-count
+
+(list-stmt-count root)
+;=>nil
+
+(list-stmt-count system)
+;=>nil
+;out:
+obj=add                 , type=func    , stmt-count=4
+obj=add-all             , type=func    , stmt-count=4
+obj=cmp                 , type=func    , stmt-count=4
+obj=equal               , type=func    , stmt-count=4
+obj=get                 , type=func    , stmt-count=4
+obj=is-empty            , type=func    , stmt-count=9
+obj=length-of           , type=func    , stmt-count=4
+obj=println             , type=func    , stmt-count=2
+obj=size-of             , type=func    , stmt-count=4
+obj=to-array            , type=func    , stmt-count=6
+obj=to-list             , type=func    , stmt-count=4
+
+;eof
+
+(list-stmt-count main)
+;err:
+java.lang.StackOverflowError
+;eof
+

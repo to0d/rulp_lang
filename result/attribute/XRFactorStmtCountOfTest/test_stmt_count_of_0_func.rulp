@@ -1,0 +1,26 @@
+(defun list-stmt-count (?subject) 
+    (if (equal ?subject local)
+    
+        (list-stmt-count (value-of (:: (value-of local::parent) parent)))
+
+        (loop for ?mbr in (list-of ?subject) do
+            (defvar ?type (type-of $(value-of (value-of ?mbr))))            
+            (if (= ?type func)
+                (print (str-format "obj=%-20s, type=%-8s, stmt-count=%d\n" 
+                            (name-of $(value-of ?mbr))
+                            (to-string ?type)
+                            (stmt-count-of $(value-of (value-of ?mbr)))))
+            )
+        )
+    )
+)
+;;;
+
+(list-stmt-count root)
+;=>
+
+(list-stmt-count system)
+;=>
+
+(list-stmt-count main)
+;=>
