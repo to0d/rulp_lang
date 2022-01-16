@@ -5,10 +5,10 @@ Total runtime info:
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
            Interpreter call id:      241
-    Interpreter call level/max:        4       10
-               Frame max level:        5
-                  Frame max id:        7
-           Frame free id count:        2
+    Interpreter call level/max:        4      512
+               Frame max level:      206
+                  Frame max id:      207
+           Frame free id count:      203
 ==========================================================================================================================
 
 Optimize info:
@@ -16,7 +16,7 @@ Optimize info:
       Name: Status
 --------------------------------------------------------------------------------------------------------------------------
        ERO: rebuild=0, compute=0
-       CCO: rebuild=0, expr=0, call=0, cache=0, reuse=0
+       CCO: rebuild=6, expr=6, call=7, cache=0, reuse=36
        TCO: rebuild=0, expr=0, call=0, compute=0, max-level=0, node=0
        LCO: rebuild=0, arg=0, pass=0, hit=0
 ==========================================================================================================================
@@ -25,42 +25,42 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      262
-      func:        2
-  template:        2
+    factor:   336865
+      func:    42080
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=241, row=27, column=61(4), value-max=5, value-unit=2^x
+Callable stats info: callId=241, row=28, column=61(4), value-max=84102, value-unit=4^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         3333333333333333333333333333333333333333333333333333333343455 max=16, unit=2^x
+   Frame    RType  Count  Ref Object                         22222222222222222222222222222222222222222222222222222222335X3 max=378460, unit=4^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor    179    0 add-attribute                   1333333333333333333333333333333333333333333332              
-    root   factor     39    0 defun                                                                        133321333342   
-    root   factor      9    0 search-frame-of                                                                         2231
-    root   factor      6    0 alias                          33                                                           
+    root   factor  84152    0 if                                                                                      14X1
+    root   factor  84151    0 <=                                                                                      14X 
+    root   factor  42079    0 return                                                                                  1491
+    root   factor  42079    0 do                                                                                      1491
+    main     func  42072    1 (fun2 nil)                                                                               49 
+    root   factor  42072    0 -                                                                                        49 
+    root   factor  37169    0 +                                                                                        491
+    root   factor   4904    0 /                                                                                        18 
+    root   factor    179    0 add-attribute                   1222222222222222222222222222222222222222222222              
+    root   factor     40    0 defun                                                                        122221222232   
+    root   factor      6    0 cc                                                                                      121 
+    root   factor      6    0 alias                          22                                                           
     root   factor      4    0 defvar                                                                       1         1   2
-    root   factor      3    0 deftemplate                                                                       3         
+    root   factor      3    0 deftemplate                                                                       2         
     root   factor      3    0 defmacro                                                                         2     1    
-  system template      2    1 use                                                                                      11 
-    root   factor      2    0 print                                                                                     2 
-    root   factor      2    0 do                                                                                        11
-    root   factor      2    0 add_search_frame                                                                         11 
-    root   factor      1    0 value-of                                                                                 1  
+    root   factor      2    0 attribute-of                                                                              2 
     root   factor      1    0 str-substr                                                                                 1
     root   factor      1    0 str-last-index-of                                                                          1
     root   factor      1    0 setq                                                                                       1
     main    macro      1    1 script_out                                                                                 1
-    root   factor      1    0 return                                                                                     1
+    root   factor      1    0 print-impl                                                                                1 
     root   factor      1    0 print-global-info                                                                          1
     root   factor      1    0 out-to-file                                                                                1
-    root   factor      1    0 new                                                                                      1  
+    root   factor      1    0 opt-status                                                                                 1
     root   factor      1    0 load                                                                                   1    
-    root   factor      1    0 if                                                                                         1
-    root   factor      1    0 frame-of                                                                                 1  
     main     func      1    1 (file-prename string)                                                                      1
     main funcList      1    2 _ginfo                                                                                     1
-    root   factor      1    0 +                                                                                          1
     root   factor      1    0 !=                                                                                         1
 ==========================================================================================================================
 
@@ -68,31 +68,30 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1084            0         1084
-      string:           28            0           28
-        list:           11            4            7
-        expr:          445            3          442
-         var:           18            7           11
-        func:           52            0           52
+        atom:         1125            0         1125
+         int:         2463            0         2463
+      string:           26            0           26
+        list:            8            2            6
+        expr:        42685        42079          606
+         var:        79261        79249           12
+        func:           65            0           65
     template:            1            0            1
        macro:            3            0            3
-    instance:            1            0            1
-      member:            1            0            1
-       frame:            7            5            2
+       frame:        84159        84158            1
  interpreter:            1            0
-  frameEntry:          226            0
-      lambda:            0            0
+  frameEntry:        79464            0
+      lambda:            6            0
 ==========================================================================================================================
 
-Global frame list: total=2
+Global frame list: total=1
 
-id=2, name=main, lvl=2, ref=4/7, entry=12, pid=1(system), subject=main, search=[frame@main, frame@SF-ns1-0]
+id=2, name=main, lvl=2, ref=8/8, entry=12, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
-main                 : 3        2        4    frame      frame@main          
+main                 : 3        2        8    frame      frame@main          
 is-empty             : 4        2        1    funcList   '((is-empty array) (is-empty list) (is-empty string)) : frame=null, type=list
                                          2    func       (is-empty list) : frame=frame@system
                                          2    func       (is-empty array) : frame=frame@system
@@ -100,39 +99,29 @@ is-empty             : 4        2        1    funcList   '((is-empty array) (is-
 is-blank             : 5        2        1    func       (is-blank string) : frame=frame@main
 file-prename         : 6        2        1    func       (file-prename string) : frame=frame@main
 file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
-?script-path         : 8        2        1    var        result\runtime\XRFactorSearchFrameOfTest\test_search_frame_of_1.rulp : type=string
+?script-path         : 8        2        1    var        result\optimize\XRFactorCCTest\test_cc_2_recursion_fun.rulp : type=string
 script_out           : 9        2        1    macro      script_out          
 _ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          1    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
-local                : 11       2        4    frame      frame@main          
-ns1                  : 12       2        2    instance   namespace@ns1       
+fun2                 : 11       2        1    func       (fun2 nil) : frame=frame@main
+?rv                  : 13       2        1    var        132564 : type=int   
 ==========================================================================================================================
 
 
-id=3, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$__ginfo
+id=172, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$__ginfo
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?rv                  : 24       3        1    var        result\runtime\XRFactorSearchFrameOfTest\test_search_frame_of_1 : type=string
+?rv                  : 79262    172      1    var        result\optimize\XRFactorCCTest\test_cc_2_recursion_fun : type=string
 ==========================================================================================================================
-
-id=4, name=SF-ns1-0, lvl=3, ref=2/3, entry=0, pid=2(main), subject=ns1
 
 Global frame tree:
 
 ->FRAME(root): id=0, lvl=0, subject=root
     ->FRAME(system): id=1, lvl=1, subject=system
-        ->FRAME(main): id=2, lvl=2, subject=main, search=[frame@main, frame@SF-ns1-0]
-            ->FRAME(_$fun$__ginfo): id=3, lvl=3, subject=_$fun$__ginfo
-            ->FRAME(SF-ns1-0): id=4, lvl=3, subject=ns1
+        ->FRAME(main): id=2, lvl=2, subject=main
+            ->FRAME(_$fun$__ginfo): id=172, lvl=3, subject=_$fun$__ginfo
 
 Global Subject list:
-
-name=ns1, string=namespace@ns1, lvl=1, ref=2/4, parent=namespace, final=false, mbrs=1, frame=4(SF-ns1-0)
-==========================================================================================================================
-Name                 : Access  Final Static Inherit Prop Ref  Type       Value
---------------------------------------------------------------------------------------------------------------------------
-this                 : DEFAULT                      0    2    instance   namespace@ns1
-==========================================================================================================================
 

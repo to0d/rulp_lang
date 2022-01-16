@@ -15,8 +15,70 @@
 ;=>fun2
 
 (cc (fun2 0))
-;err:
-factor not found: (cc (fun2 0))
-at (cc (fun2 0)) ; main-2
+;=>0
+
+(cc (fun2 1))
+;=>1
+
+(cc (fun2 2))
+;=>3
+
+(cc (fun2 3))
+;=>6
+
+(cc (fun2 11))
+;=>65
+
+(cc (fun2 101))
+;=>132564
+
+(attribute-of fun1)
+;=>'()
+
+(attribute-of fun2)
+;=>'('(stable true))
+
+(print-impl fun2)
+;=>nil
+;out:
+(defun fun2 (?v)
+    (do
+        (if
+            (<= ?v 0)
+            (return 0)
+        )
+        (if
+            (<= ?v 10)
+            (return (+ ?v (fun2 (- ?v 1))))
+        )
+        (if
+            (<= ?v 100)
+            (return (+ (fun2 (- ?v 1)) (fun2 (- (/ ?v 2) 1))))
+        )
+        (if
+            (<= ?v 1000)
+            (return (+ (fun2 (- ?v 1)) (fun2 (- (/ ?v 4) 1))))
+        )
+        (return (+ (fun2 (- ?v 1)) (fun2 (- (/ ?v 8) 1))))
+    )
+)[stable=true]
+
 ;eof
+
+(opt-status)
+;=>nil
+;out:
+==========================================================================================================================
+      Name: Status
+--------------------------------------------------------------------------------------------------------------------------
+       ERO: rebuild=0, compute=0
+       CCO: rebuild=6, expr=6, call=7, cache=0, reuse=36
+       TCO: rebuild=0, expr=0, call=0, compute=0, max-level=0, node=0
+       LCO: rebuild=0, arg=0, pass=0, hit=0
+==========================================================================================================================
+
+;eof
+
+(_ginfo)
+;=>nil
 

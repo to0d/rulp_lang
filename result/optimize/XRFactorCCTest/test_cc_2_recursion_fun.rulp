@@ -32,9 +32,6 @@
 (cc (fun2 101))
 ;=>
 
-(cc (fun2 1001))
-;=>
-
 (attribute-of fun1)
 ;=>
 

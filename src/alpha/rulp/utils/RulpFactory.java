@@ -174,6 +174,7 @@ import alpha.rulp.ximpl.math.XRFactorToInteger;
 import alpha.rulp.ximpl.namespace.XRNameSpace;
 import alpha.rulp.ximpl.namespace.XRNameSpaceClass;
 import alpha.rulp.ximpl.optimize.XFactorReduct;
+import alpha.rulp.ximpl.optimize.XRFactorCC;
 import alpha.rulp.ximpl.optimize.XRFactorListFunctionInReturn;
 import alpha.rulp.ximpl.optimize.XRFactorOptStatus;
 import alpha.rulp.ximpl.optimize.XRFactorPrintImpl;
@@ -596,6 +597,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorAttributeOf(F_ATTRIBUTE_OF));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorAddAttribute(F_ADD_ATTRIBUTE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorReturnTypeOf(F_RETURN_TYPE_OF));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorCC(F_CC));
 
 		// Class
 		RulpUtil.addFrameObject(rootFrame, new XRNoClass(A_NOCLASS, rootFrame));

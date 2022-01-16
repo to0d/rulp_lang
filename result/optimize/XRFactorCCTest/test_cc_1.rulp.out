@@ -1,5 +1,7 @@
 (defun fun1 (?v)
-    (return (+ ?v 1))
+    (if (<= ?v 0) 
+        (return 0))
+    (return (+ (fun1 (- ?v 1)) 1))
 )
 ;=>fun1
 
@@ -13,8 +15,43 @@
 ;=>fun2
 
 (cc (fun2 5))
-;err:
-factor not found: (cc (fun2 5))
-at (cc (fun2 5)) ; main-2
+;=>20
+
+(attribute-of fun1)
+;=>'('(stable true))
+
+(attribute-of fun2)
+;=>'()
+
+(print-impl fun2)
+;=>nil
+;out:
+(defun fun2 (?m)
+    (do
+        (defvar ?x 0)
+        (loop for ?i from 1 to ?m do
+            (setq ?x (+ ?x (fun1 (+ ?i 1))))
+        )
+        (return ?x)
+    )
+)
+
 ;eof
+
+(opt-status)
+;=>nil
+;out:
+==========================================================================================================================
+      Name: Status
+--------------------------------------------------------------------------------------------------------------------------
+       ERO: rebuild=0, compute=0
+       CCO: rebuild=1, expr=1, call=5, cache=0, reuse=0
+       TCO: rebuild=0, expr=0, call=0, compute=0, max-level=0, node=0
+       LCO: rebuild=0, arg=0, pass=0, hit=0
+==========================================================================================================================
+
+;eof
+
+(_ginfo)
+;=>nil
 

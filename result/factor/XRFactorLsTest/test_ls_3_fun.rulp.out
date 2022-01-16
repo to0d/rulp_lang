@@ -75,6 +75,7 @@ root::bool
 root::break
 root::can-cast
 root::case
+root::cc
 root::class
 root::class-of
 root::cmp_def

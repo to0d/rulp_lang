@@ -73,6 +73,21 @@ public class CCOUtil {
 		CC2CallCount.getAndIncrement();
 	}
 
+	public static IRExpr rebuild(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		CC2RebuildCount.getAndIncrement();
+
+		NameSet nameSet = new NameSet();
+
+		CCO cc0 = new CCO();
+		cc0.setInputExpr(expr);
+
+		CCOUtil ccoUtil = new CCOUtil(interpreter, frame);
+		ccoUtil._rebuildCC2(cc0, nameSet);
+
+		return cc0.outputExpr == null ? expr : cc0.outputExpr;
+	}
+
 	// (Op A1 A2 ... Ak), Op is Stable functions, Ak const value, or local
 	// variables
 	public static IRExpr rebuild(IRExpr expr, List<IRParaAttr> paras, String funcName, IRInterpreter interpreter,

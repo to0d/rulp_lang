@@ -1,5 +1,7 @@
 (defun fun1 (?v)
-    (return (+ ?v 1))
+    (if (<= ?v 0) 
+        (return 0))
+    (return (+ (fun1 (- ?v 1)) 1))
 )
 ;=>
 

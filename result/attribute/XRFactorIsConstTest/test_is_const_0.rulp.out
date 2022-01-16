@@ -48,6 +48,7 @@ obj=bool                , type=atom
 obj=break               , type=factor
 obj=can-cast            , type=factor
 obj=case                , type=factor
+obj=cc                  , type=factor
 obj=class               , type=atom
 obj=class-of            , type=factor
 obj=cmp_def             , type=factor
