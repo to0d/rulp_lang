@@ -89,6 +89,7 @@ obj=if                  , type=factor
 obj=instance            , type=atom
 obj=int                 , type=atom
 obj=is-const            , type=factor
+obj=is-recursive        , type=factor
 obj=is-stable           , type=factor
 obj=is-thread-safe      , type=factor
 obj=join                , type=factor

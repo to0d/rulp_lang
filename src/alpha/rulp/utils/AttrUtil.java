@@ -1,11 +1,13 @@
 package alpha.rulp.utils;
 
+import static alpha.rulp.lang.Constant.A_RECURSIVE;
 import static alpha.rulp.lang.Constant.A_THREAD_UNSAFE;
 
 import java.util.List;
 
 import alpha.rulp.lang.IRArray;
 import alpha.rulp.lang.IRClass;
+import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
@@ -13,6 +15,7 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFunction;
+import alpha.rulp.runtime.IRFunctionList;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.ximpl.attribute.StableUtil;
 import alpha.rulp.ximpl.lang.AbsObject;
@@ -20,6 +23,64 @@ import alpha.rulp.ximpl.optimize.NameSet;
 import alpha.rulp.ximpl.optimize.OptUtil;
 
 public class AttrUtil {
+
+	private static boolean _hasFunc(IRObject obj, String funcName) throws RException {
+
+		switch (obj.getType()) {
+		case EXPR: {
+			IRExpr expr = (IRExpr) obj;
+			if (expr.isEmpty()) {
+				return false;
+			}
+
+			IRObject e0 = expr.get(0);
+			if (OptUtil.isFunc(e0, funcName)) {
+				return true;
+			}
+
+			IRIterator<? extends IRObject> it = expr.listIterator(1);
+			while (it.hasNext()) {
+				if (_hasFunc(it.next(), funcName)) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		case LIST: {
+			IRList list = (IRList) obj;
+			IRIterator<? extends IRObject> it = list.iterator();
+			while (it.hasNext()) {
+				if (_hasFunc(it.next(), funcName)) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		default:
+			return false;
+		}
+	}
+
+	private static boolean _isRecursiveFunc(IRFunction func) throws RException {
+
+		if (func.isList()) {
+
+			IRFunctionList funcList = (IRFunctionList) func;
+			for (IRFunction childFunc : funcList.getAllFuncList()) {
+				if (isRecursive(childFunc)) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		return _hasFunc(func.getFunBody(), func.getName());
+	}
 
 	public static void addAttribute(IRObject obj, String key) throws RException {
 		((AbsObject) obj).addAttribute(key);
@@ -91,12 +152,21 @@ public class AttrUtil {
 		}
 	}
 
-	public static boolean isStable(IRObject obj, IRFrame frame) throws RException {
-		return StableUtil.isStable(obj, null, frame);
-	}
-
 	public static boolean isRecursive(IRFunction func) throws RException {
 
+		IRObject value = AttrUtil.getAttributeValue(func, A_RECURSIVE);
+		if (value != null) {
+			return RulpUtil.asBoolean(value).asBoolean();
+		}
+
+		boolean rc = _isRecursiveFunc(func);
+		AttrUtil.setAttribute(func, A_RECURSIVE, RulpFactory.createBoolean(rc));
+
+		return rc;
+	}
+
+	public static boolean isStable(IRObject obj, IRFrame frame) throws RException {
+		return StableUtil.isStable(obj, null, frame);
 	}
 
 	public static boolean isStableValue(IRIterator<? extends IRObject> it, NameSet nameSet, IRFrame frame)

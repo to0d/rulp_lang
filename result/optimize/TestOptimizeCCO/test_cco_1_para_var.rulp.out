@@ -1,5 +1,8 @@
+(load math)
+;=>nil
+
 (defun fun1 (?v)
-    (return (+ ?v 1))
+    (return (max ?v (+ (- 10 (+ 4 5)) 1)))
 )
 ;=>fun1
 
@@ -13,10 +16,10 @@
 ;=>fun2
 
 (fun2 5)
-;=>20
+;=>16
 
 (attribute-of fun1)
-;=>'('(stable true))
+;=>'('(recursive false) '(stable true) '(stmt-count 17))
 
 (attribute-of fun2)
 ;=>'(opt-cco)
@@ -36,7 +39,7 @@
         (return ?x)
     )
 )[opt-cco]
-rebuild: id=0, name=cc2, call=5, hit=0, func=fun1, cache=5, data:[$$i_1/2/D/0] [$$i_2/3/D/0] [$$i_3/4/D/0]...
+rebuild: id=0, name=cc2, call=5, hit=0, func=fun1, cache=5, data:[$$i_1/2/D/0] [$$i_2/2/D/0] [$$i_3/3/D/0]...
 
 ;eof
 

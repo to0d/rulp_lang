@@ -1,5 +1,8 @@
+(load math)
+;=>nil
+
 (defun fun1 (?v)
-    (return (+ ?v 1))
+    (return (max ?v (+ (- 10 (+ 4 5)) 1)))
 )
 ;=>fun1
 
@@ -16,7 +19,7 @@
 ;=>6
 
 (attribute-of fun1)
-;=>'('(stable true))
+;=>'('(recursive false) '(stable true) '(stmt-count 17))
 
 (attribute-of fun2)
 ;=>'(opt-cco)

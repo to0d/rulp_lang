@@ -13,10 +13,13 @@ import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
+import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
+import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorIsRecursive extends AbsAtomFactorAdapter implements IRFactor {
@@ -32,7 +35,29 @@ public class XRFactorIsRecursive extends AbsAtomFactorAdapter implements IRFacto
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		return RulpFactory.createBoolean(AttrUtil.isStable(args.get(1), frame));
+		IRObject obj = args.get(1);
+		while (obj.getType() != RType.FUNC) {
+
+			switch (obj.getType()) {
+			case EXPR:
+				obj = interpreter.compute(frame, obj);
+				break;
+
+			case ATOM:
+				IRObject obj2 = RulpUtil.lookup(obj, interpreter, frame);
+				if (obj2 == obj) {
+					throw new RException("func not found: " + obj);
+				}
+				obj = obj2;
+				break;
+
+			default:
+				throw new RException("not func: " + obj);
+			}
+
+		}
+
+		return RulpFactory.createBoolean(AttrUtil.isRecursive((IRFunction) obj));
 	}
 
 }

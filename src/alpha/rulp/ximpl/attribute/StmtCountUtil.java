@@ -59,19 +59,22 @@ public class StmtCountUtil {
 
 		int count = 0;
 
-		if (func.isList()) {
-
-			IRFunctionList funcList = (IRFunctionList) func;
-			for (IRFunction childFunc : funcList.getAllFuncList()) {
-				int childCount = _getFuncStmtCount(childFunc, interpreter, frame);
-				if (count < childCount) {
-					count = childCount;
-				}
-			}
+		if (AttrUtil.isRecursive(func)) {
+			count = -1;
 
 		} else {
 
-			count = _getStmtCount(func.getFunBody(), interpreter, frame);
+			if (func.isList()) {
+				IRFunctionList funcList = (IRFunctionList) func;
+				for (IRFunction childFunc : funcList.getAllFuncList()) {
+					int childCount = _getFuncStmtCount(childFunc, interpreter, frame);
+					if (count < childCount) {
+						count = childCount;
+					}
+				}
+			} else {
+				count = _getStmtCount(func.getFunBody(), interpreter, frame);
+			}
 		}
 
 		AttrUtil.setAttribute(func, A_STMT_COUNT, RulpFactory.createInteger(count));
@@ -104,9 +107,9 @@ public class StmtCountUtil {
 
 	private static int _getStmtCount(IRObject obj, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (level++ > 100) {
-			System.out.println();
-		}
+//		if (level++ > 100) {
+//			System.out.println();
+//		}
 
 		switch (obj.getType()) {
 
@@ -150,11 +153,11 @@ public class StmtCountUtil {
 		}
 	}
 
-	static int level = 0;
+//	static int level = 0;
 
 	public static int getStmtCount(IRObject obj, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		level = 0;
+//		level = 0;
 
 		return _getStmtCount(obj, interpreter, frame);
 	}

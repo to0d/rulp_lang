@@ -1,0 +1,24 @@
+(defun list-recursive-func (?subject) 
+    (if (equal ?subject local)
+    
+        (list-recursive-func (value-of (:: (value-of local::parent) parent)))
+
+        (loop for ?mbr in (list-of ?subject) do
+            (defvar ?type (type-of $(value-of (value-of ?mbr))))            
+            (if (and (= ?type func) (is-recursive $(value-of (value-of ?mbr))))
+                (print (str-format "func=%s\n" 
+                            (name-of $(value-of ?mbr))))
+            )
+        )
+    )
+)
+;;;
+
+(list-recursive-func root)
+;=>
+
+(list-recursive-func system)
+;=>
+
+(list-recursive-func main)
+;=>

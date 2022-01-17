@@ -1,0 +1,12 @@
+;; fact(n) = n*fact(n-1)
+(defun fun1 (?v)
+    (do
+        (if (<= ?v 0)(return 1))
+        (return (* ?v (fun1 (- ?v 1))))
+    )
+)
+;=>fun1
+
+(is-recursive fun1)
+;=>true
+

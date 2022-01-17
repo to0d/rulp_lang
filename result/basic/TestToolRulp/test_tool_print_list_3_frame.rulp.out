@@ -89,6 +89,7 @@ mbr=if, mbr-property='(public), mbr-attribute='(), obj=if, obj-type=factor, obj-
 mbr=instance, mbr-property='(public), mbr-attribute='(), obj=instance, obj-type=atom, obj-attribute='()
 mbr=int, mbr-property='(public), mbr-attribute='(), obj=int, obj-type=atom, obj-attribute='()
 mbr=is-const, mbr-property='(public), mbr-attribute='(), obj=is-const, obj-type=factor, obj-attribute='(stable)
+mbr=is-recursive, mbr-property='(public), mbr-attribute='(), obj=is-recursive, obj-type=factor, obj-attribute='()
 mbr=is-stable, mbr-property='(public), mbr-attribute='(), obj=is-stable, obj-type=factor, obj-attribute='()
 mbr=is-thread-safe, mbr-property='(public), mbr-attribute='(), obj=is-thread-safe, obj-type=factor, obj-attribute='()
 mbr=join, mbr-property='(public), mbr-attribute='(), obj=join, obj-type=factor, obj-attribute='(stable)

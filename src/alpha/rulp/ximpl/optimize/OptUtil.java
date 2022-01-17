@@ -36,6 +36,7 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
+import alpha.rulp.utils.RulpUtil;
 
 public class OptUtil {
 
@@ -213,6 +214,19 @@ public class OptUtil {
 		}
 
 		return obj.asString().equals(name);
+	}
+
+	public static boolean isFunc(IRObject obj, String name) throws RException {
+
+		if (obj.getType() == RType.ATOM) {
+			return obj.asString().equals(name);
+		}
+
+		if (obj.getType() == RType.FUNC) {
+			return RulpUtil.asFunction(obj).getName().equals(name);
+		}
+
+		return false;
 	}
 
 	public static boolean isLocalValue(IRObject obj, NameSet nameSet) throws RException {

@@ -1,0 +1,15 @@
+(load math)
+(load string)
+(load tool)
+
+(defun fun1 (?v) 
+    (return (+ ?v 1))
+)
+;=>nil nil nil fun1
+
+(stmt-count-of fun1)
+;=>4
+
+(stmt-count-of max)
+;=>8
+

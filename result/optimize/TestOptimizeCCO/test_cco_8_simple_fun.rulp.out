@@ -1,6 +1,53 @@
 (load math)
 ;=>nil
 
-(is-stable max)
-;=>true
+(defun fun1 (?v)
+    (if (<= ?v 0) (return 0))
+    (return (max (fun1 (- ?v 1)) 100))
+)[opt-cco]
+;=>fun1
+
+(fun1 5)
+;=>100
+
+(attribute-of fun1)
+;=>'(opt-cco)
+
+(print-impl fun1)
+;=>nil
+;out:
+(defun fun1 (?v)
+    (do[stable]
+        (if
+            (<= ?v 0)
+            (return 0)
+        )
+        (return[stable]
+            (max[recursive=false stable=true stmt-count=8]
+                (cc2[opt-id=0] (fun1 (- ?v 1)))
+                100
+            )
+        )
+    )
+)[opt-cco]
+rebuild: id=0, name=cc2, call=5, hit=0, func=fun1, cache=5, data:[$$i_0/0/D/0] [$$i_1/100/D/0] [$$i_2/100/D/0]...
+
+;eof
+
+(opt-status)
+;=>nil
+;out:
+==========================================================================================================================
+      Name: Status
+--------------------------------------------------------------------------------------------------------------------------
+       ERO: rebuild=0, compute=0
+       CCO: rebuild=1, expr=1, call=5, cache=0, reuse=0
+       TCO: rebuild=0, expr=0, call=0, compute=0, max-level=0, node=0
+       LCO: rebuild=0, arg=0, pass=0, hit=0
+==========================================================================================================================
+
+;eof
+
+(_ginfo)
+;=>nil
 

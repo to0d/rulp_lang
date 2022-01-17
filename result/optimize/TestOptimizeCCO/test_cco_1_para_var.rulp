@@ -1,5 +1,8 @@
+(load math)
+;=>
+
 (defun fun1 (?v)
-    (return (+ ?v 1))
+    (return (max ?v (+ (- 10 (+ 4 5)) 1)))
 )
 ;=>
 

@@ -1,3 +1,7 @@
+(load math)
+(load string)
+(load tool)
+
 (defun list-stmt-count (?subject) 
     (if (equal ?subject local)
     
@@ -14,7 +18,7 @@
         )
     )
 )
-;=>list-stmt-count
+;=>nil nil nil list-stmt-count
 
 (list-stmt-count root)
 ;=>nil
@@ -37,7 +41,17 @@ obj=to-list             , type=func    , stmt-count=4
 ;eof
 
 (list-stmt-count main)
-;err:
-java.lang.StackOverflowError
+;=>nil
+;out:
+obj=_ginfo              , type=func    , stmt-count=43
+obj=file-prename        , type=func    , stmt-count=18
+obj=file-subffix        , type=func    , stmt-count=20
+obj=is-blank            , type=func    , stmt-count=8
+obj=is-empty            , type=func    , stmt-count=9
+obj=list-stmt-count     , type=func    , stmt-count=-1
+obj=max                 , type=func    , stmt-count=8
+obj=min                 , type=func    , stmt-count=8
+obj=print-list          , type=func    , stmt-count=-1
+
 ;eof
 

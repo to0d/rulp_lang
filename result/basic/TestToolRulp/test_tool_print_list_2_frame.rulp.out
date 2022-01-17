@@ -83,6 +83,7 @@ root::if
 root::instance
 root::int
 root::is-const
+root::is-recursive
 root::is-stable
 root::is-thread-safe
 root::join

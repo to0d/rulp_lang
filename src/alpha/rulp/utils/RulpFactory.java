@@ -67,6 +67,7 @@ import alpha.rulp.ximpl.attribute.XRFactorAddAttribute;
 import alpha.rulp.ximpl.attribute.XRFactorAttributeOf;
 import alpha.rulp.ximpl.attribute.XRFactorGetAttribute;
 import alpha.rulp.ximpl.attribute.XRFactorIsConst;
+import alpha.rulp.ximpl.attribute.XRFactorIsRecursive;
 import alpha.rulp.ximpl.attribute.XRFactorIsStable;
 import alpha.rulp.ximpl.attribute.XRFactorIsThreadSafe;
 import alpha.rulp.ximpl.attribute.XRFactorReturnTypeOf;
@@ -601,6 +602,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorReturnTypeOf(F_RETURN_TYPE_OF));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorGetAttribute(F_GET_ATTRIBUTE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorStmtCountOf(F_STMT_COUNT_OF));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorIsRecursive(F_IS_RECURSIVE));
 
 		// Class
 		RulpUtil.addFrameObject(rootFrame, new XRNoClass(A_NOCLASS, rootFrame));

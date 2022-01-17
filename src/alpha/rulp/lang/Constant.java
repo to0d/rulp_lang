@@ -141,6 +141,10 @@ public interface Constant {
 
 	String A_STMT_COUNT = "stmt-count";
 
+	String A_RECURSIVE = "recursive";
+
+	String F_IS_RECURSIVE = "is-recursive";
+
 	String A_STRING = "string";
 
 	String A_SUPER = "super";
@@ -190,7 +194,7 @@ public interface Constant {
 	String F_ALIAS = "alias";
 
 	String F_ATTRIBUTE_OF = "attribute-of";
-	
+
 	String F_GET_ATTRIBUTE = "get-attribute";
 
 	String F_B_AND = "and";
@@ -366,7 +370,7 @@ public interface Constant {
 	String F_PROPERTY_OF = "property-of";
 
 	String F_RANDOM = "random";
-	
+
 	String F_Reduct = "reduct";
 
 	String F_REF = "ref";

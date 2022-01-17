@@ -1,8 +1,23 @@
 (load math)
 ;=>
 
-(is-stable max)
-;=>false
+(defun fun1 (?v)
+    (if (<= ?v 0) (return 0))
+    (return (max (fun1 (- ?v 1)) 100))
+)[opt-cco]
+;=>
 
-(is-stable min)
-;=>false
+(fun1 5)
+;=>
+
+(attribute-of fun1)
+;=>
+
+(print-impl fun1)
+;;;
+
+(opt-status)
+;=>
+
+(_ginfo)
+;;;

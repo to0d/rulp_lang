@@ -5,10 +5,10 @@ Total runtime info:
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
            Interpreter call id:      236
-    Interpreter call level/max:        4       10
-               Frame max level:        5
-                  Frame max id:        6
-           Frame free id count:        2
+    Interpreter call level/max:        4       25
+               Frame max level:       14
+                  Frame max id:       15
+           Frame free id count:       11
 ==========================================================================================================================
 
 Optimize info:
@@ -16,7 +16,7 @@ Optimize info:
       Name: Status
 --------------------------------------------------------------------------------------------------------------------------
        ERO: rebuild=0, compute=0
-       CCO: rebuild=0, expr=0, call=0, cache=0, reuse=0
+       CCO: rebuild=1, expr=1, call=5, cache=0, reuse=0
        TCO: rebuild=0, expr=0, call=0, compute=0, max-level=0, node=0
        LCO: rebuild=0, arg=0, pass=0, hit=0
 ==========================================================================================================================
@@ -25,37 +25,40 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      261
-      func:        6
+    factor:      301
+      func:       13
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=236, row=25, column=60(4), value-max=5, value-unit=2^x
+Callable stats info: callId=236, row=28, column=60(4), value-max=11, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         333333333333333333333333333333333333333333333333333333334465 max=17, unit=2^x
+   Frame    RType  Count  Ref Object                         333333333333333333333333333333333333333333333333333333334475 max=58, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
     root   factor    179    0 add-attribute                   1333333333333333333333333333333333333333333332             
-    root   factor     39    0 defun                                                                        133321333342  
+    root   factor     42    0 defun                                                                        133321333344  
+    root   factor     12    0 return                                                                                   51
+    root   factor     12    0 if                                                                                       51
+    root   factor      7    0 do                                                                                       41
+    main     func      6    1 (fun1 nil)                                                                               4 
     root   factor      6    0 alias                          33                                                          
-    root   factor      5    0 defvar                                                                       1         11 2
-    root   factor      4    0 setq                                                                                     31
-  system funcList      4    1 println                                                                                  3 
-    root   factor      4    0 print                                                                                    3 
-    root   factor      4    0 name-of                                                                                  3 
+    root   factor      6    0 <=                                                                                       4 
+    main     func      5    2 (max nil nil)                                                                            4 
+    root   factor      5    0 >=                                                                                       4 
+    root   factor      5    0 -                                                                                        4 
+    root   factor      4    0 defvar                                                                       1         1  2
     root   factor      3    0 deftemplate                                                                       3        
     root   factor      3    0 defmacro                                                                         2     1   
-    root   factor      2    0 lambda                                                                                  11 
-    root   factor      2    0 do-when-var-changed                                                                     11 
+    root   factor      2    0 load                                                                                   11  
     root   factor      1    0 str-substr                                                                                1
     root   factor      1    0 str-last-index-of                                                                         1
+    root   factor      1    0 setq                                                                                      1
     main    macro      1    1 script_out                                                                                1
-    root   factor      1    0 return                                                                                    1
+    root   factor      1    0 print-impl                                                                               1 
     root   factor      1    0 print-global-info                                                                         1
     root   factor      1    0 out-to-file                                                                               1
-    root   factor      1    0 load                                                                                   1   
-    root   factor      1    0 if                                                                                        1
+    root   factor      1    0 opt-status                                                                               1 
     main     func      1    1 (file-prename string)                                                                     1
-    root   factor      1    0 do                                                                                        1
+    root   factor      1    0 attribute-of                                                                             1 
     main funcList      1    2 _ginfo                                                                                    1
     root   factor      1    0 +                                                                                         1
     root   factor      1    0 !=                                                                                        1
@@ -65,29 +68,29 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1086            0         1086
-      string:           38            0           38
-        list:           10            0           10
-        expr:          445            5          440
-         var:           51           39           12
-        func:           56            0           56
+        atom:         1102            0         1102
+      string:           26            0           26
+        list:            7            1            6
+        expr:          474           12          462
+         var:           36           24           12
+        func:           55            0           55
     template:            1            0            1
        macro:            3            0            3
-       frame:           11           10            1
+       frame:           20           19            1
  interpreter:            1            0
-  frameEntry:          260            0
-      lambda:            2            0
+  frameEntry:          244            0
+      lambda:            0            0
 ==========================================================================================================================
 
 Global frame list: total=1
 
-id=2, name=main, lvl=2, ref=4/4, entry=11, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=2/2, entry=14, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
-main                 : 3        2        4    frame      frame@main          
+main                 : 3        2        2    frame      frame@main          
 is-empty             : 4        2        1    funcList   '((is-empty array) (is-empty list) (is-empty string)) : frame=null, type=list
                                          2    func       (is-empty list) : frame=frame@system
                                          2    func       (is-empty array) : frame=frame@system
@@ -95,20 +98,23 @@ is-empty             : 4        2        1    funcList   '((is-empty array) (is-
 is-blank             : 5        2        1    func       (is-blank string) : frame=frame@main
 file-prename         : 6        2        1    func       (file-prename string) : frame=frame@main
 file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
-?script-path         : 8        2        1    var        result\factor\XRFactorDoWhenVarChanged\test_dow_when_var_changed_1.rulp : type=string
+?script-path         : 8        2        1    var        result\optimize\TestOptimizeCCO\test_cco_8_simple_fun.rulp : type=string
 script_out           : 9        2        1    macro      script_out          
 _ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          1    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
-x                    : 11       2        1    var        3 : type=int        
+max                  : 11       2        2    func       (max nil nil) : frame=frame@main
+min                  : 12       2        1    func       (min nil nil) : frame=frame@main
+fun1                 : 13       2        1    func       (fun1 nil) : frame=frame@main
+?rv                  : 35       2        1    var        100 : type=int      
 ==========================================================================================================================
 
 
-id=3, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$__ginfo
+id=13, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$__ginfo
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?rv                  : 55       3        1    var        result\factor\XRFactorDoWhenVarChanged\test_dow_when_var_changed_1 : type=string
+?rv                  : 39       13       1    var        result\optimize\TestOptimizeCCO\test_cco_8_simple_fun : type=string
 ==========================================================================================================================
 
 Global frame tree:
@@ -116,7 +122,7 @@ Global frame tree:
 ->FRAME(root): id=0, lvl=0, subject=root
     ->FRAME(system): id=1, lvl=1, subject=system
         ->FRAME(main): id=2, lvl=2, subject=main
-            ->FRAME(_$fun$__ginfo): id=3, lvl=3, subject=_$fun$__ginfo
+            ->FRAME(_$fun$__ginfo): id=13, lvl=3, subject=_$fun$__ginfo
 
 Global Subject list:
 

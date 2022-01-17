@@ -19,6 +19,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.attribute.StmtCountUtil;
 
 // (Compute Cache Optimization)
 public class CCOUtil {
@@ -158,6 +159,8 @@ public class CCOUtil {
 		return true;
 	}
 
+	static int MIN_CC0_STMT_COUNT = 16;
+
 	private boolean _isCC2Factor(IRObject obj) throws RException {
 
 		if (obj.getType() != RType.FUNC) {
@@ -168,7 +171,16 @@ public class CCOUtil {
 			return false;
 		}
 
-		return true;
+		int stmtCount = StmtCountUtil.getStmtCount(obj, interpreter, frame);
+		if (stmtCount < 0) { // Recursive function
+			return true;
+		}
+
+		if (stmtCount >= MIN_CC0_STMT_COUNT) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private boolean _rebuildCC2(CCO cc0, NameSet nameSet) throws RException {
