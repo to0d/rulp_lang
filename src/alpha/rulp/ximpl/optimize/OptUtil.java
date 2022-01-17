@@ -209,24 +209,7 @@ public class OptUtil {
 
 	public static boolean isFactor(IRObject obj, String name) throws RException {
 
-		if (obj.getType() != RType.ATOM && obj.getType() != RType.FACTOR) {
-			return false;
-		}
-
-		return obj.asString().equals(name);
-	}
-
-	public static boolean isFunc(IRObject obj, String name) throws RException {
-
-		if (obj.getType() == RType.ATOM) {
-			return obj.asString().equals(name);
-		}
-
-		if (obj.getType() == RType.FUNC) {
-			return RulpUtil.asFunction(obj).getName().equals(name);
-		}
-
-		return false;
+		return RulpUtil.isObject(obj, name, RType.ATOM, RType.FACTOR);
 	}
 
 	public static boolean isLocalValue(IRObject obj, NameSet nameSet) throws RException {

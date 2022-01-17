@@ -979,6 +979,47 @@ public class RulpUtil {
 		return resultList;
 	}
 
+	public static boolean containObject(IRObject obj, String name, RType... types) throws RException {
+
+		switch (obj.getType()) {
+		case EXPR: {
+			IRExpr expr = (IRExpr) obj;
+			if (expr.isEmpty()) {
+				return false;
+			}
+
+			IRObject e0 = expr.get(0);
+			if (RulpUtil.isObject(e0, name, types)) {
+				return true;
+			}
+
+			IRIterator<? extends IRObject> it = expr.listIterator(1);
+			while (it.hasNext()) {
+				if (containObject(it.next(), name, types)) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		case LIST: {
+			IRList list = (IRList) obj;
+			IRIterator<? extends IRObject> it = list.iterator();
+			while (it.hasNext()) {
+				if (containObject(it.next(), name, types)) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		default:
+			return false;
+		}
+	}
+
 	public static void decRef(IRObject obj) throws RException {
 
 		if (obj == null) {
@@ -1197,6 +1238,34 @@ public class RulpUtil {
 
 	public static boolean isNil(IRObject a) {
 		return a == null || a.getType() == RType.NIL;
+	}
+
+	public static boolean isObject(IRObject obj, String name, RType... types) throws RException {
+
+		for (RType type : types) {
+
+			if (obj.getType() == type) {
+				switch (type) {
+				case ATOM:
+					return ((IRAtom) obj).getName().equals(name);
+
+				case FACTOR:
+					return ((IRFactor) obj).getName().equals(name);
+
+				case FUNC:
+					return ((IRFunction) obj).getName().equals(name);
+
+				case VAR:
+					return ((IRVar) obj).getName().equals(name);
+
+				default:
+					return false;
+
+				}
+			}
+		}
+
+		return false;
 	}
 
 	public static boolean isPropertyFinal(IRMember mbr) {

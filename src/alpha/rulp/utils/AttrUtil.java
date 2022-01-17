@@ -7,7 +7,6 @@ import java.util.List;
 
 import alpha.rulp.lang.IRArray;
 import alpha.rulp.lang.IRClass;
-import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
@@ -24,47 +23,6 @@ import alpha.rulp.ximpl.optimize.OptUtil;
 
 public class AttrUtil {
 
-	private static boolean _hasFunc(IRObject obj, String funcName) throws RException {
-
-		switch (obj.getType()) {
-		case EXPR: {
-			IRExpr expr = (IRExpr) obj;
-			if (expr.isEmpty()) {
-				return false;
-			}
-
-			IRObject e0 = expr.get(0);
-			if (OptUtil.isFunc(e0, funcName)) {
-				return true;
-			}
-
-			IRIterator<? extends IRObject> it = expr.listIterator(1);
-			while (it.hasNext()) {
-				if (_hasFunc(it.next(), funcName)) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		case LIST: {
-			IRList list = (IRList) obj;
-			IRIterator<? extends IRObject> it = list.iterator();
-			while (it.hasNext()) {
-				if (_hasFunc(it.next(), funcName)) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		default:
-			return false;
-		}
-	}
-
 	private static boolean _isRecursiveFunc(IRFunction func) throws RException {
 
 		if (func.isList()) {
@@ -79,7 +37,7 @@ public class AttrUtil {
 			return false;
 		}
 
-		return _hasFunc(func.getFunBody(), func.getName());
+		return RulpUtil.containObject(func.getFunBody(), func.getName(), RType.ATOM, RType.FUNC);
 	}
 
 	public static void addAttribute(IRObject obj, String key) throws RException {
