@@ -1,26 +1,32 @@
 (defun fun1 (?x)
     (if (<= ?x 0)
         (return 0))
-    (return (* (fun2 (- ?x 1)) 2))
+    (return (+ (fun2 (- ?x 1)) 2))
 )[opt-lco]
 
 (defun fun2 (?x)
     (if (<= ?x 0)
         (return 0))
-    (return (* (fun1 (- ?x 1)) 2))
+    (return (+ (fun1 (- ?x 1)) 2))
 )[opt-lco]
 ;=>
 
 (fun1 0)
-;=>0
+;=>
 
 (fun1 2)
-;=>3
+;=>
 
 (attribute-of fun1)
 ;=>
 
+(attribute-of fun2)
+;=>
+
 (print-impl fun1)
+;=>
+
+(print-impl fun2)
 ;=>
 
 (opt-status)

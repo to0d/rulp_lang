@@ -123,6 +123,8 @@ public interface Constant {
 
 	String A_QUEUE = "queue";
 
+	String A_RECURSIVE = "recursive";
+
 	String A_RETURN_TYPE = "return-type";
 
 	String A_RETURN_VAR = "?rv";
@@ -140,10 +142,6 @@ public interface Constant {
 	String A_STATIC = "static";
 
 	String A_STMT_COUNT = "stmt-count";
-
-	String A_RECURSIVE = "recursive";
-
-	String F_IS_RECURSIVE = "is-recursive";
 
 	String A_STRING = "string";
 
@@ -194,8 +192,6 @@ public interface Constant {
 	String F_ALIAS = "alias";
 
 	String F_ATTRIBUTE_OF = "attribute-of";
-
-	String F_GET_ATTRIBUTE = "get-attribute";
 
 	String F_B_AND = "and";
 
@@ -263,6 +259,8 @@ public interface Constant {
 
 	String F_FREAME_OF = "frame-of";
 
+	String F_GET_ATTRIBUTE = "get-attribute";
+
 	String F_GET_OF_ARRAY = "get-of-array";
 
 	String F_GET_OF_LIST = "get-of-list";
@@ -274,6 +272,8 @@ public interface Constant {
 	String F_IN = "in";
 
 	String F_IS_CONST = "is-const";
+
+	String F_IS_RECURSIVE = "is-recursive";
 
 	String F_IS_STABLE = "is-stable";
 
@@ -588,6 +588,8 @@ public interface Constant {
 	IRAtom O_Public = RulpFactory.createAtom(A_PUBLIC);
 
 	IRAtom O_QUESTION = RulpFactory.createAtom(A_QUESTION);
+
+	IRAtom O_RETURN = RulpFactory.createAtom(F_RETURN);
 
 	IRAtom O_RETURN_TYPE = RulpFactory.createAtom(A_RETURN_TYPE);
 

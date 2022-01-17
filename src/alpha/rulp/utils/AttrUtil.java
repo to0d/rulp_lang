@@ -37,7 +37,7 @@ public class AttrUtil {
 			return false;
 		}
 
-		return RulpUtil.containObject(func.getFunBody(), func.getName(), RType.ATOM, RType.FUNC);
+		return RulpUtil.containFunc(func.getFunBody(), func.getName());
 	}
 
 	public static void addAttribute(IRObject obj, String key) throws RException {

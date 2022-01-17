@@ -9,7 +9,7 @@
 
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.A_ARRAY;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.A_ATOM;
 import static alpha.rulp.lang.Constant.A_BLOB;
 import static alpha.rulp.lang.Constant.A_BOOL;
@@ -979,7 +979,7 @@ public class RulpUtil {
 		return resultList;
 	}
 
-	public static boolean containObject(IRObject obj, String name, RType... types) throws RException {
+	public static boolean containVar(IRObject obj, String name) throws RException {
 
 		switch (obj.getType()) {
 		case EXPR: {
@@ -988,14 +988,9 @@ public class RulpUtil {
 				return false;
 			}
 
-			IRObject e0 = expr.get(0);
-			if (RulpUtil.isObject(e0, name, types)) {
-				return true;
-			}
-
 			IRIterator<? extends IRObject> it = expr.listIterator(1);
 			while (it.hasNext()) {
-				if (containObject(it.next(), name, types)) {
+				if (containVar(it.next(), name)) {
 					return true;
 				}
 			}
@@ -1007,7 +1002,54 @@ public class RulpUtil {
 			IRList list = (IRList) obj;
 			IRIterator<? extends IRObject> it = list.iterator();
 			while (it.hasNext()) {
-				if (containObject(it.next(), name, types)) {
+				if (containVar(it.next(), name)) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		case ATOM:
+			return ((IRAtom) obj).getName().equals(name);
+
+		case VAR:
+			return ((IRVar) obj).getName().equals(name);
+
+		default:
+			return false;
+		}
+	}
+
+	public static boolean containFunc(IRObject obj, String name) throws RException {
+
+		switch (obj.getType()) {
+		case EXPR: {
+			IRExpr expr = (IRExpr) obj;
+			if (expr.isEmpty()) {
+				return false;
+			}
+
+			IRObject e0 = expr.get(0);
+			if (RulpUtil.isObject(e0, name, RType.ATOM, RType.FUNC)) {
+				return true;
+			}
+
+			IRIterator<? extends IRObject> it = expr.listIterator(1);
+			while (it.hasNext()) {
+				if (containFunc(it.next(), name)) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		case LIST: {
+			IRList list = (IRList) obj;
+			IRIterator<? extends IRObject> it = list.iterator();
+			while (it.hasNext()) {
+				if (containFunc(it.next(), name)) {
 					return true;
 				}
 			}
@@ -1747,6 +1789,9 @@ public class RulpUtil {
 
 		case A_RETURN_TYPE:
 			return O_RETURN_TYPE;
+			
+		case F_RETURN:
+			return O_RETURN;
 
 		default:
 			return RulpFactory.createAtom(name);

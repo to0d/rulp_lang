@@ -9,11 +9,13 @@
 
 package alpha.rulp.ximpl.function;
 
-import static alpha.rulp.lang.Constant.A_FUN_PRE;
+import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_LAMBDA;
 import static alpha.rulp.lang.Constant.A_OPT_LCO;
 import static alpha.rulp.lang.Constant.O_Nil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -134,6 +136,9 @@ public class XRFunction extends AbsFunctionAdapter implements IRFunction {
 
 					// Lazy compute
 					if (arg.getType() == RType.EXPR && AttrUtil.containAttribute(attr, A_OPT_LCO)) {
+						arg = RulpFactory.createExpression(
+								RulpFactory.createFunctionLambda(RulpFactory.createFunction(frame, A_LAMBDA,
+										Collections.emptyList(), RulpFactory.createExpression(O_RETURN, arg)), frame));
 						LCOUtil.incPassCount();
 						lazyLoad = true;
 					}
