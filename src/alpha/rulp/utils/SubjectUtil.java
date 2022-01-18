@@ -46,8 +46,7 @@ public class SubjectUtil {
 		return rClass;
 	}
 
-	private static IRMember _createMemberVar(IRSubject sub, String mbrName, IRObject varValue,
-			IRInterpreter interpreter, IRFrame frame) throws RException {
+	private static IRMember _createMemberVar(IRSubject sub, String mbrName, IRObject varValue) throws RException {
 
 		/*****************************************************/
 		// Check the variable whether be defined
@@ -75,14 +74,6 @@ public class SubjectUtil {
 
 		IRVar var = RulpFactory.createVar(mbrName);
 		if (varValue != null) {
-
-			if (varValue.getType() == RType.EXPR) {
-				varValue = RulpFactory
-						.createExpression(RulpFactory.createFunctionLambda(RulpFactory.createFunction(frame, A_LAMBDA,
-								Collections.emptyList(), RulpFactory.createExpression(O_RETURN, varValue)), frame));
-				AttrUtil.addAttribute(varValue, A_OPT_LCO);
-			}
-
 			var.setValue(varValue);
 		}
 
@@ -336,7 +327,7 @@ public class SubjectUtil {
 			val = interpreter.compute(frame, val);
 		}
 
-		IRMember mbr = SubjectUtil._createMemberVar(sub, varName, val, interpreter, frame);
+		IRMember mbr = SubjectUtil._createMemberVar(sub, varName, val);
 		sub.setMember(varName, mbr);
 
 		return (IRVar) mbr.getValue();
@@ -361,12 +352,25 @@ public class SubjectUtil {
 		int mbrExprSize = mbrExpr.size();
 		if (mbrExprSize >= 3) {
 			varValue = mbrExpr.get(2);
+
+			if (varValue.getType() == RType.EXPR) {
+
+				varValue = RulpFactory
+						.createExpression(RulpFactory.createFunctionLambda(RulpFactory.createFunction(frame, A_LAMBDA,
+								Collections.emptyList(), RulpFactory.createExpression(O_RETURN, varValue)), frame));
+				AttrUtil.addAttribute(varValue, A_OPT_LCO);
+
+			} else {
+
+				varValue = interpreter.compute(frame, varValue);
+			}
+
 		}
 
 		/*****************************************************/
 		// member
 		/*****************************************************/
-		IRMember mbr = _createMemberVar(sub, mbrName, varValue, interpreter, frame);
+		IRMember mbr = _createMemberVar(sub, mbrName, varValue);
 
 		/*****************************************************/
 		// Process attribute

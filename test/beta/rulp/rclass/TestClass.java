@@ -3,6 +3,7 @@ package beta.rulp.rclass;
 import org.junit.jupiter.api.Test;
 
 import alpha.rulp.utils.RulpTestBase;
+import alpha.rulp.ximpl.runtime.XRInterpreter;
 
 public class TestClass extends RulpTestBase {
 
@@ -127,8 +128,15 @@ public class TestClass extends RulpTestBase {
 	}
 
 	@Test
-	public void test_class_c_mbr() {
+	public void test_class_c_mbr_1() {
 		_setup();
+		_run_script();
+	}
+	
+	@Test
+	public void test_class_c_mbr_2_const_var() {
+		_setup();
+		XRInterpreter.TRACE = true;
 		_run_script();
 	}
 

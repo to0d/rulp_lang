@@ -172,7 +172,7 @@ name=set, string=set, lvl=0, ref=1/1, parent=null, final=true, mbrs=15, frame=3(
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE                      0    1    var        nil : type=atom
+?impl                : PRIVATE                      0    1    var        nil
 _set_add             : PRIVATE                      0    0    factor     _set_add
 _set_clear           : PRIVATE                      0    0    factor     _set_clear
 _set_has             : PRIVATE                      0    0    factor     _set_has

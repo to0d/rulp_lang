@@ -180,7 +180,7 @@ name=queue, string=queue, lvl=0, ref=1/1, parent=null, final=true, mbrs=28, fram
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE                      0    1    var        nil : type=atom
+?impl                : PRIVATE                      0    1    var        nil
 _queue_clear         : PRIVATE                      0    0    factor     _queue_clear
 _queue_get           : PRIVATE                      0    0    factor     _queue_get
 _queue_init          : PRIVATE                      0    0    factor     _queue_init
@@ -214,7 +214,7 @@ name=stack, string=stack, lvl=0, ref=1/1, parent=null, final=true, mbrs=9, frame
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE                      0    1    var        nil : type=atom
+?impl                : PRIVATE                      0    1    var        nil
 clear                : DEFAULT Y                    1    1    func       (clear) : frame=frame@main
 init                 : DEFAULT Y                    1    1    func       (init) : frame=frame@main
 is-empty             : DEFAULT Y                    1    1    func       (is-empty) : frame=frame@main

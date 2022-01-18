@@ -1,0 +1,13 @@
+(defconst def_value 1)
+(defun add_1 ((?v int)) (return (+ ?v 1)))
+
+(defclass class1
+    (defvar ?value def_value)
+    (defun fun1 () (return (add_1 ?value)))
+)
+
+(defvar ?o1 (new class1))
+;=>
+
+(?o1::fun1)
+;=>
