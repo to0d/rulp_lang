@@ -83,7 +83,7 @@ Object create count:
       member:           37            7           30
        frame:           19           13            6
  interpreter:            1            0
-  frameEntry:          244            0
+  frameEntry:          245            0
       lambda:            3            0
 ==========================================================================================================================
 
@@ -172,7 +172,7 @@ name=set, string=set, lvl=0, ref=1/1, parent=null, final=true, mbrs=15, frame=3(
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE                      0    1    var        nil
+?impl                : PRIVATE                      0    1    var        nil : type=atom
 _set_add             : PRIVATE                      0    0    factor     _set_add
 _set_clear           : PRIVATE                      0    0    factor     _set_clear
 _set_has             : PRIVATE                      0    0    factor     _set_has

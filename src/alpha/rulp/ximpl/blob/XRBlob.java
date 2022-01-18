@@ -75,6 +75,11 @@ public class XRBlob extends AbsAtomObject implements IRBlob {
 	}
 
 	@Override
+	public IRBlob cloneBlob() {
+		return new XRBlob(value);
+	}
+
+	@Override
 	public byte get(int index) throws RException {
 
 		if (index < 0 || index >= length()) {

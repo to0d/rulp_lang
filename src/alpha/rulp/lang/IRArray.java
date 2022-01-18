@@ -4,6 +4,8 @@ public interface IRArray extends IRObject {
 
 	public void add(IRObject obj) throws RException;
 
+	public IRArray cloneArray();
+
 	public IRObject get(int index) throws RException;
 
 	public IRObject get(int... indexs) throws RException;

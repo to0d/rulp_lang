@@ -2,10 +2,14 @@ package alpha.rulp.utils;
 
 import static alpha.rulp.lang.Constant.A_DEFAULT;
 import static alpha.rulp.lang.Constant.A_FINAL;
+import static alpha.rulp.lang.Constant.A_LAMBDA;
+import static alpha.rulp.lang.Constant.A_OPT_LCO;
 import static alpha.rulp.lang.Constant.A_PRIVATE;
 import static alpha.rulp.lang.Constant.A_PUBLIC;
 import static alpha.rulp.lang.Constant.A_STATIC;
+import static alpha.rulp.lang.Constant.O_RETURN;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -42,7 +46,8 @@ public class SubjectUtil {
 		return rClass;
 	}
 
-	private static IRMember _createMemberVar(IRSubject sub, String mbrName, IRObject varValue) throws RException {
+	private static IRMember _createMemberVar(IRSubject sub, String mbrName, IRObject varValue,
+			IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		/*****************************************************/
 		// Check the variable whether be defined
@@ -70,6 +75,14 @@ public class SubjectUtil {
 
 		IRVar var = RulpFactory.createVar(mbrName);
 		if (varValue != null) {
+
+			if (varValue.getType() == RType.EXPR) {
+				varValue = RulpFactory
+						.createExpression(RulpFactory.createFunctionLambda(RulpFactory.createFunction(frame, A_LAMBDA,
+								Collections.emptyList(), RulpFactory.createExpression(O_RETURN, varValue)), frame));
+				AttrUtil.addAttribute(varValue, A_OPT_LCO);
+			}
+
 			var.setValue(varValue);
 		}
 
@@ -323,7 +336,7 @@ public class SubjectUtil {
 			val = interpreter.compute(frame, val);
 		}
 
-		IRMember mbr = SubjectUtil._createMemberVar(sub, varName, val);
+		IRMember mbr = SubjectUtil._createMemberVar(sub, varName, val, interpreter, frame);
 		sub.setMember(varName, mbr);
 
 		return (IRVar) mbr.getValue();
@@ -347,13 +360,13 @@ public class SubjectUtil {
 		IRObject varValue = null;
 		int mbrExprSize = mbrExpr.size();
 		if (mbrExprSize >= 3) {
-			varValue = interpreter.compute(frame, mbrExpr.get(2));
+			varValue = mbrExpr.get(2);
 		}
 
 		/*****************************************************/
 		// member
 		/*****************************************************/
-		IRMember mbr = _createMemberVar(sub, mbrName, varValue);
+		IRMember mbr = _createMemberVar(sub, mbrName, varValue, interpreter, frame);
 
 		/*****************************************************/
 		// Process attribute
@@ -455,9 +468,16 @@ public class SubjectUtil {
 			case VAR:
 
 				IRVar var = RulpFactory.createVar(name);
-				var.setValue(RulpUtil.asVar(classMbrVal).getValue());
-				insMbrVal = var;
+				IRObject value = RulpUtil.asVar(classMbrVal).getValue();
 
+				if (value.getType() == RType.EXPR && AttrUtil.containAttribute(value, A_OPT_LCO)) {
+					AttrUtil.addAttribute(var, A_OPT_LCO);
+				} else {
+					value = RulpUtil.clone(value);
+				}
+
+				var.setValue(value);
+				insMbrVal = var;
 				break;
 
 			default:

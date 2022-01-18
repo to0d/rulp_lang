@@ -1,0 +1,27 @@
+(clone 1)
+;=>
+
+(clone 1.0)
+;=>
+
+(clone 1d)
+;=>
+
+(clone 1L)
+;=>
+
+(clone "abc")
+;=>
+
+(clone abc)
+;=>
+
+(clone true)
+;=>
+
+(clone nil)
+;=>
+
+(defconst c1 123)
+(clone c1)
+;=>

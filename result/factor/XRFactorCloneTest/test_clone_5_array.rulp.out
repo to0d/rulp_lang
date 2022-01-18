@@ -1,0 +1,12 @@
+(defvar ?arr (make-array))
+;=>&?arr
+
+(add ?arr 1)
+;=>{1}
+
+(add (clone ?arr) 2)
+;=>{1,2}
+
+?arr
+;=>{1}
+

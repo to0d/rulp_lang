@@ -136,6 +136,27 @@ public class XRArrayConst extends AbsRefObject implements IRArray {
 	}
 
 	@Override
+	public IRArray cloneArray() {
+
+		XRArrayConst newArray = new XRArrayConst();
+
+		newArray.arrayDimension = arrayDimension;
+		newArray.elementCount = elementCount;
+		
+		newArray.elements = new IRObject[elements.length];
+		for (int i = 0; i < elements.length; ++i) {
+			newArray.elements[i] = elements[i];
+		}
+
+		newArray.arraySize = new int[arraySize.length];
+		for (int i = 0; i < arraySize.length; ++i) {
+			newArray.arraySize[i] = arraySize[i];
+		}
+
+		return newArray;
+	}
+
+	@Override
 	public IRObject get(int index) throws RException {
 		return elements == null ? null : elements[index];
 	}

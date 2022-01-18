@@ -1,0 +1,16 @@
+(defvar ?b (make-blob 6))
+?b
+;=>&?b [000000000000]
+
+(write-blob ?b 0 (to-blob 1) 2 2) 
+?b
+;=>2 [000100000000]
+
+(defvar ?b2 (clone ?b))
+(write-blob ?b2 3 (to-blob 1) 2 2) 
+?b2
+;=>&?b2 2 [000100000100]
+
+?b
+;=>[000100000000]
+

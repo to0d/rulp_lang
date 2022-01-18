@@ -115,6 +115,7 @@ import alpha.rulp.ximpl.error.XRFactorErrorValue;
 import alpha.rulp.ximpl.factor.XRFactorAddSearchFrame;
 import alpha.rulp.ximpl.factor.XRFactorAlias;
 import alpha.rulp.ximpl.factor.XRFactorCanCast;
+import alpha.rulp.ximpl.factor.XRFactorClone;
 import alpha.rulp.ximpl.factor.XRFactorCompare;
 import alpha.rulp.ximpl.factor.XRFactorCompute;
 import alpha.rulp.ximpl.factor.XRFactorDefConst;
@@ -603,6 +604,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorGetAttribute(F_GET_ATTRIBUTE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorStmtCountOf(F_STMT_COUNT_OF));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorIsRecursive(F_IS_RECURSIVE));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorClone(F_CLONE));
 
 		// Class
 		RulpUtil.addFrameObject(rootFrame, new XRNoClass(A_NOCLASS, rootFrame));

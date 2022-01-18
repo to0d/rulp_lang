@@ -171,6 +171,23 @@ public class XRArrayVary extends AbsRefObject implements IRArray {
 	}
 
 	@Override
+	public IRArray cloneArray() {
+
+		XRArrayVary newArray = new XRArrayVary();
+
+		newArray.arrayDimension = arrayDimension;
+		newArray.elementCount = elementCount;
+		newArray.elements = new ArrayList<>(elements);
+
+		newArray.arraySize = new int[arraySize.length];
+		for (int i = 0; i < arraySize.length; ++i) {
+			newArray.arraySize[i] = arraySize[i];
+		}
+
+		return newArray;
+	}
+
+	@Override
 	public IRObject get(int... indexs) throws RException {
 
 		if (indexs.length == 1) {

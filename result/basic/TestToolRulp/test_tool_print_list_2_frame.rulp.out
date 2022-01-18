@@ -45,6 +45,7 @@ root::case
 root::cc
 root::class
 root::class-of
+root::clone
 root::cmp_def
 root::compute
 root::constant

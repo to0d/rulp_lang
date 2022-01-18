@@ -1,0 +1,32 @@
+(defclass class1
+    (defvar ?value 0)[public]
+    (defun get () (return ?value))
+)
+
+(defclass class2
+    (defvar ?obj (new class1))[public]
+    (defun get () (return (?obj::get)))
+    (defun set (?v) (setq ?obj::?value (+ (?obj::get) ?v)))
+)
+;=>
+
+(defvar ?o1 (new class2))
+;=>
+
+(?o1::get)
+;=>0
+
+(defvar ?o2 (clone ?o1))
+;=>
+
+(?o2::get)
+;=>0
+
+(?o1::set 1)
+;=>
+
+(?o1::get)
+;=>1
+
+(?o2::get)
+;=>1

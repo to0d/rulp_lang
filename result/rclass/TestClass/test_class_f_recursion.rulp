@@ -25,9 +25,6 @@
 (o1::get)
 ;=>
 
-; (o1::dump)
-; ;=>
-
 (print-subject class1)
 ;=>
 
@@ -35,6 +32,9 @@
 ;=>
 
 (print-subject o2)
+;=>
+
+(o1::dump)
 ;=>
 
 (_ginfo)

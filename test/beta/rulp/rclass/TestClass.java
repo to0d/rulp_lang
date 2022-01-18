@@ -95,6 +95,12 @@ public class TestClass extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	public void test_class_8_init_2() {
+		_setup();
+		_run_script();
+	}
 
 	@Test
 	public void test_class_9_delete_1() {

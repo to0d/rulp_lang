@@ -9,10 +9,11 @@
 
 package alpha.rulp.ximpl.function;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_FUN_PRE;
 import static alpha.rulp.lang.Constant.A_LAMBDA;
 import static alpha.rulp.lang.Constant.A_OPT_LCO;
 import static alpha.rulp.lang.Constant.O_Nil;
+import static alpha.rulp.lang.Constant.O_RETURN;
 
 import java.util.ArrayList;
 import java.util.Collections;

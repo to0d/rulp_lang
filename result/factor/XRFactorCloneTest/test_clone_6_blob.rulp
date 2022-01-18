@@ -1,0 +1,15 @@
+(defvar ?b (make-blob 6))
+?b
+;=>
+
+(write-blob ?b 0 (to-blob 1) 2 2) 
+?b
+;=>
+
+(defvar ?b2 (clone ?b))
+(write-blob ?b2 3 (to-blob 1) 2 2) 
+?b2
+;=>
+
+?b
+;=>

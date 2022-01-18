@@ -25,9 +25,6 @@
 (o1::get)
 ;=>{un1}
 
-; (o1::dump)
-; ;=>
-
 (print-subject class1)
 ;=>nil
 ;out:
@@ -35,7 +32,7 @@ name=class1, string=class1, lvl=0, ref=1/3, parent=null, final=false, mbrs=6, fr
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?children            : DEFAULT                      0    1    var        {un1} : type=array
+?children            : DEFAULT                      0    1    var        (lambda) : type=expr
 ?value               : DEFAULT                      0    1    var        nil
 add                  : DEFAULT                      0    1    func       (add type#class1) : frame=frame@main
 dump                 : DEFAULT                      0    1    func       (dump) : frame=frame@main
@@ -77,6 +74,14 @@ init                 : DEFAULT              Y       4    1    func       (init n
 this                 : DEFAULT                      0    3    instance   class1@un1
 ==========================================================================================================================
 
+
+;eof
+
+(o1::dump)
+;=>nil
+;out:
+1
+2
 
 ;eof
 

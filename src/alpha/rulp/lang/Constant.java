@@ -190,6 +190,8 @@ public interface Constant {
 	String F_ADD_SEARCH_FRAME = "add_search_frame";
 
 	String F_ALIAS = "alias";
+	
+	String F_CLONE = "clone";
 
 	String F_ATTRIBUTE_OF = "attribute-of";
 

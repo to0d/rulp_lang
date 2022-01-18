@@ -90,7 +90,7 @@ Object create count:
       member:           89           16           73
        frame:           41           39            2
  interpreter:            1            0
-  frameEntry:          242            0
+  frameEntry:          243            0
       lambda:           12            0
 ==========================================================================================================================
 
@@ -156,7 +156,7 @@ name=queue, string=queue, lvl=0, ref=1/1, parent=null, final=true, mbrs=28, fram
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE                      0    1    var        nil
+?impl                : PRIVATE                      0    1    var        nil : type=atom
 _queue_clear         : PRIVATE                      0    0    factor     _queue_clear
 _queue_get           : PRIVATE                      0    0    factor     _queue_get
 _queue_init          : PRIVATE                      0    0    factor     _queue_init
