@@ -198,7 +198,7 @@ name=s1, string=set@s1, lvl=1, ref=2/3, parent=set, final=false, mbrs=4, frame=4
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE              Y       4    1    var        noclass@un-0 : type=instance
+?impl                : PRIVATE              Y       4    1    var        noclass@un0 : type=instance
 add                  : DEFAULT Y            Y       5    1    func       (add nil) : frame=frame@SF-s1-1, type=lambda
 init                 : DEFAULT Y            Y       5    1    func       (init) : frame=frame@SF-s1-1, type=lambda
 this                 : DEFAULT                      0    2    instance   set@s1

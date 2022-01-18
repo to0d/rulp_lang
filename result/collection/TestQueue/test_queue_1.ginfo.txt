@@ -190,7 +190,7 @@ name=q1, string=queue@q1, lvl=1, ref=1/3, parent=queue, final=false, mbrs=15, fr
 ==========================================================================================================================
 Name                 : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE              Y       4    1    var        noclass@un-0 : type=instance
+?impl                : PRIVATE              Y       4    1    var        noclass@un0 : type=instance
 ?rv                  : DEFAULT                      0    1    var        true : type=bool
 clear                : DEFAULT Y            Y       5    1    func       (clear) : frame=frame@SF-q1-1, type=lambda
 get                  : DEFAULT Y            Y       5    1    func       (get nil) : frame=frame@SF-q1-1, type=lambda

@@ -7,10 +7,10 @@
 ;=>&?arr
 
 (add ?arr (new class1))
-;=>{un-0}
+;=>{un0}
 
 (add ?arr (new class1))
-;=>{un-0,un-1}
+;=>{un0,un1}
 
 (foreach (?a (to-list ?arr)) (return (value-of (value-of ?a::?value))))
 ;=>'(1 1)

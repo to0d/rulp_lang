@@ -98,8 +98,8 @@ _ginfo               : 10       2        1    funcList   '((_ginfo string) (_gin
                                          1    func       (_ginfo string) : frame=frame@main
 class1               : 11       2        1    class      class1              
 type#class1          : 12       2        0    atom       type#class1         
-?arr                 : 13       2        1    var        {un-0,un-1} : type=array
-?rv                  : 16       2        1    var        {un-0,un-1} : type=array
+?arr                 : 13       2        1    var        {un0,un1} : type=array
+?rv                  : 16       2        1    var        {un0,un1} : type=array
 ==========================================================================================================================
 
 

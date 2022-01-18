@@ -1,0 +1,41 @@
+(defclass class1
+    (defvar ?value)
+    (defvar ?children (make-array))  
+    (defun init (?x) (setq ?value ?x))
+    (defun add ((?c class1)) (add ?children ?c))
+    (defun dump () 
+        (println ?value)
+        (loop for ?c in (to-list ?children) do
+            (?c::dump)
+        )
+    )
+    (defun get () (return ?children))    
+)
+;=>
+
+(defvar o1 (new class1 '(1)))
+;=>
+
+(defvar o2 (new class1 '(2)))
+;=>
+
+(o1::add o2)
+;=>
+
+(o1::get)
+;=>
+
+; (o1::dump)
+; ;=>
+
+(print-subject class1)
+;=>
+
+(print-subject o1)
+;=>
+
+(print-subject o2)
+;=>
+
+(_ginfo)
+;;;

@@ -101,21 +101,21 @@ class1               : 11       2        1    class      class1
 type#class1          : 12       2        0    atom       type#class1         
 class2               : 13       2        1    class      class2              
 type#class2          : 14       2        0    atom       type#class2         
-?o2                  : 15       2        1    var        class2@un-0 : type=instance
+?o2                  : 15       2        1    var        class2@un0 : type=instance
 ==========================================================================================================================
 
 
 id=3, name=SF-class2-0, lvl=3, ref=2/2, entry=0, pid=2(main), subject=class2
 
-id=4, name=SF-un-0-1, lvl=4, ref=3/4, entry=0, pid=3(SF-class2-0), subject=un-0
+id=4, name=SF-un0-1, lvl=4, ref=3/4, entry=0, pid=3(SF-class2-0), subject=un0
 
-id=5, name=SF-un-3-5, lvl=4, ref=2/3, entry=0, pid=9(SF-class1-2), subject=un-3
+id=5, name=SF-un3-5, lvl=4, ref=2/3, entry=0, pid=9(SF-class1-2), subject=un3
 
-id=6, name=SF-un-1-3, lvl=4, ref=2/3, entry=0, pid=9(SF-class1-2), subject=un-1
+id=6, name=SF-un1-3, lvl=4, ref=2/3, entry=0, pid=9(SF-class1-2), subject=un1
 
 id=9, name=SF-class1-2, lvl=3, ref=4/4, entry=0, pid=2(main), subject=class1
 
-id=10, name=SF-un-2-4, lvl=4, ref=2/3, entry=0, pid=9(SF-class1-2), subject=un-2
+id=10, name=SF-un2-4, lvl=4, ref=2/3, entry=0, pid=9(SF-class1-2), subject=un2
 
 Global frame tree:
 
@@ -123,11 +123,11 @@ Global frame tree:
     ->FRAME(system): id=1, lvl=1, subject=system
         ->FRAME(main): id=2, lvl=2, subject=main
             ->FRAME(SF-class2-0): id=3, lvl=3, subject=class2
-                ->FRAME(SF-un-0-1): id=4, lvl=4, subject=un-0
+                ->FRAME(SF-un0-1): id=4, lvl=4, subject=un0
             ->FRAME(SF-class1-2): id=9, lvl=3, subject=class1
-                ->FRAME(SF-un-3-5): id=5, lvl=4, subject=un-3
-                ->FRAME(SF-un-1-3): id=6, lvl=4, subject=un-1
-                ->FRAME(SF-un-2-4): id=10, lvl=4, subject=un-2
+                ->FRAME(SF-un3-5): id=5, lvl=4, subject=un3
+                ->FRAME(SF-un1-3): id=6, lvl=4, subject=un1
+                ->FRAME(SF-un2-4): id=10, lvl=4, subject=un2
 
 Global Subject list:
 

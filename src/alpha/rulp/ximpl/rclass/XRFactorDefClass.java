@@ -79,6 +79,11 @@ public class XRFactorDefClass extends AbsAtomFactorAdapter implements IRFactor {
 		}
 
 		/*****************************************************/
+		// Update Entry
+		/*****************************************************/
+		RulpUtil.addFrameObject(frame, defClass);
+
+		/*****************************************************/
 		// members
 		/*****************************************************/
 		for (int i = 2; i < argSize; ++i) {
@@ -128,11 +133,6 @@ public class XRFactorDefClass extends AbsAtomFactorAdapter implements IRFactor {
 				AttrUtil.addAttribute(defClass, attr);
 			}
 		}
-
-		/*****************************************************/
-		// Update Entry
-		/*****************************************************/
-		RulpUtil.addFrameObject(frame, defClass);
 
 		return defClass;
 

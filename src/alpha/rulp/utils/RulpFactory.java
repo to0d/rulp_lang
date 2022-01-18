@@ -1073,7 +1073,7 @@ public final class RulpFactory {
 	}
 
 	public static String getNextUnusedName() {
-		return String.format("un-%d", unusedNameCount.getAndIncrement());
+		return String.format("un%d", unusedNameCount.getAndIncrement());
 	}
 
 	public static int getObjectCreateCount(RType type) {

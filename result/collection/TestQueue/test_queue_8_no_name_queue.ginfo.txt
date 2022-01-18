@@ -117,14 +117,14 @@ to-list              : 16       2        1    funcList   '((to-list array) (to-l
                                          2    func       (to-list list) : frame=frame@system
                                          2    func       (to-list array) : frame=frame@system
                                          1    func       (to-list type#queue) : frame=frame@main
-q1                   : 17       2        1    var        queue@un-2 : type=instance
+q1                   : 17       2        1    var        queue@un2 : type=instance
 ?rv                  : 25       2        1    var        true : type=bool    
 ==========================================================================================================================
 
 
 id=3, name=SF-queue-0, lvl=3, ref=2/3, entry=0, pid=2(main), subject=queue
 
-id=6, name=SF-un-2-2, lvl=4, ref=6/7, entry=0, pid=3(SF-queue-0), subject=un-2
+id=6, name=SF-un2-2, lvl=4, ref=6/7, entry=0, pid=3(SF-queue-0), subject=un2
 
 Global frame tree:
 
@@ -132,7 +132,7 @@ Global frame tree:
     ->FRAME(system): id=1, lvl=1, subject=system
         ->FRAME(main): id=2, lvl=2, subject=main
             ->FRAME(SF-queue-0): id=3, lvl=3, subject=queue
-                ->FRAME(SF-un-2-2): id=6, lvl=4, subject=un-2
+                ->FRAME(SF-un2-2): id=6, lvl=4, subject=un2
 
 Global Subject list:
 

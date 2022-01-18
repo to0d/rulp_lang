@@ -49,14 +49,14 @@ public class TestClass extends RulpTestBase {
 	}
 
 	@Test
-	public void test_class_6_super_3() {
+	public void test_class_6_super_2_inherit_init() {
 
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	public void test_class_6_super_2_inherit_init() {
+	public void test_class_6_super_3() {
 
 		_setup();
 		_run_script();
@@ -134,6 +134,12 @@ public class TestClass extends RulpTestBase {
 	
 	@Test
 	public void test_class_e_polymorphism() {
+		_setup();
+		_run_script();
+	}
+	
+	@Test
+	public void test_class_f_recursion() {
 		_setup();
 		_run_script();
 	}
