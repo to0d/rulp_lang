@@ -70,7 +70,7 @@ Object create count:
          int:          375            0          375
       string:           27            0           27
         list:            8            2            6
-        expr:         2444         1499          945
+        expr:         2444         1000         1444
          var:          515          503           12
         func:           53            0           53
     template:            1            0            1

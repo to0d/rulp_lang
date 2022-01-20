@@ -44,8 +44,8 @@ public class XRFactorCPS extends AbsAtomFactorAdapter implements IRRebuild, IRFa
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		TCOUtil.incCallCount();
 		++callCount;
+		TCOUtil.incCallCount();
 
 		IRObject rst = TCOUtil.makeCPS(RulpUtil.asExpression(args.get(1)), frame);
 		if (rst.getType() == RType.EXPR) {

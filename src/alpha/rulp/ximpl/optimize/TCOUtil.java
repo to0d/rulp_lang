@@ -39,7 +39,7 @@ public class TCOUtil {
 
 		private ArrayList<IRObject> elements = null;
 
-		private boolean expend = false;
+		private int expandIndex = -1;
 
 		private IRExpr expr;
 
@@ -97,75 +97,36 @@ public class TCOUtil {
 
 	public static boolean TRACE = false;
 
-	private static IRObject _computeTCO(IRObject obj, IRFrame frame) throws RException {
+	private static IRObject _computeTCO(IRObject e0, IRExpr newExpr, IRInterpreter interpreter, IRFrame frame)
+			throws RException {
 
-		switch (obj.getType()) {
+		switch (e0.getType()) {
+		case FACTOR:
+		case MACRO:
+		case TEMPLATE:
+			return RuntimeUtil.computeCallable((IRCallable) e0, newExpr, interpreter, frame);
 
-		case VAR: {
+		case FUNC:
 
-			IRVar var = (IRVar) obj;
-			if (var.getValue() != null) {
-				return var.getValue();
+			if (TRACE) {
+				System.out.println("cps: call fun, " + newExpr);
 			}
 
-			IRFrameEntry entry = frame.getEntry(var.getName());
-			if (entry != null) {
-				return RulpUtil.asVar(entry.getObject());
+			return RuntimeUtil.computeFun((IRFunction) e0, newExpr, interpreter, frame);
+
+		case MEMBER:
+
+			IRObject e1m = ((IRMember) e0).getValue();
+			if (e1m.getType() != RType.FUNC) {
+				throw new RException("factor not found: " + newExpr);
 			}
 
-			throw new RException("var entry not found: " + var);
-		}
-
-		case ATOM: {
-
-			IRAtom atom = (IRAtom) obj;
-			IRFrameEntry entry = frame.getEntry(atom.getName());
-			IRObject rst = entry == null ? obj : entry.getObject();
-
-			if (rst != null && rst.getType() == RType.VAR) {
-				return ((IRVar) rst).getValue();
-			}
-
-			return rst;
-		}
-
-		case LIST: {
-
-			IRList newList = RulpFactory.createVaryList();
-			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
-			while (it.hasNext()) {
-				newList.add(makeCPS(it.next(), frame));
-			}
-			return newList;
-		}
-
-		case MEMBER: {
-
-			IRMember mbr = (IRMember) obj;
-			if (mbr.getValue() != null) {
-				return mbr;
-			}
-
-			IRObject subObj = makeCPS(mbr.getSubject(), frame);
-			if (subObj == null) {
-				throw new RException("subject<" + mbr.getSubject() + "> not found");
-			}
-
-			IRSubject sub = RulpUtil.asSubject(subObj);
-
-			// Get root object
-			IRMember actMbr = sub.getMember(mbr.getName());
-			if (actMbr == null) {
-				throw new RException("member<" + mbr + "> not found in " + sub);
-			}
-
-			return mbr.getValue();
-		}
+			return RuntimeUtil.computeFun((IRFunction) e1m, newExpr, interpreter, frame);
 
 		default:
-
-			return obj;
+			throw new RException("factor not found: " + newExpr);
 		}
+
 	}
 
 	private static void _findTCOCalleeInReturn(IRObject e0, IRExpr expr, Set<String> calleeNames, IRFrame frame)
@@ -233,7 +194,6 @@ public class TCOUtil {
 		}
 
 		nodeCount.incrementAndGet();
-
 		return node;
 	}
 
@@ -318,7 +278,7 @@ public class TCOUtil {
 		LinkedList<TCONode> cpsQueue = new LinkedList<>();
 		cpsQueue.addLast(_makeTCONode(null, -1, expr));
 
-		while (!cpsQueue.isEmpty()) {
+		QUEUE: while (!cpsQueue.isEmpty()) {
 
 			if (TRACE) {
 				System.out.println("cps: queue, size=" + cpsQueue.size());
@@ -328,113 +288,113 @@ public class TCOUtil {
 
 			TCONode topNode = cpsQueue.peekLast();
 
-			// not expand
-			if (!topNode.expend) {
+			/*******************************************/
+			// init expand list
+			/*******************************************/
+			if (topNode.expandIndex == -1) {
 
 				if (topNode.getExpr().isEmpty()) {
-
 					cpsQueue.pollLast();
 					topNode.parrent.elements.set(topNode.indexOfParent, O_Nil);
+					continue QUEUE;
+				}
+
+				boolean findExpr = false;
+				{
+					IRIterator<? extends IRObject> it = topNode.getExpr().iterator();
+					while (it.hasNext()) {
+						if (it.next().getType() == RType.EXPR) {
+							findExpr = true;
+							break;
+						}
+					}
+				}
+
+				// no expr element, compute
+				if (!findExpr) {
+
+					cpsQueue.pollLast(); // pop
+
+					IRObject e0 = topNode.getExpr().get(0);
+					IRObject rst = _computeTCO(e0, topNode.getExpr(), interpreter, frame);
+
+					if (topNode.parrent != null) {
+
+						if (rst.getType() == RType.EXPR) {
+							cpsQueue.addLast(_makeTCONode(topNode.parrent, topNode.indexOfParent, (IRExpr) rst));
+						} else {
+							topNode.parrent.elements.set(topNode.indexOfParent, rst);
+						}
+
+					} else {
+
+						if (rst.getType() == RType.EXPR) {
+							cpsQueue.addLast(_makeTCONode(null, -1, (IRExpr) rst));
+						} else {
+							return rst;
+						}
+					}
+
+					continue QUEUE;
+				}
+
+				topNode.elements = new ArrayList<>();
+				RulpUtil.addAll(topNode.elements, topNode.getExpr());
+				topNode.expandIndex = 0;
+				continue QUEUE;
+			}
+
+			/*******************************************/
+			// expand expr element
+			/*******************************************/
+			while (topNode.expandIndex < topNode.elements.size()) {
+
+				int index = topNode.expandIndex++;
+				IRObject obj = topNode.elements.get(index);
+
+				if (obj.getType() == RType.EXPR) {
+					cpsQueue.addLast(_makeTCONode(topNode, index, (IRExpr) obj));
+					continue QUEUE;
 
 				} else {
-
-					topNode.expend = true;
-
-					boolean findExpr = false;
-					{
-						IRIterator<? extends IRObject> it = topNode.getExpr().iterator();
-						while (it.hasNext()) {
-							if (it.next().getType() == RType.EXPR) {
-								findExpr = true;
-								break;
-							}
-						}
-					}
-
-					if (findExpr) {
-
-						topNode.elements = new ArrayList<>();
-
-						IRIterator<? extends IRObject> it = topNode.getExpr().iterator();
-						while (it.hasNext()) {
-							topNode.elements.add(it.next());
-						}
-
-						for (int i = topNode.elements.size() - 1; i >= 0; --i) {
-
-							IRObject obj = topNode.elements.get(i);
-							if (obj.getType() == RType.EXPR) {
-								cpsQueue.addLast(_makeTCONode(topNode, i, (IRExpr) obj));
-							} else {
-								topNode.elements.set(i, _computeTCO(obj, frame));
-							}
-						}
-					}
+					topNode.elements.set(index, obj);
 				}
 			}
-			// expand node
-			else {
 
-				cpsQueue.pollLast();
+			/*******************************************/
+			// element compute completed
+			/*******************************************/
+			cpsQueue.pollLast(); // pop
 
-				IRObject rst = null;
-				IRObject e0 = topNode.getExpr().get(0);
-				IRExpr newExpr = topNode.getExpr();
+			IRObject e0 = topNode.getExpr().get(0);
+			IRExpr newExpr = topNode.getExpr();
 
-				if (topNode.elements != null) {
-					e0 = topNode.elements.get(0);
-					newExpr = topNode.getExpr().isEarly() ? RulpFactory.createExpressionEarly(topNode.elements)
-							: RulpFactory.createExpression(topNode.elements);
-				}
+			if (topNode.elements != null) {
+				e0 = topNode.elements.get(0);
+				newExpr = topNode.getExpr().isEarly() ? RulpFactory.createExpressionEarly(topNode.elements)
+						: RulpFactory.createExpression(topNode.elements);
+			}
 
-				topNode.setExpr(null); // dec ref of the expr
+			topNode.setExpr(null); // dec ref of the expr
+			IRObject rst = _computeTCO(e0, newExpr, interpreter, frame);
+			if (topNode.parrent != null) {
 
-				switch (e0.getType()) {
-				case FACTOR:
-				case MACRO:
-				case TEMPLATE:
-					rst = RuntimeUtil.computeCallable((IRCallable) e0, newExpr, interpreter, frame);
-					break;
-
-				case FUNC:
-
-					if (TRACE) {
-						System.out.println("cps: call fun, " + newExpr);
-					}
-
-					rst = RuntimeUtil.computeFun((IRFunction) e0, newExpr, interpreter, frame);
-					break;
-
-				case MEMBER:
-
-					IRObject e1m = ((IRMember) e0).getValue();
-					if (e1m.getType() != RType.FUNC) {
-						throw new RException("factor not found: " + newExpr);
-					}
-
-					rst = RuntimeUtil.computeFun((IRFunction) e1m, newExpr, interpreter, frame);
-					break;
-
-				default:
-					throw new RException("factor not found: " + newExpr);
-				}
-
-				if (topNode.parrent != null) {
-					if (rst.getType() == RType.EXPR) {
-						cpsQueue.addLast(_makeTCONode(topNode.parrent, topNode.indexOfParent, (IRExpr) rst));
-					} else {
-						topNode.parrent.elements.set(topNode.indexOfParent, rst);
-					}
+				if (rst.getType() == RType.EXPR) {
+					cpsQueue.addLast(_makeTCONode(topNode.parrent, topNode.indexOfParent, (IRExpr) rst));
 				} else {
+					topNode.parrent.elements.set(topNode.indexOfParent, rst);
+				}
 
-					if (rst.getType() == RType.EXPR) {
-						cpsQueue.addLast(_makeTCONode(null, -1, (IRExpr) rst));
-					} else {
-						return rst;
-					}
+			} else {
+
+				if (rst.getType() == RType.EXPR) {
+					cpsQueue.addLast(_makeTCONode(null, -1, (IRExpr) rst));
+				} else {
+					return rst;
 				}
 			}
-		}
+
+		} // while (!cpsQueue.isEmpty())
 
 		throw new RException("Should not run to here: " + expr);
 	}
