@@ -1072,48 +1072,6 @@ public class RulpUtil {
 		}
 	}
 
-	public static boolean containVar(IRObject obj, String name) throws RException {
-
-		switch (obj.getType()) {
-		case EXPR: {
-			IRExpr expr = (IRExpr) obj;
-			if (expr.isEmpty()) {
-				return false;
-			}
-
-			IRIterator<? extends IRObject> it = expr.listIterator(1);
-			while (it.hasNext()) {
-				if (containVar(it.next(), name)) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		case LIST: {
-			IRList list = (IRList) obj;
-			IRIterator<? extends IRObject> it = list.iterator();
-			while (it.hasNext()) {
-				if (containVar(it.next(), name)) {
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		case ATOM:
-			return ((IRAtom) obj).getName().equals(name);
-
-		case VAR:
-			return ((IRVar) obj).getName().equals(name);
-
-		default:
-			return false;
-		}
-	}
-
 	public static void decRef(IRObject obj) throws RException {
 
 		if (obj == null) {
@@ -1391,41 +1349,41 @@ public class RulpUtil {
 		return true;
 	}
 
-	public static boolean isPureAtomPairList(IRObject obj) throws RException {
+//	public static boolean isPureAtomPairList(IRObject obj) throws RException {
+//
+//		RType type = obj.getType();
+//		if (type != RType.LIST && type != RType.EXPR) {
+//			return false;
+//		}
+//
+//		IRIterator<? extends IRObject> iter = ((IRList) obj).iterator();
+//		while (iter.hasNext()) {
+//
+//			IRObject element = iter.next();
+//
+//			if (element.getType() == RType.ATOM) {
+//				continue;
+//			} else {
+//
+//			}
+//
+//			if (!isPureAtomList(element) || ((IRList) element).size() != 2) {
+//				return false;
+//			}
+//		}
+//
+//		return true;
+//	}
 
-		RType type = obj.getType();
-		if (type != RType.LIST && type != RType.EXPR) {
-			return false;
-		}
-
-		IRIterator<? extends IRObject> iter = ((IRList) obj).iterator();
-		while (iter.hasNext()) {
-
-			IRObject element = iter.next();
-
-			if (element.getType() == RType.ATOM) {
-				continue;
-			} else {
-
-			}
-
-			if (!isPureAtomList(element) || ((IRList) element).size() != 2) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	public static boolean isQuote(IRObject obj) {
-
-		if (obj.getType() == RType.ATOM) {
-			String name = ((IRAtom) obj).getName();
-			return name.equals("'") || name.equalsIgnoreCase("quote");
-		} else {
-			return false;
-		}
-	}
+//	public static boolean isQuote(IRObject obj) {
+//
+//		if (obj.getType() == RType.ATOM) {
+//			String name = ((IRAtom) obj).getName();
+//			return name.equals("'") || name.equalsIgnoreCase("quote");
+//		} else {
+//			return false;
+//		}
+//	}
 
 	public static boolean isValidRulpStmt(String line) {
 

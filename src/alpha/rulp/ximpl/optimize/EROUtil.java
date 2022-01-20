@@ -1366,15 +1366,15 @@ public class EROUtil {
 
 		rebuildCount.getAndIncrement();
 
-		ERO cc0 = new ERO();
-		cc0.setInputExpr(expr);
+		ERO ero = new ERO();
+		ero.setInputExpr(expr);
 
-		if (!_rebuild(cc0, interpreter, frame)) {
-			return cc0.outputObj == null ? expr : cc0.outputObj;
+		if (!_rebuild(ero, interpreter, frame)) {
+			return ero.outputObj == null ? expr : ero.outputObj;
 		}
 
-		if (cc0.outputObj != null) {
-			return cc0.outputObj;
+		if (ero.outputObj != null) {
+			return ero.outputObj;
 		}
 
 		IRObject rst = interpreter.compute(frame, expr);

@@ -16,29 +16,12 @@
 (list-function-in-return fun4a)
 ;=>'("fun4b")
 
-(attribute-of fun4a)
-;=>'()
-
 (list-function-in-return fun4b)
 ;=>'("fun4a")
 
-(attribute-of fun4b)
+(attribute-of fun4a)
 ;=>'()
 
-(fun4a 3)
-;=>6
-
-(opt-status)
-;=>nil
-;out:
-==========================================================================================================================
-      Name: Status
---------------------------------------------------------------------------------------------------------------------------
-       ERO: rebuild=0, compute=0
-       CCO: rebuild=0, expr=0, call=0, cache=0, reuse=0
-       TCO: rebuild=0, expr=0, call=0, compute=0, max-level=0, node=0
-       LCO: rebuild=0, arg=0, pass=0, hit=0
-==========================================================================================================================
-
-;eof
+(attribute-of fun4b)
+;=>'()
 

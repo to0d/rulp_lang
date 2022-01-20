@@ -35,67 +35,67 @@ public class StableUtil {
 	// - expression: no external variable in expression, all elements is stable
 	// - function: no external variable in function body, all elements is stable
 
-	private static void _findFunCallee(IRIterator<? extends IRObject> it, Set<String> calleeNames, IRFrame frame)
-			throws RException {
-		while (it.hasNext()) {
-			_findFunCallee(it.next(), calleeNames, frame);
-		}
-	}
-
-	private static void _findFunCallee(IRObject e0, IRExpr expr, Set<String> calleeNames, IRFrame frame)
-			throws RException {
-
-		switch (e0.getType()) {
-		case ATOM:
-			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, RulpUtil.asAtom(e0).getName());
-			if (entry != null) {
-				_findFunCallee(entry.getObject(), expr, calleeNames, frame);
-			} else {
-				_findFunCallee(expr.iterator(), calleeNames, frame);
-			}
-
-			return;
-
-		case FACTOR:
-			_findFunCallee(expr.listIterator(1), calleeNames, frame);
-			return;
-
-		case FUNC:
-			calleeNames.add(RulpUtil.asFunction(e0).getName());
-			_findFunCallee(expr.listIterator(1), calleeNames, frame);
-			return;
-
-		case TEMPLATE:
-		case MACRO:
-		default:
-			return;
-		}
-	}
-
-	private static void _findFunCallee(IRObject obj, Set<String> calleeNames, IRFrame frame) throws RException {
-
-		if (obj == null || obj.getType() != RType.EXPR) {
-			return;
-		}
-
-		IRExpr expr = (IRExpr) obj;
-		if (expr.isEmpty()) {
-			return;
-		}
-
-		_findFunCallee(expr.get(0), expr, calleeNames, frame);
-	}
-
-	public static Set<String> findFunCallee(IRExpr expr, IRFrame frame) throws RException {
-
-		if (expr.isEmpty()) {
-			return Collections.emptySet();
-		}
-
-		Set<String> callee = new HashSet<>();
-		_findFunCallee(expr, callee, frame);
-		return callee;
-	}
+//	private static void _findFunCallee(IRIterator<? extends IRObject> it, Set<String> calleeNames, IRFrame frame)
+//			throws RException {
+//		while (it.hasNext()) {
+//			_findFunCallee(it.next(), calleeNames, frame);
+//		}
+//	}
+//
+//	private static void _findFunCallee(IRObject e0, IRExpr expr, Set<String> calleeNames, IRFrame frame)
+//			throws RException {
+//
+//		switch (e0.getType()) {
+//		case ATOM:
+//			IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, RulpUtil.asAtom(e0).getName());
+//			if (entry != null) {
+//				_findFunCallee(entry.getObject(), expr, calleeNames, frame);
+//			} else {
+//				_findFunCallee(expr.iterator(), calleeNames, frame);
+//			}
+//
+//			return;
+//
+//		case FACTOR:
+//			_findFunCallee(expr.listIterator(1), calleeNames, frame);
+//			return;
+//
+//		case FUNC:
+//			calleeNames.add(RulpUtil.asFunction(e0).getName());
+//			_findFunCallee(expr.listIterator(1), calleeNames, frame);
+//			return;
+//
+//		case TEMPLATE:
+//		case MACRO:
+//		default:
+//			return;
+//		}
+//	}
+//
+//	private static void _findFunCallee(IRObject obj, Set<String> calleeNames, IRFrame frame) throws RException {
+//
+//		if (obj == null || obj.getType() != RType.EXPR) {
+//			return;
+//		}
+//
+//		IRExpr expr = (IRExpr) obj;
+//		if (expr.isEmpty()) {
+//			return;
+//		}
+//
+//		_findFunCallee(expr.get(0), expr, calleeNames, frame);
+//	}
+//
+//	public static Set<String> findFunCallee(IRExpr expr, IRFrame frame) throws RException {
+//
+//		if (expr.isEmpty()) {
+//			return Collections.emptySet();
+//		}
+//
+//		Set<String> callee = new HashSet<>();
+//		_findFunCallee(expr, callee, frame);
+//		return callee;
+//	}
 
 	public static boolean isStable(IRObject obj, NameSet nameSet, IRFrame frame) throws RException {
 

@@ -78,4 +78,11 @@ public class TestOptimizeTCO extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+
+	@Test
+	public void test_tco_a_reduct_by_0() {
+
+		_setup();
+		_run_script();
+	}
 }

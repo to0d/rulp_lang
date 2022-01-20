@@ -16,20 +16,20 @@
 (list-function-in-return fun4a)
 ;=>
 
-(attribute-of fun4a)
-;=>
-
 (list-function-in-return fun4b)
 ;=>
 
-(attribute-of fun4b)
+(attribute-of fun4a)
 ;=>
+
+(attribute-of fun4b)
+;=>'(opt-tco)
 
 (fun4a 3)
 ;=>
 
 (opt-status)
-;=>1
+;=>
 
 (_ginfo)
 ;=>
