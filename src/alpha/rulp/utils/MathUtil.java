@@ -19,6 +19,7 @@ import alpha.rulp.lang.RArithmeticOperator;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RRelationalOperator;
 import alpha.rulp.lang.RType;
+import alpha.rulp.ximpl.optimize.OptUtil;
 
 public class MathUtil {
 
@@ -64,6 +65,10 @@ public class MathUtil {
 		RType rt = MathUtil.getTypeConvert(at, bt);
 		if (rt == null) {
 			throw new RException(String.format("Invalid op types: %s %s", a.toString(), b.toString()));
+		}
+
+		if (op == RArithmeticOperator.DIV && OptUtil.isConstNumber(b, 0)) {
+			throw new RException(String.format("divide zero(%s %s %s)", "" + op, a.toString(), b.toString()));
 		}
 
 		switch (rt) {

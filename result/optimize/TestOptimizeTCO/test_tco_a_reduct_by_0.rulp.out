@@ -29,5 +29,14 @@ rebuild: id=0, name=cps, call=0, expand=0
 ;eof
 
 (/ 1.0 0)
-;=>Infinity
+;err:
+divide zero(DIV 1.0 0)
+at (/ 1.0 0) ; main-2
+;eof
+
+(fun1 3)
+;err:
+divide zero(DIV 1.0 0)
+at (fun1 3) ; main-2
+;eof
 
