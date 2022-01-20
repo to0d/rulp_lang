@@ -91,7 +91,7 @@ rebuild: id=0, name=cc2, call=197, hit=96, func=fun2, cache=101, data:[$$i_0/0/D
 --------------------------------------------------------------------------------------------------------------------------
        ERO: rebuild=0, compute=0
        CCO: rebuild=1, expr=1, call=197, cache=96, reuse=6
-       TCO: rebuild=0, expr=0, call=0, compute=0, max-level=0, node=0
+       TCO: rebuild=0, expr=0, call=0, node=0, compute=0, level=0, stack=0
        LCO: rebuild=0, arg=0, pass=0, hit=0
 ==========================================================================================================================
 

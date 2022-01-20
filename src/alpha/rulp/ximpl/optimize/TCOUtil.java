@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Set;
+import java.util.Stack;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import alpha.rulp.lang.IRAtom;
@@ -90,6 +91,8 @@ public class TCOUtil {
 	protected static AtomicInteger exprCount = new AtomicInteger(0);
 
 	protected static AtomicInteger maxLevelCount = new AtomicInteger(0);
+
+	protected static AtomicInteger maxStackSize = new AtomicInteger(0);
 
 	protected static AtomicInteger nodeCount = new AtomicInteger(0);
 
@@ -183,7 +186,7 @@ public class TCOUtil {
 		}
 	}
 
-	private static TCONode _makeTCONode(TCONode parrent, int indexOfParent, IRExpr expr) throws RException {
+	private static void _push(Stack<TCONode> stack, TCONode parrent, int indexOfParent, IRExpr expr) throws RException {
 
 		TCONode node = new TCONode(parrent, indexOfParent);
 		node.setExpr(expr);
@@ -194,7 +197,12 @@ public class TCOUtil {
 		}
 
 		nodeCount.incrementAndGet();
-		return node;
+
+		stack.push(node);
+		int size = stack.size();
+		if (size > maxStackSize.get()) {
+			maxStackSize.set(size);
+		}
 	}
 
 	private static IRExpr _rebuild(IRExpr expr, IRFrame frame) throws RException {
@@ -275,18 +283,17 @@ public class TCOUtil {
 			System.out.println("cps: compute, " + expr);
 		}
 
-		LinkedList<TCONode> cpsQueue = new LinkedList<>();
-		cpsQueue.addLast(_makeTCONode(null, -1, expr));
+		Stack<TCONode> nodeStack = new Stack<>();
+		_push(nodeStack, null, -1, expr);
 
-		QUEUE: while (!cpsQueue.isEmpty()) {
+		QUEUE: while (!nodeStack.isEmpty()) {
 
 			if (TRACE) {
-				System.out.println("cps: queue, size=" + cpsQueue.size());
+				System.out.println("cps: queue, size=" + nodeStack.size());
 			}
 
 			incComputeCount();
-
-			TCONode topNode = cpsQueue.peekLast();
+			TCONode topNode = nodeStack.peek();
 
 			/*******************************************/
 			// init expand list
@@ -294,7 +301,7 @@ public class TCOUtil {
 			if (topNode.expandIndex == -1) {
 
 				if (topNode.getExpr().isEmpty()) {
-					cpsQueue.pollLast();
+					nodeStack.pop();
 					topNode.parrent.elements.set(topNode.indexOfParent, O_Nil);
 					continue QUEUE;
 				}
@@ -313,7 +320,7 @@ public class TCOUtil {
 				// no expr element, compute
 				if (!findExpr) {
 
-					cpsQueue.pollLast(); // pop
+					nodeStack.pop();
 
 					IRObject e0 = topNode.getExpr().get(0);
 					IRObject rst = _computeTCO(e0, topNode.getExpr(), interpreter, frame);
@@ -321,7 +328,7 @@ public class TCOUtil {
 					if (topNode.parrent != null) {
 
 						if (rst.getType() == RType.EXPR) {
-							cpsQueue.addLast(_makeTCONode(topNode.parrent, topNode.indexOfParent, (IRExpr) rst));
+							_push(nodeStack, topNode.parrent, topNode.indexOfParent, (IRExpr) rst);
 						} else {
 							topNode.parrent.elements.set(topNode.indexOfParent, rst);
 						}
@@ -329,7 +336,7 @@ public class TCOUtil {
 					} else {
 
 						if (rst.getType() == RType.EXPR) {
-							cpsQueue.addLast(_makeTCONode(null, -1, (IRExpr) rst));
+							_push(nodeStack, null, -1, (IRExpr) rst);
 						} else {
 							return rst;
 						}
@@ -353,18 +360,17 @@ public class TCOUtil {
 				IRObject obj = topNode.elements.get(index);
 
 				if (obj.getType() == RType.EXPR) {
-					cpsQueue.addLast(_makeTCONode(topNode, index, (IRExpr) obj));
+					_push(nodeStack, topNode, index, (IRExpr) obj);
 					continue QUEUE;
-
-				} else {
-					topNode.elements.set(index, obj);
 				}
+
+				topNode.elements.set(index, obj);
 			}
 
 			/*******************************************/
 			// element compute completed
 			/*******************************************/
-			cpsQueue.pollLast(); // pop
+			nodeStack.pop();
 
 			IRObject e0 = topNode.getExpr().get(0);
 			IRExpr newExpr = topNode.getExpr();
@@ -380,7 +386,7 @@ public class TCOUtil {
 			if (topNode.parrent != null) {
 
 				if (rst.getType() == RType.EXPR) {
-					cpsQueue.addLast(_makeTCONode(topNode.parrent, topNode.indexOfParent, (IRExpr) rst));
+					_push(nodeStack, topNode.parrent, topNode.indexOfParent, (IRExpr) rst);
 				} else {
 					topNode.parrent.elements.set(topNode.indexOfParent, rst);
 				}
@@ -388,7 +394,7 @@ public class TCOUtil {
 			} else {
 
 				if (rst.getType() == RType.EXPR) {
-					cpsQueue.addLast(_makeTCONode(null, -1, (IRExpr) rst));
+					_push(nodeStack, null, -1, (IRExpr) rst);
 				} else {
 					return rst;
 				}
@@ -413,6 +419,10 @@ public class TCOUtil {
 
 	public static int getMaxLevelCount() {
 		return maxLevelCount.get();
+	}
+
+	public static int getMaxStackSize() {
+		return maxStackSize.get();
 	}
 
 	public static int getNodeCount() {
@@ -558,6 +568,7 @@ public class TCOUtil {
 		computeCount.set(0);
 		rebuildCount.set(0);
 		maxLevelCount.set(0);
+		maxStackSize.set(0);
 		nodeCount.set(0);
 	}
 
