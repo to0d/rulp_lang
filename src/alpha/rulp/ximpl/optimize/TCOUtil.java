@@ -353,6 +353,7 @@ public class TCOUtil {
 							switch (obj.asString()) {
 							case F_O_BY:
 								node.optId = OPT_BY;
+								break;
 							default:
 							}
 						}
@@ -363,18 +364,25 @@ public class TCOUtil {
 						continue QUEUE;
 					}
 
-//					if (node.optId != OPT_NONE) {
-//
-//						switch (node.optId) {
-//						case OPT_BY:
-//							// (* a 0 (expr)) => 0
-//							if (OptUtil.isConstNumber(obj, 0)) {
-//
-//							}
-//
-//						default:
-//						}
-//					}
+					if (node.optId != OPT_NONE && node.expandIndex > 0) {
+
+						switch (node.optId) {
+						case OPT_BY:
+							// (* a 0 (expr)) => 0
+							if (OptUtil.isConstNumber(obj, 0)) {
+								stack.pop();
+								IRObject rst = _updateResult(stack, node, obj);
+								if (rst != null) {
+									return rst;
+								}
+								continue QUEUE;
+							}
+
+							break;
+
+						default:
+						}
+					}
 
 					node.elements.set(node.expandIndex, obj);
 					node.expandIndex++;
