@@ -36,7 +36,9 @@ import alpha.rulp.utils.RuntimeUtil;
 
 public class TCOUtil {
 
-	static int OPT_BY = 1; // * by
+	static final int OPT_NONE = 0;
+
+	static final int OPT_BY = 1; // * by
 
 	static class TCONode {
 
@@ -50,7 +52,7 @@ public class TCOUtil {
 
 		private final int level;
 
-		public int optId = 0;
+		public int optId = OPT_NONE;
 
 		private TCONode parrent;
 
@@ -310,8 +312,6 @@ public class TCOUtil {
 					continue QUEUE;
 				}
 
-				node.expandIndex = 0;
-
 				boolean findExpr = false;
 				{
 					IRIterator<? extends IRObject> it = node.getExpr().iterator();
@@ -324,11 +324,18 @@ public class TCOUtil {
 				}
 
 				// no expr element, compute
-				if (findExpr) {
-					node.elements = new ArrayList<>();
-					RulpUtil.addAll(node.elements, node.getExpr());
+				if (!findExpr) {
+					stack.pop();
+					IRObject rst = _computeTCO(node.getExpr().get(0), node.getExpr(), interpreter, frame);
+					rst = _updateResult(stack, node, rst);
+					if (rst != null) {
+						return rst;
+					}
 				}
 
+				node.expandIndex = 0;
+				node.elements = new ArrayList<>();
+				RulpUtil.addAll(node.elements, node.getExpr());
 				continue QUEUE;
 			}
 
@@ -341,21 +348,33 @@ public class TCOUtil {
 
 					IRObject obj = node.elements.get(node.expandIndex);
 
-//					if (node.expandIndex == 0) {
-//						if (obj.getType() == RType.ATOM || obj.getType() == RType.FACTOR) {
-//							switch (obj.asString()) {
-//							case F_O_BY:
-//								node.optId = OPT_BY;
-//							default:
-//							}
-//						}
-//					}
+					if (node.expandIndex == 0) {
+						if (obj.getType() == RType.ATOM || obj.getType() == RType.FACTOR) {
+							switch (obj.asString()) {
+							case F_O_BY:
+								node.optId = OPT_BY;
+							default:
+							}
+						}
+					}
 
 					if (obj.getType() == RType.EXPR) {
 						_push(stack, node, node.expandIndex, (IRExpr) obj);
-						node.expandIndex++;
 						continue QUEUE;
 					}
+
+//					if (node.optId != OPT_NONE) {
+//
+//						switch (node.optId) {
+//						case OPT_BY:
+//							// (* a 0 (expr)) => 0
+//							if (OptUtil.isConstNumber(obj, 0)) {
+//
+//							}
+//
+//						default:
+//						}
+//					}
 
 					node.elements.set(node.expandIndex, obj);
 					node.expandIndex++;
@@ -378,26 +397,36 @@ public class TCOUtil {
 
 			node.setExpr(null); // dec ref of the expr
 			IRObject rst = _computeTCO(e0, expr, interpreter, frame);
-			if (node.parrent != null) {
-
-				if (rst.getType() == RType.EXPR) {
-					_push(stack, node.parrent, node.indexOfParent, (IRExpr) rst);
-				} else {
-					node.parrent.elements.set(node.indexOfParent, rst);
-				}
-
-			} else {
-
-				if (rst.getType() == RType.EXPR) {
-					_push(stack, null, -1, (IRExpr) rst);
-				} else {
-					return rst;
-				}
+			rst = _updateResult(stack, node, rst);
+			if (rst != null) {
+				return rst;
 			}
 
 		} // while (!cpsQueue.isEmpty())
 
 		throw new RException("Should not run to here: " + tcoExpr);
+	}
+
+	private static IRObject _updateResult(Stack<TCONode> stack, TCONode node, IRObject rst) throws RException {
+
+		if (node.parrent != null) {
+
+			if (rst.getType() == RType.EXPR) {
+				_push(stack, node.parrent, node.indexOfParent, (IRExpr) rst);
+			} else {
+				node.parrent.elements.set(node.indexOfParent, rst);
+			}
+
+		} else {
+
+			if (rst.getType() == RType.EXPR) {
+				_push(stack, null, -1, (IRExpr) rst);
+			} else {
+				return rst;
+			}
+		}
+
+		return null;
 	}
 
 	public static int getCallCount() {
