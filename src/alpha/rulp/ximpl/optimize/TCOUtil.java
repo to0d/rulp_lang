@@ -1,6 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.A_OPT_ID;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_RETURN;
@@ -36,6 +36,8 @@ import alpha.rulp.utils.RuntimeUtil;
 
 public class TCOUtil {
 
+	static int OPT_BY = 1; // * by
+
 	static class TCONode {
 
 		private ArrayList<IRObject> elements = null;
@@ -47,6 +49,8 @@ public class TCOUtil {
 		private final int indexOfParent;
 
 		private final int level;
+
+		public int optId = 0;
 
 		private TCONode parrent;
 
@@ -273,42 +277,44 @@ public class TCOUtil {
 		return expr;
 	}
 
-	public static IRObject computeTCO(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+	public static IRObject computeTCO(IRExpr tcoExpr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (expr.isEmpty()) {
+		if (tcoExpr.isEmpty()) {
 			return O_Nil;
 		}
 
 		if (TRACE) {
-			System.out.println("cps: compute, " + expr);
+			System.out.println("cps: compute, " + tcoExpr);
 		}
 
-		Stack<TCONode> nodeStack = new Stack<>();
-		_push(nodeStack, null, -1, expr);
+		Stack<TCONode> stack = new Stack<>();
+		_push(stack, null, -1, tcoExpr);
 
-		QUEUE: while (!nodeStack.isEmpty()) {
+		QUEUE: while (!stack.isEmpty()) {
 
 			if (TRACE) {
-				System.out.println("cps: queue, size=" + nodeStack.size());
+				System.out.println("cps: queue, size=" + stack.size());
 			}
 
 			incComputeCount();
-			TCONode topNode = nodeStack.peek();
+			TCONode node = stack.peek();
 
 			/*******************************************/
 			// init expand list
 			/*******************************************/
-			if (topNode.expandIndex == -1) {
+			if (node.expandIndex == -1) {
 
-				if (topNode.getExpr().isEmpty()) {
-					nodeStack.pop();
-					topNode.parrent.elements.set(topNode.indexOfParent, O_Nil);
+				if (node.getExpr().isEmpty()) {
+					stack.pop();
+					node.parrent.elements.set(node.indexOfParent, O_Nil);
 					continue QUEUE;
 				}
 
+				node.expandIndex = 0;
+
 				boolean findExpr = false;
 				{
-					IRIterator<? extends IRObject> it = topNode.getExpr().iterator();
+					IRIterator<? extends IRObject> it = node.getExpr().iterator();
 					while (it.hasNext()) {
 						if (it.next().getType() == RType.EXPR) {
 							findExpr = true;
@@ -318,83 +324,72 @@ public class TCOUtil {
 				}
 
 				// no expr element, compute
-				if (!findExpr) {
-
-					nodeStack.pop();
-
-					IRObject e0 = topNode.getExpr().get(0);
-					IRObject rst = _computeTCO(e0, topNode.getExpr(), interpreter, frame);
-
-					if (topNode.parrent != null) {
-
-						if (rst.getType() == RType.EXPR) {
-							_push(nodeStack, topNode.parrent, topNode.indexOfParent, (IRExpr) rst);
-						} else {
-							topNode.parrent.elements.set(topNode.indexOfParent, rst);
-						}
-
-					} else {
-
-						if (rst.getType() == RType.EXPR) {
-							_push(nodeStack, null, -1, (IRExpr) rst);
-						} else {
-							return rst;
-						}
-					}
-
-					continue QUEUE;
+				if (findExpr) {
+					node.elements = new ArrayList<>();
+					RulpUtil.addAll(node.elements, node.getExpr());
 				}
 
-				topNode.elements = new ArrayList<>();
-				RulpUtil.addAll(topNode.elements, topNode.getExpr());
-				topNode.expandIndex = 0;
 				continue QUEUE;
 			}
 
 			/*******************************************/
 			// expand expr element
 			/*******************************************/
-			while (topNode.expandIndex < topNode.elements.size()) {
+			if (node.elements != null) {
 
-				int index = topNode.expandIndex++;
-				IRObject obj = topNode.elements.get(index);
+				while (node.expandIndex < node.elements.size()) {
 
-				if (obj.getType() == RType.EXPR) {
-					_push(nodeStack, topNode, index, (IRExpr) obj);
-					continue QUEUE;
+					IRObject obj = node.elements.get(node.expandIndex);
+
+//					if (node.expandIndex == 0) {
+//						if (obj.getType() == RType.ATOM || obj.getType() == RType.FACTOR) {
+//							switch (obj.asString()) {
+//							case F_O_BY:
+//								node.optId = OPT_BY;
+//							default:
+//							}
+//						}
+//					}
+
+					if (obj.getType() == RType.EXPR) {
+						_push(stack, node, node.expandIndex, (IRExpr) obj);
+						node.expandIndex++;
+						continue QUEUE;
+					}
+
+					node.elements.set(node.expandIndex, obj);
+					node.expandIndex++;
 				}
-
-				topNode.elements.set(index, obj);
 			}
 
 			/*******************************************/
 			// element compute completed
 			/*******************************************/
-			nodeStack.pop();
+			stack.pop();
 
-			IRObject e0 = topNode.getExpr().get(0);
-			IRExpr newExpr = topNode.getExpr();
+			IRObject e0 = node.getExpr().get(0);
+			IRExpr expr = node.getExpr();
 
-			if (topNode.elements != null) {
-				e0 = topNode.elements.get(0);
-				newExpr = topNode.getExpr().isEarly() ? RulpFactory.createExpressionEarly(topNode.elements)
-						: RulpFactory.createExpression(topNode.elements);
+			if (node.elements != null) {
+				e0 = node.elements.get(0);
+				expr = node.getExpr().isEarly() ? RulpFactory.createExpressionEarly(node.elements)
+						: RulpFactory.createExpression(node.elements);
 			}
 
-			topNode.setExpr(null); // dec ref of the expr
-			IRObject rst = _computeTCO(e0, newExpr, interpreter, frame);
-			if (topNode.parrent != null) {
+			node.setExpr(null); // dec ref of the expr
+			IRObject rst = _computeTCO(e0, expr, interpreter, frame);
+			if (node.parrent != null) {
 
 				if (rst.getType() == RType.EXPR) {
-					_push(nodeStack, topNode.parrent, topNode.indexOfParent, (IRExpr) rst);
+					_push(stack, node.parrent, node.indexOfParent, (IRExpr) rst);
 				} else {
-					topNode.parrent.elements.set(topNode.indexOfParent, rst);
+					node.parrent.elements.set(node.indexOfParent, rst);
 				}
 
 			} else {
 
 				if (rst.getType() == RType.EXPR) {
-					_push(nodeStack, null, -1, (IRExpr) rst);
+					_push(stack, null, -1, (IRExpr) rst);
 				} else {
 					return rst;
 				}
@@ -402,7 +397,7 @@ public class TCOUtil {
 
 		} // while (!cpsQueue.isEmpty())
 
-		throw new RException("Should not run to here: " + expr);
+		throw new RException("Should not run to here: " + tcoExpr);
 	}
 
 	public static int getCallCount() {
