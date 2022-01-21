@@ -28,6 +28,7 @@ import static alpha.rulp.lang.Constant.A_INSTANCE;
 import static alpha.rulp.lang.Constant.A_INTEGER;
 import static alpha.rulp.lang.Constant.A_LAMBDA;
 import static alpha.rulp.lang.Constant.A_LIST;
+import static alpha.rulp.lang.Constant.A_LOAD_PATHS;
 import static alpha.rulp.lang.Constant.A_LONG;
 import static alpha.rulp.lang.Constant.A_MACRO;
 import static alpha.rulp.lang.Constant.A_MEMBER;
@@ -1265,6 +1266,10 @@ public class RulpUtil {
 		return obj.getType() == RType.FUNC && ((IRFunction) obj).isList();
 	}
 
+	public static boolean isList(IRObject obj) {
+		return obj.getType() == RType.LIST;
+	}
+
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
 //
 //		IRObject nsObj = frame.getObject(A_USING_NS);
@@ -1274,10 +1279,6 @@ public class RulpUtil {
 //
 //		return RulpUtil.asSubject(nsObj);
 //	}
-
-	public static boolean isList(IRObject obj) {
-		return obj.getType() == RType.LIST;
-	}
 
 	public static boolean isNamedList(IRObject obj) throws RException {
 
@@ -1349,6 +1350,29 @@ public class RulpUtil {
 		return true;
 	}
 
+	public static boolean isValidRulpStmt(String line) {
+
+		try {
+
+			List<IRObject> rt = RulpFactory.createParser().parse(line);
+			if (rt.isEmpty()) {
+				return false;
+			}
+
+			for (IRObject obj : rt) {
+				if (obj.getType() != RType.EXPR) {
+					return false;
+				}
+			}
+
+			return true;
+
+		} catch (RException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 //	public static boolean isPureAtomPairList(IRObject obj) throws RException {
 //
 //		RType type = obj.getType();
@@ -1385,29 +1409,6 @@ public class RulpUtil {
 //		}
 //	}
 
-	public static boolean isValidRulpStmt(String line) {
-
-		try {
-
-			List<IRObject> rt = RulpFactory.createParser().parse(line);
-			if (rt.isEmpty()) {
-				return false;
-			}
-
-			for (IRObject obj : rt) {
-				if (obj.getType() != RType.EXPR) {
-					return false;
-				}
-			}
-
-			return true;
-
-		} catch (RException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
 	public static boolean isValueAtom(IRObject obj) {
 		return obj.getType() == RType.ATOM && !isVarName(((IRAtom) obj).getName());
 	}
@@ -1435,6 +1436,51 @@ public class RulpUtil {
 		}
 
 		return obj;
+	}
+
+	public static String lookupFile(String path, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		if (FileUtil.isExistFile(path)) {
+			return path;
+		}
+
+		if (FileUtil.isAbsPath(path)) {
+			return null;
+		}
+
+		boolean find = false;
+
+		/*************************************************/
+		// Search in "load-paths"
+		/*************************************************/
+		IRList lpList = RulpUtil.asList(RulpUtil.asVar(interpreter.getObject(A_LOAD_PATHS)).getValue());
+
+		IRIterator<? extends IRObject> it = lpList.iterator();
+		while (it.hasNext()) {
+
+			String aPath = RulpUtil.asString(it.next()).asString();
+			if (FileUtil.isExistDirectory(aPath)) {
+				String newPath = FileUtil.toValidPath(aPath) + path;
+				if (FileUtil.isExistFile(newPath)) {
+					return newPath;
+				}
+			}
+		}
+
+		/*************************************************/
+		// Search in System env "PATH"
+		/*************************************************/
+		for (String aPath : SystemUtil.getEnvPaths()) {
+			if (FileUtil.isExistDirectory(aPath)) {
+
+				String newPath = FileUtil.toValidPath(aPath) + path;
+				if (FileUtil.isExistFile(newPath)) {
+					return newPath;
+				}
+			}
+		}
+
+		return null;
 	}
 
 	public static boolean matchParaType(IRObject paraValue, IRAtom paraTypeAtom) throws RException {

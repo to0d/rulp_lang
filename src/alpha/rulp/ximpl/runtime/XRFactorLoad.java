@@ -62,71 +62,24 @@ public class XRFactorLoad extends AbsAtomFactorAdapter implements IRFactor {
 			charset = RulpUtil.asString(interpreter.compute(frame, args.get(2))).asString();
 		}
 
-		if (!FileUtil.isExistFile(path)) {
-
-			if (FileUtil.isAbsPath(path)) {
-				throw new RException("file not exist: " + path);
-			}
-
-			boolean find = false;
-
-			/*************************************************/
-			// Search in "load-paths"
-			/*************************************************/
-			IRList lpList = RulpUtil.asList(RulpUtil.asVar(interpreter.getObject(A_LOAD_PATHS)).getValue());
-
-			IRIterator<? extends IRObject> it = lpList.iterator();
-			while (it.hasNext()) {
-
-				String aPath = RulpUtil.asString(it.next()).asString();
-				if (FileUtil.isExistDirectory(aPath)) {
-
-					String newPath = FileUtil.toValidPath(aPath) + path;
-					if (FileUtil.isExistFile(newPath)) {
-						path = newPath;
-						find = true;
-						break;
-					}
-				}
-			}
-
-			/*************************************************/
-			// Search in System env "PATH"
-			/*************************************************/
-			if (!find) {
-
-				for (String aPath : SystemUtil.getEnvPaths()) {
-					if (FileUtil.isExistDirectory(aPath)) {
-
-						String newPath = FileUtil.toValidPath(aPath) + path;
-						if (FileUtil.isExistFile(newPath)) {
-							path = newPath;
-							find = true;
-							break;
-						}
-					}
-				}
-			}
-
-			if (!find) {
-				throw new RException("file not found: " + path);
-			}
-
+		String absPath = RulpUtil.lookupFile(path, interpreter, frame);
+		if (absPath == null) {
+			throw new RException("file not found: " + path);
 		}
 
 		/*************************************************/
 		// Script can only be loaded once
 		/*************************************************/
-		if (loadedScriptPaths.contains(path)) {
+		if (loadedScriptPaths.contains(absPath)) {
 			return;
 		}
 
 		if (RuntimeUtil.isTrace(frame)) {
-			System.out.println("loading: " + path);
+			System.out.println("loading: " + absPath);
 		}
 
-		LoadUtil.loadRulp(interpreter, path, charset);
-		loadedScriptPaths.add(path);
+		LoadUtil.loadRulp(interpreter, absPath, charset);
+		loadedScriptPaths.add(absPath);
 	}
 
 	@Override
