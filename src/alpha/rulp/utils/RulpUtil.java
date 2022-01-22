@@ -1469,7 +1469,6 @@ public class RulpUtil {
 		/*************************************************/
 		for (String aPath : SystemUtil.getEnvPaths()) {
 			if (FileUtil.isExistDirectory(aPath)) {
-
 				String newPath = FileUtil.toValidPath(aPath) + path;
 				if (FileUtil.isExistFile(newPath)) {
 					return newPath;

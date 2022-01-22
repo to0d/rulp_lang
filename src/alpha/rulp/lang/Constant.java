@@ -13,6 +13,8 @@ import alpha.rulp.utils.RulpFactory;
 
 public interface Constant {
 
+	String A_AIX = "aix";
+
 	String A_ARRAY = "array";
 
 	String A_ATOM = "atom";
@@ -67,6 +69,8 @@ public interface Constant {
 
 	String A_LAMBDA = "lambda";
 
+	String A_LINUX = "linux";
+
 	String A_LIST = "list";
 
 	String A_LOAD_PATHS = "?load-paths";
@@ -74,6 +78,8 @@ public interface Constant {
 	String A_LOCAL = "local";
 
 	String A_LONG = "long";
+
+	String A_MAC = "mac";
 
 	String A_MACRO = "macro";
 
@@ -89,13 +95,13 @@ public interface Constant {
 
 	String A_NAN = "nan";
 
+//	String A_NULL = "null";
+
 	String A_NATIVE = "native";
 
 	String A_NIL = "nil";
 
 	String A_NOCLASS = "noclass";
-
-//	String A_NULL = "null";
 
 	String A_OPT_CCO = "opt-cco";
 
@@ -165,6 +171,8 @@ public interface Constant {
 
 	String A_VAR = "var";
 
+	String A_WIN = "win";
+
 	IRAtom C_COLUMN = RulpFactory.createAtom(A_COLUMN);
 
 	String C_ERROR_DEFAULT = "_$error$_";
@@ -190,8 +198,6 @@ public interface Constant {
 	String F_ADD_SEARCH_FRAME = "add_search_frame";
 
 	String F_ALIAS = "alias";
-	
-	String F_CLONE = "clone";
 
 	String F_ATTRIBUTE_OF = "attribute-of";
 
@@ -214,6 +220,8 @@ public interface Constant {
 	String F_CC2 = "cc2";
 
 	String F_CLASS_OF = "class-of";
+
+	String F_CLONE = "clone";
 
 	String F_CMP = "cmp";
 
@@ -450,6 +458,8 @@ public interface Constant {
 	String F_SYS_FREE_MEMORY = "sys-free-memory";
 
 	String F_SYS_GC = "sys-gc";
+	
+	String F_SYS_OS_TYPE = "sys-os-type";
 
 	String F_SYS_TIME = "sys-time";
 
@@ -511,6 +521,8 @@ public interface Constant {
 
 	IRAtom O_ADD = RulpFactory.createAtom(F_O_ADD);
 
+	IRAtom O_AIX = RulpFactory.createAtom(A_AIX);
+
 	IRAtom O_AND = RulpFactory.createAtom(F_O_AND);
 
 	IRAtom O_BY = RulpFactory.createAtom(F_O_BY);
@@ -542,7 +554,7 @@ public interface Constant {
 	IRAtom O_From = RulpFactory.createAtom(A_FROM);
 
 	IRAtom O_GE = RulpFactory.createAtom(F_O_GE);
-
+	
 	IRAtom O_GT = RulpFactory.createAtom(F_O_GT);
 
 	IRAtom O_INFINITE_LOOP = RulpFactory.createAtom(E_INFINITE_LOOP);
@@ -555,11 +567,15 @@ public interface Constant {
 
 	IRAtom O_LE = RulpFactory.createAtom(F_O_LE);
 
+	IRAtom O_LINUX = RulpFactory.createAtom(A_LINUX);
+
 	IRLong O_LONG_0 = RulpFactory.createLong(0);
 
 	IRLong O_LONG_1 = RulpFactory.createLong(1);
 
 	IRAtom O_LT = RulpFactory.createAtom(F_O_LT);
+
+	IRAtom O_MAC = RulpFactory.createAtom(A_MAC);
 
 	IRAtom O_MOD = RulpFactory.createAtom(F_O_MOD);
 
@@ -604,6 +620,8 @@ public interface Constant {
 	IRAtom O_THREAD_UNSAFE = RulpFactory.createAtom(A_THREAD_UNSAFE);
 
 	IRBoolean O_True = RulpFactory.createBoolean(true);
+
+	IRAtom O_WIN = RulpFactory.createAtom(A_WIN);
 
 	IRAtom O_XOR = RulpFactory.createAtom(F_O_XOR);
 

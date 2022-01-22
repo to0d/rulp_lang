@@ -52,7 +52,7 @@ public class SystemUtil {
 			} else if (osName.toLowerCase().indexOf("mac") >= 0) {
 				osType = OSType.Mac;
 			} else if (osName.toLowerCase().indexOf("aix") >= 0) {
-				osType = OSType.Mac;
+				osType = OSType.AIX;
 			} else {
 				osType = OSType.Linux;
 			}

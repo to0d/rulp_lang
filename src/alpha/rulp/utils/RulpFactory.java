@@ -229,6 +229,7 @@ import alpha.rulp.ximpl.subject.XRSubjectFrame;
 import alpha.rulp.ximpl.system.XRFactorDate;
 import alpha.rulp.ximpl.system.XRFactorSystemFreeMemory;
 import alpha.rulp.ximpl.system.XRFactorSystemGC;
+import alpha.rulp.ximpl.system.XRFactorSystemOSType;
 import alpha.rulp.ximpl.system.XRFactorSystemTime;
 import alpha.rulp.ximpl.system.XRFactorSystemTotalMemory;
 import alpha.rulp.ximpl.template.XRFactorDefTemplate;
@@ -353,6 +354,11 @@ public final class RulpFactory {
 	public static IRConst createConstant(String name, IRObject value) {
 		RType.CONSTANT.incCreateCount();
 		return new XRConst(name, value);
+	}
+
+	public static IRArray createConstArray(List<? extends IRObject> elements) throws RException {
+		RType.ARRAY.incCreateCount();
+		return XRArrayConst.build(elements);
 	}
 
 	public static IRDouble createDouble(double value) {
@@ -760,6 +766,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemTime(F_SYS_TIME));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemTotalMemory(F_SYS_TOTAL_MEMORY));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemFreeMemory(F_SYS_FREE_MEMORY));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemOSType(F_SYS_OS_TYPE));
 
 		// Runtime
 		RulpUtil.addFrameObject(rootFrame, new XRFactorRuntimeCallCount(F_RUNTIME_CALL_COUNT));
@@ -968,10 +975,6 @@ public final class RulpFactory {
 		return new XRThreadContext();
 	}
 
-	public static IRTokener createTokener() {
-		return new XRTokener();
-	}
-
 //	public static IRClass createNoClass() {
 //		IRClass noClass = new XRDefClass(A_NOCLASS);
 //		try {
@@ -981,6 +984,10 @@ public final class RulpFactory {
 //		}
 //		return noClass;
 //	}
+
+	public static IRTokener createTokener() {
+		return new XRTokener();
+	}
 
 	public static String createUniqName(String name) {
 		return name + uniqNameCount.getAndIncrement();
@@ -1005,11 +1012,6 @@ public final class RulpFactory {
 	public static IRArray createVaryArray(int[] sizes) throws RException {
 		RType.ARRAY.incCreateCount();
 		return XRArrayVary.build(sizes);
-	}
-
-	public static IRArray createConstArray(List<? extends IRObject> elements) throws RException {
-		RType.ARRAY.incCreateCount();
-		return XRArrayConst.build(elements);
 	}
 
 	public static IRList createVaryList() {

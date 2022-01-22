@@ -3,7 +3,6 @@ package alpha.rulp.ximpl.attribute;
 import static alpha.rulp.lang.Constant.A_STABLE;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
