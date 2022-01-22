@@ -26,4 +26,11 @@ class XRFactorLoadTest extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	void test_load_4_short_name() {
+
+		_setup();
+		_run_script();
+	}
 }

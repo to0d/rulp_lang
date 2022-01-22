@@ -184,6 +184,7 @@ mbr=to-int, mbr-property='(public), mbr-attribute='(), obj=to-int, obj-type=fact
 mbr=to-named-list, mbr-property='(public), mbr-attribute='(), obj=to-named-list, obj-type=factor, obj-attribute='(stable)
 mbr=to-nonamed-list, mbr-property='(public), mbr-attribute='(), obj=to-nonamed-list, obj-type=factor, obj-attribute='(stable)
 mbr=to-string, mbr-property='(public), mbr-attribute='(), obj=to-string, obj-type=factor, obj-attribute='(stable)
+mbr=to-valid-path, mbr-property='(public), mbr-attribute='(), obj=to-valid-path, obj-type=factor, obj-attribute='()
 mbr=to-vary, mbr-property='(public), mbr-attribute='(), obj=to-vary, obj-type=factor, obj-attribute='()
 mbr=true, mbr-property='(public), mbr-attribute='(), obj=nil, obj-type=bool, obj-attribute='()
 mbr=try, mbr-property='(public), mbr-attribute='(), obj=try, obj-type=factor, obj-attribute='()

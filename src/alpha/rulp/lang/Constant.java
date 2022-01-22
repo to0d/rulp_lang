@@ -117,6 +117,8 @@ public interface Constant {
 
 	String A_PARENT = "parent";
 
+	String A_RULP_SUFFIX = ".rulp";
+
 	String A_PRIVATE = "private";
 
 	String A_PUBLIC = "public";
@@ -458,8 +460,10 @@ public interface Constant {
 	String F_SYS_FREE_MEMORY = "sys-free-memory";
 
 	String F_SYS_GC = "sys-gc";
-	
+
 	String F_SYS_OS_TYPE = "sys-os-type";
+	
+	String F_TO_VALID_PATH = "to-valid-path";
 
 	String F_SYS_TIME = "sys-time";
 
@@ -554,7 +558,7 @@ public interface Constant {
 	IRAtom O_From = RulpFactory.createAtom(A_FROM);
 
 	IRAtom O_GE = RulpFactory.createAtom(F_O_GE);
-	
+
 	IRAtom O_GT = RulpFactory.createAtom(F_O_GT);
 
 	IRAtom O_INFINITE_LOOP = RulpFactory.createAtom(E_INFINITE_LOOP);

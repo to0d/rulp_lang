@@ -4,7 +4,7 @@
 (list-of)
 ;=>'(main::?script-path main::_ginfo main::file-prename main::file-subffix main::is-blank main::is-empty main::main main::root main::script_out main::system main::x1)
 
-(load "load/load1.rulp")
+(load "load/load1.rulp") ; load twice
 ;=>nil
 
 (list-of)

@@ -141,6 +141,7 @@ import alpha.rulp.ximpl.factor.XRFactorToVary;
 import alpha.rulp.ximpl.factor.XRFactorTypeOf;
 import alpha.rulp.ximpl.factor.XRFactorValueOf;
 import alpha.rulp.ximpl.factor.XRFactorValueTypeOf;
+import alpha.rulp.ximpl.fs.XRFactorToValidPath;
 import alpha.rulp.ximpl.function.XRFactorDefun;
 import alpha.rulp.ximpl.function.XRFactorLambda;
 import alpha.rulp.ximpl.function.XRFunction;
@@ -767,6 +768,9 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemTotalMemory(F_SYS_TOTAL_MEMORY));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemFreeMemory(F_SYS_FREE_MEMORY));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemOSType(F_SYS_OS_TYPE));
+
+		// File System
+		RulpUtil.addFrameObject(rootFrame, new XRFactorToValidPath(F_TO_VALID_PATH));
 
 		// Runtime
 		RulpUtil.addFrameObject(rootFrame, new XRFactorRuntimeCallCount(F_RUNTIME_CALL_COUNT));

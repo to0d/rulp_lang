@@ -1,16 +1,17 @@
-id=0, name=root, lvl=0, ref=0/0, entry=189, subject=root
+id=0, name=root, lvl=0, ref=0/0, entry=190, subject=root
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?os.version          : -207     0        1    var        10.0 : type=string  
-?os.name             : -206     0        1    var        Windows 10 : type=string
-?path.separator      : -205     0        1    var        ; : type=string     
-?file.separator      : -204     0        1    var        \ : type=string     
-?user.dir            : -203     0        1    var        C:\data\itool\irulp_base : type=string
-?user.name           : -202     0        1    var        to0d : type=string  
-?user.home           : -201     0        1    var        C:\Users\to0d : type=string
-rulp-object-count    : -184     0        0    factor     rulp-object-count   
-runtime-call-count   : -183     0        0    factor     runtime-call-count  
+?os.version          : -208     0        1    var        10.0 : type=string  
+?os.name             : -207     0        1    var        Windows 10 : type=string
+?path.separator      : -206     0        1    var        ; : type=string     
+?file.separator      : -205     0        1    var        \ : type=string     
+?user.dir            : -204     0        1    var        C:\data\itool\irulp_base : type=string
+?user.name           : -203     0        1    var        to0d : type=string  
+?user.home           : -202     0        1    var        C:\Users\to0d : type=string
+rulp-object-count    : -185     0        0    factor     rulp-object-count   
+runtime-call-count   : -184     0        0    factor     runtime-call-count  
+to-valid-path        : -183     0        0    factor     to-valid-path       
 sys-os-type          : -182     0        0    factor     sys-os-type         
 sys-free-memory      : -181     0        0    factor     sys-free-memory     
 sys-total-memory     : -180     0        0    factor     sys-total-memory    

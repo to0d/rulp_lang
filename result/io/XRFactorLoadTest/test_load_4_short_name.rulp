@@ -1,0 +1,5 @@
+(load "load/load1")
+;=>
+
+(list-of)
+;=>

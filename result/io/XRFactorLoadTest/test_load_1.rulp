@@ -4,7 +4,7 @@
 (list-of)
 ;=>
 
-(load "load/load1.rulp")
+(load "load/load1.rulp") ; load twice
 ;=>
 
 (list-of)

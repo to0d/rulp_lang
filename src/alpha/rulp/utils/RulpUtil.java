@@ -44,6 +44,7 @@ import static alpha.rulp.lang.Constant.A_PUBLIC;
 import static alpha.rulp.lang.Constant.A_QUESTION;
 import static alpha.rulp.lang.Constant.A_QUESTION_C;
 import static alpha.rulp.lang.Constant.A_RETURN_TYPE;
+import static alpha.rulp.lang.Constant.A_RULP_SUFFIX;
 import static alpha.rulp.lang.Constant.A_STABLE;
 import static alpha.rulp.lang.Constant.A_STATIC;
 import static alpha.rulp.lang.Constant.A_STRING;
@@ -388,6 +389,26 @@ public class RulpUtil {
 		}
 
 		sb.append("]");
+	}
+
+	private static String _lookupFile(String parent, String path) {
+
+		if (FileUtil.isExistDirectory(parent)) {
+
+			String newPath = FileUtil.toValidPath(parent) + path;
+			if (FileUtil.isExistFile(newPath)) {
+				return newPath;
+			}
+
+			if (!path.endsWith(A_RULP_SUFFIX)) {
+				newPath = FileUtil.toValidPath(parent) + path + A_RULP_SUFFIX;
+				if (FileUtil.isExistFile(newPath)) {
+					return newPath;
+				}
+			}
+		}
+
+		return null;
 	}
 
 	private static void _toString(StringBuffer sb, IRIterator<? extends IRObject> iterator, IRFormater formater,
@@ -1266,10 +1287,6 @@ public class RulpUtil {
 		return obj.getType() == RType.FUNC && ((IRFunction) obj).isList();
 	}
 
-	public static boolean isList(IRObject obj) {
-		return obj.getType() == RType.LIST;
-	}
-
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
 //
 //		IRObject nsObj = frame.getObject(A_USING_NS);
@@ -1279,6 +1296,10 @@ public class RulpUtil {
 //
 //		return RulpUtil.asSubject(nsObj);
 //	}
+
+	public static boolean isList(IRObject obj) {
+		return obj.getType() == RType.LIST;
+	}
 
 	public static boolean isNamedList(IRObject obj) throws RException {
 
@@ -1350,29 +1371,6 @@ public class RulpUtil {
 		return true;
 	}
 
-	public static boolean isValidRulpStmt(String line) {
-
-		try {
-
-			List<IRObject> rt = RulpFactory.createParser().parse(line);
-			if (rt.isEmpty()) {
-				return false;
-			}
-
-			for (IRObject obj : rt) {
-				if (obj.getType() != RType.EXPR) {
-					return false;
-				}
-			}
-
-			return true;
-
-		} catch (RException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
 //	public static boolean isPureAtomPairList(IRObject obj) throws RException {
 //
 //		RType type = obj.getType();
@@ -1408,6 +1406,29 @@ public class RulpUtil {
 //			return false;
 //		}
 //	}
+
+	public static boolean isValidRulpStmt(String line) {
+
+		try {
+
+			List<IRObject> rt = RulpFactory.createParser().parse(line);
+			if (rt.isEmpty()) {
+				return false;
+			}
+
+			for (IRObject obj : rt) {
+				if (obj.getType() != RType.EXPR) {
+					return false;
+				}
+			}
+
+			return true;
+
+		} catch (RException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 	public static boolean isValueAtom(IRObject obj) {
 		return obj.getType() == RType.ATOM && !isVarName(((IRAtom) obj).getName());
@@ -1446,6 +1467,12 @@ public class RulpUtil {
 
 		if (FileUtil.isAbsPath(path)) {
 			return null;
+
+		} else if (!path.endsWith(A_RULP_SUFFIX)) {
+			String newPath = path + A_RULP_SUFFIX;
+			if (FileUtil.isExistFile(newPath)) {
+				return newPath;
+			}
 		}
 
 		/*************************************************/
@@ -1456,11 +1483,9 @@ public class RulpUtil {
 		IRIterator<? extends IRObject> it = lpList.iterator();
 		while (it.hasNext()) {
 			String aPath = RulpUtil.asString(it.next()).asString();
-			if (FileUtil.isExistDirectory(aPath)) {
-				String newPath = FileUtil.toValidPath(aPath) + path;
-				if (FileUtil.isExistFile(newPath)) {
-					return newPath;
-				}
+			String newPath = _lookupFile(aPath, path);
+			if (newPath != null) {
+				return newPath;
 			}
 		}
 
@@ -1468,11 +1493,9 @@ public class RulpUtil {
 		// Search in System env "PATH"
 		/*************************************************/
 		for (String aPath : SystemUtil.getEnvPaths()) {
-			if (FileUtil.isExistDirectory(aPath)) {
-				String newPath = FileUtil.toValidPath(aPath) + path;
-				if (FileUtil.isExistFile(newPath)) {
-					return newPath;
-				}
+			String newPath = _lookupFile(aPath, path);
+			if (newPath != null) {
+				return newPath;
 			}
 		}
 
