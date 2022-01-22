@@ -1448,8 +1448,6 @@ public class RulpUtil {
 			return null;
 		}
 
-		boolean find = false;
-
 		/*************************************************/
 		// Search in "load-paths"
 		/*************************************************/
@@ -1457,7 +1455,6 @@ public class RulpUtil {
 
 		IRIterator<? extends IRObject> it = lpList.iterator();
 		while (it.hasNext()) {
-
 			String aPath = RulpUtil.asString(it.next()).asString();
 			if (FileUtil.isExistDirectory(aPath)) {
 				String newPath = FileUtil.toValidPath(aPath) + path;
