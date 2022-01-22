@@ -182,7 +182,6 @@ obj=to-int              , type=factor
 obj=to-named-list       , type=factor
 obj=to-nonamed-list     , type=factor
 obj=to-string           , type=factor
-obj=to-valid-path       , type=factor
 obj=to-vary             , type=factor
 obj=true                , type=bool
 obj=try                 , type=factor

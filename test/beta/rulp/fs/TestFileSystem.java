@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import alpha.rulp.utils.RulpTestBase;
 
-class XRFactorToValidPathTest extends RulpTestBase {
+class TestFileSystem extends RulpTestBase {
 
 	@Test
 	void test_to_valid_path_1() {

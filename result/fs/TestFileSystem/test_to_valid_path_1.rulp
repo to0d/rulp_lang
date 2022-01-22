@@ -1,2 +1,5 @@
+(load tool)
+;=>
+
 (to-valid-path "abc")
 ;=>

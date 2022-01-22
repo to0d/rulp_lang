@@ -462,7 +462,7 @@ public interface Constant {
 	String F_SYS_GC = "sys-gc";
 
 	String F_SYS_OS_TYPE = "sys-os-type";
-	
+
 	String F_TO_VALID_PATH = "to-valid-path";
 
 	String F_SYS_TIME = "sys-time";
@@ -682,4 +682,6 @@ public interface Constant {
 	IRAtom T_Template = RulpFactory.createAtom(A_TEMPLATE);
 
 	IRAtom T_Var = RulpFactory.createAtom(A_VAR);
+
+	String V_FILE_SEP_CHAR = "?file-separator";
 }

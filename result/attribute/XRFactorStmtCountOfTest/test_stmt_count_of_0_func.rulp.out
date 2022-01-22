@@ -52,6 +52,7 @@ obj=list-stmt-count     , type=func    , stmt-count=-1
 obj=max                 , type=func    , stmt-count=8
 obj=min                 , type=func    , stmt-count=8
 obj=print-list          , type=func    , stmt-count=-1
+obj=to-valid-path       , type=func    , stmt-count=18
 
 ;eof
 

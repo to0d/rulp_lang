@@ -53,3 +53,17 @@
 (defun print-list (?subject)
     (print-list ?subject nil)
 )
+
+;****************************************************;
+; File System tools
+;****************************************************;
+(defun to-valid-path ((?path string))
+    
+    (if (= ?path "") 
+        (return ?user.dir))
+
+    (if (str-end-with ?path ?file.separator)
+        (return ?path))
+    
+    (return (+ ?path ?file.separator))
+)
