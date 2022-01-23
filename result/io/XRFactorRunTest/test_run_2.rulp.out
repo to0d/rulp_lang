@@ -1,0 +1,6 @@
+(run "result/io/XRFactorRunTest/run_2.rulp")
+;=>1
+;out:
+run
+;eof
+

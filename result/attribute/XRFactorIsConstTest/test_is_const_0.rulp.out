@@ -137,6 +137,7 @@ obj=return              , type=factor
 obj=return-type-of      , type=factor
 obj=reverse             , type=factor
 obj=rulp-object-count   , type=factor
+obj=run                 , type=factor
 obj=runtime-call-count  , type=factor
 obj=save-txt-file       , type=factor
 obj=search-frame-of     , type=factor

@@ -1,0 +1,11 @@
+(run "result/io/XRFactorRunTest/run_1.rulp")
+;=>
+
+(list-of)
+;=>
+
+(run "result/io/XRFactorRunTest/run_1.rulp") ; run twice
+;=>
+
+(list-of)
+;=>

@@ -146,12 +146,14 @@ import alpha.rulp.ximpl.function.XRFactorLambda;
 import alpha.rulp.ximpl.function.XRFunction;
 import alpha.rulp.ximpl.function.XRFunctionLambda;
 import alpha.rulp.ximpl.function.XRFunctionList;
+import alpha.rulp.ximpl.io.XRFactorLoad;
 import alpha.rulp.ximpl.io.XRFactorOpenTxtFile;
 import alpha.rulp.ximpl.io.XRFactorOutToFile;
 import alpha.rulp.ximpl.io.XRFactorPrint;
 import alpha.rulp.ximpl.io.XRFactorPrintFrameTree;
 import alpha.rulp.ximpl.io.XRFactorPrintGlobalInfo;
 import alpha.rulp.ximpl.io.XRFactorPrintSubject;
+import alpha.rulp.ximpl.io.XRFactorRun;
 import alpha.rulp.ximpl.io.XRFactorSaveTxtFile;
 import alpha.rulp.ximpl.lang.XRAtom;
 import alpha.rulp.ximpl.lang.XRBoolean;
@@ -194,7 +196,6 @@ import alpha.rulp.ximpl.rclass.XRFactorNew;
 import alpha.rulp.ximpl.rclass.XRFactorPropertyOf;
 import alpha.rulp.ximpl.rclass.XRMember;
 import alpha.rulp.ximpl.rclass.XRNoClass;
-import alpha.rulp.ximpl.runtime.XRFactorLoad;
 import alpha.rulp.ximpl.runtime.XRFactorRuntimeCallCount;
 import alpha.rulp.ximpl.runtime.XRFrame;
 import alpha.rulp.ximpl.runtime.XRFrameEntry;
@@ -635,6 +636,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorPrintFrameTree(F_PRINT_FRAME_TREE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorPrintGlobalInfo(F_PRINT_GLOBAL_INFO));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorPrintImpl(F_PRINT_IMPL));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorRun(F_RUN));
 
 		// Variable, Value & Expression
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefvar(F_DEFVAR, true, false));

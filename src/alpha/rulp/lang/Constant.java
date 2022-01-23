@@ -39,6 +39,8 @@ public interface Constant {
 
 	String A_DO = "do";
 
+	String F_RUN = "run";
+
 	String A_DOUBLE = "double";
 
 	String A_ERROR = "error";

@@ -1,0 +1,18 @@
+(run "result/io/XRFactorRunTest/run_1.rulp")
+;=>nil
+;out:
+run
+;eof
+
+(list-of)
+;=>'(main::?script-path main::_ginfo main::file-prename main::file-subffix main::is-blank main::is-empty main::main main::root main::script_out main::system)
+
+(run "result/io/XRFactorRunTest/run_1.rulp") ; run twice
+;=>nil
+;out:
+run
+;eof
+
+(list-of)
+;=>'(main::?script-path main::_ginfo main::file-prename main::file-subffix main::is-blank main::is-empty main::main main::root main::script_out main::system)
+

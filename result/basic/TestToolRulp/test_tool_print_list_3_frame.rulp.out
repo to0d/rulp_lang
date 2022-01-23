@@ -139,6 +139,7 @@ mbr=return-type-of, mbr-property='(public), mbr-attribute='(), obj=return-type-o
 mbr=reverse, mbr-property='(public), mbr-attribute='(), obj=reverse, obj-type=factor, obj-attribute='(stable)
 mbr=root, mbr-property='(public), mbr-attribute='(), obj=root, obj-type=frame, obj-attribute='()
 mbr=rulp-object-count, mbr-property='(public), mbr-attribute='(), obj=rulp-object-count, obj-type=factor, obj-attribute='()
+mbr=run, mbr-property='(public), mbr-attribute='(), obj=run, obj-type=factor, obj-attribute='()
 mbr=runtime-call-count, mbr-property='(public), mbr-attribute='(), obj=runtime-call-count, obj-type=factor, obj-attribute='()
 mbr=save-txt-file, mbr-property='(public), mbr-attribute='(), obj=save-txt-file, obj-type=factor, obj-attribute='(thread-unsafe)
 mbr=search-frame-of, mbr-property='(public), mbr-attribute='(), obj=search-frame-of, obj-type=factor, obj-attribute='()
