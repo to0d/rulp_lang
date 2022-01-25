@@ -29,4 +29,10 @@ public class TestToolRulp extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	void test_tool_index_of_1() {
+		_setup();
+		_run_script();
+	}
 }

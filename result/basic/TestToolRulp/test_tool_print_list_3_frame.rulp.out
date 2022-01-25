@@ -236,6 +236,7 @@ mbr=clear, mbr-property='(public), mbr-attribute='(), obj='((clear type#map) (cl
 mbr=file-prename, mbr-property='(public), mbr-attribute='(), obj=(file-prename string), obj-type=func, obj-attribute='()
 mbr=file-subffix, mbr-property='(public), mbr-attribute='(), obj=(file-subffix string), obj-type=func, obj-attribute='()
 mbr=get, mbr-property='(public), mbr-attribute='(), obj='((get array int int) (get array int) (get list int) (get type#queue int)), obj-type=func, obj-attribute='()
+mbr=index-of, mbr-property='(public), mbr-attribute='(), obj=(index-of nil list), obj-type=func, obj-attribute='()
 mbr=is-blank, mbr-property='(public), mbr-attribute='(), obj=(is-blank string), obj-type=func, obj-attribute='()
 mbr=is-empty, mbr-property='(public), mbr-attribute='(), obj='((is-empty array) (is-empty list) (is-empty string) (is-empty type#map) (is-empty type#queue) (is-empty type#set) (is-empty type#stack)), obj-type=func, obj-attribute='()
 mbr=main, mbr-property='(public), mbr-attribute='(), obj=main, obj-type=frame, obj-attribute='()

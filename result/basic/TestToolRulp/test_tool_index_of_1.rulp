@@ -1,0 +1,11 @@
+(load tool)
+;=>
+
+(index-of 1 '(1 2))
+;=>
+
+(index-of a '(1 2))
+;=>
+
+(index-of "a" '(1 2 "a"))
+;=>

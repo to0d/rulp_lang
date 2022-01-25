@@ -262,6 +262,7 @@ main::?script-path
 main::_ginfo
 main::file-prename
 main::file-subffix
+main::index-of
 main::is-blank
 main::is-empty
 main::ls1

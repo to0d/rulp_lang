@@ -67,3 +67,21 @@
     
     (return (+ ?path ?file.separator))
 )
+
+
+;****************************************************;
+; Other tools
+;****************************************************;
+(defun index-of (?obj (?list list))
+    (defvar ?pos (- (size-of ?list) 1))    
+    (loop 
+        (if (< ?pos 0) 
+            (break))
+        (defvar ?obj2 (get ?list ?pos))
+        (if (equal ?obj ?obj2)
+            (break))
+        (-- ?pos)
+    )    
+    (return ?pos)
+)
+
