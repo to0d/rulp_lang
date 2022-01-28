@@ -1,0 +1,21 @@
+(to-const 123)
+;=>123
+
+(to-const "123")
+;=>"123"
+
+(to-const 1.1)
+;=>1.1
+
+(defvar ?x 1)
+;=>&?x
+
+(defvar ?y '((to-const ?x))) 
+;=>&?y
+
+(setq ?x 2)
+;=>&?x
+
+?y
+;=>'(1)
+

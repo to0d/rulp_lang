@@ -17,9 +17,9 @@ import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpUtil;
 
-public class XRFactorToVary extends AbsAtomFactorAdapter implements IRFactor {
+public class XRFactorToConst extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorToVary(String factorName) {
+	public XRFactorToConst(String factorName) {
 		super(factorName);
 	}
 
@@ -30,7 +30,7 @@ public class XRFactorToVary extends AbsAtomFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		return RulpUtil.toVary(interpreter.compute(frame, args.get(1)), frame);
+		return RulpUtil.toConst(interpreter.compute(frame, args.get(1)), frame);
 	}
 
 }

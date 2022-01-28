@@ -133,6 +133,7 @@ import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RAccessType;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
+import alpha.rulp.runtime.IRAction;
 import alpha.rulp.runtime.IRCallable;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRFactorBody;
@@ -1287,6 +1288,10 @@ public class RulpUtil {
 		return obj.getType() == RType.FUNC && ((IRFunction) obj).isList();
 	}
 
+	public static boolean isList(IRObject obj) {
+		return obj.getType() == RType.LIST;
+	}
+
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
 //
 //		IRObject nsObj = frame.getObject(A_USING_NS);
@@ -1296,10 +1301,6 @@ public class RulpUtil {
 //
 //		return RulpUtil.asSubject(nsObj);
 //	}
-
-	public static boolean isList(IRObject obj) {
-		return obj.getType() == RType.LIST;
-	}
 
 	public static boolean isNamedList(IRObject obj) throws RException {
 
@@ -1371,6 +1372,29 @@ public class RulpUtil {
 		return true;
 	}
 
+	public static boolean isValidRulpStmt(String line) {
+
+		try {
+
+			List<IRObject> rt = RulpFactory.createParser().parse(line);
+			if (rt.isEmpty()) {
+				return false;
+			}
+
+			for (IRObject obj : rt) {
+				if (obj.getType() != RType.EXPR) {
+					return false;
+				}
+			}
+
+			return true;
+
+		} catch (RException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 //	public static boolean isPureAtomPairList(IRObject obj) throws RException {
 //
 //		RType type = obj.getType();
@@ -1406,29 +1430,6 @@ public class RulpUtil {
 //			return false;
 //		}
 //	}
-
-	public static boolean isValidRulpStmt(String line) {
-
-		try {
-
-			List<IRObject> rt = RulpFactory.createParser().parse(line);
-			if (rt.isEmpty()) {
-				return false;
-			}
-
-			for (IRObject obj : rt) {
-				if (obj.getType() != RType.EXPR) {
-					return false;
-				}
-			}
-
-			return true;
-
-		} catch (RException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
 
 	public static boolean isValueAtom(IRObject obj) {
 		return obj.getType() == RType.ATOM && !isVarName(((IRAtom) obj).getName());
@@ -1591,6 +1592,30 @@ public class RulpUtil {
 		return XRFactorNew.newInstance(
 				RulpFactory.createList(O_New, RulpFactory.createAtom(className), RulpFactory.createAtom(instanceName)),
 				interpreter, frame);
+	}
+
+	public static ArrayList<IRObject> rebuildList(IRList list, int from, int end, IRAction<IRObject> action)
+			throws RException {
+
+		ArrayList<IRObject> newObjs = null;
+
+		for (int i = from; i < end; ++i) {
+
+			IRObject oldObj = list.get(i);
+			IRObject newObj = action.doAction(oldObj);
+
+			if (oldObj != newObj) {
+				newObjs = new ArrayList<>();
+				for (int j = 0; j < i; ++j) {
+					newObjs.add(list.get(j));
+				}
+				newObjs.add(newObj);
+			} else if (newObjs != null) {
+				newObjs.add(newObj);
+			}
+		}
+
+		return newObjs;
 	}
 
 	public static void registerNameSpaceLoader(IRInterpreter interpreter, IRFrame frame, String nsName,
@@ -1936,6 +1961,36 @@ public class RulpUtil {
 		}
 	}
 
+	public static IRObject toConst(IRObject obj, IRFrame frame) throws RException {
+
+		if (AttrUtil.isConst(obj, frame)) {
+			return obj;
+		}
+
+		switch (obj.getType()) {
+		case VAR:
+			return toConst(RulpUtil.asVar(obj).getValue(), frame);
+
+		case LIST:
+
+			IRList list = (IRList) obj;
+			if (list.isEmpty()) {
+				return RulpFactory.emptyConstList();
+			}
+
+			ArrayList<IRObject> newObjs = new ArrayList<>();
+			IRIterator<? extends IRObject> it = list.iterator();
+			while (it.hasNext()) {
+				newObjs.add(toConst(it.next(), frame));				
+			}
+			
+			return RulpFactory.createConstArray(newObjs);
+
+		default:
+			throw new RException("Can't to-const: " + obj);
+		}
+	}
+
 	public static IRExpr toDoExpr(IRIterator<? extends IRObject> it) throws RException {
 
 		ArrayList<IRObject> newExpr = new ArrayList<>();
@@ -2128,6 +2183,30 @@ public class RulpUtil {
 		}
 
 		return attr;
+	}
+
+	public static IRObject toVary(IRObject obj, IRFrame frame) throws RException {
+
+		if (!AttrUtil.isConst(obj, frame)) {
+			return obj;
+		}
+
+		switch (obj.getType()) {
+		case ARRAY:
+
+			IRArray varyArray = RulpFactory.createVaryArray();
+			IRArray constArray = RulpUtil.asArray(obj);
+
+			int size = constArray.size();
+			for (int i = 0; i < size; ++i) {
+				varyArray.add(constArray.get(i));
+			}
+
+			return varyArray;
+
+		default:
+			throw new RException("Can't to-vary: " + obj);
+		}
 	}
 
 }

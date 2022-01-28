@@ -207,6 +207,7 @@ root::sys-total-memory
 root::throw
 root::to-atom
 root::to-blob
+root::to-const
 root::to-expr
 root::to-int
 root::to-named-list

@@ -59,7 +59,7 @@ public class XRFactorDefConst extends AbsAtomFactorAdapter implements IRFactor {
 			throw new RException("invalid constant value: " + valObj);
 		}
 
-		IRConst constant = RulpFactory.createConstant(constantName, valObj);
+		IRConst constant = RulpFactory.createConstant(constantName, RulpUtil.toConst(valObj, frame));
 		frame.setEntry(constantName, constant);
 
 		return constant;

@@ -178,6 +178,7 @@ obj=sys-total-memory    , type=factor
 obj=throw               , type=factor
 obj=to-atom             , type=factor
 obj=to-blob             , type=factor
+obj=to-const            , type=factor
 obj=to-expr             , type=factor
 obj=to-int              , type=factor
 obj=to-named-list       , type=factor

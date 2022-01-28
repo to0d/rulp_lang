@@ -11,20 +11,34 @@ package alpha.rulp.ximpl.lang;
 
 import alpha.rulp.lang.IRConst;
 import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
+import alpha.rulp.utils.RulpUtil;
 
 public class XRConst extends AbsRefObject implements IRConst {
 
 	private String _asString = null;
 
-	private final IRObject value;
+	private IRObject value;
 
 	private final String varName;
 
-	public XRConst(String varName, IRObject value) {
+	public XRConst(String varName, IRObject value) throws RException {
 		super();
 		this.varName = varName;
 		this.value = value;
+
+		RulpUtil.incRef(value);
+	}
+
+	protected void _delete() throws RException {
+
+		if (value != null) {
+			RulpUtil.decRef(value);
+			value = null;
+		}
+
+		super._delete();
 	}
 
 	@Override

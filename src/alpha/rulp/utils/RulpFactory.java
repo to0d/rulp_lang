@@ -134,6 +134,7 @@ import alpha.rulp.ximpl.factor.XRFactorSearchFrameOf;
 import alpha.rulp.ximpl.factor.XRFactorSetq;
 import alpha.rulp.ximpl.factor.XRFactorSubjectOf;
 import alpha.rulp.ximpl.factor.XRFactorToAtom;
+import alpha.rulp.ximpl.factor.XRFactorToConst;
 import alpha.rulp.ximpl.factor.XRFactorToExpr;
 import alpha.rulp.ximpl.factor.XRFactorToNamedList;
 import alpha.rulp.ximpl.factor.XRFactorToNoNamedList;
@@ -352,7 +353,7 @@ public final class RulpFactory {
 		return new XRDefClass(className, definedFrame, superClass);
 	}
 
-	public static IRConst createConstant(String name, IRObject value) {
+	public static IRConst createConstant(String name, IRObject value) throws RException {
 		RType.CONSTANT.incCreateCount();
 		return new XRConst(name, value);
 	}
@@ -752,6 +753,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorAddArrayToList(F_ADD_ARRAY_TO_LIST));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSeta(F_SETA));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorToVary(F_TO_VARY));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorToConst(F_TO_CONST));
 
 		// Thread
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSleep(F_SLEEP));

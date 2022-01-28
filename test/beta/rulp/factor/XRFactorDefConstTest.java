@@ -13,4 +13,12 @@ class XRFactorDefConstTest extends RulpTestBase {
 		_run_script();
 
 	}
+
+	@Test
+	void test_defconst_2() {
+
+		_setup();
+		_run_script();
+
+	}
 }

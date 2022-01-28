@@ -180,6 +180,7 @@ mbr=sys-total-memory, mbr-property='(public), mbr-attribute='(), obj=sys-total-m
 mbr=throw, mbr-property='(public), mbr-attribute='(), obj=throw, obj-type=factor, obj-attribute='()
 mbr=to-atom, mbr-property='(public), mbr-attribute='(), obj=to-atom, obj-type=factor, obj-attribute='(stable)
 mbr=to-blob, mbr-property='(public), mbr-attribute='(), obj=to-blob, obj-type=factor, obj-attribute='(stable)
+mbr=to-const, mbr-property='(public), mbr-attribute='(), obj=to-const, obj-type=factor, obj-attribute='()
 mbr=to-expr, mbr-property='(public), mbr-attribute='(), obj=to-expr, obj-type=factor, obj-attribute='(stable)
 mbr=to-int, mbr-property='(public), mbr-attribute='(), obj=to-int, obj-type=factor, obj-attribute='(atom stable)
 mbr=to-named-list, mbr-property='(public), mbr-attribute='(), obj=to-named-list, obj-type=factor, obj-attribute='(stable)

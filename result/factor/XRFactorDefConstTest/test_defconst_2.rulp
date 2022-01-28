@@ -1,0 +1,10 @@
+(defconst N0 0)
+(defconst N1 1)
+(defconst LIST1 '(N0 N1))
+;=>
+
+(foreach (?x LIST1) (return (+ ?x 1)))
+;=>
+
+(foreach (?x LIST1) (return (+ ?x 1)))
+;=>
