@@ -1,0 +1,8 @@
+(file-exist "abc")
+;=>
+
+(file-exist "result\\fs\\XRFactorFileExistTest")
+;=>
+
+(file-exist "result\\fs\\XRFactorFileExistTest\\test_file_exist_1.rulp")
+;=>

@@ -102,9 +102,10 @@ root::error-value
 root::expr
 root::factor
 root::false
-root::file-child-list
+root::file-delete
 root::file-exist
 root::file-is-folder
+root::file-list
 root::file-mkdirs
 root::final
 root::float

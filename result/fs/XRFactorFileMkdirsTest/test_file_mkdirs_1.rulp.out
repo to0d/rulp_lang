@@ -1,0 +1,24 @@
+(file-exist "result\\fs\\XRFactorFileMkdirsTest")
+;=>true
+
+(file-exist "result\\fs\\XRFactorFileMkdirsTest\\test_dir_1")
+;=>false
+
+(file-mkdirs "result\\fs\\XRFactorFileMkdirsTest\\test_dir_1")
+;=>true
+
+(file-exist "result\\fs\\XRFactorFileMkdirsTest\\test_dir_1")
+;=>true
+
+(file-mkdirs "result\\fs\\XRFactorFileMkdirsTest\\test_dir_1\\a\\b")
+;=>true
+
+(file-exist "result\\fs\\XRFactorFileMkdirsTest\\test_dir_1\\a\\b")
+;=>true
+
+(file-delete "result\\fs\\XRFactorFileMkdirsTest\\test_dir_1")
+;=>true
+
+(file-exist "result\\fs\\XRFactorFileMkdirsTest\\test_dir_1")
+;=>false
+

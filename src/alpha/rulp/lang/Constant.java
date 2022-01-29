@@ -39,26 +39,16 @@ public interface Constant {
 
 	String A_DO = "do";
 
-	String F_RUN = "run";
-	
-	String F_FILE_EXIST = "file-exist";
-	
-	String F_FILE_IS_FOLDER = "file-is-folder";
-	
-	String F_FILE_MKDIRS = "file-mkdirs";
-	
-	String F_FILE_CHILD_LIST = "file-child-list";
-
 	String A_DOUBLE = "double";
-
+	
 	String A_ERROR = "error";
-
+	
 	String A_EXPRESSION = "expr";
-
+	
 	String A_FACTOR = "factor";
-
+	
 	String A_FALSE = "false";
-
+	
 	String A_FINAL = "final";
 
 	String A_FLOAT = "float";
@@ -105,8 +95,6 @@ public interface Constant {
 
 	String A_NAN = "nan";
 
-//	String A_NULL = "null";
-
 	String A_NATIVE = "native";
 
 	String A_NIL = "nil";
@@ -119,6 +107,8 @@ public interface Constant {
 
 	String A_OPT_FULL = "opt-full";
 
+//	String A_NULL = "null";
+
 	String A_OPT_ID = "opt-id";
 
 	String A_OPT_LCO = "opt-lco";
@@ -126,8 +116,6 @@ public interface Constant {
 	String A_OPT_TCO = "opt-tco";
 
 	String A_PARENT = "parent";
-
-	String A_RULP_SUFFIX = ".rulp";
 
 	String A_PRIVATE = "private";
 
@@ -148,6 +136,8 @@ public interface Constant {
 	String A_RETURN_VAR = "?rv";
 
 	String A_ROOT = "root";
+
+	String A_RULP_SUFFIX = ".rulp";
 
 	String A_SET = "set";
 
@@ -274,6 +264,16 @@ public interface Constant {
 	String F_EQUAL_DEFAULT = F_EQUAL + "_def";
 
 	String F_EXTENDS = "extends";
+
+	String F_FILE_DELETE = "file-delete";
+
+	String F_FILE_EXIST = "file-exist";
+
+	String F_FILE_IS_FOLDER = "file-is-folder";
+
+	String F_FILE_LIST = "file-list";
+
+	String F_FILE_MKDIRS = "file-mkdirs";
 
 	String F_FOR = "for";
 
@@ -407,6 +407,8 @@ public interface Constant {
 
 	String F_RULP_OBJ_COUNT = "rulp-object-count";
 
+	String F_RUN = "run";
+
 	String F_RUNTIME_CALL_COUNT = "runtime-call-count";
 
 	String F_SAVE_TXT_FILE = "save-txt-file";
@@ -473,8 +475,6 @@ public interface Constant {
 
 	String F_SYS_OS_TYPE = "sys-os-type";
 
-	String F_TO_VALID_PATH = "to-valid-path";
-
 	String F_SYS_TIME = "sys-time";
 
 	String F_SYS_TOTAL_MEMORY = "sys-total-memory";
@@ -487,6 +487,8 @@ public interface Constant {
 
 	String F_TO_BLOB = "to-blob";
 
+	String F_TO_CONST = "to-const";
+
 	String F_TO_EXPR = "to-expr";
 
 	String F_TO_INT = "to-int";
@@ -497,9 +499,9 @@ public interface Constant {
 
 	String F_TO_STRING = "to-string";
 
-	String F_TO_VARY = "to-vary";
+	String F_TO_VALID_PATH = "to-valid-path";
 	
-	String F_TO_CONST = "to-const";
+	String F_TO_VARY = "to-vary";
 
 	String F_TRY = "try";
 

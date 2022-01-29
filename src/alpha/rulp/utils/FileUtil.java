@@ -24,6 +24,30 @@ import alpha.rulp.utils.SystemUtil.OSType;
 
 public class FileUtil {
 
+	public static boolean deleteFile(File file) {
+
+		if (!isSupportFile(file)) {
+			return false;
+		}
+
+		if (file.isFile()) {
+			return file.delete();
+
+		} else if (file.isDirectory()) {
+
+			for (File subFile : file.listFiles()) {
+
+				if (!deleteFile(subFile)) {
+					return false;
+				}
+			}
+
+			return file.delete();
+		} else {
+			return false;
+		}
+	}
+
 	public static String getFilePreName(String fileName) {
 
 		String filePreName = fileName;
@@ -86,6 +110,27 @@ public class FileUtil {
 
 		File file = new File(path);
 		return file.exists() && file.isFile();
+	}
+
+	static boolean isSupportFile(File file) {
+
+		if (file == null || !file.exists()) {
+			return false;
+		}
+
+		if (file.isDirectory()) {
+
+			for (File f : file.listFiles()) {
+				if (!isSupportFile(f)) {
+					return false;
+				}
+			}
+			return true;
+		} else if (file.isFile()) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public static List<String> openTxtFile(String fileName) throws IOException {

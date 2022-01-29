@@ -1,0 +1,9 @@
+(file-is-folder "abc")
+;=>false
+
+(file-is-folder "result\\fs\\XRFactorFileIsFolderTest")
+;=>true
+
+(file-is-folder "result\\fs\\XRFactorFileIsFolderTest\\test_file_exist_1.rulp")
+;=>false
+

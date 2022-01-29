@@ -1,0 +1,9 @@
+(file-exist "abc")
+;=>false
+
+(file-exist "result\\fs\\XRFactorFileExistTest")
+;=>true
+
+(file-exist "result\\fs\\XRFactorFileExistTest\\test_file_exist_1.rulp")
+;=>true
+

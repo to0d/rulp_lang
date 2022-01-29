@@ -17,12 +17,14 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.utils.FileUtil;
+import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorFileChildList extends AbsAtomFactorAdapter implements IRFactor {
+public class XRFactorFileDelete extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorFileChildList(String factorName) {
+	public XRFactorFileDelete(String factorName) {
 		super(factorName);
 	}
 
@@ -34,8 +36,8 @@ public class XRFactorFileChildList extends AbsAtomFactorAdapter implements IRFac
 		}
 
 		String path = RulpUtil.asString(interpreter.compute(frame, args.get(1))).asString();
-		
-		return RulpUtil.buildListOfString(new File(path).list());
+
+		return RulpFactory.createBoolean(FileUtil.deleteFile(new File(path)));
 	}
 
 }

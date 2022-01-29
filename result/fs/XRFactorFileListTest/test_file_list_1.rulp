@@ -1,0 +1,5 @@
+(file-list "abc")
+;=>
+
+(file-list "result\\fs\\XRFactorFileListTest")
+;=>
