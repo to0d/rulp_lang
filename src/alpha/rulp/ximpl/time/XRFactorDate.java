@@ -7,7 +7,7 @@
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-package alpha.rulp.ximpl.system;
+package alpha.rulp.ximpl.time;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

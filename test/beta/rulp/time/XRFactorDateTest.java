@@ -1,4 +1,4 @@
-package beta.rulp.factor;
+package beta.rulp.time;
 
 import org.junit.jupiter.api.Test;
 
