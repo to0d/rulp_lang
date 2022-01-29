@@ -967,11 +967,25 @@ public class RulpUtil {
 		return (IRVar) obj;
 	}
 
-	public static IRList buildList(List<String> strlist) throws RException {
+	public static IRList buildListOfString(List<String> strlist) throws RException {
 
-		LinkedList<IRObject> objList = new LinkedList<>();
+		ArrayList<IRObject> objList = new ArrayList<>();
 		for (String str : strlist) {
 			objList.add(RulpFactory.createString(str));
+		}
+
+		return RulpFactory.createList(objList);
+	}
+
+	public static IRList buildListOfString(String[] elements) throws RException {
+
+		if (elements == null || elements.length == 0) {
+			return RulpFactory.emptyConstList();
+		}
+
+		ArrayList<IRObject> objList = new ArrayList<>();
+		for (String element : elements) {
+			objList.add(RulpFactory.createString(element));
 		}
 
 		return RulpFactory.createList(objList);
@@ -1288,10 +1302,6 @@ public class RulpUtil {
 		return obj.getType() == RType.FUNC && ((IRFunction) obj).isList();
 	}
 
-	public static boolean isList(IRObject obj) {
-		return obj.getType() == RType.LIST;
-	}
-
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
 //
 //		IRObject nsObj = frame.getObject(A_USING_NS);
@@ -1301,6 +1311,10 @@ public class RulpUtil {
 //
 //		return RulpUtil.asSubject(nsObj);
 //	}
+
+	public static boolean isList(IRObject obj) {
+		return obj.getType() == RType.LIST;
+	}
 
 	public static boolean isNamedList(IRObject obj) throws RException {
 
@@ -1372,29 +1386,6 @@ public class RulpUtil {
 		return true;
 	}
 
-	public static boolean isValidRulpStmt(String line) {
-
-		try {
-
-			List<IRObject> rt = RulpFactory.createParser().parse(line);
-			if (rt.isEmpty()) {
-				return false;
-			}
-
-			for (IRObject obj : rt) {
-				if (obj.getType() != RType.EXPR) {
-					return false;
-				}
-			}
-
-			return true;
-
-		} catch (RException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
 //	public static boolean isPureAtomPairList(IRObject obj) throws RException {
 //
 //		RType type = obj.getType();
@@ -1430,6 +1421,29 @@ public class RulpUtil {
 //			return false;
 //		}
 //	}
+
+	public static boolean isValidRulpStmt(String line) {
+
+		try {
+
+			List<IRObject> rt = RulpFactory.createParser().parse(line);
+			if (rt.isEmpty()) {
+				return false;
+			}
+
+			for (IRObject obj : rt) {
+				if (obj.getType() != RType.EXPR) {
+					return false;
+				}
+			}
+
+			return true;
+
+		} catch (RException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 	public static boolean isValueAtom(IRObject obj) {
 		return obj.getType() == RType.ATOM && !isVarName(((IRAtom) obj).getName());
@@ -1981,9 +1995,9 @@ public class RulpUtil {
 			ArrayList<IRObject> newObjs = new ArrayList<>();
 			IRIterator<? extends IRObject> it = list.iterator();
 			while (it.hasNext()) {
-				newObjs.add(toConst(it.next(), frame));				
+				newObjs.add(toConst(it.next(), frame));
 			}
-			
+
 			return RulpFactory.createConstArray(newObjs);
 
 		default:

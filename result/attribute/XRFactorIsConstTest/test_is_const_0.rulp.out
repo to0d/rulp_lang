@@ -75,6 +75,10 @@ obj=error-value         , type=factor
 obj=expr                , type=atom
 obj=factor              , type=atom
 obj=false               , type=bool
+obj=file-child-list     , type=factor
+obj=file-exist          , type=factor
+obj=file-is-folder      , type=factor
+obj=file-mkdirs         , type=factor
 obj=final               , type=atom
 obj=float               , type=atom
 obj=foreach             , type=factor

@@ -142,6 +142,10 @@ import alpha.rulp.ximpl.factor.XRFactorToVary;
 import alpha.rulp.ximpl.factor.XRFactorTypeOf;
 import alpha.rulp.ximpl.factor.XRFactorValueOf;
 import alpha.rulp.ximpl.factor.XRFactorValueTypeOf;
+import alpha.rulp.ximpl.fs.XRFactorFileChildList;
+import alpha.rulp.ximpl.fs.XRFactorFileExist;
+import alpha.rulp.ximpl.fs.XRFactorFileIsFolder;
+import alpha.rulp.ximpl.fs.XRFactorFileMkdirs;
 import alpha.rulp.ximpl.function.XRFactorDefun;
 import alpha.rulp.ximpl.function.XRFactorLambda;
 import alpha.rulp.ximpl.function.XRFunction;
@@ -638,6 +642,12 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorPrintGlobalInfo(F_PRINT_GLOBAL_INFO));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorPrintImpl(F_PRINT_IMPL));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorRun(F_RUN));
+
+		// FS
+		RulpUtil.addFrameObject(rootFrame, new XRFactorFileExist(F_FILE_EXIST));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorFileIsFolder(F_FILE_IS_FOLDER));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorFileMkdirs(F_FILE_MKDIRS));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorFileChildList(F_FILE_CHILD_LIST));
 
 		// Variable, Value & Expression
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDefvar(F_DEFVAR, true, false));

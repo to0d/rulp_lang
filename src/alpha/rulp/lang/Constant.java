@@ -40,6 +40,14 @@ public interface Constant {
 	String A_DO = "do";
 
 	String F_RUN = "run";
+	
+	String F_FILE_EXIST = "file-exist";
+	
+	String F_FILE_IS_FOLDER = "file-is-folder";
+	
+	String F_FILE_MKDIRS = "file-mkdirs";
+	
+	String F_FILE_CHILD_LIST = "file-child-list";
 
 	String A_DOUBLE = "double";
 
