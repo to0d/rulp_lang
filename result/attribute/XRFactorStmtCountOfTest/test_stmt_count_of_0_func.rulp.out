@@ -44,6 +44,8 @@ obj=to-list             , type=func    , stmt-count=4
 ;=>nil
 ;out:
 obj=_ginfo              , type=func    , stmt-count=43
+obj=day-is-bigger-than  , type=func    , stmt-count=8
+obj=day-is-smaller-than , type=func    , stmt-count=8
 obj=file-prename        , type=func    , stmt-count=18
 obj=file-subffix        , type=func    , stmt-count=20
 obj=index-of            , type=func    , stmt-count=42

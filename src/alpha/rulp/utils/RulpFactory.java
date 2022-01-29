@@ -236,13 +236,14 @@ import alpha.rulp.ximpl.subject.XRSubjectFrame;
 import alpha.rulp.ximpl.system.XRFactorSystemFreeMemory;
 import alpha.rulp.ximpl.system.XRFactorSystemGC;
 import alpha.rulp.ximpl.system.XRFactorSystemOSType;
-import alpha.rulp.ximpl.system.XRFactorSystemTime;
 import alpha.rulp.ximpl.system.XRFactorSystemTotalMemory;
 import alpha.rulp.ximpl.template.XRFactorDefTemplate;
 import alpha.rulp.ximpl.template.XRTemplate;
 import alpha.rulp.ximpl.thread.XRFactorDoParallel;
 import alpha.rulp.ximpl.thread.XRFactorSleep;
 import alpha.rulp.ximpl.time.XRFactorDate;
+import alpha.rulp.ximpl.time.XRFactorDayNumber;
+import alpha.rulp.ximpl.time.XRFactorSystemTime;
 
 public final class RulpFactory {
 
@@ -773,6 +774,7 @@ public final class RulpFactory {
 
 		// Time
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDate(F_DATE));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorDayNumber(F_DAY_NUMBER));
 
 		// Math
 		RulpUtil.addFrameObject(rootFrame, new XRFactorRandom(F_RANDOM));

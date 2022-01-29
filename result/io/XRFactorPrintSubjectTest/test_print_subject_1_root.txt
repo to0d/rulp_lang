@@ -1,22 +1,23 @@
-id=0, name=root, lvl=0, ref=0/0, entry=196, subject=root
+id=0, name=root, lvl=0, ref=0/0, entry=197, subject=root
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?os.version          : -214     0        1    var        10.0 : type=string  
-?os.name             : -213     0        1    var        Windows 10 : type=string
-?path.separator      : -212     0        1    var        ; : type=string     
-?file.separator      : -211     0        1    var        \ : type=string     
-?user.dir            : -210     0        1    var        C:\data\itool\irulp_base : type=string
-?user.name           : -209     0        1    var        to0d : type=string  
-?user.home           : -208     0        1    var        C:\Users\to0d : type=string
-rulp-object-count    : -191     0        0    factor     rulp-object-count   
-runtime-call-count   : -190     0        0    factor     runtime-call-count  
-sys-os-type          : -189     0        0    factor     sys-os-type         
-sys-free-memory      : -188     0        0    factor     sys-free-memory     
-sys-total-memory     : -187     0        0    factor     sys-total-memory    
-sys-time             : -186     0        0    factor     sys-time            
-sys-gc               : -185     0        0    factor     sys-gc              
-random               : -184     0        0    factor     random              
+?os.version          : -215     0        1    var        10.0 : type=string  
+?os.name             : -214     0        1    var        Windows 10 : type=string
+?path.separator      : -213     0        1    var        ; : type=string     
+?file.separator      : -212     0        1    var        \ : type=string     
+?user.dir            : -211     0        1    var        C:\data\itool\irulp_base : type=string
+?user.name           : -210     0        1    var        to0d : type=string  
+?user.home           : -209     0        1    var        C:\Users\to0d : type=string
+rulp-object-count    : -192     0        0    factor     rulp-object-count   
+runtime-call-count   : -191     0        0    factor     runtime-call-count  
+sys-os-type          : -190     0        0    factor     sys-os-type         
+sys-free-memory      : -189     0        0    factor     sys-free-memory     
+sys-total-memory     : -188     0        0    factor     sys-total-memory    
+sys-time             : -187     0        0    factor     sys-time            
+sys-gc               : -186     0        0    factor     sys-gc              
+random               : -185     0        0    factor     random              
+day-number           : -184     0        0    factor     day-number          
 date                 : -183     0        0    factor     date                
 do-p                 : -182     0        0    factor     do-p                
 sleep                : -181     0        0    factor     sleep               

@@ -84,6 +84,7 @@ root::compute
 root::constant
 root::continue
 root::date
+root::day-number
 root::default
 root::defclass
 root::defconst
@@ -266,6 +267,8 @@ system::use
 main::?rv
 main::?script-path
 main::_ginfo
+main::day-is-bigger-than
+main::day-is-smaller-than
 main::file-prename
 main::file-subffix
 main::index-of

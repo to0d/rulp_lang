@@ -51,6 +51,7 @@ root::compute
 root::constant
 root::continue
 root::date
+root::day-number
 root::default
 root::defclass
 root::defconst

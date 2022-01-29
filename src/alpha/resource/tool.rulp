@@ -68,6 +68,16 @@
     (return (+ ?path ?file.separator))
 )
 
+;****************************************************;
+; Time tools
+;****************************************************;
+(defun day-is-bigger-than ((?day1 string) (?day2 string))
+    (return (> (day-number ?day1) (day-number ?day2)))
+)
+
+(defun day-is-smaller-than ((?day1 string) (?day2 string))
+    (return (< (day-number ?day1) (day-number ?day2)))
+)
 
 ;****************************************************;
 ; Other tools

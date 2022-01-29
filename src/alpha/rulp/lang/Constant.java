@@ -236,6 +236,8 @@ public interface Constant {
 	String F_CPS = "cps";
 
 	String F_DATE = "date";
+	
+	String F_DAY_NUMBER = "day-number";
 
 	String F_DEF_CONST = "defconst";
 

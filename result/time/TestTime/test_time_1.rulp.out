@@ -1,0 +1,9 @@
+(load tool)
+;=>nil
+
+(day-is-bigger-than "2020-01-01" "2020-01-02")
+;=>false
+
+(day-is-smaller-than "2020-01-01" "2020-01-02")
+;=>true
+
