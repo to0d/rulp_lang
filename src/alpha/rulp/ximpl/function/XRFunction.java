@@ -89,7 +89,6 @@ public class XRFunction extends AbsFunctionAdapter implements IRFunction {
 			if (!RulpUtil.matchParaType(value, typeAtom)) {
 
 				if (value.getType() == RType.EXPR && AttrUtil.containAttribute(attr, A_OPT_LCO)) {
-
 					IRAtom exprTypeAtom = ReturnTypeUtil.returnTypeOf(value, frame);
 					if (exprTypeAtom != O_Nil && RulpUtil.equal(exprTypeAtom, typeAtom)) {
 						continue;

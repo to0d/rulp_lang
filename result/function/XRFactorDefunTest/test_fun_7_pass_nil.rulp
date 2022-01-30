@@ -1,0 +1,6 @@
+(defun fun1 ((?x string)) (print ?x))
+;=>
+
+(fun1 nil)
+;=>
+

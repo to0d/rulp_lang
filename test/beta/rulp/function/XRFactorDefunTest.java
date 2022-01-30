@@ -138,9 +138,15 @@ class XRFactorDefunTest extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
-
+	
 	@Test
 	void test_fun_6_extend_body() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_fun_7_pass_nil() {
 		_setup();
 		_run_script();
 	}
