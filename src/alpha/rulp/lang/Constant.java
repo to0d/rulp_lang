@@ -20,9 +20,9 @@ public interface Constant {
 	String A_ATOM = "atom";
 
 	String A_BLOB = "blob";
-
+	
 	String A_BOOL = "bool";
-
+	
 	String A_CATCH = "catch";
 
 	String A_CLASS = "class";
@@ -40,15 +40,15 @@ public interface Constant {
 	String A_DO = "do";
 
 	String A_DOUBLE = "double";
-	
+
 	String A_ERROR = "error";
-	
+
 	String A_EXPRESSION = "expr";
-	
+
 	String A_FACTOR = "factor";
-	
+
 	String A_FALSE = "false";
-	
+
 	String A_FINAL = "final";
 
 	String A_FLOAT = "float";
@@ -107,9 +107,9 @@ public interface Constant {
 
 	String A_OPT_FULL = "opt-full";
 
-//	String A_NULL = "null";
-
 	String A_OPT_ID = "opt-id";
+
+//	String A_NULL = "null";
 
 	String A_OPT_LCO = "opt-lco";
 
@@ -236,7 +236,7 @@ public interface Constant {
 	String F_CPS = "cps";
 
 	String F_DATE = "date";
-	
+
 	String F_DAY_NUMBER = "day-number";
 
 	String F_DEF_CONST = "defconst";
@@ -314,6 +314,8 @@ public interface Constant {
 	String F_LIST_OF = "list-of";
 
 	String F_LOAD = "load";
+
+	String F_LOAD_JAR = "load-jar";
 
 	String F_LOOP = "loop";
 
@@ -502,7 +504,7 @@ public interface Constant {
 	String F_TO_STRING = "to-string";
 
 	String F_TO_VALID_PATH = "to-valid-path";
-	
+
 	String F_TO_VARY = "to-vary";
 
 	String F_TRY = "try";

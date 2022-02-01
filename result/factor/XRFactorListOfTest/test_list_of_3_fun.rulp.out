@@ -133,6 +133,7 @@ root::list
 root::list-function-in-return
 root::list-of
 root::load
+root::load-jar
 root::long
 root::loop
 root::macro
