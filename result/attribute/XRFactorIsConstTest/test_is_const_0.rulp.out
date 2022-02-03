@@ -106,7 +106,6 @@ obj=list                , type=atom
 obj=list-function-in-return, type=factor
 obj=list-of             , type=factor
 obj=load                , type=factor
-obj=load-jar            , type=factor
 obj=long                , type=atom
 obj=loop                , type=factor
 obj=macro               , type=atom

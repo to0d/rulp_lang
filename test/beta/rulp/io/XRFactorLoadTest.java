@@ -11,6 +11,7 @@ class XRFactorLoadTest extends RulpTestBase {
 
 		_setup();
 		_run_script();
+		_gInfo();
 	}
 
 	@Test
@@ -18,6 +19,7 @@ class XRFactorLoadTest extends RulpTestBase {
 
 		_setup();
 		_run_script();
+		_gInfo();
 	}
 
 	@Test
@@ -25,6 +27,7 @@ class XRFactorLoadTest extends RulpTestBase {
 
 		_setup();
 		_run_script();
+		_gInfo();
 	}
 	
 	@Test
@@ -32,5 +35,6 @@ class XRFactorLoadTest extends RulpTestBase {
 
 		_setup();
 		_run_script();
+		_gInfo();
 	}
 }

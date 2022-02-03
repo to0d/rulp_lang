@@ -73,6 +73,8 @@ public interface Constant {
 
 	String A_LIST = "list";
 
+	String A_LOAD_JARS = "?load-jars";
+
 	String A_LOAD_PATHS = "?load-paths";
 
 	String A_LOAD_SCRIPTS = "?load-scripts";
@@ -317,7 +319,7 @@ public interface Constant {
 
 	String F_LOAD = "load";
 
-	String F_LOAD_JAR = "load-jar";
+//	String F_LOAD_JAR = "load-jar";
 
 	String F_LOOP = "loop";
 

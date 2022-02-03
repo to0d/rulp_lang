@@ -106,7 +106,6 @@ mbr=list, mbr-property='(public), mbr-attribute='(), obj=list, obj-type=atom, ob
 mbr=list-function-in-return, mbr-property='(public), mbr-attribute='(), obj=list-function-in-return, obj-type=factor, obj-attribute='()
 mbr=list-of, mbr-property='(public), mbr-attribute='(), obj=list-of, obj-type=factor, obj-attribute='(stable)
 mbr=load, mbr-property='(public), mbr-attribute='(), obj=load, obj-type=factor, obj-attribute='(thread-unsafe)
-mbr=load-jar, mbr-property='(public), mbr-attribute='(), obj=load-jar, obj-type=factor, obj-attribute='()
 mbr=long, mbr-property='(public), mbr-attribute='(), obj=long, obj-type=atom, obj-attribute='()
 mbr=loop, mbr-property='(public), mbr-attribute='(), obj=loop, obj-type=factor, obj-attribute='(stable)
 mbr=macro, mbr-property='(public), mbr-attribute='(), obj=macro, obj-type=atom, obj-attribute='()
