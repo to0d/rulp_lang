@@ -153,6 +153,7 @@ import alpha.rulp.ximpl.function.XRFunction;
 import alpha.rulp.ximpl.function.XRFunctionLambda;
 import alpha.rulp.ximpl.function.XRFunctionList;
 import alpha.rulp.ximpl.io.XRFactorLoad;
+import alpha.rulp.ximpl.io.XRFactorLoadClass;
 import alpha.rulp.ximpl.io.XRFactorOpenTxtFile;
 import alpha.rulp.ximpl.io.XRFactorOutToFile;
 import alpha.rulp.ximpl.io.XRFactorPrint;
@@ -310,14 +311,6 @@ public final class RulpFactory {
 		} catch (RException e) {
 			e.printStackTrace();
 		}
-
-		LoadUtil.registerSystemLoader(A_MAP, XRMap.getLoader());
-		LoadUtil.registerSystemLoader(A_QUEUE, XRQueue.getLoader());
-		LoadUtil.registerSystemLoader(A_SET, XRSet.getLoader());
-		LoadUtil.registerSystemLoader(A_STACK, null);
-		LoadUtil.registerSystemLoader(A_STRING, null);
-		LoadUtil.registerSystemLoader(A_MATH, null);
-		LoadUtil.registerSystemLoader(A_TOOL, null);
 	}
 
 	public static IRAtom createAtom(RName rname) {
@@ -644,7 +637,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorPrintGlobalInfo(F_PRINT_GLOBAL_INFO));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorPrintImpl(F_PRINT_IMPL));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorRun(F_RUN));
-//		RulpUtil.addFrameObject(rootFrame, new XRFactorLoadJar(F_LOAD_JAR));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorLoadClass(F_LOAD_CLASS));
 
 		// FS
 		RulpUtil.addFrameObject(rootFrame, new XRFactorFileExist(F_FILE_EXIST));

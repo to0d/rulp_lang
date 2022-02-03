@@ -106,6 +106,7 @@ mbr=list, mbr-property='(public), mbr-attribute='(), obj=list, obj-type=atom, ob
 mbr=list-function-in-return, mbr-property='(public), mbr-attribute='(), obj=list-function-in-return, obj-type=factor, obj-attribute='()
 mbr=list-of, mbr-property='(public), mbr-attribute='(), obj=list-of, obj-type=factor, obj-attribute='(stable)
 mbr=load, mbr-property='(public), mbr-attribute='(), obj=load, obj-type=factor, obj-attribute='(thread-unsafe)
+mbr=load-class, mbr-property='(public), mbr-attribute='(), obj=load-class, obj-type=factor, obj-attribute='()
 mbr=long, mbr-property='(public), mbr-attribute='(), obj=long, obj-type=atom, obj-attribute='()
 mbr=loop, mbr-property='(public), mbr-attribute='(), obj=loop, obj-type=factor, obj-attribute='(stable)
 mbr=macro, mbr-property='(public), mbr-attribute='(), obj=macro, obj-type=atom, obj-attribute='()
@@ -215,7 +216,10 @@ mbr=~, mbr-property='(public), mbr-attribute='(), obj=~, obj-type=factor, obj-at
 ;out:
 mbr=++, mbr-property='(public), mbr-attribute='(), obj=++, obj-type=macro, obj-attribute='()
 mbr=--, mbr-property='(public), mbr-attribute='(), obj=--, obj-type=macro, obj-attribute='()
-mbr=?load, mbr-property='(public), mbr-attribute='(), obj=?load, obj-type=var, obj-attribute='(), var-value="'(string math map queue set stack tool)"
+mbr=?load-class, mbr-property='(public), mbr-attribute='(), obj=?load-class, obj-type=var, obj-attribute='(), var-value="'(alpha.rulp.ximpl.collection.XRMap$Loader alpha.rulp.ximpl.collection.XRQueue$Loader alpha.rulp.ximpl.collection.XRSet$Loader)"
+mbr=?load-jar, mbr-property='(public), mbr-attribute='(), obj=?load-jar, obj-type=var, obj-attribute='(), var-value="'()"
+mbr=?load-script, mbr-property='(public), mbr-attribute='(), obj=?load-script, obj-type=var, obj-attribute='(), var-value="'()"
+mbr=?load-system, mbr-property='(public), mbr-attribute='(), obj=?load-system, obj-type=var, obj-attribute='(), var-value="'(string math map queue set stack tool)"
 mbr=?path, mbr-property='(public), mbr-attribute='(), obj=?path, obj-type=var, obj-attribute='(), var-value="'()"
 mbr=?trace, mbr-property='(public), mbr-attribute='(), obj=?trace, obj-type=var, obj-attribute='(), var-value="false"
 mbr=add, mbr-property='(public), mbr-attribute='(), obj='((add array nil nil nil) (add array nil nil) (add array nil) (add list nil nil nil) (add list nil nil) (add list nil)), obj-type=func, obj-attribute='()

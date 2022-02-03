@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      235
+           Interpreter call id:      238
     Interpreter call level/max:        0        7
                Frame max level:        5
                   Frame max id:        8
@@ -25,47 +25,48 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      256
+    factor:      263
       func:        7
 ==========================================================================================================================
 
-Callable stats info: callId=235, row=22, column=59(4), value-max=7, value-unit=2^x
+Callable stats info: callId=238, row=23, column=60(4), value-max=7, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         33333333333333333333333333333333333333333333334333333333456 max=18, unit=2^x
+   Frame    RType  Count  Ref Object                         333333333333333333333333333333333333333333333344333333333455 max=14, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor    179    0 add-attribute                   1333333333333333333333333333333333333333333332            
-    root   factor     44    0 defun                                                                         3333 333344 
-    root   factor      6    0 alias                          33                                                         
-    root   factor      3    0 defvar                                                                       2         1  
-    root   factor      3    0 deftemplate                                                                       3       
-    root   factor      3    0 defmacro                                                                         11     1 
-    root   factor      2    0 return                                                                                   2
-    main   member      2    1 queue@q1::push                                                                           2
-    main   member      2    1 queue::_queue_push_back                                                                  2
-    root   factor      2    0 print                                                                                    2
-    root   factor      2    0 make-list                                                                    2            
-    root   factor      2    0 load                                                                                   11 
-    root   factor      2    0 lambda                                                                                   2
-    main funcList      1    1 to-list                                                                                  1
-    root   factor      1    0 setq                                                                                     1
-    main   member      1    1 queue@q1::to-list                                                                        1
-    main   member      1    1 queue@q1::init                                                                           1
-    main   member      1    1 queue::_queue_to_list                                                                    1
-    main   member      1    1 queue::_queue_init                                                                       1
-    root   factor      1    0 new                                                                                      1
-    root   factor      1    0 loop                                                                                     1
-    root   factor      1    0 defclass                                                                                1 
+    root   factor    179    0 add-attribute                   1333333333333333333333333333333333333333333332             
+    root   factor     44    0 defun                                                                         133321333344 
+    root   factor      6    0 defvar                                                                       23         1  
+    root   factor      6    0 alias                          33                                                          
+    root   factor      5    0 make-list                                                                    23            
+    root   factor      3    0 deftemplate                                                                        3       
+    root   factor      3    0 defmacro                                                                          2     1  
+    root   factor      2    0 return                                                                                    2
+    main   member      2    1 queue@q1::push                                                                            2
+    main   member      2    1 queue::_queue_push_back                                                                   2
+    root   factor      2    0 print                                                                                     2
+    root   factor      2    0 load                                                                                    11 
+    root   factor      2    0 lambda                                                                                    2
+    main funcList      1    1 to-list                                                                                   1
+    root   factor      1    0 setq                                                                                     1 
+    main   member      1    1 queue@q1::to-list                                                                         1
+    main   member      1    1 queue@q1::init                                                                           1 
+    main   member      1    1 queue::_queue_to_list                                                                     1
+    main   member      1    1 queue::_queue_init                                                                       1 
+    root   factor      1    0 new                                                                                      1 
+    root   factor      1    0 loop                                                                                      1
+    root   factor      1    0 load-class                                                                               1 
+    root   factor      1    0 defclass                                                                                 1 
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1216            0         1216
-      string:           30            0           30
-        list:            9            0            9
-        expr:          516            6          510
-         var:           20            6           14
+        atom:         1226            0         1226
+      string:           32            0           32
+        list:           12            0           12
+        expr:          523            6          517
+         var:           23            6           17
         func:           82            0           82
     template:            1            0            1
        macro:            3            0            3
@@ -74,7 +75,7 @@ Object create count:
       member:           56            0           56
        frame:           12           10            2
  interpreter:            1            0
-  frameEntry:          241            0
+  frameEntry:          245            0
       lambda:            5            0
 ==========================================================================================================================
 
@@ -125,11 +126,14 @@ id=3, name=SF-queue-0, lvl=3, ref=2/2, entry=0, pid=2(main), subject=queue
 
 id=4, name=SF-q1-1, lvl=4, ref=4/5, entry=0, pid=3(SF-queue-0), subject=q1
 
-Root var list: total=3
+Root var list: total=6
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
-?load                : '("string" "queue")
+?load-class          : '("alpha.rulp.ximpl.collection.XRQueue$Loader")
+?load-jar            : '()
+?load-script         : '()
+?load-system         : '("string" "queue")
 ?path                : '()
 ?trace               : false
 ==========================================================================================================================

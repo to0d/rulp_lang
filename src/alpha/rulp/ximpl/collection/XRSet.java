@@ -22,7 +22,7 @@ import alpha.rulp.ximpl.rclass.AbsRInstance;
 
 public class XRSet extends AbsRInstance implements IRCollection {
 
-	static class SetLoader implements IRObjectLoader {
+	public static class Loader implements IRObjectLoader {
 
 		@Override
 		public void load(IRInterpreter interpreter, IRFrame frame) throws RException, IOException {
@@ -157,10 +157,6 @@ public class XRSet extends AbsRInstance implements IRCollection {
 		}
 
 		return (XRSet) obj;
-	}
-
-	public static IRObjectLoader getLoader() {
-		return new SetLoader();
 	}
 
 	private Map<String, IRObject> uniqMap = new HashMap<>();

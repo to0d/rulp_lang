@@ -54,7 +54,10 @@ obj=true                , type=bool
 (list-of-is-thread-safe-objects system)
 ;=>nil
 ;out:
-obj=?load               , type=var
+obj=?load-class         , type=var
+obj=?load-jar           , type=var
+obj=?load-script        , type=var
+obj=?load-system        , type=var
 obj=?path               , type=var
 obj=?trace              , type=var
 obj=root                , type=frame

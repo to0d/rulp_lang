@@ -54,3 +54,5 @@
 (defun is-empty ((?queue queue))            (return (?queue::is-empty)))
 (defun clear    ((?queue queue))            (?queue::clear))
 (defun to-list  ((?queue queue))            (return (?queue::to-list)))
+
+(load-class "alpha.rulp.ximpl.collection.XRQueue$Loader")

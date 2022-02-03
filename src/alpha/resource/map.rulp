@@ -26,3 +26,5 @@
 (defun size-of  ((?map map))    (return (?map::size-of)))
 (defun is-empty ((?map map))    (return (?map::is-empty)))
 (defun clear    ((?map map))    (return (?map::clear)))
+
+(load-class "alpha.rulp.ximpl.collection.XRMap$Loader")

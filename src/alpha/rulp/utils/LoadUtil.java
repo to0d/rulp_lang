@@ -11,13 +11,12 @@ import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.runtime.IRObjectLoader;
 
 public class LoadUtil {
 
 	static Map<String, String> loadLineMap = new HashMap<>();
 
-	static Map<String, IRObjectLoader> systemLoaderMap = new HashMap<>();
+//	static Map<String, IRObjectLoader> systemLoaderMap = new HashMap<>();
 
 	public static IRList loadRulp(IRInterpreter interpreter, String path, String charset) throws RException {
 		try {
@@ -96,40 +95,40 @@ public class LoadUtil {
 //		}
 //	}
 
-	public static void loadSystem(IRInterpreter interpreter, IRFrame frame, String loadName) throws RException {
+//	public static void loadSystem(IRInterpreter interpreter, IRFrame frame, String loadName) throws RException {
+//
+////		if (!systemLoaderMap.containsKey(loadName)) {
+////			throw new RException("unknown system script:" + loadName);
+////		}
+//
+////		IRObjectLoader loader = systemLoaderMap.get(loadName);
+//
+//		String jarPath = "alpha/resource/" + loadName + ".rulp";
+//
+//		try {
+//
+//			if (RuntimeUtil.isTrace(frame)) {
+//				System.out.println("loading: " + jarPath);
+//			}
+//
+//			LoadUtil.loadRulpFromJar(interpreter, frame, jarPath, "utf-8");
+////			if (loader != null) {
+////				loader.load(interpreter, frame);
+////			}
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			throw new RException("fail to load <" + loadName + ">, err:" + e.toString());
+//		}
+//
+//	}
 
-		if (!systemLoaderMap.containsKey(loadName)) {
-			throw new RException("unknown system script:" + loadName);
-		}
-
-		IRObjectLoader loader = systemLoaderMap.get(loadName);
-
-		String jarPath = "alpha/resource/" + loadName + ".rulp";
-
-		try {
-
-			if (RuntimeUtil.isTrace(frame)) {
-				System.out.println("loading: " + jarPath);
-			}
-
-			LoadUtil.loadRulpFromJar(interpreter, frame, jarPath, "utf-8");
-			if (loader != null) {
-				loader.load(interpreter, frame);
-			}
-
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new RException("fail to load <" + loadName + ">, err:" + e.toString());
-		}
-
-	}
-
-	public static void registerSystemLoader(String loadName, IRObjectLoader loader) {
-
-		if (loadName == null || (loadName = loadName.trim()).isEmpty() || loadName.startsWith("/")) {
-			throw new RuntimeException("invalid load name: " + loadName);
-		}
-
-		systemLoaderMap.put(loadName, loader);
-	}
+//	public static void registerSystemLoader(String loadName, IRObjectLoader loader) {
+//
+//		if (loadName == null || (loadName = loadName.trim()).isEmpty() || loadName.startsWith("/")) {
+//			throw new RuntimeException("invalid load name: " + loadName);
+//		}
+//
+//		systemLoaderMap.put(loadName, loader);
+//	}
 }

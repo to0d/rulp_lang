@@ -21,7 +21,7 @@ import alpha.rulp.ximpl.rclass.AbsRInstance;
 
 public class XRQueue extends AbsRInstance implements IRCollection {
 
-	static class QueueLoader implements IRObjectLoader {
+	public static class Loader implements IRObjectLoader {
 
 		@Override
 		public void load(IRInterpreter interpreter, IRFrame frame) throws RException, IOException {
@@ -240,10 +240,6 @@ public class XRQueue extends AbsRInstance implements IRCollection {
 		}
 
 		return (XRQueue) obj;
-	}
-
-	public static IRObjectLoader getLoader() {
-		return new QueueLoader();
 	}
 
 	private LinkedList<IRObject> elementList = new LinkedList<>();

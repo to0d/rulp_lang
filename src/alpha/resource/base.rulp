@@ -199,7 +199,10 @@
 ; Enviroment vars
 ;****************************************************;
 (defvar ?path (make-list))
-(defvar ?load (make-list))
+(defvar ?load-system (make-list))
+(defvar ?load-class (make-list))
+(defvar ?load-jar (make-list))
+(defvar ?load-script (make-list))
 
 ;****************************************************;
 ; Basic tools

@@ -57,7 +57,10 @@ obj=true                , type=bool    , return=bool
 (list-of-return-type-of system)
 ;=>nil
 ;out:
-obj=?load               , type=var     , return=list
+obj=?load-class         , type=var     , return=list
+obj=?load-jar           , type=var     , return=list
+obj=?load-script        , type=var     , return=list
+obj=?load-system        , type=var     , return=list
 obj=?path               , type=var     , return=list
 obj=?trace              , type=var     , return=bool
 

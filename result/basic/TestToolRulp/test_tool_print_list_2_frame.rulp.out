@@ -100,6 +100,7 @@ root::list
 root::list-function-in-return
 root::list-of
 root::load
+root::load-class
 root::long
 root::loop
 root::macro
@@ -209,7 +210,10 @@ root::~
 ;out:
 system::++
 system::--
-system::?load
+system::?load-class
+system::?load-jar
+system::?load-script
+system::?load-system
 system::?path
 system::?trace
 system::add

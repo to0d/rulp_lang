@@ -30,7 +30,7 @@ import alpha.rulp.ximpl.rclass.XRDefInstance;
 
 public class XRMap extends XRDefInstance implements IRCollection {
 
-	static class MapLoader implements IRObjectLoader {
+	public static class Loader implements IRObjectLoader {
 
 		@Override
 		public void load(IRInterpreter interpreter, IRFrame frame) throws RException, IOException {
@@ -273,10 +273,6 @@ public class XRMap extends XRDefInstance implements IRCollection {
 	static final String F_MBR_MAP_SIZE_OF = "_map_size_of";
 
 	public static boolean TRACE = false;
-
-	public static IRObjectLoader getLoader() {
-		return new MapLoader();
-	}
 
 	public static IRMap toImplMap(IRInstance instance) throws RException {
 

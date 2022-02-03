@@ -73,7 +73,13 @@ public interface Constant {
 
 	String A_LIST = "list";
 
-	String A_LOAD = "?load";
+	String A_LOAD_SYSTEM = "?load-system";
+
+	String A_LOAD_CLASS = "?load-class";
+	
+	String A_LOAD_JAR = "?load-jar";
+	
+	String A_LOAD_SCRIPT = "?load-script";
 
 	String A_LOCAL = "local";
 
@@ -109,15 +115,15 @@ public interface Constant {
 
 	String A_OPT_ID = "opt-id";
 
-	String A_OPT_LCO = "opt-lco";
-
 //	String A_NULL = "null";
+
+	String A_OPT_LCO = "opt-lco";
 
 	String A_OPT_TCO = "opt-tco";
 
 	String A_PARENT = "parent";
 
-	String A_PATH= "?path";
+	String A_PATH = "?path";
 
 	String A_PRIVATE = "private";
 
@@ -316,6 +322,8 @@ public interface Constant {
 	String F_LIST_OF = "list-of";
 
 	String F_LOAD = "load";
+	
+	String F_LOAD_CLASS = "load-class";
 
 //	String F_LOAD_JAR = "load-jar";
 

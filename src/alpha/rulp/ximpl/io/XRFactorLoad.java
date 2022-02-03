@@ -9,8 +9,12 @@
 
 package alpha.rulp.ximpl.io;
 
-import static alpha.rulp.lang.Constant.A_LOAD;
+import static alpha.rulp.lang.Constant.A_LOAD_JAR;
+import static alpha.rulp.lang.Constant.A_LOAD_SCRIPT;
+import static alpha.rulp.lang.Constant.A_LOAD_SYSTEM;
 import static alpha.rulp.lang.Constant.O_Nil;
+
+import java.io.IOException;
 
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
@@ -42,38 +46,43 @@ public class XRFactorLoad extends AbsAtomFactorAdapter implements IRFactor {
 		return false;
 	}
 
-	static IRList _getLoadList(IRInterpreter interpreter) throws RException {
-		return RulpUtil.asList(RulpUtil.asVar(interpreter.getObject(A_LOAD)).getValue());
-	}
-
 	public XRFactorLoad(String factorName) {
 		super(factorName);
 	}
 
-	private void _load_system_script(String name, IRInterpreter interpreter, IRFrame frame) throws RException {
+	private void _load_jar(String path, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		IRList lsList = _getLoadList(interpreter);
+		String absJarPath = RulpUtil.lookupFile(path, interpreter, frame);
+		if (absJarPath == null) {
+			throw new RException("jar not found: " + path);
+		}
+
+		IRList lsList = RulpUtil.asList(RulpUtil.asVar(interpreter.getObject(A_LOAD_JAR)).getValue());
 
 		/*************************************************/
 		// Script can only be loaded once
 		/*************************************************/
-		if (_contain(lsList, name)) {
+		if (_contain(lsList, absJarPath)) {
 			return;
 		}
 
-		LoadUtil.loadSystem(interpreter, frame, name);
-		lsList.add(RulpFactory.createString(name));
+		if (RuntimeUtil.isTrace(frame)) {
+			System.out.println("loading jar: " + absJarPath);
+		}
+
+		JVMUtil.loadJar(absJarPath);
+
+		lsList.add(RulpFactory.createString(absJarPath));
 	}
 
-	private void _load_user_script(String path, String charset, IRInterpreter interpreter, IRFrame frame)
-			throws RException {
+	private void _load_script(String path, String charset, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		String absPath = RulpUtil.lookupFile(path, interpreter, frame);
 		if (absPath == null) {
 			throw new RException("file not found: " + path);
 		}
 
-		IRList lsList = _getLoadList(interpreter);
+		IRList lsList = RulpUtil.asList(RulpUtil.asVar(interpreter.getObject(A_LOAD_SCRIPT)).getValue());
 
 		/*************************************************/
 		// Script can only be loaded once
@@ -91,29 +100,37 @@ public class XRFactorLoad extends AbsAtomFactorAdapter implements IRFactor {
 		lsList.add(RulpFactory.createString(absPath));
 	}
 
-	private void _load_jar(String path, IRInterpreter interpreter, IRFrame frame) throws RException {
+	private void _load_system(String name, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		String absJarPath = RulpUtil.lookupFile(path, interpreter, frame);
-		if (absJarPath == null) {
-			throw new RException("jar not found: " + path);
-		}
-
-		IRList lsList = _getLoadList(interpreter);
+		IRList lsList = RulpUtil.asList(RulpUtil.asVar(interpreter.getObject(A_LOAD_SYSTEM)).getValue());
 
 		/*************************************************/
 		// Script can only be loaded once
 		/*************************************************/
-		if (_contain(lsList, absJarPath)) {
+		if (_contain(lsList, name)) {
 			return;
 		}
 
-		if (RuntimeUtil.isTrace(frame)) {
-			System.out.println("loading jar: " + absJarPath);
+		String jarPath = "alpha/resource/" + name + ".rulp";
+
+		try {
+
+			if (RuntimeUtil.isTrace(frame)) {
+				System.out.println("loading system: " + jarPath);
+			}
+
+			LoadUtil.loadRulpFromJar(interpreter, frame, jarPath, "utf-8");
+//			if (loader != null) {
+//				loader.load(interpreter, frame);
+//			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new RException("fail to load <" + name + ">, err:" + e.toString());
 		}
 
-		JVMUtil.loadJar(absJarPath);
-
-		lsList.add(RulpFactory.createString(absJarPath));
+//		LoadUtil.loadSystem(interpreter, frame, name);
+		lsList.add(RulpFactory.createString(name));
 	}
 
 	@Override
@@ -137,17 +154,17 @@ public class XRFactorLoad extends AbsAtomFactorAdapter implements IRFactor {
 			if (name.endsWith(".jar")) {
 				_load_jar(name, interpreter, frame);
 			} else {
-				_load_user_script(name, charset, interpreter, frame);
+				_load_script(name, charset, interpreter, frame);
 			}
 
 			break;
 
 		case ATOM:
-			_load_system_script(RulpUtil.asAtom(loadObj).getName(), interpreter, frame);
+			_load_system(RulpUtil.asAtom(loadObj).getName(), interpreter, frame);
 			break;
 
 		case CLASS:
-			_load_system_script(RulpUtil.asClass(loadObj).getClassName(), interpreter, frame);
+			_load_system(RulpUtil.asClass(loadObj).getClassName(), interpreter, frame);
 			break;
 
 		default:
