@@ -19,6 +19,7 @@ import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRMember;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRSubject;
+import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFunction;
@@ -600,6 +601,34 @@ public class TraceUtil {
 			sb.append(printFrame(frame, frameObjs));
 		}
 
+		/***********************************************/
+		// Root var list
+		/***********************************************/
+		{
+			ArrayList<IRVar> rootVars = new ArrayList<>();
+			for (IRFrameEntry frameEntry : interpreter.getMainFrame().getParentFrame().listEntries()) {
+				IRObject value = frameEntry.getValue();
+				if (value.getType() == RType.VAR) {
+					rootVars.add((IRVar) value);
+				}
+			}
+
+			Collections.sort(rootVars, (v1, v2) -> {
+				return v1.getName().compareTo(v2.getName());
+			});
+
+			sb.append("\n");
+			sb.append(String.format("Root var list: total=%d\n", rootVars.size()));
+			sb.append(SEP_LINE1);
+			sb.append(String.format("%-20s : %s\n", "Var", "Value"));
+			sb.append(SEP_LINE2);
+
+			for (IRVar var : rootVars) {
+				sb.append(String.format("%-20s : %s\n", var.getName(), _toString(var.getValue())));
+			}
+
+			sb.append(SEP_LINE1);
+		}
 		/***********************************************/
 		// Frame tree
 		/***********************************************/

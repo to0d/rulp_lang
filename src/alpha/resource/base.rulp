@@ -198,8 +198,8 @@
 ;****************************************************;
 ; Enviroment vars
 ;****************************************************;
-(defvar ?load-paths '())
-(defvar ?load-scripts '())
+(defvar ?load-paths (make-list))
+(defvar ?load-scripts (make-list))
 
 ;****************************************************;
 ; Basic tools
