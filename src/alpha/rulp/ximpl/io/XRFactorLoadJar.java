@@ -34,7 +34,7 @@ public class XRFactorLoadJar extends AbsAtomFactorAdapter implements IRFactor {
 		}
 
 		String jarFilePath = RulpUtil.asString(interpreter.compute(frame, args.get(1))).asString();
-		String className = RulpUtil.asString(interpreter.compute(frame, args.get(1))).asString();
+		String className = RulpUtil.asString(interpreter.compute(frame, args.get(2))).asString();
 
 		String absJarFilePath = RulpUtil.lookupFile(jarFilePath, interpreter, frame);
 		if (absJarFilePath == null) {
@@ -52,10 +52,14 @@ public class XRFactorLoadJar extends AbsAtomFactorAdapter implements IRFactor {
 					throw new RException("Invalid RLoader class: " + aClass);
 				}
 
-				RulpFactory.registerLoader((Class<? extends IRObjectLoader>) aClass);
+				Class<? extends IRObjectLoader> loaderClass = (Class<? extends IRObjectLoader>) aClass;
+				IRObjectLoader loader = loaderClass.newInstance();
+				loader.load(interpreter, frame);
+				RulpFactory.registerLoader(loaderClass);
+				
 				loadedJarPaths.add(absJarFilePath);
 
-			} catch (ClassNotFoundException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				throw new RException(e.toString());
 			}

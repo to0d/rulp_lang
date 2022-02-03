@@ -55,46 +55,46 @@ public class LoadUtil {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
-	public static void loadRulpLoader(String jarBinPath, String confPath) throws RException, IOException {
-
-		for (String line : FileUtil.openTxtFile(confPath, "utf-8")) {
-
-			line = line.trim();
-			if (line.isEmpty() || line.startsWith("#")) {
-				continue;
-			}
-
-			List<String> values = StringUtil.splitStringByChar(line, ' ');
-			if (values.size() != 2) {
-				throw new RException("invalid conf line: " + line);
-			}
-
-			String jarName = values.get(0);
-			String className = values.get(1);
-
-			if (!jarName.endsWith(".jar")) {
-				throw new RException("invalid jar name: " + line);
-			}
-
-			String fullJarPath = FileUtil.toValidPath(jarBinPath) + jarName;
-			JVMUtil.loadJar(fullJarPath);
-
-			try {
-
-				Class<?> aClass = Class.forName(className);
-				if (!IRObjectLoader.class.isAssignableFrom(aClass)) {
-					throw new RException("Invalid RLoader class: " + aClass);
-				}
-
-				RulpFactory.registerLoader((Class<? extends IRObjectLoader>) aClass);
-
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-				throw new RException(e.toString());
-			}
-		}
-	}
+//	@SuppressWarnings("unchecked")
+//	public static void loadRulpLoader(String jarBinPath, String confPath) throws RException, IOException {
+//
+//		for (String line : FileUtil.openTxtFile(confPath, "utf-8")) {
+//
+//			line = line.trim();
+//			if (line.isEmpty() || line.startsWith("#")) {
+//				continue;
+//			}
+//
+//			List<String> values = StringUtil.splitStringByChar(line, ' ');
+//			if (values.size() != 2) {
+//				throw new RException("invalid conf line: " + line);
+//			}
+//
+//			String jarName = values.get(0);
+//			String className = values.get(1);
+//
+//			if (!jarName.endsWith(".jar")) {
+//				throw new RException("invalid jar name: " + line);
+//			}
+//
+//			String fullJarPath = FileUtil.toValidPath(jarBinPath) + jarName;
+//			JVMUtil.loadJar(fullJarPath);
+//
+//			try {
+//
+//				Class<?> aClass = Class.forName(className);
+//				if (!IRObjectLoader.class.isAssignableFrom(aClass)) {
+//					throw new RException("Invalid RLoader class: " + aClass);
+//				}
+//
+//				RulpFactory.registerLoader((Class<? extends IRObjectLoader>) aClass);
+//
+//			} catch (ClassNotFoundException e) {
+//				e.printStackTrace();
+//				throw new RException(e.toString());
+//			}
+//		}
+//	}
 
 	public static void loadSystem(IRInterpreter interpreter, IRFrame frame, String loadName) throws RException {
 
