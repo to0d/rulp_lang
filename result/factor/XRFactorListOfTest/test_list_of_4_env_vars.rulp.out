@@ -25,7 +25,8 @@
 ;=>nil
 ;out:
 1:var, name=?load-paths
-2:var, name=?trace
+2:var, name=?load-scripts
+3:var, name=?trace
 
 ;eof
 

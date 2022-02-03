@@ -20,9 +20,9 @@ public interface Constant {
 	String A_ATOM = "atom";
 
 	String A_BLOB = "blob";
-	
+
 	String A_BOOL = "bool";
-	
+
 	String A_CATCH = "catch";
 
 	String A_CLASS = "class";
@@ -74,6 +74,8 @@ public interface Constant {
 	String A_LIST = "list";
 
 	String A_LOAD_PATHS = "?load-paths";
+
+	String A_LOAD_SCRIPTS = "?load-scripts";
 
 	String A_LOCAL = "local";
 

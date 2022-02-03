@@ -58,6 +58,7 @@ obj=true                , type=bool    , return=bool
 ;=>nil
 ;out:
 obj=?load-paths         , type=var     , return=list
+obj=?load-scripts       , type=var     , return=list
 obj=?trace              , type=var     , return=bool
 
 ;eof

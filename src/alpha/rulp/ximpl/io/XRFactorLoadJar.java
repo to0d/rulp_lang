@@ -29,7 +29,7 @@ public class XRFactorLoadJar extends AbsAtomFactorAdapter implements IRFactor {
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() != 3) {
+		if (args.size() != 2) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
@@ -45,24 +45,24 @@ public class XRFactorLoadJar extends AbsAtomFactorAdapter implements IRFactor {
 
 			JVMUtil.loadJar(absJarFilePath);
 
-			try {
-
-				Class<?> aClass = Class.forName(className);
-				if (!IRObjectLoader.class.isAssignableFrom(aClass)) {
-					throw new RException("Invalid RLoader class: " + aClass);
-				}
-
-				Class<? extends IRObjectLoader> loaderClass = (Class<? extends IRObjectLoader>) aClass;
-				IRObjectLoader loader = loaderClass.newInstance();
-				loader.load(interpreter, frame);
-				RulpFactory.registerLoader(loaderClass);
-				
-				loadedJarPaths.add(absJarFilePath);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new RException(e.toString());
-			}
+//			try {
+//
+//				Class<?> aClass = Class.forName(className);
+//				if (!IRObjectLoader.class.isAssignableFrom(aClass)) {
+//					throw new RException("Invalid RLoader class: " + aClass);
+//				}
+//
+//				Class<? extends IRObjectLoader> loaderClass = (Class<? extends IRObjectLoader>) aClass;
+//				IRObjectLoader loader = loaderClass.newInstance();
+//				loader.load(interpreter, frame);
+//				RulpFactory.registerLoader(loaderClass);
+//				
+//				loadedJarPaths.add(absJarFilePath);
+//
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				throw new RException(e.toString());
+//			}
 		}
 
 		return O_Nil;

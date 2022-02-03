@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      241
+           Interpreter call id:      242
     Interpreter call level/max:        4      549
                Frame max level:      184
                   Frame max id:      185
@@ -25,36 +25,36 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:     1671
+    factor:     1672
       func:      109
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=241, row=28, column=61(4), value-max=274, value-unit=2^x
+Callable stats info: callId=242, row=28, column=61(4), value-max=293, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         2333333333333333333333333333333333333333333333333333333333684 max=1189, unit=3^x
+   Frame    RType  Count  Ref Object                         2333333333333333333333333333333333333333333333333333333333584 max=1274, unit=3^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor    306    0 if                                                                                      16X1
-    root   factor    305    0 <=                                                                                      16X 
-    root   factor    197    0 -                                                                                        59 
+    root   factor    306    0 if                                                                                       5X1
+    root   factor    305    0 <=                                                                                       5X 
+    root   factor    197    0 -                                                                                        49 
     root   factor    179    0 add-attribute                   1333333333333333333333333333333333333333333332              
-    root   factor    108    0 return                                                                                  1581
-    root   factor    108    0 do                                                                                      1581
-    main     func    107    1 (fun2 nil)                                                                              158 
-    root   factor    106    0 +                                                                                        581
-    root   factor     92    0 /                                                                                        18 
-    root   factor     40    0 defun                                                                        133321333343   
-    root   factor      6    0 cc                                                                                      131 
+    root   factor    108    0 return                                                                                   481
+    root   factor    108    0 do                                                                                       481
+    main     func    107    1 (fun2 nil)                                                                               48 
+    root   factor    106    0 +                                                                                        481
+    root   factor     92    0 /                                                                                         8 
+    root   factor     40    0 defun                                                                         3333 333343   
+    root   factor      6    0 cc                                                                                       32 
     root   factor      6    0 alias                          33                                                           
-    root   factor      4    0 defvar                                                                       1         1   2
+    root   factor      5    0 defvar                                                                       2         1   2
     root   factor      3    0 deftemplate                                                                       3         
-    root   factor      3    0 defmacro                                                                         2     1    
+    root   factor      3    0 defmacro                                                                         11     1   
     root   factor      2    0 attribute-of                                                                              2 
     root   factor      1    0 str-substr                                                                                 1
     root   factor      1    0 str-last-index-of                                                                          1
     root   factor      1    0 setq                                                                                       1
     main    macro      1    1 script_out                                                                                 1
-    root   factor      1    0 print-impl                                                                                1 
+    root   factor      1    0 print-impl                                                                                 1
     root   factor      1    0 print-global-info                                                                          1
     root   factor      1    0 out-to-file                                                                                1
     root   factor      1    0 opt-status                                                                                 1
@@ -68,18 +68,18 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1125            0         1125
+        atom:         1127            0         1127
          int:           88            0           88
       string:           26            0           26
         list:            7            1            6
-        expr:          803          108          695
-         var:          223          211           12
+        expr:          804          108          696
+         var:          224          211           13
         func:           54            1           53
     template:            1            0            1
        macro:            3            0            3
        frame:          217          216            1
  interpreter:            1            0
-  frameEntry:          440            0
+  frameEntry:          441            0
       lambda:            0            0
 ==========================================================================================================================
 

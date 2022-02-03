@@ -55,6 +55,7 @@ obj=true                , type=bool
 ;=>nil
 ;out:
 obj=?load-paths         , type=var
+obj=?load-scripts       , type=var
 obj=?trace              , type=var
 obj=root                , type=frame
 obj=system              , type=frame

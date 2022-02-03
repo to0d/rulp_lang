@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      237
+           Interpreter call id:      238
     Interpreter call level/max:        4       36
                Frame max level:       20
                   Frame max id:       21
@@ -25,17 +25,17 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      416
+    factor:      417
       func:       28
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=237, row=29, column=60(4), value-max=30, value-unit=2^x
+Callable stats info: callId=238, row=29, column=60(4), value-max=30, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         333333333333333333333333333333333333333333333333333333334395 max=189, unit=2^x
+   Frame    RType  Count  Ref Object                         333333333333333333333333333333333333333333333333333333334396 max=189, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
     root   factor    179    0 add-attribute                   1333333333333333333333333333333333333333333332             
-    root   factor     41    0 defun                                                                        133321333343  
+    root   factor     41    0 defun                                                                         3333 3333431 
     root   factor     31    0 +                                                                                        61
     root   factor     27    0 return                                                                                   61
     root   factor     27    0 do                                                                                       61
@@ -44,15 +44,15 @@ Callable stats info: callId=237, row=29, column=60(4), value-max=30, value-unit=
     root   factor     25    0 <=                                                                                       6 
     root   factor     20    0 -                                                                                        6 
     root   factor      6    0 setq                                                                                     41
+    root   factor      6    0 defvar                                                                       2         1 12
     root   factor      6    0 alias                          33                                                          
-    root   factor      5    0 defvar                                                                       1         1 12
     root   factor      3    0 deftemplate                                                                       3        
-    root   factor      3    0 defmacro                                                                         2     1   
+    root   factor      3    0 defmacro                                                                         11     1  
     root   factor      2    0 attribute-of                                                                             2 
     root   factor      1    0 str-substr                                                                                1
     root   factor      1    0 str-last-index-of                                                                         1
     main    macro      1    1 script_out                                                                                1
-    root   factor      1    0 print-impl                                                                               1 
+    root   factor      1    0 print-impl                                                                                1
     root   factor      1    0 print-global-info                                                                         1
     root   factor      1    0 out-to-file                                                                               1
     root   factor      1    0 opt-status                                                                                1
@@ -69,17 +69,17 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1102            0         1102
+        atom:         1104            0         1104
       string:           26            0           26
         list:           11            5            6
-        expr:          489           27          462
-         var:           67           55           12
+        expr:          490           27          463
+         var:           68           55           13
         func:           55            1           54
     template:            1            0            1
        macro:            3            0            3
        frame:           61           60            1
  interpreter:            1            0
-  frameEntry:          286            0
+  frameEntry:          287            0
       lambda:            0            0
 ==========================================================================================================================
 

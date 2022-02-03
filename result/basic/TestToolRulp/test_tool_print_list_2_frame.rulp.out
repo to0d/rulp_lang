@@ -211,6 +211,7 @@ root::~
 system::++
 system::--
 system::?load-paths
+system::?load-scripts
 system::?trace
 system::add
 system::add-all
