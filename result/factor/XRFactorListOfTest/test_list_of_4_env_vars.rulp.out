@@ -24,8 +24,8 @@
         (setq $idx (+ $idx 1))))
 ;=>nil
 ;out:
-1:var, name=?load-paths
-2:var, name=?load-scripts
+1:var, name=?load
+2:var, name=?path
 3:var, name=?trace
 
 ;eof

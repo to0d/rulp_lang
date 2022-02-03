@@ -46,8 +46,8 @@ equal                : -197     1        1    funcList   '((equal nil nil) (equa
 length-of            : -196     1        1    funcList   '((length-of blob) (length-of string)) : frame=null, type=list
                                          1    func       (length-of string) : frame=frame@system
                                          1    func       (length-of blob) : frame=frame@system
-?load-scripts        : -195     1        1    var        '("string") : type=list
-?load-paths          : -194     1        1    var        '() : type=list     
+?load                : -195     1        1    var        '("string") : type=list
+?path                : -194     1        1    var        '() : type=list     
 ?trace               : -193     1        1    var        false : type=bool   
 system               : -3       1        0    frame      frame@system        
 root                 : -2       1        0    frame      frame@root          

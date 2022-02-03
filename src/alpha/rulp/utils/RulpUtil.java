@@ -28,7 +28,6 @@ import static alpha.rulp.lang.Constant.A_INSTANCE;
 import static alpha.rulp.lang.Constant.A_INTEGER;
 import static alpha.rulp.lang.Constant.A_LAMBDA;
 import static alpha.rulp.lang.Constant.A_LIST;
-import static alpha.rulp.lang.Constant.A_LOAD_PATHS;
 import static alpha.rulp.lang.Constant.A_LONG;
 import static alpha.rulp.lang.Constant.A_MACRO;
 import static alpha.rulp.lang.Constant.A_MEMBER;
@@ -39,6 +38,7 @@ import static alpha.rulp.lang.Constant.A_OPT_CCO;
 import static alpha.rulp.lang.Constant.A_OPT_ERO;
 import static alpha.rulp.lang.Constant.A_OPT_ID;
 import static alpha.rulp.lang.Constant.A_OPT_TCO;
+import static alpha.rulp.lang.Constant.A_PATH;
 import static alpha.rulp.lang.Constant.A_PRIVATE;
 import static alpha.rulp.lang.Constant.A_PUBLIC;
 import static alpha.rulp.lang.Constant.A_QUESTION;
@@ -1493,7 +1493,7 @@ public class RulpUtil {
 		/*************************************************/
 		// Search in "load-paths"
 		/*************************************************/
-		IRList lpList = RulpUtil.asList(RulpUtil.asVar(interpreter.getObject(A_LOAD_PATHS)).getValue());
+		IRList lpList = RulpUtil.asList(RulpUtil.asVar(interpreter.getObject(A_PATH)).getValue());
 
 		IRIterator<? extends IRObject> it = lpList.iterator();
 		while (it.hasNext()) {

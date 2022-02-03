@@ -4,14 +4,14 @@ file not found: load/load2.rulp
 at (load "load/load2.rulp") ; main-2
 ;eof
 
-(print ?load-paths)
+(print ?path)
 ;=>nil
 ;out:
 '()
 ;eof
 
-(setq ?load-paths (add ?load-paths "load/path2"))
-;=>&?load-paths
+(setq ?path (add ?path "load/path2"))
+;=>&?path
 
 (load "load2.rulp")
 ;=>nil

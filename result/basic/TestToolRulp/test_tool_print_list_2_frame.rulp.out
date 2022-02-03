@@ -209,8 +209,8 @@ root::~
 ;out:
 system::++
 system::--
-system::?load-paths
-system::?load-scripts
+system::?load
+system::?path
 system::?trace
 system::add
 system::add-all

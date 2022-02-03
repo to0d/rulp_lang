@@ -1,10 +1,10 @@
 (load "load/load2.rulp")
 ;err
 
-(print ?load-paths)
+(print ?path)
 ;=>
 
-(setq ?load-paths (add ?load-paths "load/path2"))
+(setq ?path (add ?path "load/path2"))
 ;=>
 
 (load "load2.rulp")

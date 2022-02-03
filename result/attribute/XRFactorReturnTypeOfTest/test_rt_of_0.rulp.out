@@ -57,8 +57,8 @@ obj=true                , type=bool    , return=bool
 (list-of-return-type-of system)
 ;=>nil
 ;out:
-obj=?load-paths         , type=var     , return=list
-obj=?load-scripts       , type=var     , return=list
+obj=?load               , type=var     , return=list
+obj=?path               , type=var     , return=list
 obj=?trace              , type=var     , return=bool
 
 ;eof

@@ -9,7 +9,7 @@
 
 package alpha.rulp.ximpl.io;
 
-import static alpha.rulp.lang.Constant.A_LOAD_SCRIPTS;
+import static alpha.rulp.lang.Constant.A_LOAD;
 import static alpha.rulp.lang.Constant.O_Nil;
 
 import alpha.rulp.lang.IRFrame;
@@ -43,7 +43,7 @@ public class XRFactorLoad extends AbsAtomFactorAdapter implements IRFactor {
 	}
 
 	static IRList _getLoadList(IRInterpreter interpreter) throws RException {
-		return RulpUtil.asList(RulpUtil.asVar(interpreter.getObject(A_LOAD_SCRIPTS)).getValue());
+		return RulpUtil.asList(RulpUtil.asVar(interpreter.getObject(A_LOAD)).getValue());
 	}
 
 	public XRFactorLoad(String factorName) {
