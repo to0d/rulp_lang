@@ -189,6 +189,7 @@ root::to-named-list
 root::to-nonamed-list
 root::to-string
 root::to-vary
+root::trace
 root::true
 root::try
 root::type#namespace
