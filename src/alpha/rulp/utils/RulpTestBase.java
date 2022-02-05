@@ -178,7 +178,7 @@ public class RulpTestBase {
 
 			boolean rc = true;
 
-			List<String> lines = FileUtil.openTxtFile(inputScriptPath);
+			List<String> lines = FileUtil.openTxtFile(inputScriptPath, "utf-8");
 			ArrayList<String> outLines = new ArrayList<>();
 
 			int size = lines.size();
