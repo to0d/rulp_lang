@@ -8,7 +8,6 @@ import static alpha.rulp.lang.Constant.A_PARENT;
 import static alpha.rulp.lang.Constant.A_TRACE;
 import static alpha.rulp.lang.Constant.O_False;
 import static alpha.rulp.lang.Constant.O_Nil;
-import static alpha.rulp.lang.Constant.O_True;
 import static alpha.rulp.lang.Constant.T_Expr;
 
 import java.util.ArrayList;
@@ -852,10 +851,6 @@ public final class RuntimeUtil {
 		return frame.getSubject() != frame;
 	}
 
-	public static boolean isTrace(IRFrame frame) throws RException {
-		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_TRACE)).asBoolean();
-	}
-
 	public static IRFrameEntry lookupFrameEntry(IRFrame frame, String name) throws RException {
 
 //		if (name.equals("to-string")) {
@@ -1111,7 +1106,4 @@ public final class RuntimeUtil {
 		callStatsId.incrementAndGet();
 	}
 
-	public static void setTrace(IRFrame frame, boolean trace) throws RException {
-		RulpUtil.setLocalVar(frame, A_TRACE, trace ? O_True : O_False);
-	}
 }

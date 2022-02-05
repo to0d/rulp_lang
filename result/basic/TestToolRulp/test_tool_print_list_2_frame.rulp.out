@@ -127,6 +127,7 @@ root::print
 root::print-frame-tree
 root::print-global-info
 root::print-impl
+root::print-object
 root::print-subject
 root::private
 root::property-of

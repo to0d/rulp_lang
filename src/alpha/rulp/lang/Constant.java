@@ -394,6 +394,8 @@ public interface Constant {
 	String F_PARENT_OF = "parent-of";
 
 	String F_PRINT = "print";
+	
+	String F_PRINT_OBJECT = "print-object";
 
 	String F_PRINT_FRAME_TREE = "print-frame-tree";
 

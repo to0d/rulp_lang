@@ -56,6 +56,10 @@ public class XRFactorLoadClass extends AbsAtomFactorAdapter implements IRFactor 
 		/*************************************************/
 		if (!_contain(ldList, loaderName)) {
 
+			if (RulpUtil.isTrace(frame)) {
+				System.out.println("loading class: " + loaderName);
+			}
+
 			try {
 
 				Class<?> aClass = Class.forName(loaderName);

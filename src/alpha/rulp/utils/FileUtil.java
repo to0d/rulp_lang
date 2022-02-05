@@ -164,6 +164,10 @@ public class FileUtil {
 		return lineList;
 	}
 
+	public static boolean containFileInJar(String path) {
+		return RulpUtil.class.getClassLoader().getResource(path) != null;
+	}
+
 	public static ArrayList<String> openTxtFileFromJar(String path, String charset) throws IOException {
 
 		ArrayList<String> lineList = new ArrayList<String>();

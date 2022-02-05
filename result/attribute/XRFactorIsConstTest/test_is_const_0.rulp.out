@@ -132,6 +132,7 @@ obj=print               , type=factor
 obj=print-frame-tree    , type=factor
 obj=print-global-info   , type=factor
 obj=print-impl          , type=factor
+obj=print-object        , type=factor
 obj=print-subject       , type=factor
 obj=private             , type=atom
 obj=property-of         , type=factor

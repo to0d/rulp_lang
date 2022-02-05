@@ -40,9 +40,13 @@ public class LoadUtil {
 		String line = null;
 
 		synchronized (loadLineMap) {
-
 			line = loadLineMap.get(jarPath);
 			if (line == null) {
+
+				if (!FileUtil.containFileInJar(jarPath)) {
+					throw new RException("jar file not found: "+jarPath);
+				}
+
 				line = StringUtil.toOneLine(FileUtil.openTxtFileFromJar(jarPath, charset));
 				loadLineMap.put(jarPath, line);
 			}

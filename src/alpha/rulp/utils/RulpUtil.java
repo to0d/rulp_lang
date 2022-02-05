@@ -50,6 +50,7 @@ import static alpha.rulp.lang.Constant.A_STATIC;
 import static alpha.rulp.lang.Constant.A_STRING;
 import static alpha.rulp.lang.Constant.A_TEMPLATE;
 import static alpha.rulp.lang.Constant.A_THREAD_UNSAFE;
+import static alpha.rulp.lang.Constant.A_TRACE;
 import static alpha.rulp.lang.Constant.A_VAR;
 import static alpha.rulp.lang.Constant.F_COMPUTE;
 import static alpha.rulp.lang.Constant.F_RETURN;
@@ -57,6 +58,7 @@ import static alpha.rulp.lang.Constant.MAX_TOSTRING_LEN;
 import static alpha.rulp.lang.Constant.O_COMPUTE;
 import static alpha.rulp.lang.Constant.O_CONST;
 import static alpha.rulp.lang.Constant.O_EMPTY;
+import static alpha.rulp.lang.Constant.O_False;
 import static alpha.rulp.lang.Constant.O_Final;
 import static alpha.rulp.lang.Constant.O_LAMBDA;
 import static alpha.rulp.lang.Constant.O_New;
@@ -72,6 +74,7 @@ import static alpha.rulp.lang.Constant.O_RETURN_TYPE;
 import static alpha.rulp.lang.Constant.O_STABLE;
 import static alpha.rulp.lang.Constant.O_Static;
 import static alpha.rulp.lang.Constant.O_THREAD_UNSAFE;
+import static alpha.rulp.lang.Constant.O_True;
 import static alpha.rulp.lang.Constant.P_FINAL;
 import static alpha.rulp.lang.Constant.P_INHERIT;
 import static alpha.rulp.lang.Constant.P_STATIC;
@@ -1302,16 +1305,6 @@ public class RulpUtil {
 		return obj.getType() == RType.FUNC && ((IRFunction) obj).isList();
 	}
 
-//	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
-//
-//		IRObject nsObj = frame.getObject(A_USING_NS);
-//		if (nsObj == null) {
-//			return null;
-//		}
-//
-//		return RulpUtil.asSubject(nsObj);
-//	}
-
 	public static boolean isList(IRObject obj) {
 		return obj.getType() == RType.LIST;
 	}
@@ -1357,6 +1350,16 @@ public class RulpUtil {
 		return false;
 	}
 
+//	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
+//
+//		IRObject nsObj = frame.getObject(A_USING_NS);
+//		if (nsObj == null) {
+//			return null;
+//		}
+//
+//		return RulpUtil.asSubject(nsObj);
+//	}
+
 	public static boolean isPropertyFinal(IRMember mbr) {
 		return (P_FINAL & mbr.getProperty()) != 0;
 	}
@@ -1384,6 +1387,41 @@ public class RulpUtil {
 		}
 
 		return true;
+	}
+
+	public static boolean isTrace(IRFrame frame) throws RException {
+		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_TRACE)).asBoolean();
+	}
+
+	public static boolean isTrace(IRInterpreter interpreter) throws RException {
+		return isTrace(interpreter.getMainFrame());
+	}
+
+	public static boolean isValidRulpStmt(String line) {
+
+		try {
+
+			List<IRObject> rt = RulpFactory.createParser().parse(line);
+			if (rt.isEmpty()) {
+				return false;
+			}
+
+			for (IRObject obj : rt) {
+				if (obj.getType() != RType.EXPR) {
+					return false;
+				}
+			}
+
+			return true;
+
+		} catch (RException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public static boolean isValueAtom(IRObject obj) {
+		return obj.getType() == RType.ATOM && !isVarName(((IRAtom) obj).getName());
 	}
 
 //	public static boolean isPureAtomPairList(IRObject obj) throws RException {
@@ -1421,33 +1459,6 @@ public class RulpUtil {
 //			return false;
 //		}
 //	}
-
-	public static boolean isValidRulpStmt(String line) {
-
-		try {
-
-			List<IRObject> rt = RulpFactory.createParser().parse(line);
-			if (rt.isEmpty()) {
-				return false;
-			}
-
-			for (IRObject obj : rt) {
-				if (obj.getType() != RType.EXPR) {
-					return false;
-				}
-			}
-
-			return true;
-
-		} catch (RException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-
-	public static boolean isValueAtom(IRObject obj) {
-		return obj.getType() == RType.ATOM && !isVarName(((IRAtom) obj).getName());
-	}
 
 	public static boolean isVarAtom(IRObject obj) {
 		return obj.getType() == RType.ATOM && isVarName(((IRAtom) obj).getName());
@@ -1736,6 +1747,14 @@ public class RulpUtil {
 		} else {
 			mbr.setProperty(mbr.getProperty() & ~P_STATIC);
 		}
+	}
+
+	public static void setTrace(IRFrame frame, boolean trace) throws RException {
+		RulpUtil.setLocalVar(frame, A_TRACE, trace ? O_True : O_False);
+	}
+
+	public static void setTrace(IRInterpreter interpreter, boolean trace) throws RException {
+		setTrace(interpreter.getMainFrame(), trace);
 	}
 
 	public static List<IRObject> subList(IRList l1, int begin, int end) throws RException {

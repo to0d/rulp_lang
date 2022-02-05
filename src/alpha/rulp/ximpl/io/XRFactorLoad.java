@@ -28,7 +28,6 @@ import alpha.rulp.utils.JVMUtil;
 import alpha.rulp.utils.LoadUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorLoad extends AbsAtomFactorAdapter implements IRFactor {
@@ -66,7 +65,7 @@ public class XRFactorLoad extends AbsAtomFactorAdapter implements IRFactor {
 			return;
 		}
 
-		if (RuntimeUtil.isTrace(frame)) {
+		if (RulpUtil.isTrace(frame)) {
 			System.out.println("loading jar: " + absJarPath);
 		}
 
@@ -91,7 +90,7 @@ public class XRFactorLoad extends AbsAtomFactorAdapter implements IRFactor {
 			return;
 		}
 
-		if (RuntimeUtil.isTrace(frame)) {
+		if (RulpUtil.isTrace(frame)) {
 			System.out.println("loading script: " + absPath);
 		}
 
@@ -115,7 +114,7 @@ public class XRFactorLoad extends AbsAtomFactorAdapter implements IRFactor {
 
 		try {
 
-			if (RuntimeUtil.isTrace(frame)) {
+			if (RulpUtil.isTrace(frame)) {
 				System.out.println("loading system: " + jarPath);
 			}
 

@@ -133,6 +133,7 @@ mbr=print, mbr-property='(public), mbr-attribute='(), obj=print, obj-type=factor
 mbr=print-frame-tree, mbr-property='(public), mbr-attribute='(), obj=print-frame-tree, obj-type=factor, obj-attribute='(thread-unsafe)
 mbr=print-global-info, mbr-property='(public), mbr-attribute='(), obj=print-global-info, obj-type=factor, obj-attribute='(thread-unsafe)
 mbr=print-impl, mbr-property='(public), mbr-attribute='(), obj=print-impl, obj-type=factor, obj-attribute='(thread-unsafe)
+mbr=print-object, mbr-property='(public), mbr-attribute='(), obj=print-object, obj-type=factor, obj-attribute='()
 mbr=print-subject, mbr-property='(public), mbr-attribute='(), obj=print-subject, obj-type=factor, obj-attribute='(thread-unsafe)
 mbr=private, mbr-property='(public), mbr-attribute='(), obj=private, obj-type=atom, obj-attribute='()
 mbr=property-of, mbr-property='(public), mbr-attribute='(), obj=property-of, obj-type=factor, obj-attribute='(stable)

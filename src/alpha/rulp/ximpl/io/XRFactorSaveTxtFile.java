@@ -24,7 +24,6 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.FileUtil;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorSaveTxtFile extends AbsAtomFactorAdapter implements IRFactor {
@@ -41,7 +40,7 @@ public class XRFactorSaveTxtFile extends AbsAtomFactorAdapter implements IRFacto
 		}
 
 		String path = RulpUtil.asString(interpreter.compute(frame, args.get(1))).asString();
-		if (RuntimeUtil.isTrace(frame)) {
+		if (RulpUtil.isTrace(frame)) {
 			interpreter.out(String.format("%s: save %s\n", F_SAVE_TXT_FILE, path));
 		}
 
@@ -60,7 +59,7 @@ public class XRFactorSaveTxtFile extends AbsAtomFactorAdapter implements IRFacto
 
 		} catch (IOException e) {
 
-			if (RuntimeUtil.isTrace(frame)) {
+			if (RulpUtil.isTrace(frame)) {
 				e.printStackTrace();
 			}
 

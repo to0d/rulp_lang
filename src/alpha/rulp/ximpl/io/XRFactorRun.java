@@ -23,7 +23,6 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.FileUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.utils.StringUtil;
 import alpha.rulp.ximpl.error.RReturn;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
@@ -52,7 +51,7 @@ public class XRFactorRun extends AbsAtomFactorAdapter implements IRFactor {
 			throw new RException("file not found: " + path);
 		}
 
-		if (RuntimeUtil.isTrace(frame)) {
+		if (RulpUtil.isTrace(frame)) {
 			System.out.println("running: " + absPath);
 		}
 
@@ -70,7 +69,7 @@ public class XRFactorRun extends AbsAtomFactorAdapter implements IRFactor {
 
 		} catch (IOException e) {
 
-			if (RuntimeUtil.isTrace(frame)) {
+			if (RulpUtil.isTrace(frame)) {
 				e.printStackTrace();
 			}
 

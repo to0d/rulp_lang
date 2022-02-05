@@ -159,6 +159,7 @@ import alpha.rulp.ximpl.io.XRFactorOutToFile;
 import alpha.rulp.ximpl.io.XRFactorPrint;
 import alpha.rulp.ximpl.io.XRFactorPrintFrameTree;
 import alpha.rulp.ximpl.io.XRFactorPrintGlobalInfo;
+import alpha.rulp.ximpl.io.XRFactorPrintObject;
 import alpha.rulp.ximpl.io.XRFactorPrintSubject;
 import alpha.rulp.ximpl.io.XRFactorRun;
 import alpha.rulp.ximpl.io.XRFactorSaveTxtFile;
@@ -638,6 +639,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorPrintImpl(F_PRINT_IMPL));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorRun(F_RUN));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorLoadClass(F_LOAD_CLASS));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorPrintObject(F_PRINT_OBJECT));
 
 		// FS
 		RulpUtil.addFrameObject(rootFrame, new XRFactorFileExist(F_FILE_EXIST));

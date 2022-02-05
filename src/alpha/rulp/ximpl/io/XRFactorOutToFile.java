@@ -23,7 +23,6 @@ import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IROut;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorOutToFile extends AbsAtomFactorAdapter implements IRFactor {
@@ -42,7 +41,7 @@ public class XRFactorOutToFile extends AbsAtomFactorAdapter implements IRFactor 
 		String outPath = RulpUtil.asString(interpreter.compute(frame, args.get(1))).asString();
 		IROut oldOut = interpreter.getOut();
 
-		if (RuntimeUtil.isTrace(frame)) {
+		if (RulpUtil.isTrace(frame)) {
 			interpreter.out(String.format("%s: saving out to %s\n", F_OUT_TO_FILE, outPath));
 		}
 
@@ -66,7 +65,7 @@ public class XRFactorOutToFile extends AbsAtomFactorAdapter implements IRFactor 
 			return interpreter.compute(frame, args.get(2));
 
 		} catch (FileNotFoundException e) {
-			if (RuntimeUtil.isTrace(frame)) {
+			if (RulpUtil.isTrace(frame)) {
 				e.printStackTrace();
 			}
 			throw new RException(e.toString());
