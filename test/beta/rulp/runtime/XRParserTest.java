@@ -138,48 +138,48 @@ public class XRParserTest extends RulpTestBase {
 	}
 
 	@Test
-	public void test_parser_1_special_char() {
+	void test_parser_1_special_char() {
 
 		_setup();
 		_test_parse();
 	}
 
 	@Test
-	public void test_parser_2_operator() {
+	void test_parser_2_operator() {
 
 		_setup();
 		_test_parse();
 	}
 
 	@Test
-	public void test_parser_3_number_1() {
+	void test_parser_3_number_1() {
 
 		_setup();
 		_test_parse();
 	}
 
 	@Test
-	public void test_parser_3_number_2_hex() {
+	void test_parser_3_number_2_hex() {
 		_setup();
 		_test_parse();
 	}
 
 	@Test
-	public void test_parser_4_vars() {
-
-		_setup();
-		_test_parse();
-	}
-
-	@Test
-	public void test_parser_5_expr() {
+	void test_parser_4_vars() {
 
 		_setup();
 		_test_parse();
 	}
 
 	@Test
-	public void test_parser_5_list() {
+	void test_parser_5_expr() {
+
+		_setup();
+		_test_parse();
+	}
+
+	@Test
+	void test_parser_5_list() {
 
 		_setup();
 		_test_parse();
@@ -187,21 +187,21 @@ public class XRParserTest extends RulpTestBase {
 	}
 
 	@Test
-	public void test_parser_6_comments() {
+	void test_parser_6_comments() {
 
 		_setup();
 		_test_parse();
 	}
 
 	@Test
-	public void test_parser_7_multi_lines_1() {
+	void test_parser_7_multi_lines_1() {
 
 		_setup();
 		_test_parse();
 	}
 
 	@Test
-	public void test_parser_7_multi_lines_2() {
+	void test_parser_7_multi_lines_2() {
 
 		// example comes from chtb_0593.nw
 		_setup();
@@ -210,13 +210,13 @@ public class XRParserTest extends RulpTestBase {
 	}
 
 	@Test
-	public void test_parser_7_multi_lines_3() {
+	void test_parser_7_multi_lines_3() {
 		_setup();
 		_test_parse();
 	}
 
 	@Test
-	public void test_parser_8_special_escape_string() {
+	void test_parser_8_special_escape_string() {
 		_setup();
 		_test_parse_line("\"\\\"abc\"");
 		_test_parse_line("\"abc\\ndef\"", "\"abc\n" + "def\"");
@@ -227,7 +227,7 @@ public class XRParserTest extends RulpTestBase {
 	}
 
 	@Test
-	public void test_parser_8_special_string() {
+	void test_parser_8_special_string() {
 
 		_setup();
 		_test_parse();
@@ -235,21 +235,29 @@ public class XRParserTest extends RulpTestBase {
 	}
 
 	@Test
-	public void test_parser_8_special_string_not_support() {
+	void test_parser_8_special_string_not_support() {
 
 		_setup();
 		_test_parse();
 	}
 
 	@Test
-	public void test_parser_9_error() {
+	void test_parser_8_special_string2() {
+
+		_setup();
+		_test_parse();
+
+	}
+
+	@Test
+	void test_parser_9_error() {
 
 		_setup();
 		_test_parse();
 	}
 
 	@Test
-	public void test_parser_a_namespace() {
+	void test_parser_a_namespace() {
 
 		_setup();
 		_getParser().registerPrefix("nm", "https://github.com/to0d/nm#");
@@ -257,7 +265,7 @@ public class XRParserTest extends RulpTestBase {
 	}
 
 	@Test
-	public void test_parser_b_number_a() {
+	void test_parser_b_number_a() {
 
 		_setup();
 		this._getParser().setSupportNumber(false);
@@ -265,34 +273,34 @@ public class XRParserTest extends RulpTestBase {
 	}
 
 	@Test
-	public void test_parser_b_number_b() {
+	void test_parser_b_number_b() {
 
 		_setup();
 		_test_parse();
 	}
 
 	@Test
-	public void test_parser_c_any() {
+	void test_parser_c_any() {
 		_setup();
 		_test_parse();
 	}
 
 	@Test
-	public void test_parser_d_named() {
-
-		_setup();
-		_test_parse();
-	}
-
-	@Test
-	public void test_parser_e_array() {
+	void test_parser_d_named() {
 
 		_setup();
 		_test_parse();
 	}
 
 	@Test
-	public void test_parser_f_attr() {
+	void test_parser_e_array() {
+
+		_setup();
+		_test_parse();
+	}
+
+	@Test
+	void test_parser_f_attr() {
 		_setup();
 		_test_parse();
 	}

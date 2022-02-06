@@ -1,0 +1,5 @@
+in : '('() '("xxx") '("divide zero(DIV 1 0)\nat (/ 1 0) ; do-6\nat (do (print \"xxx\") (/ 1 0)) ; main-2"))
+out: '('() '("xxx") '("divide zero(DIV 1 0)
+at (/ 1 0) ; do-6
+at (do (print \"xxx\") (/ 1 0)) ; main-2"))
+
