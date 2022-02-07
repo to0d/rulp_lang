@@ -37,7 +37,7 @@ public class XRFactorTrace extends AbsAtomFactorAdapter implements IRFactor {
 				}
 			}
 
-			interpreter.out(sb.toString());
+			interpreter.out(sb.toString() + "\n");
 		}
 
 		return O_Nil;
