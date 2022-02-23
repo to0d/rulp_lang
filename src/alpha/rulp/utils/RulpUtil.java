@@ -1350,6 +1350,10 @@ public class RulpUtil {
 		return false;
 	}
 
+	public static boolean isPropertyFinal(IRMember mbr) {
+		return (P_FINAL & mbr.getProperty()) != 0;
+	}
+
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
 //
 //		IRObject nsObj = frame.getObject(A_USING_NS);
@@ -1359,10 +1363,6 @@ public class RulpUtil {
 //
 //		return RulpUtil.asSubject(nsObj);
 //	}
-
-	public static boolean isPropertyFinal(IRMember mbr) {
-		return (P_FINAL & mbr.getProperty()) != 0;
-	}
 
 	public static boolean isPropertyInherit(IRMember mbr) {
 		return (P_INHERIT & mbr.getProperty()) != 0;
@@ -1424,6 +1424,10 @@ public class RulpUtil {
 		return obj.getType() == RType.ATOM && !isVarName(((IRAtom) obj).getName());
 	}
 
+	public static boolean isVarAtom(IRObject obj) {
+		return obj.getType() == RType.ATOM && isVarName(((IRAtom) obj).getName());
+	}
+
 //	public static boolean isPureAtomPairList(IRObject obj) throws RException {
 //
 //		RType type = obj.getType();
@@ -1459,10 +1463,6 @@ public class RulpUtil {
 //			return false;
 //		}
 //	}
-
-	public static boolean isVarAtom(IRObject obj) {
-		return obj.getType() == RType.ATOM && isVarName(((IRAtom) obj).getName());
-	}
 
 	public static boolean isVarName(String var) {
 		return var.length() > 1 && var.charAt(0) == A_QUESTION_C;
@@ -2084,6 +2084,13 @@ public class RulpUtil {
 		default:
 			throw new RException(String.format("Not support type: %s", a.toString()));
 		}
+	}
+
+	public static String toString(IRIterator<? extends IRObject> iterator) throws RException {
+
+		StringBuffer sb = new StringBuffer();
+		_toString(sb, iterator, objFormater, false);
+		return sb.toString();
 	}
 
 	public static String toString(IRObject obj) throws RException {
