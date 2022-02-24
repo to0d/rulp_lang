@@ -253,7 +253,7 @@ public class RulpTestBase {
 				rc = _run_stmt(inputStmt, false, null, null, outLines, interpreter);
 			}
 
-			FileUtil.saveTxtFile(inputScriptPath + ".out", outLines);
+			FileUtil.saveTxtFile(inputScriptPath + ".out", outLines, "utf-8");
 
 			if (!rc) {
 				fail(String.format("error found in line: %d, file=%s", index, inputScriptPath));

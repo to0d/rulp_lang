@@ -848,7 +848,7 @@ public final class RuntimeUtil {
 	}
 
 	public static boolean isSubjectFrame(IRFrame frame) {
-		return frame.getSubject() != frame;
+		return frame != null && frame.getSubject() != frame;
 	}
 
 	public static IRFrameEntry lookupFrameEntry(IRFrame frame, String name) throws RException {
