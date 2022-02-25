@@ -1,0 +1,16 @@
+(defclass class1)
+
+(defun fun1 ((?x class1)) 
+    (print ?x)
+)
+;=>
+
+(defvar ?o (new class1))
+;=>
+
+(fun1 ?o)
+;=>
+
+(fun1 xx)
+;err
+

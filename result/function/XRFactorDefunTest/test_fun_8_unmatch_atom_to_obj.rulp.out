@@ -1,0 +1,22 @@
+(defclass class1)
+
+(defun fun1 ((?x class1)) 
+    (print ?x)
+)
+;=>class1 fun1
+
+(defvar ?o (new class1))
+;=>&?o
+
+(fun1 ?o)
+;=>nil
+;out:
+un0
+;eof
+
+(fun1 xx)
+;err:
+the 0 argument<xx> not match type <type#class1>
+at (fun1 xx) ; main-2
+;eof
+

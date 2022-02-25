@@ -1540,12 +1540,11 @@ public class RulpUtil {
 			return true;
 		}
 
-		RType convertType = MathUtil.getTypeConvert(valueType, expectType);
-		if (convertType == expectType) {
-			return true;
+		if (expectType == null) {
+			return false;
 		}
 
-		return false;
+		return MathUtil.getTypeConvert(valueType, expectType) == expectType;
 	}
 
 	public static boolean matchType(IRAtom typeAtom, IRObject obj) throws RException {

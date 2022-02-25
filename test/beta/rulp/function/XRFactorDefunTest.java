@@ -150,4 +150,10 @@ class XRFactorDefunTest extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	void test_fun_8_unmatch_atom_to_obj() {
+		_setup();
+		_run_script();
+	}
 }
