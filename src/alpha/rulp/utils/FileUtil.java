@@ -12,17 +12,115 @@ package alpha.rulp.utils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import alpha.rulp.utils.SystemUtil.OSType;
 
 public class FileUtil {
+
+	static AtomicLong ioReadBytes = new AtomicLong();
+
+	static AtomicInteger ioReadCount = new AtomicInteger();
+
+	static AtomicLong ioWriteBytes = new AtomicLong();
+
+	static AtomicInteger ioWriteCount = new AtomicInteger();
+
+	private static void _copyFileTo(File srcFile, File dstFolder, String fileName) throws IOException {
+
+		if (!srcFile.exists()) {
+			throw new IOException("File not exist: " + srcFile.getAbsolutePath());
+		}
+
+		if (fileName == null) {
+			fileName = srcFile.getName();
+		}
+
+		File dstFile = new File(dstFolder.getAbsolutePath() + File.separator + fileName);
+
+		if (srcFile.isFile()) {
+
+			if (dstFile.exists()) {
+				return;
+			}
+
+			copyByChannel(srcFile, dstFile);
+			return;
+		}
+
+		if (srcFile.isDirectory()) {
+
+			if (!dstFile.exists() && !dstFile.mkdirs()) {
+				throw new IOException("Unable to mkdirs: " + dstFile.getAbsolutePath());
+			}
+
+			for (File f : srcFile.listFiles()) {
+				_copyFileTo(f, dstFile, null);
+			}
+		}
+	}
+
+	public static boolean containFileInJar(String path) {
+		return RulpUtil.class.getClassLoader().getResource(path) != null;
+	}
+
+	public static void copyByChannel(File srcFile, File targetFile) throws IOException {
+
+		if (srcFile == null || targetFile == null) {
+			throw new IOException("NULL para");
+		}
+
+		if (!srcFile.exists() || !srcFile.isFile()) {
+			throw new IOException("Source file not exist:" + srcFile.getAbsolutePath());
+		}
+
+		if (targetFile.exists()) {
+			throw new IOException("target file exist already:" + targetFile.getAbsolutePath());
+		}
+
+		long writeBytes = 0;
+
+		try (FileInputStream fi = new FileInputStream(srcFile);
+				FileChannel in = fi.getChannel();
+				FileOutputStream fo = new FileOutputStream(targetFile);
+				FileChannel out = fo.getChannel();) {
+
+			writeBytes = in.transferTo(0, in.size(), out);
+
+		} finally {
+
+			incIOWriteFileCount();
+			incIOWriteFileBytes(writeBytes);
+		}
+	}
+
+	public static void copyFolder(File srcFolder, File dstFolder) throws IOException {
+
+		if (srcFolder == null || dstFolder == null || !srcFolder.exists() || !srcFolder.isDirectory()
+				|| !dstFolder.exists() || !dstFolder.isDirectory()) {
+			throw new IOException("Invaild parameter ");
+		}
+
+		// Check path valid
+		// E:\x\a ==> E:\x\a\y
+		if (dstFolder.getAbsolutePath().startsWith(srcFolder.getAbsolutePath())) {
+			throw new IOException("Invaild path" + srcFolder.getAbsolutePath() + " : " + dstFolder.getAbsolutePath());
+		}
+
+		for (File f : srcFolder.listFiles()) {
+			_copyFileTo(f, dstFolder, null);
+		}
+	}
 
 	public static boolean deleteFile(File file) {
 
@@ -68,6 +166,14 @@ public class FileUtil {
 		}
 
 		return fileSubffix;
+	}
+
+	public static void incIOWriteFileBytes(long byteNum) {
+		ioWriteBytes.addAndGet(byteNum);
+	}
+
+	public static void incIOWriteFileCount() {
+		ioWriteCount.incrementAndGet();
 	}
 
 	public static boolean isAbsPath(String path) {
@@ -162,10 +268,6 @@ public class FileUtil {
 		}
 
 		return lineList;
-	}
-
-	public static boolean containFileInJar(String path) {
-		return RulpUtil.class.getClassLoader().getResource(path) != null;
 	}
 
 	public static ArrayList<String> openTxtFileFromJar(String path, String charset) throws IOException {

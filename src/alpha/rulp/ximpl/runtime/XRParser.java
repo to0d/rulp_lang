@@ -359,6 +359,25 @@ public class XRParser implements IRParser {
 		return _tokenPos() < tokenCount;
 	}
 
+	private IRObject _nextObject() throws RException {
+
+		IRObject obj = nextObject();
+
+		/******************************************/
+		// Try match Array: []
+		/******************************************/
+		if (obj != null) {
+			List<IRObject> list = matchAttrList();
+			if (list != null) {
+				for (IRObject attr : list) {
+					AttrUtil.addAttribute(obj, attr.asString());
+				}
+			}
+		}
+
+		return obj;
+	}
+
 	private void _pullStack(int newDepth) throws RException {
 
 		if (newDepth < 0 || newDepth > _depth())
@@ -586,25 +605,6 @@ public class XRParser implements IRParser {
 
 		_pullStack(depth);
 		return null;
-	}
-
-	private IRObject _nextObject() throws RException {
-
-		IRObject obj = nextObject();
-
-		/******************************************/
-		// Try match Array: []
-		/******************************************/
-		if (obj != null) {
-			List<IRObject> list = matchAttrList();
-			if (list != null) {
-				for (IRObject attr : list) {
-					AttrUtil.addAttribute(obj, attr.asString());
-				}
-			}
-		}
-
-		return obj;
 	}
 
 	private IRObject nextObject() throws RException {
