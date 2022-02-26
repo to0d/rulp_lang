@@ -28,13 +28,22 @@ import alpha.rulp.utils.SystemUtil.OSType;
 
 public class FileUtil {
 
-	static AtomicLong ioReadBytes = new AtomicLong();
+	static AtomicLong ioReadBytes = new AtomicLong(0);
 
-	static AtomicInteger ioReadCount = new AtomicInteger();
+	static AtomicInteger ioReadCount = new AtomicInteger(0);
 
-	static AtomicLong ioWriteBytes = new AtomicLong();
+	static AtomicLong ioWriteBytes = new AtomicLong(0);
 
-	static AtomicInteger ioWriteCount = new AtomicInteger();
+	static AtomicInteger ioWriteCount = new AtomicInteger(0);
+
+	public static void reset() {
+
+		ioReadBytes.set(0);
+		ioReadCount.set(0);
+		ioWriteBytes.set(0);
+		ioWriteCount.set(0);
+
+	}
 
 	private static void _copyFileTo(File srcFile, File dstFolder, String fileName) throws IOException {
 

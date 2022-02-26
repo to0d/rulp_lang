@@ -353,6 +353,7 @@ public class RulpTestBase {
 		_interpreter = null;
 		_parser = null;
 
+		FileUtil.reset();
 		TCOUtil.reset();
 		CCOUtil.reset();
 		EROUtil.reset();
