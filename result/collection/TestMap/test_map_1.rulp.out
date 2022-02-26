@@ -55,3 +55,6 @@
 (map1::get '(b))
 ;=>nil
 
+(map1::key-list)
+;=>'("str1" a 1 '(a))
+

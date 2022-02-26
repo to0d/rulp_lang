@@ -55,3 +55,5 @@
 (map1::get '(b))
 ;=>
 
+(map1::key-list)
+;=>

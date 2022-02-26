@@ -4,9 +4,12 @@ import static alpha.rulp.lang.Constant.A_MAP;
 import static alpha.rulp.lang.Constant.O_Nil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -25,6 +28,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRObjectLoader;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.rclass.XRDefInstance;
 
@@ -129,6 +133,21 @@ public class XRMap extends XRDefInstance implements IRCollection {
 				}
 
 			}, RAccessType.PRIVATE);
+
+			RulpUtil.setMember(mapClass, F_MBR_MAP_KEY_LIST, new AbsAtomFactorAdapter(F_MBR_MAP_KEY_LIST) {
+
+				@Override
+				public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+					if (args.size() != 2) {
+						throw new RException("Invalid parameters: " + args);
+					}
+
+					return RulpFactory.createList(RulpUtil.asMap(interpreter.compute(frame, args.get(1))).keyList());
+				}
+
+			}, RAccessType.PRIVATE);
+
 		}
 
 	}
@@ -268,6 +287,8 @@ public class XRMap extends XRDefInstance implements IRCollection {
 
 	static final String F_MBR_MAP_IS_EMPTY = "_map_is_empty";
 
+	static final String F_MBR_MAP_KEY_LIST = "_key_list";
+
 	static final String F_MBR_MAP_PUT = "_map_put";
 
 	static final String F_MBR_MAP_SIZE_OF = "_map_size_of";
@@ -307,6 +328,26 @@ public class XRMap extends XRDefInstance implements IRCollection {
 	@Override
 	public void clear() {
 		uniqMap.clear();
+	}
+
+	public ArrayList<IRObject> keyList() throws RException {
+
+		ArrayList<IRObject> keyList = new ArrayList<>();
+
+		for (RMapEntry entry : uniqMap.values()) {
+			keyList.add(entry.key);
+		}
+
+		Collections.sort(keyList, (k1, k2) -> {
+			try {
+				return RulpUtil.toUniqString(k1).compareTo(RulpUtil.toUniqString(k2));
+			} catch (RException e) {
+				e.printStackTrace();
+				return 0;
+			}
+		});
+
+		return keyList;
 	}
 
 	public boolean containsKey(IRObject key) throws RException {

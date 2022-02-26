@@ -18,13 +18,19 @@
     (defun is-empty ()
         (return (map::_map_is_empty ?impl)))[final]
         
+    (defun key-list ()
+        (return (map::_key_list ?impl)))[final]
+        
     (defun clear ()
         (map::_map_clear ?impl))[final]
 
 )[final]
 
 (defun size-of  ((?map map))    (return (?map::size-of)))
+
 (defun is-empty ((?map map))    (return (?map::is-empty)))
+
 (defun clear    ((?map map))    (return (?map::clear)))
 
 (load-class "alpha.rulp.ximpl.collection.XRMap$Loader")
+
