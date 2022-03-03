@@ -1,0 +1,13 @@
+(defmacro m1 (?n1 ?v1 ?v2) 
+    (println ?n1:'(?v1 ?v2))
+)
+;=>
+
+(m1 n1 a b)
+;=>
+
+(defvar ?n n2)
+;=>
+
+(m1 $(compute ?n) a b)
+;=>

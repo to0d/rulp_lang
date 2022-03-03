@@ -1021,7 +1021,24 @@ public final class RuntimeUtil {
 			}
 
 			if (obj.getType() == RType.LIST) {
-				return RulpFactory.createList(newList);
+
+				String name = ((IRList) obj).getNamedName();
+				if (name != null) {
+
+					IRObject replaceObj = replaceMap.get(name);
+					if (replaceObj != null) {
+						switch (replaceObj.getType()) {
+						case ATOM:
+							name = RulpUtil.asAtom(replaceObj).getName();
+							break;
+
+						default:
+							throw new RException("Can't replace list name: " + obj);
+						}
+					}
+				}
+
+				return RulpFactory.createNamedList(newList, name);
 			}
 
 			IRExpr expr = (IRExpr) obj;
