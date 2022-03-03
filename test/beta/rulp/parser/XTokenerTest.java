@@ -1,5 +1,5 @@
 
-package beta.rulp.runtime;
+package beta.rulp.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;

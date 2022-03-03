@@ -1,4 +1,4 @@
-package beta.rulp.runtime;
+package beta.rulp.template;
 
 import static org.junit.Assert.fail;
 

@@ -1,4 +1,4 @@
-package beta.rulp.runtime;
+package beta.rulp.frame;
 
 import org.junit.jupiter.api.Test;
 
