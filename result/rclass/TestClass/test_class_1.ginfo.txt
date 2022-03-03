@@ -147,12 +147,12 @@ Global Subject list:
 
 name=class1, string=class1, lvl=0, ref=1/3, parent=null, final=false, mbrs=5, frame=3(SF-class1-0)
 ==========================================================================================================================
-Name                 : Access  Final Static Inherit Prop Ref  Type       Value
+Name                           : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?value               : DEFAULT                      0    1    var        0 : type=int
-add                  : DEFAULT                      0    1    func       (add nil) : frame=frame@main
-get                  : DEFAULT                      0    1    func       (get) : frame=frame@main
-set                  : DEFAULT                      0    1    func       (set nil) : frame=frame@main
-sub                  : DEFAULT                      0    1    func       (sub nil) : frame=frame@main
+?value                         : DEFAULT                      0    1    var        0 : type=int
+add                            : DEFAULT                      0    1    func       (add nil) : frame=frame@main
+get                            : DEFAULT                      0    1    func       (get) : frame=frame@main
+set                            : DEFAULT                      0    1    func       (set nil) : frame=frame@main
+sub                            : DEFAULT                      0    1    func       (sub nil) : frame=frame@main
 ==========================================================================================================================
 

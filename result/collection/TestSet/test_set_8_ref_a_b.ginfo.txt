@@ -184,22 +184,22 @@ Global Subject list:
 
 name=set, string=set, lvl=0, ref=1/1, parent=null, final=true, mbrs=15, frame=3(SF-set-0)
 ==========================================================================================================================
-Name                 : Access  Final Static Inherit Prop Ref  Type       Value
+Name                           : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE                      0    1    var        nil
-_set_add             : PRIVATE                      0    0    factor     _set_add
-_set_clear           : PRIVATE                      0    0    factor     _set_clear
-_set_has             : PRIVATE                      0    0    factor     _set_has
-_set_init            : PRIVATE                      0    0    factor     _set_init
-_set_is_empty        : PRIVATE                      0    0    factor     _set_is_empty
-_set_size_of         : PRIVATE                      0    0    factor     _set_size_of
-_set_to_list         : PRIVATE                      0    0    factor     _set_to_list
-add                  : DEFAULT Y                    1    1    func       (add nil) : frame=frame@main
-clear                : DEFAULT Y                    1    1    func       (clear) : frame=frame@main
-has                  : DEFAULT Y                    1    1    func       (has nil) : frame=frame@main
-init                 : DEFAULT Y                    1    1    func       (init) : frame=frame@main
-is-empty             : DEFAULT Y                    1    1    func       (is-empty) : frame=frame@main
-size-of              : DEFAULT Y                    1    1    func       (size-of) : frame=frame@main
-to-list              : DEFAULT Y                    1    1    func       (to-list) : frame=frame@main
+?impl                          : PRIVATE                      0    1    var        nil
+_set_add                       : PRIVATE                      0    0    factor     _set_add
+_set_clear                     : PRIVATE                      0    0    factor     _set_clear
+_set_has                       : PRIVATE                      0    0    factor     _set_has
+_set_init                      : PRIVATE                      0    0    factor     _set_init
+_set_is_empty                  : PRIVATE                      0    0    factor     _set_is_empty
+_set_size_of                   : PRIVATE                      0    0    factor     _set_size_of
+_set_to_list                   : PRIVATE                      0    0    factor     _set_to_list
+add                            : DEFAULT Y                    1    1    func       (add nil) : frame=frame@main
+clear                          : DEFAULT Y                    1    1    func       (clear) : frame=frame@main
+has                            : DEFAULT Y                    1    1    func       (has nil) : frame=frame@main
+init                           : DEFAULT Y                    1    1    func       (init) : frame=frame@main
+is-empty                       : DEFAULT Y                    1    1    func       (is-empty) : frame=frame@main
+size-of                        : DEFAULT Y                    1    1    func       (size-of) : frame=frame@main
+to-list                        : DEFAULT Y                    1    1    func       (to-list) : frame=frame@main
 ==========================================================================================================================
 

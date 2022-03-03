@@ -1,15 +1,15 @@
 name=class2, string=class2, lvl=1, ref=1/3, parent=class1, final=false, mbrs=2, frame=null
 ==========================================================================================================================
-Name                 : Access  Final Static Inherit Prop Ref  Type       Value
+Name                           : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-extends              : DEFAULT                      0    2    class      class1
-fun1                 : DEFAULT                      0    1    func       (fun1 nil) : frame=frame@main
+extends                        : DEFAULT                      0    2    class      class1
+fun1                           : DEFAULT                      0    1    func       (fun1 nil) : frame=frame@main
 ==========================================================================================================================
 
 name=class1, string=class1, lvl=0, ref=2/3, parent=null, final=false, mbrs=1, frame=null
 ==========================================================================================================================
-Name                 : Access  Final Static Inherit Prop Ref  Type       Value
+Name                           : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-fun1                 : DEFAULT                      0    1    func       (fun1 nil) : frame=frame@main
+fun1                           : DEFAULT                      0    1    func       (fun1 nil) : frame=frame@main
 ==========================================================================================================================
 

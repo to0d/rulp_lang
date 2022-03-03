@@ -142,9 +142,9 @@ Global Subject list:
 
 name=ns1, string=namespace@ns1, lvl=1, ref=1/3, parent=namespace, final=false, mbrs=2, frame=3(SF-ns1-0)
 ==========================================================================================================================
-Name                 : Access  Final Static Inherit Prop Ref  Type       Value
+Name                           : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-ask                  : DEFAULT                      0    1    template   (ask '('(teacher atom) '(? expr)) '('(student atom) '(? expr))) : frame=frame@SF-ns1-0
-this                 : DEFAULT                      0    1    instance   namespace@ns1
+ask                            : DEFAULT                      0    1    template   (ask '('(teacher atom) '(? expr)) '('(student atom) '(? expr))) : frame=frame@SF-ns1-0
+this                           : DEFAULT                      0    1    instance   namespace@ns1
 ==========================================================================================================================
 

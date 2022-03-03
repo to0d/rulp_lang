@@ -152,36 +152,36 @@ Global Subject list:
 
 name=queue, string=queue, lvl=0, ref=1/1, parent=null, final=true, mbrs=28, frame=3(SF-queue-0)
 ==========================================================================================================================
-Name                 : Access  Final Static Inherit Prop Ref  Type       Value
+Name                           : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-?impl                : PRIVATE                      0    1    var        nil
-_queue_clear         : PRIVATE                      0    0    factor     _queue_clear
-_queue_get           : PRIVATE                      0    0    factor     _queue_get
-_queue_init          : PRIVATE                      0    0    factor     _queue_init
-_queue_is_empty      : PRIVATE                      0    0    factor     _queue_is_empty
-_queue_peek_back     : PRIVATE                      0    0    factor     _queue_peek_back
-_queue_peek_front    : PRIVATE                      0    0    factor     _queue_peek_front
-_queue_pop_back      : PRIVATE                      0    0    factor     _queue_pop_back
-_queue_pop_front     : PRIVATE                      0    0    factor     _queue_pop_front
-_queue_push_back     : PRIVATE                      0    0    factor     _queue_push_back
-_queue_push_front    : PRIVATE                      0    0    factor     _queue_push_front
-_queue_size_of       : PRIVATE                      0    0    factor     _queue_size_of
-_queue_to_list       : PRIVATE                      0    0    factor     _queue_to_list
-clear                : DEFAULT Y                    1    1    func       (clear) : frame=frame@main
-get                  : DEFAULT Y                    1    1    func       (get nil) : frame=frame@main
-init                 : DEFAULT Y                    1    1    func       (init) : frame=frame@main
-is-empty             : DEFAULT Y                    1    1    func       (is-empty) : frame=frame@main
-peek                 : DEFAULT Y                    1    1    func       (peek) : frame=frame@main
-peek_back            : DEFAULT Y                    1    1    func       (peek_back) : frame=frame@main
-peek_front           : DEFAULT Y                    1    1    func       (peek_front) : frame=frame@main
-pop                  : DEFAULT Y                    1    1    func       (pop) : frame=frame@main
-pop_back             : DEFAULT Y                    1    1    func       (pop_back) : frame=frame@main
-pop_front            : DEFAULT Y                    1    1    func       (pop_front) : frame=frame@main
-push                 : DEFAULT Y                    1    1    func       (push nil) : frame=frame@main
-push_back            : DEFAULT Y                    1    1    func       (push_back nil) : frame=frame@main
-push_front           : DEFAULT Y                    1    1    func       (push_front nil) : frame=frame@main
-size-of              : DEFAULT Y                    1    1    func       (size-of) : frame=frame@main
-to-list              : DEFAULT Y                    1    1    func       (to-list) : frame=frame@main
+?impl                          : PRIVATE                      0    1    var        nil
+_queue_clear                   : PRIVATE                      0    0    factor     _queue_clear
+_queue_get                     : PRIVATE                      0    0    factor     _queue_get
+_queue_init                    : PRIVATE                      0    0    factor     _queue_init
+_queue_is_empty                : PRIVATE                      0    0    factor     _queue_is_empty
+_queue_peek_back               : PRIVATE                      0    0    factor     _queue_peek_back
+_queue_peek_front              : PRIVATE                      0    0    factor     _queue_peek_front
+_queue_pop_back                : PRIVATE                      0    0    factor     _queue_pop_back
+_queue_pop_front               : PRIVATE                      0    0    factor     _queue_pop_front
+_queue_push_back               : PRIVATE                      0    0    factor     _queue_push_back
+_queue_push_front              : PRIVATE                      0    0    factor     _queue_push_front
+_queue_size_of                 : PRIVATE                      0    0    factor     _queue_size_of
+_queue_to_list                 : PRIVATE                      0    0    factor     _queue_to_list
+clear                          : DEFAULT Y                    1    1    func       (clear) : frame=frame@main
+get                            : DEFAULT Y                    1    1    func       (get nil) : frame=frame@main
+init                           : DEFAULT Y                    1    1    func       (init) : frame=frame@main
+is-empty                       : DEFAULT Y                    1    1    func       (is-empty) : frame=frame@main
+peek                           : DEFAULT Y                    1    1    func       (peek) : frame=frame@main
+peek_back                      : DEFAULT Y                    1    1    func       (peek_back) : frame=frame@main
+peek_front                     : DEFAULT Y                    1    1    func       (peek_front) : frame=frame@main
+pop                            : DEFAULT Y                    1    1    func       (pop) : frame=frame@main
+pop_back                       : DEFAULT Y                    1    1    func       (pop_back) : frame=frame@main
+pop_front                      : DEFAULT Y                    1    1    func       (pop_front) : frame=frame@main
+push                           : DEFAULT Y                    1    1    func       (push nil) : frame=frame@main
+push_back                      : DEFAULT Y                    1    1    func       (push_back nil) : frame=frame@main
+push_front                     : DEFAULT Y                    1    1    func       (push_front nil) : frame=frame@main
+size-of                        : DEFAULT Y                    1    1    func       (size-of) : frame=frame@main
+to-list                        : DEFAULT Y                    1    1    func       (to-list) : frame=frame@main
 ==========================================================================================================================
 
 

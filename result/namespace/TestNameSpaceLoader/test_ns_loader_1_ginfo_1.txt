@@ -95,9 +95,9 @@ Global Subject list:
 
 name=ns1, string=namespace@ns1, lvl=1, ref=1/1, parent=namespace, final=false, mbrs=1, frame=null
 ==========================================================================================================================
-Name                 : Access  Final Static Inherit Prop Ref  Type       Value
+Name                           : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
-this                 : DEFAULT                      0    1    instance   namespace@ns1
+this                           : DEFAULT                      0    1    instance   namespace@ns1
 ==========================================================================================================================
 
 

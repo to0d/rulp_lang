@@ -724,7 +724,7 @@ public class TraceUtil {
 
 		sb.append("\n");
 		sb.append(SEP_LINE1);
-		sb.append(String.format("%-20s : %-7s %-5s %-6s %-7s %-4s %-4s %-10s %s\n", "Name", "Access", "Final", "Static",
+		sb.append(String.format("%-30s : %-7s %-5s %-6s %-7s %-4s %-4s %-10s %s\n", "Name", "Access", "Final", "Static",
 				"Inherit", "Prop", "Ref", "Type", "Value"));
 		sb.append(SEP_LINE2);
 
@@ -732,14 +732,14 @@ public class TraceUtil {
 
 			IRObject value = mbr.getValue();
 
-			sb.append(String.format("%-20s : %-7s %-5s %-6s %-7s %-4d %-4s %-10s %s\n", mbr.getName(),
+			sb.append(String.format("%-30s : %-7s %-5s %-6s %-7s %-4d %-4s %-10s %s\n", mbr.getName(),
 					mbr.getAccessType(), RulpUtil.isPropertyFinal(mbr) ? "Y" : "",
 					RulpUtil.isPropertyStatic(mbr) ? "Y" : "", RulpUtil.isPropertyInherit(mbr) ? "Y" : "",
 					mbr.getProperty(), _toRefString(value), _toTypeString(value), _toString(value)));
 
 			if (RulpUtil.isFunctionList(value)) {
 				for (IRFunction func : RulpUtil.asFunctionList(mbr.getValue()).getAllFuncList()) {
-					sb.append(String.format("%56s %-4s %-10s %s\n", "", _toRefString(func), _toTypeString(func),
+					sb.append(String.format("%66s %-4s %-10s %s\n", "", _toRefString(func), _toTypeString(func),
 							_toString(func)));
 				}
 			}
