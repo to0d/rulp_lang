@@ -170,21 +170,21 @@ public class PortingStock {
 	public static void main(String[] args) throws IOException {
 
 //		codeMap = processCode("C:\\data\\eton\\code.txt");
-//		process_daily("C:\\data\\stock\\stock0000_2016_01_17.txt");
+		process_daily("D:\\data\\stock\\backup\\stock0000_2016_01_26.sql");
 
-		int index = 0;
-		try (BufferedReader in = new BufferedReader(
-				new InputStreamReader(new FileInputStream("C:\\data\\stock\\stock0000_2016_01_26.txt"), "utf-8"))) {
-			String line = null;
-			while ((line = in.readLine()) != null) {
-
-				System.out.println(line);
-
-				if (index++ > 2000) {
-					return;
-				}
-			}
-		}
+//		int index = 0;
+//		try (BufferedReader in = new BufferedReader(
+//				new InputStreamReader(new FileInputStream("D:\\data\\stock\\backup\\stock0000_2016_01_26.sql"), "utf-8"))) {
+//			String line = null;
+//			while ((line = in.readLine()) != null) {
+//
+//				System.out.println(line);
+//
+//				if (index++ > 5000) {
+//					return;
+//				}
+//			}
+//		}
 	}
 
 	public static void process_daily(String path) throws IOException {
@@ -196,6 +196,7 @@ public class PortingStock {
 		String name = null;
 
 		for (String line : FileUtil.openTxtFile(path, "utf-8")) {
+
 			line = line.trim();
 			if (line.isEmpty()) {
 				continue;
@@ -204,7 +205,7 @@ public class PortingStock {
 			if (lines == null) {
 
 				ArrayList<String> names = new ArrayList<>();
-				if (StringUtil.matchFormat("REPLACE INTO `%?` (`day`, `hp`, `lp`, `op`, `cp`, `ta`, `tv`) VALUES",
+				if (StringUtil.matchFormat("REPLACE INTO `%?` (`day`, `hp`, `lp`, `op`, `cp`, `tv`, `ta`) VALUES",
 						line.trim(), names) && names.size() == 1) {
 
 					name = names.get(0);
@@ -227,8 +228,17 @@ public class PortingStock {
 					throw new IOException("invalid line " + index + ": " + line);
 				}
 
+				ArrayList<String> array = new ArrayList<>();
+				if (!StringUtil.matchFormat("'%?', %?, %?, %?, %?, %?, %?", line, array) || array.size() != 7) {
+					throw new IOException("invalid line " + index + ": " + line);
+				}
+
+				lines.add(String.format("\"%s\" %s %s %s %s %sL %sL", array.get(0), array.get(1), array.get(2),
+						array.get(3), array.get(4), array.get(5), array.get(6)));
+
 				if (end) {
 					System.out.println("save:" + name);
+					FileUtil.saveTxtFile("C:\\data\\eton\\stock2\\" + name + ".7.mc", lines, "utf-8");
 					lines = null;
 				}
 
