@@ -181,6 +181,7 @@ obj=subject-of          , type=factor
 obj=sys-free-memory     , type=factor
 obj=sys-gc              , type=factor
 obj=sys-os-type         , type=factor
+obj=sys-set-property    , type=factor
 obj=sys-time            , type=factor
 obj=sys-total-memory    , type=factor
 obj=throw               , type=factor

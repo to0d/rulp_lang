@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -28,7 +27,6 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRObjectLoader;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.rclass.XRDefInstance;
 

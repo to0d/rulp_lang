@@ -239,6 +239,7 @@ import alpha.rulp.ximpl.subject.XRSubjectFrame;
 import alpha.rulp.ximpl.system.XRFactorSystemFreeMemory;
 import alpha.rulp.ximpl.system.XRFactorSystemGC;
 import alpha.rulp.ximpl.system.XRFactorSystemOSType;
+import alpha.rulp.ximpl.system.XRFactorSystemSetProperty;
 import alpha.rulp.ximpl.system.XRFactorSystemTotalMemory;
 import alpha.rulp.ximpl.template.XRFactorDefTemplate;
 import alpha.rulp.ximpl.template.XRTemplate;
@@ -783,6 +784,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemTotalMemory(F_SYS_TOTAL_MEMORY));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemFreeMemory(F_SYS_FREE_MEMORY));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemOSType(F_SYS_OS_TYPE));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemSetProperty(F_SYS_SET_PROP));
 
 		// File System
 //		RulpUtil.addFrameObject(rootFrame, new XRFactorToValidPath(F_TO_VALID_PATH));

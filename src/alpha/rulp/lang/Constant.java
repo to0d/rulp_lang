@@ -492,6 +492,8 @@ public interface Constant {
 	String F_SYS_OS_TYPE = "sys-os-type";
 
 	String F_SYS_TIME = "sys-time";
+	
+	String F_SYS_SET_PROP = "sys-set-property";
 
 	String F_SYS_TOTAL_MEMORY = "sys-total-memory";
 

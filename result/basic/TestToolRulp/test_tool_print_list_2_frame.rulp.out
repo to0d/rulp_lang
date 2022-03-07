@@ -177,6 +177,7 @@ root::subject-of
 root::sys-free-memory
 root::sys-gc
 root::sys-os-type
+root::sys-set-property
 root::sys-time
 root::sys-total-memory
 root::throw
