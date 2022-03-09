@@ -1,3 +1,6 @@
 (str-replace "XX/YY/ZZ" "/" "_")
 ;=>"XX_YY_ZZ"
 
+(str-replace "2,238,984" "," "")
+;=>"2238984"
+
