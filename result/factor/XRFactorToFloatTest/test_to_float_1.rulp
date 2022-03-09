@@ -1,0 +1,15 @@
+(to-float 123)
+;=>
+
+(to-float 123L)
+;=>
+
+(to-float 1.1)
+;=>
+
+(to-float 1.1D)
+;=>
+
+(to-float "123")
+;=>
+

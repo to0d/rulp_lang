@@ -185,7 +185,10 @@ import alpha.rulp.ximpl.lang.XRVar;
 import alpha.rulp.ximpl.math.XRFactorArithmetic;
 import alpha.rulp.ximpl.math.XRFactorComparison;
 import alpha.rulp.ximpl.math.XRFactorRandom;
+import alpha.rulp.ximpl.math.XRFactorToDouble;
+import alpha.rulp.ximpl.math.XRFactorToFloat;
 import alpha.rulp.ximpl.math.XRFactorToInteger;
+import alpha.rulp.ximpl.math.XRFactorToLong;
 import alpha.rulp.ximpl.namespace.XRNameSpace;
 import alpha.rulp.ximpl.namespace.XRNameSpaceClass;
 import alpha.rulp.ximpl.optimize.XFactorReduct;
@@ -669,6 +672,9 @@ public final class RulpFactory {
 		// String
 		RulpUtil.addFrameObject(rootFrame, new XRFactorToString(F_TO_STRING));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorToInteger(F_TO_INT));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorToLong(F_TO_LONG));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorToFloat(F_TO_FLOAT));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorToDouble(F_TO_DOUBLE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorStrCat(F_STRCAT));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorStrEqual(F_STR_EQUAL));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorStrEqualNoCase(F_STR_EQUAL_NOCASE));

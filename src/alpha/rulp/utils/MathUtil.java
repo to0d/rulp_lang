@@ -468,8 +468,11 @@ public class MathUtil {
 		case LONG:
 			return (double) ((IRLong) a).asLong();
 
+		case STRING:
+			return Double.valueOf(RulpUtil.asString(a).asString());
+
 		default:
-			throw new RException(String.format("Not support type: %s", a.toString()));
+			throw new RException("Can't convert to double: " + a);
 		}
 	}
 
@@ -487,13 +490,17 @@ public class MathUtil {
 		case LONG:
 			return (float) ((IRLong) a).asLong();
 
+		case STRING:
+			return Float.valueOf(RulpUtil.asString(a).asString());
+
 		default:
-			throw new RException(String.format("Not support type: %s", a.toString()));
+			throw new RException("Can't convert to float: " + a);
 		}
 	}
 
 	public static int toInt(IRObject a) throws RException {
 		switch (a.getType()) {
+
 		case FLOAT:
 			return (int) ((IRFloat) a).asFloat();
 
@@ -506,12 +513,16 @@ public class MathUtil {
 		case LONG:
 			return (int) ((IRLong) a).asLong();
 
+		case STRING:
+			return Integer.valueOf(RulpUtil.asString(a).asString());
+
 		default:
-			throw new RException(String.format("Not support type: %s", a.toString()));
+			throw new RException("Can't convert to integer: " + a);
 		}
 	}
 
 	public static long toLong(IRObject a) throws RException {
+
 		switch (a.getType()) {
 		case FLOAT:
 			return (long) ((IRFloat) a).asFloat();
@@ -525,8 +536,11 @@ public class MathUtil {
 		case LONG:
 			return ((IRLong) a).asLong();
 
+		case STRING:
+			return Long.valueOf(RulpUtil.asString(a).asString());
+
 		default:
-			throw new RException(String.format("Not support type: %s", a.toString()));
+			throw new RException("Can't convert to long: " + a);
 		}
 	}
 

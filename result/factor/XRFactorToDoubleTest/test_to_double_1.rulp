@@ -1,0 +1,15 @@
+(to-double 123)
+;=>
+
+(to-double 123L)
+;=>
+
+(to-double 1.1)
+;=>
+
+(to-double 1.1D)
+;=>
+
+(to-double "123")
+;=>
+

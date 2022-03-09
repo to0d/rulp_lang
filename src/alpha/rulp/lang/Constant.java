@@ -510,6 +510,12 @@ public interface Constant {
 	String F_TO_EXPR = "to-expr";
 
 	String F_TO_INT = "to-int";
+	
+	String F_TO_LONG = "to-long";
+	
+	String F_TO_FLOAT = "to-float";
+	
+	String F_TO_DOUBLE = "to-double";
 
 	String F_TO_NAMED_LIST = "to-named-list";
 

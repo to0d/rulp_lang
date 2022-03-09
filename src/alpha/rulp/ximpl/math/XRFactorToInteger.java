@@ -13,10 +13,11 @@ import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.utils.MathUtil;
 import alpha.rulp.utils.RulpFactory;
-import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorToInteger extends AbsAtomFactorAdapter implements IRFactor {
@@ -33,36 +34,11 @@ public class XRFactorToInteger extends AbsAtomFactorAdapter implements IRFactor 
 		}
 
 		IRObject obj = interpreter.compute(frame, args.get(1));
-		int val = 0;
-		if (obj != null) {
-
-			switch (obj.getType()) {
-			case INT:
-				return obj;
-
-			case STRING:
-				val = Integer.valueOf(RulpUtil.asString(obj).asString());
-				break;
-
-			case LONG:
-				val = (int) RulpUtil.asLong(obj).asLong();
-				break;
-
-			case FLOAT:
-				val = (int) RulpUtil.asFloat(obj).asFloat();
-				break;
-
-			case DOUBLE:
-				val = (int) RulpUtil.asDouble(obj).asDouble();
-				break;
-
-			default:
-				throw new RException("Can't conver to integer: " + obj);
-
-			}
+		if (obj.getType() == RType.INT) {
+			return obj;
 		}
 
-		return RulpFactory.createInteger(val);
+		return RulpFactory.createInteger(MathUtil.toInt(obj));
 	}
 
 }

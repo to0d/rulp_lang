@@ -217,8 +217,11 @@ root::throw
 root::to-atom
 root::to-blob
 root::to-const
+root::to-double
 root::to-expr
+root::to-float
 root::to-int
+root::to-long
 root::to-named-list
 root::to-nonamed-list
 root::to-string
