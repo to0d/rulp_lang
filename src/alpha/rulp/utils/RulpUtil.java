@@ -43,6 +43,7 @@ import static alpha.rulp.lang.Constant.A_PRIVATE;
 import static alpha.rulp.lang.Constant.A_PUBLIC;
 import static alpha.rulp.lang.Constant.A_QUESTION;
 import static alpha.rulp.lang.Constant.A_QUESTION_C;
+import static alpha.rulp.lang.Constant.A_QUESTION_LIST;
 import static alpha.rulp.lang.Constant.A_RETURN_TYPE;
 import static alpha.rulp.lang.Constant.A_RULP_SUFFIX;
 import static alpha.rulp.lang.Constant.A_STABLE;
@@ -69,6 +70,7 @@ import static alpha.rulp.lang.Constant.O_OPT_ID;
 import static alpha.rulp.lang.Constant.O_OPT_TCO;
 import static alpha.rulp.lang.Constant.O_Private;
 import static alpha.rulp.lang.Constant.O_Public;
+import static alpha.rulp.lang.Constant.O_QUESTION_LIST;
 import static alpha.rulp.lang.Constant.O_RETURN;
 import static alpha.rulp.lang.Constant.O_RETURN_TYPE;
 import static alpha.rulp.lang.Constant.O_STABLE;
@@ -1924,6 +1926,9 @@ public class RulpUtil {
 
 		case F_RETURN:
 			return O_RETURN;
+
+		case A_QUESTION_LIST:
+			return O_QUESTION_LIST;
 
 		default:
 			return RulpFactory.createAtom(name);

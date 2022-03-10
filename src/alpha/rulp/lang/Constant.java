@@ -491,9 +491,9 @@ public interface Constant {
 
 	String F_SYS_OS_TYPE = "sys-os-type";
 
-	String F_SYS_TIME = "sys-time";
-	
 	String F_SYS_SET_PROP = "sys-set-property";
+
+	String F_SYS_TIME = "sys-time";
 
 	String F_SYS_TOTAL_MEMORY = "sys-total-memory";
 
@@ -507,15 +507,15 @@ public interface Constant {
 
 	String F_TO_CONST = "to-const";
 
+	String F_TO_DOUBLE = "to-double";
+
 	String F_TO_EXPR = "to-expr";
 
-	String F_TO_INT = "to-int";
-	
-	String F_TO_LONG = "to-long";
-	
 	String F_TO_FLOAT = "to-float";
-	
-	String F_TO_DOUBLE = "to-double";
+
+	String F_TO_INT = "to-int";
+
+	String F_TO_LONG = "to-long";
 
 	String F_TO_NAMED_LIST = "to-named-list";
 
@@ -650,6 +650,8 @@ public interface Constant {
 	IRAtom O_Public = RulpFactory.createAtom(A_PUBLIC);
 
 	IRAtom O_QUESTION = RulpFactory.createAtom(A_QUESTION);
+
+	IRAtom O_QUESTION_LIST = RulpFactory.createAtom(A_QUESTION_LIST);
 
 	IRAtom O_RETURN = RulpFactory.createAtom(F_RETURN);
 
