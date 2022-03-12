@@ -13,3 +13,8 @@
 (to-long "123")
 ;=>123L
 
+(to-long "9032824.00")
+;err:
+For input string: "9032824.00"
+;eof
+
