@@ -58,6 +58,7 @@ obj=constant            , type=atom
 obj=continue            , type=factor
 obj=date                , type=factor
 obj=day-number          , type=factor
+obj=day-of-week         , type=factor
 obj=default             , type=atom
 obj=defclass            , type=factor
 obj=defconst            , type=factor

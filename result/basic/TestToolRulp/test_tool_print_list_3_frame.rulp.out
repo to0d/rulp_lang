@@ -58,6 +58,7 @@ mbr=constant, mbr-property='(public), mbr-attribute='(), obj=constant, obj-type=
 mbr=continue, mbr-property='(public), mbr-attribute='(), obj=continue, obj-type=factor, obj-attribute='(stable)
 mbr=date, mbr-property='(public), mbr-attribute='(), obj=date, obj-type=factor, obj-attribute='()
 mbr=day-number, mbr-property='(public), mbr-attribute='(), obj=day-number, obj-type=factor, obj-attribute='()
+mbr=day-of-week, mbr-property='(public), mbr-attribute='(), obj=day-of-week, obj-type=factor, obj-attribute='()
 mbr=default, mbr-property='(public), mbr-attribute='(), obj=default, obj-type=atom, obj-attribute='()
 mbr=defclass, mbr-property='(public), mbr-attribute='(), obj=defclass, obj-type=factor, obj-attribute='(stable)
 mbr=defconst, mbr-property='(public), mbr-attribute='(), obj=defconst, obj-type=factor, obj-attribute='(stable)

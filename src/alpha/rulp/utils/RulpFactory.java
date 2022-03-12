@@ -248,6 +248,7 @@ import alpha.rulp.ximpl.template.XRFactorDefTemplate;
 import alpha.rulp.ximpl.template.XRTemplate;
 import alpha.rulp.ximpl.thread.XRFactorDoParallel;
 import alpha.rulp.ximpl.thread.XRFactorSleep;
+import alpha.rulp.ximpl.time.XFactorDayOfWeek;
 import alpha.rulp.ximpl.time.XRFactorDate;
 import alpha.rulp.ximpl.time.XRFactorDayNumber;
 import alpha.rulp.ximpl.time.XRFactorSystemTime;
@@ -780,13 +781,14 @@ public final class RulpFactory {
 		// Time
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDate(F_DATE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorDayNumber(F_DAY_NUMBER));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemTime(F_SYS_TIME));
+		RulpUtil.addFrameObject(rootFrame, new XFactorDayOfWeek(F_DAY_OF_WEEK));
 
 		// Math
 		RulpUtil.addFrameObject(rootFrame, new XRFactorRandom(F_RANDOM));
 
 		// System
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemGC(F_SYS_GC));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemTime(F_SYS_TIME));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemTotalMemory(F_SYS_TOTAL_MEMORY));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemFreeMemory(F_SYS_FREE_MEMORY));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemOSType(F_SYS_OS_TYPE));

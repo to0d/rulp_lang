@@ -85,6 +85,7 @@ root::constant
 root::continue
 root::date
 root::day-number
+root::day-of-week
 root::default
 root::defclass
 root::defconst

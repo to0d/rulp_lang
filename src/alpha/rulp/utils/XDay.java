@@ -175,13 +175,13 @@ public class XDay implements Comparable<XDay> {
 		}
 	}
 
-	private int year = 0;
-
-	private int month = 0;
-
 	private int day = 0;
 
 	private int dayOfWeek = -1;
+
+	private int month = 0;
+
+	private int year = 0;
 
 	private XDay(int year, int month, int day) {
 

@@ -244,6 +244,8 @@ public interface Constant {
 	String F_CPS = "cps";
 
 	String F_DATE = "date";
+	
+	String F_DAY_OF_WEEK = "day-of-week";
 
 	String F_DAY_NUMBER = "day-number";
 

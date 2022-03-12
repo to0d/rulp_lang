@@ -20,27 +20,21 @@ import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.XDay;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorDate extends AbsAtomFactorAdapter implements IRFactor {
+public class XFactorDayOfWeek extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorDate(String factorName) {
+	public XFactorDayOfWeek(String factorName) {
 		super(factorName);
 	}
 
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() > 2) {
+		if (args.size() != 2) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		if (args.size() == 2) {
-
-			String dayString = RulpUtil.asString(interpreter.compute(frame, args.get(1))).asString();
-			return RulpFactory.createString(XDay.getDay(dayString).toString());
-
-		} else {
-			return RulpFactory.createString(XDay.today().toString());
-		}
+		String dayString = RulpUtil.asString(interpreter.compute(frame, args.get(1))).asString();
+		return RulpFactory.createInteger(XDay.getDay(dayString).getDayOfWeek());
 	}
 
 }
