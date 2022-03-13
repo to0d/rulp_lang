@@ -1,0 +1,16 @@
+(defvar ?v true)
+;=>&?v
+
+(if ?v do 
+    (println "action1")
+    (println "action2")
+    (println "action3")
+)
+;=>nil
+;out:
+action1
+action2
+action3
+
+;eof
+
