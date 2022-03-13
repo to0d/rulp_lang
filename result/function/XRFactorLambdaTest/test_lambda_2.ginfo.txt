@@ -68,18 +68,18 @@ Object create count:
         atom:         1088            0         1088
       string:           29            0           29
         list:           11            0           11
-        expr:          452            4          448
-         var:           22            8           14
+        expr:          452            3          449
+         var:           22            6           16
         func:           56            1           55
     template:            1            0            1
        macro:            3            0            3
-       frame:            6            9           -3
+       frame:            6            5            1
  interpreter:            1            0
   frameEntry:          247            0
       lambda:            1            0
 ==========================================================================================================================
 
-Global frame list: total=0
+Global frame list: total=1
 
 id=2, name=main, lvl=2, ref=2/4, entry=13, pid=1(system), subject=main
 ==========================================================================================================================
@@ -106,6 +106,13 @@ fun2                 : 12       2        1    func       (fun2 nil) : frame=fram
 ==========================================================================================================================
 
 
+id=5, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$__ginfo
+==========================================================================================================================
+Name(alias)          : EntryId  FrameId  Ref  Type       Value               
+--------------------------------------------------------------------------------------------------------------------------
+?rv                  : 20       5        1    var        result\function\XRFactorLambdaTest\test_lambda_2 : type=string
+==========================================================================================================================
+
 Root var list: total=6
 ==========================================================================================================================
 Var                  : Value
@@ -123,6 +130,7 @@ Global frame tree:
 ->FRAME(root): id=0, lvl=0, subject=root
     ->FRAME(system): id=1, lvl=1, subject=system
         ->FRAME(main): id=2, lvl=2, subject=main
+            ->FRAME(_$fun$__ginfo): id=5, lvl=3, subject=_$fun$__ginfo
 
 Global Subject list:
 
