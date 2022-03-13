@@ -1,0 +1,25 @@
+(foreach (?a {1, 2, 3}) 
+    (println ?a )
+)
+;=>'(nil nil nil)
+;out:
+1
+2
+3
+
+;eof
+
+(defvar ?arr (to-array '(1 2 3)))
+;=>&?arr
+
+(foreach (?a ?arr) 
+    (println ?a )
+)
+;=>'(nil nil nil)
+;out:
+1
+2
+3
+
+;eof
+

@@ -185,6 +185,8 @@ import alpha.rulp.ximpl.lang.XRVar;
 import alpha.rulp.ximpl.math.XRFactorArithmetic;
 import alpha.rulp.ximpl.math.XRFactorComparison;
 import alpha.rulp.ximpl.math.XRFactorRandom;
+import alpha.rulp.ximpl.math.XRFactorRandomFloat;
+import alpha.rulp.ximpl.math.XRFactorRandomInt;
 import alpha.rulp.ximpl.math.XRFactorToDouble;
 import alpha.rulp.ximpl.math.XRFactorToFloat;
 import alpha.rulp.ximpl.math.XRFactorToInteger;
@@ -786,6 +788,9 @@ public final class RulpFactory {
 
 		// Math
 		RulpUtil.addFrameObject(rootFrame, new XRFactorRandom(F_RANDOM));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorRandomInt(F_RANDOM_INT));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorRandomFloat(F_RANDOM_FLOAT));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorRandom(F_RANDOM_DOUBLE));
 
 		// System
 		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemGC(F_SYS_GC));

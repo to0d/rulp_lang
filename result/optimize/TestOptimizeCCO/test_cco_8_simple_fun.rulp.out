@@ -22,15 +22,10 @@
             (<= ?v 0)
             (return 0)
         )
-        (return[stable]
-            (max[recursive=false stable=true stmt-count=8]
-                (cc2[opt-id=0] (fun1 (- ?v 1)))
-                100
-            )
-        )
+        (return[stable] (cc2[opt-id=0] (max (fun1 (- ?v 1)) 100)))
     )
 )[opt-cco]
-rebuild: id=0, name=cc2, call=5, hit=0, func=fun1, cache=5, data:[$$i_0/0/D/0] [$$i_1/100/D/0] [$$i_2/100/D/0]...
+rebuild: id=0, name=cc2, call=5, hit=3, func=max, cache=2, data:[$$i_0$$i_100/100/D/0] [$$i_100$$i_100/100/D/3]
 
 ;eof
 
@@ -41,7 +36,7 @@ rebuild: id=0, name=cc2, call=5, hit=0, func=fun1, cache=5, data:[$$i_0/0/D/0] [
       Name: Status
 --------------------------------------------------------------------------------------------------------------------------
        ERO: rebuild=0, compute=0
-       CCO: rebuild=1, expr=1, call=5, cache=0, reuse=0
+       CCO: rebuild=1, expr=1, call=5, cache=3, reuse=0
        TCO: rebuild=0, expr=0, call=0, node=0, compute=0, level=0, stack=0
        LCO: rebuild=0, arg=0, pass=0, hit=0
 ==========================================================================================================================

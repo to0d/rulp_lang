@@ -13,6 +13,7 @@ import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.F_FOREACH;
 import static alpha.rulp.lang.Constant.O_Nan;
 
+import alpha.rulp.lang.IRArray;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -66,6 +67,19 @@ public class XRFactorForeach extends AbsAtomFactorAdapter implements IRFactor {
 		super(factorName);
 	}
 
+	public static IRObject _do_foreach(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		IRFrame doFrame = RulpFactory.createFrame(frame, A_DO);
+		RulpUtil.incRef(doFrame);
+
+		try {
+			return getResultObject(args, interpreter, doFrame, frame);
+		} finally {
+			doFrame.release();
+			RulpUtil.decRef(doFrame);
+		}
+	}
+
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
@@ -97,24 +111,30 @@ public class XRFactorForeach extends AbsAtomFactorAdapter implements IRFactor {
 					IRIterator<? extends IRObject> iter = ((IRList) cond).iterator();
 					while (iter.hasNext()) {
 						var.setValue(iter.next());
+						IRObject rst = _do_foreach(args, interpreter, factorFrame);
+						if (rst != null && rst != O_Nan) {
+							rstList.add(rst);
+						}
+					}
 
-						IRFrame doFrame = RulpFactory.createFrame(factorFrame, A_DO);
-						RulpUtil.incRef(doFrame);
+					break;
 
-						try {
-							IRObject rst = getResultObject(args, interpreter, doFrame, factorFrame);
-							if (rst != O_Nan) {
-								rstList.add(rst);
-							}
-						} finally {
-							doFrame.release();
-							RulpUtil.decRef(doFrame);
+				case ARRAY:
+
+					IRArray arr = RulpUtil.asArray(cond);
+					int size = arr.size();
+					for (int i = 0; i < size; ++i) {
+						var.setValue(arr.get(i));
+						IRObject rst = _do_foreach(args, interpreter, factorFrame);
+						if (rst != null && rst != O_Nan) {
+							rstList.add(rst);
 						}
 					}
 
 					break;
 
 				case ATOM:
+
 					var.setValue(cond);
 					IRObject rst = getResultObject(args, interpreter, factorFrame, factorFrame);
 					if (rst != O_Nan) {

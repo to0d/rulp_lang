@@ -1,0 +1,12 @@
+(foreach (?a {1, 2, 3}) 
+    (println ?a )
+)
+;=>
+
+(defvar ?arr (to-array '(1 2 3)))
+;=>
+
+(foreach (?a ?arr) 
+    (println ?a )
+)
+;=>

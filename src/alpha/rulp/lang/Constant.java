@@ -410,6 +410,12 @@ public interface Constant {
 	String F_PROPERTY_OF = "property-of";
 
 	String F_RANDOM = "random";
+	
+	String F_RANDOM_INT = "random-int";
+	
+	String F_RANDOM_FLOAT = "random-float";
+	
+	String F_RANDOM_DOUBLE = "random-double";
 
 	String F_Reduct = "reduct";
 

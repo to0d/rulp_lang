@@ -9,6 +9,8 @@
 
 package alpha.rulp.utils;
 
+import java.util.Random;
+
 import alpha.rulp.lang.IRBoolean;
 import alpha.rulp.lang.IRDouble;
 import alpha.rulp.lang.IRFloat;
@@ -22,6 +24,8 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.ximpl.optimize.OptUtil;
 
 public class MathUtil {
+
+	static Random random = new Random();
 
 	static RType result2Type[][] = new RType[RType.TYPE_NUM][RType.TYPE_NUM];
 
@@ -430,6 +434,22 @@ public class MathUtil {
 			return false;
 
 		}
+	}
+
+	public static double random_double() {
+		return random.nextDouble();
+	}
+
+	public static float random_float() {
+		return random.nextFloat();
+	}
+
+	public static int random_int() {
+		return random.nextInt();
+	}
+
+	public static int random_int(int bound) {
+		return random.nextInt(bound);
 	}
 
 	public static boolean toBoolean(IRObject a) throws RException {

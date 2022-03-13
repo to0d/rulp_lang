@@ -27,4 +27,10 @@ class XRFactorForeachTest extends RulpTestBase {
 		_run_script();
 	}
 
+	@Test
+	void test_foreach_4_array() {
+
+		_setup();
+		_run_script();
+	}
 }

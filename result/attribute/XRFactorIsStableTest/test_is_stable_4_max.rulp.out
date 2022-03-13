@@ -1,0 +1,6 @@
+(load math)
+;=>nil
+
+(is-stable max)
+;=>true
+

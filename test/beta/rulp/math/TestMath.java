@@ -11,9 +11,21 @@ public class TestMath extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	void test_math_max_2_list() {
+		_setup();
+		_run_script();
+	}
 
 	@Test
 	void test_math_min_1() {
+		_setup();
+		_run_script();
+	}
+	
+	@Test
+	void test_math_min_2_list() {
 		_setup();
 		_run_script();
 	}

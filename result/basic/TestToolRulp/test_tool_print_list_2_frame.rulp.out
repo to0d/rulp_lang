@@ -134,6 +134,9 @@ root::private
 root::property-of
 root::public
 root::random
+root::random-double
+root::random-float
+root::random-int
 root::reduct
 root::ref
 root::remove

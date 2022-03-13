@@ -8,11 +8,13 @@
 ;=>nil nil nil nil nil nil nil
 
 (defun list-of-is-stable-fun (?subject) 
+
     (if (equal ?subject local)
-    
+
         (list-of-is-stable-fun (value-of (:: (value-of local::parent) parent)))
-        
+
         (loop for ?mbr in (list-of ?subject) do 
+            ;(println ?mbr " " $(value-of (value-of ?mbr)))
             (if (is-stable  $(value-of (value-of ?mbr)))
                 (print (str-format "obj=%-20s, type=%s\n" 
                             (name-of $(value-of ?mbr)) 

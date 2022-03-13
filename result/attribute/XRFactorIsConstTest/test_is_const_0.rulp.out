@@ -139,6 +139,9 @@ obj=private             , type=atom
 obj=property-of         , type=factor
 obj=public              , type=atom
 obj=random              , type=factor
+obj=random-double       , type=factor
+obj=random-float        , type=factor
+obj=random-int          , type=factor
 obj=reduct              , type=factor
 obj=ref                 , type=factor
 obj=remove              , type=factor

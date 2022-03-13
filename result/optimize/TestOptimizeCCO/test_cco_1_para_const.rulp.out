@@ -19,7 +19,7 @@
 ;=>6
 
 (attribute-of fun1)
-;=>'('(recursive false) '(stable true) '(stmt-count 17))
+;=>'('(recursive false) '(stable true) '(stmt-count 42))
 
 (attribute-of fun2)
 ;=>'(opt-cco)
