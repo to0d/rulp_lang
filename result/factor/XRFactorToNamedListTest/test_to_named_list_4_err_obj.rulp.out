@@ -1,0 +1,8 @@
+(defclass c1)
+
+(to-named-list c1 '(a c))
+;err:
+Invalid name object type<CLASS>: c1
+at (to-named-list c1 '(a c)) ; main-2
+;eof
+

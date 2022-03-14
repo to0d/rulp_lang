@@ -23,4 +23,10 @@ class XRFactorToNamedListTest extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	void test_to_named_list_4_err_obj() {
+		_setup();
+		_run_script();
+	}
 }

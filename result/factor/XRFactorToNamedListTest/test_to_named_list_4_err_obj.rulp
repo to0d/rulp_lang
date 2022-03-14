@@ -1,0 +1,5 @@
+(defclass c1)
+
+(to-named-list c1 '(a c))
+;err
+

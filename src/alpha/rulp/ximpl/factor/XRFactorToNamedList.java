@@ -29,7 +29,7 @@ public class XRFactorToNamedList extends AbsAtomFactorAdapter implements IRFacto
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		if (args.size() != 3) {
-			throw new RException("Invalid parameters: " + args);
+			throw new RException("invalid parameters: " + args);
 		}
 
 		IRObject nameObj = interpreter.compute(frame, args.get(1));
@@ -40,11 +40,13 @@ public class XRFactorToNamedList extends AbsAtomFactorAdapter implements IRFacto
 		case ATOM:
 			name = RulpUtil.asAtom(nameObj).getName();
 			break;
+
 		case STRING:
 			name = RulpUtil.asString(nameObj).asString();
 			break;
+
 		default:
-			throw new RException("Invalid parameters: " + args);
+			throw new RException(String.format("Invalid name object type<%s>: %s", "" + nameObj.getType(), nameObj));
 		}
 
 		if (list.getNamedName() != null && name.equals(list.getNamedName())) {
