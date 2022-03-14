@@ -13,6 +13,24 @@
 (cmp nil nil)
 ;=>0
 
+(cmp true true)
+;=>0
+
+(cmp false false)
+;=>0
+
+(cmp true false)
+;=>14
+
+(cmp false true)
+;=>-14
+
+(cmp "a" "b")
+;=>-1
+
+(cmp "bc" "a")
+;=>1
+
 (cmp 1 1)
 ;=>0
 
@@ -21,4 +39,29 @@
 
 (cmp 1.1 1)
 ;=>1
+
+(cmp 100L 10L)
+;=>1
+
+(cmp 1.2d 1.3d)
+;=>-1
+
+(cmp a "bc")
+;=>-1
+
+(cmp 1.1 a)
+;err:
+can't compare: 1.1 a
+at (cmp_def ?l ?2) ; _$fun$_cmp-3
+at (return (cmp_def ?l ?2)) ; _$fun$_cmp-3
+at (cmp 1.1 a) ; main-2
+;eof
+
+(cmp a 2) 
+;err:
+can't compare: a 2
+at (cmp_def ?l ?2) ; _$fun$_cmp-3
+at (return (cmp_def ?l ?2)) ; _$fun$_cmp-3
+at (cmp a 2) ; main-2
+;eof
 

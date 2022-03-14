@@ -41,14 +41,13 @@ public class XRFactorSort extends AbsAtomFactorAdapter implements IRFactor {
 			return list;
 		}
 
-		IRObject e0 = list.get(0);
+//		IRObject e0 = list.get(0);
 
 		boolean needSort = false;
 
 		for (int i = 1; !needSort && i < size; ++i) {
-			int d = list.get(i - 1).toString().compareTo(list.get(i).toString());
-			// need
-			if (d > 0) {
+			int d = RulpUtil.compare(list.get(i - 1), list.get(i));
+			if (d != 0) {
 				needSort = true;
 			}
 		}
@@ -63,7 +62,12 @@ public class XRFactorSort extends AbsAtomFactorAdapter implements IRFactor {
 		}
 
 		Collections.sort(allObjs, (o1, o2) -> {
-			return o1.toString().compareTo(o2.toString());
+			try {
+				return RulpUtil.compare(o1, o2);
+			} catch (RException e) {
+				e.printStackTrace();
+				return 0;
+			}
 		});
 
 		return RulpFactory.createList(allObjs);

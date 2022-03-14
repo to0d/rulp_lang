@@ -1095,17 +1095,30 @@ public class RulpUtil {
 
 		RType at = a.getType();
 		RType bt = b.getType();
+
 		switch (at) {
 		case BOOL:
 		case ATOM:
 		case STRING:
-			return a.asString().compareTo(b.asString());
+		case LIST:
+
+			switch (bt) {
+			case BOOL:
+			case ATOM:
+			case STRING:
+			case LIST:
+				return a.asString().compareTo(b.asString());
+
+			default:
+				throw new RException(String.format("can't compare: %s %s", a.toString(), b.toString()));
+			}
+
 		default:
 		}
 
 		RType rt = MathUtil.getTypeConvert(at, bt);
 		if (rt == null) {
-			throw new RException(String.format("Invalid compare types: %s %s", a.toString(), b.toString()));
+			throw new RException(String.format("can't compare: %s %s", a.toString(), b.toString()));
 		}
 
 		switch (rt) {
@@ -1174,7 +1187,7 @@ public class RulpUtil {
 		}
 
 		default:
-			throw new RException("invalid compare type: " + a);
+			throw new RException(String.format("can't compare: %s %s", a.toString(), b.toString()));
 		}
 
 	}

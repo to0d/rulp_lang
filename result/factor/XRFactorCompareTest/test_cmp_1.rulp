@@ -13,6 +13,24 @@
 (cmp nil nil)
 ;=>
 
+(cmp true true)
+;=>
+
+(cmp false false)
+;=>
+
+(cmp true false)
+;=>
+
+(cmp false true)
+;=>
+
+(cmp "a" "b")
+;=>
+
+(cmp "bc" "a")
+;=>
+
 (cmp 1 1)
 ;=>
 
@@ -21,4 +39,21 @@
 
 (cmp 1.1 1)
 ;=>
+
+(cmp 100L 10L)
+;=>
+
+(cmp 1.2d 1.3d)
+;=>
+
+(cmp a "bc")
+;=>
+
+(cmp 1.1 a)
+;err
+
+(cmp a 2) 
+;err
+
+
 
