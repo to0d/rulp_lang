@@ -41,6 +41,8 @@ public class XRFactorSort extends AbsAtomFactorAdapter implements IRFactor {
 			return list;
 		}
 
+		IRObject e0 = list.get(0);
+
 		boolean needSort = false;
 
 		for (int i = 1; !needSort && i < size; ++i) {

@@ -368,6 +368,28 @@ public class RulpUtil {
 
 	private static final String R_VAR_PRE = "$$v_";
 
+	private static IRObject _compare_obj(IRObject obj) throws RException {
+
+		if (obj == null) {
+			return O_Nil;
+		}
+
+		switch (obj.getType()) {
+
+		case CONSTANT:
+			return _compare_obj(RulpUtil.asConstant(obj).getValue());
+
+		case MEMBER:
+			return _compare_obj(RulpUtil.asMember(obj).getValue());
+
+		case VAR:
+			return _compare_obj(RulpUtil.asVar(obj).getValue());
+
+		default:
+			return obj;
+		}
+	}
+
 	private static void _formatAttrList(StringBuffer sb, IRObject obj) throws RException {
 
 		List<String> attrKeyList = AttrUtil.getAttributeKeyList(obj);
@@ -1051,16 +1073,130 @@ public class RulpUtil {
 			return 0;
 		}
 
-		if (a == null) {
-			a = O_Nil;
+		if (a == null || a == O_Nil) {
+
+			if (b == null || b == O_Nil) {
+				return 0;
+			}
+
+			return -1;
 		}
 
-		if (b == null) {
-			b = O_Nil;
+		if (b == null || b == O_Nil) {
+			return -compare(b, a);
 		}
 
-		return a.asString().compareTo(b.asString());
+		a = _compare_obj(a);
+		b = _compare_obj(b);
+
+		if (a == b) {
+			return 0;
+		}
+
+		RType at = a.getType();
+		RType bt = b.getType();
+		switch (at) {
+		case BOOL:
+		case ATOM:
+		case STRING:
+			return a.asString().compareTo(b.asString());
+		default:
+		}
+
+		RType rt = MathUtil.getTypeConvert(at, bt);
+		if (rt == null) {
+			throw new RException(String.format("Invalid compare types: %s %s", a.toString(), b.toString()));
+		}
+
+		switch (rt) {
+		case DOUBLE: {
+
+			double av = MathUtil.toDouble(a);
+			double bv = MathUtil.toDouble(b);
+
+			if (av > bv) {
+				return 1;
+
+			} else if (av < bv) {
+				return -1;
+
+			} else {
+				return 0;
+			}
+		}
+
+		case FLOAT: {
+
+			float av = MathUtil.toFloat(a);
+			float bv = MathUtil.toFloat(b);
+
+			if (av > bv) {
+				return 1;
+
+			} else if (av < bv) {
+				return -1;
+
+			} else {
+				return 0;
+			}
+		}
+
+		case INT: {
+
+			int av = MathUtil.toInt(a);
+			int bv = MathUtil.toInt(b);
+
+			if (av > bv) {
+				return 1;
+
+			} else if (av < bv) {
+				return -1;
+
+			} else {
+				return 0;
+			}
+		}
+
+		case LONG: {
+
+			long av = MathUtil.toLong(a);
+			long bv = MathUtil.toLong(b);
+
+			if (av > bv) {
+				return 1;
+
+			} else if (av < bv) {
+				return -1;
+
+			} else {
+				return 0;
+			}
+		}
+
+		default:
+			throw new RException("invalid compare type: " + a);
+		}
+
 	}
+
+//	public static RType compare_type(IRObject obj) throws RException {
+//
+//		RType type = _compare_obj(obj).getType();
+//
+//		switch (type) {
+//		case ATOM:
+//		case BOOL:
+//		case DOUBLE:
+//		case FLOAT:
+//		case INT:
+//		case LONG:
+//		case STRING:
+//			return type;
+//
+//		default:
+//			return null;
+//		}
+//	}
 
 	public static RResultList compute(IRInterpreter interpreter, String input) throws RException {
 
