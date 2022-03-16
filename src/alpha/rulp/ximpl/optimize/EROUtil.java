@@ -41,7 +41,6 @@ import alpha.rulp.utils.MathUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.control.XRFactorCase;
-import alpha.rulp.ximpl.control.XRFactorIf;
 import alpha.rulp.ximpl.control.XRFactorLoop;
 
 public class EROUtil {

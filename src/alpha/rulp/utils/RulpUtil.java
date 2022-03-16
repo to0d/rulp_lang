@@ -1992,6 +1992,9 @@ public class RulpUtil {
 		case A_QUESTION_LIST:
 			return O_QUESTION_LIST;
 
+		case F_B_AND:
+			return O_B_AND;
+
 		default:
 			return RulpFactory.createAtom(name);
 		}
@@ -2112,6 +2115,17 @@ public class RulpUtil {
 		}
 
 		return RulpFactory.createExpression(newExpr);
+	}
+
+	static IRExpr toExpr(IRObject factor, List<? extends IRObject> objList) throws RException {
+
+		ArrayList<IRObject> exprList = new ArrayList<>();
+		exprList.add(factor);
+		for (IRObject obj : objList) {
+			exprList.add(obj);
+		}
+
+		return RulpFactory.createExpression(exprList);
 	}
 
 	public static ArrayList<IRExpr> toExprList(IRList list) throws RException {
