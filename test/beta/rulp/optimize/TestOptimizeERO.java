@@ -47,6 +47,13 @@ public class TestOptimizeERO extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	public void test_ero_4_if_2() {
+
+		_setup();
+		_run_script();
+	}
 
 	@Test
 	public void test_ero_5_case_1() {

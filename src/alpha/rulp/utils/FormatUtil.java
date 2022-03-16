@@ -27,6 +27,7 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRParser;
+import alpha.rulp.ximpl.control.XRFactorIf;
 import alpha.rulp.ximpl.control.XRFactorLoop;
 
 public class FormatUtil {
@@ -121,7 +122,7 @@ public class FormatUtil {
 
 			switch (((IRList) obj).get(0).asString()) {
 			case F_IF:
-				_output_factor1((IRList) obj, outLines, level);
+				_output_if((IRList) obj, outLines, level);
 				return;
 			case F_DEFUN:
 				_output_defun((IRList) obj, outLines, level);
@@ -252,6 +253,60 @@ public class FormatUtil {
 		}
 
 		outLines.add(_getSpaceLine(level) + ")");
+	}
+
+	private static void _output_if(IRList expr, List<String> outLines, int level) throws RException {
+
+		// (if condition
+		// true-expr
+		// )
+		if (XRFactorIf.isIf1(expr)) {
+
+			String line1 = _getSpaceLine(level) + "(" + toString(expr.get(0)) + " " + toString(expr.get(1));
+			outLines.add(line1);
+			_output(expr.get(2), outLines, level + 1);
+			outLines.add(_getSpaceLine(level) + ")");
+
+			return;
+		}
+
+		// (if condition
+		// true-expr
+		// false-expr
+		// )
+		if (XRFactorIf.isIf2(expr)) {
+
+			String line1 = _getSpaceLine(level) + "(" + toString(expr.get(0)) + " " + toString(expr.get(1));
+			outLines.add(line1);
+			_output(expr.get(2), outLines, level + 1);
+			_output(expr.get(3), outLines, level + 1);
+			outLines.add(_getSpaceLine(level) + ")");
+
+			return;
+		}
+
+		// (if condition do
+		// expr1
+		// expr2
+		// expr3
+		// ...
+		// )
+		if (XRFactorIf.isIf3(expr)) {
+
+			String line1 = _getSpaceLine(level) + "(" + toString(expr.get(0)) + " " + toString(expr.get(1)) + " "
+					+ toString(expr.get(2));
+			outLines.add(line1);
+
+			int size = expr.size();
+			for (int i = 3; i < size; ++i) {
+				_output(expr.get(i), outLines, level + 1);
+			}
+			outLines.add(_getSpaceLine(level) + ")");
+
+			return;
+		}
+
+		_output_factor1(expr, outLines, level);
 	}
 
 	private static void _output_loop(IRList expr, List<String> outLines, int level) throws RException {

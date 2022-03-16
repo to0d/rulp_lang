@@ -41,6 +41,7 @@ import alpha.rulp.utils.MathUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.control.XRFactorCase;
+import alpha.rulp.ximpl.control.XRFactorIf;
 import alpha.rulp.ximpl.control.XRFactorLoop;
 
 public class EROUtil {
@@ -1137,19 +1138,52 @@ public class EROUtil {
 			return null;
 		}
 
-		// (if true A B) or (if false A B)
+		// (if true ...) or (if false ...)
 		IRObject e1 = rebuildList.get(1);
 		if (e1.getType() == RType.BOOL) {
 
-			IRObject rst = null;
 			if (RulpUtil.asBoolean(e1).asBoolean()) {
-				rst = rebuildList.get(2);
 
-			} else if (rebuildList.size() > 3) {
-				rst = rebuildList.get(3);
+				// (if true A)
+				if (rebuildList.size() == 3) {
+					return OptUtil.asExpr(rebuildList.get(2));
+				}
+
+				// (if true A B)
+				if (rebuildList.size() == 4 && !RulpUtil.isAtom(rebuildList.get(2), A_DO)) {
+
+					return OptUtil.asExpr(rebuildList.get(2));
+				}
+
+				// (if true do expr1 expr2 expr3 ...)
+				if (rebuildList.size() >= 4 && RulpUtil.isAtom(rebuildList.get(2), A_DO)) {
+
+					if (rebuildList.size() == 4) {
+						return OptUtil.asExpr(rebuildList.get(3));
+					}
+
+					return RulpUtil.toDoExpr(rebuildList.subList(3, rebuildList.size()));
+				}
+
+			} else {
+
+				// (if false A)
+				if (rebuildList.size() == 3) {
+					return OptUtil.asExpr(null);
+				}
+
+				// (if false A B)
+				if (rebuildList.size() == 4 && !RulpUtil.isAtom(rebuildList.get(2), A_DO)) {
+					return OptUtil.asExpr(rebuildList.get(3));
+				}
+
+				// (if false do expr1 expr2 expr3 ...)
+				if (rebuildList.size() >= 4 && RulpUtil.isAtom(rebuildList.get(2), A_DO)) {
+					return OptUtil.asExpr(null);
+				}
+
 			}
 
-			return OptUtil.asExpr(rst);
 		}
 
 		return null;

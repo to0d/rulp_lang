@@ -18,8 +18,7 @@
 ;out:
 (defun fun (?v)
     (do[stable]
-        (if
-            (<= ?v 0)
+        (if (<= ?v 0)
             (return 0)
         )
         (return[stable] (+[atom return-type=1 stable] 1 (fun (- ?v 1))))

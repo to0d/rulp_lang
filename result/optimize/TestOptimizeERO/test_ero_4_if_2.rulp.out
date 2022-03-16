@@ -1,37 +1,38 @@
-(defun fun (?x) 
-    (if (< ?x 0) 
-        (return 0))
-    (if (> (fun (- ?x 1)) 1)
-        (return 1))
-    (return 2)
-)[opt-tco]
+(defun fun (?v) 
+
+    (if (<= ?v 0) do
+        (return 0)
+    )
+        
+    (if (> 2 1) do
+        (return (+ 1 (fun (- ?v 1))))        
+    )
+
+    (return (+ 2 (fun (- ?v 1))))
+
+)[opt-ero]
 ;=>fun
 
-(list-function-in-return fun)
-;=>'()
-
 (attribute-of fun)
-;=>'()
+;=>'(opt-ero)
 
 (print-impl fun)
 ;=>nil
 ;out:
-(defun fun (?x)
-    (do
-        (if (< ?x 0)
+(defun fun (?v)
+    (do[stable]
+        (if (<= ?v 0) do
             (return 0)
         )
-        (if (> (fun (- ?x 1)) 1)
-            (return 1)
-        )
-        (return 2)
+        (return[stable] (+[atom return-type=1 stable] 1 (fun (- ?v 1))))
+        (return[stable] (+[atom return-type=1 stable] 2 (fun (- ?v 1))))
     )
-)
+)[opt-ero]
 
 ;eof
 
-(fun 10)
-;=>2
+(fun 5)
+;=>5
 
 (opt-status)
 ;=>nil
@@ -39,7 +40,7 @@
 ==========================================================================================================================
       Name: Status
 --------------------------------------------------------------------------------------------------------------------------
-       ERO: rebuild=0, compute=0
+       ERO: rebuild=1, compute=4
        CCO: rebuild=0, expr=0, call=0, cache=0, reuse=0
        TCO: rebuild=0, expr=0, call=0, node=0, compute=0, level=0, stack=0
        LCO: rebuild=0, arg=0, pass=0, hit=0

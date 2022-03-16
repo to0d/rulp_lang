@@ -21,16 +21,13 @@
 ;out:
 (defun uniquePaths (m n)
     (do[stable]
-        (if
-            (or (= m 0) (= n 0))
+        (if (or (= m 0) (= n 0))
             (return 0)
         )
-        (if[stable]
-            (< m n)
+        (if[stable] (< m n)
             (return[stable] (cc2[opt-id=0] (uniquePaths n m)))
         )
-        (if
-            (= n 1)
+        (if (= n 1)
             (return 1)
         )
         (return[stable]

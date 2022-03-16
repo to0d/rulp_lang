@@ -31,19 +31,16 @@
 ;out:
 (defun isHappy ((?n int))
     (do[stable]
-        (if
-            (<= ?n 0)
+        (if (<= ?n 0)
             (return false)
         )
-        (if
-            (= ?n 1)
+        (if (= ?n 1)
             (return true)
         )
         (defvar ?n2 0)
         (defvar ?x)
         (loop
-            (if
-                (<= ?n 0)
+            (if (<= ?n 0)
                 (break)
             )
             (setq ?x (% ?n 10))

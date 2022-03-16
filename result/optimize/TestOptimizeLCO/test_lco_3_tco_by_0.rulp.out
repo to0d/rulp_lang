@@ -16,8 +16,7 @@
 ;out:
 (defun fact (?v)
     (do
-        (if
-            (<= ?v -1)
+        (if (<= ?v -1)
             (return -1)
         )
         (cps[opt-id=0] (* ?v (fact (- ?v 1))))

@@ -18,8 +18,7 @@
 ;out:
 (defun fun1 (?v)
     (do[stable]
-        (if
-            (<= ?v 0)
+        (if (<= ?v 0)
             (return 0)
         )
         (return[stable] (cc2[opt-id=0] (max (fun1 (- ?v 1)) 100)))

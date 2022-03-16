@@ -43,18 +43,15 @@
 ;out:
 (defun fun2 (?v)
     (do[stable]
-        (if
-            (<= ?v 0)
+        (if (<= ?v 0)
             (return 0)
         )
-        (if[stable]
-            (<= ?v 10)
+        (if[stable] (<= ?v 10)
             (return[stable]
                 (+[atom return-type=1 stable] ?v (cc2[opt-id=0] (fun2 (- ?v 1))))
             )
         )
-        (if[stable]
-            (<= ?v 100)
+        (if[stable] (<= ?v 100)
             (return[stable]
                 (+[atom return-type=1 stable]
                     (cc2[opt-id=0] (fun2 (- ?v 1)))
@@ -62,8 +59,7 @@
                 )
             )
         )
-        (if[stable]
-            (<= ?v 1000)
+        (if[stable] (<= ?v 1000)
             (return[stable]
                 (+[atom return-type=1 stable]
                     (cc2[opt-id=0] (fun2 (- ?v 1)))

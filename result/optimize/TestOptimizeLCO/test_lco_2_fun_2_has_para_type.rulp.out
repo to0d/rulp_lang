@@ -47,8 +47,7 @@ at (fun1 (fun2) (fun3)) ; main-2
 ;out:
 (defun fun1 ((?x[opt-lco] int) (?y[opt-lco] int))
     (do
-        (if
-            (<= ?x 0)
+        (if (<= ?x 0)
             (return 0)
         )
         (return ?y)

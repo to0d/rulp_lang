@@ -39,15 +39,12 @@ at (fun 4) ; main-2
 ;=>nil
 ;out:
 (defun fun (?x)
-    (if[stable]
-        (> ?x 3)
-        (if[stable]
-            (>[atom stable] (cc2[opt-id=0] (fun (- ?x 1))) 0)
+    (if[stable] (> ?x 3)
+        (if[stable] (>[atom stable] (cc2[opt-id=0] (fun (- ?x 1))) 0)
             (return 1)
             (return 2)
         )
-        (if[stable]
-            (>[atom stable] (cc2[opt-id=0] (fun (+ ?x 1))) 0)
+        (if[stable] (>[atom stable] (cc2[opt-id=0] (fun (+ ?x 1))) 0)
             (return 1)
             (return 2)
         )

@@ -15,8 +15,7 @@
 ;out:
 (defun fun (?v)
     (do[stable]
-        (if
-            (<= ?v 0)
+        (if (<= ?v 0)
             (return 1)
         )
         (return[stable]

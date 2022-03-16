@@ -16,6 +16,7 @@ import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.MathUtil;
@@ -23,6 +24,24 @@ import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorIf extends AbsAtomFactorAdapter implements IRFactor {
+
+	public static boolean isIf1(IRList args) throws RException {
+
+		// (if condition true-expr)
+		return args.size() == 3;
+	}
+
+	public static boolean isIf2(IRList args) throws RException {
+
+		// (if condition true-expr false-expr)
+		return args.size() == 4 && !RulpUtil.isAtom(args.get(2), A_DO);
+	}
+
+	public static boolean isIf3(IRList args) throws RException {
+
+		// (if condition do expr1 expr2 expr3 ...)
+		return args.size() >= 4 && RulpUtil.isAtom(args.get(2), A_DO);
+	}
 
 	public XRFactorIf(String factorName) {
 		super(factorName);
@@ -39,43 +58,44 @@ public class XRFactorIf extends AbsAtomFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRObject condition = interpreter.compute(frame, args.get(1));
+		// (if condition true-expr)
+		if (isIf1(args)) {
 
-		// (if condition do expr1 expr2 expr3 ...)
-		if (RulpUtil.isAtom(args.get(2), A_DO)) {
-
-			if (args.size() < 4) {
-				throw new RException("Invalid parameters: " + args);
+			// condition
+			if (!MathUtil.toBoolean(interpreter.compute(frame, args.get(1)))) {
+				return O_Nil;
 			}
 
-			if (!MathUtil.toBoolean(condition)) {
+			return interpreter.compute(frame, args.get(2));
+		}
+
+		// (if condition true-expr false-expr)
+		if (isIf2(args)) {
+
+			// condition
+			if (!MathUtil.toBoolean(interpreter.compute(frame, args.get(1)))) {
+				return interpreter.compute(frame, args.get(3));
+			}
+
+			return interpreter.compute(frame, args.get(2));
+		}
+
+		// (if condition do expr1 expr2 expr3 ...)
+		if (isIf3(args)) {
+
+			// condition
+			if (!MathUtil.toBoolean(interpreter.compute(frame, args.get(1)))) {
 				return O_Nil;
+			}
+
+			if (args.size() == 4) {
+				return interpreter.compute(frame, args.get(3));
 			}
 
 			return interpreter.compute(frame, RulpUtil.toDoExpr(args.listIterator(3)));
 		}
-		// (if condition true-expr)
-		// (if condition true-expr false-expr)
-		else {
 
-			if (args.size() != 3 && args.size() != 4) {
-				throw new RException("Invalid parameters: " + args);
-			}
-
-			IRObject actionClause = null;
-
-			if (MathUtil.toBoolean(condition)) {
-				actionClause = args.get(2); // trueClause
-			} else {
-				actionClause = args.size() > 3 ? args.get(3) : null; // falseClause
-			}
-
-			if (actionClause == null) {
-				return O_Nil;
-			}
-
-			return interpreter.compute(frame, actionClause);
-		}
+		throw new RException("Invalid parameters: " + args);
 	}
 
 }

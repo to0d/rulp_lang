@@ -38,12 +38,10 @@
 ;out:
 (defun fun1 (?x[opt-lco] ?y[opt-lco])
     (do
-        (if
-            (<= ?x 0)
+        (if (<= ?x 0)
             (return 0)
         )
-        (if
-            (<= ?x 10)
+        (if (<= ?x 10)
             (return ?y)
         )
         (return (* ?y ?y))
