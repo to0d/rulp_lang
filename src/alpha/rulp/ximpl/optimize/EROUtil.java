@@ -1144,6 +1144,7 @@ public class EROUtil {
 			IRObject rst = null;
 			if (RulpUtil.asBoolean(e1).asBoolean()) {
 				rst = rebuildList.get(2);
+
 			} else if (rebuildList.size() > 3) {
 				rst = rebuildList.get(3);
 			}

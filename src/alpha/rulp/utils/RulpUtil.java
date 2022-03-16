@@ -9,99 +9,7 @@
 
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.A_ARRAY;
-import static alpha.rulp.lang.Constant.A_ATOM;
-import static alpha.rulp.lang.Constant.A_BLOB;
-import static alpha.rulp.lang.Constant.A_BOOL;
-import static alpha.rulp.lang.Constant.A_CLASS;
-import static alpha.rulp.lang.Constant.A_CONST;
-import static alpha.rulp.lang.Constant.A_CONSTANT;
-import static alpha.rulp.lang.Constant.A_DO;
-import static alpha.rulp.lang.Constant.A_DOUBLE;
-import static alpha.rulp.lang.Constant.A_EXPRESSION;
-import static alpha.rulp.lang.Constant.A_FACTOR;
-import static alpha.rulp.lang.Constant.A_FINAL;
-import static alpha.rulp.lang.Constant.A_FLOAT;
-import static alpha.rulp.lang.Constant.A_FRAME;
-import static alpha.rulp.lang.Constant.A_FUNCTION;
-import static alpha.rulp.lang.Constant.A_INSTANCE;
-import static alpha.rulp.lang.Constant.A_INTEGER;
-import static alpha.rulp.lang.Constant.A_LAMBDA;
-import static alpha.rulp.lang.Constant.A_LIST;
-import static alpha.rulp.lang.Constant.A_LONG;
-import static alpha.rulp.lang.Constant.A_MACRO;
-import static alpha.rulp.lang.Constant.A_MEMBER;
-import static alpha.rulp.lang.Constant.A_NAMESPACE;
-import static alpha.rulp.lang.Constant.A_NATIVE;
-import static alpha.rulp.lang.Constant.A_NIL;
-import static alpha.rulp.lang.Constant.A_OPT_CCO;
-import static alpha.rulp.lang.Constant.A_OPT_ERO;
-import static alpha.rulp.lang.Constant.A_OPT_ID;
-import static alpha.rulp.lang.Constant.A_OPT_TCO;
-import static alpha.rulp.lang.Constant.A_PATH;
-import static alpha.rulp.lang.Constant.A_PRIVATE;
-import static alpha.rulp.lang.Constant.A_PUBLIC;
-import static alpha.rulp.lang.Constant.A_QUESTION;
-import static alpha.rulp.lang.Constant.A_QUESTION_C;
-import static alpha.rulp.lang.Constant.A_QUESTION_LIST;
-import static alpha.rulp.lang.Constant.A_RETURN_TYPE;
-import static alpha.rulp.lang.Constant.A_RULP_SUFFIX;
-import static alpha.rulp.lang.Constant.A_STABLE;
-import static alpha.rulp.lang.Constant.A_STATIC;
-import static alpha.rulp.lang.Constant.A_STRING;
-import static alpha.rulp.lang.Constant.A_TEMPLATE;
-import static alpha.rulp.lang.Constant.A_THREAD_UNSAFE;
-import static alpha.rulp.lang.Constant.A_TRACE;
-import static alpha.rulp.lang.Constant.A_VAR;
-import static alpha.rulp.lang.Constant.F_COMPUTE;
-import static alpha.rulp.lang.Constant.F_RETURN;
-import static alpha.rulp.lang.Constant.MAX_TOSTRING_LEN;
-import static alpha.rulp.lang.Constant.O_COMPUTE;
-import static alpha.rulp.lang.Constant.O_CONST;
-import static alpha.rulp.lang.Constant.O_EMPTY;
-import static alpha.rulp.lang.Constant.O_False;
-import static alpha.rulp.lang.Constant.O_Final;
-import static alpha.rulp.lang.Constant.O_LAMBDA;
-import static alpha.rulp.lang.Constant.O_New;
-import static alpha.rulp.lang.Constant.O_Nil;
-import static alpha.rulp.lang.Constant.O_OPT_CCO;
-import static alpha.rulp.lang.Constant.O_OPT_ERO;
-import static alpha.rulp.lang.Constant.O_OPT_ID;
-import static alpha.rulp.lang.Constant.O_OPT_TCO;
-import static alpha.rulp.lang.Constant.O_Private;
-import static alpha.rulp.lang.Constant.O_Public;
-import static alpha.rulp.lang.Constant.O_QUESTION_LIST;
-import static alpha.rulp.lang.Constant.O_RETURN;
-import static alpha.rulp.lang.Constant.O_RETURN_TYPE;
-import static alpha.rulp.lang.Constant.O_STABLE;
-import static alpha.rulp.lang.Constant.O_Static;
-import static alpha.rulp.lang.Constant.O_THREAD_UNSAFE;
-import static alpha.rulp.lang.Constant.O_True;
-import static alpha.rulp.lang.Constant.P_FINAL;
-import static alpha.rulp.lang.Constant.P_INHERIT;
-import static alpha.rulp.lang.Constant.P_STATIC;
-import static alpha.rulp.lang.Constant.T_Array;
-import static alpha.rulp.lang.Constant.T_Atom;
-import static alpha.rulp.lang.Constant.T_Blob;
-import static alpha.rulp.lang.Constant.T_Bool;
-import static alpha.rulp.lang.Constant.T_Class;
-import static alpha.rulp.lang.Constant.T_Constant;
-import static alpha.rulp.lang.Constant.T_Double;
-import static alpha.rulp.lang.Constant.T_Expr;
-import static alpha.rulp.lang.Constant.T_Factor;
-import static alpha.rulp.lang.Constant.T_Float;
-import static alpha.rulp.lang.Constant.T_Frame;
-import static alpha.rulp.lang.Constant.T_Func;
-import static alpha.rulp.lang.Constant.T_Instance;
-import static alpha.rulp.lang.Constant.T_Int;
-import static alpha.rulp.lang.Constant.T_List;
-import static alpha.rulp.lang.Constant.T_Long;
-import static alpha.rulp.lang.Constant.T_Macro;
-import static alpha.rulp.lang.Constant.T_Member;
-import static alpha.rulp.lang.Constant.T_Native;
-import static alpha.rulp.lang.Constant.T_String;
-import static alpha.rulp.lang.Constant.T_Template;
-import static alpha.rulp.lang.Constant.T_Var;
+import static alpha.rulp.lang.Constant.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -137,6 +45,7 @@ import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RAccessType;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RRelationalOperator;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRAction;
 import alpha.rulp.runtime.IRCallable;
@@ -1436,6 +1345,10 @@ public class RulpUtil {
 		return var.equals(A_QUESTION);
 	}
 
+	public static boolean isAnyVar(IRObject obj) {
+		return obj.getType() == RType.ATOM && ((IRAtom) obj).getName().equals(A_QUESTION);
+	}
+
 	public static boolean isAtom(IRObject obj) {
 		return obj.getType() == RType.ATOM;
 	}
@@ -1505,6 +1418,10 @@ public class RulpUtil {
 		return (P_FINAL & mbr.getProperty()) != 0;
 	}
 
+	public static boolean isPropertyInherit(IRMember mbr) {
+		return (P_INHERIT & mbr.getProperty()) != 0;
+	}
+
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
 //
 //		IRObject nsObj = frame.getObject(A_USING_NS);
@@ -1514,10 +1431,6 @@ public class RulpUtil {
 //
 //		return RulpUtil.asSubject(nsObj);
 //	}
-
-	public static boolean isPropertyInherit(IRMember mbr) {
-		return (P_INHERIT & mbr.getProperty()) != 0;
-	}
 
 	public static boolean isPropertyStatic(IRMember mbr) {
 		return (P_STATIC & mbr.getProperty()) != 0;
@@ -1578,42 +1491,6 @@ public class RulpUtil {
 	public static boolean isVarAtom(IRObject obj) {
 		return obj.getType() == RType.ATOM && isVarName(((IRAtom) obj).getName());
 	}
-
-//	public static boolean isPureAtomPairList(IRObject obj) throws RException {
-//
-//		RType type = obj.getType();
-//		if (type != RType.LIST && type != RType.EXPR) {
-//			return false;
-//		}
-//
-//		IRIterator<? extends IRObject> iter = ((IRList) obj).iterator();
-//		while (iter.hasNext()) {
-//
-//			IRObject element = iter.next();
-//
-//			if (element.getType() == RType.ATOM) {
-//				continue;
-//			} else {
-//
-//			}
-//
-//			if (!isPureAtomList(element) || ((IRList) element).size() != 2) {
-//				return false;
-//			}
-//		}
-//
-//		return true;
-//	}
-
-//	public static boolean isQuote(IRObject obj) {
-//
-//		if (obj.getType() == RType.ATOM) {
-//			String name = ((IRAtom) obj).getName();
-//			return name.equals("'") || name.equalsIgnoreCase("quote");
-//		} else {
-//			return false;
-//		}
-//	}
 
 	public static boolean isVarName(String var) {
 		return var.length() > 1 && var.charAt(0) == A_QUESTION_C;
@@ -1678,6 +1555,42 @@ public class RulpUtil {
 
 		return null;
 	}
+
+//	public static boolean isPureAtomPairList(IRObject obj) throws RException {
+//
+//		RType type = obj.getType();
+//		if (type != RType.LIST && type != RType.EXPR) {
+//			return false;
+//		}
+//
+//		IRIterator<? extends IRObject> iter = ((IRList) obj).iterator();
+//		while (iter.hasNext()) {
+//
+//			IRObject element = iter.next();
+//
+//			if (element.getType() == RType.ATOM) {
+//				continue;
+//			} else {
+//
+//			}
+//
+//			if (!isPureAtomList(element) || ((IRList) element).size() != 2) {
+//				return false;
+//			}
+//		}
+//
+//		return true;
+//	}
+
+//	public static boolean isQuote(IRObject obj) {
+//
+//		if (obj.getType() == RType.ATOM) {
+//			String name = ((IRAtom) obj).getName();
+//			return name.equals("'") || name.equalsIgnoreCase("quote");
+//		} else {
+//			return false;
+//		}
+//	}
 
 	public static boolean matchParaType(IRObject paraValue, IRAtom paraTypeAtom) throws RException {
 
@@ -2201,6 +2114,18 @@ public class RulpUtil {
 		return RulpFactory.createExpression(newExpr);
 	}
 
+	public static ArrayList<IRExpr> toExprList(IRList list) throws RException {
+
+		ArrayList<IRExpr> array = new ArrayList<>();
+
+		IRIterator<? extends IRObject> iter = list.iterator();
+		while (iter.hasNext()) {
+			array.add(RulpUtil.asExpression(iter.next()));
+		}
+
+		return array;
+	}
+
 	public static IRObject[] toFixArray(Collection<? extends IRObject> list) {
 
 		IRObject[] arr = new IRObject[list.size()];
@@ -2210,6 +2135,31 @@ public class RulpUtil {
 		}
 
 		return arr;
+	}
+
+	static IRExpr toIfExpr(IRExpr condExpr, IRExpr... doExprs) throws RException {
+
+		ArrayList<IRObject> exprList = new ArrayList<>();
+		exprList.add(RulpFactory.createAtom(F_IF));
+		exprList.add(condExpr);
+		exprList.add(RulpFactory.createAtom(A_DO));
+
+		for (IRExpr doExpr : doExprs) {
+			exprList.add(doExpr);
+		}
+
+		return RulpFactory.createExpression(exprList);
+	}
+
+	static IRExpr toIfExpr(IRExpr condExpr, IRList doExprs) throws RException {
+
+		ArrayList<IRObject> exprList = new ArrayList<>();
+		exprList.add(RulpFactory.createAtom(F_IF));
+		exprList.add(condExpr);
+		exprList.add(RulpFactory.createAtom(A_DO));
+		exprList.addAll(toExprList(doExprs));
+
+		return RulpFactory.createExpression(exprList);
 	}
 
 	public static IRMap toImplMap(IRInstance instance) throws RException {
@@ -2226,6 +2176,21 @@ public class RulpUtil {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	public static <T> List<T> toList(T... objs) {
+
+		if (objs == null || objs.length == 0) {
+			return Collections.emptyList();
+		}
+
+		List<T> list = new ArrayList<T>();
+		for (T o : objs) {
+			list.add(o);
+		}
+
+		return list;
+	}
+
 	public static long toLong(IRObject a) throws RException {
 
 		switch (a.getType()) {
@@ -2236,6 +2201,34 @@ public class RulpUtil {
 
 		default:
 			throw new RException(String.format("Not support type: %s", a.toString()));
+		}
+	}
+
+	public static RRelationalOperator toRelationalOperator(String name) {
+
+		switch (name) {
+		case F_EQUAL:
+		case F_O_EQ:
+			return RRelationalOperator.EQ;
+
+		case F_NOT_EQUAL:
+		case F_O_NE:
+			return RRelationalOperator.NE;
+
+		case F_O_GE:
+			return RRelationalOperator.GE;
+
+		case F_O_GT:
+			return RRelationalOperator.GT;
+
+		case F_O_LE:
+			return RRelationalOperator.LE;
+
+		case F_O_LT:
+			return RRelationalOperator.LT;
+
+		default:
+			return null;
 		}
 	}
 

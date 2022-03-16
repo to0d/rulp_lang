@@ -117,9 +117,9 @@ public interface Constant {
 
 	String A_OPT_LCO = "opt-lco";
 
-//	String A_NULL = "null";
-
 	String A_OPT_TCO = "opt-tco";
+
+//	String A_NULL = "null";
 
 	String A_PARENT = "parent";
 
@@ -244,10 +244,10 @@ public interface Constant {
 	String F_CPS = "cps";
 
 	String F_DATE = "date";
-	
-	String F_DAY_OF_WEEK = "day-of-week";
 
 	String F_DAY_NUMBER = "day-number";
+
+	String F_DAY_OF_WEEK = "day-of-week";
 
 	String F_DEF_CONST = "defconst";
 
@@ -329,9 +329,9 @@ public interface Constant {
 
 	String F_LOOP = "loop";
 
-//	String F_LOAD_JAR = "load-jar";
-
 	String F_MAKE_ARRAY = "make-array";
+
+//	String F_LOAD_JAR = "load-jar";
 
 	String F_MAKE_BLOB = "make-blob";
 
@@ -348,6 +348,8 @@ public interface Constant {
 	String F_NAME_OF = "name-of";
 
 	String F_NEW = "new";
+
+	String F_NOT_EQUAL = "not-equal";
 
 	String F_O_ADD = "+";
 
@@ -410,12 +412,12 @@ public interface Constant {
 	String F_PROPERTY_OF = "property-of";
 
 	String F_RANDOM = "random";
-	
-	String F_RANDOM_INT = "random-int";
-	
-	String F_RANDOM_FLOAT = "random-float";
-	
+
 	String F_RANDOM_DOUBLE = "random-double";
+
+	String F_RANDOM_FLOAT = "random-float";
+
+	String F_RANDOM_INT = "random-int";
 
 	String F_Reduct = "reduct";
 
