@@ -1,0 +1,26 @@
+
+(defun fun (?v)
+    (loop
+        (if (2 > 1)
+            (return ?x)
+        )
+    )
+
+    (return 2)
+)[opt-ero]
+;=>
+
+(print-impl fun)
+;=>
+
+(attribute-of fun)
+;=>'(opt-ero)
+
+(fun 5)
+;=>2
+
+(opt-status)
+;=>
+
+(_ginfo)
+;=>

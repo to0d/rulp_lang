@@ -858,6 +858,10 @@ public class EROUtil {
 		return update == 0 ? -1 : endIndex;
 	}
 
+	private static int _getTypePriority(RType type) {
+		return typePriority[type.getIndex()];
+	}
+
 	static boolean _hasBreakExpr(IRObject obj) throws RException {
 
 		if (obj == null) {
@@ -1162,6 +1166,8 @@ public class EROUtil {
 						return OptUtil.asExpr(rebuildList.get(3));
 					}
 
+					// remove empty or useless expression
+
 					return RulpUtil.toDoExpr(rebuildList.subList(3, rebuildList.size()));
 				}
 
@@ -1184,6 +1190,12 @@ public class EROUtil {
 
 			}
 
+		} else {
+
+			// (if condition do expr1 expr2 expr3 ...)
+			if (rebuildList.size() >= 4 && RulpUtil.isAtom(rebuildList.get(2), A_DO)) {
+
+			}
 		}
 
 		return null;
@@ -1316,7 +1328,7 @@ public class EROUtil {
 
 		Collections.sort(uniqList, (e1, e2) -> {
 
-			int d = getTypePriority(e1.element.getType()) - getTypePriority(e2.element.getType());
+			int d = _getTypePriority(e1.element.getType()) - _getTypePriority(e2.element.getType());
 			if (d == 0) {
 				d = e1.exprLevel - e2.exprLevel;
 			}
@@ -1347,9 +1359,9 @@ public class EROUtil {
 	private static int _removeEmptyExpr(List<IRObject> exprList, int fromIndex) throws RException {
 
 		int size = exprList.size();
-		int pos = 1;
+		int pos = fromIndex;
 
-		for (int i = 1; i < size; ++i) {
+		for (int i = fromIndex; i < size; ++i) {
 
 			IRObject ei = exprList.get(i);
 
@@ -1369,7 +1381,7 @@ public class EROUtil {
 		return pos;
 	}
 
-	static <T> void _set(List<T> list, int index, T obj) {
+	private static <T> void _set(List<T> list, int index, T obj) {
 
 		if (index >= list.size()) {
 			for (int i = list.size(); i <= index; ++i) {
@@ -1390,10 +1402,6 @@ public class EROUtil {
 
 	public static int getRebuildCount() {
 		return rebuildCount.get();
-	}
-
-	private static int getTypePriority(RType type) {
-		return typePriority[type.getIndex()];
 	}
 
 	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value

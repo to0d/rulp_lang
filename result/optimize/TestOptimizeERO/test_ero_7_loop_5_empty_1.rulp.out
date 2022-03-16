@@ -1,0 +1,30 @@
+(defun fun (?v)
+    (loop for ?x from 1 to 3 do 
+        (if (2 > 1)
+            (return ?x)
+        )
+    )
+
+    (return 2)
+)[opt-ero]
+;=>fun
+
+(print-impl fun)
+;=>nil
+;out:
+(defun fun (?v)
+    (do
+        (loop for ?x from 1 to 3 do
+            (if (2 > 1)
+                (return ?x)
+            )
+        )
+        (return 2)
+    )
+)
+
+;eof
+
+(attribute-of fun)
+;=>'()
+

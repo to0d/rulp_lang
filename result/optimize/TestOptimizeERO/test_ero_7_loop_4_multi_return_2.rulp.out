@@ -1,0 +1,11 @@
+(defun fun (?v)
+    (loop 
+        (return ?x)
+        (return ?x)
+    )
+)[opt-ero]
+;=>fun
+
+(attribute-of fun)
+;=>'()
+

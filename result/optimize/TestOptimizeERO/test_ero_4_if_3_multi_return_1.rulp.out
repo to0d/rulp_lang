@@ -1,0 +1,16 @@
+(defun fun (?v) 
+
+    (if (<= ?v 0) do
+        (return 0)
+        (return 0)
+    )
+        
+    (return 1)
+    (return 2)
+
+)[opt-ero]
+;=>fun
+
+(attribute-of fun)
+;=>'()
+
