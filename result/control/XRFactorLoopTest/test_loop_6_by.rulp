@@ -1,0 +1,10 @@
+(loop for x from 1 to 3 by 1 do 
+    (print x ","))
+;=>
+
+(loop for x from 3 to 1 by -1 do 
+    (print x ","))
+;=>
+
+
+    

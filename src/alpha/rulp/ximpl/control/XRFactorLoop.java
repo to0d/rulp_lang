@@ -46,6 +46,26 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 		return args.get(6);
 	}
 
+	public static boolean isLoop1(IRList args) throws RException {
+
+		// (loop for x in '(1 2 3) do ...)
+		return args.size() >= 7 && RulpUtil.isAtom(args.get(1), F_FOR) && RulpUtil.isAtom(args.get(2))
+				&& RulpUtil.isAtom(args.get(3), F_IN) && RulpUtil.isAtom(args.get(5), A_DO);
+
+	}
+
+	public static boolean isLoop2(IRList args) throws RException {
+
+		// (loop for x from 1 to 3 do ...)
+		return args.size() >= 9 && RulpUtil.isAtom(args.get(1), F_FOR) && RulpUtil.isAtom(args.get(2))
+				&& RulpUtil.isAtom(args.get(3), A_FROM) && RulpUtil.isAtom(args.get(5), F_TO)
+				&& RulpUtil.isAtom(args.get(7), A_DO);
+	}
+
+	public static boolean isLoop3(IRList args) throws RException {
+		return args.size() == 1 || args.get(1).getType() == RType.EXPR;
+	}
+
 	static void loop1(IRList args, IRInterpreter interpreter, IRFrame loopFrame) throws RException {
 
 		String indexName = RulpUtil.asAtom(args.get(2)).getName();
@@ -103,6 +123,7 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 					if (expr.getType() != RType.EXPR) {
 						throw new RException("Invalid expr in loop: " + expr);
 					}
+
 					interpreter.compute(loopDoFrame, expr);
 				}
 
@@ -167,26 +188,6 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorLoop(String factorName) {
 		super(factorName);
-	}
-
-	public static boolean isLoop2(IRList args) throws RException {
-
-		// (loop for x from 1 to 3 do ...)
-		return args.size() >= 9 && RulpUtil.isAtom(args.get(1), F_FOR) && RulpUtil.isAtom(args.get(2))
-				&& RulpUtil.isAtom(args.get(3), A_FROM) && RulpUtil.isAtom(args.get(5), F_TO)
-				&& RulpUtil.isAtom(args.get(7), A_DO);
-	}
-
-	public static boolean isLoop1(IRList args) throws RException {
-
-		// (loop for x in '(1 2 3) do ...)
-		return args.size() >= 7 && RulpUtil.isAtom(args.get(1), F_FOR) && RulpUtil.isAtom(args.get(2))
-				&& RulpUtil.isAtom(args.get(3), F_IN) && RulpUtil.isAtom(args.get(5), A_DO);
-
-	}
-
-	public static boolean isLoop3(IRList args) throws RException {
-		return args.size() == 1 || args.get(1).getType() == RType.EXPR;
 	}
 
 	@Override

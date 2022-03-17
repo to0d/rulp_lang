@@ -1,0 +1,7 @@
+(loop for x from 1 to 3 by 1 do 
+    (print x ","))
+;err:
+Invalid loop expr: (loop for x from 1 to 3 by 1 do (print x ","))
+at (loop for x from 1 to 3 by 1 do (print x ",")) ; main-2
+;eof
+

@@ -23,6 +23,8 @@ public interface Constant {
 
 	String A_BOOL = "bool";
 
+	String A_By = "by";
+
 	String A_CATCH = "catch";
 
 	String A_CLASS = "class";

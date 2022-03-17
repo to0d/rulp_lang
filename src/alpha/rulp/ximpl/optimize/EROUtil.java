@@ -1242,6 +1242,15 @@ public class EROUtil {
 					return RuntimeUtil.rebuild(doExpr, replaceMap);
 				}
 			}
+
+//			List<IRObject> doActions = new ArrayList<>();
+//			RulpUtil.addAll(doActions, XRFactorLoop.getLoop2DoList(expr));
+//			int pos = _removeEmptyExpr(doActions, 0);
+//			if (pos == 0) {
+//				return OptUtil.asExpr(null);
+//			}
+//			
+			
 		}
 
 		// Check infinite loop: (loop a)
