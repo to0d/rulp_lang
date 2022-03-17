@@ -2107,6 +2107,10 @@ public class RulpUtil {
 
 	public static IRExpr toDoExpr(List<? extends IRObject> exprList) throws RException {
 
+		if (exprList.size() == 1) {
+			return RulpUtil.asExpression(exprList.get(0));
+		}
+
 		ArrayList<IRObject> newExpr = new ArrayList<>();
 		newExpr.add(RulpFactory.createAtom(A_DO));
 

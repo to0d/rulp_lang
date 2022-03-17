@@ -1223,15 +1223,16 @@ public class EROUtil {
 				// from 1 to 1 ==> (do action)
 				if (fromIndex == toIndex) {
 
-					ArrayList<IRObject> doActions = new ArrayList<>();
+					List<IRObject> doActions = new ArrayList<>();
 					RulpUtil.addAll(doActions, XRFactorLoop.getLoop2DoList(expr));
 
-					if (doActions.size() == 0) {
+					int pos = _removeEmptyExpr(doActions, 0);
+					if (pos == 0) {
 						return OptUtil.asExpr(null);
 					}
 
-					if (doActions.size() == 1) {
-						return OptUtil.asExpr(doActions.get(0));
+					if (pos < doActions.size()) {
+						doActions = doActions.subList(0, pos);
 					}
 
 					return RulpUtil.toDoExpr(doActions);
