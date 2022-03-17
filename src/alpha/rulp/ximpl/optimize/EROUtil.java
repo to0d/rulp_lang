@@ -40,6 +40,7 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.MathUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.control.XRFactorCase;
 import alpha.rulp.ximpl.control.XRFactorLoop;
 
@@ -1235,7 +1236,10 @@ public class EROUtil {
 						doActions = doActions.subList(0, pos);
 					}
 
-					return RulpUtil.toDoExpr(doActions);
+					IRExpr doExpr = RulpUtil.toDoExpr(doActions);
+					Map<String, IRObject> replaceMap = new HashMap<>();
+					replaceMap.put(RulpUtil.asAtom(expr.get(2)).getName(), fromObj);
+					return RuntimeUtil.rebuild(doExpr, replaceMap);
 				}
 			}
 		}
