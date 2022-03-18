@@ -1,0 +1,28 @@
+(sort {})
+;=>
+
+(sort {b, c, a})
+;=>
+
+(defvar ?arr1 {b, c, a})
+;=>
+
+(sort ?arr1)
+;=>
+
+(print ?arr1)
+;=>
+
+(defvar ?arr2 (make-array))
+;=>
+
+(add ?arr2 "c")
+(add ?arr2 "b")
+(add ?arr2 "a")
+;=>
+
+(sort ?arr2)
+;=>
+
+(print ?arr2)
+;=>

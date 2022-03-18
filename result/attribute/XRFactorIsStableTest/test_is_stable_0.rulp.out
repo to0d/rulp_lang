@@ -123,7 +123,7 @@ obj=seta                , type=factor
 obj=setq                , type=factor
 obj=size-of-array       , type=factor
 obj=size-of-list        , type=factor
-obj=sort                , type=factor
+obj=sort-list           , type=factor
 obj=static              , type=atom
 obj=str-char-at         , type=factor
 obj=str-end-with        , type=factor

@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      245
+           Interpreter call id:      249
     Interpreter call level/max:        4       10
                Frame max level:        5
                   Frame max id:        7
@@ -25,63 +25,63 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      271
+    factor:      275
       func:        2
   template:        2
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=245, row=28, column=62(4), value-max=5, value-unit=2^x
+Callable stats info: callId=249, row=28, column=63(4), value-max=5, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         33333333333333333333333333333333333333333333334433333333343455 max=16, unit=2^x
+   Frame    RType  Count  Ref Object                         333333333333333333333333333333333333333333333344333333333343455 max=16, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor    179    0 add-attribute                   1333333333333333333333333333333333333333333332               
-    root   factor     39    0 defun                                                                         133321333342   
-    root   factor      9    0 search-frame-of                                                                          2231
-    root   factor      8    0 defvar                                                                       23         1   2
-    root   factor      6    0 alias                          33                                                            
-    root   factor      5    0 make-list                                                                    23              
-    root   factor      3    0 deftemplate                                                                        3         
-    root   factor      3    0 defmacro                                                                          2     1    
-  system template      2    1 use                                                                                       11 
-    root   factor      2    0 print                                                                                      2 
-    root   factor      2    0 do                                                                                         11
-    root   factor      2    0 add_search_frame                                                                          11 
-    root   factor      1    0 value-of                                                                                  1  
-    root   factor      1    0 str-substr                                                                                  1
-    root   factor      1    0 str-last-index-of                                                                           1
-    root   factor      1    0 setq                                                                                        1
-    main    macro      1    1 script_out                                                                                  1
-    root   factor      1    0 return                                                                                      1
-    root   factor      1    0 print-global-info                                                                           1
-    root   factor      1    0 out-to-file                                                                                 1
-    root   factor      1    0 new                                                                                       1  
-    root   factor      1    0 load                                                                                    1    
-    root   factor      1    0 if                                                                                          1
-    root   factor      1    0 frame-of                                                                                  1  
-    main     func      1    1 (file-prename string)                                                                       1
-    main funcList      1    2 _ginfo                                                                                      1
-    root   factor      1    0 +                                                                                           1
-    root   factor      1    0 !=                                                                                          1
+    root   factor    179    0 add-attribute                   1333333333333333333333333333333333333333333332                
+    root   factor     43    0 defun                                                                         1333213333342   
+    root   factor      9    0 search-frame-of                                                                           2231
+    root   factor      8    0 defvar                                                                       23          1   2
+    root   factor      6    0 alias                          33                                                             
+    root   factor      5    0 make-list                                                                    23               
+    root   factor      3    0 deftemplate                                                                        3          
+    root   factor      3    0 defmacro                                                                          2      1    
+  system template      2    1 use                                                                                        11 
+    root   factor      2    0 print                                                                                       2 
+    root   factor      2    0 do                                                                                          11
+    root   factor      2    0 add_search_frame                                                                           11 
+    root   factor      1    0 value-of                                                                                   1  
+    root   factor      1    0 str-substr                                                                                   1
+    root   factor      1    0 str-last-index-of                                                                            1
+    root   factor      1    0 setq                                                                                         1
+    main    macro      1    1 script_out                                                                                   1
+    root   factor      1    0 return                                                                                       1
+    root   factor      1    0 print-global-info                                                                            1
+    root   factor      1    0 out-to-file                                                                                  1
+    root   factor      1    0 new                                                                                        1  
+    root   factor      1    0 load                                                                                     1    
+    root   factor      1    0 if                                                                                           1
+    root   factor      1    0 frame-of                                                                                   1  
+    main     func      1    1 (file-prename string)                                                                        1
+    main funcList      1    2 _ginfo                                                                                       1
+    root   factor      1    0 +                                                                                            1
+    root   factor      1    0 !=                                                                                           1
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1097            0         1097
+        atom:         1211            0         1211
       string:           29            0           29
         list:           16            4           12
-        expr:          454            3          451
+        expr:          514            3          511
          var:           22            7           15
-        func:           52            0           52
+        func:           57            0           57
     template:            1            0            1
        macro:            3            0            3
     instance:            1            0            1
       member:            1            0            1
        frame:            7            5            2
  interpreter:            1            0
-  frameEntry:          254            0
+  frameEntry:          255            0
       lambda:            0            0
 ==========================================================================================================================
 

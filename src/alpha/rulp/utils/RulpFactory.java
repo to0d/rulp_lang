@@ -765,7 +765,7 @@ public final class RulpFactory {
 		RulpUtil.addFrameObject(rootFrame, new XRFactorJoin(F_JOIN));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorUnion(F_UNION));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorUniq(F_UNIQ));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSort(F_SORT));
+		RulpUtil.addFrameObject(rootFrame, new XRFactorSort(F_SORT_LIST));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorReverse(F_REVERSE));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorGetOfArray(F_GET_OF_ARRAY));
 		RulpUtil.addFrameObject(rootFrame, new XRFactorToNamedList(F_TO_NAMED_LIST));

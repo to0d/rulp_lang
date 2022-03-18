@@ -119,7 +119,7 @@
 (add-attribute setq                  stable)
 (add-attribute size-of-array         stable)
 (add-attribute size-of-list          stable)
-(add-attribute sort                  stable)
+(add-attribute sort-list             stable)
 (add-attribute str-char-at           stable)
 (add-attribute str-end-with          stable)
 (add-attribute str-equal             stable)
@@ -272,3 +272,50 @@
 (defun get ((?l list) (?i int)) (return (get-of-list ?l ?i)))
 (defun get ((?arr array) (?i1 int)) (return (get-of-array ?arr ?i1)))
 (defun get ((?arr array) (?i1 int) (?i2 int)) (return (get-of-array ?arr ?i1 ?i2)))
+
+(defun sort ((?l list)) (return (sort-list ?l)))
+(defun sort ((?l list) (?cmp func)) (return (sort-list ?l ?cmp)))
+
+(defun sort ((?arr array)) 
+
+    (defvar ?size (size-of ?arr))
+    (if (<= ?size 1)
+        (return ?arr)
+    )
+
+    (defvar ?list (to-list ?arr))
+    (setq ?list (sort-list ?list))
+
+    (if (is-const $(value-of ?arr))
+        (return (to-array ?list))
+    )
+    
+    (defvar ?index 0)
+    (loop for ?i from 0 to (- ?size 1) do
+        (seta ?arr ?i (get ?list ?i))
+    )
+    
+    (return ?arr)
+)
+
+(defun sort ((?arr array) (?cmp func))
+
+    (defvar ?size (size-of ?arr))
+    (if (<= ?size 1)
+        (return ?arr)
+    )
+
+    (defvar ?list (to-list ?arr))
+    (setq ?list (sort-list ?list ?cmp))
+
+    (if (is-const $(value-of ?arr))
+        (return (to-array ?list))
+    )
+    
+    (defvar ?index 0)
+    (loop for ?i from 0 to (- ?size 1) do
+        (seta ?arr ?i (get ?list ?i))
+    )
+    
+    (return ?arr)    
+)

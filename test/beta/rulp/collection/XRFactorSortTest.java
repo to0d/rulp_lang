@@ -27,6 +27,13 @@ class XRFactorSortTest extends RulpTestBase {
 
 		_setup();
 		_run_script();
+	}
+	
+	@Test
+	void test_sort_4_array() {
 
+		_setup();
+		_run_script();
+		
 	}
 }

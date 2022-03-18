@@ -1,0 +1,35 @@
+(sort {})
+;=>{}
+
+(sort {b, c, a})
+;=>{a,b,c}
+
+(defvar ?arr1 {b, c, a})
+;=>&?arr1
+
+(sort ?arr1)
+;=>{a,b,c}
+
+(print ?arr1)
+;=>nil
+;out:
+{b,c,a}
+;eof
+
+(defvar ?arr2 (make-array))
+;=>&?arr2
+
+(add ?arr2 "c")
+(add ?arr2 "b")
+(add ?arr2 "a")
+;=>{"c","b","a"} {"c","b","a"} {"c","b","a"}
+
+(sort ?arr2)
+;=>{"a","b","c"}
+
+(print ?arr2)
+;=>nil
+;out:
+{a,b,c}
+;eof
+

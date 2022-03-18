@@ -1,7 +1,12 @@
-id=1, name=system, lvl=1, ref=0/0, entry=22, pid=0(root), subject=system
+id=1, name=system, lvl=1, ref=0/0, entry=23, pid=0(root), subject=system
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
+sort                 : -224     1        1    funcList   '((sort array func) (sort array) (sort list func) (sort list)) : frame=null, type=list
+                                         1    func       (sort list) : frame=frame@system
+                                         1    func       (sort list func) : frame=frame@system
+                                         1    func       (sort array) : frame=frame@system
+                                         1    func       (sort array func) : frame=frame@system
 get                  : -223     1        1    funcList   '((get array int int) (get array int) (get list int)) : frame=null, type=list
                                          1    func       (get list int) : frame=frame@system
                                          1    func       (get array int) : frame=frame@system

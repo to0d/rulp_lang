@@ -158,7 +158,7 @@ obj=setq                , type=factor
 obj=size-of-array       , type=factor
 obj=size-of-list        , type=factor
 obj=sleep               , type=factor
-obj=sort                , type=factor
+obj=sort-list           , type=factor
 obj=static              , type=atom
 obj=stmt-count-of       , type=factor
 obj=str-char-at         , type=factor

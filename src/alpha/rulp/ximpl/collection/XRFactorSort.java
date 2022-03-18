@@ -81,6 +81,7 @@ public class XRFactorSort extends AbsAtomFactorAdapter implements IRFactor {
 		IRFunction cmpFunc = RulpUtil.asFunction(interpreter.compute(frame, args.get(2)));
 		IRFrame sortFrame = RulpFactory.createFrame(frame, F_SORT);
 		RulpUtil.incRef(sortFrame);
+
 		try {
 
 			boolean needSort = false;

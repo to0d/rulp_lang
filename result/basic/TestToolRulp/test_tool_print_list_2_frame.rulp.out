@@ -154,7 +154,7 @@ root::setq
 root::size-of-array
 root::size-of-list
 root::sleep
-root::sort
+root::sort-list
 root::static
 root::stmt-count-of
 root::str-char-at
@@ -236,6 +236,7 @@ system::length-of
 system::println
 system::root
 system::size-of
+system::sort
 system::system
 system::to-array
 system::to-list

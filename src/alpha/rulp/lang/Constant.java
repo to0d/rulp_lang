@@ -454,6 +454,8 @@ public interface Constant {
 	String F_SLEEP = "sleep";
 
 	String F_SORT = "sort";
+	
+	String F_SORT_LIST = "sort-list";
 
 	String F_STMT_COUNT_OF = "stmt-count-of";
 
