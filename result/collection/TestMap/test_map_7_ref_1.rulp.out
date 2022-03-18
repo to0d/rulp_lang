@@ -1,0 +1,34 @@
+(load map)
+;=>nil
+
+(defclass class1
+    (defvar ?m_key)
+    (defvar ?m_count)
+    (defun init ((?key string))
+        (setq ?m_key ?key)
+        (setq ?m_count 0)
+    )
+    (defun inc () (++ ?m_count))
+    (defun to_string () (return (str-format "obj: key=%s, count=%d" ?m_key ?m_count)))
+)
+;=>class1
+
+(defvar ?map1 (new map))
+;=>&?map1
+
+(foreach (?key '("a" "b" "a"))
+    (defvar ?obj (?map1::get ?key))
+    (if (= nil ?obj) do
+        (setq ?obj (new class1 '(?key)))
+        (?map1::put ?key ?obj)
+    )
+    (?obj::inc)
+)
+;err:
+Can't incRef: class1@un2, ref=-1
+at (return (map::_map_get ?impl ?k)) ; _$fun$_get-10
+at (?map1::get ?key) ; do-7
+at (defvar ?obj (?map1::get ?key)) ; do-7
+at (foreach (?key '("a" "b" "a")) (defvar ?obj (?map1::get ?key)) (if (= nil ?ob... ; main-2
+;eof
+

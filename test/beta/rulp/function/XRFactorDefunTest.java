@@ -138,7 +138,7 @@ class XRFactorDefunTest extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
-	
+
 	@Test
 	void test_fun_6_extend_body() {
 		_setup();
@@ -150,10 +150,17 @@ class XRFactorDefunTest extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
-	
+
 	@Test
 	void test_fun_8_unmatch_atom_to_obj() {
 		_setup();
 		_run_script();
+	}
+
+	@Test
+	void test_fun_9_default_para_1() {
+		_setup();
+		_run_script();
+		_gInfo();
 	}
 }

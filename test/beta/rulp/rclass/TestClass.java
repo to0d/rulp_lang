@@ -157,4 +157,11 @@ public class TestClass extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	public void test_class_g_default_para_1() {
+		_setup();
+		_run_script();
+		_gInfo();
+	}
 }

@@ -1,0 +1,34 @@
+(load map)
+;=>
+
+(defclass class1
+    (defvar ?m_key)
+    (defvar ?m_count)
+    (defun init ((?key string))
+        (setq ?m_key ?key)
+        (setq ?m_count 0)
+    )
+    (defun inc () (++ ?m_count))
+    (defun to_string () (return (str-format "obj: key=%s, count=%d" ?m_key ?m_count)))
+)
+;=>
+
+(defvar ?map1 (new map))
+;=>
+
+(foreach (?key '("a" "b" "a"))
+    (defvar ?obj (?map1::get ?key))
+    (if (= nil ?obj) do
+        (setq ?obj (new class1 '(?key)))
+        (?map1::put ?key ?obj)
+    )
+    (?obj::inc)
+)
+;=>
+
+
+(size-of map1)
+;=>
+
+(:: (?map1::get "a") to_string)
+;=>

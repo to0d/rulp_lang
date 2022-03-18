@@ -74,4 +74,11 @@ public class TestMap extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+
+	@Test
+	void test_map_7_ref_1() {
+
+		_setup();
+		_run_script();
+	}
 }
