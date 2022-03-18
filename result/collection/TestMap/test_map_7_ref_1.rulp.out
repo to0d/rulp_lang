@@ -24,11 +24,14 @@
     )
     (?obj::inc)
 )
-;err:
-Can't incRef: class1@un2, ref=-1
-at (return (map::_map_get ?impl ?k)) ; _$fun$_get-10
-at (?map1::get ?key) ; do-7
-at (defvar ?obj (?map1::get ?key)) ; do-7
-at (foreach (?key '("a" "b" "a")) (defvar ?obj (?map1::get ?key)) (if (= nil ?ob... ; main-2
-;eof
+;=>'(nil nil nil)
+
+(size-of ?map1)
+;=>2
+
+(defvar ?obj (?map1::get "a"))
+;=>&?obj
+
+(?obj::to_string)
+;=>"obj: key=a, count=2"
 

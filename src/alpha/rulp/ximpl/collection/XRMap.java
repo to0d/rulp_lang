@@ -155,10 +155,19 @@ public class XRMap extends XRDefInstance implements IRCollection {
 		IRObject key;
 		IRObject value;
 
-		public RMapEntry(IRObject key, IRObject value) {
+		public RMapEntry(IRObject key, IRObject value) throws RException {
 			super();
 			this.key = key;
 			this.value = value;
+
+			RulpUtil.incRef(key);
+			RulpUtil.incRef(value);
+		}
+
+		public void delete() throws RException {
+
+			RulpUtil.decRef(key);
+			RulpUtil.decRef(value);
 		}
 
 		@Override
@@ -173,8 +182,18 @@ public class XRMap extends XRDefInstance implements IRCollection {
 
 		@Override
 		public IRObject setValue(IRObject value) {
-			this.value = value;
-			return value;
+
+			try {
+				if (value != this.value) {
+					RulpUtil.incRef(value);
+					RulpUtil.decRef(this.value);
+					this.value = value;
+				}
+			} catch (RException e) {
+				e.printStackTrace();
+			}
+
+			return this.value;
 		}
 	}
 
@@ -324,8 +343,36 @@ public class XRMap extends XRDefInstance implements IRCollection {
 	}
 
 	@Override
+	protected void _delete() throws RException {
+
+		if (!uniqMap.isEmpty()) {
+			for (RMapEntry entry : uniqMap.values()) {
+				entry.delete();
+			}
+			uniqMap.clear();
+		}
+
+		super._delete();
+	}
+
+	@Override
 	public void clear() {
 		uniqMap.clear();
+	}
+
+	public boolean containsKey(IRObject key) throws RException {
+		return uniqMap.containsKey(RulpUtil.toUniqString(key));
+	}
+
+	public IRObject get(IRObject key) throws RException {
+		String uniName = RulpUtil.toUniqString(key);
+		RMapEntry entry = uniqMap.get(uniName);
+		return entry == null ? null : entry.value;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		return uniqMap.isEmpty();
 	}
 
 	public ArrayList<IRObject> keyList() throws RException {
@@ -348,24 +395,17 @@ public class XRMap extends XRDefInstance implements IRCollection {
 		return keyList;
 	}
 
-	public boolean containsKey(IRObject key) throws RException {
-		return uniqMap.containsKey(RulpUtil.toUniqString(key));
-	}
+	public void put(IRObject key, IRObject value) throws RException {
 
-	public IRObject get(IRObject key) throws RException {
 		String uniName = RulpUtil.toUniqString(key);
 		RMapEntry entry = uniqMap.get(uniName);
-		return entry == null ? null : entry.value;
-	}
+		if (entry == null) {
+			entry = new RMapEntry(key, value);
+			uniqMap.put(uniName, new RMapEntry(key, value));
+		} else {
+			entry.setValue(value);
+		}
 
-	@Override
-	public boolean isEmpty() {
-		return uniqMap.isEmpty();
-	}
-
-	public void put(IRObject key, IRObject value) throws RException {
-		String uniName = RulpUtil.toUniqString(key);
-		uniqMap.put(uniName, new RMapEntry(key, value));
 	}
 
 	public int size() {

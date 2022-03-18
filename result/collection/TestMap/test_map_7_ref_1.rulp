@@ -27,8 +27,11 @@
 ;=>
 
 
-(size-of map1)
+(size-of ?map1)
 ;=>
 
-(:: (?map1::get "a") to_string)
+(defvar ?obj (?map1::get "a"))
+;=>
+
+(?obj::to_string)
 ;=>

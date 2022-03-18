@@ -71,6 +71,7 @@ public class TestMap extends RulpTestBase {
 
 	@Test
 	void test_map_6_size_of() {
+		
 		_setup();
 		_run_script();
 	}
@@ -80,5 +81,6 @@ public class TestMap extends RulpTestBase {
 
 		_setup();
 		_run_script();
+		_gInfo();
 	}
 }
