@@ -137,6 +137,8 @@ Global frame tree:
 ->FRAME(root): id=0, lvl=0, subject=root
     ->FRAME(system): id=1, lvl=1, subject=system
         ->FRAME(main): id=2, lvl=2, subject=main
+            ->FRAME(_$fun$__ginfo): id=3, lvl=3, subject=_$fun$__ginfo
+            ->FRAME(_$fun$_fun1): id=4, lvl=3, subject=_$fun$_fun1
 
 Global Subject list:
 
