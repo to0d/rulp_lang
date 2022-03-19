@@ -262,8 +262,10 @@ system::?trace
 system::add
 system::add-all
 system::cmp
+system::dec
 system::equal
 system::get
+system::inc
 system::is-empty
 system::length-of
 system::println

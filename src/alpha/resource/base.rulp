@@ -229,6 +229,8 @@
 (defmacro -- (?v) (setq ?v (- ?v 1)))
 (defmacro ++ (?v) (setq ?v (+ ?v 1)))
 
+(defmacro inc (?var ?value) (setq ?var (+ ?var ?value)))
+(defmacro dec (?var ?value) (setq ?var (+ ?var ?value)))
 
 ;****************************************************;
 ; Namespace tools

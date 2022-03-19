@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      244
+           Interpreter call id:      246
     Interpreter call level/max:        0        9
                Frame max level:        6
                   Frame max id:       13
@@ -25,39 +25,39 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      301
+    factor:      303
       func:       15
      macro:        3
 ==========================================================================================================================
 
-Callable stats info: callId=244, row=25, column=62(4), value-max=10, value-unit=2^x
+Callable stats info: callId=246, row=25, column=62(4), value-max=10, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         33333333333333333333333333333333333333333333334433333333334572 max=50, unit=2^x
+   Frame    RType  Count  Ref Object                         33333333333333333333333333333333333333333333334433333333334375 max=50, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
     root   factor    179    0 add-attribute                   1333333333333333333333333333333333333333333332               
-    root   factor     46    0 defun                                                                         1333213333344  
-    root   factor     11    0 defvar                                                                       23          1 4 
+    root   factor     46    0 defun                                                                         13332 33333423 
+    root   factor     11    0 defvar                                                                       23           131
     root   factor     10    0 setq                                                                                       5 
-    root   factor      7    0 return                                                                                     41
+    root   factor      7    0 return                                                                                     33
     root   factor      6    0 alias                          33                                                            
     root   factor      5    0 make-list                                                                    23              
-    main   member      4    1 map::_map_get                                                                              3 
+    root   factor      5    0 defmacro                                                                          22      1  
+    main   member      4    1 map::_map_get                                                                              31
     root   factor      4    0 do                                                                                         3 
     root   factor      3    0 new                                                                                        3 
     root   factor      3    0 if                                                                                         3 
-    root   factor      3    0 deftemplate                                                                        3         
-    root   factor      3    0 defmacro                                                                          2      1   
+    root   factor      3    0 deftemplate                                                                        21        
     root   factor      3    0 =                                                                                          3 
   system    macro      3    1 ++                                                                                         3 
     root   factor      3    0 +                                                                                          3 
     main   member      2    1 map::_map_put                                                                              2 
-    root   factor      2    0 load                                                                                     11  
-    root   factor      2    0 defclass                                                                                  2  
+    root   factor      2    0 load                                                                                     1 1 
+    root   factor      2    0 defclass                                                                                   2 
     root   factor      1    0 str-format                                                                                  1
-    main funcList      1    1 size-of                                                                                    1 
-    main   member      1    1 map::_map_size_of                                                                          1 
+    main funcList      1    1 size-of                                                                                     1
+    main   member      1    1 map::_map_size_of                                                                           1
     main   member      1    1 map::_map_init                                                                             1 
-    root   factor      1    0 load-class                                                                                1  
+    root   factor      1    0 load-class                                                                                 1 
     root   factor      1    0 foreach                                                                                    1 
 ==========================================================================================================================
 
@@ -65,20 +65,20 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1316            0         1316
+        atom:         1334            0         1334
       string:           34            0           34
         list:           16            1           15
-        expr:          583           15          568
+        expr:          591           15          576
          var:           42           14           28
         func:           80            0           80
     template:            1            0            1
-       macro:            3            0            3
+       macro:            5            0            5
     instance:            4            0            4
        class:            2            0            2
       member:           54            1           53
        frame:           28           23            5
  interpreter:            1            0
-  frameEntry:          270            0
+  frameEntry:          272            0
       lambda:            9            0
 ==========================================================================================================================
 

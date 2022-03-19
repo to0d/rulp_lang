@@ -226,6 +226,8 @@ obj=++                  , type=macro
 obj=--                  , type=macro
 obj=add-all             , type=func
 obj=cmp                 , type=func
+obj=dec                 , type=macro
+obj=inc                 , type=macro
 obj=to-array            , type=func
 
 ;eof
