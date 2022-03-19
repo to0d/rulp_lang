@@ -144,39 +144,59 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
 				IRList argExpr = (IRList) element;
 
-				int argExprSize = argExpr.size();
-				int argPos = 0;
-
-				IRObject name = argExpr.get(argPos++);
-				if (name.getType() != RType.ATOM) {
-					throw new RException("Invalid para name: " + name + ", expr=" + argExpr);
-				}
-
-				IRAtom type = null;
-
-				if (argPos < argExprSize) {
-
-					IRObject typeObj = interpreter.compute(frame, argExpr.get(argPos++));
-
-					if (typeObj.getType() == RType.ATOM) {
-						type = RulpUtil.asAtom(typeObj);
-						if (RType.toType(type.getName()) == null) {
-							throw new RException("Undefined para type: " + type);
-						}
-					} else if (typeObj.getType() == RType.CLASS) {
-						type = ((IRClass) typeObj).getClassTypeAtom();
-
-					} else {
-						throw new RException("Invalid para type: " + argExpr);
-					}
-				}
-
-				if (argPos != argExprSize) {
+				int aszie = argExpr.size();
+				if (aszie == 0 || aszie > 3) {
 					throw new RException("Invalid para expression: " + argExpr);
 				}
 
-				paraAttrs.add(RulpFactory.createParaAttr(RulpUtil.asAtom(name).getName(), type));
-				continue;
+				IRObject a0 = argExpr.get(0);
+				if (a0.getType() != RType.ATOM) {
+					throw new RException("Invalid para name: " + a0 + ", expr=" + argExpr);
+				}
+
+				// (?a)
+				if (aszie == 1) {
+					paraAttrs.add(RulpFactory.createParaAttr(RulpUtil.asAtom(a0).getName(), null));
+					continue;
+				}
+
+				IRObject a1 = interpreter.compute(frame, argExpr.get(1));
+
+				// (?a int)
+				if (aszie == 2 && a1.getType() == RType.ATOM) {
+
+					IRAtom type = RulpUtil.asAtom(a1);
+					if (RType.toType(type.getName()) == null) {
+						throw new RException("Undefined para type: " + type);
+					}
+
+					paraAttrs.add(RulpFactory.createParaAttr(RulpUtil.asAtom(a0).getName(), type));
+					continue;
+				}
+
+				// (?a class-name)
+				if (aszie == 2 && a1.getType() == RType.CLASS) {
+					IRAtom type = ((IRClass) a1).getClassTypeAtom();
+					paraAttrs.add(RulpFactory.createParaAttr(RulpUtil.asAtom(a0).getName(), type));
+					continue;
+				}
+
+				// (?a '(default-value))
+//				if (aszie == 1 && a1.getType() == RType.LIST) {
+//
+//					IRList defValList = (IRList) a1;
+//					if (defValList.size() != 1) {
+//						throw new RException("invalid para default value list: " + defValList);
+//					}
+//					
+//					IRObject defVal = defValList.get(0);
+//					
+//
+//					paraAttrs.add(RulpFactory.createParaAttr(RulpUtil.asAtom(a0).getName(), type));
+//					continue;
+//				}
+
+				throw new RException("Invalid para expression: " + argExpr);
 			}
 
 			throw new RException("Invalid para type: " + paraObj);

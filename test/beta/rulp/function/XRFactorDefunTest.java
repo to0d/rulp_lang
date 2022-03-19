@@ -163,4 +163,11 @@ class XRFactorDefunTest extends RulpTestBase {
 		_run_script();
 		_gInfo();
 	}
+	
+	@Test
+	void test_fun_9_default_para_2() {
+		_setup();
+		_run_script();
+		_gInfo();
+	}
 }
