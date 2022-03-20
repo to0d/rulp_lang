@@ -1,0 +1,15 @@
+(defvar ?x 0) ?x
+;=>&?x 0
+
+(inc ?x 2) ?x
+;=>&?x 2
+
+(dec ?x 3) ?x
+;=>&?x -1
+
+(defvar ?y "xx") ?y
+;=>&?y "xx"
+
+(inc ?y "yy") ?y
+;=>&?y "xxyy"
+

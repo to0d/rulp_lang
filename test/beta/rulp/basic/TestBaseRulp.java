@@ -13,7 +13,13 @@ public class TestBaseRulp extends RulpTestBase {
 	}
 
 	@Test
-	void test_base_2_inc_dec() {
+	void test_base_2_inc_dec_1() {
+		_setup();
+		_run_script();
+	}
+	
+	@Test
+	void test_base_2_inc_dec_2() {
 		_setup();
 		_run_script();
 	}
