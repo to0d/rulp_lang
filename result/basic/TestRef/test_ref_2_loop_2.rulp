@@ -1,0 +1,39 @@
+(load "tool")
+;=>
+
+(defclass class1
+    (defvar ?value 1)[public]
+    (defun dump () (print ?value "\n"))
+)
+;=>
+
+(defclass class2
+    (defvar ?descriptors nil)[public]
+    (defun load (?count)
+        (defvar ?_descriptors (make-array))    
+        (loop for ?x from 1 to ?count do
+            (defvar ?descriptor (new class1))
+            (setq ?descriptor::?value ?x)
+            (add ?_descriptors ?descriptor)
+        )
+        (setq ?descriptors (to-list ?_descriptors))
+    )
+    (defun dump ()
+        (loop for ?d in ?descriptors do
+            (?d::dump)
+        )
+
+    )
+)
+;=>
+
+(defvar ?o2 (new class2))
+;=>
+
+(?o2::load 3)
+;=>
+
+(?o2::dump)
+;=>
+
+

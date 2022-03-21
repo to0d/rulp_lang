@@ -1,0 +1,13 @@
+(get {a, b, c} 1)
+;=>
+
+(get {a, b, c} -1)
+;err:
+Invalid index: -1
+at (get-of-array ?arr ?i1) ; _$fun$_get-3
+at (return (get-of-array ?arr ?i1)) ; _$fun$_get-3
+at (get {a,b,c} -1) ; main-2
+;eof
+
+(get {a, b, c} 3)
+;err

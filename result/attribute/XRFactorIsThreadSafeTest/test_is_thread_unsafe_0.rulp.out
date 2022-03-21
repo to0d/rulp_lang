@@ -57,7 +57,6 @@ obj=true                , type=bool
 obj=?load-class         , type=var
 obj=?load-jar           , type=var
 obj=?load-script        , type=var
-obj=?load-system        , type=var
 obj=?path               , type=var
 obj=?trace              , type=var
 obj=root                , type=frame

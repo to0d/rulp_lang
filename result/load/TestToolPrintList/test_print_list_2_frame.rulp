@@ -1,0 +1,8 @@
+(load "tool")
+;=>
+
+(print-list (list-of root))
+;=>
+
+(print-list (list-of system))
+;=>

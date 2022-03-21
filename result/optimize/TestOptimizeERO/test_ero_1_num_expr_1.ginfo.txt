@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      247
+           Interpreter call id:      243
     Interpreter call level/max:        4       10
                Frame max level:        5
                   Frame max id:        6
@@ -25,57 +25,57 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      268
+    factor:      263
       func:        4
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=247, row=25, column=62(4), value-max=7, value-unit=2^x
+Callable stats info: callId=243, row=25, column=61(4), value-max=4, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         33333333333333333333333333333333333333333333334433333333334346 max=19, unit=2^x
+   Frame    RType  Count  Ref Object                         3333333333333333333333333333333333333333333333333334433334346 max=19, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor    179    0 add-attribute                   1333333333333333333333333333333333333333333332               
-    root   factor     44    0 defun                                                                         13332 33333421 
-    root   factor      8    0 defvar                                                                       23           1 2
-    root   factor      6    0 alias                          33                                                            
-    root   factor      5    0 make-list                                                                    23              
-    root   factor      5    0 defmacro                                                                          22      1  
-    root   factor      3    0 return                                                                                     12
-    root   factor      3    0 deftemplate                                                                        21        
-    root   factor      2    0 opt-status                                                                                  2
-    main     func      2    1 (fun)                                                                                      11
-    root   factor      2    0 +                                                                                          11
-    root   factor      1    0 str-substr                                                                                  1
-    root   factor      1    0 str-last-index-of                                                                           1
-    root   factor      1    0 setq                                                                                        1
-    main    macro      1    2 script_out                                                                                  1
-    root   factor      1    0 print-impl                                                                                 1 
-    root   factor      1    0 print-global-info                                                                           1
-    root   factor      1    0 out-to-file                                                                                 1
-    root   factor      1    0 load                                                                                     1   
-    root   factor      1    0 if                                                                                          1
-    main     func      1    2 (file-prename string)                                                                       1
-    root   factor      1    0 do                                                                                          1
-    root   factor      1    0 attribute-of                                                                               1 
-    main funcList      1    3 _ginfo                                                                                      1
-    root   factor      1    0 !=                                                                                          1
+    root   factor    179    0 add-attribute                   1333333333333333333333333333333333333333333332              
+    root   factor     41    0 defun                                                                        23331 33333321 
+    root   factor      7    0 defvar                                                                            31     1 2
+    root   factor      6    0 alias                          33                                                           
+    root   factor      5    0 defmacro                                                                         31      1  
+    root   factor      4    0 make-list                                                                         31        
+    root   factor      3    0 return                                                                                    12
+    root   factor      3    0 deftemplate                                                                             3   
+    root   factor      2    0 opt-status                                                                                 2
+    main     func      2    1 (fun)                                                                                     11
+    root   factor      2    0 +                                                                                         11
+    root   factor      1    0 str-substr                                                                                 1
+    root   factor      1    0 str-last-index-of                                                                          1
+    root   factor      1    0 setq                                                                                       1
+    main    macro      1    2 script_out                                                                                 1
+    root   factor      1    0 print-impl                                                                                1 
+    root   factor      1    0 print-global-info                                                                          1
+    root   factor      1    0 out-to-file                                                                                1
+    root   factor      1    0 load                                                                                    1   
+    root   factor      1    0 if                                                                                         1
+    main     func      1    2 (file-prename string)                                                                      1
+    root   factor      1    0 do                                                                                         1
+    root   factor      1    0 attribute-of                                                                              1 
+    main funcList      1    3 _ginfo                                                                                     1
+    root   factor      1    0 !=                                                                                         1
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1213            0         1213
+        atom:         1126            0         1126
       string:           28            0           28
-        list:           14            1           13
-        expr:          514            3          511
-         var:           19            3           16
-        func:           58            0           58
+        list:           13            1           12
+        expr:          470            3          467
+         var:           18            3           15
+        func:           54            0           54
     template:            1            0            1
        macro:            5            0            5
        frame:            5            4            1
  interpreter:            1            0
-  frameEntry:          249            0
+  frameEntry:          248            0
       lambda:            0            0
 ==========================================================================================================================
 
@@ -112,14 +112,13 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 ?rv                  : 16       3        1    var        result\optimize\TestOptimizeERO\test_ero_1_num_expr_1 : type=string
 ==========================================================================================================================
 
-Root var list: total=6
+Root var list: total=5
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
 ?load-class          : '()
 ?load-jar            : '()
 ?load-script         : '("C:\\data\\rs\\rulp\\string.rulp")
-?load-system         : '()
 ?path                : '()
 ?trace               : false
 ==========================================================================================================================

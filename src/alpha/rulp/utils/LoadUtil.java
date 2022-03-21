@@ -1,8 +1,17 @@
+/* Copyright Prolog                                  */
+/*                                                   */
+/* RULP(Run a Lisp Processer) on Java                */
+/* 													 */
+/* Copyright (C) 2020 Todd (to0d@outlook.com)        */
+/* This program comes with ABSOLUTELY NO WARRANTY;   */
+/* This is free software, and you are welcome to     */
+/* redistribute it under certain conditions.         */
+
 package alpha.rulp.utils;
 
 import static alpha.rulp.lang.Constant.A_LOAD_JAR;
 import static alpha.rulp.lang.Constant.A_LOAD_SCRIPT;
-import static alpha.rulp.lang.Constant.A_LOAD_SYSTEM;
+//import static alpha.rulp.lang.Constant.A_LOAD_SYSTEM;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -126,33 +135,33 @@ public class LoadUtil {
 		lsList.add(RulpFactory.createString(absPath));
 	}
 
-	public static void loadSystemRulp(IRInterpreter interpreter, IRFrame frame, String name) throws RException {
-
-		IRList lsList = RulpUtil.asList(RulpUtil.asVar(interpreter.getObject(A_LOAD_SYSTEM)).getValue());
-
-		/*************************************************/
-		// Script can only be loaded once
-		/*************************************************/
-		if (_contain(lsList, name)) {
-			return;
-		}
-
-		String jarPath = "alpha/resource/" + name + ".rulp";
-
-		try {
-
-			if (RulpUtil.isTrace(frame)) {
-				System.out.println("loading system: " + jarPath);
-			}
-
-			LoadUtil.loadRulpFromJar(interpreter, frame, jarPath, "utf-8");
-
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new RException("fail to load <" + name + ">, err:" + e.toString());
-		}
-
-		lsList.add(RulpFactory.createString(name));
-	}
+//	public static void loadSystemRulp(IRInterpreter interpreter, IRFrame frame, String name) throws RException {
+//
+//		IRList lsList = RulpUtil.asList(RulpUtil.asVar(interpreter.getObject(A_LOAD_SYSTEM)).getValue());
+//
+//		/*************************************************/
+//		// Script can only be loaded once
+//		/*************************************************/
+//		if (_contain(lsList, name)) {
+//			return;
+//		}
+//
+//		String jarPath = "alpha/resource/" + name + ".rulp";
+//
+//		try {
+//
+//			if (RulpUtil.isTrace(frame)) {
+//				System.out.println("loading system: " + jarPath);
+//			}
+//
+//			LoadUtil.loadRulpFromJar(interpreter, frame, jarPath, "utf-8");
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//			throw new RException("fail to load <" + name + ">, err:" + e.toString());
+//		}
+//
+//		lsList.add(RulpFactory.createString(name));
+//	}
 
 }

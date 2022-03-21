@@ -1,3 +1,6 @@
+(load "tool")
+;=>nil
+
 (defvar l1 '(a b c))
 ;=>&l1
 

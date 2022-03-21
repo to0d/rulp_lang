@@ -1,3 +1,6 @@
+(load "tool")
+;=>nil
+
 (add '() a b)
 ;=>'(a b)
 

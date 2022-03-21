@@ -1,0 +1,19 @@
+(load "tool")
+;=>
+
+(defclass class1
+    (defvar ?value 1)[public]
+)
+;=>
+
+(defvar ?arr (make-array))
+;=>
+
+(add ?arr (new class1))
+;=>
+
+(add ?arr (new class1))
+;=>
+
+(foreach (?a (to-list ?arr)) (return (value-of (value-of ?a::?value))))
+;=>

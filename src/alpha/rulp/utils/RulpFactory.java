@@ -9,7 +9,14 @@
 
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_MAIN;
+import static alpha.rulp.lang.Constant.A_NIL;
+import static alpha.rulp.lang.Constant.A_ROOT;
+import static alpha.rulp.lang.Constant.A_SYSTEM;
+import static alpha.rulp.lang.Constant.I_FRAME_MAIN_ID;
+import static alpha.rulp.lang.Constant.I_FRAME_ROOT_ID;
+import static alpha.rulp.lang.Constant.I_FRAME_SYSTEM_ID;
+import static alpha.rulp.lang.Constant.O_Nil;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -43,9 +50,7 @@ import alpha.rulp.lang.IRParaAttr;
 import alpha.rulp.lang.IRString;
 import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.IRVar;
-import alpha.rulp.lang.RArithmeticOperator;
 import alpha.rulp.lang.RException;
-import alpha.rulp.lang.RRelationalOperator;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRFunctionList;
@@ -61,109 +66,14 @@ import alpha.rulp.runtime.IRTokener;
 import alpha.rulp.runtime.RName;
 import alpha.rulp.ximpl.array.XRArrayConst;
 import alpha.rulp.ximpl.array.XRArrayVary;
-import alpha.rulp.ximpl.array.XRFactorMakeArray;
-import alpha.rulp.ximpl.array.XRFactorSeta;
-import alpha.rulp.ximpl.attribute.XRFactorAddAttribute;
-import alpha.rulp.ximpl.attribute.XRFactorAttributeOf;
-import alpha.rulp.ximpl.attribute.XRFactorGetAttribute;
-import alpha.rulp.ximpl.attribute.XRFactorIsConst;
-import alpha.rulp.ximpl.attribute.XRFactorIsRecursive;
-import alpha.rulp.ximpl.attribute.XRFactorIsStable;
-import alpha.rulp.ximpl.attribute.XRFactorIsThreadSafe;
-import alpha.rulp.ximpl.attribute.XRFactorReturnTypeOf;
-import alpha.rulp.ximpl.attribute.XRFactorStmtCountOf;
 import alpha.rulp.ximpl.blob.XRBlob;
-import alpha.rulp.ximpl.blob.XRFactorBlobLength;
-import alpha.rulp.ximpl.blob.XRFactorMakeBlob;
-import alpha.rulp.ximpl.blob.XRFactorToBlob;
-import alpha.rulp.ximpl.blob.XRFactorWriteBlob;
-import alpha.rulp.ximpl.bool.XRFactorBitNot;
-import alpha.rulp.ximpl.bool.XRFactorBoolAnd;
-import alpha.rulp.ximpl.bool.XRFactorBoolNot;
-import alpha.rulp.ximpl.bool.XRFactorBoolOr;
-import alpha.rulp.ximpl.bool.XRFactorEqual;
-import alpha.rulp.ximpl.collection.XRFactorAddArrayToList;
-import alpha.rulp.ximpl.collection.XRFactorAddListToArray;
-import alpha.rulp.ximpl.collection.XRFactorAddListToList;
-import alpha.rulp.ximpl.collection.XRFactorForeach;
-import alpha.rulp.ximpl.collection.XRFactorGetOfArray;
-import alpha.rulp.ximpl.collection.XRFactorGetOfList;
-import alpha.rulp.ximpl.collection.XRFactorJoin;
-import alpha.rulp.ximpl.collection.XRFactorRemove;
-import alpha.rulp.ximpl.collection.XRFactorReverse;
-import alpha.rulp.ximpl.collection.XRFactorSizeOfArray;
-import alpha.rulp.ximpl.collection.XRFactorSizeOfList;
-import alpha.rulp.ximpl.collection.XRFactorSort;
-import alpha.rulp.ximpl.collection.XRFactorUnion;
-import alpha.rulp.ximpl.collection.XRFactorUniq;
 import alpha.rulp.ximpl.collection.XRMap;
 import alpha.rulp.ximpl.collection.XRQueue;
 import alpha.rulp.ximpl.collection.XRSet;
-import alpha.rulp.ximpl.control.XRFactorBreak;
-import alpha.rulp.ximpl.control.XRFactorCase;
-import alpha.rulp.ximpl.control.XRFactorContinue;
-import alpha.rulp.ximpl.control.XRFactorDo;
-import alpha.rulp.ximpl.control.XRFactorIf;
-import alpha.rulp.ximpl.control.XRFactorLet;
-import alpha.rulp.ximpl.control.XRFactorLoop;
-import alpha.rulp.ximpl.control.XRFactorReturn;
-import alpha.rulp.ximpl.control.XRFactorThrow;
-import alpha.rulp.ximpl.control.XRFactorTry;
-import alpha.rulp.ximpl.control.XRFactorWhen;
 import alpha.rulp.ximpl.error.XRError;
-import alpha.rulp.ximpl.error.XRFactorErrorValue;
-import alpha.rulp.ximpl.factor.XRFactorAddSearchFrame;
-import alpha.rulp.ximpl.factor.XRFactorAlias;
-import alpha.rulp.ximpl.factor.XRFactorCanCast;
-import alpha.rulp.ximpl.factor.XRFactorClone;
-import alpha.rulp.ximpl.factor.XRFactorCompare;
-import alpha.rulp.ximpl.factor.XRFactorCompute;
-import alpha.rulp.ximpl.factor.XRFactorDefConst;
-import alpha.rulp.ximpl.factor.XRFactorDefMacro;
-import alpha.rulp.ximpl.factor.XRFactorDefvar;
-import alpha.rulp.ximpl.factor.XRFactorDoWhenObjDeleted;
-import alpha.rulp.ximpl.factor.XRFactorDoWhenVarChanged;
-import alpha.rulp.ximpl.factor.XRFactorFrameOf;
-import alpha.rulp.ximpl.factor.XRFactorListOf;
-import alpha.rulp.ximpl.factor.XRFactorMakeList;
-import alpha.rulp.ximpl.factor.XRFactorNameOf;
-import alpha.rulp.ximpl.factor.XRFactorParentOf;
-import alpha.rulp.ximpl.factor.XRFactorRef;
-import alpha.rulp.ximpl.factor.XRFactorRulpObjectCount;
-import alpha.rulp.ximpl.factor.XRFactorSearchFrameOf;
-import alpha.rulp.ximpl.factor.XRFactorSetq;
-import alpha.rulp.ximpl.factor.XRFactorSubjectOf;
-import alpha.rulp.ximpl.factor.XRFactorToAtom;
-import alpha.rulp.ximpl.factor.XRFactorToConst;
-import alpha.rulp.ximpl.factor.XRFactorToExpr;
-import alpha.rulp.ximpl.factor.XRFactorToNamedList;
-import alpha.rulp.ximpl.factor.XRFactorToNoNamedList;
-import alpha.rulp.ximpl.factor.XRFactorToVary;
-import alpha.rulp.ximpl.factor.XRFactorTypeOf;
-import alpha.rulp.ximpl.factor.XRFactorValueOf;
-import alpha.rulp.ximpl.factor.XRFactorValueTypeOf;
-import alpha.rulp.ximpl.fs.XRFactorFileDelete;
-import alpha.rulp.ximpl.fs.XRFactorFileExist;
-import alpha.rulp.ximpl.fs.XRFactorFileIsFolder;
-import alpha.rulp.ximpl.fs.XRFactorFileList;
-import alpha.rulp.ximpl.fs.XRFactorFileMkdirs;
-import alpha.rulp.ximpl.function.XRFactorDefun;
-import alpha.rulp.ximpl.function.XRFactorLambda;
 import alpha.rulp.ximpl.function.XRFunction;
 import alpha.rulp.ximpl.function.XRFunctionLambda;
 import alpha.rulp.ximpl.function.XRFunctionList;
-import alpha.rulp.ximpl.io.XRFactorLoad;
-import alpha.rulp.ximpl.io.XRFactorLoadClass;
-import alpha.rulp.ximpl.io.XRFactorOpenTxtFile;
-import alpha.rulp.ximpl.io.XRFactorOutToFile;
-import alpha.rulp.ximpl.io.XRFactorPrint;
-import alpha.rulp.ximpl.io.XRFactorPrintFrameTree;
-import alpha.rulp.ximpl.io.XRFactorPrintGlobalInfo;
-import alpha.rulp.ximpl.io.XRFactorPrintObject;
-import alpha.rulp.ximpl.io.XRFactorPrintSubject;
-import alpha.rulp.ximpl.io.XRFactorRun;
-import alpha.rulp.ximpl.io.XRFactorSaveTxtFile;
-import alpha.rulp.ximpl.io.XRFactorTrace;
 import alpha.rulp.ximpl.lang.XRAtom;
 import alpha.rulp.ximpl.lang.XRBoolean;
 import alpha.rulp.ximpl.lang.XRConst;
@@ -182,35 +92,10 @@ import alpha.rulp.ximpl.lang.XRMacro;
 import alpha.rulp.ximpl.lang.XRNative;
 import alpha.rulp.ximpl.lang.XRString;
 import alpha.rulp.ximpl.lang.XRVar;
-import alpha.rulp.ximpl.math.XRFactorArithmetic;
-import alpha.rulp.ximpl.math.XRFactorComparison;
-import alpha.rulp.ximpl.math.XRFactorRandom;
-import alpha.rulp.ximpl.math.XRFactorRandomFloat;
-import alpha.rulp.ximpl.math.XRFactorRandomInt;
-import alpha.rulp.ximpl.math.XRFactorToDouble;
-import alpha.rulp.ximpl.math.XRFactorToFloat;
-import alpha.rulp.ximpl.math.XRFactorToInteger;
-import alpha.rulp.ximpl.math.XRFactorToLong;
 import alpha.rulp.ximpl.namespace.XRNameSpace;
-import alpha.rulp.ximpl.namespace.XRNameSpaceClass;
-import alpha.rulp.ximpl.optimize.XFactorReduct;
-import alpha.rulp.ximpl.optimize.XRFactorCC;
-import alpha.rulp.ximpl.optimize.XRFactorListFunctionInReturn;
-import alpha.rulp.ximpl.optimize.XRFactorOptStatus;
-import alpha.rulp.ximpl.optimize.XRFactorPrintImpl;
 import alpha.rulp.ximpl.rclass.XRDefClass;
 import alpha.rulp.ximpl.rclass.XRDefInstance;
-import alpha.rulp.ximpl.rclass.XRFactorAccess;
-import alpha.rulp.ximpl.rclass.XRFactorClassOf;
-import alpha.rulp.ximpl.rclass.XRFactorDefClass;
-import alpha.rulp.ximpl.rclass.XRFactorDelete;
-import alpha.rulp.ximpl.rclass.XRFactorGetMbr;
-import alpha.rulp.ximpl.rclass.XRFactorHasMbr;
-import alpha.rulp.ximpl.rclass.XRFactorNew;
-import alpha.rulp.ximpl.rclass.XRFactorPropertyOf;
 import alpha.rulp.ximpl.rclass.XRMember;
-import alpha.rulp.ximpl.rclass.XRNoClass;
-import alpha.rulp.ximpl.runtime.XRFactorRuntimeCallCount;
 import alpha.rulp.ximpl.runtime.XRFrame;
 import alpha.rulp.ximpl.runtime.XRFrameEntry;
 import alpha.rulp.ximpl.runtime.XRFrameProtected;
@@ -219,41 +104,8 @@ import alpha.rulp.ximpl.runtime.XRParaAttr;
 import alpha.rulp.ximpl.runtime.XRParser;
 import alpha.rulp.ximpl.runtime.XRThreadContext;
 import alpha.rulp.ximpl.runtime.XRTokener;
-import alpha.rulp.ximpl.string.XRFactorMakeString;
-import alpha.rulp.ximpl.string.XRFactorStrCat;
-import alpha.rulp.ximpl.string.XRFactorStrCharAt;
-import alpha.rulp.ximpl.string.XRFactorStrEndWith;
-import alpha.rulp.ximpl.string.XRFactorStrEqual;
-import alpha.rulp.ximpl.string.XRFactorStrEqualNoCase;
-import alpha.rulp.ximpl.string.XRFactorStrFormat;
-import alpha.rulp.ximpl.string.XRFactorStrIndexOf;
-import alpha.rulp.ximpl.string.XRFactorStrLastIndexOf;
-import alpha.rulp.ximpl.string.XRFactorStrLength;
-import alpha.rulp.ximpl.string.XRFactorStrMatch;
-import alpha.rulp.ximpl.string.XRFactorStrReplace;
-import alpha.rulp.ximpl.string.XRFactorStrSplit;
-import alpha.rulp.ximpl.string.XRFactorStrSplitLines;
-import alpha.rulp.ximpl.string.XRFactorStrStartsWith;
-import alpha.rulp.ximpl.string.XRFactorStrSubStr;
-import alpha.rulp.ximpl.string.XRFactorStrTrim;
-import alpha.rulp.ximpl.string.XRFactorStrTrimHead;
-import alpha.rulp.ximpl.string.XRFactorStrTrimTail;
-import alpha.rulp.ximpl.string.XRFactorStrUpper;
-import alpha.rulp.ximpl.string.XRFactorToString;
 import alpha.rulp.ximpl.subject.XRSubjectFrame;
-import alpha.rulp.ximpl.system.XRFactorSystemFreeMemory;
-import alpha.rulp.ximpl.system.XRFactorSystemGC;
-import alpha.rulp.ximpl.system.XRFactorSystemOSType;
-import alpha.rulp.ximpl.system.XRFactorSystemSetProperty;
-import alpha.rulp.ximpl.system.XRFactorSystemTotalMemory;
-import alpha.rulp.ximpl.template.XRFactorDefTemplate;
 import alpha.rulp.ximpl.template.XRTemplate;
-import alpha.rulp.ximpl.thread.XRFactorDoParallel;
-import alpha.rulp.ximpl.thread.XRFactorSleep;
-import alpha.rulp.ximpl.time.XFactorDayOfWeek;
-import alpha.rulp.ximpl.time.XRFactorDate;
-import alpha.rulp.ximpl.time.XRFactorDayNumber;
-import alpha.rulp.ximpl.time.XRFactorSystemTime;
 
 public final class RulpFactory {
 
@@ -556,263 +408,14 @@ public final class RulpFactory {
 		XRInterpreter interpreter = new XRInterpreter();
 		interpreter.setMainFrame(mainFrame);
 
-		/******************************************************/
 		// Load base object
-		/******************************************************/
-
-		// Objects
-		RulpUtil.addFrameObject(rootFrame, O_Nil);
-		RulpUtil.addFrameObject(rootFrame, O_True);
-		RulpUtil.addFrameObject(rootFrame, O_False);
-		RulpUtil.addFrameObject(rootFrame, O_Nan);
-		RulpUtil.addFrameObject(rootFrame, O_Public);
-		RulpUtil.addFrameObject(rootFrame, O_Private);
-		RulpUtil.addFrameObject(rootFrame, O_Default);
-		RulpUtil.addFrameObject(rootFrame, O_Final);
-		RulpUtil.addFrameObject(rootFrame, O_Static);
-		RulpUtil.addFrameObject(rootFrame, O_From);
-
-		RulpUtil.addFrameObject(rootFrame, T_Atom);
-		RulpUtil.addFrameObject(rootFrame, T_Bool);
-		RulpUtil.addFrameObject(rootFrame, T_Int);
-		RulpUtil.addFrameObject(rootFrame, T_Int);
-		RulpUtil.addFrameObject(rootFrame, T_Long);
-		RulpUtil.addFrameObject(rootFrame, T_Float);
-		RulpUtil.addFrameObject(rootFrame, T_Double);
-		RulpUtil.addFrameObject(rootFrame, T_String);
-		RulpUtil.addFrameObject(rootFrame, T_Blob);
-		RulpUtil.addFrameObject(rootFrame, T_List);
-		RulpUtil.addFrameObject(rootFrame, T_Expr);
-		RulpUtil.addFrameObject(rootFrame, T_Array);
-		RulpUtil.addFrameObject(rootFrame, T_Var);
-		RulpUtil.addFrameObject(rootFrame, T_Constant);
-		RulpUtil.addFrameObject(rootFrame, T_Factor);
-		RulpUtil.addFrameObject(rootFrame, T_Func);
-		RulpUtil.addFrameObject(rootFrame, T_Macro);
-		RulpUtil.addFrameObject(rootFrame, T_Instance);
-		RulpUtil.addFrameObject(rootFrame, T_Class);
-		RulpUtil.addFrameObject(rootFrame, T_Native);
-		RulpUtil.addFrameObject(rootFrame, T_Member);
-		RulpUtil.addFrameObject(rootFrame, T_Frame);
-
-		RulpUtil.addFrameObject(rootFrame, new XRFactorNameOf(F_NAME_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorTypeOf(F_TYPE_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorValueOf(F_VALUE_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorValueTypeOf(F_VALUE_TYPE_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorAlias(F_ALIAS));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorEqual(F_EQUAL_DEFAULT));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorToAtom(F_TO_ATOM));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSizeOfList(F_SIZE_OF_LIST));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSizeOfArray(F_SIZE_OF_ARRAY));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSubjectOf(F_SUBJECT_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorFrameOf(F_FREAME_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorParentOf(F_PARENT_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorAddSearchFrame(F_ADD_SEARCH_FRAME));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSearchFrameOf(F_SEARCH_FRAEM_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorIsConst(F_IS_CONST));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorMakeList(F_MAKE_LIST));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorMakeArray(F_MAKE_ARRAY));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorToExpr(F_TO_EXPR));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorCompute(F_COMPUTE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorAttributeOf(F_ATTRIBUTE_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorAddAttribute(F_ADD_ATTRIBUTE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorReturnTypeOf(F_RETURN_TYPE_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorGetAttribute(F_GET_ATTRIBUTE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStmtCountOf(F_STMT_COUNT_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorIsRecursive(F_IS_RECURSIVE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorClone(F_CLONE));
-
-		// Class
-		RulpUtil.addFrameObject(rootFrame, new XRNoClass(A_NOCLASS, rootFrame));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorClassOf(F_CLASS_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorPropertyOf(F_PROPERTY_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorAccess(F_ACCESS));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorNew(F_NEW));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorDelete(F_DELETE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorDefClass(F_DEFCLASS));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorGetMbr(F_O_MBR));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorHasMbr(F_HAS_MBR));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorListOf(F_LIST_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRNameSpaceClass(A_NAMESPACE, rootFrame));
-
-		// IO
-		RulpUtil.addFrameObject(rootFrame, new XRFactorPrint(F_PRINT));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorLoad(F_LOAD));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorOutToFile(F_OUT_TO_FILE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorOpenTxtFile(F_OPEN_TXT_FILE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSaveTxtFile(F_SAVE_TXT_FILE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorPrintSubject(F_PRINT_SUBJECT));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorPrintFrameTree(F_PRINT_FRAME_TREE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorPrintGlobalInfo(F_PRINT_GLOBAL_INFO));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorPrintImpl(F_PRINT_IMPL));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorRun(F_RUN));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorLoadClass(F_LOAD_CLASS));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorPrintObject(F_PRINT_OBJECT));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorTrace(F_TRACE));
-
-		// FS
-		RulpUtil.addFrameObject(rootFrame, new XRFactorFileExist(F_FILE_EXIST));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorFileIsFolder(F_FILE_IS_FOLDER));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorFileMkdirs(F_FILE_MKDIRS));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorFileList(F_FILE_LIST));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorFileDelete(F_FILE_DELETE));
-
-		// Variable, Value & Expression
-		RulpUtil.addFrameObject(rootFrame, new XRFactorDefvar(F_DEFVAR, true, false));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSetq(F_SETQ));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorDoWhenVarChanged(F_DO_WHEN_VAR_CHANGED));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorDoWhenObjDeleted(F_DO_WHEN_OBJ_DELETED));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorRef(F_REF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorDefConst(F_DEF_CONST));
-
-		// Blob
-		RulpUtil.addFrameObject(rootFrame, new XRFactorMakeBlob(F_MAKE_BLOB));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorBlobLength(F_BLOB_LENGTH));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorToBlob(F_TO_BLOB));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorWriteBlob(F_WRITE_BLOB));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorMakeString(F_MAKE_STRING));
-
-		// String
-		RulpUtil.addFrameObject(rootFrame, new XRFactorToString(F_TO_STRING));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorToInteger(F_TO_INT));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorToLong(F_TO_LONG));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorToFloat(F_TO_FLOAT));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorToDouble(F_TO_DOUBLE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrCat(F_STRCAT));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrEqual(F_STR_EQUAL));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrEqualNoCase(F_STR_EQUAL_NOCASE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrTrim(F_STR_TRIM));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrTrimHead(F_STR_TRIM_HEAD));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrTrimTail(F_STR_TRIM_TAIL));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrMatch(F_STR_MATCH));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrStartsWith(F_STR_START_WITH));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrEndWith(F_STR_END_WITH));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrSubStr(F_STR_SUBSTR));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrLength(F_STR_LENGTH));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrIndexOf(F_STR_INDEX_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrLastIndexOf(F_STR_LAST_INDEX_OF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrFormat(F_STR_FORMAT));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrCharAt(F_STR_CHAR_AT));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrSplit(F_STR_SPLIT));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrReplace(F_STR_REPLACE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrUpper(F_STR_UPPER));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorStrSplitLines(F_STR_SPLIT_LINE));
-
-		// Arithmetic
-		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_ADD, RArithmeticOperator.ADD));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_SUB, RArithmeticOperator.SUB));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_BY, RArithmeticOperator.BY));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_DIV, RArithmeticOperator.DIV));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_MOD, RArithmeticOperator.MOD));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_POWER, RArithmeticOperator.POWER));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_AND, RArithmeticOperator.AND));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_OR, RArithmeticOperator.OR));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorArithmetic(F_O_XOR, RArithmeticOperator.XOR));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorBitNot(F_O_NOT));
-
-		// Boolean
-		RulpUtil.addFrameObject(rootFrame, new XRFactorBoolNot(F_B_NOT));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorBoolAnd(F_B_AND));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorBoolOr(F_B_OR));
-
-		// Relational
-		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_EQ, RRelationalOperator.EQ)); // =
-		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_NE, RRelationalOperator.NE)); // =
-		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_GT, RRelationalOperator.GT)); // >
-		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_LT, RRelationalOperator.LT)); // <
-		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_GE, RRelationalOperator.GE)); // >=
-		RulpUtil.addFrameObject(rootFrame, new XRFactorComparison(F_O_LE, RRelationalOperator.LE));// <=
-
-		RulpUtil.addFrameObject(rootFrame, new XRFactorCompare(F_CMP_DEF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorCanCast(F_CAN_CAST));
-
-		// Macro & Function
-		RulpUtil.addFrameObject(rootFrame, new XRFactorDefMacro(F_DEFMACRO));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorDefun(F_DEFUN));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorDefTemplate(F_DEFTEMPLATE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorOptStatus(F_OPT_STATUS));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorListFunctionInReturn(F_LIST_FUNC_IN_RETURN));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorIsStable(F_IS_STABLE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorIsThreadSafe(F_IS_THREAD_SAFE));
-		RulpUtil.addFrameObject(rootFrame, new XFactorReduct(F_Reduct));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorCC(F_CC));
-
-		// Lambda
-		RulpUtil.addFrameObject(rootFrame, new XRFactorLet(F_LET));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorLambda(F_LAMBDA));
-
-		// Control
-		RulpUtil.addFrameObject(rootFrame, new XRFactorIf(F_IF));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorWhen(F_WHEN));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorLoop(F_LOOP));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorReturn(F_RETURN));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorContinue(F_CONTINUE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorBreak(F_BREAK));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorDo(A_DO));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorCase(F_CASE));
-
-		// Exception
-		RulpUtil.addFrameObject(rootFrame, new XRFactorThrow(F_THROW));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorErrorValue(F_E_ERROR_VALUE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorTry(F_TRY));
-
-		// Collection
-		RulpUtil.addFrameObject(rootFrame, new XRFactorForeach(F_FOREACH));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorGetOfList(F_GET_OF_LIST));
-//		RulpUtil.addFrameObject(rootFrame, new XRFactorAddToList(F_ADD_TO_LIST));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorAddListToList(F_ADD_LIST_TO_LIST));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorRemove(F_REMOVE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorJoin(F_JOIN));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorUnion(F_UNION));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorUniq(F_UNIQ));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSort(F_SORT_LIST));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorReverse(F_REVERSE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorGetOfArray(F_GET_OF_ARRAY));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorToNamedList(F_TO_NAMED_LIST));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorToNoNamedList(F_TO_NONAMED_LIST));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorAddListToArray(F_ADD_LIST_TO_ARRAY));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorAddArrayToList(F_ADD_ARRAY_TO_LIST));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSeta(F_SETA));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorToVary(F_TO_VARY));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorToConst(F_TO_CONST));
-
-		// Thread
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSleep(F_SLEEP));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorDoParallel(F_DO_Parallel));
-
-		// Time
-		RulpUtil.addFrameObject(rootFrame, new XRFactorDate(F_DATE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorDayNumber(F_DAY_NUMBER));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemTime(F_SYS_TIME));
-		RulpUtil.addFrameObject(rootFrame, new XFactorDayOfWeek(F_DAY_OF_WEEK));
-
-		// Math
-		RulpUtil.addFrameObject(rootFrame, new XRFactorRandom(F_RANDOM));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorRandomInt(F_RANDOM_INT));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorRandomFloat(F_RANDOM_FLOAT));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorRandom(F_RANDOM_DOUBLE));
-
-		// System
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemGC(F_SYS_GC));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemTotalMemory(F_SYS_TOTAL_MEMORY));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemFreeMemory(F_SYS_FREE_MEMORY));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemOSType(F_SYS_OS_TYPE));
-		RulpUtil.addFrameObject(rootFrame, new XRFactorSystemSetProperty(F_SYS_SET_PROP));
-
-		// File System
-//		RulpUtil.addFrameObject(rootFrame, new XRFactorToValidPath(F_TO_VALID_PATH));
-
-		// Runtime
-		RulpUtil.addFrameObject(rootFrame, new XRFactorRuntimeCallCount(F_RUNTIME_CALL_COUNT));
-
-		// Rulp Utils
-		RulpUtil.addFrameObject(rootFrame, new XRFactorRulpObjectCount(F_RULP_OBJ_COUNT));
+		new BaseLoader().load(interpreter, rootFrame);
 
 		// Runtime Initialization
 		RuntimeUtil.init(systemFrame);
 
 		// Load base script
-		LoadUtil.loadRulpFromJar(interpreter, systemFrame, "alpha/resource/base.rulp", "utf-8");
+		LoadUtil.loadRulpFromJar(interpreter, systemFrame, "alpha/resource/base.res", "utf-8");
 
 		/******************************************************/
 		// Load JVM object

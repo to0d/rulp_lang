@@ -256,7 +256,6 @@ system::--
 system::?load-class
 system::?load-jar
 system::?load-script
-system::?load-system
 system::?path
 system::?trace
 system::add
@@ -266,12 +265,12 @@ system::dec
 system::equal
 system::get
 system::inc
+system::index-of
 system::is-empty
 system::length-of
 system::println
 system::root
 system::size-of
-system::sort
 system::system
 system::to-array
 system::to-list
@@ -289,7 +288,6 @@ main::day-is-bigger-than
 main::day-is-smaller-than
 main::file-prename
 main::file-subffix
-main::index-of
 main::is-blank
 main::is-empty
 main::ls1
@@ -303,6 +301,7 @@ main::main
 main::print-list
 main::root
 main::script_out
+main::sort
 main::system
 main::to-valid-path
 

@@ -1,0 +1,5 @@
+(load "tool")
+;=>
+
+(print-list '(a b c))
+;=>

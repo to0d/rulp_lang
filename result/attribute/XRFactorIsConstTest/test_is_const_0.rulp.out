@@ -228,6 +228,7 @@ obj=add-all             , type=func
 obj=cmp                 , type=func
 obj=dec                 , type=macro
 obj=inc                 , type=macro
+obj=index-of            , type=func
 obj=to-array            , type=func
 
 ;eof

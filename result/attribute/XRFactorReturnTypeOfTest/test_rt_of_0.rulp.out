@@ -60,7 +60,6 @@ obj=true                , type=bool    , return=bool
 obj=?load-class         , type=var     , return=list
 obj=?load-jar           , type=var     , return=list
 obj=?load-script        , type=var     , return=list
-obj=?load-system        , type=var     , return=list
 obj=?path               , type=var     , return=list
 obj=?trace              , type=var     , return=bool
 

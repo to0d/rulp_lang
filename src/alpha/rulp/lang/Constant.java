@@ -81,7 +81,7 @@ public interface Constant {
 
 	String A_LOAD_SCRIPT = "?load-script";
 
-	String A_LOAD_SYSTEM = "?load-system";
+//	String A_LOAD_SYSTEM = "?load-system";
 
 	String A_LOCAL = "local";
 
