@@ -1,4 +1,4 @@
-(load set)
+(load "set")
 ;=>nil
 
 (new set setx)

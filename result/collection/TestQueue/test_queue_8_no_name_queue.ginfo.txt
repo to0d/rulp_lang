@@ -50,22 +50,22 @@ Callable stats info: callId=258, row=24, column=33(8), value-max=9, value-unit=2
     main   member      2    1 queue::_queue_clear                                            2
     root   factor      2    0 new                                                          11 
     root   factor      2    0 load                                                        11  
-    main funcList      2    1 is-empty                                                      11
+    main funcList      2    3 is-empty                                                      11
     main   member      1    1 queue::_queue_pop_front                                       1 
     root   factor      1    0 name-of                                                      1  
     root   factor      1    0 load-class                                                   1  
-    main funcList      1    1 get                                                           1 
+    main funcList      1    2 get                                                           1 
     root   factor      1    0 defclass                                                     1  
-    main     func      1    1 (clear type#queue)                                             1
+    main     func      1    2 (clear type#queue)                                             1
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1366            0         1366
-      string:           29            0           29
-        list:           11            0           11
+        atom:         1364            0         1364
+      string:           31            0           31
+        list:           14            0           14
         expr:          604           18          586
          var:           31           12           19
         func:           90            5           85
@@ -89,33 +89,33 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        2    frame      frame@main          
-is-empty             : 4        2        1    funcList   '((is-empty array) (is-empty list) (is-empty string) (is-empty type#queue)) : frame=null, type=list
+is-empty             : 4        2        3    funcList   '((is-empty array) (is-empty list) (is-empty string) (is-empty type#queue)) : frame=null, type=list
                                          2    func       (is-empty list) : frame=frame@system
                                          2    func       (is-empty array) : frame=frame@system
                                          1    func       (is-empty string) : frame=frame@main
                                          1    func       (is-empty type#queue) : frame=frame@main
-is-blank             : 5        2        1    func       (is-blank string) : frame=frame@main
-file-prename         : 6        2        1    func       (file-prename string) : frame=frame@main
-file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
-?script-path         : 8        2        1    var        result\collection\TestQueue\test_queue_8_no_name_queue.rulp : type=string
-script_out           : 9        2        1    macro      script_out          
-_ginfo               : 10       2        1    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
-                                         1    func       (_ginfo) : frame=frame@main
+is-blank             : 5        2        2    func       (is-blank string) : frame=frame@main
+file-prename         : 6        2        2    func       (file-prename string) : frame=frame@main
+file-subffix         : 7        2        2    func       (file-subffix string) : frame=frame@main
+?script-path         : 8        2        2    var        result\collection\TestQueue\test_queue_8_no_name_queue.rulp : type=string
+script_out           : 9        2        2    macro      script_out          
+_ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+                                         2    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
-queue                : 11       2        1    class      queue               
+queue                : 11       2        2    class      queue               
 type#queue           : 12       2        0    atom       type#queue          
-size-of              : 13       2        1    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#queue)) : frame=null, type=list
+size-of              : 13       2        2    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#queue)) : frame=null, type=list
                                          2    func       (size-of list) : frame=frame@system
                                          2    func       (size-of array) : frame=frame@system
                                          2    func       (size-of array int) : frame=frame@system
                                          1    func       (size-of type#queue) : frame=frame@main
-get                  : 14       2        1    funcList   '((get array int int) (get array int) (get list int) (get type#queue int)) : frame=null, type=list
+get                  : 14       2        2    funcList   '((get array int int) (get array int) (get list int) (get type#queue int)) : frame=null, type=list
                                          2    func       (get list int) : frame=frame@system
                                          2    func       (get array int) : frame=frame@system
                                          2    func       (get array int int) : frame=frame@system
                                          1    func       (get type#queue int) : frame=frame@main
-clear                : 15       2        1    func       (clear type#queue) : frame=frame@main
-to-list              : 16       2        1    funcList   '((to-list array) (to-list list) (to-list type#queue)) : frame=null, type=list
+clear                : 15       2        2    func       (clear type#queue) : frame=frame@main
+to-list              : 16       2        2    funcList   '((to-list array) (to-list list) (to-list type#queue)) : frame=null, type=list
                                          2    func       (to-list list) : frame=frame@system
                                          2    func       (to-list array) : frame=frame@system
                                          1    func       (to-list type#queue) : frame=frame@main
@@ -134,8 +134,8 @@ Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
 ?load-class          : '("alpha.rulp.ximpl.collection.XRQueue$Loader")
 ?load-jar            : '()
-?load-script         : '()
-?load-system         : '("string" "queue")
+?load-script         : '("C:\\data\\rs\\rulp\\string.rulp" "C:\\data\\rs\\rulp\\queue.rulp")
+?load-system         : '()
 ?path                : '()
 ?trace               : false
 ==========================================================================================================================
@@ -150,7 +150,7 @@ Global frame tree:
 
 Global Subject list:
 
-name=queue, string=queue, lvl=0, ref=1/1, parent=null, final=true, mbrs=28, frame=3(SF-queue-0)
+name=queue, string=queue, lvl=0, ref=2/3, parent=null, final=true, mbrs=28, frame=3(SF-queue-0)
 ==========================================================================================================================
 Name                           : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-(load string)
+(load "string")
 ;=>nil
 
 (is-empty "")

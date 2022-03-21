@@ -1,4 +1,4 @@
-(load queue)
+(load "queue")
 ;=>
 
 (defclass class1 (queue))

@@ -1,4 +1,4 @@
-(load set)
+(load "set")
 ;=>
 
 (defun fun_add (?set ?v) (?set::add ?v))

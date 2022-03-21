@@ -53,13 +53,13 @@ public class XRFactorLoad extends AbsAtomFactorAdapter implements IRFactor {
 
 			break;
 
-		case ATOM:
-			LoadUtil.loadSystemRulp(interpreter, frame, RulpUtil.asAtom(loadObj).getName());
-			break;
-
-		case CLASS:
-			LoadUtil.loadSystemRulp(interpreter, frame, RulpUtil.asClass(loadObj).getClassName());
-			break;
+//		case ATOM:
+//			LoadUtil.loadSystemRulp(interpreter, frame, RulpUtil.asAtom(loadObj).getName());
+//			break;
+//
+//		case CLASS:
+//			LoadUtil.loadSystemRulp(interpreter, frame, RulpUtil.asClass(loadObj).getClassName());
+//			break;
 
 		default:
 			throw new RException("Invalid parameters: " + args);

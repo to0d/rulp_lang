@@ -1,4 +1,4 @@
-(load map)
+(load "map")
 ;=>nil
 
 (property-of map)

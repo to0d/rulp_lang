@@ -1,4 +1,4 @@
-(load queue)
+(load "queue")
 ;=>nil
 
 (new queue q1)

@@ -1,4 +1,4 @@
-(load queue)
+(load "queue")
 ;=>nil
 
 (defun fun_push (?queue ?v) (?queue::push ?v))

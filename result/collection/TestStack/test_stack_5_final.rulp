@@ -1,4 +1,4 @@
-(load stack)
+(load "stack")
 ;=>
 
 (defclass class1 (stack))

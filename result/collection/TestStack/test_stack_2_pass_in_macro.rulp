@@ -1,4 +1,4 @@
-(load stack)
+(load "stack")
 ;=>
 
 (defmacro macro_push (?stack ?v) (?stack::push ?v))

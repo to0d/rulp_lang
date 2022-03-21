@@ -1,4 +1,4 @@
-(load stack)
+(load "stack")
 ;=>nil
 
 (defun fun_push (?stack ?v) (?stack::push ?v))

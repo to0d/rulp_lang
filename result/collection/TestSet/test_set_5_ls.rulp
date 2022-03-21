@@ -1,5 +1,5 @@
-(load set)
-(load tool)
+(load "set")
+(load "tool")
 ;=>
 
 (print-list (list-of set))

@@ -1,4 +1,4 @@
-(load math)
+(load "math")
 ;=>nil
 
 (max '(1 2 3))

@@ -1,4 +1,4 @@
-(load set)
+(load "set")
 ;=>nil
 
 (defclass class1 (set))

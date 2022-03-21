@@ -1,4 +1,4 @@
-(load tool)
+(load "tool")
 ;;;
 
 (defun ls1 () (return (list-of)))

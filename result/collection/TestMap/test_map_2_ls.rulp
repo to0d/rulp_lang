@@ -1,5 +1,5 @@
-(load map)
-(load tool)
+(load "map")
+(load "tool")
 ;=>
 
 (list-of map)

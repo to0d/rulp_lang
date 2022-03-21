@@ -54,7 +54,7 @@ Callable stats info: callId=246, row=25, column=62(4), value-max=10, value-unit=
     root   factor      2    0 load                                                                                     1 1 
     root   factor      2    0 defclass                                                                                   2 
     root   factor      1    0 str-format                                                                                  1
-    main funcList      1    1 size-of                                                                                     1
+    main funcList      1    2 size-of                                                                                     1
     main   member      1    1 map::_map_size_of                                                                           1
     main   member      1    1 map::_map_init                                                                             1 
     root   factor      1    0 load-class                                                                                 1 
@@ -65,9 +65,9 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1334            0         1334
-      string:           34            0           34
-        list:           16            1           15
+        atom:         1332            0         1332
+      string:           36            0           36
+        list:           19            1           18
         expr:          591           15          576
          var:           42           14           28
         func:           80            0           80
@@ -91,27 +91,27 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        3    frame      frame@main          
-is-empty             : 4        2        1    funcList   '((is-empty array) (is-empty list) (is-empty string) (is-empty type#map)) : frame=null, type=list
+is-empty             : 4        2        3    funcList   '((is-empty array) (is-empty list) (is-empty string) (is-empty type#map)) : frame=null, type=list
                                          2    func       (is-empty list) : frame=frame@system
                                          2    func       (is-empty array) : frame=frame@system
                                          1    func       (is-empty string) : frame=frame@main
                                          1    func       (is-empty type#map) : frame=frame@main
-is-blank             : 5        2        1    func       (is-blank string) : frame=frame@main
-file-prename         : 6        2        1    func       (file-prename string) : frame=frame@main
-file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
-?script-path         : 8        2        1    var        result\collection\TestMap\test_map_7_ref_1.rulp : type=string
-script_out           : 9        2        1    macro      script_out          
-_ginfo               : 10       2        1    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
-                                         1    func       (_ginfo) : frame=frame@main
+is-blank             : 5        2        2    func       (is-blank string) : frame=frame@main
+file-prename         : 6        2        2    func       (file-prename string) : frame=frame@main
+file-subffix         : 7        2        2    func       (file-subffix string) : frame=frame@main
+?script-path         : 8        2        2    var        result\collection\TestMap\test_map_7_ref_1.rulp : type=string
+script_out           : 9        2        2    macro      script_out          
+_ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+                                         2    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
-map                  : 11       2        1    class      map                 
+map                  : 11       2        2    class      map                 
 type#map             : 12       2        0    atom       type#map            
-size-of              : 13       2        1    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#map)) : frame=null, type=list
+size-of              : 13       2        2    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#map)) : frame=null, type=list
                                          2    func       (size-of list) : frame=frame@system
                                          2    func       (size-of array) : frame=frame@system
                                          2    func       (size-of array int) : frame=frame@system
                                          1    func       (size-of type#map) : frame=frame@main
-clear                : 14       2        1    func       (clear type#map) : frame=frame@main
+clear                : 14       2        2    func       (clear type#map) : frame=frame@main
 class1               : 15       2        1    class      class1              
 type#class1          : 16       2        0    atom       type#class1         
 ?map1                : 17       2        1    var        map@un0 : type=instance
@@ -137,8 +137,8 @@ Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
 ?load-class          : '("alpha.rulp.ximpl.collection.XRMap$Loader")
 ?load-jar            : '()
-?load-script         : '()
-?load-system         : '("string" "map")
+?load-script         : '("C:\\data\\rs\\rulp\\string.rulp" "C:\\data\\rs\\rulp\\map.rulp")
+?load-system         : '()
 ?path                : '()
 ?trace               : false
 ==========================================================================================================================
@@ -167,7 +167,7 @@ init                           : DEFAULT                      0    1    func    
 to_string                      : DEFAULT                      0    1    func       (to_string) : frame=frame@main
 ==========================================================================================================================
 
-name=map, string=map, lvl=0, ref=1/1, parent=null, final=true, mbrs=15, frame=3(SF-map-0)
+name=map, string=map, lvl=0, ref=2/3, parent=null, final=true, mbrs=15, frame=3(SF-map-0)
 ==========================================================================================================================
 Name                           : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

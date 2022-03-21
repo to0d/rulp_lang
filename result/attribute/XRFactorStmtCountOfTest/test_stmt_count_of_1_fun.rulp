@@ -1,6 +1,6 @@
-(load math)
-(load string)
-(load tool)
+(load "math")
+(load "string")
+(load "tool")
 
 (defun fun1 (?v) 
     (return (+ ?v 1))

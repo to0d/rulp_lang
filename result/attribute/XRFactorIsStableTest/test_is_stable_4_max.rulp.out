@@ -1,4 +1,4 @@
-(load math)
+(load "math")
 ;=>nil
 
 (is-stable max)

@@ -1,4 +1,4 @@
-(load math)
+(load "math")
 ;=>
 
 (min 1 2)

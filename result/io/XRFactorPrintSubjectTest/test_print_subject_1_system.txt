@@ -53,10 +53,10 @@ equal                : -211     1        1    funcList   '((equal nil nil) (equa
 length-of            : -210     1        1    funcList   '((length-of blob) (length-of string)) : frame=null, type=list
                                          1    func       (length-of string) : frame=frame@system
                                          1    func       (length-of blob) : frame=frame@system
-?load-script         : -209     1        1    var        '() : type=list     
+?load-script         : -209     1        1    var        '("C:\\data\\rs\\rulp\\string.rulp") : type=list
 ?load-jar            : -208     1        1    var        '() : type=list     
 ?load-class          : -207     1        1    var        '() : type=list     
-?load-system         : -206     1        1    var        '("string") : type=list
+?load-system         : -206     1        1    var        '() : type=list     
 ?path                : -205     1        1    var        '() : type=list     
 ?trace               : -204     1        1    var        false : type=bool   
 system               : -3       1        0    frame      frame@system        

@@ -1,4 +1,4 @@
-(load stack)
+(load "stack")
 ;=>nil
 
 (defclass class1 (stack))

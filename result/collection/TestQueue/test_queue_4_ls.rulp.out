@@ -1,5 +1,5 @@
-(load queue)
-(load tool)
+(load "queue")
+(load "tool")
 ;=>nil nil
 
 (list-of queue)

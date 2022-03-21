@@ -1,4 +1,4 @@
-(load tool)
+(load "tool")
 ;=>
 
 (defvar x 10)

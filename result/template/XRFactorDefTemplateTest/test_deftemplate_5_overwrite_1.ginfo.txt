@@ -49,17 +49,17 @@ Callable stats info: callId=247, row=26, column=62(4), value-max=7, value-unit=2
     root   factor      2    0 +                                                                                           2
     root   factor      1    0 str-substr                                                                                  1
     root   factor      1    0 str-last-index-of                                                                           1
-    main    macro      1    1 script_out                                                                                  1
+    main    macro      1    2 script_out                                                                                  1
     root   factor      1    0 print-global-info                                                                           1
     root   factor      1    0 out-to-file                                                                                 1
     main   member      1    1 namespace@ns1::set                                                                          1
     root   factor      1    0 load                                                                                     1   
     root   factor      1    0 if                                                                                          1
-    main     func      1    1 (file-prename string)                                                                       1
+    main     func      1    2 (file-prename string)                                                                       1
     root   factor      1    0 do                                                                                          1
     root   factor      1    0 defclass                                                                                   1 
     main   member      1    1 class1@?o1::inc                                                                             1
-    main funcList      1    2 _ginfo                                                                                      1
+    main funcList      1    3 _ginfo                                                                                      1
     root   factor      1    0 !=                                                                                          1
 ==========================================================================================================================
 
@@ -67,9 +67,9 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1236            0         1236
-      string:           27            0           27
-        list:           11            0           11
+        atom:         1235            0         1235
+      string:           28            0           28
+        list:           13            0           13
         expr:          523            5          518
          var:           24            6           18
         func:           62            0           62
@@ -93,17 +93,17 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        4    frame      frame@main          
-is-empty             : 4        2        1    funcList   '((is-empty array) (is-empty list) (is-empty string)) : frame=null, type=list
+is-empty             : 4        2        2    funcList   '((is-empty array) (is-empty list) (is-empty string)) : frame=null, type=list
                                          2    func       (is-empty list) : frame=frame@system
                                          2    func       (is-empty array) : frame=frame@system
                                          1    func       (is-empty string) : frame=frame@main
-is-blank             : 5        2        1    func       (is-blank string) : frame=frame@main
-file-prename         : 6        2        1    func       (file-prename string) : frame=frame@main
-file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
-?script-path         : 8        2        1    var        result\template\XRFactorDefTemplateTest\test_deftemplate_5_overwrite_1.rulp : type=string
-script_out           : 9        2        1    macro      script_out          
-_ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
-                                         1    func       (_ginfo) : frame=frame@main
+is-blank             : 5        2        2    func       (is-blank string) : frame=frame@main
+file-prename         : 6        2        2    func       (file-prename string) : frame=frame@main
+file-subffix         : 7        2        2    func       (file-subffix string) : frame=frame@main
+?script-path         : 8        2        2    var        result\template\XRFactorDefTemplateTest\test_deftemplate_5_overwrite_1.rulp : type=string
+script_out           : 9        2        2    macro      script_out          
+_ginfo               : 10       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+                                         2    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
 class1               : 11       2        1    class      class1              
 type#class1          : 12       2        0    atom       type#class1         
@@ -131,8 +131,8 @@ Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
 ?load-class          : '()
 ?load-jar            : '()
-?load-script         : '()
-?load-system         : '("string")
+?load-script         : '("C:\\data\\rs\\rulp\\string.rulp")
+?load-system         : '()
 ?path                : '()
 ?trace               : false
 ==========================================================================================================================

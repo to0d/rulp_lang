@@ -1,4 +1,4 @@
-(load tool)
+(load "tool")
 ;=>
 
 (to-valid-path "abc")

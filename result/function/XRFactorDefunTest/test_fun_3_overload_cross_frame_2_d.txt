@@ -26,17 +26,17 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        2    frame      frame@main          
-is-empty             : 4        2        1    funcList   '((is-empty array) (is-empty list) (is-empty string)) : frame=null, type=list
+is-empty             : 4        2        2    funcList   '((is-empty array) (is-empty list) (is-empty string)) : frame=null, type=list
                                          2    func       (is-empty list) : frame=frame@system
                                          2    func       (is-empty array) : frame=frame@system
                                          1    func       (is-empty string) : frame=frame@main
-is-blank             : 5        2        1    func       (is-blank string) : frame=frame@main
-file-prename         : 6        2        1    func       (file-prename string) : frame=frame@main
-file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
-?script-path         : 8        2        1    var        result\function\XRFactorDefunTest\test_fun_3_overload_cross_frame_2.rulp : type=string
-script_out           : 9        2        1    macro      script_out          
-_ginfo               : 10       2        1    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
-                                         1    func       (_ginfo) : frame=frame@main
+is-blank             : 5        2        2    func       (is-blank string) : frame=frame@main
+file-prename         : 6        2        2    func       (file-prename string) : frame=frame@main
+file-subffix         : 7        2        2    func       (file-subffix string) : frame=frame@main
+?script-path         : 8        2        2    var        result\function\XRFactorDefunTest\test_fun_3_overload_cross_frame_2.rulp : type=string
+script_out           : 9        2        2    macro      script_out          
+_ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+                                         2    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
 fun1                 : 11       2        3    func       (fun1 nil) : frame=frame@main
 ?rv                  : 13       2        1    var        result\function\XRFactorDefunTest\test_fun_3_overload_cross_frame_2 : type=string

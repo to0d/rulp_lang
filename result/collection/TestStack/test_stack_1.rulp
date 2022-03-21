@@ -1,4 +1,4 @@
-(load stack)
+(load "stack")
 ;=>
 
 (new stack s1)

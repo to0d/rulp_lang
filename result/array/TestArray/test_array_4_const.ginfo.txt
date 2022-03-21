@@ -57,9 +57,9 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1230            0         1230
-      string:           29            0           29
-        list:           19            3           16
+        atom:         1229            0         1229
+      string:           30            0           30
+        list:           21            3           18
         expr:          533           12          521
        array:            5            4            1
          var:           39           24           15
@@ -81,17 +81,17 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        1    frame      frame@main          
-is-empty             : 4        2        1    funcList   '((is-empty array) (is-empty list) (is-empty string)) : frame=null, type=list
+is-empty             : 4        2        2    funcList   '((is-empty array) (is-empty list) (is-empty string)) : frame=null, type=list
                                          2    func       (is-empty list) : frame=frame@system
                                          2    func       (is-empty array) : frame=frame@system
                                          1    func       (is-empty string) : frame=frame@main
-is-blank             : 5        2        1    func       (is-blank string) : frame=frame@main
-file-prename         : 6        2        1    func       (file-prename string) : frame=frame@main
-file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
-?script-path         : 8        2        1    var        result\array\TestArray\test_array_4_const.rulp : type=string
-script_out           : 9        2        1    macro      script_out          
-_ginfo               : 10       2        1    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
-                                         1    func       (_ginfo) : frame=frame@main
+is-blank             : 5        2        2    func       (is-blank string) : frame=frame@main
+file-prename         : 6        2        2    func       (file-prename string) : frame=frame@main
+file-subffix         : 7        2        2    func       (file-subffix string) : frame=frame@main
+?script-path         : 8        2        2    var        result\array\TestArray\test_array_4_const.rulp : type=string
+script_out           : 9        2        2    macro      script_out          
+_ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+                                         2    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
 fun1                 : 11       2        1    func       (fun1 string) : frame=frame@main
 fun2                 : 12       2        1    func       (fun2 string) : frame=frame@main
@@ -105,8 +105,8 @@ Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
 ?load-class          : '()
 ?load-jar            : '()
-?load-script         : '()
-?load-system         : '("string")
+?load-script         : '("C:\\data\\rs\\rulp\\string.rulp")
+?load-system         : '()
 ?path                : '()
 ?trace               : false
 ==========================================================================================================================

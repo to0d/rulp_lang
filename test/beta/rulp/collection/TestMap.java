@@ -42,7 +42,7 @@ public class TestMap extends RulpTestBase {
 
 		_setup();
 
-		_test("(load map)");
+		_test("(load \"map\")");
 		_test("(new map map1)", "map1");
 		_test("(map1::put 1 2)", "nil");
 

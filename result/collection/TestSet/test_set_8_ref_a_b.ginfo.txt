@@ -50,15 +50,15 @@ Callable stats info: callId=255, row=32, column=64(4), value-max=7, value-unit=2
     root   factor      2    0 str-substr                                                                                   11
     root   factor      2    0 str-length                                                                                   11
     root   factor      2    0 str-last-index-of                                                                            11
-    main    macro      2    1 script_out                                                                                   11
+    main    macro      2    2 script_out                                                                                   11
     root   factor      2    0 print-global-info                                                                            11
     root   factor      2    0 out-to-file                                                                                  11
     root   factor      2    0 new                                                                                         2  
     root   factor      2    0 load                                                                                     1 1   
   system funcList      2    1 length-of                                                                                    11
-    main     func      2    1 (file-prename string)                                                                        11
+    main     func      2    2 (file-prename string)                                                                        11
     root   factor      2    0 defclass                                                                                   11  
-    main funcList      2    2 _ginfo                                                                                       11
+    main funcList      2    3 _ginfo                                                                                       11
     root   factor      2    0 >                                                                                            11
     root   factor      2    0 !=                                                                                           11
     main   member      1    1 set::_set_init                                                                              1  
@@ -72,9 +72,9 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1331            0         1331
-      string:           37            0           37
-        list:           11            0           11
+        atom:         1329            0         1329
+      string:           39            0           39
+        list:           14            0           14
         expr:          586            9          577
          var:           35           14           21
         func:           76            4           72
@@ -98,28 +98,28 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        4    frame      frame@main          
-is-empty             : 4        2        1    funcList   '((is-empty array) (is-empty list) (is-empty string) (is-empty type#set)) : frame=null, type=list
+is-empty             : 4        2        3    funcList   '((is-empty array) (is-empty list) (is-empty string) (is-empty type#set)) : frame=null, type=list
                                          2    func       (is-empty list) : frame=frame@system
                                          2    func       (is-empty array) : frame=frame@system
                                          1    func       (is-empty string) : frame=frame@main
                                          1    func       (is-empty type#set) : frame=frame@main
-is-blank             : 5        2        1    func       (is-blank string) : frame=frame@main
-file-prename         : 6        2        1    func       (file-prename string) : frame=frame@main
-file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
-?script-path         : 8        2        1    var        result\collection\TestSet\test_set_8_ref_a.rulp : type=string
-script_out           : 9        2        1    macro      script_out          
-_ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
-                                         1    func       (_ginfo) : frame=frame@main
+is-blank             : 5        2        2    func       (is-blank string) : frame=frame@main
+file-prename         : 6        2        2    func       (file-prename string) : frame=frame@main
+file-subffix         : 7        2        2    func       (file-subffix string) : frame=frame@main
+?script-path         : 8        2        2    var        result\collection\TestSet\test_set_8_ref_a.rulp : type=string
+script_out           : 9        2        2    macro      script_out          
+_ginfo               : 10       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+                                         2    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
-set                  : 11       2        1    class      set                 
+set                  : 11       2        2    class      set                 
 type#set             : 12       2        0    atom       type#set            
-size-of              : 13       2        1    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#set)) : frame=null, type=list
+size-of              : 13       2        2    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#set)) : frame=null, type=list
                                          2    func       (size-of list) : frame=frame@system
                                          2    func       (size-of array) : frame=frame@system
                                          2    func       (size-of array int) : frame=frame@system
                                          1    func       (size-of type#set) : frame=frame@main
-clear                : 14       2        1    func       (clear type#set) : frame=frame@main
-to-list              : 15       2        1    funcList   '((to-list array) (to-list list) (to-list type#set)) : frame=null, type=list
+clear                : 14       2        2    func       (clear type#set) : frame=frame@main
+to-list              : 15       2        2    funcList   '((to-list array) (to-list list) (to-list type#set)) : frame=null, type=list
                                          2    func       (to-list list) : frame=frame@system
                                          2    func       (to-list array) : frame=frame@system
                                          1    func       (to-list type#set) : frame=frame@main
@@ -162,8 +162,8 @@ Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
 ?load-class          : '("alpha.rulp.ximpl.collection.XRSet$Loader")
 ?load-jar            : '()
-?load-script         : '()
-?load-system         : '("string" "set")
+?load-script         : '("C:\\data\\rs\\rulp\\string.rulp" "C:\\data\\rs\\rulp\\set.rulp")
+?load-system         : '()
 ?path                : '()
 ?trace               : false
 ==========================================================================================================================
@@ -182,7 +182,7 @@ Global frame tree:
 
 Global Subject list:
 
-name=set, string=set, lvl=0, ref=1/1, parent=null, final=true, mbrs=15, frame=3(SF-set-0)
+name=set, string=set, lvl=0, ref=2/3, parent=null, final=true, mbrs=15, frame=3(SF-set-0)
 ==========================================================================================================================
 Name                           : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------

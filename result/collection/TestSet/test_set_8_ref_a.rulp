@@ -1,4 +1,4 @@
-(load set)
+(load "set")
 ;=>
 
 (rulp-object-count frame)

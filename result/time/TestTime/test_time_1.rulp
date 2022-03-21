@@ -1,4 +1,4 @@
-(load tool)
+(load "tool")
 ;=>
 
 (day-is-bigger-than "2020-01-01" "2020-01-02")

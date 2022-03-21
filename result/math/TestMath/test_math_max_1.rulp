@@ -1,4 +1,4 @@
-(load math)
+(load "math")
 ;=>
 
 (max 1 2)

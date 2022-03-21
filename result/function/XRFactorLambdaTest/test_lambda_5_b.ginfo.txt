@@ -49,12 +49,12 @@ Callable stats info: callId=246, row=27, column=62(4), value-max=7, value-unit=2
     root   factor      2    0 str-substr                                                                                  2
     root   factor      2    0 str-length                                                                                  2
     root   factor      2    0 str-last-index-of                                                                           2
-    main    macro      2    1 script_out                                                                                  2
+    main    macro      2    2 script_out                                                                                  2
     root   factor      2    0 print-global-info                                                                           2
     root   factor      2    0 out-to-file                                                                                 2
   system funcList      2    1 length-of                                                                                   2
-    main     func      2    1 (file-prename string)                                                                       2
-    main funcList      2    2 _ginfo                                                                                      2
+    main     func      2    2 (file-prename string)                                                                       2
+    main funcList      2    3 _ginfo                                                                                      2
     root   factor      2    0 >                                                                                           2
     root   factor      2    0 *                                                                                          2 
     root   factor      2    0 !=                                                                                          2
@@ -67,9 +67,9 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1221            0         1221
-      string:           33            0           33
-        list:           11            0           11
+        atom:         1220            0         1220
+      string:           34            0           34
+        list:           13            0           13
         expr:          527            8          519
          var:           32           11           21
         func:           60            0           60
@@ -90,17 +90,17 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        3    frame      frame@main          
-is-empty             : 4        2        1    funcList   '((is-empty array) (is-empty list) (is-empty string)) : frame=null, type=list
+is-empty             : 4        2        2    funcList   '((is-empty array) (is-empty list) (is-empty string)) : frame=null, type=list
                                          2    func       (is-empty list) : frame=frame@system
                                          2    func       (is-empty array) : frame=frame@system
                                          1    func       (is-empty string) : frame=frame@main
-is-blank             : 5        2        1    func       (is-blank string) : frame=frame@main
-file-prename         : 6        2        1    func       (file-prename string) : frame=frame@main
-file-subffix         : 7        2        1    func       (file-subffix string) : frame=frame@main
-?script-path         : 8        2        1    var        result\function\XRFactorLambdaTest\test_lambda_5.rulp : type=string
-script_out           : 9        2        1    macro      script_out          
-_ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
-                                         1    func       (_ginfo) : frame=frame@main
+is-blank             : 5        2        2    func       (is-blank string) : frame=frame@main
+file-prename         : 6        2        2    func       (file-prename string) : frame=frame@main
+file-subffix         : 7        2        2    func       (file-subffix string) : frame=frame@main
+?script-path         : 8        2        2    var        result\function\XRFactorLambdaTest\test_lambda_5.rulp : type=string
+script_out           : 9        2        2    macro      script_out          
+_ginfo               : 10       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+                                         2    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
 fun1                 : 11       2        1    func       (fun1 nil) : frame=frame@main
 ?f                   : 12       2        1    var        nil                 
@@ -143,8 +143,8 @@ Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
 ?load-class          : '()
 ?load-jar            : '()
-?load-script         : '()
-?load-system         : '("string")
+?load-script         : '("C:\\data\\rs\\rulp\\string.rulp")
+?load-system         : '()
 ?path                : '()
 ?trace               : false
 ==========================================================================================================================

@@ -1,4 +1,4 @@
-(load queue)
+(load "queue")
 ;=>nil
 
 (defvar q1 (new queue))

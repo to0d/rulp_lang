@@ -1,4 +1,4 @@
-(load math)
+(load "math")
 ;=>
 
 (is-stable max)

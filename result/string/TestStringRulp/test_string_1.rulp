@@ -1,4 +1,4 @@
-(load string)
+(load "string")
 ;=>
 
 (is-empty "")
