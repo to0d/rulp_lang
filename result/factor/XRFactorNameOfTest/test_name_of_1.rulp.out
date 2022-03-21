@@ -14,7 +14,7 @@
 ;=>nil
 
 (name-of print-list)
-;=>"print-list"
+;=>"'((print-list list) (print-list nil nil) (print-list nil))"
 
 (name-of n1:'(a b))
 ;=>"n1"

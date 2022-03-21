@@ -185,9 +185,8 @@ public class RulpTestBase {
 			int index = 0;
 			String inputStmt = null;
 			IRInterpreter interpreter = _getInterpreter();
-			
-			LoadUtil.loadRulp(interpreter, "C:\\data\\rs\\load\\itest.rulp", "utf-8");
-//			LoadUtil.loadRulpFromJar(interpreter, interpreter.getMainFrame(), "alpha/resource/itest.rulp", "utf-8");
+
+			LoadUtil.loadScript(interpreter, interpreter.getMainFrame(), "test/itest", "utf-8");
 			RulpUtil.setLocalVar(interpreter.getMainFrame(), V_SCRIPT_PATH, RulpFactory.createString(inputScriptPath));
 
 			for (; rc && index < size; ++index) {

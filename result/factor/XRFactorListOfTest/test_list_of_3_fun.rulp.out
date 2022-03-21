@@ -251,8 +251,6 @@ root::~
 (ls6)
 ;=>nil
 ;out:
-system::++
-system::--
 system::?load-class
 system::?load-jar
 system::?load-script
@@ -261,10 +259,8 @@ system::?trace
 system::add
 system::add-all
 system::cmp
-system::dec
 system::equal
 system::get
-system::inc
 system::index-of
 system::is-empty
 system::length-of
@@ -281,13 +277,17 @@ system::use
 (ls7)
 ;=>nil
 ;out:
+main::++
+main::--
 main::?rv
 main::?script-path
 main::_ginfo
 main::day-is-bigger-than
 main::day-is-smaller-than
+main::dec
 main::file-prename
 main::file-subffix
+main::inc
 main::is-blank
 main::is-empty
 main::ls1
@@ -298,6 +298,8 @@ main::ls5
 main::ls6
 main::ls7
 main::main
+main::max
+main::min
 main::print-list
 main::root
 main::script_out

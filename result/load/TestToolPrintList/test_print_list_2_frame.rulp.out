@@ -218,8 +218,6 @@ root::~
 (print-list (list-of system))
 ;=>nil
 ;out:
-system::++
-system::--
 system::?load-class
 system::?load-jar
 system::?load-script
@@ -228,10 +226,8 @@ system::?trace
 system::add
 system::add-all
 system::cmp
-system::dec
 system::equal
 system::get
-system::inc
 system::index-of
 system::is-empty
 system::length-of

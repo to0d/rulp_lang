@@ -1,6 +1,5 @@
-(load "math")
-(load "string")
 (load "tool")
+;=>nil
 
 (defun list-stmt-count (?subject) 
     (if (equal ?subject local)
@@ -18,7 +17,7 @@
         )
     )
 )
-;=>nil nil nil list-stmt-count
+;=>list-stmt-count
 
 (list-stmt-count root)
 ;=>nil

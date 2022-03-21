@@ -1,4 +1,4 @@
-(load "math")
+(load "tool")
 ;=>
 
 (defun fun1 (?v)

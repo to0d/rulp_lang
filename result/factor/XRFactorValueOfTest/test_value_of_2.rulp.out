@@ -2,26 +2,26 @@
 ;=>&v1
 
 (foreach (?x (list-of main)) (value-of ?x))
-;=>'(main::?script-path main::?x main::_ginfo main::file-prename main::file-subffix main::is-blank main::is-empty main::main main::root main::script_out main::system main::v1)
+;=>'(main::++ main::-- main::?script-path main::?x main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::main main::max main::min main::print-list main::root main::script_out main::sort main::system main::to-valid-path main::v1)
 
 (foreach (?x (list-of main)) (type-of $(value-of ?x)))
-;=>'(member member member member member member member member member member member member)
+;=>'(member member member member member member member member member member member member member member member member member member member member member member member)
 
 (foreach (?x (list-of main)) (value-of (value-of ?x)))
-;=>'(&?script-path &?x _ginfo file-prename file-subffix is-blank is-empty main root script_out system &v1)
+;=>'(++ -- &?script-path &?x _ginfo day-is-bigger-than day-is-smaller-than dec file-prename file-subffix inc is-blank is-empty main max min print-list root script_out sort system to-valid-path &v1)
 
 (foreach (?x (list-of main)) (type-of $(value-of (value-of ?x))))
-;=>'(var var func func func func func frame frame macro frame var)
+;=>'(macro macro var var func func func macro func func macro func func frame func func func frame macro func frame func var)
 
 (foreach (?x (list-of main)) (value-of (value-of (value-of ?x))))
-;=>'("result\\factor\\XRFactorValueOfTest\\test_value_of_2.rulp" main::?x _ginfo file-prename file-subffix is-blank is-empty main root script_out system 10)
+;=>'(++ -- "result\\factor\\XRFactorValueOfTest\\test_value_of_2.rulp" main::?x _ginfo day-is-bigger-than day-is-smaller-than dec file-prename file-subffix inc is-blank is-empty main max min print-list root script_out sort system to-valid-path 10)
 
 (foreach (?x (list-of main)) (type-of $(value-of (value-of (value-of ?x)))))
-;=>'(string member func func func func func frame frame macro frame int)
+;=>'(macro macro string member func func func macro func func macro func func frame func func func frame macro func frame func int)
 
 (foreach (?x (list-of main)) (value-of (value-of (value-of (value-of ?x)))))
-;=>'("result\\factor\\XRFactorValueOfTest\\test_value_of_2.rulp" &?x _ginfo file-prename file-subffix is-blank is-empty main root script_out system 10)
+;=>'(++ -- "result\\factor\\XRFactorValueOfTest\\test_value_of_2.rulp" &?x _ginfo day-is-bigger-than day-is-smaller-than dec file-prename file-subffix inc is-blank is-empty main max min print-list root script_out sort system to-valid-path 10)
 
 (foreach (?x (list-of main)) (type-of $(value-of (value-of (value-of (value-of ?x))))))
-;=>'(string var func func func func func frame frame macro frame int)
+;=>'(macro macro string var func func func macro func func macro func func frame func func func frame macro func frame func int)
 

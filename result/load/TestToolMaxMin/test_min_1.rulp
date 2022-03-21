@@ -1,4 +1,4 @@
-(load "math")
+(load "tool")
 ;=>
 
 (min 1 2)

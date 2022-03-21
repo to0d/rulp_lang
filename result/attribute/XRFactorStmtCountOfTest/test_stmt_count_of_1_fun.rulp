@@ -1,11 +1,10 @@
-(load "math")
-(load "string")
 (load "tool")
+;=>
 
 (defun fun1 (?v) 
     (return (+ ?v 1))
 )
-;;;
+;=>
 
 (stmt-count-of fun1)
 ;=>

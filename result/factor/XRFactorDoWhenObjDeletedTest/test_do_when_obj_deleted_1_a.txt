@@ -2,8 +2,8 @@ id=3, name=do, lvl=3, ref=2/3, entry=3, pid=2(main), subject=do
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-x                    : 11       3        1    var        1 : type=int        
-?rv                  : 15       3        1    var        result\factor\XRFactorDoWhenObjDeletedTest\test_do_when_obj_deleted_1 : type=string
-local                : 16       3        2    frame      frame@do            
+x                    : 22       3        1    var        1 : type=int        
+?rv                  : 26       3        1    var        result\factor\XRFactorDoWhenObjDeletedTest\test_do_when_obj_deleted_1 : type=string
+local                : 27       3        2    frame      frame@do            
 ==========================================================================================================================
 

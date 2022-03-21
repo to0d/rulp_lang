@@ -217,13 +217,6 @@
 (defun println (?a1 ?a2 ?a3 ?a4 ?a5 ?a6 ?a7 ?a8)     (print ?a1 ?a2 ?a3 ?a4 ?a5 ?a6 ?a7 ?a8 "\n"))
 (defun println (?a1 ?a2 ?a3 ?a4 ?a5 ?a6 ?a7 ?a8 ?a9) (print ?a1 ?a2 ?a3 ?a4 ?a5 ?a6 ?a7 ?a8 ?a9 "\n"))
 
-(defmacro -- (?v) (setq ?v (- ?v 1)))
-(defmacro ++ (?v) (setq ?v (+ ?v 1)))
-
-(defmacro inc (?var ?value) (setq ?var (+ ?var ?value)))
-(defmacro dec (?var ?value) (setq ?var (- ?var ?value)))
-
-
 ;****************************************************;
 ; Enviroment vars
 ;****************************************************;

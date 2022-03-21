@@ -222,12 +222,8 @@ obj=~                   , type=factor
 (list-of-is-const system)
 ;=>nil
 ;out:
-obj=++                  , type=macro
-obj=--                  , type=macro
 obj=add-all             , type=func
 obj=cmp                 , type=func
-obj=dec                 , type=macro
-obj=inc                 , type=macro
 obj=index-of            , type=func
 obj=to-array            , type=func
 
@@ -236,11 +232,18 @@ obj=to-array            , type=func
 (list-of-is-const main)
 ;=>nil
 ;out:
+obj=++                  , type=macro
+obj=--                  , type=macro
+obj=day-is-bigger-than  , type=func
+obj=day-is-smaller-than , type=func
+obj=dec                 , type=macro
 obj=file-prename        , type=func
 obj=file-subffix        , type=func
+obj=inc                 , type=macro
 obj=is-blank            , type=func
 obj=list-of-is-const    , type=func
 obj=script_out          , type=macro
+obj=to-valid-path       , type=func
 
 ;eof
 

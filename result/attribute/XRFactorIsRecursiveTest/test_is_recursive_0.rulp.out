@@ -24,6 +24,7 @@
 ;=>nil
 ;out:
 func=list-recursive-func
+func=print-list
 
 ;eof
 

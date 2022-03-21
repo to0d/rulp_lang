@@ -1,4 +1,4 @@
-(load "math")
+(load "tool")
 ;=>nil
 
 (min 1 2)

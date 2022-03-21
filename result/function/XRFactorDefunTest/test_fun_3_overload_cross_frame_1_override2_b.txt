@@ -2,34 +2,56 @@ id=4, name=do, lvl=3, ref=1/2, entry=2, pid=2(main), subject=do
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-fun1                 : 17       4        1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
+fun1                 : 28       4        1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
                                          2    func       (fun1 nil nil) : frame=frame@main
                                          1    func       (fun1 nil) : frame=frame@do
-?rv                  : 21       4        1    var        result\function\XRFactorDefunTest\test_fun_3_overload_cross_frame_1_override2 : type=string
+?rv                  : 32       4        1    var        result\function\XRFactorDefunTest\test_fun_3_overload_cross_frame_1_override2 : type=string
 ==========================================================================================================================
 
-id=2, name=main, lvl=2, ref=2/2, entry=12, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=2/2, entry=23, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
 root                 : 1        2        0    frame      frame@root          
 system               : 2        2        0    frame      frame@system        
 main                 : 3        2        2    frame      frame@main          
-is-empty             : 4        2        2    funcList   '((is-empty array) (is-empty list) (is-empty string)) : frame=null, type=list
+--                   : 4        2        2    macro      --                  
+++                   : 5        2        2    macro      ++                  
+inc                  : 6        2        2    macro      inc                 
+dec                  : 7        2        2    macro      dec                 
+max                  : 8        2        2    funcList   '((max list) (max nil nil)) : frame=null, type=list
+                                         2    func       (max nil nil) : frame=frame@main
+                                         1    func       (max list) : frame=frame@main
+min                  : 9        2        2    funcList   '((min list) (min nil nil)) : frame=null, type=list
+                                         2    func       (min nil nil) : frame=frame@main
+                                         1    func       (min list) : frame=frame@main
+is-empty             : 10       2        2    funcList   '((is-empty array) (is-empty list) (is-empty string)) : frame=null, type=list
                                          2    func       (is-empty list) : frame=frame@system
                                          2    func       (is-empty array) : frame=frame@system
                                          1    func       (is-empty string) : frame=frame@main
-is-blank             : 5        2        2    func       (is-blank string) : frame=frame@main
-file-prename         : 6        2        2    func       (file-prename string) : frame=frame@main
-file-subffix         : 7        2        2    func       (file-subffix string) : frame=frame@main
-?script-path         : 8        2        2    var        result\function\XRFactorDefunTest\test_fun_3_overload_cross_frame_1_override2.rulp : type=string
-script_out           : 9        2        2    macro      script_out          
-_ginfo               : 10       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+is-blank             : 11       2        2    func       (is-blank string) : frame=frame@main
+file-prename         : 12       2        2    func       (file-prename string) : frame=frame@main
+file-subffix         : 13       2        2    func       (file-subffix string) : frame=frame@main
+print-list           : 14       2        3    funcList   '((print-list list) (print-list nil nil) (print-list nil)) : frame=null, type=list
+                                         2    func       (print-list list) : frame=frame@main
+                                         1    func       (print-list nil nil) : frame=frame@main
+                                         1    func       (print-list nil) : frame=frame@main
+sort                 : 15       2        4    funcList   '((sort array func) (sort array) (sort list func) (sort list)) : frame=null, type=list
+                                         2    func       (sort list) : frame=frame@main
+                                         1    func       (sort list func) : frame=frame@main
+                                         1    func       (sort array) : frame=frame@main
+                                         1    func       (sort array func) : frame=frame@main
+to-valid-path        : 16       2        2    func       (to-valid-path string) : frame=frame@main
+day-is-bigger-than   : 17       2        2    func       (day-is-bigger-than string string) : frame=frame@main
+day-is-smaller-than  : 18       2        2    func       (day-is-smaller-than string string) : frame=frame@main
+?script-path         : 19       2        2    var        result\function\XRFactorDefunTest\test_fun_3_overload_cross_frame_1_override2.rulp : type=string
+script_out           : 20       2        2    macro      script_out          
+_ginfo               : 21       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          2    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
-fun1                 : 11       2        1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
+fun1                 : 22       2        1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
                                          1    func       (fun1 nil) : frame=frame@main
                                          2    func       (fun1 nil nil) : frame=frame@main
-?rv                  : 13       2        1    var        result\function\XRFactorDefunTest\test_fun_3_overload_cross_frame_1_override2 : type=string
+?rv                  : 24       2        1    var        result\function\XRFactorDefunTest\test_fun_3_overload_cross_frame_1_override2 : type=string
 ==========================================================================================================================
 

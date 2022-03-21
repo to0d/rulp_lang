@@ -1,11 +1,9 @@
-(load "math")
+(load "tool")
 (load "map")
 (load "queue")
 (load "set")
 (load "stack")
-(load "string")
-(load "tool")
-;=>nil nil nil nil nil nil nil
+;=>nil nil nil nil nil
 
 (defun list-of-is-thread-safe-objects (?subject) 
     (if (equal ?subject local)

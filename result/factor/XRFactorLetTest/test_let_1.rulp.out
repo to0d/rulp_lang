@@ -2,11 +2,11 @@
 ;=>&x
 
 (list-of local)
-;=>'(main::?script-path main::_ginfo main::file-prename main::file-subffix main::is-blank main::is-empty main::local main::main main::root main::script_out main::system main::x)
+;=>'(main::++ main::-- main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::local main::main main::max main::min main::print-list main::root main::script_out main::sort main::system main::to-valid-path main::x)
 
 (let (a 5) (+ a 1))
 ;=>6
 
 (list-of local) ; no global var created
-;=>'(main::?script-path main::_ginfo main::file-prename main::file-subffix main::is-blank main::is-empty main::local main::main main::root main::script_out main::system main::x)
+;=>'(main::++ main::-- main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::local main::main main::max main::min main::print-list main::root main::script_out main::sort main::system main::to-valid-path main::x)
 

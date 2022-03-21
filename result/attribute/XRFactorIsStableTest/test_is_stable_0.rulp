@@ -1,10 +1,8 @@
-(load "math")
+(load "tool")
 (load "map")
 (load "queue")
 (load "set")
 (load "stack")
-(load "string")
-(load "tool")
 ;=>
 
 (defun list-of-is-stable-fun (?subject) 

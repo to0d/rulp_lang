@@ -1,6 +1,5 @@
-(load "math")
-(load "string")
 (load "tool")
+;=>
 
 (defun list-stmt-count (?subject) 
     (if (equal ?subject local)
@@ -18,7 +17,7 @@
         )
     )
 )
-;;;
+;=>
 
 (list-stmt-count root)
 ;=>

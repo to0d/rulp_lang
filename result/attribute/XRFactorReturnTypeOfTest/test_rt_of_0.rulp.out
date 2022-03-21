@@ -69,6 +69,7 @@ obj=?trace              , type=var     , return=bool
 ;=>nil
 ;out:
 obj=?script-path        , type=var     , return=string
+obj=to-valid-path       , type=func    , return=string
 
 ;eof
 

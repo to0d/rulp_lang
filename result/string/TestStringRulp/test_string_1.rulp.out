@@ -1,4 +1,4 @@
-(load "string")
+(load "tool")
 ;=>nil
 
 (is-empty "")
