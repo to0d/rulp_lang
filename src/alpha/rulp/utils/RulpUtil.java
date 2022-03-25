@@ -1479,7 +1479,7 @@ public class RulpUtil {
 			return true;
 
 		} catch (RException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			return false;
 		}
 	}
