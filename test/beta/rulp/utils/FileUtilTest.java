@@ -71,8 +71,8 @@ class FileUtilTest extends RulpTestBase {
 		_setup();
 
 		if (SystemUtil.getOSType() == OSType.Win) {
-			assertEquals("C:\\data\\itool\\irulp_base\\", FileUtil.toValidPath(""));
-			assertEquals("C:\\data\\itool\\irulp_base\\", FileUtil.toValidPath(null));
+			assertEquals("C:\\data\\itool\\irulp_lang\\", FileUtil.toValidPath(""));
+			assertEquals("C:\\data\\itool\\irulp_lang\\", FileUtil.toValidPath(null));
 
 		} else {
 			assertEquals("/home/todd/data/project/itool/iCommon/", FileUtil.toValidPath(""));
