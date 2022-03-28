@@ -12,9 +12,13 @@ package alpha.rulp.runtime;
 public class RName {
 
 	public final String fullName;
+
 	public final String nameSpace;
+
 	public final String prefix;
+
 	public final String subName;
+
 	private String _shortName;
 
 	public RName(String nameSpace, String prefix, String subName, String fullName) {
@@ -34,6 +38,7 @@ public class RName {
 		if (_shortName == null) {
 			_shortName = prefix + ":" + subName;
 		}
+		
 		return _shortName;
 	}
 }
