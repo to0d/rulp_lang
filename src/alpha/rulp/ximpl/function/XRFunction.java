@@ -82,7 +82,7 @@ public class XRFunction extends AbsFunctionAdapter implements IRFunction {
 			IRObject value = valIter.next();
 
 			// Match any type
-			if (typeAtom == O_Nil || value == null) {
+			if (typeAtom == O_Nil || value == null||value == O_Nil) {
 				continue;
 			}
 

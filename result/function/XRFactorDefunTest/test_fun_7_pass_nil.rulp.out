@@ -1,9 +1,11 @@
-(defun fun1 ((?x string)) (print ?x))
+(defun fun1 ((?x string)) 
+    (print ?x)
+)
 ;=>fun1
 
 (fun1 nil)
-;err:
-the 0 argument<nil> not match type <string>
-at (fun1 nil) ; main-2
+;=>nil
+;out:
+nil
 ;eof
 
