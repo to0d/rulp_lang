@@ -15,6 +15,7 @@ import static alpha.rulp.lang.Constant.O_Nil;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import alpha.common.file.FileUtil;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -22,7 +23,6 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
-import alpha.rulp.utils.FileUtil;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 

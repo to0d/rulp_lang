@@ -19,6 +19,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import alpha.common.file.FileUtil;
+import alpha.common.jar.JarUtil;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -95,11 +97,11 @@ public class LoadUtil {
 			line = loadLineMap.get(jarPath);
 			if (line == null) {
 
-				if (!FileUtil.containFileInJar(jarPath)) {
+				if (!JarUtil.containFileInJar(jarPath)) {
 					throw new RException("jar file not found: " + jarPath);
 				}
 
-				line = RulpUtil.toOneLine(FileUtil.openTxtFileFromJar(jarPath, charset));
+				line = RulpUtil.toOneLine(JarUtil.openTxtFileFromJar(jarPath, charset));
 				loadLineMap.put(jarPath, line);
 			}
 		}

@@ -15,13 +15,13 @@ import static alpha.rulp.lang.Constant.O_MAC;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.O_WIN;
 
+import alpha.common.os.SystemUtil;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.utils.SystemUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorSystemOSType extends AbsAtomFactorAdapter implements IRFactor {
