@@ -335,7 +335,7 @@ public class BaseLoader implements IRObjectLoader {
 
 		// Relational
 		RulpUtil.addFrameObject(frame, new XRFactorComparison(F_O_EQ, RRelationalOperator.EQ)); // =
-		RulpUtil.addFrameObject(frame, new XRFactorComparison(F_O_NE, RRelationalOperator.NE)); // =
+		RulpUtil.addFrameObject(frame, new XRFactorComparison(F_O_NE, RRelationalOperator.NE)); // !=
 		RulpUtil.addFrameObject(frame, new XRFactorComparison(F_O_GT, RRelationalOperator.GT)); // >
 		RulpUtil.addFrameObject(frame, new XRFactorComparison(F_O_LT, RRelationalOperator.LT)); // <
 		RulpUtil.addFrameObject(frame, new XRFactorComparison(F_O_GE, RRelationalOperator.GE)); // >=
