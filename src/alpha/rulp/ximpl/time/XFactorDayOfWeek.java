@@ -9,6 +9,8 @@
 
 package alpha.rulp.ximpl.time;
 
+import alpha.common.exception.AException;
+import alpha.common.time.XDay;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -17,7 +19,6 @@ import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.utils.XDay;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XFactorDayOfWeek extends AbsAtomFactorAdapter implements IRFactor {
@@ -34,7 +35,12 @@ public class XFactorDayOfWeek extends AbsAtomFactorAdapter implements IRFactor {
 		}
 
 		String dayString = RulpUtil.asString(interpreter.compute(frame, args.get(1))).asString();
-		return RulpFactory.createInteger(XDay.getDay(dayString).getDayOfWeek());
+		try {
+			return RulpFactory.createInteger(XDay.getDay(dayString).getDayOfWeek());
+		} catch (AException e) {
+//			e.printStackTrace();
+			throw new RException(e.getMessage());
+		}
 	}
 
 }

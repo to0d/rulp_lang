@@ -70,11 +70,12 @@ public class LoadUtil {
 	}
 
 	public static IRList loadRulp(IRInterpreter interpreter, String path, String charset) throws RException {
+
 		try {
 
 			IRList rstList = RulpFactory.createVaryList();
 
-			interpreter.compute(StringUtil.toOneLine(FileUtil.openTxtFile(path, charset)), (rst) -> {
+			interpreter.compute(RulpUtil.toOneLine(FileUtil.openTxtFile(path, charset)), (rst) -> {
 				rstList.add(rst);
 			});
 
@@ -98,12 +99,13 @@ public class LoadUtil {
 					throw new RException("jar file not found: " + jarPath);
 				}
 
-				line = StringUtil.toOneLine(FileUtil.openTxtFileFromJar(jarPath, charset));
+				line = RulpUtil.toOneLine(FileUtil.openTxtFileFromJar(jarPath, charset));
 				loadLineMap.put(jarPath, line);
 			}
 		}
 
 		List<IRObject> rsts = new LinkedList<>();
+
 		for (IRObject obj : interpreter.getParser().parse(line)) {
 			rsts.add(interpreter.compute(frame, obj));
 		}

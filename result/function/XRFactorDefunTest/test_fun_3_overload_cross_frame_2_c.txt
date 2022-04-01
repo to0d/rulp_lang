@@ -1,11 +1,11 @@
-id=5, name=do, lvl=3, ref=1/2, entry=2, pid=2(main), subject=do
+id=3, name=do, lvl=3, ref=1/2, entry=2, pid=2(main), subject=do
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-fun1                 : 35       5        1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
+fun1                 : 35       3        1    funcList   '((fun1 nil nil) (fun1 nil)) : frame=null, type=list
                                          2    func       (fun1 nil) : frame=frame@main
                                          1    func       (fun1 nil nil) : frame=frame@do
-?rv                  : 39       5        1    var        result\function\XRFactorDefunTest\test_fun_3_overload_cross_frame_2 : type=string
+?rv                  : 39       3        1    var        result\function\XRFactorDefunTest\test_fun_3_overload_cross_frame_2 : type=string
 ==========================================================================================================================
 
 id=2, name=main, lvl=2, ref=2/2, entry=23, pid=1(system), subject=main

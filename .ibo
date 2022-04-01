@@ -3,5 +3,5 @@ NAME:RULP_LANG
 LIBP:irulp_lang
 VERS:0.0.1
 # Projects
-DEPP:CHAR
+DEPP:ALPHA_COM
 # Libraries

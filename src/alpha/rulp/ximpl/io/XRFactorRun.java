@@ -23,7 +23,6 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.utils.FileUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.utils.StringUtil;
 import alpha.rulp.ximpl.error.RReturn;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
@@ -61,7 +60,7 @@ public class XRFactorRun extends AbsAtomFactorAdapter implements IRFactor {
 			RulpUtil.incRef(runFrame);
 
 			for (IRObject obj : interpreter.getParser()
-					.parse(StringUtil.toOneLine(FileUtil.openTxtFile(path, charset)))) {
+					.parse(RulpUtil.toOneLine(FileUtil.openTxtFile(path, charset)))) {
 				interpreter.compute(runFrame, obj);
 			}
 

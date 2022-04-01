@@ -4,6 +4,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import alpha.common.exception.AException;
+
 /* Copyright Prolog                                  */
 
 /*                                                   */
@@ -14,7 +16,7 @@ import java.util.List;
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-public class RException extends Exception {
+public class RException extends AException {
 
 	private static final long serialVersionUID = -5868320437069359308L;
 

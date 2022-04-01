@@ -12,9 +12,9 @@ package alpha.rulp.ximpl.runtime;
 import static alpha.common.ichar.Constant.EN_SEPARATION_DOT;
 
 import alpha.common.ichar.CharUtil;
+import alpha.common.string.StringUtil;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRTokener;
-import alpha.rulp.utils.StringUtil;
 
 public class XRTokener implements IRTokener {
 

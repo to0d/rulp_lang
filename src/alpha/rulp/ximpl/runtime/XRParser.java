@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import alpha.common.string.StringUtil;
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRObject;
@@ -33,7 +34,6 @@ import alpha.rulp.runtime.IRTokener.TokenType;
 import alpha.rulp.runtime.RName;
 import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
-import alpha.rulp.utils.StringUtil;
 import alpha.rulp.ximpl.error.RParseException;
 import alpha.rulp.ximpl.error.RulpIncompleteException;
 

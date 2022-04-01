@@ -12,6 +12,8 @@ package alpha.rulp.utils;
 import java.util.Collections;
 import java.util.List;
 
+import alpha.common.string.StringUtil;
+
 public class SystemUtil {
 
 	public enum OSType {

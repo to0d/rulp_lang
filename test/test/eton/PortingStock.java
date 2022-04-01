@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import alpha.common.string.StringUtil;
 import alpha.rulp.utils.FileUtil;
-import alpha.rulp.utils.StringUtil;
 
 public class PortingStock {
 

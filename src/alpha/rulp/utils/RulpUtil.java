@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import alpha.common.string.StringUtil;
 import alpha.rulp.lang.IRArray;
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRBlob;
@@ -2220,6 +2221,21 @@ public class RulpUtil {
 		default:
 			throw new RException(String.format("Not support type: %s", a.toString()));
 		}
+	}
+
+	public static String toOneLine(List<String> lines) {
+
+		StringBuffer sb = new StringBuffer();
+		int index = 0;
+
+		for (String line : lines) {
+			if (index++ != 0) {
+				sb.append('\n');
+			}
+			sb.append(line);
+		}
+
+		return sb.toString();
 	}
 
 	public static RRelationalOperator toRelationalOperator(String name) {

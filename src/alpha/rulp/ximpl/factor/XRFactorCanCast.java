@@ -12,6 +12,7 @@ package alpha.rulp.ximpl.factor;
 import java.util.ArrayList;
 import java.util.List;
 
+import alpha.common.string.StringUtil;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -22,7 +23,6 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.utils.StringUtil;
 
 public class XRFactorCanCast extends AbsAtomFactorAdapter implements IRFactor {
 

@@ -75,8 +75,8 @@ public class RulpTestBase {
 	protected static String _load(String path) {
 
 		try {
-			return StringUtil.toOneLine(FileUtil.openTxtFile(path));
-		} catch (RException | IOException e) {
+			return RulpUtil.toOneLine(FileUtil.openTxtFile(path));
+		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e.toString());
 			return null;
@@ -86,8 +86,8 @@ public class RulpTestBase {
 	protected static String _load(String path, String charset) {
 
 		try {
-			return StringUtil.toOneLine(FileUtil.openTxtFile(path, charset));
-		} catch (RException | IOException e) {
+			return RulpUtil.toOneLine(FileUtil.openTxtFile(path, charset));
+		} catch (IOException e) {
 			e.printStackTrace();
 			fail(e.toString());
 			return null;
