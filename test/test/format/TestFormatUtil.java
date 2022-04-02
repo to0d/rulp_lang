@@ -2,7 +2,7 @@ package test.format;
 
 import java.io.IOException;
 
-import alpha.common.file.FileUtil;
+import alpha.common.utils.FileUtil;
 import alpha.rulp.lang.RException;
 import alpha.rulp.utils.FormatUtil;
 

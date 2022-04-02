@@ -19,8 +19,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import alpha.common.file.FileUtil;
-import alpha.common.jar.JarUtil;
+import alpha.common.utils.FileUtil;
+import alpha.common.utils.JarUtil;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;

@@ -15,7 +15,7 @@ import static alpha.rulp.lang.Constant.O_MAC;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.O_WIN;
 
-import alpha.common.os.SystemUtil;
+import alpha.common.utils.SystemUtil;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;

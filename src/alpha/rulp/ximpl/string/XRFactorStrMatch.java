@@ -11,7 +11,7 @@ package alpha.rulp.ximpl.string;
 
 import java.util.ArrayList;
 
-import alpha.common.string.StringUtil;
+import alpha.common.utils.StringUtil;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;

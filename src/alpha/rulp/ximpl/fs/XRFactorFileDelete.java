@@ -11,7 +11,7 @@ package alpha.rulp.ximpl.fs;
 
 import java.io.File;
 
-import alpha.common.file.FileUtil;
+import alpha.common.utils.FileUtil;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;

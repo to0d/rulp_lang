@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import alpha.common.string.StringUtil;
+import alpha.common.utils.StringUtil;
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRObject;

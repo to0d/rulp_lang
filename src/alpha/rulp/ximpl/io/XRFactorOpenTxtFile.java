@@ -13,7 +13,7 @@ import static alpha.rulp.lang.Constant.F_OPEN_TXT_FILE;
 
 import java.io.IOException;
 
-import alpha.common.file.FileUtil;
+import alpha.common.utils.FileUtil;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;

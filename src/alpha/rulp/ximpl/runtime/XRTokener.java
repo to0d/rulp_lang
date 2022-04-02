@@ -9,10 +9,9 @@
 
 package alpha.rulp.ximpl.runtime;
 
-import static alpha.common.ichar.Constant.EN_SEPARATION_DOT;
+import static alpha.common.string.Constant.EN_SEPARATION_DOT;
 
-import alpha.common.ichar.CharUtil;
-import alpha.common.string.StringUtil;
+import alpha.common.utils.StringUtil;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRTokener;
 
@@ -151,18 +150,18 @@ public class XRTokener implements IRTokener {
 			break;
 		}
 
-		switch (CharUtil.getCharLangType(c)) {
-		case CL20_CN_CHAR:
-		case CL21_CN_SYMBOL:
-		case CL33_TW_ZHUYIN:
-		case CL41_JP_SYMBOL:
-		case CL53_ROMAN_NUM:
+		switch (StringUtil.getCharType(c)) {
+		case CN_CHAR:
+		case CN_SYMBOL:
+		case TW_ZHUYIN:
+		case JP_SYMBOL:
+		case ROMAN_NUM:
 			return C00_CHAR;
 
-		case CL00_NUMBER:
+		case NUMBER:
 			return C01_NUM;
 
-		case CL10_EN_CHAR:
+		case EN_CHAR:
 			return C00_CHAR;
 
 		default:

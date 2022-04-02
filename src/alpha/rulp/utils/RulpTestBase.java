@@ -16,8 +16,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import alpha.common.file.FileUtil;
-import alpha.common.test.AlphaTestBase;
+import alpha.common.utils.AlphaTestBase;
+import alpha.common.utils.FileUtil;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRInterpreter;

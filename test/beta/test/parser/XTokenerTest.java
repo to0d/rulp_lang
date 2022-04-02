@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import alpha.common.file.FileUtil;
+import alpha.common.utils.FileUtil;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRTokener;
 import alpha.rulp.runtime.IRTokener.Token;

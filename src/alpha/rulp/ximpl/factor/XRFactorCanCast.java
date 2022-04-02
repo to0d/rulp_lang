@@ -12,7 +12,7 @@ package alpha.rulp.ximpl.factor;
 import java.util.ArrayList;
 import java.util.List;
 
-import alpha.common.string.StringUtil;
+import alpha.common.utils.StringUtil;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;

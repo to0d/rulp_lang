@@ -9,8 +9,8 @@
 
 package alpha.rulp.ximpl.time;
 
-import alpha.common.exception.AException;
-import alpha.common.time.XDay;
+import alpha.common.exception.XException;
+import alpha.common.utils.XDay;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -37,7 +37,7 @@ public class XRFactorDayNumber extends AbsAtomFactorAdapter implements IRFactor 
 		String dayString = RulpUtil.asString(interpreter.compute(frame, args.get(1))).asString();
 		try {
 			return RulpFactory.createInteger(XDay.getDay(dayString).getNumDay());
-		} catch (AException e) {
+		} catch (XException e) {
 			// e.printStackTrace();
 			throw new RException(e.getMessage());
 		}
