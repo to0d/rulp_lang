@@ -1,6 +1,6 @@
 TYPE:PROJECT
 NAME:RULP_LANG
-LIBP:irulp_lang
+LIBP:rulp_lang
 VERS:0.0.1
 # Projects
 DEPP:ALPHA_COMMON
