@@ -6,7 +6,7 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 ?os.name             : -227     0        1    var        Windows 10 : type=string
 ?path.separator      : -226     0        1    var        ; : type=string     
 ?file.separator      : -225     0        1    var        \ : type=string     
-?user.dir            : -224     0        1    var        C:\data\itool\irulp_lang : type=string
+?user.dir            : -224     0        1    var        C:\data\itool\rulp_lang : type=string
 ?user.name           : -223     0        1    var        to0d : type=string  
 ?user.home           : -222     0        1    var        C:\Users\to0d : type=string
 rulp-object-count    : -203     0        0    factor     rulp-object-count   
