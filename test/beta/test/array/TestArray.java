@@ -13,13 +13,13 @@ public class TestArray extends RulpTestBase {
 	}
 
 	@Test
-	public void test_array_2_add() {
+	void test_array_2_add() {
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	public void test_array_4_const() {
+	void test_array_4_const() {
 
 		_setup();
 		_run_script();
