@@ -4,3 +4,4 @@
 (str-replace "2,238,984" "," "")
 ;=>
 
+(str-replace "abc'x'y" "'" "''")
