@@ -2197,21 +2197,6 @@ public class RulpUtil {
 		return list;
 	}
 
-	@SuppressWarnings("unchecked")
-	public static <T> List<T> toList(T... objs) {
-
-		if (objs == null || objs.length == 0) {
-			return Collections.emptyList();
-		}
-
-		List<T> list = new ArrayList<T>();
-		for (T o : objs) {
-			list.add(o);
-		}
-
-		return list;
-	}
-
 	public static long toLong(IRObject a) throws RException {
 
 		switch (a.getType()) {
