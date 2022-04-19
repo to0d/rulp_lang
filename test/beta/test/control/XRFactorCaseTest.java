@@ -1,4 +1,4 @@
-package beta.test.factor;
+package beta.test.control;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,4 +12,9 @@ class XRFactorCaseTest extends RulpTestBase {
 		_run_script();
 	}
 
+	@Test
+	void test_case_2() {
+		_setup();
+		_run_script();
+	}
 }

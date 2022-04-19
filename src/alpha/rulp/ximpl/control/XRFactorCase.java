@@ -36,6 +36,16 @@ public class XRFactorCase extends AbsAtomFactorAdapter implements IRFactor {
 			return true;
 		}
 
+		if (caseValue.getType() == RType.LIST) {
+
+			IRIterator<? extends IRObject> it = RulpUtil.asList(caseValue).iterator();
+			while (it.hasNext()) {
+				if (RulpUtil.equal(value, it.next())) {
+					return true;
+				}
+			}
+		}
+
 		return false;
 	}
 
@@ -62,12 +72,11 @@ public class XRFactorCase extends AbsAtomFactorAdapter implements IRFactor {
 
 			IRObject caseValue = interpreter.compute(frame, caseClause.get(0));
 			if (matchCaseValue(value, caseValue)) {
-				IRExpr caseExpr = RulpUtil.asExpression(caseClause.get(1));
-				return interpreter.compute(frame, caseExpr);
+				return interpreter.compute(frame, caseClause.get(1));
 			}
 		}
 
 		return O_Nil;
 	}
- 
+
 }

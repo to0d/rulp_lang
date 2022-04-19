@@ -2,22 +2,29 @@
     (return (case ?v
                 (1 (return "a"))
                 (2 (return "b")))))
-;;;
+;=>
+
 (fun1 1)
-;;;
+;=>
+
 (fun1 3)
-;;;
+;=>
+
 (fun1 a)
-;;;
+;=>
+
 (defun fun2 (?v)
     (return (case ?v
                 (1 (return "a"))
                 (2 (return "b"))
                 (? (return "x")))))
-;;;
+;=>
+
 (fun2 1)
-;;;
+;=>
+
 (fun2 3)
-;;;
+;=>
+
 (fun2 a)
-;;;
+;=>
