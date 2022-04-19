@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import alpha.common.utils.ComUtil;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
@@ -50,8 +51,6 @@ public class FormatUtil {
 	static Loc nil_loc = new Loc(0, 1, A_NIL.length());
 
 	static Map<IRObject, Loc> objLocMap = new HashMap<>();
-
-	static String spaceLines[] = new String[1024];
 
 	private static Loc _getLoc(IRObject obj) throws RException {
 
@@ -89,26 +88,6 @@ public class FormatUtil {
 		}
 
 		return loc;
-	}
-
-	private static String _getSpaceLine(int len) {
-
-		if (len < 0) {
-			len = 0;
-		}
-
-		String line = spaceLines[len];
-		if (line == null) {
-
-			StringBuffer sb = new StringBuffer();
-			for (int i = 0; i < len * 4; ++i) {
-				sb.append(' ');
-			}
-			line = sb.toString();
-			spaceLines[len] = line;
-		}
-
-		return line;
 	}
 
 	private static void _output(IRObject obj, List<String> outLines) throws RException {
@@ -155,7 +134,7 @@ public class FormatUtil {
 		}
 
 		if (outputOneLine) {
-			outLines.add(_getSpaceLine(level) + toString(obj));
+			outLines.add(ComUtil.getSpaceLine(level) + toString(obj));
 			return;
 		}
 
@@ -168,10 +147,10 @@ public class FormatUtil {
 		IRIterator<? extends IRObject> it;
 		// first element is simple
 		if (l0.num == 1 || (l0.width < MAX_LEN)) {
-			outLines.add(_getSpaceLine(level) + head + toString(e0));
+			outLines.add(ComUtil.getSpaceLine(level) + head + toString(e0));
 			it = list.listIterator(1);
 		} else {
-			outLines.add(_getSpaceLine(level) + head);
+			outLines.add(ComUtil.getSpaceLine(level) + head);
 			it = list.listIterator(0);
 		}
 
@@ -179,7 +158,7 @@ public class FormatUtil {
 			_output(it.next(), outLines, level + 1);
 		}
 
-		outLines.add(_getSpaceLine(level) + ")");
+		outLines.add(ComUtil.getSpaceLine(level) + ")");
 	}
 
 	private static void _output_add_rule(IRList expr, List<String> outLines, int level) throws RException {
@@ -213,7 +192,7 @@ public class FormatUtil {
 			firsLine += toString(obj);
 		}
 
-		outLines.add(_getSpaceLine(level) + firsLine);
+		outLines.add(ComUtil.getSpaceLine(level) + firsLine);
 		for (; index < size; ++index) {
 
 			IRObject obj = expr.get(index);
@@ -225,7 +204,7 @@ public class FormatUtil {
 
 		}
 
-		outLines.add(_getSpaceLine(level) + ")");
+		outLines.add(ComUtil.getSpaceLine(level) + ")");
 	}
 
 	private static void _output_defun(IRList expr, List<String> outLines, int level) throws RException {
@@ -239,20 +218,20 @@ public class FormatUtil {
 			firsLine += toString(expr.get(index));
 		}
 
-		outLines.add(_getSpaceLine(level) + firsLine);
+		outLines.add(ComUtil.getSpaceLine(level) + firsLine);
 		_output(expr.get(size - 1), outLines, level + 1);
-		outLines.add(_getSpaceLine(level) + ")");
+		outLines.add(ComUtil.getSpaceLine(level) + ")");
 	}
 
 	private static void _output_factor1(IRList expr, List<String> outLines, int level) throws RException {
 
-		outLines.add(_getSpaceLine(level) + "(" + toString(expr.get(0)));
+		outLines.add(ComUtil.getSpaceLine(level) + "(" + toString(expr.get(0)));
 
 		for (int i = 1; i < expr.size(); ++i) {
 			_output(expr.get(i), outLines, level + 1);
 		}
 
-		outLines.add(_getSpaceLine(level) + ")");
+		outLines.add(ComUtil.getSpaceLine(level) + ")");
 	}
 
 	private static void _output_if(IRList expr, List<String> outLines, int level) throws RException {
@@ -262,10 +241,10 @@ public class FormatUtil {
 		// )
 		if (XRFactorIf.isIf1(expr)) {
 
-			String line1 = _getSpaceLine(level) + "(" + toString(expr.get(0)) + " " + toString(expr.get(1));
+			String line1 = ComUtil.getSpaceLine(level) + "(" + toString(expr.get(0)) + " " + toString(expr.get(1));
 			outLines.add(line1);
 			_output(expr.get(2), outLines, level + 1);
-			outLines.add(_getSpaceLine(level) + ")");
+			outLines.add(ComUtil.getSpaceLine(level) + ")");
 
 			return;
 		}
@@ -276,11 +255,11 @@ public class FormatUtil {
 		// )
 		if (XRFactorIf.isIf2(expr)) {
 
-			String line1 = _getSpaceLine(level) + "(" + toString(expr.get(0)) + " " + toString(expr.get(1));
+			String line1 = ComUtil.getSpaceLine(level) + "(" + toString(expr.get(0)) + " " + toString(expr.get(1));
 			outLines.add(line1);
 			_output(expr.get(2), outLines, level + 1);
 			_output(expr.get(3), outLines, level + 1);
-			outLines.add(_getSpaceLine(level) + ")");
+			outLines.add(ComUtil.getSpaceLine(level) + ")");
 
 			return;
 		}
@@ -293,7 +272,7 @@ public class FormatUtil {
 		// )
 		if (XRFactorIf.isIf3(expr)) {
 
-			String line1 = _getSpaceLine(level) + "(" + toString(expr.get(0)) + " " + toString(expr.get(1)) + " "
+			String line1 = ComUtil.getSpaceLine(level) + "(" + toString(expr.get(0)) + " " + toString(expr.get(1)) + " "
 					+ toString(expr.get(2));
 			outLines.add(line1);
 
@@ -301,7 +280,7 @@ public class FormatUtil {
 			for (int i = 3; i < size; ++i) {
 				_output(expr.get(i), outLines, level + 1);
 			}
-			outLines.add(_getSpaceLine(level) + ")");
+			outLines.add(ComUtil.getSpaceLine(level) + ")");
 
 			return;
 		}
@@ -318,7 +297,7 @@ public class FormatUtil {
 
 			int size = expr.size();
 
-			String line1 = _getSpaceLine(level) + "(" + toString(expr.get(0));
+			String line1 = ComUtil.getSpaceLine(level) + "(" + toString(expr.get(0));
 			for (int i = 1; i < 6; ++i) {
 				line1 += " " + toString(expr.get(i));
 			}
@@ -327,7 +306,7 @@ public class FormatUtil {
 			for (int i = 6; i < size; ++i) {
 				_output(expr.get(i), outLines, level + 1);
 			}
-			outLines.add(_getSpaceLine(level) + ")");
+			outLines.add(ComUtil.getSpaceLine(level) + ")");
 
 			return;
 		}
@@ -339,7 +318,7 @@ public class FormatUtil {
 
 			int size = expr.size();
 
-			String line1 = _getSpaceLine(level) + "(" + toString(expr.get(0));
+			String line1 = ComUtil.getSpaceLine(level) + "(" + toString(expr.get(0));
 			for (int i = 1; i < 8; ++i) {
 				line1 += " " + toString(expr.get(i));
 			}
@@ -348,7 +327,7 @@ public class FormatUtil {
 			for (int i = 8; i < size; ++i) {
 				_output(expr.get(i), outLines, level + 1);
 			}
-			outLines.add(_getSpaceLine(level) + ")");
+			outLines.add(ComUtil.getSpaceLine(level) + ")");
 
 			return;
 		}
