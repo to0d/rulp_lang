@@ -1,6 +1,5 @@
 package alpha.rulp.ximpl.io;
 
-import static alpha.rulp.lang.Constant.A_LOAD_CLASS;
 import static alpha.rulp.lang.Constant.O_Nil;
 
 import alpha.rulp.lang.IRFrame;
@@ -12,7 +11,7 @@ import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRObjectLoader;
-import alpha.rulp.utils.RulpFactory;
+import alpha.rulp.utils.LoadUtil;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
@@ -31,10 +30,6 @@ public class XRFactorLoadClass extends AbsAtomFactorAdapter implements IRFactor 
 		return false;
 	}
 
-	static IRList _getLoaderList(IRInterpreter interpreter) throws RException {
-		return RulpUtil.asList(RulpUtil.asVar(interpreter.getObject(A_LOAD_CLASS)).getValue());
-	}
-
 	public XRFactorLoadClass(String factorName) {
 		super(factorName);
 	}
@@ -49,35 +44,19 @@ public class XRFactorLoadClass extends AbsAtomFactorAdapter implements IRFactor 
 
 		String loaderName = RulpUtil.asString(interpreter.compute(frame, args.get(1))).asString();
 
-		IRList ldList = _getLoaderList(interpreter);
+		try {
 
-		/*************************************************/
-		// Script can only be loaded once
-		/*************************************************/
-		if (!_contain(ldList, loaderName)) {
-
-			if (RulpUtil.isTrace(frame)) {
-				System.out.println("loading class: " + loaderName);
+			Class<?> aClass = Class.forName(loaderName);
+			if (!IRObjectLoader.class.isAssignableFrom(aClass)) {
+				throw new RException("Invalid RLoader class: " + aClass);
 			}
 
-			try {
+			Class<? extends IRObjectLoader> loaderClass = (Class<? extends IRObjectLoader>) aClass;
+			LoadUtil.loadClass(loaderClass.newInstance(), interpreter, frame);
 
-				Class<?> aClass = Class.forName(loaderName);
-				if (!IRObjectLoader.class.isAssignableFrom(aClass)) {
-					throw new RException("Invalid RLoader class: " + aClass);
-				}
-
-				Class<? extends IRObjectLoader> loaderClass = (Class<? extends IRObjectLoader>) aClass;
-				IRObjectLoader loader = loaderClass.newInstance();
-				loader.load(interpreter, frame);
-
-				ldList.add(RulpFactory.createString(loaderName));
-
-			} catch (Exception e) {
-				e.printStackTrace();
-				throw new RException(e.toString());
-			}
-
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RException(e.toString());
 		}
 
 		return O_Nil;

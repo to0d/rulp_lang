@@ -9,6 +9,7 @@
 
 package alpha.rulp.utils;
 
+import static alpha.rulp.lang.Constant.A_LOAD_CLASS;
 import static alpha.rulp.lang.Constant.A_LOAD_JAR;
 import static alpha.rulp.lang.Constant.A_LOAD_SCRIPT;
 //import static alpha.rulp.lang.Constant.A_LOAD_SYSTEM;
@@ -28,6 +29,7 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.runtime.IRObjectLoader;
 
 public class LoadUtil {
 
@@ -44,6 +46,25 @@ public class LoadUtil {
 		}
 
 		return false;
+	}
+
+	public static void loadClass(IRObjectLoader loader, IRInterpreter interpreter, IRFrame frame)
+			throws RException, IOException {
+
+		String className = loader.getClass().getName();
+		IRList ldList = RulpUtil.asList(RulpUtil.asVar(interpreter.getObject(A_LOAD_CLASS)).getValue());
+
+		// Script can only be loaded once
+		if (_contain(ldList, className)) {
+			return;
+		}
+
+		if (RulpUtil.isTrace(frame)) {
+			System.out.println("loading class: " + className);
+		}
+
+		loader.load(interpreter, frame);
+		ldList.add(RulpFactory.createString(className));
 	}
 
 	public static void loadJar(IRInterpreter interpreter, IRFrame frame, String path) throws RException {

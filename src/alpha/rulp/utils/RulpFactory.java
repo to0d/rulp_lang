@@ -426,7 +426,7 @@ public final class RulpFactory {
 		// Load object
 		/******************************************************/
 		for (IRObjectLoader loader : rulpLoaders) {
-			loader.load(interpreter, systemFrame);
+			LoadUtil.loadClass(loader, interpreter, systemFrame);
 		}
 
 		return interpreter;

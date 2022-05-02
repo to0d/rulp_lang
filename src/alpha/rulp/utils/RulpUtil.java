@@ -1717,9 +1717,10 @@ public class RulpUtil {
 		}
 
 		IRInstance instance = RulpUtil.newInstance(A_NAMESPACE, nsName, interpreter, frame);
+
 		instance.addLoader((sub) -> {
 			try {
-				loader.load(interpreter, sub.getSubjectFrame());
+				LoadUtil.loadClass(loader, interpreter, sub.getSubjectFrame());
 			} catch (IOException e) {
 				e.printStackTrace();
 				throw new RException(e.toString());
