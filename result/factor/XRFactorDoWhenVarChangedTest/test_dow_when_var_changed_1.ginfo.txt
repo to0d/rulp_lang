@@ -119,7 +119,7 @@ print-list           : 15       2        3    funcList   '((print-list list) (pr
 to-valid-path        : 16       2        2    func       (to-valid-path string) : frame=frame@main
 day-is-bigger-than   : 17       2        2    func       (day-is-bigger-than string string) : frame=frame@main
 day-is-smaller-than  : 18       2        2    func       (day-is-smaller-than string string) : frame=frame@main
-?script-path         : 19       2        2    var        result\factor\XRFactorDoWhenVarChanged\test_dow_when_var_changed_1.rulp : type=string
+?script-path         : 19       2        2    var        result\factor\XRFactorDoWhenVarChangedTest\test_dow_when_var_changed_1.rulp : type=string
 script_out           : 20       2        2    macro      script_out          
 _ginfo               : 21       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          2    func       (_ginfo) : frame=frame@main
@@ -132,7 +132,7 @@ id=3, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$__
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?rv                  : 66       3        1    var        result\factor\XRFactorDoWhenVarChanged\test_dow_when_var_changed_1 : type=string
+?rv                  : 66       3        1    var        result\factor\XRFactorDoWhenVarChangedTest\test_dow_when_var_changed_1 : type=string
 ==========================================================================================================================
 
 Root var list: total=5

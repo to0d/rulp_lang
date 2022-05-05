@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import alpha.rulp.utils.RulpTestBase;
 
-class XRFactorDoWhenVarChanged extends RulpTestBase {
+class XRFactorDoWhenVarChangedTest extends RulpTestBase {
 
 	@Test
 	void test_dow_when_var_changed_1() {
