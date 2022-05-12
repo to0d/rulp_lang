@@ -1242,15 +1242,53 @@ public class EROUtil {
 					return RuntimeUtil.rebuild(doExpr, replaceMap);
 				}
 			}
+		}
 
-//			List<IRObject> doActions = new ArrayList<>();
-//			RulpUtil.addAll(doActions, XRFactorLoop.getLoop2DoList(expr));
-//			int pos = _removeEmptyExpr(doActions, 0);
-//			if (pos == 0) {
-//				return OptUtil.asExpr(null);
-//			}
-//			
-			
+		// (loop for x from 3 to 1 by 1 do ...
+		if (OptUtil.isFactor(e0, F_LOOP) && XRFactorLoop.isLoop4(expr)) {
+
+			IRObject fromObj = XRFactorLoop.getLoop4FromObject(expr);
+			IRObject toObj = XRFactorLoop.getLoop4ToObject(expr);
+			IRObject byObj = XRFactorLoop.getLoop4ByObject(expr);
+
+			if (fromObj.getType() == RType.INT && toObj.getType() == RType.INT && byObj.getType() == RType.INT) {
+
+				int fromIndex = RulpUtil.asInteger(fromObj).asInteger();
+				int toIndex = RulpUtil.asInteger(toObj).asInteger();
+
+				// from 1 to 1 ==> (do action)
+				if (fromIndex == toIndex) {
+
+					List<IRObject> doActions = new ArrayList<>();
+					RulpUtil.addAll(doActions, XRFactorLoop.getLoop4DoList(expr));
+
+					int pos = _removeEmptyExpr(doActions, 0);
+					if (pos == 0) {
+						return OptUtil.asExpr(null);
+					}
+
+					if (pos < doActions.size()) {
+						doActions = doActions.subList(0, pos);
+					}
+
+					IRExpr doExpr = RulpUtil.toDoExpr(doActions);
+					Map<String, IRObject> replaceMap = new HashMap<>();
+					replaceMap.put(RulpUtil.asAtom(expr.get(2)).getName(), fromObj);
+					return RuntimeUtil.rebuild(doExpr, replaceMap);
+				}
+
+				int byValue = RulpUtil.asInteger(byObj).asInteger();
+
+				// from 3 to 1 by 1 ==> empty expr
+				if (fromIndex > toIndex && byValue > 0) {
+					return OptUtil.asExpr(null);
+				}
+
+				// from 1 to 3 by -1 ==> empty expr
+				if (fromIndex < toIndex && byValue < 0) {
+					return OptUtil.asExpr(null);
+				}
+			}
 		}
 
 		// Check infinite loop: (loop a)

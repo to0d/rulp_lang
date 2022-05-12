@@ -131,6 +131,27 @@ class TestOptimizeERO extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	void test_ero_7_loop_6() {
+
+		_setup();
+		_run_script();
+	}
+	
+	@Test
+	void test_ero_7_loop_7() {
+
+		_setup();
+		_run_script();
+	}
+	
+	@Test
+	void test_ero_7_loop_8() {
+
+		_setup();
+		_run_script();
+	}
 
 	@Test
 	void test_ero_8_infinite_loop_detected_loop() {

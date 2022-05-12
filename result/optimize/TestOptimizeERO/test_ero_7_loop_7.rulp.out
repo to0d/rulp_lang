@@ -1,0 +1,39 @@
+(defun fun (?v)
+    (loop for x from 1 to 3 by -1 do 
+        (print x ","))
+    (return ?v)
+)[opt-ero]
+;=>fun
+
+(attribute-of fun)
+;=>'(opt-ero)
+
+(print-impl fun)
+;=>nil
+;out:
+(defun fun (?v)
+    (return ?v)
+)[opt-ero]
+
+;eof
+
+(fun 5)
+;=>5
+
+(opt-status)
+;=>nil
+;out:
+==========================================================================================================================
+      Name: Status
+--------------------------------------------------------------------------------------------------------------------------
+       ERO: rebuild=1, compute=2
+       CCO: rebuild=0, expr=0, call=0, cache=0, reuse=0
+       TCO: rebuild=0, expr=0, call=0, node=0, compute=0, level=0, stack=0
+       LCO: rebuild=0, arg=0, pass=0, hit=0
+==========================================================================================================================
+
+;eof
+
+(_ginfo)
+;=>nil
+
