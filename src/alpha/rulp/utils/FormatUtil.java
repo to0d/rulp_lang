@@ -332,6 +332,27 @@ public class FormatUtil {
 			return;
 		}
 
+		// (loop for x from 1 to 3 by 2 do
+		// action
+		// )
+		if (XRFactorLoop.isLoop4(expr)) {
+
+			int size = expr.size();
+
+			String line1 = ComUtil.getSpaceLine(level) + "(" + toString(expr.get(0));
+			for (int i = 1; i < 10; ++i) {
+				line1 += " " + toString(expr.get(i));
+			}
+			outLines.add(line1);
+
+			for (int i = 10; i < size; ++i) {
+				_output(expr.get(i), outLines, level + 1);
+			}
+			outLines.add(ComUtil.getSpaceLine(level) + ")");
+
+			return;
+		}
+
 		// (loop
 		// action
 		// )

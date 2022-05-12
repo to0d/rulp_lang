@@ -17,15 +17,13 @@
 ;=>nil
 ;out:
 (defun fun (?x)
-    (do
-        (if (< ?x 0)
-            (return 0)
-        )
-        (if (> (fun (- ?x 1)) 1)
-            (return 1)
-        )
-        (return 2)
+    (if (< ?x 0)
+        (return 0)
     )
+    (if (> (fun (- ?x 1)) 1)
+        (return 1)
+    )
+    (return 2)
 )
 
 ;eof

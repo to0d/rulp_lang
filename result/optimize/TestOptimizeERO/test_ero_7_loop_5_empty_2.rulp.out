@@ -13,14 +13,12 @@
 ;=>nil
 ;out:
 (defun fun (?v)
-    (do
-        (loop
-            (if (2 > 1)
-                (return ?x)
-            )
+    (loop
+        (if (2 > 1)
+            (return ?x)
         )
-        (return 2)
     )
+    (return 2)
 )
 
 ;eof

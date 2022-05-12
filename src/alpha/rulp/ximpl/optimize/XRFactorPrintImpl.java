@@ -1,13 +1,14 @@
 package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.F_DEFUN;
-import static alpha.rulp.lang.Constant.O_Nil;
+import static alpha.rulp.lang.Constant.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
@@ -88,7 +89,28 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 
 		List<String> lines = new ArrayList<>();
 		lines.add(sb.toString());
-		FormatUtil.format(func.getFunBody(), lines, 1);
+
+		/**************************************************/
+		// Output function body
+		/**************************************************/
+		IRExpr bodyExpr = func.getFunBody();
+
+		// (do ...)
+		if (bodyExpr.size() > 1 && RulpUtil.isObject(bodyExpr.get(0), A_DO, RType.ATOM, RType.FACTOR)) {
+
+			IRIterator<? extends IRObject> it = bodyExpr.listIterator(1);
+			while (it.hasNext()) {
+				FormatUtil.format(it.next(), lines, 1);
+			}
+
+		} else {
+
+			FormatUtil.format(func.getFunBody(), lines, 1);
+		}
+
+		/**************************************************/
+		// print
+		/**************************************************/
 		lines.add(")" + RulpUtil.formatAttribute(func));
 
 		for (String line : lines) {
@@ -142,7 +164,6 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 
 		default:
 			throw new RException("not support object: " + obj);
-
 		}
 
 		return O_Nil;

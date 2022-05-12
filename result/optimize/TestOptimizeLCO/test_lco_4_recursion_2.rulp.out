@@ -27,12 +27,10 @@
 ;=>nil
 ;out:
 (defun fun1 (?x[opt-lco])
-    (do
-        (if (<= ?x 0)
-            (return 0)
-        )
-        (return (+ (fun2 (- ?x 1)) 2))
+    (if (<= ?x 0)
+        (return 0)
     )
+    (return (+ (fun2 (- ?x 1)) 2))
 )[opt-lco]
 
 ;eof
@@ -41,12 +39,10 @@
 ;=>nil
 ;out:
 (defun fun2 (?x[opt-lco])
-    (do
-        (if (<= ?x 0)
-            (return 0)
-        )
-        (return (+ (fun1 (- ?x 1)) 2))
+    (if (<= ?x 0)
+        (return 0)
     )
+    (return (+ (fun1 (- ?x 1)) 2))
 )[opt-lco]
 
 ;eof

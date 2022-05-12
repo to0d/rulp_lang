@@ -17,12 +17,10 @@
 ;=>nil
 ;out:
 (defun fun1 (?v)
-    (do[stable]
-        (if (<= ?v 0)
-            (return 0)
-        )
-        (return[stable] (cc2[opt-id=0] (max (fun1 (- ?v 1)) 100)))
+    (if (<= ?v 0)
+        (return 0)
     )
+    (return[stable] (cc2[opt-id=0] (max (fun1 (- ?v 1)) 100)))
 )[opt-cco]
 rebuild: id=0, name=cc2, call=5, hit=3, func=max, cache=2, data:[$$i_0$$i_100/100/D/0] [$$i_100$$i_100/100/D/3]
 

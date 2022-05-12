@@ -208,7 +208,6 @@ public class OptUtil {
 	}
 
 	public static boolean isFactor(IRObject obj, String name) throws RException {
-
 		return RulpUtil.isObject(obj, name, RType.ATOM, RType.FACTOR);
 	}
 

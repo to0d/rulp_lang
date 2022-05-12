@@ -28,16 +28,14 @@
 ;=>nil
 ;out:
 (defun fun2 ()
-    (do[stable]
-        (defvar ?x 0)
-        (loop[stable] for x from 1 to 3 do
-            (setq[stable]
-                ?x
-                (+[atom return-type=1 stable] ?x (cc2[opt-id=0] (fun1 1)))
-            )
+    (defvar ?x 0)
+    (loop[stable] for x from 1 to 3 do
+        (setq[stable]
+            ?x
+            (+[atom return-type=1 stable] ?x (cc2[opt-id=0] (fun1 1)))
         )
-        (return ?x)
     )
+    (return ?x)
 )[opt-cco]
 rebuild: id=0, name=cc2, call=3, hit=2, func=fun1, cache=1, data:[$$i_1/2/D/2]
 

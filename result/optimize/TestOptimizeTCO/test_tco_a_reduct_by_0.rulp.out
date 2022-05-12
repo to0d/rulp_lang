@@ -16,12 +16,10 @@
 ;=>nil
 ;out:
 (defun fun1 (?v)
-    (do
-        (if (<= ?v 0)
-            (return 1)
-        )
-        (cps[opt-id=0] (* (- ?v 2) (/ 1.0 (- ?v 2)) (fun1 (- ?v 1))))
+    (if (<= ?v 0)
+        (return 1)
     )
+    (cps[opt-id=0] (* (- ?v 2) (/ 1.0 (- ?v 2)) (fun1 (- ?v 1))))
 )[opt-tco]
 rebuild: id=0, name=cps, call=0, expand=0
 

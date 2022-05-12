@@ -1,0 +1,46 @@
+(defun fun (?v)
+
+    (loop for x in '(1 2 3) do 
+        (print x ",")
+    )
+
+    (loop for x from 1 to 3 do 
+        (print x ",")
+    )
+
+    (loop         
+        (if (> ?v 0) (break))
+        (print ?v ",")
+    )
+
+    (loop for x from 1 to 3 by 0 do 
+        (print x ",")
+    )
+
+
+)
+;=>fun
+
+(print-impl fun)
+;=>nil
+;out:
+(defun fun (?v)
+    (loop for x in '(1 2 3) do
+        (print x ",")
+    )
+    (loop for x from 1 to 3 do
+        (print x ",")
+    )
+    (loop
+        (if (> ?v 0)
+            (break)
+        )
+        (print ?v ",")
+    )
+    (loop for x from 1 to 3 by 0 do
+        (print x ",")
+    )
+)
+
+;eof
+

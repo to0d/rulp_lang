@@ -20,13 +20,11 @@
 ;=>nil
 ;out:
 (defun fun (?v)
-    (do[stable]
-        (if (<= ?v 0) do
-            (return 0)
-        )
-        (return[stable] (+[atom return-type=1 stable] 1 (fun (- ?v 1))))
-        (return[stable] (+[atom return-type=1 stable] 2 (fun (- ?v 1))))
+    (if (<= ?v 0) do
+        (return 0)
     )
+    (return[stable] (+[atom return-type=1 stable] 1 (fun (- ?v 1))))
+    (return[stable] (+[atom return-type=1 stable] 2 (fun (- ?v 1))))
 )[opt-ero]
 
 ;eof

@@ -30,27 +30,25 @@
 ;=>nil
 ;out:
 (defun isHappy ((?n int))
-    (do[stable]
+    (if (<= ?n 0)
+        (return false)
+    )
+    (if (= ?n 1)
+        (return true)
+    )
+    (defvar ?n2 0)
+    (defvar ?x)
+    (loop
         (if (<= ?n 0)
-            (return false)
+            (break)
         )
-        (if (= ?n 1)
-            (return true)
-        )
-        (defvar ?n2 0)
-        (defvar ?x)
-        (loop
-            (if (<= ?n 0)
-                (break)
-            )
-            (setq ?x (% ?n 10))
-            (setq ?n (/ ?n 10))
-            (setq ?n2 (+ ?n2 (power ?x 2)))
-        )
-        (try
-            (return[stable] (cc2[opt-id=0] (isHappy ?n2)))
-            (catch ?e (return false))
-        )
+        (setq ?x (% ?n 10))
+        (setq ?n (/ ?n 10))
+        (setq ?n2 (+ ?n2 (power ?x 2)))
+    )
+    (try
+        (return[stable] (cc2[opt-id=0] (isHappy ?n2)))
+        (catch ?e (return false))
     )
 )[opt-cco]
 rebuild: id=0, name=cc2, call=10, hit=0, func=isHappy, cache=9, data:[$$i_145/false/D/0] [$$i_16/false/D/0] [$$i_20/false/D/0]...
