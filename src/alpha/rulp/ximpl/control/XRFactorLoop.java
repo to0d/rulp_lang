@@ -9,7 +9,7 @@
 
 package alpha.rulp.ximpl.control;
 
-import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.A_FROM;
 import static alpha.rulp.lang.Constant.F_FOR;
 import static alpha.rulp.lang.Constant.F_IN;
@@ -46,6 +46,22 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 		return args.get(6);
 	}
 
+	public static IRObject getLoop4ByObject(IRList args) throws RException {
+		return args.get(8);
+	}
+
+	public static IRIterator<? extends IRObject> getLoop4DoList(IRList args) throws RException {
+		return args.listIterator(10);
+	}
+
+	public static IRObject getLoop4FromObject(IRList args) throws RException {
+		return args.get(4);
+	}
+
+	public static IRObject getLoop4ToObject(IRList args) throws RException {
+		return args.get(6);
+	}
+
 	public static boolean isLoop1(IRList args) throws RException {
 
 		// (loop for x in '(1 2 3) do ...)
@@ -64,6 +80,14 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 
 	public static boolean isLoop3(IRList args) throws RException {
 		return args.size() == 1 || args.get(1).getType() == RType.EXPR;
+	}
+
+	public static boolean isLoop4(IRList args) throws RException {
+
+		// (loop for x from 1 to 3 by 1 do ...) A_By
+		return args.size() >= 9 && RulpUtil.isAtom(args.get(1), F_FOR) && RulpUtil.isAtom(args.get(2))
+				&& RulpUtil.isAtom(args.get(3), A_FROM) && RulpUtil.isAtom(args.get(5), F_TO)
+				&& RulpUtil.isAtom(args.get(7), A_By) && RulpUtil.isAtom(args.get(9), A_DO);
 	}
 
 	static void loop1(IRList args, IRInterpreter interpreter, IRFrame loopFrame) throws RException {
@@ -102,6 +126,8 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 	}
 
 	static void loop2(IRList args, IRInterpreter interpreter, IRFrame loopFrame) throws RException {
+
+		// (loop for x from 1 to 3 do ...)
 
 		String indexName = RulpUtil.asAtom(args.get(2)).getName();
 		int fromIndex = MathUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop2FromObject(args))));
@@ -186,6 +212,66 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 		}
 	}
 
+	static void loop4(IRList args, IRInterpreter interpreter, IRFrame loopFrame) throws RException {
+
+		// (loop for x from 1 to 3 by 1 do ...) A_By
+
+		String indexName = RulpUtil.asAtom(args.get(2)).getName();
+		int fromIndex = MathUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop4FromObject(args))));
+		int toIndex = MathUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop4ToObject(args))));
+		int byValue = MathUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop4ByObject(args))));
+		if (byValue == 0) {
+			throw new RException("Invalid by value in loop: " + byValue);
+		}
+
+		boolean add = byValue > 0;
+		int i = fromIndex;
+
+		OUT_LOOP: while (true) {
+
+			if (add) {
+				if (i > toIndex) {
+					break OUT_LOOP;
+				}
+			} else {
+				if (i < toIndex) {
+					break OUT_LOOP;
+				}
+			}
+
+			loopFrame.setEntry(indexName, RulpFactory.createInteger(i));
+			IRIterator<? extends IRObject> iter = getLoop4DoList(args);
+
+			IRFrame loopDoFrame = RulpFactory.createFrame(loopFrame, F_LOOP);
+			RulpUtil.incRef(loopDoFrame);
+
+			try {
+
+				while (iter.hasNext()) {
+
+					IRObject expr = iter.next();
+					if (expr.getType() != RType.EXPR) {
+						throw new RException("Invalid expr in loop: " + expr);
+					}
+
+					interpreter.compute(loopDoFrame, expr);
+				}
+
+				i += byValue;
+
+			} catch (RBreak r) {
+				break OUT_LOOP;
+
+			} catch (RContinue c) {
+				continue OUT_LOOP;
+
+			} finally {
+				loopDoFrame.release();
+				RulpUtil.decRef(loopDoFrame);
+			}
+		}
+	}
+
 	public XRFactorLoop(String factorName) {
 		super(factorName);
 	}
@@ -217,6 +303,12 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 			// (loop stmt1 ...)
 			if (isLoop3(args)) {
 				loop3(args, interpreter, loopFrame);
+				return O_Nil;
+			}
+
+			// (loop for x from 1 to 3 by 1 do ...)
+			if (isLoop4(args)) {
+				loop4(args, interpreter, loopFrame);
 				return O_Nil;
 			}
 

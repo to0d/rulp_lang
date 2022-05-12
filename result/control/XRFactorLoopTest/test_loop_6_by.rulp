@@ -1,10 +1,49 @@
+(loop for x from 1 to 3 by 0 do 
+    (print x ",")
+)
+;err
+
 (loop for x from 1 to 3 by 1 do 
-    (print x ","))
+    (print x ",")
+)
+;=>
+
+(loop for x from 1 to 3 by -1 do 
+    (print x ",")
+)
+;=>
+
+(loop for x from 1 to 3 by 2 do 
+    (print x ",")
+)
+;=>
+
+(loop for x from 1 to 3 by 3 do 
+    (print x ",")
+)
+;=>
+
+(loop for x from 1 to 3 by 4 do 
+    (print x ",")
+)
+;=>
+
+(loop for x from 3 to 1 by 0 do 
+    (print x ",")
+)
+;err
+
+(loop for x from 3 to 1 by 1 do 
+    (print x ",")
+)
 ;=>
 
 (loop for x from 3 to 1 by -1 do 
-    (print x ","))
+    (print x ",")
+)
 ;=>
 
-
-    
+(loop for x from 3 to 1 by -2 do 
+    (print x ",")
+)
+;=>
