@@ -81,7 +81,7 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
 	private static boolean _optCC0(OPT opt) throws RException {
 
-		IRObject rst = EROUtil.rebuild(opt.funBody, opt.interpreter, opt.frame);
+		IRObject rst = EROUtil.rebuildFuncBody(opt.funBody, opt.interpreter, opt.frame);
 		if (rst == opt.funBody) {
 			return false;
 		}

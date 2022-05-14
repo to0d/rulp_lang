@@ -9,7 +9,8 @@
 
 package alpha.rulp.ximpl.control;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_By;
+import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.A_FROM;
 import static alpha.rulp.lang.Constant.F_FOR;
 import static alpha.rulp.lang.Constant.F_IN;

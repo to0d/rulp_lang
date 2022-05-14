@@ -5,6 +5,7 @@ import static alpha.rulp.lang.Constant.F_BREAK;
 import static alpha.rulp.lang.Constant.F_B_AND;
 import static alpha.rulp.lang.Constant.F_B_OR;
 import static alpha.rulp.lang.Constant.F_CASE;
+import static alpha.rulp.lang.Constant.F_DEFUN;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_LOOP;
 import static alpha.rulp.lang.Constant.F_O_ADD;
@@ -842,7 +843,7 @@ public class EROUtil {
 			}
 
 			IRExpr expr = (IRExpr) obj;
-			if (expr.size() <= 1 || !OptUtil.isFactor(expr.get(0), name)) {
+			if (expr.size() <= 1 || !RulpUtil.isFactor(expr.get(0), name)) {
 				continue;
 			}
 
@@ -1013,6 +1014,11 @@ public class EROUtil {
 				rebuildObj = _rebuildDo(rebuildList);
 				break;
 
+			// (do () (b action))
+			case F_DEFUN:
+				rebuildObj = _rebuildDefun(rebuildList);
+				break;
+
 			// (loop for x from 1 to 3 do ..
 			// (loop a)
 			case F_LOOP:
@@ -1110,6 +1116,22 @@ public class EROUtil {
 		return null;
 	}
 
+	private static IRObject _rebuildDefun(List<IRObject> rebuildList) throws RException {
+
+		IRExpr funBody = null;
+		if (rebuildList.size() == 4) {
+			funBody = RulpUtil.asExpression(rebuildList.get(3));
+
+		} else if (rebuildList.size() > 4) {
+			funBody = RulpUtil.toDoExpr(rebuildList.listIterator(3));
+
+		} else {
+			return null;
+		}
+
+		return _rebuildFuncBody(funBody);
+	}
+
 	// (do () (b action))
 	private static IRObject _rebuildDo(List<IRObject> rebuildList) throws RException {
 
@@ -1132,6 +1154,10 @@ public class EROUtil {
 		}
 
 		return null;
+	}
+
+	private static IRExpr _rebuildFuncBody(IRExpr expr) throws RException {
+		return _removeExprAfterReturn(expr);
 	}
 
 	// (if true A B) or (if false A B)
@@ -1206,7 +1232,7 @@ public class EROUtil {
 		int size = rebuildList.size();
 
 		// (loop for x from 1 to 3 do ...
-		if (OptUtil.isFactor(e0, F_LOOP) && XRFactorLoop.isLoop2(expr)) {
+		if (RulpUtil.isFactor(e0, F_LOOP) && XRFactorLoop.isLoop2(expr)) {
 
 			IRObject fromObj = XRFactorLoop.getLoop2FromObject(expr);
 			IRObject toObj = XRFactorLoop.getLoop2ToObject(expr);
@@ -1245,7 +1271,7 @@ public class EROUtil {
 		}
 
 		// (loop for x from 3 to 1 by 1 do ...
-		if (OptUtil.isFactor(e0, F_LOOP) && XRFactorLoop.isLoop4(expr)) {
+		if (RulpUtil.isFactor(e0, F_LOOP) && XRFactorLoop.isLoop4(expr)) {
 
 			IRObject fromObj = XRFactorLoop.getLoop4FromObject(expr);
 			IRObject toObj = XRFactorLoop.getLoop4ToObject(expr);
@@ -1292,7 +1318,7 @@ public class EROUtil {
 		}
 
 		// Check infinite loop: (loop a)
-		if (OptUtil.isFactor(e0, F_LOOP) && XRFactorLoop.isLoop3(expr)) {
+		if (RulpUtil.isFactor(e0, F_LOOP) && XRFactorLoop.isLoop3(expr)) {
 
 			int pos = _removeEmptyExpr(rebuildList, 1);
 			if (pos == 1) {
@@ -1432,6 +1458,34 @@ public class EROUtil {
 		return pos;
 	}
 
+	private static IRExpr _removeExprAfterReturn(IRExpr expr) throws RException {
+
+		int size = expr.size();
+		if (RulpUtil.isExpr(expr, A_DO)) {
+
+			int rtIdx = -1;
+
+			for (int i = 1; i < size; ++i) {
+				if (RulpUtil.isExpr(expr.get(i), F_RETURN)) {
+					rtIdx = i;
+					break;
+				}
+			}
+
+			if (rtIdx != -1 && (rtIdx + 1) < size) {
+
+				ArrayList<IRObject> doList = new ArrayList<>();
+				for (int i = 1; i <= rtIdx; ++i) {
+					doList.add(expr.get(i));
+				}
+
+				return RulpUtil.toDoExpr(doList);
+			}
+		}
+
+		return null;
+	}
+
 	private static <T> void _set(List<T> list, int index, T obj) {
 
 		if (index >= list.size()) {
@@ -1459,6 +1513,32 @@ public class EROUtil {
 	public static IRObject rebuild(IRList expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		rebuildCount.getAndIncrement();
+
+		ERO ero = new ERO();
+		ero.setInputExpr(expr);
+
+		if (!_rebuild(ero, interpreter, frame)) {
+			return ero.outputObj == null ? expr : ero.outputObj;
+		}
+
+		if (ero.outputObj != null) {
+			return ero.outputObj;
+		}
+
+		IRObject rst = interpreter.compute(frame, expr);
+		_incComputeCount();
+		return rst;
+	}
+
+	public static IRObject rebuildFuncBody(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		rebuildCount.getAndIncrement();
+
+		IRExpr newBody = _rebuildFuncBody(expr);
+		if (newBody != null) {
+			expr = newBody;
+			_incComputeCount();
+		}
 
 		ERO ero = new ERO();
 		ero.setInputExpr(expr);

@@ -36,7 +36,6 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
-import alpha.rulp.utils.RulpUtil;
 
 public class OptUtil {
 
@@ -205,10 +204,6 @@ public class OptUtil {
 		default:
 			return false;
 		}
-	}
-
-	public static boolean isFactor(IRObject obj, String name) throws RException {
-		return RulpUtil.isObject(obj, name, RType.ATOM, RType.FACTOR);
 	}
 
 	public static boolean isLocalValue(IRObject obj, NameSet nameSet) throws RException {

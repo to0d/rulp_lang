@@ -1,7 +1,8 @@
 package alpha.rulp.ximpl.optimize;
 
+import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.F_DEFUN;
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.O_Nil;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -96,7 +97,7 @@ public class XRFactorPrintImpl extends AbsAtomFactorAdapter implements IRFactor 
 		IRExpr bodyExpr = func.getFunBody();
 
 		// (do ...)
-		if (bodyExpr.size() > 1 && RulpUtil.isObject(bodyExpr.get(0), A_DO, RType.ATOM, RType.FACTOR)) {
+		if (bodyExpr.size() > 1 && RulpUtil.isFactor(bodyExpr.get(0), A_DO)) {
 
 			IRIterator<? extends IRObject> it = bodyExpr.listIterator(1);
 			while (it.hasNext()) {

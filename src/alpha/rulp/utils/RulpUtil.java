@@ -1360,8 +1360,23 @@ public class RulpUtil {
 		return obj.getType() == RType.ATOM && ((IRAtom) obj).getName().equals(name);
 	}
 
-	public static boolean isExpression(IRObject obj) {
+	public static boolean isExpr(IRObject obj) {
 		return obj.getType() == RType.EXPR;
+	}
+
+	public static boolean isExpr(IRObject obj, String factorName) throws RException {
+
+		if (obj.getType() != RType.EXPR) {
+			return false;
+		}
+
+		IRExpr expr = (IRExpr) obj;
+
+		return expr.size() > 0 && isFactor(expr.get(0), factorName);
+	}
+
+	public static boolean isFactor(IRObject obj, String name) throws RException {
+		return RulpUtil.isObject(obj, name, RType.ATOM, RType.FACTOR);
 	}
 
 	public static boolean isFunctionLambda(IRObject obj) throws RException {
@@ -2109,16 +2124,28 @@ public class RulpUtil {
 		return RulpFactory.createExpression(newExpr);
 	}
 
-	public static IRExpr toDoExpr(List<? extends IRObject> exprList) throws RException {
+	public static IRExpr toDoExpr(Iterator<? extends IRObject> it) throws RException {
 
-		if (exprList.size() == 1) {
-			return RulpUtil.asExpression(exprList.get(0));
+		ArrayList<IRObject> newExpr = new ArrayList<>();
+		newExpr.add(RulpFactory.createAtom(A_DO));
+
+		while (it.hasNext()) {
+			newExpr.add(RulpUtil.asExpression(it.next()));
+		}
+
+		return RulpFactory.createExpression(newExpr);
+	}
+
+	public static IRExpr toDoExpr(List<? extends IRObject> it) throws RException {
+
+		if (it.size() == 1) {
+			return RulpUtil.asExpression(it.get(0));
 		}
 
 		ArrayList<IRObject> newExpr = new ArrayList<>();
 		newExpr.add(RulpFactory.createAtom(A_DO));
 
-		for (IRObject expr : exprList) {
+		for (IRObject expr : it) {
 			newExpr.add(RulpUtil.asExpression(expr));
 		}
 
