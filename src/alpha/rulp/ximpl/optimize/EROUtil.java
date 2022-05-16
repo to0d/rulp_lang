@@ -829,6 +829,21 @@ public class EROUtil {
 		typePriority[RType.MEMBER.getIndex()] = 22;
 	}
 
+	static IRObject _computeContant(IRObject obj, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		IRObject value = obj;
+
+		if (obj.getType() == RType.ATOM) {
+			value = RulpUtil.lookup(value, interpreter, frame);
+		}
+
+		if (value.getType() != RType.CONSTANT) {
+			return obj;
+		}
+
+		return RulpUtil.asConstant(value).getValue();
+	}
+
 	private static int _expandExpr(List<IRObject> list, int fromIndex, int toIndex, String name) throws RException {
 
 		int endIndex = toIndex;
@@ -1227,28 +1242,13 @@ public class EROUtil {
 		return null;
 	}
 
-	static IRObject _computeContant(IRObject obj, IRInterpreter interpreter, IRFrame frame) throws RException {
-
-		IRObject value = obj;
-
-		if (obj.getType() == RType.ATOM) {
-			value = RulpUtil.lookup(value, interpreter, frame);
-		}
-
-		if (value.getType() != RType.CONSTANT) {
-			return obj;
-		}
-
-		return RulpUtil.asConstant(value).getValue();
-	}
-
 	private static IRObject _rebuildLoop(IRObject e0, IRList expr, List<IRObject> rebuildList,
 			IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		int size = rebuildList.size();
 
 		// (loop for x from 1 to 3 do ...
-		if (RulpUtil.isFactor(e0, F_LOOP) && XRFactorLoop.isLoop2(expr)) {
+		if (XRFactorLoop.isLoop2(expr)) {
 
 			IRObject fromObj = _computeContant(XRFactorLoop.getLoop2FromObject(expr), interpreter, frame);
 			IRObject toObj = _computeContant(XRFactorLoop.getLoop2ToObject(expr), interpreter, frame);
@@ -1281,13 +1281,40 @@ public class EROUtil {
 					IRExpr doExpr = RulpUtil.toDoExpr(doActions);
 					Map<String, IRObject> replaceMap = new HashMap<>();
 					replaceMap.put(RulpUtil.asAtom(expr.get(2)).getName(), fromObj);
+
 					return RuntimeUtil.rebuild(doExpr, replaceMap);
 				}
 			}
 		}
 
+		// Check infinite loop: (loop a)
+		if (XRFactorLoop.isLoop3(expr)) {
+
+			int pos = _removeEmptyExpr(rebuildList, 1);
+			if (pos == 1) {
+				throw new RException("infinite loop detected: input=" + expr + ", output="
+						+ RulpFactory.createExpression(rebuildList.subList(0, pos)));
+			}
+
+			boolean findBreak = false;
+			for (int i = 1; !findBreak && i < pos; ++i) {
+				findBreak = _hasBreakExpr(rebuildList.get(i));
+			}
+
+			// no break clause found, infinite loop
+			if (!findBreak) {
+				throw new RException("infinite loop detected: input=" + expr + ", output="
+						+ RulpFactory.createExpression(rebuildList.subList(0, pos)));
+			}
+
+			// empty expr found
+			if (pos != size) {
+				return RulpFactory.createExpression(rebuildList.subList(0, pos));
+			}
+		}
+
 		// (loop for x from 3 to 1 by 1 do ...
-		if (RulpUtil.isFactor(e0, F_LOOP) && XRFactorLoop.isLoop4(expr)) {
+		if (XRFactorLoop.isLoop4(expr)) {
 
 			IRObject fromObj = _computeContant(XRFactorLoop.getLoop4FromObject(expr), interpreter, frame);
 			IRObject toObj = _computeContant(XRFactorLoop.getLoop4ToObject(expr), interpreter, frame);
@@ -1330,32 +1357,6 @@ public class EROUtil {
 				if (fromIndex < toIndex && byValue < 0) {
 					return OptUtil.asExpr(null);
 				}
-			}
-		}
-
-		// Check infinite loop: (loop a)
-		if (RulpUtil.isFactor(e0, F_LOOP) && XRFactorLoop.isLoop3(expr)) {
-
-			int pos = _removeEmptyExpr(rebuildList, 1);
-			if (pos == 1) {
-				throw new RException("infinite loop detected: input=" + expr + ", output="
-						+ RulpFactory.createExpression(rebuildList.subList(0, pos)));
-			}
-
-			boolean findBreak = false;
-			for (int i = 1; !findBreak && i < pos; ++i) {
-				findBreak = _hasBreakExpr(rebuildList.get(i));
-			}
-
-			// no break clause found, infinite loop
-			if (!findBreak) {
-				throw new RException("infinite loop detected: input=" + expr + ", output="
-						+ RulpFactory.createExpression(rebuildList.subList(0, pos)));
-			}
-
-			// empty expr found
-			if (pos != size) {
-				return RulpFactory.createExpression(rebuildList.subList(0, pos));
 			}
 		}
 
