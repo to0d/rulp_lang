@@ -1022,7 +1022,7 @@ public class EROUtil {
 			// (loop for x from 1 to 3 do ..
 			// (loop a)
 			case F_LOOP:
-				rebuildObj = _rebuildLoop(e0, expr, rebuildList);
+				rebuildObj = _rebuildLoop(e0, expr, rebuildList, interpreter, frame);
 				break;
 
 			case F_O_BY:
@@ -1227,15 +1227,31 @@ public class EROUtil {
 		return null;
 	}
 
-	private static IRObject _rebuildLoop(IRObject e0, IRList expr, List<IRObject> rebuildList) throws RException {
+	static IRObject _computeContant(IRObject obj, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		IRObject value = obj;
+
+		if (obj.getType() == RType.ATOM) {
+			value = RulpUtil.lookup(value, interpreter, frame);
+		}
+
+		if (value.getType() != RType.CONSTANT) {
+			return obj;
+		}
+
+		return RulpUtil.asConstant(value).getValue();
+	}
+
+	private static IRObject _rebuildLoop(IRObject e0, IRList expr, List<IRObject> rebuildList,
+			IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		int size = rebuildList.size();
 
 		// (loop for x from 1 to 3 do ...
 		if (RulpUtil.isFactor(e0, F_LOOP) && XRFactorLoop.isLoop2(expr)) {
 
-			IRObject fromObj = XRFactorLoop.getLoop2FromObject(expr);
-			IRObject toObj = XRFactorLoop.getLoop2ToObject(expr);
+			IRObject fromObj = _computeContant(XRFactorLoop.getLoop2FromObject(expr), interpreter, frame);
+			IRObject toObj = _computeContant(XRFactorLoop.getLoop2ToObject(expr), interpreter, frame);
 
 			if (fromObj.getType() == RType.INT && toObj.getType() == RType.INT) {
 
@@ -1273,9 +1289,9 @@ public class EROUtil {
 		// (loop for x from 3 to 1 by 1 do ...
 		if (RulpUtil.isFactor(e0, F_LOOP) && XRFactorLoop.isLoop4(expr)) {
 
-			IRObject fromObj = XRFactorLoop.getLoop4FromObject(expr);
-			IRObject toObj = XRFactorLoop.getLoop4ToObject(expr);
-			IRObject byObj = XRFactorLoop.getLoop4ByObject(expr);
+			IRObject fromObj = _computeContant(XRFactorLoop.getLoop4FromObject(expr), interpreter, frame);
+			IRObject toObj = _computeContant(XRFactorLoop.getLoop4ToObject(expr), interpreter, frame);
+			IRObject byObj = _computeContant(XRFactorLoop.getLoop4ByObject(expr), interpreter, frame);
 
 			if (fromObj.getType() == RType.INT && toObj.getType() == RType.INT && byObj.getType() == RType.INT) {
 
