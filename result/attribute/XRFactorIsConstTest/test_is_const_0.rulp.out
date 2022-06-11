@@ -142,6 +142,7 @@ obj=random              , type=factor
 obj=random-double       , type=factor
 obj=random-float        , type=factor
 obj=random-int          , type=factor
+obj=read-line           , type=factor
 obj=reduct              , type=factor
 obj=ref                 , type=factor
 obj=remove              , type=factor

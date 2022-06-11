@@ -1,0 +1,12 @@
+(read-line)
+;=>"line1"
+
+(read-line)
+;=>"line2  xxx"
+
+(read-line)
+;=>"  line3"
+
+(read-line)
+;=>""
+

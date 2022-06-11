@@ -9,6 +9,9 @@
 
 package alpha.rulp.ximpl.runtime;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +26,7 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RError;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
+import alpha.rulp.runtime.IRInput;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRListener1;
 import alpha.rulp.runtime.IROut;
@@ -70,6 +74,8 @@ public class XRInterpreter implements IRInterpreter {
 	public static boolean TRACE = false;
 
 	protected AtomicInteger callId = new AtomicInteger(0);
+
+	protected IRInput input;
 
 	protected IRFrame mainFrame;
 
@@ -204,6 +210,11 @@ public class XRInterpreter implements IRInterpreter {
 	}
 
 	@Override
+	public IRInput getInput() {
+		return input;
+	}
+
+	@Override
 	public IRFrame getMainFrame() {
 		return mainFrame;
 	}
@@ -254,6 +265,43 @@ public class XRInterpreter implements IRInterpreter {
 		} else {
 			System.out.print(line);
 		}
+	}
+
+	protected BufferedReader defaultInput = null;
+
+	protected BufferedReader getDefaultInput() {
+
+		if (defaultInput == null) {
+			defaultInput = new BufferedReader(new InputStreamReader(System.in));
+		}
+
+		return defaultInput;
+	}
+
+	@Override
+	public String read() throws RException {
+
+		try {
+
+			if (input != null) {
+				return input.read();
+			} else {
+				return getDefaultInput().readLine();
+			}
+
+		} catch (IOException e) {
+
+			if (RulpUtil.isTrace(mainFrame)) {
+				e.printStackTrace();
+			}
+
+			throw new RException(e.toString());
+		}
+	}
+
+	@Override
+	public void setInput(IRInput input) {
+		this.input = input;
 	}
 
 	public void setMainFrame(IRFrame mainFrame) {

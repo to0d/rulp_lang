@@ -401,6 +401,8 @@ public interface Constant {
 
 	String F_PRINT = "print";
 
+	String F_READ_LINE = "read-line";
+
 	String F_PRINT_FRAME_TREE = "print-frame-tree";
 
 	String F_PRINT_GLOBAL_INFO = "print-global-info";
@@ -454,7 +456,7 @@ public interface Constant {
 	String F_SLEEP = "sleep";
 
 	String F_SORT = "sort";
-	
+
 	String F_SORT_LIST = "sort-list";
 
 	String F_STMT_COUNT_OF = "stmt-count-of";

@@ -25,6 +25,8 @@ public interface IRInterpreter {
 
 	public int getCallId();
 
+	public IRInput getInput();
+
 	public IRFrame getMainFrame();
 
 	public int getMaxCallLevel();
@@ -38,6 +40,10 @@ public interface IRInterpreter {
 	public IRTLS getTLS();
 
 	public void out(String line);
+
+	public String read() throws RException;
+
+	public void setInput(IRInput in);
 
 	public void setOutput(IROut out);
 }

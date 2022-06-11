@@ -170,6 +170,7 @@ root::random
 root::random-double
 root::random-float
 root::random-int
+root::read-line
 root::reduct
 root::ref
 root::remove
