@@ -223,6 +223,7 @@ mbr=~, mbr-property='(public), mbr-attribute='(), obj=~, obj-type=factor, obj-at
 (print-list system)
 ;=>nil
 ;out:
+mbr=?debug, mbr-property='(public), mbr-attribute='(), obj=?debug, obj-type=var, obj-attribute='(), var-value="false"
 mbr=?load-class, mbr-property='(public), mbr-attribute='(), obj=?load-class, obj-type=var, obj-attribute='(), var-value="'(alpha.rulp.ximpl.collection.XRMap$Loader alpha.rulp.ximpl.collection.XRQueue$Loader alpha.rulp.ximpl.collection.XRSet$Loader)"
 mbr=?load-jar, mbr-property='(public), mbr-attribute='(), obj=?load-jar, obj-type=var, obj-attribute='(), var-value="'()"
 mbr=?load-script, mbr-property='(public), mbr-attribute='(), obj=?load-script, obj-type=var, obj-attribute='(), var-value="'(C:\datas\load\tool.rulp C:\datas\load\test/itest.rulp C:\datas\load\map.rulp C:\datas\load\queue.rulp C:\datas\load\set.rulp C:\datas\load\stack.rulp)"

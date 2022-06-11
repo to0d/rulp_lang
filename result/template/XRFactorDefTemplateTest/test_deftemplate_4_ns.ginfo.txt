@@ -71,7 +71,7 @@ Object create count:
       string:           46            0           46
         list:           12            0           12
         expr:          705            4          701
-         var:           23            9           14
+         var:           24            9           15
         func:           73            0           73
     template:            3            0            3
        macro:            5            0            5
@@ -79,7 +79,7 @@ Object create count:
       member:            6            0            6
        frame:            7            5            2
  interpreter:            1            0
-  frameEntry:          262            0
+  frameEntry:          263            0
       lambda:            0            0
 ==========================================================================================================================
 
@@ -140,10 +140,11 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 ?rv                  : 33       4        1    var        result\template\XRFactorDefTemplateTest\test_deftemplate_4_ns : type=string
 ==========================================================================================================================
 
-Root var list: total=5
+Root var list: total=6
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
+?debug               : false
 ?load-class          : '()
 ?load-jar            : '()
 ?load-script         : '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp")

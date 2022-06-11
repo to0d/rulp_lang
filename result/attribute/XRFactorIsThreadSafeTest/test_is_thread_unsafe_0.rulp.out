@@ -52,6 +52,7 @@ obj=true                , type=bool
 (list-of-is-thread-safe-objects system)
 ;=>nil
 ;out:
+obj=?debug              , type=var
 obj=?load-class         , type=var
 obj=?load-jar           , type=var
 obj=?load-script        , type=var

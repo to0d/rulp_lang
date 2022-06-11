@@ -175,6 +175,8 @@ public interface Constant {
 
 	String A_TRACE = "?trace";
 
+	String A_DEBUG = "?debug";
+
 	String A_TRUE = "true";
 
 	String A_TYPE = "type#";

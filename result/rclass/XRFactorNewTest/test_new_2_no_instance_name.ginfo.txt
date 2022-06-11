@@ -67,7 +67,7 @@ Object create count:
       string:           42            0           42
         list:           12            0           12
         expr:          687            1          686
-         var:           19            4           15
+         var:           20            4           16
         func:           71            0           71
     template:            1            0            1
        macro:            5            0            5
@@ -76,7 +76,7 @@ Object create count:
       member:            3            1            2
        frame:            5            3            2
  interpreter:            1            0
-  frameEntry:          258            0
+  frameEntry:          259            0
       lambda:            0            0
 ==========================================================================================================================
 
@@ -138,10 +138,11 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 ?rv                  : 29       4        1    var        result\rclass\XRFactorNewTest\test_new_2_no_instance_name : type=string
 ==========================================================================================================================
 
-Root var list: total=5
+Root var list: total=6
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
+?debug               : false
 ?load-class          : '()
 ?load-jar            : '()
 ?load-script         : '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp")

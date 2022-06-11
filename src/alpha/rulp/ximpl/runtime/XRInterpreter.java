@@ -75,6 +75,8 @@ public class XRInterpreter implements IRInterpreter {
 
 	protected AtomicInteger callId = new AtomicInteger(0);
 
+	protected BufferedReader defaultInput = null;
+
 	protected IRInput input;
 
 	protected IRFrame mainFrame;
@@ -209,6 +211,15 @@ public class XRInterpreter implements IRInterpreter {
 		return callId.get();
 	}
 
+	protected BufferedReader getDefaultInput() {
+
+		if (defaultInput == null) {
+			defaultInput = new BufferedReader(new InputStreamReader(System.in));
+		}
+
+		return defaultInput;
+	}
+
 	@Override
 	public IRInput getInput() {
 		return input;
@@ -265,17 +276,6 @@ public class XRInterpreter implements IRInterpreter {
 		} else {
 			System.out.print(line);
 		}
-	}
-
-	protected BufferedReader defaultInput = null;
-
-	protected BufferedReader getDefaultInput() {
-
-		if (defaultInput == null) {
-			defaultInput = new BufferedReader(new InputStreamReader(System.in));
-		}
-
-		return defaultInput;
 	}
 
 	@Override

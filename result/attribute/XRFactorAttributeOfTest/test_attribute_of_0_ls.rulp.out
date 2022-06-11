@@ -231,6 +231,7 @@ obj=~, type=factor, attribute='(atom stable)
 (list-of-attribute-of system)
 ;=>nil
 ;out:
+obj=?debug, type=var, attribute='()
 obj=?load-class, type=var, attribute='()
 obj=?load-jar, type=var, attribute='()
 obj=?load-script, type=var, attribute='()

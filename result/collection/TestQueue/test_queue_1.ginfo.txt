@@ -83,7 +83,7 @@ Object create count:
       string:           45            0           45
         list:           15            2           13
         expr:          802           34          768
-         var:           35           18           17
+         var:           36           18           18
         func:          106            0          106
     template:            1            0            1
        macro:            5            0            5
@@ -92,7 +92,7 @@ Object create count:
       member:           90           16           74
        frame:           41           39            2
  interpreter:            1            0
-  frameEntry:          277            0
+  frameEntry:          278            0
       lambda:           12            0
 ==========================================================================================================================
 
@@ -166,10 +166,11 @@ id=3, name=SF-queue-0, lvl=3, ref=2/2, entry=0, pid=2(main), subject=queue
 
 id=4, name=SF-q1-1, lvl=4, ref=13/14, entry=0, pid=3(SF-queue-0), subject=q1
 
-Root var list: total=5
+Root var list: total=6
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
+?debug               : false
 ?load-class          : '("alpha.rulp.ximpl.collection.XRQueue$Loader")
 ?load-jar            : '()
 ?load-script         : '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp" "C:\\data\\rs\\load\\queue.rulp")

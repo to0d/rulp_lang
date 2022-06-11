@@ -70,14 +70,14 @@ Object create count:
       string:           44            0           44
         list:           13            1           12
         expr:          691            3          688
-         var:           18            3           15
+         var:           19            3           16
         func:           72            0           72
     template:            1            0            1
        macro:            5            0            5
       member:            1            0            1
        frame:            5            4            1
  interpreter:            1            0
-  frameEntry:          256            0
+  frameEntry:          257            0
       lambda:            0            0
 ==========================================================================================================================
 
@@ -136,10 +136,11 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 ?rv                  : 27       3        1    var        result\optimize\TestOptimizeERO\test_ero_2_str_expr_1 : type=string
 ==========================================================================================================================
 
-Root var list: total=5
+Root var list: total=6
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
+?debug               : false
 ?load-class          : '()
 ?load-jar            : '()
 ?load-script         : '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp")

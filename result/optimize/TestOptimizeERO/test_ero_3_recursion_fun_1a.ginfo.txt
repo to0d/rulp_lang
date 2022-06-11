@@ -72,14 +72,14 @@ Object create count:
       string:           42            0           42
         list:           13            1           12
         expr:          704            6          698
-         var:           27           12           15
+         var:           28           12           16
         func:           72            0           72
     template:            1            0            1
        macro:            5            0            5
       member:            1            0            1
        frame:           13           12            1
  interpreter:            1            0
-  frameEntry:          265            0
+  frameEntry:          266            0
       lambda:            0            0
 ==========================================================================================================================
 
@@ -138,10 +138,11 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 ?rv                  : 36       12       1    var        result\optimize\TestOptimizeERO\test_ero_3_recursion_fun_1a : type=string
 ==========================================================================================================================
 
-Root var list: total=5
+Root var list: total=6
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
+?debug               : false
 ?load-class          : '()
 ?load-jar            : '()
 ?load-script         : '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp")

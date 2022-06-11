@@ -252,6 +252,7 @@ root::~
 (ls6)
 ;=>nil
 ;out:
+system::?debug
 system::?load-class
 system::?load-jar
 system::?load-script

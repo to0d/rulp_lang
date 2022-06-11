@@ -77,7 +77,7 @@ Object create count:
       string:           49            0           49
         list:           13            0           13
         expr:          753            6          747
-         var:           27            6           21
+         var:           28            6           22
         func:           90            2           88
     template:            1            0            1
        macro:            5            0            5
@@ -86,7 +86,7 @@ Object create count:
       member:           38            3           35
        frame:           14            7            7
  interpreter:            1            0
-  frameEntry:          272            0
+  frameEntry:          273            0
       lambda:            3            0
 ==========================================================================================================================
 
@@ -182,10 +182,11 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 ?n                   : 37       9        1    var        a : type=string     
 ==========================================================================================================================
 
-Root var list: total=5
+Root var list: total=6
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
+?debug               : false
 ?load-class          : '("alpha.rulp.ximpl.collection.XRSet$Loader")
 ?load-jar            : '()
 ?load-script         : '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp" "C:\\data\\rs\\load\\set.rulp")

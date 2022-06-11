@@ -219,6 +219,7 @@ root::~
 (print-list (list-of system))
 ;=>nil
 ;out:
+system::?debug
 system::?load-class
 system::?load-jar
 system::?load-script

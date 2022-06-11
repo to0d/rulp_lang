@@ -57,6 +57,7 @@ obj=true                , type=bool    , return=bool
 (list-of-return-type-of system)
 ;=>nil
 ;out:
+obj=?debug              , type=var     , return=bool
 obj=?load-class         , type=var     , return=list
 obj=?load-jar           , type=var     , return=list
 obj=?load-script        , type=var     , return=list

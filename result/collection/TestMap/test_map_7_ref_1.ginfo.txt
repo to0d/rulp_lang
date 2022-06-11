@@ -69,7 +69,7 @@ Object create count:
       string:           50            0           50
         list:           18            1           17
         expr:          768           15          753
-         var:           41           14           27
+         var:           42           14           28
         func:           94            0           94
     template:            1            0            1
        macro:            5            0            5
@@ -78,7 +78,7 @@ Object create count:
       member:           55            1           54
        frame:           28           23            5
  interpreter:            1            0
-  frameEntry:          279            0
+  frameEntry:          280            0
       lambda:            9            0
 ==========================================================================================================================
 
@@ -153,10 +153,11 @@ id=8, name=SF-class1-2, lvl=3, ref=3/3, entry=0, pid=2(main), subject=class1
 
 id=9, name=SF-un2-3, lvl=4, ref=4/5, entry=0, pid=8(SF-class1-2), subject=un2
 
-Root var list: total=5
+Root var list: total=6
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
+?debug               : false
 ?load-class          : '("alpha.rulp.ximpl.collection.XRMap$Loader")
 ?load-jar            : '()
 ?load-script         : '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp" "C:\\data\\rs\\load\\map.rulp")

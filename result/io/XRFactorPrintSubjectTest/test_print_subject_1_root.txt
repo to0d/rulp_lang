@@ -2,13 +2,13 @@ id=0, name=root, lvl=0, ref=0/0, entry=209, subject=root
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?os.version          : -229     0        1    var        10.0 : type=string  
-?os.name             : -228     0        1    var        Windows 10 : type=string
-?path.separator      : -227     0        1    var        ; : type=string     
-?file.separator      : -226     0        1    var        \ : type=string     
-?user.dir            : -225     0        1    var        C:\data\itool\rulp_lang : type=string
-?user.name           : -224     0        1    var        to0d : type=string  
-?user.home           : -223     0        1    var        C:\Users\to0d : type=string
+?os.version          : -230     0        1    var        10.0 : type=string  
+?os.name             : -229     0        1    var        Windows 10 : type=string
+?path.separator      : -228     0        1    var        ; : type=string     
+?file.separator      : -227     0        1    var        \ : type=string     
+?user.dir            : -226     0        1    var        C:\data\itool\rulp_lang : type=string
+?user.name           : -225     0        1    var        to0d : type=string  
+?user.home           : -224     0        1    var        C:\Users\to0d : type=string
 rulp-object-count    : -204     0        0    factor     rulp-object-count   
 runtime-call-count   : -203     0        0    factor     runtime-call-count  
 sys-set-property     : -202     0        0    factor     sys-set-property    

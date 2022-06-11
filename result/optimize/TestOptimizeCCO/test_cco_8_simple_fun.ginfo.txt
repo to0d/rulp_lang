@@ -73,14 +73,14 @@ Object create count:
       string:           43            0           43
         list:           13            1           12
         expr:          712            9          703
-         var:           33           18           15
+         var:           34           18           16
         func:           72            0           72
     template:            1            0            1
        macro:            5            0            5
       member:            1            0            1
        frame:           17           16            1
  interpreter:            1            0
-  frameEntry:          271            0
+  frameEntry:          272            0
       lambda:            0            0
 ==========================================================================================================================
 
@@ -139,10 +139,11 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 ?rv                  : 42       14       1    var        result\optimize\TestOptimizeCCO\test_cco_8_simple_fun : type=string
 ==========================================================================================================================
 
-Root var list: total=5
+Root var list: total=6
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
+?debug               : false
 ?load-class          : '()
 ?load-jar            : '()
 ?load-script         : '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp")

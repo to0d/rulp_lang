@@ -1,5 +1,6 @@
 package alpha.rulp.utils;
 
+import static alpha.rulp.lang.Constant.A_DEBUG;
 import static alpha.rulp.lang.Constant.A_LOCAL;
 import static alpha.rulp.lang.Constant.A_NOCLASS;
 import static alpha.rulp.lang.Constant.A_OPT_LCO;
@@ -778,6 +779,7 @@ public final class RuntimeUtil {
 
 	public static void init(IRFrame frame) throws RException {
 		RulpUtil.setLocalVar(frame, A_TRACE, O_False);
+		RulpUtil.setLocalVar(frame, A_DEBUG, O_False);
 	}
 
 	public static boolean isComputable(IRFrame curFrame, IRObject obj) throws RException {
