@@ -74,14 +74,14 @@ Object create count:
       string:           43            0           43
         list:           17            5           12
         expr:          721            4          717
-         var:           25            9           16
+         var:           24            9           15
         func:           73            0           73
     template:            1            0            1
        macro:            5            0            5
       member:            1            0            1
        frame:           11           10            1
  interpreter:            1            0
-  frameEntry:          265            0
+  frameEntry:          267            0
       lambda:            0            0
 ==========================================================================================================================
 
@@ -141,11 +141,10 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 ?rv                  : 35       6        1    var        result\optimize\TestOptimizeCCO\test_cco_2_duplicate_fun : type=string
 ==========================================================================================================================
 
-Root var list: total=6
+Root var list: total=5
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
-?debug               : false
 ?load-class          : '()
 ?load-jar            : '()
 ?load-script         : '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp")

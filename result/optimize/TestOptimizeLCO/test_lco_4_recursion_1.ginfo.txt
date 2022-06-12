@@ -71,14 +71,14 @@ Object create count:
       string:           42            0           42
         list:           13            1           12
         expr:          702            5          697
-         var:           25            9           16
+         var:           24            9           15
         func:           76            2           74
     template:            1            0            1
        macro:            5            0            5
       member:            1            0            1
        frame:           15           14            1
  interpreter:            1            0
-  frameEntry:          263            0
+  frameEntry:          265            0
       lambda:            2            0
 ==========================================================================================================================
 
@@ -137,11 +137,10 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 ?rv                  : 33       10       1    var        result\optimize\TestOptimizeLCO\test_lco_4_recursion_1 : type=string
 ==========================================================================================================================
 
-Root var list: total=6
+Root var list: total=5
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
-?debug               : false
 ?load-class          : '()
 ?load-jar            : '()
 ?load-script         : '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp")

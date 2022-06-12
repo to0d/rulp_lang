@@ -26,7 +26,9 @@ import alpha.rulp.ximpl.function.XRFunction;
 public class NameSet {
 
 	private Map<XRFunction, List<XRFunction>> funcDepMap;
+
 	private Map<String, RType> localObjTypeMap;
+
 	private NameSet parent = null;
 
 	public NameSet() {

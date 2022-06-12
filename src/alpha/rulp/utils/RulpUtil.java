@@ -1360,10 +1360,6 @@ public class RulpUtil {
 		return obj.getType() == RType.ATOM && ((IRAtom) obj).getName().equals(name);
 	}
 
-	public static boolean isDebug(IRFrame frame) throws RException {
-		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_DEBUG)).asBoolean();
-	}
-
 	public static boolean isExpr(IRObject obj) {
 		return obj.getType() == RType.EXPR;
 	}
@@ -1750,10 +1746,6 @@ public class RulpUtil {
 	public static void saveObjList(List<IRObject> list, IRObject obj) throws RException {
 		list.add(obj);
 		incRef(obj);
-	}
-
-	public static void setDebug(IRFrame frame, boolean debug) throws RException {
-		RulpUtil.setLocalVar(frame, A_DEBUG, debug ? O_True : O_False);
 	}
 
 	public static void setLocalVar(IRFrame frame, String varName, IRObject value) throws RException {

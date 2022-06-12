@@ -64,6 +64,9 @@ import alpha.rulp.ximpl.control.XRFactorReturn;
 import alpha.rulp.ximpl.control.XRFactorThrow;
 import alpha.rulp.ximpl.control.XRFactorTry;
 import alpha.rulp.ximpl.control.XRFactorWhen;
+import alpha.rulp.ximpl.debug.XRFactorEnddbg;
+import alpha.rulp.ximpl.debug.XRFactorIsDebugActive;
+import alpha.rulp.ximpl.debug.XRFactorStrdbg;
 import alpha.rulp.ximpl.error.XRFactorErrorValue;
 import alpha.rulp.ximpl.factor.XRFactorAddSearchFrame;
 import alpha.rulp.ximpl.factor.XRFactorAlias;
@@ -421,6 +424,11 @@ public class BaseLoader implements IRObjectLoader {
 
 		// Runtime
 		RulpUtil.addFrameObject(frame, new XRFactorRuntimeCallCount(F_RUNTIME_CALL_COUNT));
+
+		// Debugger
+		RulpUtil.addFrameObject(frame, new XRFactorStrdbg(F_STRDBG));
+		RulpUtil.addFrameObject(frame, new XRFactorEnddbg(F_ENDDBG));
+		RulpUtil.addFrameObject(frame, new XRFactorIsDebugActive(F_IS_DEBUG_ACTIBE));
 
 		// Rulp Utils
 		RulpUtil.addFrameObject(frame, new XRFactorRulpObjectCount(F_RULP_OBJ_COUNT));

@@ -1,6 +1,5 @@
 package alpha.rulp.utils;
 
-import static alpha.rulp.lang.Constant.A_DEBUG;
 import static alpha.rulp.lang.Constant.A_LOCAL;
 import static alpha.rulp.lang.Constant.A_NOCLASS;
 import static alpha.rulp.lang.Constant.A_OPT_LCO;
@@ -33,6 +32,7 @@ import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRCallable;
+import alpha.rulp.runtime.IRDebugger;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
@@ -483,21 +483,6 @@ public final class RuntimeUtil {
 		}
 	}
 
-//	public static IRList computeAtomList(IRInterpreter intepreter, IRFrame frame, Collection<String> list)
-//			throws RException {
-//
-//		if (list == null || list.isEmpty()) {
-//			return RulpFactory.emptyConstList();
-//		}
-//
-//		LinkedList<IRObject> aList = new LinkedList<>();
-//		for (String element : list) {
-//			aList.add(intepreter.compute(frame, RulpFactory.createAtom(element)));
-//		}
-//
-//		return RulpFactory.createList(aList);
-//	}
-
 	public static IRObject computeCallable(IRCallable callObject, IRList args, IRInterpreter interpreter, IRFrame frame)
 			throws RException {
 
@@ -553,64 +538,78 @@ public final class RuntimeUtil {
 	public static IRObject computeExpr(IRObject e0, IRList expr, IRInterpreter interpreter, IRFrame frame)
 			throws RException {
 
-		switch (e0.getType()) {
-		case FACTOR:
-			exprComputeFactorCount.getAndIncrement();
-			return RuntimeUtil.computeCallable((IRCallable) e0, expr, interpreter, frame);
+		IRDebugger debugger = interpreter.getActiveDebugger();
+		if (debugger != null) {
+			debugger.debugBegin(e0, expr, interpreter, frame);
+		}
 
-		case MACRO:
-			exprComputeMacroCount.getAndIncrement();
-			return RuntimeUtil.computeCallable((IRCallable) e0, expr, interpreter, frame);
+		try {
 
-		case FUNC:
+			switch (e0.getType()) {
+			case FACTOR:
+				exprComputeFactorCount.getAndIncrement();
+				return RuntimeUtil.computeCallable((IRCallable) e0, expr, interpreter, frame);
 
-			IRFunction func = (IRFunction) e0;
+			case MACRO:
+				exprComputeMacroCount.getAndIncrement();
+				return RuntimeUtil.computeCallable((IRCallable) e0, expr, interpreter, frame);
 
-			try {
+			case FUNC:
 
-				exprComputeFuncCount.getAndIncrement();
-				IRObject rst = RuntimeUtil.computeFun(func, expr, interpreter, frame);
-				if (rst == null) {
-					return O_Nil;
-				} else if (rst.getType() == RType.EXPR && AttrUtil.containAttribute(rst, A_OPT_TCO)) {
-					rst = TCOUtil.computeTCO((IRExpr) rst, interpreter, frame);
+				IRFunction func = (IRFunction) e0;
+				try {
+
+					exprComputeFuncCount.getAndIncrement();
+					IRObject rst = RuntimeUtil.computeFun(func, expr, interpreter, frame);
+					if (rst == null) {
+						return O_Nil;
+					} else if (rst.getType() == RType.EXPR && AttrUtil.containAttribute(rst, A_OPT_TCO)) {
+						rst = TCOUtil.computeTCO((IRExpr) rst, interpreter, frame);
+					}
+
+					return rst;
+
+				} catch (RUnmatchParaException excep1) {
+
+					if (!isSubjectFrame(func.getDefineFrame())) {
+						excep1.setHandle(true);
+						throw excep1;
+					}
+
+					IRObject o2 = _lookupNonSubjectObject(func.getName(), frame);
+					if (o2 == null) {
+						excep1.setHandle(true);
+						throw excep1;
+					}
+
+					return computeExpr(o2, expr, interpreter, frame);
+				}
+			case TEMPLATE:
+				exprComputeTemplateCount.getAndIncrement();
+				return RuntimeUtil.computeCallable((IRCallable) e0, expr, interpreter, frame);
+
+			case MEMBER:
+
+				exprComputeMemberCount.getAndIncrement();
+				IRObject e1m = ((IRMember) e0).getValue();
+				if (e1m.getType() != RType.FUNC) {
+					throw new RException("factor not found: " + expr);
 				}
 
-				return rst;
+				return RuntimeUtil.computeFun((IRFunction) e1m, expr, interpreter, frame);
 
-			} catch (RUnmatchParaException excep1) {
+			default:
 
-				if (!isSubjectFrame(func.getDefineFrame())) {
-					excep1.setHandle(true);
-					throw excep1;
-				}
-
-				IRObject o2 = _lookupNonSubjectObject(func.getName(), frame);
-				if (o2 == null) {
-					excep1.setHandle(true);
-					throw excep1;
-				}
-
-				return computeExpr(o2, expr, interpreter, frame);
-			}
-		case TEMPLATE:
-			exprComputeTemplateCount.getAndIncrement();
-			return RuntimeUtil.computeCallable((IRCallable) e0, expr, interpreter, frame);
-
-		case MEMBER:
-
-			exprComputeMemberCount.getAndIncrement();
-			IRObject e1m = ((IRMember) e0).getValue();
-			if (e1m.getType() != RType.FUNC) {
 				throw new RException("factor not found: " + expr);
 			}
 
-			return RuntimeUtil.computeFun((IRFunction) e1m, expr, interpreter, frame);
+		} finally {
 
-		default:
-
-			throw new RException("factor not found: " + expr);
+			if (debugger != null) {
+				debugger.debugEnd(frame);
+			}
 		}
+
 	}
 
 	public static IRObject computeFun(IRFunction fun, IRList expr, IRInterpreter interpreter, IRFrame frame)
@@ -779,7 +778,6 @@ public final class RuntimeUtil {
 
 	public static void init(IRFrame frame) throws RException {
 		RulpUtil.setLocalVar(frame, A_TRACE, O_False);
-		RulpUtil.setLocalVar(frame, A_DEBUG, O_False);
 	}
 
 	public static boolean isComputable(IRFrame curFrame, IRObject obj) throws RException {

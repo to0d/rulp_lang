@@ -72,6 +72,7 @@ obj=do-p                , type=factor
 obj=do-when-obj-deleted , type=factor
 obj=do-when-var-changed , type=factor
 obj=double              , type=atom
+obj=enddbg              , type=factor
 obj=equal_def           , type=factor
 obj=error-value         , type=factor
 obj=expr                , type=atom
@@ -97,6 +98,7 @@ obj=if                  , type=factor
 obj=instance            , type=atom
 obj=int                 , type=atom
 obj=is-const            , type=factor
+obj=is-debug-active     , type=factor
 obj=is-recursive        , type=factor
 obj=is-stable           , type=factor
 obj=is-thread-safe      , type=factor
@@ -181,6 +183,7 @@ obj=str-trim-head       , type=factor
 obj=str-trim-tail       , type=factor
 obj=str-upper           , type=factor
 obj=strcat              , type=factor
+obj=strdbg              , type=factor
 obj=string              , type=atom
 obj=subject-of          , type=factor
 obj=sys-free-memory     , type=factor

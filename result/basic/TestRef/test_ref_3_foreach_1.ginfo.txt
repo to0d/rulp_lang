@@ -62,7 +62,7 @@ Object create count:
         list:           16            2           14
         expr:          694            3          691
        array:            1            0            1
-         var:           26            6           20
+         var:           25            6           19
         func:           71            0           71
     template:            1            0            1
        macro:            5            0            5
@@ -71,7 +71,7 @@ Object create count:
       member:            7            0            7
        frame:            7            6            1
  interpreter:            1            0
-  frameEntry:          262            0
+  frameEntry:          264            0
       lambda:            0            0
 ==========================================================================================================================
 
@@ -128,11 +128,10 @@ type#class1          : 23       2        0    atom       type#class1
 
 id=3, name=SF-class1-0, lvl=3, ref=1/1, entry=0, pid=2(main), subject=class1
 
-Root var list: total=6
+Root var list: total=5
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
-?debug               : false
 ?load-class          : '()
 ?load-jar            : '()
 ?load-script         : '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp")

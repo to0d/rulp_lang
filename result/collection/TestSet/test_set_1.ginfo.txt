@@ -65,7 +65,7 @@ Object create count:
       string:           48            0           48
         list:           16            0           16
         expr:          753           18          735
-         var:           29           12           17
+         var:           28           12           16
         func:           88            0           88
     template:            1            0            1
        macro:            5            0            5
@@ -74,7 +74,7 @@ Object create count:
       member:           51            5           46
        frame:           20           18            2
  interpreter:            1            0
-  frameEntry:          270            0
+  frameEntry:          272            0
       lambda:            4            0
 ==========================================================================================================================
 
@@ -142,11 +142,10 @@ id=3, name=SF-set-0, lvl=3, ref=2/2, entry=0, pid=2(main), subject=set
 
 id=4, name=SF-set1-1, lvl=4, ref=5/6, entry=0, pid=3(SF-set-0), subject=set1
 
-Root var list: total=6
+Root var list: total=5
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
-?debug               : false
 ?load-class          : '("alpha.rulp.ximpl.collection.XRSet$Loader")
 ?load-jar            : '()
 ?load-script         : '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp" "C:\\data\\rs\\load\\set.rulp")

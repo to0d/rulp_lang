@@ -23,6 +23,10 @@ public interface IRInterpreter {
 
 	public void compute(String input, IRListener1<IRObject> resultListener) throws RException;
 
+	public void endDebug();
+
+	public IRDebugger getActiveDebugger();
+
 	public int getCallId();
 
 	public IRInput getInput();
@@ -46,4 +50,6 @@ public interface IRInterpreter {
 	public void setInput(IRInput in);
 
 	public void setOutput(IROut out);
+
+	public void startDebug();
 }

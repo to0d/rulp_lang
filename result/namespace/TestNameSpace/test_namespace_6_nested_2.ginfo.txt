@@ -74,7 +74,7 @@ Object create count:
       string:           42            0           42
         list:           13            1           12
         expr:          696            2          694
-         var:           21            5           16
+         var:           20            5           15
         func:           71            0           71
     template:            1            0            1
        macro:            5            0            5
@@ -82,7 +82,7 @@ Object create count:
       member:            9            0            9
        frame:            7            3            4
  interpreter:            1            0
-  frameEntry:          261            0
+  frameEntry:          263            0
       lambda:            0            0
 ==========================================================================================================================
 
@@ -146,11 +146,10 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 
 id=6, name=SF-ns3-2, lvl=5, ref=1/2, entry=0, pid=4(SF-ns2-1), subject=ns3
 
-Root var list: total=6
+Root var list: total=5
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
-?debug               : false
 ?load-class          : '()
 ?load-jar            : '()
 ?load-script         : '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp")

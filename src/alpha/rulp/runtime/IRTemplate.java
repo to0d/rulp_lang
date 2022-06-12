@@ -14,7 +14,9 @@ public interface IRTemplate extends IRObject, IRCallable {
 	public static class TemplatePara {
 
 		public boolean isVar;
+	
 		public IRAtom paraType;
+		
 		public IRObject paraValue;
 
 		@Override

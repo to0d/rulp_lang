@@ -40,6 +40,8 @@ public interface Constant {
 	String A_DEFAULT = "default";
 
 	String A_DO = "do";
+	
+	String A_DEBUG = "debug";
 
 	String A_DOUBLE = "double";
 
@@ -174,8 +176,6 @@ public interface Constant {
 	String A_TOOL = "tool";
 
 	String A_TRACE = "?trace";
-
-	String A_DEBUG = "?debug";
 
 	String A_TRUE = "true";
 
@@ -440,6 +440,12 @@ public interface Constant {
 	String F_RULP_OBJ_COUNT = "rulp-object-count";
 
 	String F_RUN = "run";
+	
+	String F_STRDBG = "strdbg";
+	
+	String F_ENDDBG = "enddbg";
+	
+	String F_IS_DEBUG_ACTIBE = "is-debug-active";
 
 	String F_RUNTIME_CALL_COUNT = "runtime-call-count";
 

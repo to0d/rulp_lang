@@ -36,10 +36,6 @@ import alpha.rulp.utils.RuntimeUtil;
 
 public class TCOUtil {
 
-	static final int OPT_NONE = 0;
-
-	static final int OPT_BY = 1; // * by
-
 	static class TCONode {
 
 		private ArrayList<IRObject> elements = null;
@@ -101,6 +97,10 @@ public class TCOUtil {
 	protected static AtomicInteger maxStackSize = new AtomicInteger(0);
 
 	protected static AtomicInteger nodeCount = new AtomicInteger(0);
+
+	static final int OPT_BY = 1; // * by
+
+	static final int OPT_NONE = 0;
 
 	protected static AtomicInteger rebuildCount = new AtomicInteger(0);
 
@@ -279,6 +279,28 @@ public class TCOUtil {
 		return expr;
 	}
 
+	private static IRObject _updateResult(Stack<TCONode> stack, TCONode node, IRObject rst) throws RException {
+
+		if (node.parrent != null) {
+
+			if (rst.getType() == RType.EXPR) {
+				_push(stack, node.parrent, node.indexOfParent, (IRExpr) rst);
+			} else {
+				node.parrent.elements.set(node.indexOfParent, rst);
+			}
+
+		} else {
+
+			if (rst.getType() == RType.EXPR) {
+				_push(stack, null, -1, (IRExpr) rst);
+			} else {
+				return rst;
+			}
+		}
+
+		return null;
+	}
+
 	public static IRObject computeTCO(IRExpr tcoExpr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		if (tcoExpr.isEmpty()) {
@@ -413,28 +435,6 @@ public class TCOUtil {
 		} // while (!cpsQueue.isEmpty())
 
 		throw new RException("Should not run to here: " + tcoExpr);
-	}
-
-	private static IRObject _updateResult(Stack<TCONode> stack, TCONode node, IRObject rst) throws RException {
-
-		if (node.parrent != null) {
-
-			if (rst.getType() == RType.EXPR) {
-				_push(stack, node.parrent, node.indexOfParent, (IRExpr) rst);
-			} else {
-				node.parrent.elements.set(node.indexOfParent, rst);
-			}
-
-		} else {
-
-			if (rst.getType() == RType.EXPR) {
-				_push(stack, null, -1, (IRExpr) rst);
-			} else {
-				return rst;
-			}
-		}
-
-		return null;
 	}
 
 	public static int getCallCount() {

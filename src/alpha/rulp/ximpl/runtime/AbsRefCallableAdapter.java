@@ -10,6 +10,8 @@ public abstract class AbsRefCallableAdapter extends AbsRefObject implements IRCa
 
 	private DeCounter callCounter = new DeCounter(MAX_COUNTER_SIZE);
 
+	private boolean debug = false;
+
 	private int statsId = -1;
 
 	@Override
@@ -32,5 +34,15 @@ public abstract class AbsRefCallableAdapter extends AbsRefObject implements IRCa
 		}
 
 		callCounter.add(callId);
+	}
+
+	@Override
+	public boolean isDebug() {
+		return debug;
+	}
+
+	@Override
+	public void setDebug(boolean debug) {
+		this.debug = debug;
 	}
 }

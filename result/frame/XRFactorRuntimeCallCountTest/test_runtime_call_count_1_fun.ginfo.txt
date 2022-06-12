@@ -69,14 +69,14 @@ Object create count:
       string:           43            0           43
         list:           12            0           12
         expr:          691            4          687
-         var:           24            9           15
+         var:           23            9           14
         func:           72            0           72
     template:            1            0            1
        macro:            5            0            5
       member:            1            0            1
        frame:           10            9            1
  interpreter:            1            0
-  frameEntry:          263            0
+  frameEntry:          265            0
       lambda:            0            0
 ==========================================================================================================================
 
@@ -134,11 +134,10 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 ?rv                  : 33       5        1    var        result\frame\XRFactorRuntimeCallCountTest\test_runtime_call_count_1_fun : type=string
 ==========================================================================================================================
 
-Root var list: total=6
+Root var list: total=5
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
-?debug               : false
 ?load-class          : '()
 ?load-jar            : '()
 ?load-script         : '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp")

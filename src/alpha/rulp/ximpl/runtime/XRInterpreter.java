@@ -25,6 +25,7 @@ import alpha.rulp.lang.IRInstance;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RError;
 import alpha.rulp.lang.RException;
+import alpha.rulp.runtime.IRDebugger;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInput;
 import alpha.rulp.runtime.IRInterpreter;
@@ -35,6 +36,8 @@ import alpha.rulp.runtime.IRTLS;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
+import alpha.rulp.ximpl.debug.RDebugResumeException;
+import alpha.rulp.ximpl.debug.XRDebugger;
 import alpha.rulp.ximpl.error.RIException;
 
 public class XRInterpreter implements IRInterpreter {
@@ -75,6 +78,8 @@ public class XRInterpreter implements IRInterpreter {
 
 	protected AtomicInteger callId = new AtomicInteger(0);
 
+	private IRDebugger debugger = null;
+
 	protected BufferedReader defaultInput = null;
 
 	protected IRInput input;
@@ -99,6 +104,15 @@ public class XRInterpreter implements IRInterpreter {
 		if (level > maxCallLevel.get()) {
 			maxCallLevel.set(level);
 		}
+	}
+
+	protected BufferedReader _getDefaultInput() {
+
+		if (defaultInput == null) {
+			defaultInput = new BufferedReader(new InputStreamReader(System.in));
+		}
+
+		return defaultInput;
 	}
 
 	@Override
@@ -173,7 +187,11 @@ public class XRInterpreter implements IRInterpreter {
 				RulpUtil.decRef(rst);
 			}
 
-		} catch (RIException e) {
+		} catch (RDebugResumeException e) {
+			throw e;
+		}
+
+		catch (RIException e) {
 
 			if (TRACE) {
 				e.printStackTrace();
@@ -207,17 +225,23 @@ public class XRInterpreter implements IRInterpreter {
 	}
 
 	@Override
+	public void endDebug() {
+
+		if (debugger != null) {
+			debugger.shutdown();
+			debugger = null;
+		}
+
+	}
+
+	@Override
 	public int getCallId() {
 		return callId.get();
 	}
 
-	protected BufferedReader getDefaultInput() {
-
-		if (defaultInput == null) {
-			defaultInput = new BufferedReader(new InputStreamReader(System.in));
-		}
-
-		return defaultInput;
+	@Override
+	public IRDebugger getActiveDebugger() {
+		return debugger;
 	}
 
 	@Override
@@ -286,7 +310,7 @@ public class XRInterpreter implements IRInterpreter {
 			if (input != null) {
 				return input.read();
 			} else {
-				return getDefaultInput().readLine();
+				return _getDefaultInput().readLine();
 			}
 
 		} catch (IOException e) {
@@ -311,6 +335,16 @@ public class XRInterpreter implements IRInterpreter {
 	@Override
 	public void setOutput(IROut out) {
 		this.out = out;
+	}
+
+	@Override
+	public void startDebug() {
+
+		if (debugger == null) {
+			debugger = new XRDebugger();
+		}
+
+		debugger.setup();
 	}
 
 }

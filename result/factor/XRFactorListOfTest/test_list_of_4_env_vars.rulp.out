@@ -24,12 +24,11 @@
         (setq $idx (+ $idx 1))))
 ;=>nil
 ;out:
-1:var, name=?debug
-2:var, name=?load-class
-3:var, name=?load-jar
-4:var, name=?load-script
-5:var, name=?path
-6:var, name=?trace
+1:var, name=?load-class
+2:var, name=?load-jar
+3:var, name=?load-script
+4:var, name=?path
+5:var, name=?trace
 
 ;eof
 

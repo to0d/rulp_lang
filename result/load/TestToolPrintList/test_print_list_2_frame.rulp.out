@@ -66,6 +66,7 @@ root::do-p
 root::do-when-obj-deleted
 root::do-when-var-changed
 root::double
+root::enddbg
 root::equal_def
 root::error-value
 root::expr
@@ -91,6 +92,7 @@ root::if
 root::instance
 root::int
 root::is-const
+root::is-debug-active
 root::is-recursive
 root::is-stable
 root::is-thread-safe
@@ -177,6 +179,7 @@ root::str-trim-head
 root::str-trim-tail
 root::str-upper
 root::strcat
+root::strdbg
 root::string
 root::subject-of
 root::sys-free-memory
@@ -219,7 +222,6 @@ root::~
 (print-list (list-of system))
 ;=>nil
 ;out:
-system::?debug
 system::?load-class
 system::?load-jar
 system::?load-script

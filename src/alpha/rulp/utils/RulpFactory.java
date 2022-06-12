@@ -298,6 +298,7 @@ public final class RulpFactory {
 		frame.setFrameName(name);
 		frame.setThreadContext(parentFrame.getThreadContext());
 		framePool.allocateFrameId(frame);
+
 		return frame;
 	}
 

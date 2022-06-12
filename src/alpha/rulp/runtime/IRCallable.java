@@ -23,4 +23,7 @@ public interface IRCallable extends IRObject {
 
 	public void incCallCount(int statsId, int callId);
 
+	public boolean isDebug();
+
+	public void setDebug(boolean debug);
 }

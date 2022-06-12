@@ -70,7 +70,7 @@ Object create count:
       string:           42            0           42
         list:           13            1           12
         expr:          698            3          695
-         var:           21            4           17
+         var:           20            4           16
         func:           75            2           73
     template:            1            0            1
        macro:            5            0            5
@@ -79,7 +79,7 @@ Object create count:
       member:            8            4            4
        frame:            7            5            2
  interpreter:            1            0
-  frameEntry:          260            0
+  frameEntry:          262            0
       lambda:            2            0
 ==========================================================================================================================
 
@@ -141,11 +141,10 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 ?rv                  : 30       5        1    var        result\rclass\TestClass\test_class_9_delete_2 : type=string
 ==========================================================================================================================
 
-Root var list: total=6
+Root var list: total=5
 ==========================================================================================================================
 Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
-?debug               : false
 ?load-class          : '()
 ?load-jar            : '()
 ?load-script         : '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp")
