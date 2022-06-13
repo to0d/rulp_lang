@@ -1,0 +1,26 @@
+(defun fun1 ()
+   (return 1)
+)
+
+(defun fun2 ()
+    (defvar ?x 1)
+    (return (fun1))
+)
+;=>
+
+(strdbg)
+;in:
+b fun1
+;eof
+;=>
+
+(fun2)
+;in:
+(println ?x)
+r
+;eof
+;=>
+
+(enddbg)
+;=>
+

@@ -1,12 +1,18 @@
 (read-line)
+;in:
+line1
+;eof
 ;=>
 
 (read-line)
+;in:
+line2  xxx
+;eof
 ;=>
 
 (read-line)
-;=>
-
-(read-line)
+;in:
+  line3
+;eof
 ;=>
 

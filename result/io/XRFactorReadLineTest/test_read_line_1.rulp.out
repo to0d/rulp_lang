@@ -1,12 +1,30 @@
 (read-line)
+;in:
+line1
+;eof
 ;=>"line1"
+;out:
+line1
+
+;eof
 
 (read-line)
+;in:
+line2  xxx
+;eof
 ;=>"line2  xxx"
+;out:
+line2  xxx
+
+;eof
 
 (read-line)
+;in:
+  line3
+;eof
 ;=>"  line3"
+;out:
+  line3
 
-(read-line)
-;=>""
+;eof
 

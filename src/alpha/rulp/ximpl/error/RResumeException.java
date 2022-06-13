@@ -1,8 +1,8 @@
-package alpha.rulp.ximpl.debug;
+package alpha.rulp.ximpl.error;
 
 import alpha.rulp.lang.RException;
 
-public class RDebugResumeException extends RException {
+public class RResumeException extends RException {
 
 	private static final long serialVersionUID = 4357385572930274936L;
 

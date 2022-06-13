@@ -39,6 +39,10 @@ public class XRFactorStrdbg extends AbsAtomFactorAdapter implements IRFactor {
 		}
 
 		interpreter.startDebug();
+		debugger = interpreter.getActiveDebugger();
+		debugger.pushStack(args, frame);
+		debugger.run(interpreter, frame);
+		debugger.popStack(frame);
 
 		return O_Nil;
 	}

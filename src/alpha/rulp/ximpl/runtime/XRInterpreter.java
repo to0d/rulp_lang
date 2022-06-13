@@ -36,8 +36,8 @@ import alpha.rulp.runtime.IRTLS;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
-import alpha.rulp.ximpl.debug.RDebugResumeException;
 import alpha.rulp.ximpl.debug.XRDebugger;
+import alpha.rulp.ximpl.error.RResumeException;
 import alpha.rulp.ximpl.error.RIException;
 
 public class XRInterpreter implements IRInterpreter {
@@ -187,7 +187,7 @@ public class XRInterpreter implements IRInterpreter {
 				RulpUtil.decRef(rst);
 			}
 
-		} catch (RDebugResumeException e) {
+		} catch (RResumeException e) {
 			throw e;
 		}
 

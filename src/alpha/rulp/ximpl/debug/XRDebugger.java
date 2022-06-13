@@ -2,6 +2,7 @@ package alpha.rulp.ximpl.debug;
 
 import static alpha.rulp.lang.Constant.A_DEBUG;
 
+import java.util.List;
 import java.util.Stack;
 
 import alpha.rulp.lang.IRFrame;
@@ -12,29 +13,34 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRCallable;
 import alpha.rulp.runtime.IRDebugger;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.runtime.IRParser;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.error.REofException;
+import alpha.rulp.ximpl.error.RResumeException;
 
 public class XRDebugger implements IRDebugger {
 
 	static final String F_BREAK = "b";
-	
+
 	static final String F_RESUME = "r";
 
-	protected boolean debugCmd = false;
+	protected boolean active = false;
 
-	protected boolean debugMode = false;
+	protected int debugLevel = 0;
 
 	protected Stack<String> frameStack = new Stack<>();
 
 	protected void _load(IRFrame frame) throws RException {
-		RulpUtil.addFrameObject(frame, new XRFactorB(F_BREAK));
-		RulpUtil.addFrameObject(frame, new XRFactorR(F_RESUME));
+		RulpUtil.addFrameObject(frame, new XRFactorDebugBreak(F_BREAK));
+		RulpUtil.addFrameObject(frame, new XRFactorDebugResume(F_RESUME));
 	}
 
 	protected void _run(IRInterpreter interpreter, IRFrame frame) {
 
-		DBG: while (debugCmd) {
+		IRParser parser = interpreter.getParser();
+
+		DBG: while (active) {
 
 			interpreter.out("R>");
 
@@ -53,17 +59,33 @@ public class XRDebugger implements IRDebugger {
 					cmd = cmd + ")";
 				}
 
-				interpreter.compute(cmd, (rst) -> {
-					System.out.println(RulpUtil.toString(rst));
-				});
+				List<IRObject> objs = parser.parse(cmd);
 
-			} catch (RDebugResumeException e) {
-				debugCmd = false;
+				for (IRObject obj : objs) {
+					IRObject rst = interpreter.compute(frame, obj);
+					RulpUtil.incRef(rst);
+					interpreter.out(RulpUtil.toString(rst) + "\n");
+					RulpUtil.decRef(rst);
+				}
+
+			} catch (RResumeException e) {
+				break;
+
+			} catch (REofException e) {
+				interpreter.out("eof");
 				break;
 
 			} catch (RException e) {
-				e.printStackTrace();
-				continue DBG;
+
+				try {
+					if (RulpUtil.isTrace(frame)) {
+						e.printStackTrace();
+					}
+				} catch (RException e1) {
+					e1.printStackTrace();
+				}
+
+				interpreter.out(e.toString() + "\n");
 			}
 		}
 	}
@@ -96,59 +118,33 @@ public class XRDebugger implements IRDebugger {
 	}
 
 	@Override
-	public void debugBegin(IRObject e0, IRList expr, IRInterpreter interpreter, IRFrame frame) throws RException {
-
-		if (!debugMode) {
-			return;
-		}
-
-		// push call stack
-		frameStack.push(String.format("at %s ; %s-%d", expr, frame.getFrameName(), frame.getFrameId()));
+	public boolean canBreak(IRObject obj) {
 
 		// can't run debugger recursively
-		if (debugCmd) {
-			return;
+		if (debugLevel > 0) {
+			return false;
 		}
 
-		switch (e0.getType()) {
+		switch (obj.getType()) {
 		case FACTOR:
 		case MACRO:
 		case FUNC:
-			if (!((IRCallable) e0).isDebug()) {
-				return;
-			}
-
-			break;
+			return ((IRCallable) obj).isDebug();
 
 		default:
-			return;
+			return false;
 		}
-
-		debugCmd = true;
-
-		interpreter.out("break at object: " + e0);
-		int size = frameStack.size();
-		while (size > 0) {
-			interpreter.out(frameStack.get(size - 1));
-		}
-
-		IRFrame debugFrame = RulpFactory.createFrame(frame, A_DEBUG);
-		RulpUtil.incRef(debugFrame);
-		_load(debugFrame);
-
-		try {
-			_run(interpreter, debugFrame);
-		} finally {
-			debugFrame.release();
-			RulpUtil.decRef(debugFrame);
-		}
-
 	}
 
 	@Override
-	public void debugEnd(IRFrame frame) {
+	public boolean isDebug() {
+		return active;
+	}
 
-		if (!debugMode) {
+	@Override
+	public void popStack(IRFrame frame) {
+
+		if (!active) {
 			return;
 		}
 
@@ -156,20 +152,62 @@ public class XRDebugger implements IRDebugger {
 	}
 
 	@Override
-	public boolean isDebug() {
-		return debugMode;
+	public void pushStack(IRList expr, IRFrame frame) throws RException {
+
+		if (!active) {
+			return;
+		}
+
+		frameStack.push(String.format("at %s ; %s-%d", expr, frame.getFrameName(), frame.getFrameId()));
+	}
+
+	@Override
+	public void run(IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		/**************************************************/
+		// output current stack
+		/**************************************************/
+		interpreter.out("debug active:\n");
+		int size = frameStack.size();
+		while (size > 0) {
+			interpreter.out(frameStack.get(size - 1) + "\n");
+			--size;
+		}
+
+		/**************************************************/
+		// init a frame for debugging
+		/**************************************************/
+		IRFrame debugFrame = RulpFactory.createFrame(frame, A_DEBUG);
+		RulpUtil.incRef(debugFrame);
+		_load(debugFrame);
+
+		/**************************************************/
+		// Run
+		/**************************************************/
+		try {
+
+			++debugLevel;
+			_run(interpreter, debugFrame);
+
+		} finally {
+
+			debugFrame.release();
+			RulpUtil.decRef(debugFrame);
+			--debugLevel;
+		}
+
 	}
 
 	@Override
 	public void setup() {
-		debugMode = true;
+		active = true;
 	}
 
 	@Override
 	public void shutdown() {
 
 		frameStack.clear();
-		debugMode = false;
+		active = false;
 	}
 
 }

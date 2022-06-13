@@ -20,10 +20,13 @@ import alpha.common.utils.AlphaTestBase;
 import alpha.common.utils.FileUtil;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.RException;
+import alpha.rulp.runtime.IRInput;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IROut;
 import alpha.rulp.runtime.IRParser;
 import alpha.rulp.utils.RulpUtil.RResultList;
+import alpha.rulp.ximpl.error.REofException;
+import alpha.rulp.ximpl.error.RInterrupt;
 import alpha.rulp.ximpl.optimize.CCOUtil;
 import alpha.rulp.ximpl.optimize.EROUtil;
 import alpha.rulp.ximpl.optimize.LCOUtil;
@@ -31,8 +34,6 @@ import alpha.rulp.ximpl.optimize.OptUtil;
 import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public class RulpTestBase extends AlphaTestBase {
-
-	static final String V_SCRIPT_PATH = "?script-path";
 
 	protected static class XROut implements IROut {
 
@@ -52,6 +53,22 @@ public class RulpTestBase extends AlphaTestBase {
 		}
 	}
 
+	static final String KEY_COMMENT = ";;;";
+
+	static final String KEY_EOF = ";eof";
+
+	static final String KEY_ERR = ";err";
+
+	static final String KEY_ERR2 = ";err:";
+
+	static final String KEY_OUT = ";out:";
+
+	static final String KEY_IN = ";in:";
+
+	static final String KEY_RESULT = ";=>";
+
+	static final String V_SCRIPT_PATH = "?script-path";
+
 	protected static String _load(String path) {
 
 		try {
@@ -61,7 +78,7 @@ public class RulpTestBase extends AlphaTestBase {
 			fail(e.toString());
 			return null;
 		}
-	}
+	};
 
 	protected static String _load(String path, String charset) {
 
@@ -90,35 +107,10 @@ public class RulpTestBase extends AlphaTestBase {
 			_interpreter = _createInterpreter();
 			_out = new XROut();
 			_interpreter.setOutput(_out);
-
-			IRFrame mainFrame = _interpreter.getMainFrame();
-
-//			RulpUtil.setLocalVar(mainFrame, V_TEST_SCRIPT, O_Nil);
-
-//			RulpUtil.addFrameObject(mainFrame, new AbsRFactorAdapter("script_out") {
-//
-//				@Override
-//				public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
-//
-//					if (args.size() > 3) {
-//						throw new RException("Invalid parameters: " + args);
-//					}
-//
-//					String scriptPath = RulpUtil.asString(RulpUtil.getVarValue(frame, V_TEST_SCRIPT)).asString();
-//					String outName = FileUtil.getFilePreName(scriptPath);
-//					if (args.size() > 1) {
-//						outName += "_" + RulpUtil.asString(interpreter.compute(frame, args.get(1))).asString();
-//					}
-//
-//					outName += ".ginfo.txt";
-//					_gInfo(outName);
-//					return O_Nil;
-//				}
-//			});
 		}
 
 		return _interpreter;
-	};
+	}
 
 	protected IRParser _getParser() {
 
@@ -160,6 +152,7 @@ public class RulpTestBase extends AlphaTestBase {
 
 			List<String> lines = FileUtil.openTxtFile(inputScriptPath, "utf-8");
 			ArrayList<String> outLines = new ArrayList<>();
+			ArrayList<String> inLines = null;
 
 			int size = lines.size();
 			int index = 0;
@@ -173,12 +166,13 @@ public class RulpTestBase extends AlphaTestBase {
 
 				String line = lines.get(index);
 
-				if (line.trim().equals(";;;")) {
+				if (line.trim().equals(KEY_COMMENT)) {// ;;;
 					inputStmt = sb.toString();
 					sb.setLength(0);
-					rc = _run_stmt(inputStmt, null, null, null, outLines, interpreter);
+					rc = _run_stmt(inputStmt, null, null, null, inLines, outLines, interpreter);
+					inLines = null;
 
-				} else if (line.startsWith(";=>")) {
+				} else if (line.startsWith(KEY_RESULT)) {// ;=>
 
 					inputStmt = sb.toString();
 					sb.setLength(0);
@@ -187,16 +181,18 @@ public class RulpTestBase extends AlphaTestBase {
 						expectResult = null;
 					}
 
-					rc = _run_stmt(inputStmt, false, expectResult, null, outLines, interpreter);
+					rc = _run_stmt(inputStmt, false, expectResult, null, inLines, outLines, interpreter);
+					inLines = null;
 
-				} else if (line.trim().equals(";err")) {
+				} else if (line.trim().equals(KEY_ERR)) {// ;err
 
 					inputStmt = sb.toString();
 					sb.setLength(0);
 
-					rc = _run_stmt(inputStmt, true, null, null, outLines, interpreter);
+					rc = _run_stmt(inputStmt, true, null, null, inLines, outLines, interpreter);
+					inLines = null;
 
-				} else if (line.trim().equals(";err:")) {
+				} else if (line.trim().equals(KEY_ERR2)) {// ;err:
 
 					inputStmt = sb.toString();
 					sb.setLength(0);
@@ -206,7 +202,7 @@ public class RulpTestBase extends AlphaTestBase {
 					while (++index < size) {
 
 						String nextLine = lines.get(index);
-						if (nextLine.trim().equals(";eof")) {
+						if (nextLine.trim().equals(KEY_EOF)) {
 							break;
 						}
 
@@ -216,13 +212,27 @@ public class RulpTestBase extends AlphaTestBase {
 						expectSb.append(nextLine);
 					}
 
-					rc = _run_stmt(inputStmt, true, null, expectSb.toString(), outLines, interpreter);
+					rc = _run_stmt(inputStmt, true, null, expectSb.toString(), inLines, outLines, interpreter);
+					inLines = null;
+
+				} else if (line.trim().equals(KEY_IN)) {// ;in:
+
+					inLines = new ArrayList<>();
+					while (++index < size) {
+
+						String nextLine = lines.get(index);
+						if (nextLine.trim().equals(KEY_EOF)) {
+							break;
+						}
+						inLines.add(nextLine);
+					}
 
 				} else {
 
 					if (sb.length() != 0) {
 						sb.append("\n");
 					}
+
 					sb.append(line);
 				}
 			}
@@ -230,7 +240,8 @@ public class RulpTestBase extends AlphaTestBase {
 			if (rc && sb.length() != 0) {
 				inputStmt = sb.toString();
 				sb.setLength(0);
-				rc = _run_stmt(inputStmt, false, null, null, outLines, interpreter);
+				rc = _run_stmt(inputStmt, false, null, null, inLines, outLines, interpreter);
+				inLines = null;
 			}
 
 			FileUtil.saveTxtFile(inputScriptPath + ".out", outLines, "utf-8");
@@ -247,24 +258,59 @@ public class RulpTestBase extends AlphaTestBase {
 	}
 
 	protected boolean _run_stmt(String inputStmt, Boolean expectError, String expectResult, String expectErrorMessage,
-			ArrayList<String> outLines, IRInterpreter interpreter) {
+			List<String> inLines, List<String> outLines, IRInterpreter interpreter) {
 
 		RResultList rsultList = null;
 
+		// init output
+		_out.clear();
+
+		// init input
+		IRInput oldIn = null;
+
 		try {
 
-			_out.clear();
+			if (inLines != null) {
+
+				oldIn = interpreter.getInput();
+
+				interpreter.setInput(new IRInput() {
+
+					int idx = 0;
+
+					@Override
+					public String read() throws RException {
+
+						if (idx >= inLines.size()) {
+							throw new REofException();
+						}
+
+						String line = inLines.get(idx++);
+						_out.out(line + "\n");
+
+						return line;
+					}
+				});
+			}
+
 			outLines.add(inputStmt);
+			if (inLines != null) {
+				outLines.add(KEY_IN);
+				for (String inLine : inLines) {
+					outLines.add(inLine);
+				}
+				outLines.add(KEY_EOF);
+			}
 
 			rsultList = RulpUtil.compute(interpreter, inputStmt);
 			String result = RulpUtil.toString(rsultList.results);
-			outLines.add(";=>" + result);
+			outLines.add(KEY_RESULT + result);
 
 			String output = _out.getOut();
 			if (output != null && !output.isEmpty()) {
-				outLines.add(";out:");
+				outLines.add(KEY_OUT);
 				outLines.add(output);
-				outLines.add(";eof");
+				outLines.add(KEY_EOF);
 			}
 
 			outLines.add("");
@@ -279,9 +325,9 @@ public class RulpTestBase extends AlphaTestBase {
 
 		} catch (Exception e) {
 
-			outLines.add(";err:");
+			outLines.add(KEY_ERR2);
 			outLines.add(e.getMessage());
-			outLines.add(";eof");
+			outLines.add(KEY_EOF);
 			outLines.add("");
 
 			if (expectError != null && !expectError) {
@@ -298,9 +344,9 @@ public class RulpTestBase extends AlphaTestBase {
 
 			e.printStackTrace();
 
-			outLines.add(";err:");
+			outLines.add(KEY_ERR2);
 			outLines.add(e.toString());
-			outLines.add(";eof");
+			outLines.add(KEY_EOF);
 			outLines.add("");
 
 			if (expectError != null && !expectError) {
@@ -322,6 +368,10 @@ public class RulpTestBase extends AlphaTestBase {
 					e1.printStackTrace();
 					fail(e1.toString());
 				}
+			}
+
+			if (oldIn != null) {
+				interpreter.setInput(oldIn);
 			}
 		}
 
@@ -395,9 +445,9 @@ public class RulpTestBase extends AlphaTestBase {
 
 	protected void _test_error(String input, String expectError) {
 
-		System.out.println(input);
-		System.out.println(";err");
-		System.out.println();
+//		System.out.println(input);
+//		System.out.println(";err");
+//		System.out.println();
 
 		try {
 

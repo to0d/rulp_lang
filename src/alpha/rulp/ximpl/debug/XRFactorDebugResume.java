@@ -13,31 +13,25 @@ import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
-import alpha.rulp.runtime.IRDebugger;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.utils.RulpFactory;
+import alpha.rulp.ximpl.error.RResumeException;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorB extends AbsAtomFactorAdapter implements IRFactor {
+public class XRFactorDebugResume extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorB(String factorName) {
+	public XRFactorDebugResume(String factorName) {
 		super(factorName);
 	}
 
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() != 2) {
+		if (args.size() != 1) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		IRDebugger debugger = interpreter.getActiveDebugger();
-		if (debugger == null) {
-			throw new RException("not in debug mode");
-		}
-
-		return RulpFactory.createBoolean(debugger.addBreakObject(args.get(1), interpreter, frame));
+		throw new RResumeException();
 	}
 
 }

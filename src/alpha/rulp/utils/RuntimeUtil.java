@@ -540,7 +540,11 @@ public final class RuntimeUtil {
 
 		IRDebugger debugger = interpreter.getActiveDebugger();
 		if (debugger != null) {
-			debugger.debugBegin(e0, expr, interpreter, frame);
+			debugger.pushStack(expr, frame);
+
+			if (debugger.canBreak(e0)) {
+				debugger.run(interpreter, frame);
+			}
 		}
 
 		try {
@@ -606,7 +610,7 @@ public final class RuntimeUtil {
 		} finally {
 
 			if (debugger != null) {
-				debugger.debugEnd(frame);
+				debugger.popStack(frame);
 			}
 		}
 

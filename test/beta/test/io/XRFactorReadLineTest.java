@@ -17,32 +17,6 @@ class XRFactorReadLineTest extends RulpTestBase {
 	void test_read_line_1() {
 
 		_setup();
-
-		ArrayList<String> lines = new ArrayList<>();
-		lines.add("line1");
-		lines.add("line2  xxx");
-		lines.add("  line3");
-
-		try {
-			this._getInterpreter().setInput(new IRInput() {
-
-				int idx = 0;
-
-				@Override
-				public String read() throws RException {
-
-					if (idx >= lines.size()) {
-						return "";
-					}
-
-					return lines.get(idx++);
-				}
-			});
-		} catch (RException | IOException e) {
-			e.printStackTrace();
-			fail(e.toString());
-		}
-
 		_run_script();
 	}
 }

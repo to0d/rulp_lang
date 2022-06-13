@@ -9,11 +9,15 @@ public interface IRDebugger {
 
 	public boolean addBreakObject(IRObject obj, IRInterpreter interpreter, IRFrame frame) throws RException;
 
-	public void debugBegin(IRObject e0, IRList expr, IRInterpreter interpreter, IRFrame frame) throws RException;
-
-	public void debugEnd(IRFrame frame);
+	public boolean canBreak(IRObject obj);
 
 	public boolean isDebug();
+
+	public void popStack(IRFrame frame);
+
+	public void pushStack(IRList expr, IRFrame frame) throws RException;
+
+	public void run(IRInterpreter interpreter, IRFrame frame) throws RException;
 
 	public void setup();
 
