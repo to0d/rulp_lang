@@ -44,6 +44,8 @@ public class CCOUtil {
 
 	protected static AtomicInteger exprCount = new AtomicInteger(0);
 
+	static int MIN_CC0_STMT_COUNT = 16;
+
 	protected static AtomicInteger reuseCount = new AtomicInteger(0);
 
 	public static int getCC2CacheCount() {
@@ -158,8 +160,6 @@ public class CCOUtil {
 
 		return true;
 	}
-
-	static int MIN_CC0_STMT_COUNT = 16;
 
 	private boolean _isCC2Factor(IRObject obj) throws RException {
 
