@@ -87,6 +87,12 @@ class XFactorReductTest extends RulpTestBase {
 	}
 
 	@Test
+	void test_reduct_6_add_4() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
 	void test_reduct_6_and_0() {
 		_setup();
 		_run_script();

@@ -1,0 +1,19 @@
+(reduct (+ "a" 1))
+;=>"a1"
+
+(reduct (+ 1 "a"))
+;err:
+Invalid op types: 1 a
+at (+ 1 "a") ; main-2
+at (reduct (+ 1 "a")) ; main-2
+;eof
+
+(reduct (+ "a" b))
+;=>(+ "a" b)
+
+(reduct (+ b "a"))
+;=>(+ "a" b)
+
+(_ginfo)
+;=>nil
+

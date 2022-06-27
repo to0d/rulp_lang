@@ -1,0 +1,14 @@
+(reduct (+ "a" 1))
+;=>
+
+(reduct (+ 1 "a"))
+;err
+
+(reduct (+ "a" b))
+;=>
+
+(reduct (+ b "a"))
+;=>
+
+(_ginfo)
+;;;

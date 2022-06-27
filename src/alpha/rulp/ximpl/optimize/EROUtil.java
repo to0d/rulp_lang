@@ -569,6 +569,9 @@ public class EROUtil {
 				break;
 
 			case ADD:
+				if (_isTypeOf(rebuildList, 1, size, RType.STRING)) {
+					return null;
+				}
 				size = _rebuildAdd(rebuildList, 1, size);
 				break;
 
@@ -1129,6 +1132,24 @@ public class EROUtil {
 		}
 
 		return null;
+	}
+
+	private static boolean _isTypeOf(List<IRObject> list, int fromIndex, int toIndex, RType... types) {
+
+		NEXT: for (int i = fromIndex; i < toIndex; ++i) {
+
+			IRObject obj = list.get(i);
+			RType type = obj.getType();
+			for (RType t : types) {
+				if (t == type) {
+					continue NEXT;
+				}
+			}
+
+			return false;
+		}
+
+		return true;
 	}
 
 	private static IRObject _rebuildDefun(List<IRObject> rebuildList) throws RException {
