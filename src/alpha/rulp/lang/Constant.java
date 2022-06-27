@@ -37,11 +37,11 @@ public interface Constant {
 
 	String A_CORE = "core";
 
-	String A_DEFAULT = "default";
-
-	String A_DO = "do";
-	
 	String A_DEBUG = "debug";
+
+	String A_DEFAULT = "default";
+	
+	String A_DO = "do";
 
 	String A_DOUBLE = "double";
 
@@ -275,6 +275,8 @@ public interface Constant {
 
 	String F_E_ERROR_VALUE = "error-value";
 
+	String F_ENDDBG = "enddbg";
+
 	String F_EQUAL = "equal";
 
 	String F_EQUAL_DEFAULT = F_EQUAL + "_def";
@@ -295,6 +297,8 @@ public interface Constant {
 
 	String F_FOREACH = "foreach";
 
+	String F_FORMAT = "format";
+
 	String F_FREAME_OF = "frame-of";
 
 	String F_GET_ATTRIBUTE = "get-attribute";
@@ -310,6 +314,8 @@ public interface Constant {
 	String F_IN = "in";
 
 	String F_IS_CONST = "is-const";
+
+	String F_IS_DEBUG_ACTIBE = "is-debug-active";
 
 	String F_IS_RECURSIVE = "is-recursive";
 
@@ -329,13 +335,13 @@ public interface Constant {
 
 	String F_LOAD = "load";
 
+//	String F_LOAD_JAR = "load-jar";
+
 	String F_LOAD_CLASS = "load-class";
 
 	String F_LOOP = "loop";
 
 	String F_MAKE_ARRAY = "make-array";
-
-//	String F_LOAD_JAR = "load-jar";
 
 	String F_MAKE_BLOB = "make-blob";
 
@@ -403,8 +409,6 @@ public interface Constant {
 
 	String F_PRINT = "print";
 
-	String F_READ_LINE = "read-line";
-
 	String F_PRINT_FRAME_TREE = "print-frame-tree";
 
 	String F_PRINT_GLOBAL_INFO = "print-global-info";
@@ -425,6 +429,8 @@ public interface Constant {
 
 	String F_RANDOM_INT = "random-int";
 
+	String F_READ_LINE = "read-line";
+
 	String F_Reduct = "reduct";
 
 	String F_REF = "ref";
@@ -434,18 +440,12 @@ public interface Constant {
 	String F_RETURN = "return";
 
 	String F_RETURN_TYPE_OF = "return-type-of";
-
+	
 	String F_REVERSE = "reverse";
-
+	
 	String F_RULP_OBJ_COUNT = "rulp-object-count";
-
+	
 	String F_RUN = "run";
-	
-	String F_STRDBG = "strdbg";
-	
-	String F_ENDDBG = "enddbg";
-	
-	String F_IS_DEBUG_ACTIBE = "is-debug-active";
 
 	String F_RUNTIME_CALL_COUNT = "runtime-call-count";
 
@@ -478,7 +478,7 @@ public interface Constant {
 	String F_STR_EQUAL_NOCASE = "str-equal-nocase";
 
 	String F_STR_FORMAT = "str-format";
-
+	
 	String F_STR_INDEX_OF = "str-index-of";
 
 	String F_STR_LAST_INDEX_OF = "str-last-index-of";
@@ -506,6 +506,8 @@ public interface Constant {
 	String F_STR_UPPER = "str-upper";
 
 	String F_STRCAT = "strcat";
+
+	String F_STRDBG = "strdbg";
 
 	String F_SUBJECT_OF = "subject-of";
 

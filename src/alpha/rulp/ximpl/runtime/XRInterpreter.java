@@ -37,8 +37,8 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.RuntimeUtil;
 import alpha.rulp.ximpl.debug.XRDebugger;
-import alpha.rulp.ximpl.error.RResumeException;
 import alpha.rulp.ximpl.error.RIException;
+import alpha.rulp.ximpl.error.RResumeException;
 
 public class XRInterpreter implements IRInterpreter {
 

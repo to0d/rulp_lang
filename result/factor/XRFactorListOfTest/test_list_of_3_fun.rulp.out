@@ -113,6 +113,7 @@ root::file-mkdirs
 root::final
 root::float
 root::foreach
+root::format
 root::frame
 root::frame-of
 root::from

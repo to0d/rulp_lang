@@ -18,7 +18,6 @@ import java.util.List;
 
 import alpha.common.utils.AlphaTestBase;
 import alpha.common.utils.FileUtil;
-import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRInput;
 import alpha.rulp.runtime.IRInterpreter;
@@ -26,7 +25,6 @@ import alpha.rulp.runtime.IROut;
 import alpha.rulp.runtime.IRParser;
 import alpha.rulp.utils.RulpUtil.RResultList;
 import alpha.rulp.ximpl.error.REofException;
-import alpha.rulp.ximpl.error.RInterrupt;
 import alpha.rulp.ximpl.optimize.CCOUtil;
 import alpha.rulp.ximpl.optimize.EROUtil;
 import alpha.rulp.ximpl.optimize.LCOUtil;

@@ -46,7 +46,7 @@ public class FormatUtil {
 		}
 	}
 
-	static final int MAX_LEN = 80;
+	static final int MAX_LEN = 256;
 
 	static Loc nil_loc = new Loc(0, 1, A_NIL.length());
 

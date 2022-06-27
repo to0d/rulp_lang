@@ -30,10 +30,7 @@
 (defun fun2 (?m)
     (defvar ?x 0)
     (loop[stable] for ?i from 1 to ?m do
-        (setq[stable]
-            ?x
-            (+[atom return-type=1 stable] ?x (cc2[opt-id=0] (fun1 (+ ?i 1))))
-        )
+        (setq[stable] ?x (+[atom return-type=1 stable] ?x (cc2[opt-id=0] (fun1 (+ ?i 1)))))
     )
     (return ?x)
 )[opt-cco]

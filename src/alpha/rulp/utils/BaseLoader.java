@@ -105,6 +105,7 @@ import alpha.rulp.ximpl.fs.XRFactorFileList;
 import alpha.rulp.ximpl.fs.XRFactorFileMkdirs;
 import alpha.rulp.ximpl.function.XRFactorDefun;
 import alpha.rulp.ximpl.function.XRFactorLambda;
+import alpha.rulp.ximpl.io.XRFactorFormat;
 import alpha.rulp.ximpl.io.XRFactorLoad;
 import alpha.rulp.ximpl.io.XRFactorLoadClass;
 import alpha.rulp.ximpl.io.XRFactorOpenTxtFile;
@@ -272,6 +273,7 @@ public class BaseLoader implements IRObjectLoader {
 		RulpUtil.addFrameObject(frame, new XRFactorPrintObject(F_PRINT_OBJECT));
 		RulpUtil.addFrameObject(frame, new XRFactorTrace(F_TRACE));
 		RulpUtil.addFrameObject(frame, new XRFactorReadLine(F_READ_LINE));
+		RulpUtil.addFrameObject(frame, new XRFactorFormat(F_FORMAT));
 
 		// FS
 		RulpUtil.addFrameObject(frame, new XRFactorFileExist(F_FILE_EXIST));

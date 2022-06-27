@@ -86,6 +86,7 @@ obj=file-mkdirs         , type=factor
 obj=final               , type=atom
 obj=float               , type=atom
 obj=foreach             , type=factor
+obj=format              , type=factor
 obj=frame               , type=atom
 obj=frame-of            , type=factor
 obj=from                , type=atom

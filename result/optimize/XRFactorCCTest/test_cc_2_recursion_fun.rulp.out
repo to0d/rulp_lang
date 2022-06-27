@@ -46,32 +46,15 @@
         (return 0)
     )
     (if[stable] (<= ?v 10)
-        (return[stable]
-            (+[atom return-type=1 stable] ?v (cc2[opt-id=0] (fun2 (- ?v 1))))
-        )
+        (return[stable] (+[atom return-type=1 stable] ?v (cc2[opt-id=0] (fun2 (- ?v 1)))))
     )
     (if[stable] (<= ?v 100)
-        (return[stable]
-            (+[atom return-type=1 stable]
-                (cc2[opt-id=0] (fun2 (- ?v 1)))
-                (cc2[opt-id=0] (fun2 (- (/ ?v 2) 1)))
-            )
-        )
+        (return[stable] (+[atom return-type=1 stable] (cc2[opt-id=0] (fun2 (- ?v 1))) (cc2[opt-id=0] (fun2 (- (/ ?v 2) 1)))))
     )
     (if[stable] (<= ?v 1000)
-        (return[stable]
-            (+[atom return-type=1 stable]
-                (cc2[opt-id=0] (fun2 (- ?v 1)))
-                (cc2[opt-id=0] (fun2 (- (/ ?v 4) 1)))
-            )
-        )
+        (return[stable] (+[atom return-type=1 stable] (cc2[opt-id=0] (fun2 (- ?v 1))) (cc2[opt-id=0] (fun2 (- (/ ?v 4) 1)))))
     )
-    (return[stable]
-        (+[atom return-type=1 stable]
-            (cc2[opt-id=0] (fun2 (- ?v 1)))
-            (cc2[opt-id=0] (fun2 (- (/ ?v 8) 1)))
-        )
-    )
+    (return[stable] (+[atom return-type=1 stable] (cc2[opt-id=0] (fun2 (- ?v 1))) (cc2[opt-id=0] (fun2 (- (/ ?v 8) 1)))))
 )[opt-cco]
 rebuild: id=0, name=cc2, call=197, hit=96, func=fun2, cache=101, data:[$$i_0/0/D/1] [$$i_1/1/D/1] [$$i_10/55/D/3]...
 

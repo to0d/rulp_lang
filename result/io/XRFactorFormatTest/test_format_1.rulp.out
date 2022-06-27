@@ -1,0 +1,14 @@
+(format (strcat "one-of-constraint:'(" ?node " " ?index " " ?value "), " ?c))
+;=>nil
+;out:
+(strcat "one-of-constraint:'(" ?node " " ?index " " ?value "), " ?c)
+
+;eof
+
+(format (strcat "conflict-type-constraint:'(" ?node " " ?index " " ?type1 " " ?type2 ")"))
+;=>nil
+;out:
+(strcat "conflict-type-constraint:'(" ?node " " ?index " " ?type1 " " ?type2 ")")
+
+;eof
+
