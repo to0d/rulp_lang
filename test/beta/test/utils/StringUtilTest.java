@@ -1,16 +1,19 @@
 package beta.test.utils;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import alpha.rulp.lang.RException;
 import alpha.rulp.utils.RulpTestBase;
 import alpha.rulp.utils.StringUtil;
 
 public class StringUtilTest extends RulpTestBase {
-	
+
 	void _test_getCharType(String input, String output) {
 
 		ArrayList<Integer> types = new ArrayList<>();
@@ -47,7 +50,24 @@ public class StringUtilTest extends RulpTestBase {
 	}
 
 	@Test
+	void test_getSingleMatchString() {
+
+		_setup();
+
+		try {
+			assertNull(StringUtil.getSingleMatchString(" %? %d *", "   "));
+		} catch (RException e) {
+
+			e.printStackTrace();
+			fail(e.toString());
+		}
+
+	}
+
+	@Test
 	void test_parseChineseNumber() {
+
+		_setup();
 
 		assertEquals(1l, StringUtil.parseChineseNumber("Ò»"));
 		assertEquals(100l, StringUtil.parseChineseNumber("Ò»°Ù"));
@@ -73,6 +93,9 @@ public class StringUtilTest extends RulpTestBase {
 
 	@Test
 	void test_splitStringByChar() {
+
+		_setup();
+
 		assertEquals("[]", "" + StringUtil.splitStringByChar("", ' '));
 		assertEquals("[a, b]", "" + StringUtil.splitStringByChar("a b", ' '));
 		assertEquals("[a, b]", "" + StringUtil.splitStringByChar("a  b", ' '));
@@ -90,6 +113,9 @@ public class StringUtilTest extends RulpTestBase {
 
 	@Test
 	void test_trimHead() {
+
+		_setup();
+
 		assertEquals("abc", StringUtil.trimHead(" abc", ' '));
 		assertEquals("abc ", StringUtil.trimHead(" abc ", ' '));
 		assertEquals("abc", StringUtil.trimHead("  abc", ' '));
@@ -99,6 +125,9 @@ public class StringUtilTest extends RulpTestBase {
 
 	@Test
 	void test_trimTail() {
+
+		_setup();
+
 		assertEquals("abc", StringUtil.trimTail("abc ", ' '));
 		assertEquals(" abc", StringUtil.trimTail(" abc ", ' '));
 		assertEquals("abc", StringUtil.trimTail("abc  ", ' '));

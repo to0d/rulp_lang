@@ -69,6 +69,40 @@ public class FileUtil {
 		}
 	}
 
+	public static void appendTxtFile(String outPath, Collection<String> content) throws IOException {
+
+		long writeBytes = 0;
+
+		try (FileOutputStream output = new FileOutputStream(outPath, true); PrintStream out = new PrintStream(output)) {
+			for (String line : content) {
+				if (line != null) {
+					out.println(line);
+					writeBytes += line.length();
+				}
+			}
+		}
+
+		incIOWriteFileCount();
+		incIOWriteFileBytes(writeBytes);
+	}
+
+	public static void appendTxtFile(String outPath, String line) throws IOException {
+
+		if (line == null) {
+			return;
+		}
+
+		long writeBytes = 0;
+
+		try (FileOutputStream output = new FileOutputStream(outPath, true); PrintStream out = new PrintStream(output)) {
+			out.println(line);
+			writeBytes += line.length();
+		}
+		
+		incIOWriteFileCount();
+		incIOWriteFileBytes(writeBytes);
+	}
+
 	public static void copyByChannel(File srcFile, File targetFile) throws IOException {
 
 		if (srcFile == null || targetFile == null) {
@@ -241,6 +275,21 @@ public class FileUtil {
 		return file.exists() && file.isFile();
 	}
 
+	public static boolean isExistFile(String path, String name) {
+
+		if (path == null) {
+			return false;
+		}
+
+		path = path.trim();
+		if (!path.endsWith(File.separator)) {
+			path += File.separator;
+		}
+
+		path += name.trim();
+		return isExistFile(path);
+	}
+
 	static boolean isSupportFile(File file) {
 
 		if (file == null || !file.exists()) {
@@ -260,6 +309,45 @@ public class FileUtil {
 		} else {
 			return false;
 		}
+	}
+
+	public static boolean moveFile(File srcFile, File dstFolder) {
+
+		if (srcFile == null || dstFolder == null || !isSupportFile(srcFile) || !dstFolder.exists()
+				|| !dstFolder.isDirectory()) {
+			return false;
+		}
+
+		// Check path valid
+		// E:\x\a ==> E:\x\a\y
+		if (dstFolder.getAbsolutePath().startsWith(srcFile.getAbsolutePath())) {
+			return false;
+		}
+
+		String fileName = srcFile.getName();
+		File dstFile = new File(dstFolder.getAbsolutePath() + File.separator + fileName);
+		if (dstFile.exists()) {
+			return false;
+		}
+
+		if (srcFile.isDirectory()) {
+
+			if (!dstFile.mkdirs()) {
+				return false;
+			}
+			for (File f : srcFile.listFiles()) {
+				if (!moveFile(f, dstFile)) {
+					return false;
+				}
+			}
+			return srcFile.delete();
+		}
+
+		if (srcFile.isFile()) {
+			return srcFile.renameTo(dstFile);
+		}
+
+		return false;
 	}
 
 	public static List<String> openTxtFile(String fileName) throws IOException {
@@ -318,8 +406,8 @@ public class FileUtil {
 		try (PrintStream out = new PrintStream(outPath)) {
 			for (String line : content) {
 				if (line != null) {
-					writeBytes += line.length();
 					out.println(line);
+					writeBytes += line.length();
 				}
 			}
 		}
@@ -340,8 +428,8 @@ public class FileUtil {
 		try (PrintStream out = new PrintStream(outPath, charset)) {
 			for (String line : content) {
 				if (line != null) {
-					writeBytes += line.length();
 					out.println(line);
+					writeBytes += line.length();
 				}
 			}
 		}

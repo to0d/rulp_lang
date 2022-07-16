@@ -63,41 +63,20 @@ import static alpha.rulp.string.Constant.CN_CHAR_UNAME_8;
 import static alpha.rulp.string.Constant.CN_CHAR_UNAME_9;
 import static alpha.rulp.string.Constant.EN_SEPARATION_DOT;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import alpha.rulp.lang.RException;
+import alpha.rulp.string.CharCaster;
+import alpha.rulp.string.CharMatch;
 import alpha.rulp.string.CharType;
 import alpha.rulp.string.ChineseWord;
 import alpha.rulp.string.StringMatchUtil;
+import alpha.rulp.string.StringMatchUtil.IMatchParser;
 
 public class StringUtil {
-	public static String trimTail(String line, char... s) {
-
-		if (s == null || s.length == 0) {
-			return line;
-		}
-
-		int slen = s.length;
-		int pos = line.length() - 1;
-
-		NEXT: for (; pos >= 0; --pos) {
-
-			char c = line.charAt(pos);
-			for (int i = 0; i < slen; ++i) {
-				// trim
-				if (c == s[i]) {
-					continue NEXT;
-				}
-			}
-
-			// not found any character
-			break;
-		}
-
-		return line.substring(0, pos + 1);
-	}
 
 	public static String addEscape(String str) {
 
@@ -139,42 +118,9 @@ public class StringUtil {
 		}
 	}
 
-	public static boolean matchFormat(String matchMode, String content, List<String> values) {
-
-		try {
-
-			return StringMatchUtil.getMatchParser(matchMode).match(content, values, false);
-		} catch (RException e) {
-			// e.printStackTrace();
-			return false;
-		}
-
-	}
-
-	public static String trimHead(String line, char... s) {
-
-		if (s == null || s.length == 0) {
-			return line;
-		}
-
-		int slen = s.length;
-		int pos = 0;
-
-		NEXT: for (; pos < line.length(); ++pos) {
-
-			char c = line.charAt(pos);
-			for (int i = 0; i < slen; ++i) {
-				// trim
-				if (c == s[i]) {
-					continue NEXT;
-				}
-			}
-
-			// not found any character
-			break;
-		}
-
-		return line.substring(pos);
+	public static String decodeByCharse(String charset, byte[] buffer, int offset, int len)
+			throws UnsupportedEncodingException {
+		return CharCaster.decodeByCharse(charset, buffer, offset, len);
 	}
 
 	public static CharType getCharType(char c) {
@@ -279,6 +225,58 @@ public class StringUtil {
 		return CharType.OTHER;
 	}
 
+	public static int getFirstMatchIndex(String mode, ArrayList<String> result) {
+
+		IMatchParser sm = null;
+		try {
+			sm = StringMatchUtil.getMatchParser(mode);
+		} catch (RException e) {
+			e.printStackTrace();
+			return -1;
+		}
+
+		for (int matchIndex = 0; matchIndex < result.size(); ++matchIndex) {
+			if (sm.match(result.get(matchIndex), null, false)) {
+				return matchIndex;
+			}
+		}
+
+		return -1;
+	}
+
+	public static IMatchParser getMatchParser(String matchMode) throws RException {
+		return StringMatchUtil.getMatchParser(matchMode);
+	}
+
+	public static String getSingleMatchString(String mode, String content) throws RException {
+
+		ArrayList<String> values = new ArrayList<>();
+		IMatchParser sm = StringMatchUtil.getMatchParser(mode);
+		if (!sm.match(content, values, false)) {
+			return null;
+		}
+
+		if (values.size() != 1) {
+			throw new RException("Parse[" + content + "] String Mode <" + mode + "> error, match vars should not be:"
+					+ values.toString());
+		}
+
+		return values.get(0);
+	}
+
+	public static boolean hasChineseChar(String aString) {
+
+		if (aString != null)
+
+			for (char c : aString.toCharArray()) {
+				if (isChinese(c) || isChineseSymbol(c)) {
+					return true;
+				}
+			}
+
+		return false;
+	}
+
 	public static boolean isChinese(char c) {
 		Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
 		if (ub == Character.UnicodeBlock.CJK_UNIFIED_IDEOGRAPHS
@@ -297,8 +295,54 @@ public class StringUtil {
 		return ChineseWord.isChineseNum(c);
 	}
 
+	public static boolean isChineseSymbol(char c) {
+
+		switch (c) {
+		case CN_CHAR_COMMNA: // CN ','
+		case CN_CHAR_DUN_HAO:// CN '¡¢'
+		case CN_CHAR_PERIOD: // '¡£':
+		case CN_CHAR_QUESTION_MARK: // '£¿'
+		case CN_CHAR_EXCLAMATION: // '£¡'
+		case CN_CHAR_COLON:// CN ':'
+		case CN_CHAR_LEFT_BRACKET: // CN '['
+		case CN_CHAR_LEFT_PARENTHESIS:// CN '('
+		case CN_CHAR_LEFT_QUOTE:// CN '¡°'
+		case CN_CHAR_LEFT_SHU_MING:// CN '<'
+		case CN_CHAR_RIGHT_BRACKET: // CN ']'
+		case CN_CHAR_RIGHT_PARENTHESIS: // CN ')'
+		case CN_CHAR_RIGHT_QUOTE:// CN '¡±'
+		case CN_CHAR_RIGHT_SHU_MIN: // CN '>'
+		case CN_CHAR_SEMICOLON:// CN ';'
+		case CN_CHAR_LEFT_KUOHU: // CN '¡¸'
+		case CN_CHAR_RIGHTT_KUOHU: // CN '¡¹'
+		case CN_CHAR_LEFT_PIE: // CN '¡®'
+		case CN_CHAR_RIGHTT_PIE: // CN '¡¯'
+		case CN_CHAR_LONG_HORIZONTAL_LINE: // CN '©¥'
+			return true;
+		}
+
+		return false;
+	}
+
 	public static boolean isEnglish(char c) {
 		return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+	}
+
+	public static boolean isEnglishString(String word) {
+
+		if (word == null || word.isEmpty()) {
+			return false;
+		}
+
+		for (int i = 0; i < word.length(); ++i) {
+
+			char c = word.charAt(i);
+			if (!isEnglish(c)) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	public static boolean isEscapeChar(char c) {
@@ -341,6 +385,18 @@ public class StringUtil {
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	public static boolean matchFormat(String matchMode, String content, List<String> values) {
+
+		try {
+
+			return StringMatchUtil.getMatchParser(matchMode).match(content, values, false);
+		} catch (RException e) {
+			// e.printStackTrace();
+			return false;
+		}
+
 	}
 
 	public static boolean needEscape(char c) {
@@ -406,6 +462,10 @@ public class StringUtil {
 		}
 
 		return sb == null ? value : sb.toString();
+	}
+
+	public static String smartSort(List<String> fileNames, boolean simpleMode) throws RException {
+		return CharMatch.smartSort(fileNames, simpleMode);
 	}
 
 	public static List<String> splitStringByChar(String input, char... s) {
@@ -477,5 +537,70 @@ public class StringUtil {
 		}
 
 		return subStrs;
+	}
+
+	public static List<String> toValidArgList(String args[]) {
+
+		ArrayList<String> validArgs = new ArrayList<>();
+		for (int i = 0; i < args.length; ++i) {
+			String arg = args[i];
+			if (arg != null && !arg.trim().isEmpty()) {
+				validArgs.add(arg.trim());
+			}
+		}
+
+		return validArgs;
+	}
+
+	public static String trimHead(String line, char... s) {
+
+		if (s == null || s.length == 0) {
+			return line;
+		}
+
+		int slen = s.length;
+		int pos = 0;
+
+		NEXT: for (; pos < line.length(); ++pos) {
+
+			char c = line.charAt(pos);
+			for (int i = 0; i < slen; ++i) {
+				// trim
+				if (c == s[i]) {
+					continue NEXT;
+				}
+			}
+
+			// not found any character
+			break;
+		}
+
+		return line.substring(pos);
+	}
+
+	public static String trimTail(String line, char... s) {
+
+		if (s == null || s.length == 0) {
+			return line;
+		}
+
+		int slen = s.length;
+		int pos = line.length() - 1;
+
+		NEXT: for (; pos >= 0; --pos) {
+
+			char c = line.charAt(pos);
+			for (int i = 0; i < slen; ++i) {
+				// trim
+				if (c == s[i]) {
+					continue NEXT;
+				}
+			}
+
+			// not found any character
+			break;
+		}
+
+		return line.substring(0, pos + 1);
 	}
 }
