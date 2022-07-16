@@ -10,9 +10,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import alpha.common.utils.FileUtil;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.utils.FileUtil;
 import alpha.rulp.utils.RulpTestBase;
 import alpha.rulp.utils.RulpUtil;
 

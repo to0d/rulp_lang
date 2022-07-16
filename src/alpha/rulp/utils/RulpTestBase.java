@@ -12,12 +12,11 @@ package alpha.rulp.utils;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import alpha.common.utils.AlphaTestBase;
-import alpha.common.utils.FileUtil;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRInput;
 import alpha.rulp.runtime.IRInterpreter;
@@ -31,7 +30,48 @@ import alpha.rulp.ximpl.optimize.LCOUtil;
 import alpha.rulp.ximpl.optimize.OptUtil;
 import alpha.rulp.ximpl.optimize.TCOUtil;
 
-public class RulpTestBase extends AlphaTestBase {
+public class RulpTestBase {
+
+	static final String BETA_TEST_PRE = "beta.test.";
+
+	protected static String _getClassPathName(Class<?> c, int tailIndex) {
+
+		if (c == null || tailIndex < 0) {
+			return null;
+		}
+
+		String fullName = c.getCanonicalName();
+		if (fullName == null) {
+			return null;
+		}
+
+		String[] names = fullName.split("\\.");
+		if (names == null || tailIndex >= names.length) {
+			return null;
+		}
+
+		return names[names.length - tailIndex - 1];
+	}
+
+	protected String getCachePath() {
+
+		String packageName = getPackageName();
+
+		if (!packageName.startsWith(BETA_TEST_PRE)) {
+			throw new RuntimeException("Invalid package: " + packageName);
+		}
+
+		String packageShortName = packageName.substring(BETA_TEST_PRE.length());
+		String className = _getClassPathName(this.getClass(), 0);
+		String methodName = Thread.currentThread().getStackTrace()[3].getMethodName();
+
+		return "result" + File.separator + packageShortName + File.separator + className + File.separator + methodName;
+
+	}
+
+	protected String getPackageName() {
+		return this.getClass().getPackage().getName();
+	}
 
 	protected static class XROut implements IROut {
 
@@ -389,8 +429,7 @@ public class RulpTestBase extends AlphaTestBase {
 
 		RulpFactory.reset();
 		RuntimeUtil.reset();
-
-		super._setup();
+		FileUtil.reset();
 	}
 
 	protected void _test(String input) {

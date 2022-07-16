@@ -15,7 +15,7 @@ import alpha.rulp.utils.RulpUtil;
 
 public class RulpUtilTest extends RulpTestBase {
 
-	private void _test_toString(String input, String expect) {
+	void _test_toString(String input, String expect) {
 
 		IRParser parser = RulpFactory.createParser();
 		try {
@@ -32,32 +32,7 @@ public class RulpUtilTest extends RulpTestBase {
 
 	}
 
-	@Test
-	public void test_formatAsShortName() {
-
-		_setup();
-		_getParser().registerPrefix("nm", "https://github.com/to0d/nm#");
-		_test_toString("(nm:a nm:b)", "'((nm:a nm:b))");
-	}
-
-	@Test
-	public void test_isValidRulpStmt() {
-
-		_setup();
-
-		assertTrue(RulpUtil.isValidRulpStmt("(a b c); comments"));
-		assertTrue(RulpUtil.isValidRulpStmt("(a b c) (b c)"));
-	}
-
-	@Test
-	public void test_toUniqString() {
-
-		_setup();
-
-		_test_toUniqString("1d","'($$d_1.0)");
-	}
-	
-	private void _test_toUniqString(String input, String expect) {
+	void _test_toUniqString(String input, String expect) {
 
 		try {
 
@@ -70,5 +45,37 @@ public class RulpUtilTest extends RulpTestBase {
 			fail(e.toString());
 		}
 
+	}
+
+	@Test
+	void test_formatAsShortName() {
+
+		_setup();
+		_getParser().registerPrefix("nm", "https://github.com/to0d/nm#");
+		_test_toString("(nm:a nm:b)", "'((nm:a nm:b))");
+	}
+
+	@Test
+	void test_isValidRulpStmt() {
+
+		_setup();
+
+		assertTrue(RulpUtil.isValidRulpStmt("(a b c); comments"));
+		assertTrue(RulpUtil.isValidRulpStmt("(a b c) (b c)"));
+	}
+
+	@Test
+	void test_list_1() {
+
+		assertEquals("[]", RulpUtil.toList().toString());
+		assertEquals("[1, 2, a]", RulpUtil.toList(1, 2, "a").toString());
+	}
+
+	@Test
+	void test_toUniqString() {
+
+		_setup();
+
+		_test_toUniqString("1d", "'($$d_1.0)");
 	}
 }

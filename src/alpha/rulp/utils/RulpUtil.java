@@ -20,9 +20,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import alpha.common.utils.FileUtil;
-import alpha.common.utils.StringUtil;
-import alpha.common.utils.SystemUtil;
 import alpha.rulp.lang.IRArray;
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRBlob;
@@ -70,6 +67,10 @@ import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.rclass.XRFactorNew;
 
 public class RulpUtil {
+
+	public interface EqualAble<T> {
+		public boolean isEqualTo(T another);
+	}
 
 	static interface IRFormater {
 		public void format(StringBuffer sb, IRObject obj) throws RException;
@@ -234,6 +235,8 @@ public class RulpUtil {
 		}
 
 	}
+
+	private static String _spaceLines[] = new String[1024];
 
 	static IRFormater objFormater = new XRFormater();
 
@@ -1104,25 +1107,6 @@ public class RulpUtil {
 
 	}
 
-//	public static RType compare_type(IRObject obj) throws RException {
-//
-//		RType type = _compare_obj(obj).getType();
-//
-//		switch (type) {
-//		case ATOM:
-//		case BOOL:
-//		case DOUBLE:
-//		case FLOAT:
-//		case INT:
-//		case LONG:
-//		case STRING:
-//			return type;
-//
-//		default:
-//			return null;
-//		}
-//	}
-
 	public static RResultList compute(IRInterpreter interpreter, String input) throws RException {
 
 		RResultList resultList = new RResultList();
@@ -1293,6 +1277,25 @@ public class RulpUtil {
 		}
 	}
 
+//	public static RType compare_type(IRObject obj) throws RException {
+//
+//		RType type = _compare_obj(obj).getType();
+//
+//		switch (type) {
+//		case ATOM:
+//		case BOOL:
+//		case DOUBLE:
+//		case FLOAT:
+//		case INT:
+//		case LONG:
+//		case STRING:
+//			return type;
+//
+//		default:
+//			return null;
+//		}
+//	}
+
 	public static String formatAttribute(IRObject obj) throws RException {
 		StringBuffer sb = new StringBuffer();
 		_formatAttrList(sb, obj);
@@ -1307,6 +1310,27 @@ public class RulpUtil {
 		}
 
 		return valAtom;
+	}
+
+	public static String getSpaceLine(int len) {
+
+		if (len < 0) {
+			len = 0;
+		}
+
+		String line = _spaceLines[len];
+		if (line == null) {
+
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0; i < len * 4; ++i) {
+				sb.append(' ');
+			}
+
+			line = sb.toString();
+			_spaceLines[len] = line;
+		}
+
+		return line;
 	}
 
 	public static IRObject getVarValue(IRFrame frame, String varName) throws RException {
@@ -1358,6 +1382,68 @@ public class RulpUtil {
 
 	public static boolean isAtom(IRObject obj, String name) {
 		return obj.getType() == RType.ATOM && ((IRAtom) obj).getName().equals(name);
+	}
+
+	public static boolean isEqual(List<String> a, List<String> b) {
+
+		if (a == null && b == null) {
+			return true;
+		}
+
+		if (size(a) != size(b)) {
+			return false;
+		}
+
+		Iterator<String> at = a.iterator();
+		Iterator<String> bt = b.iterator();
+
+		while (at.hasNext()) {
+
+			String av = at.next();
+			String bv = bt.next();
+
+			if (!isEqual(av, bv)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public static boolean isEqual(String a, String b) {
+
+		if (a == null)
+			return b == null;
+		else if (b == null)
+			return false;
+
+		return a.trim().equals(b.trim());
+	}
+
+	public static <E extends EqualAble<E>> boolean isEqualTo(List<E> a, List<E> b) {
+
+		if (a == null && b == null) {
+			return true;
+		}
+
+		if (size(a) != size(b)) {
+			return false;
+		}
+
+		Iterator<E> at = a.iterator();
+		Iterator<E> bt = b.iterator();
+
+		while (at.hasNext()) {
+
+			E av = at.next();
+			E bv = bt.next();
+
+			if (!av.isEqualTo(bv)) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 	public static boolean isExpr(IRObject obj) {
@@ -1436,6 +1522,14 @@ public class RulpUtil {
 		return (P_FINAL & mbr.getProperty()) != 0;
 	}
 
+	public static boolean isPropertyInherit(IRMember mbr) {
+		return (P_INHERIT & mbr.getProperty()) != 0;
+	}
+
+	public static boolean isPropertyStatic(IRMember mbr) {
+		return (P_STATIC & mbr.getProperty()) != 0;
+	}
+
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
 //
 //		IRObject nsObj = frame.getObject(A_USING_NS);
@@ -1445,14 +1539,6 @@ public class RulpUtil {
 //
 //		return RulpUtil.asSubject(nsObj);
 //	}
-
-	public static boolean isPropertyInherit(IRMember mbr) {
-		return (P_INHERIT & mbr.getProperty()) != 0;
-	}
-
-	public static boolean isPropertyStatic(IRMember mbr) {
-		return (P_STATIC & mbr.getProperty()) != 0;
-	}
 
 	public static boolean isPureAtomList(IRObject obj) throws RException {
 
@@ -1574,6 +1660,35 @@ public class RulpUtil {
 		return null;
 	}
 
+	public static boolean matchParaType(IRObject paraValue, IRAtom paraTypeAtom) throws RException {
+
+		RType valueType = paraValue.getType();
+		if (valueType == RType.INSTANCE) {
+			return SubjectUtil.findMatchClass(RulpUtil.asInstance(paraValue), paraTypeAtom) != null;
+		}
+
+		RType expectType = RType.toType(paraTypeAtom.asString());
+		if (valueType == expectType) {
+			return true;
+		}
+
+		if (expectType == null) {
+			return false;
+		}
+
+		return MathUtil.getTypeConvert(valueType, expectType) == expectType;
+	}
+
+	public static boolean matchType(IRAtom typeAtom, IRObject obj) throws RException {
+
+		// Match any object
+		if (typeAtom == O_Nil) {
+			return true;
+		}
+
+		return getObjectType(obj) == typeAtom;
+	}
+
 //	public static boolean isPureAtomPairList(IRObject obj) throws RException {
 //
 //		RType type = obj.getType();
@@ -1609,35 +1724,6 @@ public class RulpUtil {
 //			return false;
 //		}
 //	}
-
-	public static boolean matchParaType(IRObject paraValue, IRAtom paraTypeAtom) throws RException {
-
-		RType valueType = paraValue.getType();
-		if (valueType == RType.INSTANCE) {
-			return SubjectUtil.findMatchClass(RulpUtil.asInstance(paraValue), paraTypeAtom) != null;
-		}
-
-		RType expectType = RType.toType(paraTypeAtom.asString());
-		if (valueType == expectType) {
-			return true;
-		}
-
-		if (expectType == null) {
-			return false;
-		}
-
-		return MathUtil.getTypeConvert(valueType, expectType) == expectType;
-	}
-
-	public static boolean matchType(IRAtom typeAtom, IRObject obj) throws RException {
-
-		// Match any object
-		if (typeAtom == O_Nil) {
-			return true;
-		}
-
-		return getObjectType(obj) == typeAtom;
-	}
 
 	public static String nameOf(IRObject obj, IRFrame frame) throws RException {
 
@@ -1837,6 +1923,10 @@ public class RulpUtil {
 
 	public static void setTrace(IRInterpreter interpreter, boolean trace) throws RException {
 		setTrace(interpreter.getMainFrame(), trace);
+	}
+
+	public static <T> int size(List<T> a) {
+		return a == null ? 0 : a.size();
 	}
 
 	public static List<IRObject> subList(IRList l1, int begin, int end) throws RException {
@@ -2220,6 +2310,21 @@ public class RulpUtil {
 		List<T> list = new ArrayList<>();
 		while (iter.hasNext()) {
 			list.add(iter.next());
+		}
+
+		return list;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T> List<T> toList(T... objs) {
+
+		if (objs == null || objs.length == 0) {
+			return Collections.emptyList();
+		}
+
+		List<T> list = new ArrayList<T>();
+		for (T o : objs) {
+			list.add(o);
 		}
 
 		return list;
