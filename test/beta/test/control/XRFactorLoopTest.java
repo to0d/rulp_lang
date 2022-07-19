@@ -14,7 +14,13 @@ class XRFactorLoopTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_loop_2_continue() {
+	void test_loop_2_continue_1() {
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_loop_2_continue_2() {
 		_setup();
 		_run_script();
 	}
@@ -36,7 +42,7 @@ class XRFactorLoopTest extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
-	
+
 	@Test
 	void test_loop_6_by() {
 

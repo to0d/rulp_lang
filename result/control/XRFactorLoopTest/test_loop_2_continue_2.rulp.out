@@ -1,0 +1,42 @@
+(defvar ?l1 '(1 2 3 4))
+
+(defvar ?l2 '("abc" "bcd"))
+
+(defun fun1 ((?xx int) (?yy string))
+
+    (defvar ?i 0)
+    
+    (loop for ?x in ?l1 do   
+
+        (println "check x: " ?x)
+        (++ ?i)
+        (if (!= ?x ?xx) 
+            (continue)
+        )
+        
+        (defvar ?j 0)
+        (loop for ?y in ?l2 do
+        
+            (println "check y: " ?y)
+            (++ ?j)            
+            (if (!= ?y ?yy) 
+                (continue)
+            )
+            (return (* ?i ?j))
+        )
+    )
+    
+    (return -1)
+)
+;=>&?l1 &?l2 fun1
+
+(fun1 3 "abc")
+;=>3
+;out:
+check x: 1
+check x: 2
+check x: 3
+check y: abc
+
+;eof
+
