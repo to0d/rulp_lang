@@ -11,4 +11,10 @@ class XRFactorStrIndexOfTest extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	void test_str_index_of_2() {
+		_setup();
+		_run_script();
+	}
 }

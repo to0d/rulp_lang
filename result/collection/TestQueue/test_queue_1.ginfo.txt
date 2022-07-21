@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      266
+           Interpreter call id:      265
     Interpreter call level/max:        0        6
                Frame max level:        5
                   Frame max id:        7
@@ -29,49 +29,49 @@ Expression compute count:
       func:       39
 ==========================================================================================================================
 
-Callable stats info: callId=266, row=40, column=34(8), value-max=20, value-unit=2^x
+Callable stats info: callId=265, row=40, column=34(8), value-max=26, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         4444444444444444444444444544666665 max=30, unit=2^x
+   Frame    RType  Count  Ref Object                         4444444444444444444444444544766664 max=38, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor    179    0 add-attribute                  144444444444444444444442          
-    root   factor     59    0 defun                                                 4434464    
-    root   factor     26    0 return                                                      34442
-    main   member      7    1 queue@q1::size-of                                           133  
-    main   member      7    1 queue::_queue_size_of                                       133  
+    root   factor    178    0 add-attribute                  144444444444444444444441          
+    root   factor     60    0 defun                                                 443446     
+    root   factor     26    0 return                                                      44442
+    main   member      7    1 queue@q1::size-of                                           223  
+    main   member      7    1 queue::_queue_size_of                                       223  
     main   member      7    1 queue::_queue_push_back                                     22 3 
     root   factor      6    0 alias                          4                                 
     main   member      5    1 queue@q1::push                                              2  3 
     root   factor      5    0 defvar                                                  3  1     
     root   factor      5    0 defmacro                                                   4     
-    main   member      4    1 queue@q1::is-empty                                             31
+    main   member      4    1 queue@q1::is-empty                                            121
     main   member      4    1 queue::_queue_pop_front                                      22  
-    main   member      4    1 queue::_queue_is_empty                                         31
+    main   member      4    1 queue::_queue_is_empty                                        121
     root   factor      4    0 make-list                                               3        
     main funcList      3    3 is-empty                                                       21
-    root   factor      3    0 deftemplate                                                3     
+    root   factor      3    0 deftemplate                                               12     
     main   member      2    1 queue@q1::to-list                                              2 
     main   member      2    1 queue@q1::push_front                                          2  
     main   member      2    1 queue@q1::push_back                                          2   
     main   member      2    1 queue@q1::pop_front                                           2  
-    main   member      2    1 queue@q1::pop_back                                           11  
+    main   member      2    1 queue@q1::pop_back                                           2   
     main   member      2    1 queue@q1::pop                                                2   
     main   member      2    1 queue@q1::get                                               2    
-    main   member      2    1 queue@q1::clear                                                 2
+    main   member      2    1 queue@q1::clear                                                11
     main   member      2    1 queue::_queue_to_list                                          2 
     main   member      2    1 queue::_queue_push_front                                      2  
-    main   member      2    1 queue::_queue_pop_back                                       11  
+    main   member      2    1 queue::_queue_pop_back                                       2   
     main   member      2    1 queue::_queue_get                                           2    
-    main   member      2    1 queue::_queue_clear                                             2
-    root   factor      2    0 load                                                       11    
+    main   member      2    1 queue::_queue_clear                                            11
+    root   factor      2    0 load                                                       2     
     main funcList      1    2 to-list                                                        1 
     root   factor      1    0 setq                                                        1    
     main   member      1    1 queue@q1::init                                              1    
     main   member      1    1 queue::_queue_init                                          1    
     root   factor      1    0 new                                                         1    
     root   factor      1    0 name-of                                                     1    
-    root   factor      1    0 load-class                                                  1    
+    root   factor      1    0 load-class                                                 1     
     main funcList      1    2 get                                                         1    
-    root   factor      1    0 defclass                                                    1    
+    root   factor      1    0 defclass                                                   1     
     main     func      1    2 (clear type#queue)                                              1
 ==========================================================================================================================
 
@@ -79,12 +79,12 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1678            0         1678
-      string:           45            0           45
+        atom:         1722            0         1722
+      string:           46            0           46
         list:           15            2           13
-        expr:          802           34          768
+        expr:          827           34          793
          var:           35           18           17
-        func:          106            0          106
+        func:          107            0          107
     template:            1            0            1
        macro:            5            0            5
     instance:            2            0            2
@@ -98,7 +98,7 @@ Object create count:
 
 Global frame list: total=2
 
-id=2, name=main, lvl=2, ref=2/3, entry=29, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=2/3, entry=30, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -123,42 +123,43 @@ is-empty             : 10       2        3    funcList   '((is-empty array) (is-
 is-blank             : 11       2        2    func       (is-blank string) : frame=frame@main
 file-prename         : 12       2        2    func       (file-prename string) : frame=frame@main
 file-subffix         : 13       2        2    func       (file-subffix string) : frame=frame@main
-sort                 : 14       2        4    funcList   '((sort array func) (sort array) (sort list func) (sort list)) : frame=null, type=list
+str-split-line       : 14       2        2    func       (str-split-line string) : frame=frame@main
+sort                 : 15       2        4    funcList   '((sort array func) (sort array) (sort list func) (sort list)) : frame=null, type=list
                                          2    func       (sort list) : frame=frame@main
                                          1    func       (sort list func) : frame=frame@main
                                          1    func       (sort array) : frame=frame@main
                                          1    func       (sort array func) : frame=frame@main
-print-list           : 15       2        3    funcList   '((print-list list) (print-list nil nil) (print-list nil)) : frame=null, type=list
+print-list           : 16       2        3    funcList   '((print-list list) (print-list nil nil) (print-list nil)) : frame=null, type=list
                                          2    func       (print-list list) : frame=frame@main
                                          1    func       (print-list nil nil) : frame=frame@main
                                          1    func       (print-list nil) : frame=frame@main
-to-valid-path        : 16       2        2    func       (to-valid-path string) : frame=frame@main
-day-is-bigger-than   : 17       2        2    func       (day-is-bigger-than string string) : frame=frame@main
-day-is-smaller-than  : 18       2        2    func       (day-is-smaller-than string string) : frame=frame@main
-?script-path         : 19       2        2    var        result\collection\TestQueue\test_queue_1.rulp : type=string
-script_out           : 20       2        2    macro      script_out          
-_ginfo               : 21       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+to-valid-path        : 17       2        2    func       (to-valid-path string) : frame=frame@main
+day-is-bigger-than   : 18       2        2    func       (day-is-bigger-than string string) : frame=frame@main
+day-is-smaller-than  : 19       2        2    func       (day-is-smaller-than string string) : frame=frame@main
+?script-path         : 20       2        2    var        result\collection\TestQueue\test_queue_1.rulp : type=string
+script_out           : 21       2        2    macro      script_out          
+_ginfo               : 22       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          2    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
-queue                : 22       2        2    class      queue               
-type#queue           : 23       2        0    atom       type#queue          
-size-of              : 24       2        2    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#queue)) : frame=null, type=list
+queue                : 23       2        2    class      queue               
+type#queue           : 24       2        0    atom       type#queue          
+size-of              : 25       2        2    funcList   '((size-of array int) (size-of array) (size-of list) (size-of type#queue)) : frame=null, type=list
                                          2    func       (size-of list) : frame=frame@system
                                          2    func       (size-of array) : frame=frame@system
                                          2    func       (size-of array int) : frame=frame@system
                                          1    func       (size-of type#queue) : frame=frame@main
-get                  : 25       2        2    funcList   '((get array int int) (get array int) (get list int) (get type#queue int)) : frame=null, type=list
+get                  : 26       2        2    funcList   '((get array int int) (get array int) (get list int) (get type#queue int)) : frame=null, type=list
                                          2    func       (get list int) : frame=frame@system
                                          2    func       (get array int) : frame=frame@system
                                          2    func       (get array int int) : frame=frame@system
                                          1    func       (get type#queue int) : frame=frame@main
-clear                : 26       2        2    func       (clear type#queue) : frame=frame@main
-to-list              : 27       2        2    funcList   '((to-list array) (to-list list) (to-list type#queue)) : frame=null, type=list
+clear                : 27       2        2    func       (clear type#queue) : frame=frame@main
+to-list              : 28       2        2    funcList   '((to-list array) (to-list list) (to-list type#queue)) : frame=null, type=list
                                          2    func       (to-list list) : frame=frame@system
                                          2    func       (to-list array) : frame=frame@system
                                          1    func       (to-list type#queue) : frame=frame@main
-q1                   : 29       2        1    instance   queue@q1            
-?rv                  : 36       2        1    var        true : type=bool    
+q1                   : 30       2        1    instance   queue@q1            
+?rv                  : 37       2        1    var        true : type=bool    
 ==========================================================================================================================
 
 

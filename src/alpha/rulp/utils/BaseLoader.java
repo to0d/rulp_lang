@@ -157,7 +157,6 @@ import alpha.rulp.ximpl.string.XRFactorStrLength;
 import alpha.rulp.ximpl.string.XRFactorStrMatch;
 import alpha.rulp.ximpl.string.XRFactorStrReplace;
 import alpha.rulp.ximpl.string.XRFactorStrSplit;
-import alpha.rulp.ximpl.string.XRFactorStrSplitLines;
 import alpha.rulp.ximpl.string.XRFactorStrStartsWith;
 import alpha.rulp.ximpl.string.XRFactorStrSubStr;
 import alpha.rulp.ximpl.string.XRFactorStrTrim;
@@ -321,7 +320,7 @@ public class BaseLoader implements IRObjectLoader {
 		RulpUtil.addFrameObject(frame, new XRFactorStrSplit(F_STR_SPLIT));
 		RulpUtil.addFrameObject(frame, new XRFactorStrReplace(F_STR_REPLACE));
 		RulpUtil.addFrameObject(frame, new XRFactorStrUpper(F_STR_UPPER));
-		RulpUtil.addFrameObject(frame, new XRFactorStrSplitLines(F_STR_SPLIT_LINE));
+//		RulpUtil.addFrameObject(frame, new XRFactorStrSplitLines(F_STR_SPLIT_LINE));
 
 		// Arithmetic
 		RulpUtil.addFrameObject(frame, new XRFactorArithmetic(F_O_ADD, RArithmeticOperator.ADD));

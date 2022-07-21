@@ -491,7 +491,7 @@ public interface Constant {
 
 	String F_STR_SPLIT = "str-split";
 
-	String F_STR_SPLIT_LINE = "str-split-line";
+//	String F_STR_SPLIT_LINE = "str-split-line";
 
 	String F_STR_START_WITH = "str-start-with";
 

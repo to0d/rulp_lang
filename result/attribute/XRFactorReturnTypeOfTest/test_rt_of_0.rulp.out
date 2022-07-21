@@ -43,7 +43,6 @@ obj=str-length          , type=factor  , return=int
 obj=str-match           , type=factor  , return=bool
 obj=str-replace         , type=factor  , return=string
 obj=str-split           , type=factor  , return=list
-obj=str-split-line      , type=factor  , return=list
 obj=str-start-with      , type=factor  , return=bool
 obj=str-substr          , type=factor  , return=string
 obj=str-trim            , type=factor  , return=string

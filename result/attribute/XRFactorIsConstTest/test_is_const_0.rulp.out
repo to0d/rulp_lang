@@ -176,7 +176,6 @@ obj=str-length          , type=factor
 obj=str-match           , type=factor
 obj=str-replace         , type=factor
 obj=str-split           , type=factor
-obj=str-split-line      , type=factor
 obj=str-start-with      , type=factor
 obj=str-substr          , type=factor
 obj=str-trim            , type=factor
@@ -248,6 +247,7 @@ obj=inc                 , type=macro
 obj=is-blank            , type=func
 obj=list-of-is-const    , type=func
 obj=script_out          , type=macro
+obj=str-split-line      , type=func
 obj=to-valid-path       , type=func
 
 ;eof

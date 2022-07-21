@@ -134,7 +134,6 @@ obj=str-length          , type=factor
 obj=str-match           , type=factor
 obj=str-replace         , type=factor
 obj=str-split           , type=factor
-obj=str-split-line      , type=factor
 obj=str-start-with      , type=factor
 obj=str-substr          , type=factor
 obj=str-trim            , type=factor

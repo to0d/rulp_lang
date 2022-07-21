@@ -28,14 +28,21 @@ public class XRFactorStrIndexOf extends AbsAtomFactorAdapter implements IRFactor
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() != 3) {
+		if (args.size() != 3 && args.size() != 4) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
 		String a = RulpUtil.asString(interpreter.compute(frame, args.get(1))).asString();
 		String b = RulpUtil.asString(interpreter.compute(frame, args.get(2))).asString();
 
-		return RulpFactory.createInteger(a.indexOf(b));
+		if (args.size() == 3) {
+			return RulpFactory.createInteger(a.indexOf(b));
+
+		} else {
+			int pos = RulpUtil.asInteger(interpreter.compute(frame, args.get(3))).asInteger();
+			return RulpFactory.createInteger(a.indexOf(b, pos));
+
+		}
 	}
 
 }

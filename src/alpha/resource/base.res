@@ -131,7 +131,6 @@
 (add-attribute str-match             stable)
 (add-attribute str-replace           stable)
 (add-attribute str-split             stable)
-(add-attribute str-split-line        stable)
 (add-attribute str-start-with        stable)
 (add-attribute str-substr            stable)
 (add-attribute str-trim              stable)

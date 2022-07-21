@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      239
+           Interpreter call id:      238
     Interpreter call level/max:        4       10
                Frame max level:        7
                   Frame max id:        8
@@ -30,20 +30,20 @@ Expression compute count:
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=239, row=25, column=60(4), value-max=18, value-unit=2^x
+Callable stats info: callId=238, row=25, column=60(4), value-max=19, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         333333333333333333333333333333333333333333333333334433336356 max=26, unit=2^x
+   Frame    RType  Count  Ref Object                         333333333333333333333333333333333333333333333333334333336355 max=27, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor    179    0 add-attribute                   1333333333333333333333333333333333333333333332             
-    root   factor     54    0 defun                                                                        233313333362  
-    root   factor      8    0 defvar                                                                           31     112
+    root   factor    178    0 add-attribute                   1333333333333333333333333333333333333333333331             
+    root   factor     55    0 defun                                                                        3333 3333362  
+    root   factor      8    0 defvar                                                                           3     1 12
     root   factor      6    0 alias                          33                                                          
     root   factor      5    0 defmacro                                                                               31  
-    root   factor      4    0 rulp-object-count                                                                        22
-    root   factor      4    0 make-list                                                                        31        
+    root   factor      4    0 rulp-object-count                                                                       121
+    root   factor      4    0 make-list                                                                        3         
     root   factor      3    0 setq                                                                                     21
     root   factor      3    0 do                                                                                       21
-    root   factor      3    0 deftemplate                                                                            3   
+    root   factor      3    0 deftemplate                                                                           12   
     root   factor      2    0 +                                                                                        11
     root   factor      1    0 str-substr                                                                                1
     root   factor      1    0 str-last-index-of                                                                         1
@@ -65,12 +65,12 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1533            0         1533
-      string:           44            0           44
+        atom:         1577            0         1577
+      string:           45            0           45
         list:           12            0           12
-        expr:          699            3          696
+        expr:          724            3          721
          var:           20            5           15
-        func:           75            4           71
+        func:           76            4           72
     template:            1            0            1
        macro:            5            0            5
     instance:            1            1            0
@@ -84,7 +84,7 @@ Object create count:
 
 Global frame list: total=1
 
-id=2, name=main, lvl=2, ref=2/3, entry=22, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=2/3, entry=23, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -108,24 +108,25 @@ is-empty             : 10       2        2    funcList   '((is-empty array) (is-
 is-blank             : 11       2        2    func       (is-blank string) : frame=frame@main
 file-prename         : 12       2        2    func       (file-prename string) : frame=frame@main
 file-subffix         : 13       2        2    func       (file-subffix string) : frame=frame@main
-sort                 : 14       2        4    funcList   '((sort array func) (sort array) (sort list func) (sort list)) : frame=null, type=list
+str-split-line       : 14       2        2    func       (str-split-line string) : frame=frame@main
+sort                 : 15       2        4    funcList   '((sort array func) (sort array) (sort list func) (sort list)) : frame=null, type=list
                                          2    func       (sort list) : frame=frame@main
                                          1    func       (sort list func) : frame=frame@main
                                          1    func       (sort array) : frame=frame@main
                                          1    func       (sort array func) : frame=frame@main
-print-list           : 15       2        3    funcList   '((print-list list) (print-list nil nil) (print-list nil)) : frame=null, type=list
+print-list           : 16       2        3    funcList   '((print-list list) (print-list nil nil) (print-list nil)) : frame=null, type=list
                                          2    func       (print-list list) : frame=frame@main
                                          1    func       (print-list nil nil) : frame=frame@main
                                          1    func       (print-list nil) : frame=frame@main
-to-valid-path        : 16       2        2    func       (to-valid-path string) : frame=frame@main
-day-is-bigger-than   : 17       2        2    func       (day-is-bigger-than string string) : frame=frame@main
-day-is-smaller-than  : 18       2        2    func       (day-is-smaller-than string string) : frame=frame@main
-?script-path         : 19       2        2    var        result\rclass\TestClass\test_class_9_delete_1.rulp : type=string
-script_out           : 20       2        2    macro      script_out          
-_ginfo               : 21       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+to-valid-path        : 17       2        2    func       (to-valid-path string) : frame=frame@main
+day-is-bigger-than   : 18       2        2    func       (day-is-bigger-than string string) : frame=frame@main
+day-is-smaller-than  : 19       2        2    func       (day-is-smaller-than string string) : frame=frame@main
+?script-path         : 20       2        2    var        result\rclass\TestClass\test_class_9_delete_1.rulp : type=string
+script_out           : 21       2        2    macro      script_out          
+_ginfo               : 22       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          2    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
-?x                   : 22       2        1    var        1 : type=int        
+?x                   : 23       2        1    var        1 : type=int        
 ==========================================================================================================================
 
 
@@ -133,7 +134,7 @@ id=7, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$__
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?rv                  : 31       7        1    var        result\rclass\TestClass\test_class_9_delete_1 : type=string
+?rv                  : 32       7        1    var        result\rclass\TestClass\test_class_9_delete_1 : type=string
 ==========================================================================================================================
 
 Root var list: total=5

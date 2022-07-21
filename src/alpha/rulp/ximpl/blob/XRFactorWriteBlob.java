@@ -39,6 +39,7 @@ public class XRFactorWriteBlob extends AbsAtomFactorAdapter implements IRFactor 
 		int srcPos = RulpUtil.asInteger(interpreter.compute(frame, args.get(4))).asInteger();
 		int cpyLen = RulpUtil.asInteger(interpreter.compute(frame, args.get(5))).asInteger();
 		int len = dstBlob.write(blobPos, srcBlob.getValue(), srcPos, cpyLen);
+		
 		return RulpFactory.createInteger(len);
 	}
 

@@ -1,0 +1,8 @@
+(str-index-of "abc\ndef" "\n")
+;=>
+
+(str-index-of "abc\ndef" "\n" 1)
+;=>
+
+(str-index-of "abc\ndef" "\n" 4)
+;=>

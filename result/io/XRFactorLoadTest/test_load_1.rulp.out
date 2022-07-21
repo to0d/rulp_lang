@@ -2,11 +2,11 @@
 ;=>nil
 
 (list-of)
-;=>'(main::++ main::-- main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::main main::max main::min main::print-list main::root main::script_out main::sort main::system main::to-valid-path main::x1)
+;=>'(main::++ main::-- main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::main main::max main::min main::print-list main::root main::script_out main::sort main::str-split-line main::system main::to-valid-path main::x1)
 
 (load "load/load1.rulp") ; load twice
 ;=>nil
 
 (list-of)
-;=>'(main::++ main::-- main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::main main::max main::min main::print-list main::root main::script_out main::sort main::system main::to-valid-path main::x1)
+;=>'(main::++ main::-- main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::main main::max main::min main::print-list main::root main::script_out main::sort main::str-split-line main::system main::to-valid-path main::x1)
 
