@@ -65,17 +65,17 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1676            0         1676
+        atom:         1682            0         1682
       string:           51            0           51
         list:           18            1           17
-        expr:          793           15          778
+        expr:          796           15          781
          var:           41           14           27
-        func:           95            0           95
+        func:           96            0           96
     template:            1            0            1
        macro:            5            0            5
     instance:            4            0            4
        class:            2            0            2
-      member:           55            1           54
+      member:           58            1           57
        frame:           28           23            5
  interpreter:            1            0
   frameEntry:          283            0
@@ -189,7 +189,7 @@ init                           : DEFAULT                      0    1    func    
 to_string                      : DEFAULT                      0    1    func       (to_string) : frame=frame@main
 ==========================================================================================================================
 
-name=map, string=map, lvl=0, ref=2/3, parent=null, final=true, mbrs=15, frame=3(SF-map-0)
+name=map, string=map, lvl=0, ref=2/3, parent=null, final=true, mbrs=17, frame=3(SF-map-0)
 ==========================================================================================================================
 Name                           : Access  Final Static Inherit Prop Ref  Type       Value
 --------------------------------------------------------------------------------------------------------------------------
@@ -201,6 +201,7 @@ _map_init                      : PRIVATE                      0    0    factor  
 _map_is_empty                  : PRIVATE                      0    0    factor     _map_is_empty
 _map_put                       : PRIVATE                      0    0    factor     _map_put
 _map_size_of                   : PRIVATE                      0    0    factor     _map_size_of
+_value_list                    : PRIVATE                      0    0    factor     _value_list
 clear                          : DEFAULT Y                    1    1    func       (clear) : frame=frame@main
 get                            : DEFAULT Y                    1    1    func       (get nil) : frame=frame@main
 init                           : DEFAULT Y                    1    1    func       (init) : frame=frame@main
@@ -208,6 +209,7 @@ is-empty                       : DEFAULT Y                    1    1    func    
 key-list                       : DEFAULT Y                    1    1    func       (key-list) : frame=frame@main
 put                            : DEFAULT Y                    1    1    func       (put nil nil) : frame=frame@main
 size-of                        : DEFAULT Y                    1    1    func       (size-of) : frame=frame@main
+value-list                     : DEFAULT Y                    1    1    func       (value-list) : frame=frame@main
 ==========================================================================================================================
 
 

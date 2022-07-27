@@ -146,6 +146,20 @@ public class XRMap extends XRDefInstance implements IRCollection {
 
 			}, RAccessType.PRIVATE);
 
+			RulpUtil.setMember(mapClass, F_MBR_MAP_VALUE_LIST, new AbsAtomFactorAdapter(F_MBR_MAP_VALUE_LIST) {
+
+				@Override
+				public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+					if (args.size() != 2) {
+						throw new RException("Invalid parameters: " + args);
+					}
+
+					return RulpFactory.createList(RulpUtil.asMap(interpreter.compute(frame, args.get(1))).valueList());
+				}
+
+			}, RAccessType.PRIVATE);
+
 		}
 
 	}
@@ -310,6 +324,8 @@ public class XRMap extends XRDefInstance implements IRCollection {
 
 	static final String F_MBR_MAP_SIZE_OF = "_map_size_of";
 
+	static final String F_MBR_MAP_VALUE_LIST = "_value_list";
+
 	public static boolean TRACE = false;
 
 	public static IRMap toImplMap(IRInstance instance) throws RException {
@@ -410,6 +426,26 @@ public class XRMap extends XRDefInstance implements IRCollection {
 
 	public int size() {
 		return uniqMap.size();
+	}
+
+	public ArrayList<IRObject> valueList() throws RException {
+
+		ArrayList<IRObject> valueList = new ArrayList<>();
+
+		for (RMapEntry entry : uniqMap.values()) {
+			valueList.add(entry.value);
+		}
+
+		Collections.sort(valueList, (v1, v2) -> {
+			try {
+				return RulpUtil.toUniqString(v1).compareTo(RulpUtil.toUniqString(v2));
+			} catch (RException e) {
+				e.printStackTrace();
+				return 0;
+			}
+		});
+
+		return valueList;
 	}
 
 }

@@ -7,14 +7,14 @@
 (map1::size-of)
 ;=>0
 
-(map1::put 1 2)
+(map1::put 1 1)
 ;=>nil
 
 (map1::size-of)
 ;=>1
 
 (map1::get 1)
-;=>2
+;=>1
 
 (map1::get 2)
 ;=>nil
@@ -31,30 +31,33 @@
 (map1::get b)
 ;=>nil
 
-(map1::put "str1" 2)
+(map1::put "str1" 3)
 ;=>nil
 
 (map1::size-of)
 ;=>3
 
 (map1::get "str1")
-;=>2
+;=>3
 
 (map1::get "str2")
 ;=>nil
 
-(map1::put '(a) 2)
+(map1::put '(a) 4)
 ;=>nil
 
 (map1::size-of)
 ;=>4
 
 (map1::get '(a))
-;=>2
+;=>4
 
 (map1::get '(b))
 ;=>nil
 
 (map1::key-list)
 ;=>'("str1" a 1 '(a))
+
+(map1::value-list)
+;=>'(1 2 3 4)
 

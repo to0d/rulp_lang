@@ -7,7 +7,7 @@
 (map1::size-of)
 ;=>
 
-(map1::put 1 2)
+(map1::put 1 1)
 ;=>
 
 (map1::size-of)
@@ -31,7 +31,7 @@
 (map1::get b)
 ;=>
 
-(map1::put "str1" 2)
+(map1::put "str1" 3)
 ;=>
 
 (map1::size-of)
@@ -43,7 +43,7 @@
 (map1::get "str2")
 ;=>
 
-(map1::put '(a) 2)
+(map1::put '(a) 4)
 ;=>
 
 (map1::size-of)
@@ -56,4 +56,7 @@
 ;=>
 
 (map1::key-list)
+;=>
+
+(map1::value-list)
 ;=>
