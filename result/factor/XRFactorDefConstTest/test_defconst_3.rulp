@@ -1,0 +1,21 @@
+(defvar ?x 1)
+;=>
+
+(defconst N0 (+ ?x 1))
+;=>
+
+(+ N0 1)
+;=>
+
+(setq ?x 2)
+;=>
+
+(+ N0 1)
+;=>
+
+(type-of N0)
+;=>
+
+(value-of N0)
+;=>
+
