@@ -56,6 +56,7 @@ obj=min                 , type=func    , stmt-count=33
 obj=print-list          , type=func    , stmt-count=-1
 obj=sort                , type=func    , stmt-count=57
 obj=str-split-line      , type=func    , stmt-count=61
+obj=to-one-line         , type=func    , stmt-count=15
 obj=to-valid-path       , type=func    , stmt-count=18
 
 ;eof

@@ -25,16 +25,16 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      291
+    factor:      292
       func:       12
 ==========================================================================================================================
 
-Callable stats info: callId=236, row=18, column=60(4), value-max=19, value-unit=2^x
+Callable stats info: callId=236, row=18, column=60(4), value-max=20, value-unit=2^x
 ==========================================================================================================================
    Frame    RType  Count  Ref Object                         333333333333333333333333333333333333333333333333334333336375 max=34, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
     root   factor    178    0 add-attribute                   1333333333333333333333333333333333333333333331             
-    root   factor     57    0 defun                                                                        3333 33333631 
+    root   factor     58    0 defun                                                                        3333 33333631 
     root   factor     12    0 return                                                                                   53
     root   factor      9    0 defvar                                                                           3     1 31
     root   factor      6    0 alias                          33                                                          
@@ -57,25 +57,25 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1573            0         1573
-      string:           45            0           45
+        atom:         1594            0         1594
+      string:           47            0           47
         list:           20            3           17
-        expr:          735           12          723
+        expr:          745           12          733
        array:            5            4            1
          var:           38           24           14
-        func:           74            0           74
+        func:           75            0           75
     template:            1            0            1
        macro:            5            0            5
       member:            1            0            1
        frame:           16           16            0
  interpreter:            1            0
-  frameEntry:          281            0
+  frameEntry:          282            0
       lambda:            0            0
 ==========================================================================================================================
 
 Global frame list: total=0
 
-id=2, name=main, lvl=2, ref=1/2, entry=25, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=1/2, entry=26, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -100,26 +100,27 @@ is-blank             : 11       2        2    func       (is-blank string) : fra
 file-prename         : 12       2        2    func       (file-prename string) : frame=frame@main
 file-subffix         : 13       2        2    func       (file-subffix string) : frame=frame@main
 str-split-line       : 14       2        2    func       (str-split-line string) : frame=frame@main
-sort                 : 15       2        4    funcList   '((sort array func) (sort array) (sort list func) (sort list)) : frame=null, type=list
+to-one-line          : 15       2        2    func       (to-one-line list) : frame=frame@main
+sort                 : 16       2        4    funcList   '((sort array func) (sort array) (sort list func) (sort list)) : frame=null, type=list
                                          2    func       (sort list) : frame=frame@main
                                          1    func       (sort list func) : frame=frame@main
                                          1    func       (sort array) : frame=frame@main
                                          1    func       (sort array func) : frame=frame@main
-print-list           : 16       2        3    funcList   '((print-list list) (print-list nil nil) (print-list nil)) : frame=null, type=list
+print-list           : 17       2        3    funcList   '((print-list list) (print-list nil nil) (print-list nil)) : frame=null, type=list
                                          2    func       (print-list list) : frame=frame@main
                                          1    func       (print-list nil nil) : frame=frame@main
                                          1    func       (print-list nil) : frame=frame@main
-to-valid-path        : 17       2        2    func       (to-valid-path string) : frame=frame@main
-day-is-bigger-than   : 18       2        2    func       (day-is-bigger-than string string) : frame=frame@main
-day-is-smaller-than  : 19       2        2    func       (day-is-smaller-than string string) : frame=frame@main
-?script-path         : 20       2        2    var        result\array\TestArray\test_array_4_const.rulp : type=string
-script_out           : 21       2        2    macro      script_out          
-_ginfo               : 22       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+to-valid-path        : 18       2        2    func       (to-valid-path string) : frame=frame@main
+day-is-bigger-than   : 19       2        2    func       (day-is-bigger-than string string) : frame=frame@main
+day-is-smaller-than  : 20       2        2    func       (day-is-smaller-than string string) : frame=frame@main
+?script-path         : 21       2        2    var        result\array\TestArray\test_array_4_const.rulp : type=string
+script_out           : 22       2        2    macro      script_out          
+_ginfo               : 23       2        2    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          2    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
-fun1                 : 23       2        1    func       (fun1 string) : frame=frame@main
-fun2                 : 24       2        1    func       (fun2 string) : frame=frame@main
-?rv                  : 31       2        1    var        '("abc") : type=list
+fun1                 : 24       2        1    func       (fun1 string) : frame=frame@main
+fun2                 : 25       2        1    func       (fun2 string) : frame=frame@main
+?rv                  : 32       2        1    var        '("abc") : type=list
 ==========================================================================================================================
 
 

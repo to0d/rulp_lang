@@ -5,5 +5,5 @@
 ;=>&y nil
 
 (list-of)
-;=>'(main::++ main::-- main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::main main::max main::min main::print-list main::root main::script_out main::sort main::str-split-line main::system main::to-valid-path main::x main::y)
+;=>'(main::++ main::-- main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::main main::max main::min main::print-list main::root main::script_out main::sort main::str-split-line main::system main::to-one-line main::to-valid-path main::x main::y)
 

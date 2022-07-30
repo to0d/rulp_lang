@@ -190,6 +190,7 @@ obj=file-subffix        , type=func
 obj=is-blank            , type=func
 obj=max                 , type=func
 obj=min                 , type=func
+obj=to-one-line         , type=func
 obj=type#map            , type=atom
 obj=type#queue          , type=atom
 obj=type#set            , type=atom

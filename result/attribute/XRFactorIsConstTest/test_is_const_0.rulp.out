@@ -248,6 +248,7 @@ obj=is-blank            , type=func
 obj=list-of-is-const    , type=func
 obj=script_out          , type=macro
 obj=str-split-line      , type=func
+obj=to-one-line         , type=func
 obj=to-valid-path       , type=func
 
 ;eof

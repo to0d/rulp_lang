@@ -310,6 +310,7 @@ main::script_out
 main::sort
 main::str-split-line
 main::system
+main::to-one-line
 main::to-valid-path
 
 ;eof

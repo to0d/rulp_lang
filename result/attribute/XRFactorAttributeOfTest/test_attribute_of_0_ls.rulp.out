@@ -282,6 +282,7 @@ obj=script_out, type=macro, attribute='()
 obj=sort, type=func, attribute='()
 obj=str-split-line, type=func, attribute='()
 obj=system, type=frame, attribute='()
+obj=to-one-line, type=func, attribute='()
 obj=to-valid-path, type=func, attribute='()
 
 ;eof

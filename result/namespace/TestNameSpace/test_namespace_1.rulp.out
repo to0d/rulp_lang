@@ -30,7 +30,7 @@
 ;=>3
 
 (list-of)
-;=>'(main::++ main::-- main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::f1 main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::main main::max main::min main::ns1 main::print-list main::root main::script_out main::sort main::str-split-line main::system main::to-valid-path main::var1)
+;=>'(main::++ main::-- main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::f1 main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::main main::max main::min main::ns1 main::print-list main::root main::script_out main::sort main::str-split-line main::system main::to-one-line main::to-valid-path main::var1)
 
 (list-of ns1)
 ;=>'(ns1::this ns1::var1 ns1::var2)
@@ -58,7 +58,7 @@
 ;=>3
 
 (list-of)
-;=>'(main::++ main::-- main::?rv main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::f1 main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::main main::max main::min main::ns1 main::print-list main::root main::script_out main::sort main::str-split-line main::system main::to-valid-path main::var1)
+;=>'(main::++ main::-- main::?rv main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::f1 main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::main main::max main::min main::ns1 main::print-list main::root main::script_out main::sort main::str-split-line main::system main::to-one-line main::to-valid-path main::var1)
 
 (list-of ns1)
 ;=>'(ns1::f1 ns1::f2 ns1::this ns1::var1 ns1::var2)
@@ -77,7 +77,7 @@ at (defun ns1::f1 () (return 2)) ; main-2
 ;eof
 
 (list-of)
-;=>'(main::++ main::-- main::?rv main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::f1 main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::main main::max main::min main::ns1 main::print-list main::root main::script_out main::sort main::str-split-line main::system main::to-valid-path main::var1)
+;=>'(main::++ main::-- main::?rv main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::f1 main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::main main::max main::min main::ns1 main::print-list main::root main::script_out main::sort main::str-split-line main::system main::to-one-line main::to-valid-path main::var1)
 
 (list-of ns1)
 ;=>'(ns1::f1 ns1::f2 ns1::this ns1::var1 ns1::var2)
@@ -96,7 +96,7 @@ at (f2) ; main-2
 ;eof
 
 (list-of)
-;=>'(main::++ main::-- main::?rv main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::f1 main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::main main::max main::min main::ns1 main::print-list main::root main::script_out main::sort main::str-split-line main::system main::to-valid-path main::var1)
+;=>'(main::++ main::-- main::?rv main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::f1 main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::main main::max main::min main::ns1 main::print-list main::root main::script_out main::sort main::str-split-line main::system main::to-one-line main::to-valid-path main::var1)
 
 (list-of ns1)
 ;=>'(ns1::f1 ns1::f2 ns1::this ns1::var1 ns1::var2)

@@ -25,14 +25,14 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:     4721
+    factor:     4722
       func:        8
      macro:        1
 ==========================================================================================================================
 
 Callable stats info: callId=241, row=27, column=61(4), value-max=1109, value-unit=3^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         23333333333333333333333333333333333333333333333333333333434X4 max=6650, unit=3^x
+   Frame    RType  Count  Ref Object                         23333333333333333333333333333333333333333333333333333333534X4 max=6650, unit=3^x
 --------------------------------------------------------------------------------------------------------------------------
     root   factor   1113    0 if                                                                                       281
     root   factor   1113    0 do                                                                                       281
@@ -41,7 +41,7 @@ Callable stats info: callId=241, row=27, column=61(4), value-max=1109, value-uni
     root   factor   1107    0 +                                                                                        181
     root   factor   1106    0 -                                                                                        18 
     root   factor    178    0 add-attribute                   1333333333333333333333333333333333333333333331              
-    root   factor     56    0 defun                                                                        2333 3333242   
+    root   factor     57    0 defun                                                                        2333 3333242   
     root   factor      7    0 return                                                                                   231
     root   factor      7    0 defvar                                                                           3     1   2
     root   factor      6    0 alias                          22                                                           
@@ -67,25 +67,25 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1570            0         1570
+        atom:         1591            0         1591
          int:         1943            0         1943
-      string:           44            0           44
+      string:           46            0           46
         list:           14            2           12
-        expr:         7370         3325         4045
+        expr:         7380         3325         4055
          var:         1130         1115           15
-        func:           73            0           73
+        func:           74            0           74
     template:            1            0            1
        macro:            5            0            5
       member:            1            0            1
        frame:         2227         2226            1
  interpreter:            1            0
-  frameEntry:         1372            0
+  frameEntry:         1373            0
       lambda:            0            0
 ==========================================================================================================================
 
 Global frame list: total=1
 
-id=2, name=main, lvl=2, ref=2/2, entry=24, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=2/2, entry=25, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -110,25 +110,26 @@ is-blank             : 11       2        2    func       (is-blank string) : fra
 file-prename         : 12       2        2    func       (file-prename string) : frame=frame@main
 file-subffix         : 13       2        2    func       (file-subffix string) : frame=frame@main
 str-split-line       : 14       2        2    func       (str-split-line string) : frame=frame@main
-sort                 : 15       2        4    funcList   '((sort array func) (sort array) (sort list func) (sort list)) : frame=null, type=list
+to-one-line          : 15       2        2    func       (to-one-line list) : frame=frame@main
+sort                 : 16       2        4    funcList   '((sort array func) (sort array) (sort list func) (sort list)) : frame=null, type=list
                                          2    func       (sort list) : frame=frame@main
                                          1    func       (sort list func) : frame=frame@main
                                          1    func       (sort array) : frame=frame@main
                                          1    func       (sort array func) : frame=frame@main
-print-list           : 16       2        3    funcList   '((print-list list) (print-list nil nil) (print-list nil)) : frame=null, type=list
+print-list           : 17       2        3    funcList   '((print-list list) (print-list nil nil) (print-list nil)) : frame=null, type=list
                                          2    func       (print-list list) : frame=frame@main
                                          1    func       (print-list nil nil) : frame=frame@main
                                          1    func       (print-list nil) : frame=frame@main
-to-valid-path        : 17       2        2    func       (to-valid-path string) : frame=frame@main
-day-is-bigger-than   : 18       2        2    func       (day-is-bigger-than string string) : frame=frame@main
-day-is-smaller-than  : 19       2        2    func       (day-is-smaller-than string string) : frame=frame@main
-?script-path         : 20       2        2    var        result\optimize\TestOptimizeTCO\test_tco_3_return.rulp : type=string
-script_out           : 21       2        2    macro      script_out          
-_ginfo               : 22       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+to-valid-path        : 18       2        2    func       (to-valid-path string) : frame=frame@main
+day-is-bigger-than   : 19       2        2    func       (day-is-bigger-than string string) : frame=frame@main
+day-is-smaller-than  : 20       2        2    func       (day-is-smaller-than string string) : frame=frame@main
+?script-path         : 21       2        2    var        result\optimize\TestOptimizeTCO\test_tco_3_return.rulp : type=string
+script_out           : 22       2        2    macro      script_out          
+_ginfo               : 23       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          2    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
-fact                 : 23       2        1107 func       (fact nil) : frame=frame@main
-?rv                  : 25       2        1    var        0 : type=int        
+fact                 : 24       2        1107 func       (fact nil) : frame=frame@main
+?rv                  : 26       2        1    var        0 : type=int        
 ==========================================================================================================================
 
 
@@ -136,7 +137,7 @@ id=3, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$__
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?rv                  : 1140     3        1    var        result\optimize\TestOptimizeTCO\test_tco_3_return : type=string
+?rv                  : 1141     3        1    var        result\optimize\TestOptimizeTCO\test_tco_3_return : type=string
 ==========================================================================================================================
 
 Root var list: total=5

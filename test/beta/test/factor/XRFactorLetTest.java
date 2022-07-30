@@ -12,4 +12,9 @@ class XRFactorLetTest extends RulpTestBase {
 		_run_script();
 	}
 
+	@Test
+	void test_let_2() {
+		_setup();
+		_run_script();
+	}
 }

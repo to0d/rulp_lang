@@ -40,7 +40,7 @@ public interface Constant {
 	String A_DEBUG = "debug";
 
 	String A_DEFAULT = "default";
-	
+
 	String A_DO = "do";
 
 	String A_DOUBLE = "double";
@@ -82,8 +82,6 @@ public interface Constant {
 	String A_LOAD_JAR = "?load-jar";
 
 	String A_LOAD_SCRIPT = "?load-script";
-
-//	String A_LOAD_SYSTEM = "?load-system";
 
 	String A_LOCAL = "local";
 
@@ -440,11 +438,11 @@ public interface Constant {
 	String F_RETURN = "return";
 
 	String F_RETURN_TYPE_OF = "return-type-of";
-	
+
 	String F_REVERSE = "reverse";
-	
+
 	String F_RULP_OBJ_COUNT = "rulp-object-count";
-	
+
 	String F_RUN = "run";
 
 	String F_RUNTIME_CALL_COUNT = "runtime-call-count";
@@ -478,7 +476,7 @@ public interface Constant {
 	String F_STR_EQUAL_NOCASE = "str-equal-nocase";
 
 	String F_STR_FORMAT = "str-format";
-	
+
 	String F_STR_INDEX_OF = "str-index-of";
 
 	String F_STR_LAST_INDEX_OF = "str-last-index-of";

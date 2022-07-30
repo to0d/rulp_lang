@@ -10,6 +10,7 @@
 package alpha.rulp.ximpl.control;
 
 import static alpha.rulp.lang.Constant.F_LET;
+import static alpha.rulp.lang.Constant.O_Nil;
 
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
@@ -22,6 +23,7 @@ import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
+
 public class XRFactorLet extends AbsAtomFactorAdapter implements IRFactor {
 
 	public XRFactorLet(String factorName) {
@@ -31,12 +33,12 @@ public class XRFactorLet extends AbsAtomFactorAdapter implements IRFactor {
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() != 3) {
+		if (args.size() < 3) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
 		IRList varList = RulpUtil.asExpression(args.get(1));
-		if (varList.size() < 2 || (varList.size() % 2) != 0) {
+		if ((varList.size() % 2) != 0) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
@@ -46,16 +48,25 @@ public class XRFactorLet extends AbsAtomFactorAdapter implements IRFactor {
 
 			RulpUtil.incRef(letFrame);
 
-			IRIterator<? extends IRObject> it = varList.iterator();
-			while (it.hasNext()) {
-				String varName = (RulpUtil.asAtom(it.next())).getName();
-				IRVar var = RulpFactory.createVar(varName);
-				letFrame.setEntry(varName, var);
-				IRObject val = interpreter.compute(letFrame, it.next());
-				var.setValue(val);
+			if (varList.size() > 0) {
+
+				IRIterator<? extends IRObject> it = varList.iterator();
+				while (it.hasNext()) {
+					String varName = (RulpUtil.asAtom(it.next())).getName();
+					IRVar var = RulpFactory.createVar(varName);
+					letFrame.setEntry(varName, var);
+					IRObject val = interpreter.compute(letFrame, it.next());
+					var.setValue(val);
+				}
 			}
 
-			return interpreter.compute(letFrame, args.get(2));
+			IRIterator<? extends IRObject> it = args.listIterator(2);
+			IRObject rst = O_Nil;
+			while (it.hasNext()) {
+				rst = interpreter.compute(letFrame, it.next());
+			}
+
+			return rst;
 
 		} finally {
 			letFrame.release();

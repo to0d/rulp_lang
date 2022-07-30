@@ -7,3 +7,6 @@
 (str-replace "abc'x'y" "'" "''")
 ;=>"abc''x''y"
 
+(str-replace "abc\ndef\nxyz" "\n" " ")
+;=>"abc def xyz"
+

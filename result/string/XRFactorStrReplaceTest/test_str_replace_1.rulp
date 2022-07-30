@@ -5,3 +5,7 @@
 ;=>
 
 (str-replace "abc'x'y" "'" "''")
+;=>
+
+(str-replace "abc\ndef\nxyz" "\n" " ")
+;=>

@@ -25,7 +25,7 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      675
+    factor:      676
       func:       12
      macro:        1
 ==========================================================================================================================
@@ -37,7 +37,7 @@ Callable stats info: callId=236, row=33, column=60(4), value-max=87, value-unit=
     root   factor    178    0 add-attribute                   1333333333333333333333333333333333333333333331             
     root   factor     88    0 setq                                                                                     81
     root   factor     60    0 if                                                                                       71
-    root   factor     56    0 defun                                                                        3333 3333363  
+    root   factor     57    0 defun                                                                        3333 3333363  
     root   factor     49    0 <=                                                                                       7 
     root   factor     30    0 +                                                                                        61
     root   factor     29    0 power                                                                                    6 
@@ -73,25 +73,25 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1594            0         1594
+        atom:         1615            0         1615
          int:           18            0           18
-      string:           43            0           43
+      string:           45            0           45
         list:           13            1           12
-        expr:          762           11          751
+        expr:          772           11          761
          var:           57           42           15
-        func:           73            0           73
+        func:           74            0           74
     template:            1            0            1
        macro:            5            0            5
       member:            1            0            1
        frame:           82           81            1
  interpreter:            1            0
-  frameEntry:          320            0
+  frameEntry:          321            0
       lambda:            0            0
 ==========================================================================================================================
 
 Global frame list: total=1
 
-id=2, name=main, lvl=2, ref=2/2, entry=24, pid=1(system), subject=main
+id=2, name=main, lvl=2, ref=2/2, entry=25, pid=1(system), subject=main
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
@@ -116,25 +116,26 @@ is-blank             : 11       2        2    func       (is-blank string) : fra
 file-prename         : 12       2        2    func       (file-prename string) : frame=frame@main
 file-subffix         : 13       2        2    func       (file-subffix string) : frame=frame@main
 str-split-line       : 14       2        2    func       (str-split-line string) : frame=frame@main
-sort                 : 15       2        4    funcList   '((sort array func) (sort array) (sort list func) (sort list)) : frame=null, type=list
+to-one-line          : 15       2        2    func       (to-one-line list) : frame=frame@main
+sort                 : 16       2        4    funcList   '((sort array func) (sort array) (sort list func) (sort list)) : frame=null, type=list
                                          2    func       (sort list) : frame=frame@main
                                          1    func       (sort list func) : frame=frame@main
                                          1    func       (sort array) : frame=frame@main
                                          1    func       (sort array func) : frame=frame@main
-print-list           : 16       2        3    funcList   '((print-list list) (print-list nil nil) (print-list nil)) : frame=null, type=list
+print-list           : 17       2        3    funcList   '((print-list list) (print-list nil nil) (print-list nil)) : frame=null, type=list
                                          2    func       (print-list list) : frame=frame@main
                                          1    func       (print-list nil nil) : frame=frame@main
                                          1    func       (print-list nil) : frame=frame@main
-to-valid-path        : 17       2        2    func       (to-valid-path string) : frame=frame@main
-day-is-bigger-than   : 18       2        2    func       (day-is-bigger-than string string) : frame=frame@main
-day-is-smaller-than  : 19       2        2    func       (day-is-smaller-than string string) : frame=frame@main
-?script-path         : 20       2        2    var        result\optimize\TestOptimizeCCO\test_cco_7_lt0202_try.rulp : type=string
-script_out           : 21       2        2    macro      script_out          
-_ginfo               : 22       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
+to-valid-path        : 18       2        2    func       (to-valid-path string) : frame=frame@main
+day-is-bigger-than   : 19       2        2    func       (day-is-bigger-than string string) : frame=frame@main
+day-is-smaller-than  : 20       2        2    func       (day-is-smaller-than string string) : frame=frame@main
+?script-path         : 21       2        2    var        result\optimize\TestOptimizeCCO\test_cco_7_lt0202_try.rulp : type=string
+script_out           : 22       2        2    macro      script_out          
+_ginfo               : 23       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          2    func       (_ginfo) : frame=frame@main
                                          1    func       (_ginfo string) : frame=frame@main
-isHappy              : 23       2        1    func       (isHappy int) : frame=frame@main
-?rv                  : 84       2        1    var        false : type=bool   
+isHappy              : 24       2        1    func       (isHappy int) : frame=frame@main
+?rv                  : 85       2        1    var        false : type=bool   
 ==========================================================================================================================
 
 
@@ -142,7 +143,7 @@ id=32, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$_
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?rv                  : 88       32       1    var        result\optimize\TestOptimizeCCO\test_cco_7_lt0202_try : type=string
+?rv                  : 89       32       1    var        result\optimize\TestOptimizeCCO\test_cco_7_lt0202_try : type=string
 ==========================================================================================================================
 
 Root var list: total=5

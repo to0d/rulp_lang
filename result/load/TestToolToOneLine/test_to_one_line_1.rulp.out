@@ -1,0 +1,12 @@
+(load "tool")
+;=>nil
+
+(to-one-line '("abc"))
+;=>"abc"
+
+(to-one-line '("abc" "xyz"))
+;=>"abcxyz"
+
+(to-one-line '("abc" "x\nz"))
+;=>"abcx z"
+

@@ -26,8 +26,8 @@ mbr=?os.name, mbr-property='(public), mbr-attribute='(), obj=?os.name, obj-type=
 mbr=?os.version, mbr-property='(public), mbr-attribute='(), obj=?os.version, obj-type=var, obj-attribute='(), var-value="10.0"
 mbr=?path.separator, mbr-property='(public), mbr-attribute='(), obj=?path.separator, obj-type=var, obj-attribute='(), var-value=";"
 mbr=?user.dir, mbr-property='(public), mbr-attribute='(), obj=?user.dir, obj-type=var, obj-attribute='(), var-value="C:\data\itoolulp_lang"
-mbr=?user.home, mbr-property='(public), mbr-attribute='(), obj=?user.home, obj-type=var, obj-attribute='(), var-value="C:\Users\YANLIU"
-mbr=?user.name, mbr-property='(public), mbr-attribute='(), obj=?user.name, obj-type=var, obj-attribute='(), var-value="921511672"
+mbr=?user.home, mbr-property='(public), mbr-attribute='(), obj=?user.home, obj-type=var, obj-attribute='(), var-value="C:\Users\to0d"
+mbr=?user.name, mbr-property='(public), mbr-attribute='(), obj=?user.name, obj-type=var, obj-attribute='(), var-value="to0d"
 mbr=^, mbr-property='(public), mbr-attribute='(), obj=^, obj-type=factor, obj-attribute='(atom stable)
 mbr=access, mbr-property='(public), mbr-attribute='(), obj=access, obj-type=factor, obj-attribute='(stable)
 mbr=add-array-to-list, mbr-property='(public), mbr-attribute='(), obj=add-array-to-list, obj-type=factor, obj-attribute='(stable)
@@ -281,6 +281,7 @@ mbr=stack, mbr-property='(public), mbr-attribute='(), obj=stack, obj-type=class,
 mbr=str-split-line, mbr-property='(public), mbr-attribute='(), obj=(str-split-line string), obj-type=func, obj-attribute='()
 mbr=system, mbr-property='(public), mbr-attribute='(), obj=system, obj-type=frame, obj-attribute='()
 mbr=to-list, mbr-property='(public), mbr-attribute='(), obj='((to-list array) (to-list list) (to-list type#queue) (to-list type#set) (to-list type#stack)), obj-type=func, obj-attribute='()
+mbr=to-one-line, mbr-property='(public), mbr-attribute='(), obj=(to-one-line list), obj-type=func, obj-attribute='()
 mbr=to-valid-path, mbr-property='(public), mbr-attribute='(), obj=(to-valid-path string), obj-type=func, obj-attribute='()
 mbr=type#map, mbr-property='(public), mbr-attribute='(), obj=type#map, obj-type=atom, obj-attribute='()
 mbr=type#queue, mbr-property='(public), mbr-attribute='(), obj=type#queue, obj-type=atom, obj-attribute='()

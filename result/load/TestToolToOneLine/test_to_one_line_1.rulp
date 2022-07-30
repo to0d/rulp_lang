@@ -1,0 +1,11 @@
+(load "tool")
+;=>
+
+(to-one-line '("abc"))
+;=>
+
+(to-one-line '("abc" "xyz"))
+;=>
+
+(to-one-line '("abc" "x\nz"))
+;=>

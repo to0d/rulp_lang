@@ -158,33 +158,4 @@ public class LoadUtil {
 		lsList.add(RulpFactory.createString(absPath));
 	}
 
-//	public static void loadSystemRulp(IRInterpreter interpreter, IRFrame frame, String name) throws RException {
-//
-//		IRList lsList = RulpUtil.asList(RulpUtil.asVar(interpreter.getObject(A_LOAD_SYSTEM)).getValue());
-//
-//		/*************************************************/
-//		// Script can only be loaded once
-//		/*************************************************/
-//		if (_contain(lsList, name)) {
-//			return;
-//		}
-//
-//		String jarPath = "alpha/resource/" + name + ".rulp";
-//
-//		try {
-//
-//			if (RulpUtil.isTrace(frame)) {
-//				System.out.println("loading system: " + jarPath);
-//			}
-//
-//			LoadUtil.loadRulpFromJar(interpreter, frame, jarPath, "utf-8");
-//
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//			throw new RException("fail to load <" + name + ">, err:" + e.toString());
-//		}
-//
-//		lsList.add(RulpFactory.createString(name));
-//	}
-
 }
