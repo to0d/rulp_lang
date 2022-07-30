@@ -27,6 +27,10 @@ public class XRFactorLoad extends AbsAtomFactorAdapter implements IRFactor {
 		super(factorName);
 	}
 
+	static void load(String name, String charset, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+	}
+
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
@@ -34,35 +38,32 @@ public class XRFactorLoad extends AbsAtomFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
+		String name = null;
+		String charset = null;
+
 		IRObject loadObj = interpreter.compute(frame, args.get(1));
 
 		switch (loadObj.getType()) {
 		case STRING:
-
-			String charset = null;
-			if (args.size() == 3) {
-				charset = RulpUtil.asString(interpreter.compute(frame, args.get(2))).asString();
-			}
-
-			String name = RulpUtil.asString(loadObj).asString();
-			if (name.endsWith(".jar")) {
-				LoadUtil.loadJar(interpreter, frame, name);
-			} else {
-				LoadUtil.loadScript(interpreter, frame, name, charset);
-			}
-
+			name = RulpUtil.asString(loadObj).asString();
 			break;
 
-//		case ATOM:
-//			LoadUtil.loadSystemRulp(interpreter, frame, RulpUtil.asAtom(loadObj).getName());
-//			break;
-//
-//		case CLASS:
-//			LoadUtil.loadSystemRulp(interpreter, frame, RulpUtil.asClass(loadObj).getClassName());
-//			break;
+		case ATOM:
+			name = RulpUtil.asAtom(loadObj).asString();
+			break;
 
 		default:
 			throw new RException("Invalid parameters: " + args);
+		}
+
+		if (args.size() == 3) {
+			charset = RulpUtil.asString(interpreter.compute(frame, args.get(2))).asString();
+		}
+
+		if (name.endsWith(".jar")) {
+			LoadUtil.loadJar(interpreter, frame, name);
+		} else {
+			LoadUtil.loadScript(interpreter, frame, name, charset);
 		}
 
 		return O_Nil;
