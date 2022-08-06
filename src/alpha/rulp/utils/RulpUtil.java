@@ -2315,6 +2315,24 @@ public class RulpUtil {
 		return list;
 	}
 
+	public static IRList toList(String name, List<IRObject> elements) throws RException {
+
+		if (name == null)
+			return RulpFactory.createList(elements);
+		else
+			return RulpFactory.createNamedList(name, elements);
+
+	}
+
+	public static IRList toList(String name, IRObject[] elements) throws RException {
+
+		if (name == null)
+			return RulpFactory.createList(elements);
+		else
+			return RulpFactory.createNamedList(name, elements);
+
+	}
+
 	@SuppressWarnings("unchecked")
 	public static <T> List<T> toList(T... objs) {
 

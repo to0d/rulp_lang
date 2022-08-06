@@ -495,13 +495,13 @@ public final class RulpFactory {
 		return new XRMember(subject, name, value);
 	}
 
-	public static IRList createNamedList(Collection<? extends IRObject> elements, String name) throws RException {
+	public static IRList createNamedList(String name, Collection<? extends IRObject> elements) throws RException {
 
 		RType.LIST.incCreateCount();
 		return new XRListConst(RulpUtil.toFixArray(elements), RType.LIST, name, false);
 	}
 
-	public static IRList createNamedList(IRIterator<? extends IRObject> iter, String name) throws RException {
+	public static IRList createNamedList(String name, IRIterator<? extends IRObject> iter) throws RException {
 
 		if (name != null && name.length() == 0) {
 			return createList(iter);
@@ -516,7 +516,7 @@ public final class RulpFactory {
 		return new XRListIteratorR(iter, RType.LIST, name);
 	}
 
-	public static IRList createNamedList(Iterator<? extends IRObject> iter, String name) throws RException {
+	public static IRList createNamedList(String name, Iterator<? extends IRObject> iter) throws RException {
 
 		if (name != null && name.length() == 0) {
 			return createList(iter);

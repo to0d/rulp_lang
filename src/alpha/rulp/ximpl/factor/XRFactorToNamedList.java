@@ -59,7 +59,7 @@ public class XRFactorToNamedList extends AbsAtomFactorAdapter implements IRFacto
 			return varList;
 		}
 
-		return RulpFactory.createNamedList(list.iterator(), name);
+		return RulpFactory.createNamedList(name, list.iterator());
 	}
 
 }

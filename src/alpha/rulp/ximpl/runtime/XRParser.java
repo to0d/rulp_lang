@@ -33,6 +33,7 @@ import alpha.rulp.runtime.IRTokener.TokenType;
 import alpha.rulp.runtime.RName;
 import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
+import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.StringUtil;
 import alpha.rulp.ximpl.error.RParseException;
 import alpha.rulp.ximpl.error.RulpIncompleteException;
@@ -916,7 +917,9 @@ public class XRParser implements IRParser {
 							if (name.length() == 0) {
 								name = null;
 							}
-							return RulpFactory.createNamedList(list, name);
+
+							return RulpUtil.toList(name, list);
+
 						}
 
 						_pullStack(namedDepth);

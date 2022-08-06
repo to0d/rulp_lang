@@ -454,10 +454,7 @@ public final class RuntimeUtil {
 					rstList.add(compute(it.next(), interpreter, frame));
 				}
 
-				if (oldList.getNamedName() == null)
-					return RulpFactory.createList(rstList);
-				else
-					return RulpFactory.createNamedList(rstList, oldList.getNamedName());
+				return RulpUtil.toList(oldList.getNamedName(), rstList);
 
 			case MEMBER:
 
@@ -1042,7 +1039,7 @@ public final class RuntimeUtil {
 					}
 				}
 
-				return RulpFactory.createNamedList(newList, name);
+				return RulpUtil.toList(name, newList);
 			}
 
 			IRExpr expr = (IRExpr) obj;
