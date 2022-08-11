@@ -1,8 +1,0 @@
-(defun fun1 (?v1 (?v2 '(2))) 
-    (return (+ ?v1 ?v2))
-)
-;err:
-Invalid para expression: (?v2 '(2))
-at (defun fun1 (?v1 (?v2 '(2))) (return (+ ?v1 ?v2))) ; main-2
-;eof
-
