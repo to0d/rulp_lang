@@ -1,17 +1,17 @@
-in : (a b)
+BGN: (a b)
 (x y)
-eof
+EOF
 
-in : (a b);a comment line
+BGN: (a b);a comment line
 (x y)
-eof
+EOF
 
-in : (a b ;a comment line
+BGN: (a b ;a comment line
 (x y);
 )
-eof
+EOF
 
-in : (a b 
+BGN: (a b 
 
    )
-eof
+EOF

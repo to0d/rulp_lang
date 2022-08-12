@@ -1,25 +1,25 @@
-о
-★
-Χ
-▲▼
-⊙
-◆
-Ⅰ Ⅱ Ⅲ Ⅳ Ⅴ Ⅵ Ⅶ Ⅷ Ⅸ Ⅹ Ⅺ Ⅻ
-℃
-■
-●
-の
-Ⅱ
-ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑ
-~
-□
-`
-○
-×
-∶
-━
-─
-哈利·托特达夫
-a
-"a b c"
-16MbD
+INP: о
+INP: ★
+INP: Χ
+INP: ▲▼
+INP: ⊙
+INP: ◆
+INP: Ⅰ Ⅱ Ⅲ Ⅳ Ⅴ Ⅵ Ⅶ Ⅷ Ⅸ Ⅹ Ⅺ Ⅻ
+INP: ℃
+INP: ■
+INP: ●
+INP: の
+INP: Ⅱ
+INP: ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑ
+INP: ~
+INP: □
+INP: `
+INP: ○
+INP: ×
+INP: ∶
+INP: ━
+INP: ─
+INP: 哈利·托特达夫
+INP: a
+INP: "a b c"
+INP: 16MbD

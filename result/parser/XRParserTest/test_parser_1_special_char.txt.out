@@ -1,75 +1,25 @@
-in : о
-out: о
-
-in : ★
-out: ★
-
-in : Χ
-out: Χ
-
-in : ▲▼
-out: ▲▼
-
-in : ⊙
-out: ⊙
-
-in : ◆
-out: ◆
-
-in : Ⅰ Ⅱ Ⅲ Ⅳ Ⅴ Ⅵ Ⅶ Ⅷ Ⅸ Ⅹ Ⅺ Ⅻ
-out: Ⅰ Ⅱ Ⅲ Ⅳ Ⅴ Ⅵ Ⅶ Ⅷ Ⅸ Ⅹ Ⅺ Ⅻ
-
-in : ℃
-out: ℃
-
-in : ■
-out: ■
-
-in : ●
-out: ●
-
-in : の
-out: の
-
-in : Ⅱ
-out: Ⅱ
-
-in : ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑ
-out: ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑ
-
-in : ~
-out: ~
-
-in : □
-out: □
-
-in : `
-out: `
-
-in : ○
-out: ○
-
-in : ×
-out: ×
-
-in : ∶
-out: ∶
-
-in : ━
-out: ━
-
-in : ─
-out: ─
-
-in : 哈利·托特达夫
-out: 哈利·托特达夫
-
-in : a
-out: a
-
-in : "a b c"
-out: "a b c"
-
-in : 16MbD
-out: 16MbD
-
+OUT: о
+OUT: ★
+OUT: Χ
+OUT: ▲▼
+OUT: ⊙
+OUT: ◆
+OUT: Ⅰ Ⅱ Ⅲ Ⅳ Ⅴ Ⅵ Ⅶ Ⅷ Ⅸ Ⅹ Ⅺ Ⅻ
+OUT: ℃
+OUT: ■
+OUT: ●
+OUT: の
+OUT: Ⅱ
+OUT: ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑ
+OUT: ~
+OUT: □
+OUT: `
+OUT: ○
+OUT: ×
+OUT: ∶
+OUT: ━
+OUT: ─
+OUT: 哈利·托特达夫
+OUT: a
+OUT: "a b c"
+OUT: 16MbD

@@ -1,4 +1,4 @@
-{a,b}
-{a b c,x y,z}
-{'(a b c),'(x y),z}
-{{a,b,c},{x,y},z}
+INP: {a,b}
+INP: {a b c,x y,z}
+INP: {'(a b c),'(x y),z}
+INP: {{a,b,c},{x,y},z}

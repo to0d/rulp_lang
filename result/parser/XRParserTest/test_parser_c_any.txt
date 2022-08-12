@@ -1,5 +1,5 @@
-&name
--NONE-
-*pro*
-*T*-2
-(3.2万)
+INP: &name
+INP: -NONE-
+INP: *pro*
+INP: *T*-2
+INP: (3.2万)

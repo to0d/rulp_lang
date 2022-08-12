@@ -1,4 +1,4 @@
-in : ((IP (IP (NP-SBJ (CP (WHNP-2 (-NONE- *OP*))
+BGN: ((IP (IP (NP-SBJ (CP (WHNP-2 (-NONE- *OP*))
 		     (CP (IP (NP-TPC (-NONE- *T*-2))
 			     (NP-SBJ (NN 生产)
 				     (NN 成本))
@@ -36,4 +36,4 @@ in : ((IP (IP (NP-SBJ (CP (WHNP-2 (-NONE- *OP*))
 				 (VP (VA 多)))))
 		     (PU 」))))
      (PU 。)))
-eof
+EOF

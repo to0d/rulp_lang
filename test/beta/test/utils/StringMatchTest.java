@@ -100,15 +100,4 @@ public class StringMatchTest extends RulpTestBase {
 
 	}
 
-	// @Test
-	void test_matchFormat_8_or() {
-
-		ArrayList<String> values = new ArrayList<>();
-		assertTrue(StringUtil.matchFormat("%?%r|%n%?", "abc\nedf", values));
-		assertEquals("[abc, edf]", values.toString());
-
-		assertTrue(StringUtil.matchFormat("%?%r|%n%?", "abc\redf", values));
-		assertEquals("[abc, edf]", values.toString());
-	}
-
 }

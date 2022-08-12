@@ -1,12 +1,4 @@
-in : {a,b}
-out: {a,b}
-
-in : {a b c,x y,z}
-out: {'(a b c),'(x y),z}
-
-in : {'(a b c),'(x y),z}
-out: {'(a b c),'(x y),z}
-
-in : {{a,b,c},{x,y},z}
-out: {{a,b,c},{x,y},z}
-
+OUT: {a,b}
+OUT: {'(a b c),'(x y),z}
+OUT: {'(a b c),'(x y),z}
+OUT: {{a,b,c},{x,y},z}

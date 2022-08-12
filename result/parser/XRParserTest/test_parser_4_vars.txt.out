@@ -1,6 +1,2 @@
-in : &var
-out: &var
-
-in : & var
-out: & var
-
+OUT: &var
+OUT: & var

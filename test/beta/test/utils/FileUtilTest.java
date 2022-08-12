@@ -13,8 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import alpha.rulp.utils.FileUtil;
 import alpha.rulp.utils.RulpTestBase;
-import alpha.rulp.utils.SystemUtil;
-import alpha.rulp.utils.SystemUtil.OSType;
 
 public class FileUtilTest extends RulpTestBase {
 
@@ -23,16 +21,8 @@ public class FileUtilTest extends RulpTestBase {
 
 		_setup();
 
-		String testRootPath = null;
-		String testFilePath = null;
-
-		if (SystemUtil.getOSType() == OSType.Win) {
-			testRootPath = "C:\\tmp\\cpp_FileUtilityTest_testCopyByChannel";
-			testFilePath = testRootPath + "\\File1";
-		} else {
-			testRootPath = "/tmp/test/cpp_FileUtilityTest_testCopyByChannel";
-			testFilePath = testRootPath + "/File1";
-		}
+		String testRootPath = "C:\\tmp\\cpp_FileUtilityTest_testCopyByChannel";
+		String testFilePath = testRootPath + "\\File1";
 
 		File folder = new File(testRootPath);
 		File file1 = new File(testFilePath);
@@ -70,16 +60,8 @@ public class FileUtilTest extends RulpTestBase {
 
 		_setup();
 
-		String testRootPath = null;
-		String testFilePath = null;
-
-		if (SystemUtil.getOSType() == OSType.Win) {
-			testRootPath = "C:\\tmp\\cpp_FileUtilityTest_testDeleteFile";
-			testFilePath = testRootPath + "\\File1";
-		} else {
-			testRootPath = "/tmp/test/cpp_FileUtilityTest_testDeleteFile";
-			testFilePath = testRootPath + "/File1";
-		}
+		String testRootPath = "C:\\tmp\\cpp_FileUtilityTest_testDeleteFile";
+		String testFilePath = testRootPath + "\\File1";
 
 		File folder = new File(testRootPath);
 		File file1 = new File(testFilePath);
@@ -89,10 +71,8 @@ public class FileUtilTest extends RulpTestBase {
 		}
 
 		try (PrintStream out = new PrintStream(testFilePath)) {
-
 			out.println("line1");
 			out.println("line2");
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			fail(e.toString());
@@ -112,16 +92,9 @@ public class FileUtilTest extends RulpTestBase {
 
 		_setup();
 
-		if (SystemUtil.getOSType() == OSType.Win) {
-			assertFalse(FileUtil.isAbsPath(""));
-			assertFalse(FileUtil.isAbsPath(null));
-			assertTrue(FileUtil.isAbsPath("C:\\"));
-
-		} else {
-
-			assertTrue(FileUtil.isAbsPath("/"));
-			assertFalse(FileUtil.isAbsPath("abc"));
-		}
+		assertFalse(FileUtil.isAbsPath(""));
+		assertFalse(FileUtil.isAbsPath(null));
+		assertTrue(FileUtil.isAbsPath("C:\\"));
 	}
 
 	@Test
@@ -129,25 +102,10 @@ public class FileUtilTest extends RulpTestBase {
 
 		_setup();
 
-		String testRootPath = null;
-		String testToFolder = null;
-		String testFilePath = null;
-		String expectFilePath = null;
-
-		if (SystemUtil.getOSType() == OSType.Win) {
-
-			testRootPath = "C:\\tmp\\cpp_FileUtilityTest_testMoveFile_File";
-			testToFolder = testRootPath + "\\to";
-			testFilePath = testRootPath + "\\File1";
-			expectFilePath = testRootPath + "\\to\\File1";
-
-		} else {
-
-			testRootPath = "/tmp/test/cpp_FileUtilityTest_testMoveFile";
-			testToFolder = testRootPath + "/to";
-			testFilePath = testRootPath + "/File1";
-			expectFilePath = testRootPath + "/to/File1";
-		}
+		String testRootPath = "C:\\tmp\\cpp_FileUtilityTest_testMoveFile_File";
+		String testToFolder = testRootPath + "\\to";
+		String testFilePath = testRootPath + "\\File1";
+		String expectFilePath = testRootPath + "\\to\\File1";
 
 		File testRoot = new File(testRootPath);
 		if (!testRoot.exists()) {
@@ -189,40 +147,15 @@ public class FileUtilTest extends RulpTestBase {
 
 		_setup();
 
-		String testRootPath = null;
-		String toFolderPath = null;
-		String testFile1Path = null;
-		String expectFile1Path = null;
-		String testFolder2Path = null;
-		String expectFolder2Path = null;
-		String testFile3Path = null;
-		String expectFile3Path = null;
-		String testSrcFolderPath = null;
-
-		if (SystemUtil.getOSType() == OSType.Win) {
-
-			testRootPath = "C:\\tmp\\cpp_FileUtilityTest_testMoveFile_Folder";
-			toFolderPath = testRootPath + "\\to";
-			testSrcFolderPath = testRootPath + "\\from";
-			testFile1Path = testRootPath + "\\from\\File1";
-			expectFile1Path = testRootPath + "\\to\\from\\File1";
-			testFolder2Path = testRootPath + "\\from\\Folder2";
-			expectFolder2Path = testRootPath + "\\to\\from\\Folder2";
-			testFile3Path = testRootPath + "\\from\\Folder2\\File3";
-			expectFile3Path = testRootPath + "\\to\\from\\Folder2\\File3";
-
-		} else {
-
-			testRootPath = "/tmp/test/cpp_FileUtilityTest_testMoveFile_Folder";
-			toFolderPath = testRootPath + "/to";
-			testSrcFolderPath = testRootPath + "/from";
-			testFile1Path = testRootPath + "/from/File1";
-			expectFile1Path = testRootPath + "/to/from/File1";
-			testFolder2Path = testRootPath + "/from/Folder2";
-			expectFolder2Path = testRootPath + "/to/from/Folder2";
-			testFile3Path = testRootPath + "/from/Folder2/File3";
-			expectFile3Path = testRootPath + "/to/from/Folder2/File3";
-		}
+		String testRootPath = "C:\\tmp\\cpp_FileUtilityTest_testMoveFile_Folder";
+		String toFolderPath = testRootPath + "\\to";
+		String testSrcFolderPath = testRootPath + "\\from";
+		String testFile1Path = testRootPath + "\\from\\File1";
+		String expectFile1Path = testRootPath + "\\to\\from\\File1";
+		String testFolder2Path = testRootPath + "\\from\\Folder2";
+		String expectFolder2Path = testRootPath + "\\to\\from\\Folder2";
+		String testFile3Path = testRootPath + "\\from\\Folder2\\File3";
+		String expectFile3Path = testRootPath + "\\to\\from\\Folder2\\File3";
 
 		File testRoot = new File(testRootPath);
 		if (!testRoot.exists()) {
@@ -301,15 +234,8 @@ public class FileUtilTest extends RulpTestBase {
 	void test_toValidPath() {
 
 		_setup();
-
-		if (SystemUtil.getOSType() == OSType.Win) {
-			assertEquals("C:\\data\\itool\\rulp_lang\\", FileUtil.toValidPath(""));
-			assertEquals("C:\\data\\itool\\rulp_lang\\", FileUtil.toValidPath(null));
-
-		} else {
-			assertEquals("/home/todd/data/itool/rulp_lang/", FileUtil.toValidPath(""));
-			assertEquals("/home/todd/data/itool/rulp_lang/", FileUtil.toValidPath(null));
-		}
+		assertEquals("C:\\data\\itool\\rulp_lang\\", FileUtil.toValidPath(""));
+		assertEquals("C:\\data\\itool\\rulp_lang\\", FileUtil.toValidPath(null));
 	}
 
 }

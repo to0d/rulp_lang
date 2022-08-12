@@ -1,6 +1,2 @@
-in : nm:hasChild
-out: nm:hasChild
-
-in : (nm:a nm:b)
-out: (nm:a nm:b)
-
+OUT: nm:hasChild
+OUT: (nm:a nm:b)

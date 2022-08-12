@@ -1,12 +1,4 @@
-in : 0x001
-out: 1
-
-in : 0xa
-out: 10
-
-in : 0xB1
-out: 177
-
-in : 0xG1
-err: alpha.rulp.lang.RException: [0, -1]: invalid hex, 0xG1
-
+OUT: 1
+OUT: 10
+OUT: 177
+ERR: alpha.rulp.lang.RException: [0, -1]: invalid hex, 0xG1

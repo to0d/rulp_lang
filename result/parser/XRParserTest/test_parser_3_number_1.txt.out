@@ -1,84 +1,28 @@
-in : 1
-out: 1
-
-in : +1
-out: 1
-
-in : -1
-out: -1
-
-in : 2147483647
-out: 2147483647
-
-in : 2147483648
-err: alpha.rulp.lang.RException: [0, -1]: invalid int format, 2147483648
-
-in : -2147483648
-out: -2147483648
-
-in : -2147483649
-err: alpha.rulp.lang.RException: [0, 11]: invalid int format, -2147483649
-
-in : 1.1
-out: 1.1
-
-in : +1.1
-out: 1.1
-
-in : -1.1
-out: -1.1
-
-in : true
-out: true
-
-in : false
-out: false
-
-in : 100L
-out: 100L
-
-in : +100L
-out: 100L
-
-in : -100L
-out: -100L
-
-in : 100l
-out: 100L
-
-in : +100l
-out: 100L
-
-in : -100l
-out: -100L
-
-in : 9223372036854775807L
-out: 9223372036854775807L
-
-in : 9223372036854775808L
-err: alpha.rulp.lang.RException: [0, -1]: invalid long format, 9223372036854775808L
-
-in : -9223372036854775808L
-out: -9223372036854775808L
-
-in : -9223372036854775809L
-err: alpha.rulp.lang.RException: [0, 21]: invalid long format, -9223372036854775809L
-
-in : 100D
-out: 100.0D
-
-in : +100D
-out: 100.0D
-
-in : -100D
-out: -100.0D
-
-in : 1.1d
-out: 1.1D
-
-in : +1.1d
-out: 1.1D
-
-in : -1.1d
-out: -1.1D
-
+OUT: 1
+OUT: 1
+OUT: -1
+OUT: 2147483647
+ERR: alpha.rulp.lang.RException: [0, -1]: invalid int format, 2147483648
+OUT: -2147483648
+ERR: alpha.rulp.lang.RException: [0, 11]: invalid int format, -2147483649
+OUT: 1.1
+OUT: 1.1
+OUT: -1.1
+OUT: true
+OUT: false
+OUT: 100L
+OUT: 100L
+OUT: -100L
+OUT: 100L
+OUT: 100L
+OUT: -100L
+OUT: 9223372036854775807L
+ERR: alpha.rulp.lang.RException: [0, -1]: invalid long format, 9223372036854775808L
+OUT: -9223372036854775808L
+ERR: alpha.rulp.lang.RException: [0, 21]: invalid long format, -9223372036854775809L
+OUT: 100.0D
+OUT: 100.0D
+OUT: -100.0D
+OUT: 1.1D
+OUT: 1.1D
+OUT: -1.1D

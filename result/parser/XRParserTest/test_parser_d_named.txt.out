@@ -1,15 +1,5 @@
-in : name:'()
-out: name:'()
-
-in : name:'(a b c)
-out: name:'(a b c)
-
-in : (x name:'(a b c))
-out: (x name:'(a b c))
-
-in : (add-rule m if name1:'(?x p ?y) do (-> '(?y p ?x)))
-out: (add-rule m if name1:'(?x p ?y) do (-> '(?y p ?x)))
-
-in : :'(a b c)
-out: :' (a b c)
-
+OUT: name:'()
+OUT: name:'(a b c)
+OUT: (x name:'(a b c))
+OUT: (add-rule m if name1:'(?x p ?y) do (-> '(?y p ?x)))
+OUT: :' (a b c)

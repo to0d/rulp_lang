@@ -1,3 +1,1 @@
-in : (a b); this is comments
-out: (a b)
-
+OUT: (a b)

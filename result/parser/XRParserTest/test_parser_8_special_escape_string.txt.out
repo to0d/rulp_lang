@@ -1,0 +1,5 @@
+OUT: "\"abc"
+OUT: "abc
+def"
+OUT: "abcdef"
+OUT: abc def

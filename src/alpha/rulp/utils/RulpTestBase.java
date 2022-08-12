@@ -32,45 +32,8 @@ import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public class RulpTestBase {
 
-	static final String BETA_TEST_PRE = "beta.test.";
-
-	protected static String _getClassPathName(Class<?> c, int tailIndex) {
-
-		if (c == null || tailIndex < 0) {
-			return null;
-		}
-
-		String fullName = c.getCanonicalName();
-		if (fullName == null) {
-			return null;
-		}
-
-		String[] names = fullName.split("\\.");
-		if (names == null || tailIndex >= names.length) {
-			return null;
-		}
-
-		return names[names.length - tailIndex - 1];
-	}
-
-	protected String getCachePath() {
-
-		String packageName = getPackageName();
-
-		if (!packageName.startsWith(BETA_TEST_PRE)) {
-			throw new RuntimeException("Invalid package: " + packageName);
-		}
-
-		String packageShortName = packageName.substring(BETA_TEST_PRE.length());
-		String className = _getClassPathName(this.getClass(), 0);
-		String methodName = Thread.currentThread().getStackTrace()[3].getMethodName();
-
-		return "result" + File.separator + packageShortName + File.separator + className + File.separator + methodName;
-
-	}
-
-	protected String getPackageName() {
-		return this.getClass().getPackage().getName();
+	public static interface ITActionInStrOutStr {
+		public String test(String input) throws RException;
 	}
 
 	protected static class XROut implements IROut {
@@ -91,6 +54,18 @@ public class RulpTestBase {
 		}
 	}
 
+	static final String BETA_TEST_PRE = "beta.test.";
+
+	static final String IT_PRE_ERR = "ERR: ";
+
+	static final String IT_PRE_INP = "INP: ";
+
+	static final String IT_PRE_BGN = "BGN: ";
+
+	static final String IT_PRE_EOF = "EOF";
+
+	static final String IT_PRE_OUT = "OUT: ";
+
 	static final String KEY_COMMENT = ";;;";
 
 	static final String KEY_EOF = ";eof";
@@ -99,13 +74,32 @@ public class RulpTestBase {
 
 	static final String KEY_ERR2 = ";err:";
 
-	static final String KEY_OUT = ";out:";
-
 	static final String KEY_IN = ";in:";
+
+	static final String KEY_OUT = ";out:";
 
 	static final String KEY_RESULT = ";=>";
 
 	static final String V_SCRIPT_PATH = "?script-path";
+
+	protected static String _getClassPathName(Class<?> c, int tailIndex) {
+
+		if (c == null || tailIndex < 0) {
+			return null;
+		}
+
+		String fullName = c.getCanonicalName();
+		if (fullName == null) {
+			return null;
+		}
+
+		String[] names = fullName.split("\\.");
+		if (names == null || tailIndex >= names.length) {
+			return null;
+		}
+
+		return names[names.length - tailIndex - 1];
+	}
 
 	protected static String _load(String path) {
 
@@ -116,7 +110,7 @@ public class RulpTestBase {
 			fail(e.toString());
 			return null;
 		}
-	};
+	}
 
 	protected static String _load(String path, String charset) {
 
@@ -131,7 +125,7 @@ public class RulpTestBase {
 
 	protected IRInterpreter _interpreter;
 
-	protected XROut _out = null;
+	protected XROut _out = null;;
 
 	protected IRParser _parser = null;
 
@@ -432,6 +426,96 @@ public class RulpTestBase {
 		FileUtil.reset();
 	}
 
+	protected void _test(ITActionInStrOutStr action) {
+
+		String inputPath = getCachePath() + ".txt";
+		String outputPath = getCachePath() + ".txt.out";
+
+		ArrayList<String> outLines = new ArrayList<>();
+
+		try {
+
+			List<String> lines = FileUtil.openTxtFile(inputPath, "utf-8");
+
+			StringBuffer multiBuf = new StringBuffer();
+			int multiIndex = -1;
+
+			for (int index = 0; index < lines.size(); ++index) {
+
+				String line = lines.get(index);
+
+				if (line.trim().isEmpty() || line.startsWith(";")) {
+					continue;
+				}
+
+				if (line.startsWith(IT_PRE_INP)) {
+
+					if (multiIndex != -1) {
+						throw new IOException("multi line not end: " + multiIndex);
+					}
+
+					String input = line.substring(IT_PRE_INP.length());
+					String output = "";
+
+					try {
+						output = IT_PRE_OUT + action.test(input);
+					} catch (RException e) {
+						output = IT_PRE_ERR + e.toString();
+					}
+
+					outLines.add(output);
+
+				} else if (line.startsWith(IT_PRE_BGN)) {
+
+					if (multiIndex != -1) {
+						throw new IOException("duplicated multi line: " + index);
+					}
+
+					multiBuf.append(line.substring(IT_PRE_BGN.length()));
+					multiIndex = index;
+
+				} else if (line.trim().equals(IT_PRE_EOF)) {
+
+					if (multiIndex == -1) {
+						throw new IOException("multi line not begin: " + index);
+					}
+
+					String input = multiBuf.toString();
+					String output = "";
+
+					try {
+						output = IT_PRE_OUT + action.test(input);
+					} catch (RException e) {
+						output = IT_PRE_ERR + e.toString();
+					}
+
+					outLines.add(output);
+					multiBuf.setLength(0);
+					multiIndex = -1;
+
+				} else if (multiIndex != -1) {
+
+					multiBuf.append('\n');
+					multiBuf.append(line);
+
+				} else {
+
+					throw new IOException("Invalid input line: " + line);
+				}
+			}
+
+			if (multiIndex != -1) {
+				throw new IOException("multi line not end: " + multiIndex);
+			}
+
+			FileUtil.saveTxtFile(outputPath, outLines, "utf-8");
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+
 	protected void _test(String input) {
 		_test(input, null, null);
 	}
@@ -498,6 +582,26 @@ public class RulpTestBase {
 		} catch (Error e) {
 			assertEquals(String.format("input=%s", input), expectError, e.toString());
 		}
+	}
+
+	protected String getCachePath() {
+
+		String packageName = getPackageName();
+
+		if (!packageName.startsWith(BETA_TEST_PRE)) {
+			throw new RuntimeException("Invalid package: " + packageName);
+		}
+
+		String packageShortName = packageName.substring(BETA_TEST_PRE.length());
+		String className = _getClassPathName(this.getClass(), 0);
+		String methodName = Thread.currentThread().getStackTrace()[3].getMethodName();
+
+		return "result" + File.separator + packageShortName + File.separator + className + File.separator + methodName;
+
+	}
+
+	protected String getPackageName() {
+		return this.getClass().getPackage().getName();
 	}
 
 }

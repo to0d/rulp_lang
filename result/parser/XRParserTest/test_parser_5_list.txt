@@ -1,2 +1,2 @@
-'(a b c)
-' (a b c)
+INP: '(a b c)
+INP: ' (a b c)

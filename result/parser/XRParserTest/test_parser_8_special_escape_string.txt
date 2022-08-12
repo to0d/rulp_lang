@@ -1,0 +1,6 @@
+INP: "\"abc"
+INP: "abc\ndef"
+INP: "abc\rdef"
+BGN: abc
+def
+EOF

@@ -1,22 +1,4 @@
-in : (a b)
-(x y)
-eof
-out: (a b) (x y)
-
-in : (a b);a comment line
-(x y)
-eof
-out: (a b) (x y)
-
-in : (a b ;a comment line
-(x y);
-)
-eof
-out: (a b (x y))
-
-in : (a b 
-
-   )
-eof
-out: (a b)
-
+OUT: (a b) (x y)
+OUT: (a b) (x y)
+OUT: (a b (x y))
+OUT: (a b)

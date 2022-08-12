@@ -1,8 +1,8 @@
-a[1]
-'(a b c)[k]
-(a b)[m]
-{a,b,c}[n]
-a[1 2]
-(attribute-of a[1])
-(a b) [m]
-[m]
+INP: a[1]
+INP: '(a b c)[k]
+INP: (a b)[m]
+INP: {a,b,c}[n]
+INP: a[1 2]
+INP: (attribute-of a[1])
+INP: (a b) [m]
+INP: [m]

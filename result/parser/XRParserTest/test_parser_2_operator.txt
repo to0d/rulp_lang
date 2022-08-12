@@ -1,27 +1,27 @@
-+
--
-*
-/
-mod
-rem
-incf
-decf
-=
-/=
->
-<
->=
-<=
-max
-min
-and
-or
-not
-logand
-logior
-logxor
-lognor
-logeqv
-def!
-let*
-?
+INP: +
+INP: -
+INP: *
+INP: /
+INP: mod
+INP: rem
+INP: incf
+INP: decf
+INP: =
+INP: /=
+INP: >
+INP: <
+INP: >=
+INP: <=
+INP: max
+INP: min
+INP: and
+INP: or
+INP: not
+INP: logand
+INP: logior
+INP: logxor
+INP: lognor
+INP: logeqv
+INP: def!
+INP: let*
+INP: ?
