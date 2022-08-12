@@ -1,0 +1,9 @@
+INP: nil
+INP: ABC
+INP: 123
+INP: 0.1f
+INP: 1d
+INP: true
+INP: false
+INP: "abc"
+

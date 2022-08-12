@@ -1,0 +1,4 @@
+OUT: [$$ff_defvar]
+OUT: [$$a_?file-separator]
+OUT: [($$a_a $$a_b $$a_c)]
+OUT: ['($$a_a $$a_b $$a_c)]

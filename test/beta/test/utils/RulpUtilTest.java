@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.IOException;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 import alpha.rulp.lang.IRObject;
@@ -12,6 +15,7 @@ import alpha.rulp.runtime.IRParser;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpTestBase;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.utils.RulpUtil.RResultList;
 
 public class RulpUtilTest extends RulpTestBase {
 
@@ -32,19 +36,40 @@ public class RulpUtilTest extends RulpTestBase {
 
 	}
 
-	void _test_toUniqString(String input, String expect) {
+	String _toUniqString_1(String input) throws RException {
 
-		try {
-
-			IRObject obj = RulpFactory.createList(_getParser().parse(input));
-			String out = RulpUtil.toUniqString(obj);
-			assertEquals(input, expect, out);
-
-		} catch (RException e) {
-			e.printStackTrace();
-			fail(e.toString());
+		List<IRObject> rst = _getParser().parse(input);
+		if (rst.isEmpty()) {
+			return "[]";
 		}
 
+		if (rst.size() == 1) {
+			return "[" + RulpUtil.toUniqString(rst.get(0)) + "]";
+		}
+
+		return RulpUtil.toUniqString(RulpFactory.createList(rst));
+	}
+
+	String _toUniqString_2(String input) throws RException, IOException {
+
+		RResultList rstList = RulpUtil.compute(this._getInterpreter(), input);
+
+		try {
+			
+			if (rstList.results.isEmpty()) {
+				return "[]";
+			}
+
+			if (rstList.results.size() == 1) {
+				return "[" + RulpUtil.toUniqString(rstList.results.get(0)) + "]";
+			}
+
+			return RulpUtil.toUniqString(RulpFactory.createList(rstList.results));
+
+		} finally {
+
+			rstList.free();
+		}
 	}
 
 	@Test
@@ -72,10 +97,33 @@ public class RulpUtilTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_toUniqString() {
+	void test_to_uniq_string_1() {
 
 		_setup();
 
-		_test_toUniqString("1d", "'($$d_1.0)");
+		_test((input) -> {
+			return _toUniqString_1(input);
+		});
+
+	}
+
+	@Test
+	void test_to_uniq_string_2() {
+		try {
+			assertEquals("$$null", RulpUtil.toUniqString(null));
+		} catch (RException e) {
+			fail(e.toString());
+		}
+	}
+
+	@Test
+	void test_to_uniq_string_3() {
+
+		_setup();
+
+		_test((input) -> {
+			return _toUniqString_2(input);
+		});
+
 	}
 }

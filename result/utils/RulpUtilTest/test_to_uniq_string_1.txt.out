@@ -1,0 +1,8 @@
+OUT: [$$a_nil]
+OUT: [$$a_ABC]
+OUT: [$$i_123]
+OUT: [$$a_0.1f]
+OUT: [$$d_1.0]
+OUT: [$$b_true]
+OUT: [$$b_false]
+OUT: ["abc"]

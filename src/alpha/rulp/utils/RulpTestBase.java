@@ -33,7 +33,7 @@ import alpha.rulp.ximpl.optimize.TCOUtil;
 public class RulpTestBase {
 
 	public static interface ITActionInStrOutStr {
-		public String test(String input) throws RException;
+		public String test(String input) throws RException, IOException;
 	}
 
 	protected static class XROut implements IROut {
@@ -459,7 +459,7 @@ public class RulpTestBase {
 
 					try {
 						output = IT_PRE_OUT + action.test(input);
-					} catch (RException e) {
+					} catch (RException | IOException e) {
 						output = IT_PRE_ERR + e.toString();
 					}
 
@@ -485,7 +485,7 @@ public class RulpTestBase {
 
 					try {
 						output = IT_PRE_OUT + action.test(input);
-					} catch (RException e) {
+					} catch (RException | IOException e) {
 						output = IT_PRE_ERR + e.toString();
 					}
 
