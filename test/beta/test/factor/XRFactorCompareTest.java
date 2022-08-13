@@ -13,4 +13,28 @@ class XRFactorCompareTest extends RulpTestBase {
 		_run_script();
 
 	}
+	
+	@Test
+	void test_cmp_2_const() {
+
+		_setup();
+		_run_script();
+
+	}
+	
+	@Test
+	void test_cmp_3_var() {
+
+		_setup();
+		_run_script();
+
+	}
+	
+	@Test
+	void test_cmp_4_member() {
+
+		_setup();
+		_run_script();
+
+	}
 }

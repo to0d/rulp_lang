@@ -1,0 +1,19 @@
+(defvar ?c1 1)
+(defvar ?c2 1)
+(defvar ?c3 "abc")
+;=>&?c1 &?c2 &?c3
+
+(cmp ?c1 ?c1)
+;=>0
+
+(cmp ?c1 ?c2)
+;=>0
+
+(cmp ?c1 ?c3)
+;err:
+can't compare: 1 abc
+at (cmp_def ?l ?2) ; _$fun$_cmp-3
+at (return (cmp_def ?l ?2)) ; _$fun$_cmp-3
+at (cmp ?c1 ?c3) ; main-2
+;eof
+

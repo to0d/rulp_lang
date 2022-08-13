@@ -2,3 +2,6 @@ INP: defvar
 INP: ?file-separator
 INP: (to-expr '(a b c))
 INP: (to-named-list "n1" '(a b c))
+INP: 1.0
+INP: (defvar ?x)
+INP: (deftemplate ask (student (?question expr)) (print "student say: no, I don't know " ?question "."))

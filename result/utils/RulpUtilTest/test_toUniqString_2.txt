@@ -6,4 +6,4 @@ INP: 1d
 INP: true
 INP: false
 INP: "abc"
-
+INP: 1L

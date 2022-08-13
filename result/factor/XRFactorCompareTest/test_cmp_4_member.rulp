@@ -1,0 +1,8 @@
+(defclass class1 
+    (defvar ?v1 0)
+    (defvar ?v2 0)
+)
+;=>
+
+(cmp class1::?v1 class1::?v2)
+;=>

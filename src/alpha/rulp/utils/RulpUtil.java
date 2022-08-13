@@ -47,7 +47,6 @@ import alpha.rulp.lang.RAccessType;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RRelationalOperator;
 import alpha.rulp.lang.RType;
-import alpha.rulp.runtime.IRAction;
 import alpha.rulp.runtime.IRCallable;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRFactorBody;
@@ -284,10 +283,6 @@ public class RulpUtil {
 	private static final String R_VAR_PRE = "$$v_";
 
 	private static IRObject _compare_obj(IRObject obj) throws RException {
-
-		if (obj == null) {
-			return O_Nil;
-		}
 
 		switch (obj.getType()) {
 
@@ -856,23 +851,6 @@ public class RulpUtil {
 		return (IRNameSpace) obj;
 	}
 
-	@SuppressWarnings("unchecked")
-	public static <T> T asNative(IRObject obj, Class<T> c) throws RException {
-
-		if (obj.getType() != RType.NATIVE) {
-			throw new RException("Can't convert to native: " + obj);
-		}
-
-		IRNative nativeObj = (IRNative) obj;
-		Class<?> nativeClass = nativeObj.getNativeClass();
-
-		if (!c.isAssignableFrom(nativeClass)) {
-			throw new RException("Can't convert to class: " + c);
-		}
-
-		return (T) nativeObj.getObject();
-	}
-
 	public static IRString asString(IRObject obj) throws RException {
 
 		if (obj != null && obj.getType() != RType.STRING) {
@@ -1243,16 +1221,16 @@ public class RulpUtil {
 		}
 	}
 
-	public static void expectFactorParameterType(List<IRObject> args, RType type) throws RException {
-
-		for (int i = 1; i < args.size(); ++i) {
-			IRObject arg = args.get(i);
-			if (arg.getType() != type) {
-				throw new RException(
-						String.format("the type of arg %d is not %s: %s", 1, type.toString(), args.get(1)));
-			}
-		}
-	}
+//	public static void expectFactorParameterType(List<IRObject> args, RType type) throws RException {
+//
+//		for (int i = 1; i < args.size(); ++i) {
+//			IRObject arg = args.get(i);
+//			if (arg.getType() != type) {
+//				throw new RException(
+//						String.format("the type of arg %d is not %s: %s", 1, type.toString(), args.get(1)));
+//			}
+//		}
+//	}
 
 	public static IRClass findClass(IRObject obj, IRFrame frame) throws RException {
 
@@ -1786,30 +1764,6 @@ public class RulpUtil {
 				interpreter, frame);
 	}
 
-	public static ArrayList<IRObject> rebuildList(IRList list, int from, int end, IRAction<IRObject> action)
-			throws RException {
-
-		ArrayList<IRObject> newObjs = null;
-
-		for (int i = from; i < end; ++i) {
-
-			IRObject oldObj = list.get(i);
-			IRObject newObj = action.doAction(oldObj);
-
-			if (oldObj != newObj) {
-				newObjs = new ArrayList<>();
-				for (int j = 0; j < i; ++j) {
-					newObjs.add(list.get(j));
-				}
-				newObjs.add(newObj);
-			} else if (newObjs != null) {
-				newObjs.add(newObj);
-			}
-		}
-
-		return newObjs;
-	}
-
 	public static void registerNameSpaceLoader(IRInterpreter interpreter, IRFrame frame, String nsName,
 			IRObjectLoader loader) throws RException {
 
@@ -2109,22 +2063,6 @@ public class RulpUtil {
 		}
 	}
 
-	public static IRList toAtomList(Collection<String> names) throws RException {
-
-		if (names == null || names.isEmpty()) {
-			return RulpFactory.emptyConstList();
-		}
-
-		IRAtom[] atoms = new IRAtom[names.size()];
-		Iterator<String> it = names.iterator();
-		int index = 0;
-		while (it.hasNext()) {
-			atoms[index++] = RulpUtil.toAtom(it.next());
-		}
-
-		return RulpFactory.createList(atoms);
-	}
-
 	public static IRBlob toBlob(IRObject a) throws RException {
 
 		switch (a.getType()) {
@@ -2242,7 +2180,7 @@ public class RulpUtil {
 		return RulpFactory.createExpression(newExpr);
 	}
 
-	static IRExpr toExpr(IRObject factor, List<? extends IRObject> objList) throws RException {
+	public static IRExpr toExpr(IRObject factor, List<? extends IRObject> objList) throws RException {
 
 		ArrayList<IRObject> exprList = new ArrayList<>();
 		exprList.add(factor);
@@ -2276,7 +2214,7 @@ public class RulpUtil {
 		return arr;
 	}
 
-	static IRExpr toIfExpr(IRExpr condExpr, IRExpr... doExprs) throws RException {
+	public static IRExpr toIfExpr(IRExpr condExpr, IRExpr... doExprs) throws RException {
 
 		ArrayList<IRObject> exprList = new ArrayList<>();
 		exprList.add(RulpFactory.createAtom(F_IF));
@@ -2290,7 +2228,7 @@ public class RulpUtil {
 		return RulpFactory.createExpression(exprList);
 	}
 
-	static IRExpr toIfExpr(IRExpr condExpr, IRList doExprs) throws RException {
+	public static IRExpr toIfExpr(IRExpr condExpr, IRList doExprs) throws RException {
 
 		ArrayList<IRObject> exprList = new ArrayList<>();
 		exprList.add(RulpFactory.createAtom(F_IF));
@@ -2315,7 +2253,7 @@ public class RulpUtil {
 		return list;
 	}
 
-	public static IRList toList(String name, List<IRObject> elements) throws RException {
+	public static IRList toList(String name, IRObject[] elements) throws RException {
 
 		if (name == null)
 			return RulpFactory.createList(elements);
@@ -2324,7 +2262,7 @@ public class RulpUtil {
 
 	}
 
-	public static IRList toList(String name, IRObject[] elements) throws RException {
+	public static IRList toList(String name, List<IRObject> elements) throws RException {
 
 		if (name == null)
 			return RulpFactory.createList(elements);
@@ -2523,7 +2461,16 @@ public class RulpUtil {
 		case INSTANCE:
 			IRInstance ins = (IRInstance) obj;
 			return R_CLASS_PRE + ins.getRClass().getClassName() + "_" + ins.getInstanceName();
-
+		case ARRAY:
+		case BLOB:
+		case CLASS:
+		case CONSTANT:
+		case FRAME:
+		case FUNC:
+		case LONG:
+		case MACRO:
+		case MEMBER:
+		case NATIVE:
 		default:
 			throw new RException("unsupport type: " + obj.getType());
 		}

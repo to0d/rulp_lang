@@ -6,3 +6,4 @@ OUT: [$$d_1.0]
 OUT: [$$b_true]
 OUT: [$$b_false]
 OUT: ["abc"]
+ERR: alpha.rulp.lang.RException: unsupport type: LONG

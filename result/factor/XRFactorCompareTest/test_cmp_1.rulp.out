@@ -34,17 +34,44 @@
 (cmp 1 1)
 ;=>0
 
+(cmp 2 1)
+;=>1
+
+(cmp 1 2)
+;=>-1
+
 (cmp 1 1.1)
 ;=>-1
 
 (cmp 1.1 1)
 ;=>1
 
+(cmp 1.1 1.0)
+;=>1
+
+(cmp 1.0 1.1)
+;=>-1
+
+(cmp 1.0 1.0)
+;=>0
+
 (cmp 100L 10L)
 ;=>1
 
+(cmp 10L 100L)
+;=>-1
+
+(cmp 100L 100L)
+;=>0
+
 (cmp 1.2d 1.3d)
 ;=>-1
+
+(cmp 1.0d 0.9d)
+;=>1
+
+(cmp 1.0d 1.0d)
+;=>0
 
 (cmp a "bc")
 ;=>-1
@@ -63,5 +90,13 @@ can't compare: a 2
 at (cmp_def ?l ?2) ; _$fun$_cmp-3
 at (return (cmp_def ?l ?2)) ; _$fun$_cmp-3
 at (cmp a 2) ; main-2
+;eof
+
+(cmp + -) 
+;err:
+can't compare: + -
+at (cmp_def ?l ?2) ; _$fun$_cmp-3
+at (return (cmp_def ?l ?2)) ; _$fun$_cmp-3
+at (cmp + -) ; main-2
 ;eof
 

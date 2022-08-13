@@ -22,3 +22,23 @@
 (equal "a" "b")
 ;=>
 
+(equal true true)
+;=>
+
+(equal false false)
+;=>
+
+(equal true false)
+;=>
+
+(equal 1L 2L)
+;=>
+
+(equal nil nil)
+;=>
+
+(equal '(a b c) '(a b c))
+;=>
+
+(equal '(a b c) '(b c))
+;=>

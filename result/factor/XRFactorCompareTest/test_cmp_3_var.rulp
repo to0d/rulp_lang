@@ -1,0 +1,13 @@
+(defvar ?c1 1)
+(defvar ?c2 1)
+(defvar ?c3 "abc")
+;=>
+
+(cmp ?c1 ?c1)
+;=>
+
+(cmp ?c1 ?c2)
+;=>
+
+(cmp ?c1 ?c3)
+;err

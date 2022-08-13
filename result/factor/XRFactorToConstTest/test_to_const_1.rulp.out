@@ -19,3 +19,18 @@
 ?y
 ;=>'(1)
 
+(to-const ?x)
+;=>2
+
+(to-const '(a b c))
+;=>'(a b c)
+
+(to-const size-of)
+;err:
+Can't to-const: size-of
+at (to-const size-of) ; main-2
+;eof
+
+(to-const '(?y))
+;=>'('(1))
+
