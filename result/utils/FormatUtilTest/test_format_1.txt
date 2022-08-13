@@ -1,0 +1,7 @@
+(defun fun ((?x string))
+
+(loop for ?x in '(a b c) do
+    (println ?x)
+)
+
+)

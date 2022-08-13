@@ -117,73 +117,73 @@ public class SubjectUtil {
 		return mbr;
 	}
 
-	private static IRMember _processModifier(IRMember mbr, IRList mbrExpr, int fromIdx, int endIdx, boolean fun)
-			throws RException {
-
-		RAccessType accessType = null;
-		boolean bFinal = false;
-		boolean bStatic = false;
-
-		for (int i = fromIdx; i < endIdx; ++i) {
-
-			switch (RulpUtil.asAtom(mbrExpr.get(i)).getName()) {
-			case A_PUBLIC:
-				if (accessType != null) {
-					throw new RException("duplicate modifier:" + mbrExpr.get(i));
-				}
-				accessType = RAccessType.PUBLIC;
-				break;
-
-			case A_PRIVATE:
-				if (accessType != null) {
-					throw new RException("duplicate modifier:" + mbrExpr.get(i));
-				}
-				accessType = RAccessType.PRIVATE;
-				break;
-
-			case A_DEFAULT:
-				if (accessType != null) {
-					throw new RException("duplicate modifier:" + mbrExpr.get(i));
-				}
-				accessType = RAccessType.DEFAULT;
-				break;
-
-			case A_FINAL:
-				if (bFinal) {
-					throw new RException("duplicate modifier:" + mbrExpr.get(i));
-				}
-				bFinal = true;
-				break;
-
-			case A_STATIC:
-				if (bStatic) {
-					throw new RException("duplicate modifier:" + mbrExpr.get(i));
-				}
-				bStatic = true;
-				break;
-
-			default:
-				throw new RException("duplicate modifier:" + mbrExpr.get(i));
-			}
-		}
-
-		if (accessType != null) {
-			mbr.setAccessType(accessType);
-		}
-
-		/****************************************************/
-		// set subject frame for static function
-		/****************************************************/
-		if (fun && bStatic) {
-			mbr = RulpFactory.createMember(mbr.getSubject(), mbr.getName(), RulpFactory.createFunctionLambda(
-					RulpUtil.asFunction(mbr.getValue()), RulpUtil.asSubject(mbr.getSubject()).getSubjectFrame()));
-		}
-
-		RulpUtil.setPropertyFinal(mbr, bFinal);
-		RulpUtil.setPropertyStatic(mbr, bStatic);
-
-		return mbr;
-	}
+//	private static IRMember _processModifier(IRMember mbr, IRList mbrExpr, int fromIdx, int endIdx, boolean fun)
+//			throws RException {
+//
+//		RAccessType accessType = null;
+//		boolean bFinal = false;
+//		boolean bStatic = false;
+//
+//		for (int i = fromIdx; i < endIdx; ++i) {
+//
+//			switch (RulpUtil.asAtom(mbrExpr.get(i)).getName()) {
+//			case A_PUBLIC:
+//				if (accessType != null) {
+//					throw new RException("duplicate modifier:" + mbrExpr.get(i));
+//				}
+//				accessType = RAccessType.PUBLIC;
+//				break;
+//
+//			case A_PRIVATE:
+//				if (accessType != null) {
+//					throw new RException("duplicate modifier:" + mbrExpr.get(i));
+//				}
+//				accessType = RAccessType.PRIVATE;
+//				break;
+//
+//			case A_DEFAULT:
+//				if (accessType != null) {
+//					throw new RException("duplicate modifier:" + mbrExpr.get(i));
+//				}
+//				accessType = RAccessType.DEFAULT;
+//				break;
+//
+//			case A_FINAL:
+//				if (bFinal) {
+//					throw new RException("duplicate modifier:" + mbrExpr.get(i));
+//				}
+//				bFinal = true;
+//				break;
+//
+//			case A_STATIC:
+//				if (bStatic) {
+//					throw new RException("duplicate modifier:" + mbrExpr.get(i));
+//				}
+//				bStatic = true;
+//				break;
+//
+//			default:
+//				throw new RException("duplicate modifier:" + mbrExpr.get(i));
+//			}
+//		}
+//
+//		if (accessType != null) {
+//			mbr.setAccessType(accessType);
+//		}
+//
+//		/****************************************************/
+//		// set subject frame for static function
+//		/****************************************************/
+//		if (fun && bStatic) {
+//			mbr = RulpFactory.createMember(mbr.getSubject(), mbr.getName(), RulpFactory.createFunctionLambda(
+//					RulpUtil.asFunction(mbr.getValue()), RulpUtil.asSubject(mbr.getSubject()).getSubjectFrame()));
+//		}
+//
+//		RulpUtil.setPropertyFinal(mbr, bFinal);
+//		RulpUtil.setPropertyStatic(mbr, bStatic);
+//
+//		return mbr;
+//	}
 
 	public static IRMember defineMemberFun(IRSubject sub, String mbrName, IRList mbrExpr, IRInterpreter interpreter,
 			IRFrame frame) throws RException {

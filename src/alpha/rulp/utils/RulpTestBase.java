@@ -32,6 +32,10 @@ import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public class RulpTestBase {
 
+	public static interface ITActionInStrListOutStrList {
+		public List<String> test(List<String> input) throws RException, IOException;
+	}
+
 	public static interface ITActionInStrOutStr {
 		public String test(String input) throws RException, IOException;
 	}
@@ -56,13 +60,13 @@ public class RulpTestBase {
 
 	static final String BETA_TEST_PRE = "beta.test.";
 
-	static final String IT_PRE_ERR = "ERR: ";
-
-	static final String IT_PRE_INP = "INP: ";
-
 	static final String IT_PRE_BGN = "BGN: ";
 
 	static final String IT_PRE_EOF = "EOF";
+
+	static final String IT_PRE_ERR = "ERR: ";
+
+	static final String IT_PRE_INP = "INP: ";
 
 	static final String IT_PRE_OUT = "OUT: ";
 
@@ -581,6 +585,31 @@ public class RulpTestBase {
 			assertEquals(String.format("input=%s", input), expectError, e.getMessage());
 		} catch (Error e) {
 			assertEquals(String.format("input=%s", input), expectError, e.toString());
+		}
+	}
+
+	protected void _test_multi(ITActionInStrListOutStrList action) {
+
+		String inputPath = getCachePath() + ".txt";
+		String outputPath = getCachePath() + ".txt.out";
+
+		ArrayList<String> outLines = new ArrayList<>();
+
+		try {
+
+			List<String> lines = FileUtil.openTxtFile(inputPath, "utf-8");
+
+			try {
+				outLines.addAll(action.test(lines));
+			} catch (RException e) {
+				outLines.add(IT_PRE_ERR + e.toString());
+			}
+
+			FileUtil.saveTxtFile(outputPath, outLines, "utf-8");
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			fail(e.toString());
 		}
 	}
 

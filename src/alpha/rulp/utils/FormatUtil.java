@@ -378,8 +378,11 @@ public class FormatUtil {
 		NEXT_LINE: for (; index < size; ++index) {
 
 			String line = lines.get(index);
+			if (line.trim().isEmpty()) {
+				continue;
+			}
 
-			if (line.trim().isEmpty() || line.trim().startsWith(";")) {
+			if (line.trim().startsWith(";")) {
 				if (lastInCompletedIndex == -1) {
 					outLines.add(line);
 					continue;
