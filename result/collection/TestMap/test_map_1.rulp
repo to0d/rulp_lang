@@ -60,3 +60,9 @@
 
 (map1::value-list)
 ;=>
+
+(map1::put '(a) 5)
+;=>
+
+(map1::value-list)
+;=>

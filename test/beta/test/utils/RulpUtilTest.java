@@ -1,6 +1,6 @@
 package beta.test.utils;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_ARRAY;
 import static alpha.rulp.lang.Constant.A_ATOM;
 import static alpha.rulp.lang.Constant.A_BLOB;
 import static alpha.rulp.lang.Constant.A_BOOL;
@@ -46,7 +46,9 @@ import static alpha.rulp.lang.Constant.O_COMPUTE;
 import static alpha.rulp.lang.Constant.O_CONST;
 import static alpha.rulp.lang.Constant.O_EMPTY;
 import static alpha.rulp.lang.Constant.O_EQ;
+import static alpha.rulp.lang.Constant.O_False;
 import static alpha.rulp.lang.Constant.O_Final;
+import static alpha.rulp.lang.Constant.O_INT_0;
 import static alpha.rulp.lang.Constant.O_LAMBDA;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.O_OPT_CCO;
@@ -61,6 +63,7 @@ import static alpha.rulp.lang.Constant.O_RETURN_TYPE;
 import static alpha.rulp.lang.Constant.O_STABLE;
 import static alpha.rulp.lang.Constant.O_Static;
 import static alpha.rulp.lang.Constant.O_THREAD_UNSAFE;
+import static alpha.rulp.lang.Constant.O_True;
 import static alpha.rulp.lang.Constant.T_Array;
 import static alpha.rulp.lang.Constant.T_Atom;
 import static alpha.rulp.lang.Constant.T_Blob;

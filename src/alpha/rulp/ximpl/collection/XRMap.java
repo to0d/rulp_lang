@@ -160,6 +160,23 @@ public class XRMap extends XRDefInstance implements IRCollection {
 
 			}, RAccessType.PRIVATE);
 
+			RulpUtil.setMember(mapClass, F_MBR_MAP_HAS_KEY, new AbsAtomFactorAdapter(F_MBR_MAP_HAS_KEY) {
+
+				@Override
+				public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+					if (args.size() != 3) {
+						throw new RException("Invalid parameters: " + args);
+					}
+
+					XRMap map = RulpUtil.asMap(interpreter.compute(frame, args.get(1)));
+					IRObject key = interpreter.compute(frame, args.get(2));
+					
+					return RulpFactory.createBoolean(map.containsKey(key));
+				}
+
+			}, RAccessType.PRIVATE);
+
 		}
 
 	}
@@ -313,6 +330,8 @@ public class XRMap extends XRDefInstance implements IRCollection {
 	static final String F_MBR_MAP_CLEAR = "_map_clear";
 
 	static final String F_MBR_MAP_GET = "_map_get";
+
+	static final String F_MBR_MAP_HAS_KEY = "_has_key";
 
 	static final String F_MBR_MAP_INIT = "_map_init";
 
