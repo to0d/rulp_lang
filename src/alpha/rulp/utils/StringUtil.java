@@ -464,8 +464,8 @@ public class StringUtil {
 		return sb == null ? value : sb.toString();
 	}
 
-	public static String smartSort(List<String> fileNames, boolean simpleMode) throws RException {
-		return CharMatch.smartSort(fileNames, simpleMode);
+	public static String smartSort(List<String> elements, boolean simpleMode) throws RException {
+		return CharMatch.smartSort(elements, simpleMode);
 	}
 
 	public static List<String> splitStringByChar(String input, char... s) {

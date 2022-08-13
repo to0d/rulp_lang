@@ -5,16 +5,24 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.RulpTestBase;
+import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.StringUtil;
 
 public class StringUtilTest extends RulpTestBase {
 
-	void _test_getCharType(String input, String output) {
+	String _addEscape(String input) {
+		return StringUtil.addEscape(input);
+	}
+
+	String _getCharType(String input) {
 
 		ArrayList<Integer> types = new ArrayList<>();
 
@@ -22,31 +30,61 @@ public class StringUtilTest extends RulpTestBase {
 			types.add(StringUtil.getCharType(c).index);
 		}
 
-		assertEquals(output, types.toString());
+		return types.toString();
+	}
+
+	String _parseChineseNumber(String input) {
+		return "" + StringUtil.parseChineseNumber(input);
+	}
+
+	String _removeEscape(String input) {
+		return StringUtil.removeEscape(input);
+	}
+
+	String _smartSort_1(String input) throws RException {
+
+		List<IRObject> objs = _getParser().parse(input);
+		assertEquals(1, objs.size());
+
+		ArrayList<String> elements = new ArrayList<>();
+
+		IRIterator<? extends IRObject> it = RulpUtil.asList(objs.get(0)).iterator();
+		while (it.hasNext()) {
+			elements.add(it.next().toString());
+		}
+
+		String pre = StringUtil.smartSort(elements, false);
+
+		return "" + elements + ", pre=[" + pre + "]";
 	}
 
 	@Test
-	void test_add_Escape() {
+	void test_addEscape_1() {
 
 		_setup();
 
 		assertEquals("", StringUtil.addEscape(""));
-		assertEquals("123", StringUtil.addEscape("123"));
-		assertEquals("a\\\\b", StringUtil.addEscape("a\\b"));
+
 	}
 
 	@Test
-	void test_getCharType() {
+	void test_addEscape_2() {
 
 		_setup();
 
-		_test_getCharType("abz", "[10, 10, 10]");
-		_test_getCharType("123", "[0, 0, 0]");
-		_test_getCharType("\"()+-\\\'|:;,[]{}@#=/$?&*%<>!^·_.`",
-				"[11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11]");
-		_test_getCharType("ⅠⅩⅪⅫⅡⅢⅣⅤⅥⅦⅧⅨ", "[53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53, 53]");
-		_test_getCharType("ㄅㄒㄟ", "[33, 33, 33]");
-		_test_getCharType("の", "[41]");
+		_test((input) -> {
+			return _addEscape(input);
+		});
+	}
+
+	@Test
+	void test_getCharType_1() {
+
+		_setup();
+
+		_test((input) -> {
+			return _getCharType(input);
+		});
 	}
 
 	@Test
@@ -57,7 +95,6 @@ public class StringUtilTest extends RulpTestBase {
 		try {
 			assertNull(StringUtil.getSingleMatchString(" %? %d *", "   "));
 		} catch (RException e) {
-
 			e.printStackTrace();
 			fail(e.toString());
 		}
@@ -65,30 +102,46 @@ public class StringUtilTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_parseChineseNumber() {
+	void test_parseChineseNumber_1() {
 
 		_setup();
 
-		assertEquals(1l, StringUtil.parseChineseNumber("一"));
-		assertEquals(100l, StringUtil.parseChineseNumber("一百"));
-		assertEquals(10l, StringUtil.parseChineseNumber("十"));
-		assertEquals(12l, StringUtil.parseChineseNumber("十二"));
-		assertEquals(12l, StringUtil.parseChineseNumber("十二零"));
+		_test((input) -> {
+			return _parseChineseNumber(input);
+		});
+
 	}
 
 	@Test
-	void test_remove_escape() {
+	void test_removeEscape_1() {
 
 		_setup();
 
-		assertEquals("", StringUtil.removeEscape(""));
 		assertEquals(null, StringUtil.removeEscape(null));
-		assertEquals("a", StringUtil.removeEscape("a"));
+		assertEquals("", StringUtil.removeEscape(""));
 		assertEquals(" ", StringUtil.removeEscape(" "));
 		assertEquals(" a ", StringUtil.removeEscape(" a "));
-		assertEquals(" a\nb ", StringUtil.removeEscape(" a\\" + "nb "));
-		assertEquals(" a\nb ", StringUtil.removeEscape(" a\\nb "));
-		assertEquals(" a\\b ", StringUtil.removeEscape(" a\\\\b "));
+	}
+
+	@Test
+	void test_removeEscape_2() {
+
+		_setup();
+
+		_test((input) -> {
+			return _removeEscape(input);
+		});
+	}
+
+	@Test
+	void test_smartSort_1() {
+
+		_setup();
+
+		_test((input) -> {
+			return _smartSort_1(input);
+		});
+
 	}
 
 	@Test

@@ -1,0 +1,15 @@
+(load "map")
+;=>
+
+(new map map1)
+;=>
+
+(map1::put 1 2)
+;=>
+
+(map1::has-key 1)
+;=>
+
+(map1::has-key 2)
+;=>
+

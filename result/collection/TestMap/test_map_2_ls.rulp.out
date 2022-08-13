@@ -3,7 +3,7 @@
 ;=>nil nil
 
 (list-of map)
-;=>'(map::?impl map::_has_key map::_key_list map::_map_clear map::_map_get map::_map_init map::_map_is_empty map::_map_put map::_map_size_of map::_value_list map::clear map::get map::has-Key map::init map::is-empty map::key-list map::put map::size-of map::value-list)
+;=>'(map::?impl map::_has_key map::_key_list map::_map_clear map::_map_get map::_map_init map::_map_is_empty map::_map_put map::_map_size_of map::_value_list map::clear map::get map::has-key map::init map::is-empty map::key-list map::put map::size-of map::value-list)
 
 (new map map1)
 ;=>map1
@@ -32,7 +32,7 @@ mbr=_map_size_of, access deny
 mbr=_value_list, access deny
 mbr=clear, mbr-property='(default final), mbr-attribute='(final), obj=(clear), obj-type=func, obj-attribute='()
 mbr=get, mbr-property='(default final), mbr-attribute='(final), obj=(get nil), obj-type=func, obj-attribute='()
-mbr=has-Key, mbr-property='(default final), mbr-attribute='(final), obj=(has-Key nil), obj-type=func, obj-attribute='()
+mbr=has-key, mbr-property='(default final), mbr-attribute='(final), obj=(has-key nil), obj-type=func, obj-attribute='()
 mbr=init, mbr-property='(default final), mbr-attribute='(final), obj=(init), obj-type=func, obj-attribute='()
 mbr=is-empty, mbr-property='(default final), mbr-attribute='(final), obj=(is-empty), obj-type=func, obj-attribute='()
 mbr=key-list, mbr-property='(default final), mbr-attribute='(final), obj=(key-list), obj-type=func, obj-attribute='()

@@ -1,0 +1,15 @@
+(load "map")
+;=>nil
+
+(new map map1)
+;=>map1
+
+(map1::put 1 2)
+;=>nil
+
+(map1::has-key 1)
+;=>true
+
+(map1::has-key 2)
+;=>false
+

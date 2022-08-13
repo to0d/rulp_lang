@@ -83,4 +83,11 @@ public class TestMap extends RulpTestBase {
 		_run_script();
 		_gInfo();
 	}
+	
+	@Test
+	void test_map_8_has_key() {
+
+		_setup();
+		_run_script();
+	}
 }

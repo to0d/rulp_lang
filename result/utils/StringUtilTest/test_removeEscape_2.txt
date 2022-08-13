@@ -1,0 +1,5 @@
+BGN: a
+b
+EOF
+INP:  a\nb 
+INP:  a\\b 

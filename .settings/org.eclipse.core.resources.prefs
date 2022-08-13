@@ -2,5 +2,6 @@ eclipse.preferences.version=1
 encoding//src/alpha/rulp/string/ChineseWord.java=GBK
 encoding//src/alpha/rulp/string/Constant.java=GBK
 encoding//src/alpha/rulp/utils/StringUtil.java=GBK
+encoding//test/beta/test/utils/RulpUtilTest.java=GBK
 encoding/<project>=GBK
 separateDerivedEncodings=true

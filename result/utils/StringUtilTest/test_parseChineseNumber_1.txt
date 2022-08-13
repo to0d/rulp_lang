@@ -1,0 +1,5 @@
+INP: 一
+INP: 一百
+INP: 十
+INP: 十二
+INP: 十二零
