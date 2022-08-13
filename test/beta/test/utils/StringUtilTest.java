@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.string.ChineseWord;
 import alpha.rulp.utils.RulpTestBase;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.StringUtil;
@@ -99,6 +100,25 @@ public class StringUtilTest extends RulpTestBase {
 			fail(e.toString());
 		}
 
+	}
+
+	@Test
+	void test_parseChineseNumber_0() {
+
+		_setup();
+
+		assertEquals(0, StringUtil.parseChineseNumber(""));
+
+	}
+
+	@Test
+	void test_chinese_toString_0() {
+
+		_setup();
+
+		assertEquals("零", ChineseWord.toString(0));
+		assertEquals("一", ChineseWord.toString(1L));
+		assertEquals("一千二百三十四", ChineseWord.toString(1234));
 	}
 
 	@Test

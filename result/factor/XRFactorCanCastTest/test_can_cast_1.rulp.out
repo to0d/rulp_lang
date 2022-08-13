@@ -22,3 +22,33 @@
 (can-cast '(int float) "123")
 ;=>true
 
+(can-cast)
+;err:
+Invalid parameters: (can-cast)
+at (can-cast) ; main-2
+;eof
+
+(can-cast int "123" 1)
+;err:
+Invalid parameters: (can-cast int "123" 1)
+at (can-cast int "123" 1) ; main-2
+;eof
+
+(can-cast var "123")
+;err:
+not support type: var
+at (can-cast var "123") ; main-2
+;eof
+
+(can-cast 123 "123")
+;err:
+not support type: 123
+at (can-cast 123 "123") ; main-2
+;eof
+
+(can-cast '() "123")
+;err:
+not support type: '()
+at (can-cast '() "123") ; main-2
+;eof
+

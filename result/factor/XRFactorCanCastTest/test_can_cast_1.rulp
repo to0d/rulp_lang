@@ -22,3 +22,17 @@
 (can-cast '(int float) "123")
 ;=>
 
+(can-cast)
+;err
+
+(can-cast int "123" 1)
+;err
+
+(can-cast var "123")
+;err
+
+(can-cast 123 "123")
+;err
+
+(can-cast '() "123")
+;err

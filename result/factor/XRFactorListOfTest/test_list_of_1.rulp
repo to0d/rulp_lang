@@ -6,3 +6,12 @@
 
 (list-of main)
 ;=>
+
+(list-of main abc c)
+;err
+
+(list-of main abc)
+;err
+
+(list-of root var)
+;=>

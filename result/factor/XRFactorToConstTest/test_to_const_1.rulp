@@ -22,11 +22,5 @@
 (to-const ?x)
 ;=>
 
-(to-const '(a b c))
-;=>
-
 (to-const size-of)
 ;err
-
-(to-const '(?y))
-;=>

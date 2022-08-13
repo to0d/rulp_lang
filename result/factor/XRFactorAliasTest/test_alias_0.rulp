@@ -1,0 +1,8 @@
+(alias) 
+;err
+
+(alias x) 
+;err
+
+(alias x y)
+;err

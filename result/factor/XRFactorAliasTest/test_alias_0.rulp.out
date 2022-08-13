@@ -1,0 +1,18 @@
+(alias) 
+;err:
+Invalid parameter number: (alias)
+at (alias) ; main-2
+;eof
+
+(alias x) 
+;err:
+Invalid parameter number: (alias x)
+at (alias x) ; main-2
+;eof
+
+(alias x y)
+;err:
+src entry not found: x
+at (alias x y) ; main-2
+;eof
+

@@ -7,3 +7,18 @@
 (list-of main)
 ;=>'(main::++ main::-- main::?script-path main::_ginfo main::day-is-bigger-than main::day-is-smaller-than main::dec main::file-prename main::file-subffix main::inc main::is-blank main::is-empty main::local main::main main::max main::min main::print-list main::root main::script_out main::sort main::str-split-line main::system main::to-one-line main::to-valid-path)
 
+(list-of main abc c)
+;err:
+Invalid parameters: (list-of main abc c)
+at (list-of main abc c) ; main-2
+;eof
+
+(list-of main abc)
+;err:
+Unknow type:abc
+at (list-of main abc) ; main-2
+;eof
+
+(list-of root var)
+;=>'(root::?file.separator root::?os.name root::?os.version root::?path.separator root::?user.dir root::?user.home root::?user.name)
+

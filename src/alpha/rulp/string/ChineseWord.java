@@ -87,7 +87,13 @@ public class ChineseWord {
 	 * 返回长整数l的中文表示形式
 	 */
 	public static String toString(long l) {
+
+		if (l == 0) {
+			return "零";
+		}
+
 		String numberString = Long.toString(l);
+
 		numberString = new StringBuffer(numberString).reverse().toString();
 
 		char[] resultChars = new char[12];
@@ -99,31 +105,32 @@ public class ChineseWord {
 			resultChars[i] = dic.charAt(numberString.charAt(i) - '0');
 		}
 
-		StringBuffer resultStringBuffer = new StringBuffer(20);
+		StringBuffer sb = new StringBuffer(20);
+
 		for (int i = 0; i < numberString.length(); i++) {
 			if (i == 4) {
-				resultStringBuffer.append('万');
+				sb.append('万');
 			}
 			if (i == 8) {
-				resultStringBuffer.append('亿');
+				sb.append('亿');
 			}
 			if (resultChars[i] != '零') {
 				if (i == 4 || i == 8) {
-					resultStringBuffer.append(resultChars[i]);
+					sb.append(resultChars[i]);
 				} else {
-					resultStringBuffer.append("" + model.charAt(i) + resultChars[i]);
+					sb.append("" + model.charAt(i) + resultChars[i]);
 				}
 			} else {
-				if (resultStringBuffer.charAt(resultStringBuffer.length() - 1) != '零'
-						&& resultStringBuffer.charAt(resultStringBuffer.length() - 1) != '万'
-						&& resultStringBuffer.charAt(resultStringBuffer.length() - 1) != '亿') {
-					resultStringBuffer.append('零');
+				if (sb.charAt(sb.length() - 1) != '零' && sb.charAt(sb.length() - 1) != '万'
+						&& sb.charAt(sb.length() - 1) != '亿') {
+					sb.append('零');
 				}
 			}
 		}
 
-		resultStringBuffer.deleteCharAt(0);
-		resultStringBuffer.reverse();
-		return resultStringBuffer.toString();
+		sb.deleteCharAt(0);
+		sb.reverse();
+
+		return sb.toString();
 	}
 }

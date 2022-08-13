@@ -7,7 +7,7 @@ import alpha.rulp.utils.RulpTestBase;
 public class XRFactorAliasTest extends RulpTestBase {
 
 	@Test
-	public void test_alias_1_var() {
+	void test_alias_0() {
 
 		_setup();
 		_run_script();
@@ -15,7 +15,7 @@ public class XRFactorAliasTest extends RulpTestBase {
 	}
 
 	@Test
-	public void test_alias_2_factor() {
+	void test_alias_1_var() {
 
 		_setup();
 		_run_script();
@@ -23,7 +23,15 @@ public class XRFactorAliasTest extends RulpTestBase {
 	}
 
 	@Test
-	public void test_alias_3_macro() {
+	void test_alias_2_factor() {
+
+		_setup();
+		_run_script();
+
+	}
+
+	@Test
+	void test_alias_3_macro() {
 
 		_setup();
 		_run_script();

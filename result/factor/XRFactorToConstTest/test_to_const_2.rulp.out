@@ -1,0 +1,27 @@
+(to-const '(a b c))
+;=>'(a b c)
+
+(defvar ?y 1)
+;=>&?y
+
+(to-const ?y)
+;=>1
+
+(to-const (ref ?y))
+;=>1
+
+(to-const ((lambda ()(return ?y))))
+;=>1
+
+(to-const $(lambda ()(return ?y)))
+;=>lambda
+
+(to-const '(?y))
+;=>'(1)
+
+(to-const $(make-list a b c))
+;=>{a,b,c}
+
+(to-const $(make-list))
+;=>'()
+
