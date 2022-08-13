@@ -19,21 +19,18 @@ import alpha.rulp.utils.RulpUtil.RResultList;
 
 public class RulpUtilTest extends RulpTestBase {
 
-	void _test_toString(String input, String expect) {
+	String _test_toString(String input) throws RException {
 
-		IRParser parser = RulpFactory.createParser();
-		try {
-
-			parser.registerPrefix("nm", "https://github.com/to0d/nm#");
-			IRObject obj = RulpFactory.createList(parser.parse(input));
-			String out = RulpUtil.toString(obj);
-			assertEquals(input, expect, out);
-
-		} catch (RException e) {
-			e.printStackTrace();
-			fail(e.toString());
+		List<IRObject> rst = _getParser().parse(input);
+		if (rst.isEmpty()) {
+			return "[]";
 		}
 
+		if (rst.size() == 1) {
+			return "[" + RulpUtil.toString(rst.get(0)) + "]";
+		}
+
+		return RulpUtil.toString(RulpFactory.createList(rst));
 	}
 
 	String _toUniqString_1(String input) throws RException {
@@ -55,7 +52,7 @@ public class RulpUtilTest extends RulpTestBase {
 		RResultList rstList = RulpUtil.compute(this._getInterpreter(), input);
 
 		try {
-			
+
 			if (rstList.results.isEmpty()) {
 				return "[]";
 			}
@@ -73,14 +70,6 @@ public class RulpUtilTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_formatAsShortName() {
-
-		_setup();
-		_getParser().registerPrefix("nm", "https://github.com/to0d/nm#");
-		_test_toString("(nm:a nm:b)", "'((nm:a nm:b))");
-	}
-
-	@Test
 	void test_isValidRulpStmt() {
 
 		_setup();
@@ -90,14 +79,44 @@ public class RulpUtilTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_list_1() {
+	void test_toList_1() {
 
 		assertEquals("[]", RulpUtil.toList().toString());
 		assertEquals("[1, 2, a]", RulpUtil.toList(1, 2, "a").toString());
 	}
 
 	@Test
-	void test_to_uniq_string_1() {
+	void test_toString_1() {
+
+		_setup();
+		_test((input) -> {
+			return _test_toString(input);
+		});
+	}
+
+	@Test
+	void test_toString_2() {
+
+		_setup();
+		_getParser().registerPrefix("nm", "https://github.com/to0d/nm#");
+
+		_test((input) -> {
+			return _test_toString(input);
+		});
+
+	}
+
+	@Test
+	void test_toUniqString_1() {
+		try {
+			assertEquals("$$null", RulpUtil.toUniqString(null));
+		} catch (RException e) {
+			fail(e.toString());
+		}
+	}
+
+	@Test
+	void test_toUniqString_2() {
 
 		_setup();
 
@@ -108,16 +127,7 @@ public class RulpUtilTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_to_uniq_string_2() {
-		try {
-			assertEquals("$$null", RulpUtil.toUniqString(null));
-		} catch (RException e) {
-			fail(e.toString());
-		}
-	}
-
-	@Test
-	void test_to_uniq_string_3() {
+	void test_toUniqString_3() {
 
 		_setup();
 

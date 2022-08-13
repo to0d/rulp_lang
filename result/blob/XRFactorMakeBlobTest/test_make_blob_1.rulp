@@ -6,3 +6,21 @@
 
 (length-of ?b)
 ;=>
+
+(defvar ?b2 (make-blob 256))
+;=>
+
+?b2
+;=>
+
+(length-of ?b2)
+;=>
+
+(defvar ?b3 (make-blob 257))
+;=>
+
+?b3
+;=>
+
+(length-of ?b3)
+;=>
