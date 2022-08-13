@@ -22,3 +22,24 @@ v1
 v2
 ;=>"456"
 
+(str-match "%?-%?" "123-456" '())
+;err:
+Invalid parameters: (str-match "%?-%?" "123-456" '())
+at (str-match "%?-%?" "123-456" '()) ; main-2
+;eof
+
+(str-match "%?-%?" "123-456" '(v3))
+;err:
+var not found: v3
+at (str-match "%?-%?" "123-456" '(v3)) ; main-2
+;eof
+
+(defconst c3 123)
+;=>c3
+
+(str-match "%?-%?" "123-456" '(c3))
+;err:
+not var: c3:"123"
+at (str-match "%?-%?" "123-456" '(c3)) ; main-2
+;eof
+

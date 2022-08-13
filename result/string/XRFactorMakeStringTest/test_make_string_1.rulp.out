@@ -1,0 +1,12 @@
+(make-string)
+;err:
+Invalid parameters: (make-string)
+at (make-string) ; main-2
+;eof
+
+(make-string abc)
+;err:
+not support: abc
+at (make-string abc) ; main-2
+;eof
+

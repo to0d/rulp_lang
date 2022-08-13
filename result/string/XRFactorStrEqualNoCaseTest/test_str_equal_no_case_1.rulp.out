@@ -1,0 +1,24 @@
+(str-equal-nocase)
+;err:
+Invalid parameters: (str-equal-nocase)
+at (str-equal-nocase) ; main-2
+;eof
+
+(str-equal-nocase "abc")
+;err:
+Invalid parameters: (str-equal-nocase "abc")
+at (str-equal-nocase "abc") ; main-2
+;eof
+
+(str-equal-nocase "abc" "abc" "abc")
+;err:
+Invalid parameters: (str-equal-nocase "abc" "abc" "abc")
+at (str-equal-nocase "abc" "abc" "abc") ; main-2
+;eof
+
+(str-equal-nocase "abc" "abc" )
+;=>true
+
+(str-equal-nocase "abc" "AbC" )
+;=>true
+

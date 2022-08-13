@@ -25,10 +25,6 @@ import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorMakeString extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorMakeString(String factorName) {
-		super(factorName);
-	}
-
 	static IRString makeString(IRBlob blob) throws RException {
 
 		if (blob.length() == 0) {
@@ -36,6 +32,10 @@ public class XRFactorMakeString extends AbsAtomFactorAdapter implements IRFactor
 		}
 
 		return RulpFactory.createString(new String(blob.getValue()));
+	}
+
+	public XRFactorMakeString(String factorName) {
+		super(factorName);
 	}
 
 	@Override
@@ -49,6 +49,7 @@ public class XRFactorMakeString extends AbsAtomFactorAdapter implements IRFactor
 		switch (obj.getType()) {
 		case BLOB:
 			return makeString(RulpUtil.asBlob(obj));
+
 		default:
 			throw new RException("not support: " + obj);
 		}

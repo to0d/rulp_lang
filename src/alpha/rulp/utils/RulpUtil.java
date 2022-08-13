@@ -407,7 +407,9 @@ public class RulpUtil {
 			IRBlob blob = (IRBlob) obj;
 			byte[] bytes = blob.getValue();
 
-			if (bytes.length > MAX_TOSTRING_LEN) {
+			if (bytes == null) {
+				sb.append("[]");
+			} else if (bytes.length > MAX_TOSTRING_LEN) {
 				sb.append("[" + EncodeUtil.convertBytesToHexString(bytes, 0, MAX_TOSTRING_LEN) + "...]");
 			} else {
 				sb.append("[" + EncodeUtil.convertBytesToHexString(bytes, 0, bytes.length) + "]");

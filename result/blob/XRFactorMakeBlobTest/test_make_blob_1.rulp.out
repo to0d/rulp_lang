@@ -25,3 +25,12 @@
 (length-of ?b3)
 ;=>257
 
+(defvar ?b4 (make-blob 0))
+;=>&?b4
+
+?b4
+;=>[]
+
+(length-of ?b4)
+;=>0
+

@@ -1,0 +1,14 @@
+(str-equal-nocase)
+;err
+
+(str-equal-nocase "abc")
+;err
+
+(str-equal-nocase "abc" "abc" "abc")
+;err
+
+(str-equal-nocase "abc" "abc" )
+;=>
+
+(str-equal-nocase "abc" "AbC" )
+;=>

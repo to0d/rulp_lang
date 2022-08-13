@@ -1,10 +1,10 @@
+(to-string "abc")
+;=>
+
 (to-string 123)
 ;=>
 
 (to-string a)
-;=>
-
-(to-string "abc")
 ;=>
 
 (to-string '(a b c))
@@ -15,3 +15,9 @@
 
 (to-string (to-blob "abc"))
 ;=>
+
+(to-string)
+;err
+
+(to-string a b)
+;err

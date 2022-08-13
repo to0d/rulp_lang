@@ -1,11 +1,11 @@
+(to-string "abc")
+;=>"abc"
+
 (to-string 123)
 ;=>"123"
 
 (to-string a)
 ;=>"a"
-
-(to-string "abc")
-;=>"abc"
 
 (to-string '(a b c))
 ;=>"'(a b c)"
@@ -15,4 +15,16 @@
 
 (to-string (to-blob "abc"))
 ;=>"[616263]"
+
+(to-string)
+;err:
+Invalid parameters: (to-string)
+at (to-string) ; main-2
+;eof
+
+(to-string a b)
+;err:
+Invalid parameters: (to-string a b)
+at (to-string a b) ; main-2
+;eof
 

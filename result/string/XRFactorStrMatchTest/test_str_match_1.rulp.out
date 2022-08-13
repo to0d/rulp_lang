@@ -7,3 +7,15 @@
 (str-match "* *" "abc xyz")
 ;=>true
 
+(str-match "* *")
+;err:
+Invalid parameters: (str-match "* *")
+at (str-match "* *") ; main-2
+;eof
+
+(str-match "* *" "abc xyz" "" "")
+;err:
+Invalid parameters: (str-match "* *" "abc xyz" "" "")
+at (str-match "* *" "abc xyz" "" "") ; main-2
+;eof
+

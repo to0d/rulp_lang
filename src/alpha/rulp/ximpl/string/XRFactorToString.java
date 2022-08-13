@@ -65,8 +65,6 @@ public class XRFactorToString extends AbsAtomFactorAdapter implements IRFactor {
 		}
 
 		switch (obj.getType()) {
-		case STRING:
-			return obj;
 
 		case INSTANCE:
 			IRObject rst = computeInstanceToString((IRInstance) obj, interpreter);

@@ -1,0 +1,6 @@
+(make-string (make-blob 0))
+;=>
+
+(make-string (to-blob "abc"))
+;=>
+

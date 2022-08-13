@@ -7,3 +7,8 @@
 (str-match "* *" "abc xyz")
 ;=>
 
+(str-match "* *")
+;err
+
+(str-match "* *" "abc xyz" "" "")
+;err

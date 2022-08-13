@@ -24,3 +24,12 @@
 
 (length-of ?b3)
 ;=>
+
+(defvar ?b4 (make-blob 0))
+;=>
+
+?b4
+;=>
+
+(length-of ?b4)
+;=>
