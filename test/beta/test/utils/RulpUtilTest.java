@@ -345,10 +345,10 @@ public class RulpUtilTest extends RulpTestBase {
 		}
 
 		try {
-			RulpUtil.toBoolean(O_INT_0);
+			RulpUtil.toBoolean(RulpFactory.createAtom("abc"));
 			fail("should fail");
 		} catch (RException e) {
-			assertEquals("alpha.rulp.lang.RException: Not support type: 0", e.toString());
+			assertEquals("alpha.rulp.lang.RException: Not support type: value=abc, type=ATOM", e.toString());
 		}
 	}
 

@@ -18,7 +18,7 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
-import alpha.rulp.utils.MathUtil;
+import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorWhen extends AbsAtomFactorAdapter implements IRFactor {
@@ -38,7 +38,7 @@ public class XRFactorWhen extends AbsAtomFactorAdapter implements IRFactor {
 		IRObject whenClause = interpreter.compute(frame, cond);
 
 		// false
-		if (!MathUtil.toBoolean(whenClause)) {
+		if (!RulpUtil.toBoolean(whenClause)) {
 			return O_Nil;
 		}
 

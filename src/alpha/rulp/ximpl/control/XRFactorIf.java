@@ -18,7 +18,6 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.utils.MathUtil;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
@@ -61,7 +60,7 @@ public class XRFactorIf extends AbsAtomFactorAdapter implements IRFactor {
 		if (isIf1(args)) {
 
 			// condition
-			if (!MathUtil.toBoolean(interpreter.compute(frame, args.get(1)))) {
+			if (!RulpUtil.toBoolean(interpreter.compute(frame, args.get(1)))) {
 				return O_Nil;
 			}
 
@@ -72,7 +71,7 @@ public class XRFactorIf extends AbsAtomFactorAdapter implements IRFactor {
 		if (isIf2(args)) {
 
 			// condition
-			if (!MathUtil.toBoolean(interpreter.compute(frame, args.get(1)))) {
+			if (!RulpUtil.toBoolean(interpreter.compute(frame, args.get(1)))) {
 				return interpreter.compute(frame, args.get(3));
 			}
 
@@ -83,7 +82,7 @@ public class XRFactorIf extends AbsAtomFactorAdapter implements IRFactor {
 		if (isIf3(args)) {
 
 			// condition
-			if (!MathUtil.toBoolean(interpreter.compute(frame, args.get(1)))) {
+			if (!RulpUtil.toBoolean(interpreter.compute(frame, args.get(1)))) {
 				return O_Nil;
 			}
 

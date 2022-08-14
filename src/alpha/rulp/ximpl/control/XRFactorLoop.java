@@ -26,7 +26,6 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
-import alpha.rulp.utils.MathUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.error.RBreak;
@@ -139,8 +138,8 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 		// (loop for x from 1 to 3 do ...)
 
 		String indexName = RulpUtil.asAtom(getLoop2IndexObject(args)).getName();
-		int fromIndex = MathUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop2FromObject(args))));
-		int toIndex = MathUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop2ToObject(args))));
+		int fromIndex = RulpUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop2FromObject(args))));
+		int toIndex = RulpUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop2ToObject(args))));
 
 		OUT_LOOP: for (int i = fromIndex; i <= toIndex; ++i) {
 
@@ -226,9 +225,9 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 		// (loop for x from 1 to 3 by 1 do ...) A_By
 
 		String indexName = RulpUtil.asAtom(args.get(2)).getName();
-		int fromIndex = MathUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop4FromObject(args))));
-		int toIndex = MathUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop4ToObject(args))));
-		int byValue = MathUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop4ByObject(args))));
+		int fromIndex = RulpUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop4FromObject(args))));
+		int toIndex = RulpUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop4ToObject(args))));
+		int byValue = RulpUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop4ByObject(args))));
 		if (byValue == 0) {
 			throw new RException("Invalid by value in loop: " + byValue);
 		}

@@ -1023,8 +1023,8 @@ public class RulpUtil {
 		switch (rt) {
 		case DOUBLE: {
 
-			double av = MathUtil.toDouble(a);
-			double bv = MathUtil.toDouble(b);
+			double av = RulpUtil.toDouble(a);
+			double bv = RulpUtil.toDouble(b);
 
 			if (av > bv) {
 				return 1;
@@ -1039,8 +1039,8 @@ public class RulpUtil {
 
 		case FLOAT: {
 
-			float av = MathUtil.toFloat(a);
-			float bv = MathUtil.toFloat(b);
+			float av = RulpUtil.toFloat(a);
+			float bv = RulpUtil.toFloat(b);
 
 			if (av > bv) {
 				return 1;
@@ -1055,8 +1055,8 @@ public class RulpUtil {
 
 		case INT: {
 
-			int av = MathUtil.toInt(a);
-			int bv = MathUtil.toInt(b);
+			int av = RulpUtil.toInt(a);
+			int bv = RulpUtil.toInt(b);
 
 			if (av > bv) {
 				return 1;
@@ -2113,15 +2113,24 @@ public class RulpUtil {
 	}
 
 	public static boolean toBoolean(IRObject a) throws RException {
-
 		switch (a.getType()) {
 		case NIL:
 			return false;
+
 		case BOOL:
 			return ((IRBoolean) a).asBoolean();
 
+		case FLOAT:
+		case DOUBLE:
+		case EXPR:
+			return true;
+
+		case INT:
+		case LONG:
+			return RulpUtil.toLong(a) != 0;
+
 		default:
-			throw new RException(String.format("Not support type: %s", a.toString()));
+			throw new RException(String.format("Not support type: value=%s, type=%s", a.toString(), a.getType()));
 		}
 	}
 
@@ -2195,6 +2204,28 @@ public class RulpUtil {
 		return RulpFactory.createExpression(newExpr);
 	}
 
+	public static double toDouble(IRObject a) throws RException {
+		switch (a.getType()) {
+		case FLOAT:
+			return ((IRFloat) a).asFloat();
+
+		case DOUBLE:
+			return ((IRDouble) a).asDouble();
+
+		case INT:
+			return ((IRInteger) a).asInteger();
+
+		case LONG:
+			return (double) ((IRLong) a).asLong();
+
+		case STRING:
+			return Double.valueOf(RulpUtil.asString(a).asString());
+
+		default:
+			throw new RException("Can't convert to double: " + a);
+		}
+	}
+
 	public static IRExpr toExpr(IRObject factor, List<? extends IRObject> objList) throws RException {
 
 		ArrayList<IRObject> exprList = new ArrayList<>();
@@ -2229,6 +2260,28 @@ public class RulpUtil {
 		return arr;
 	}
 
+	public static float toFloat(IRObject a) throws RException {
+		switch (a.getType()) {
+		case FLOAT:
+			return ((IRFloat) a).asFloat();
+
+		case DOUBLE:
+			return (float) ((IRDouble) a).asDouble();
+
+		case INT:
+			return ((IRInteger) a).asInteger();
+
+		case LONG:
+			return (float) ((IRLong) a).asLong();
+
+		case STRING:
+			return Float.valueOf(RulpUtil.asString(a).asString());
+
+		default:
+			throw new RException("Can't convert to float: " + a);
+		}
+	}
+
 	public static IRExpr toIfExpr(IRExpr condExpr, IRExpr... doExprs) throws RException {
 
 		ArrayList<IRObject> exprList = new ArrayList<>();
@@ -2256,6 +2309,29 @@ public class RulpUtil {
 
 	public static IRMap toImplMap(IRInstance instance) throws RException {
 		return XRMap.toImplMap(instance);
+	}
+
+	public static int toInt(IRObject a) throws RException {
+		switch (a.getType()) {
+
+		case FLOAT:
+			return (int) ((IRFloat) a).asFloat();
+
+		case DOUBLE:
+			return (int) ((IRDouble) a).asDouble();
+
+		case INT:
+			return ((IRInteger) a).asInteger();
+
+		case LONG:
+			return (int) ((IRLong) a).asLong();
+
+		case STRING:
+			return Integer.valueOf(RulpUtil.asString(a).asString());
+
+		default:
+			throw new RException("Can't convert to integer: " + a);
+		}
 	}
 
 	public static <T> List<T> toList(IRIterator<T> iter) throws RException {

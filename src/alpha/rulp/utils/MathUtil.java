@@ -11,11 +11,6 @@ package alpha.rulp.utils;
 
 import java.util.Random;
 
-import alpha.rulp.lang.IRBoolean;
-import alpha.rulp.lang.IRDouble;
-import alpha.rulp.lang.IRFloat;
-import alpha.rulp.lang.IRInteger;
-import alpha.rulp.lang.IRLong;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RArithmeticOperator;
 import alpha.rulp.lang.RException;
@@ -78,8 +73,8 @@ public class MathUtil {
 		switch (rt) {
 		case FLOAT: {
 
-			float av = MathUtil.toFloat(a);
-			float bv = MathUtil.toFloat(b);
+			float av = RulpUtil.toFloat(a);
+			float bv = RulpUtil.toFloat(b);
 
 			switch (op) {
 			case ADD:
@@ -115,8 +110,8 @@ public class MathUtil {
 
 		case DOUBLE: {
 
-			double av = MathUtil.toDouble(a);
-			double bv = MathUtil.toDouble(b);
+			double av = RulpUtil.toDouble(a);
+			double bv = RulpUtil.toDouble(b);
 
 			switch (op) {
 			case ADD:
@@ -152,8 +147,8 @@ public class MathUtil {
 
 		case INT: {
 
-			int av = MathUtil.toInt(a);
-			int bv = MathUtil.toInt(b);
+			int av = RulpUtil.toInt(a);
+			int bv = RulpUtil.toInt(b);
 
 			switch (op) {
 			case ADD:
@@ -290,8 +285,8 @@ public class MathUtil {
 
 		case FLOAT: {
 
-			float av = MathUtil.toFloat(a);
-			float bv = MathUtil.toFloat(b);
+			float av = RulpUtil.toFloat(a);
+			float bv = RulpUtil.toFloat(b);
 
 			switch (op) {
 
@@ -321,8 +316,8 @@ public class MathUtil {
 
 		case DOUBLE: {
 
-			double av = MathUtil.toDouble(a);
-			double bv = MathUtil.toDouble(b);
+			double av = RulpUtil.toDouble(a);
+			double bv = RulpUtil.toDouble(b);
 
 			switch (op) {
 
@@ -351,8 +346,8 @@ public class MathUtil {
 		}
 
 		case INT: {
-			int av = MathUtil.toInt(a);
-			int bv = MathUtil.toInt(b);
+			int av = RulpUtil.toInt(a);
+			int bv = RulpUtil.toInt(b);
 
 			switch (op) {
 
@@ -450,95 +445,6 @@ public class MathUtil {
 
 	public static int random_int(int bound) {
 		return random.nextInt(bound);
-	}
-
-	public static boolean toBoolean(IRObject a) throws RException {
-		switch (a.getType()) {
-		case NIL:
-			return false;
-
-		case BOOL:
-			return ((IRBoolean) a).asBoolean();
-
-		case FLOAT:
-		case DOUBLE:
-		case EXPR:
-			return true;
-
-		case INT:
-		case LONG:
-			return RulpUtil.toLong(a) != 0;
-
-		default:
-			throw new RException(String.format("Not support type: value=%s, type=%s", a.toString(), a.getType()));
-		}
-	}
-
-	public static double toDouble(IRObject a) throws RException {
-		switch (a.getType()) {
-		case FLOAT:
-			return ((IRFloat) a).asFloat();
-
-		case DOUBLE:
-			return ((IRDouble) a).asDouble();
-
-		case INT:
-			return ((IRInteger) a).asInteger();
-
-		case LONG:
-			return (double) ((IRLong) a).asLong();
-
-		case STRING:
-			return Double.valueOf(RulpUtil.asString(a).asString());
-
-		default:
-			throw new RException("Can't convert to double: " + a);
-		}
-	}
-
-	public static float toFloat(IRObject a) throws RException {
-		switch (a.getType()) {
-		case FLOAT:
-			return ((IRFloat) a).asFloat();
-
-		case DOUBLE:
-			return (float) ((IRDouble) a).asDouble();
-
-		case INT:
-			return ((IRInteger) a).asInteger();
-
-		case LONG:
-			return (float) ((IRLong) a).asLong();
-
-		case STRING:
-			return Float.valueOf(RulpUtil.asString(a).asString());
-
-		default:
-			throw new RException("Can't convert to float: " + a);
-		}
-	}
-
-	public static int toInt(IRObject a) throws RException {
-		switch (a.getType()) {
-
-		case FLOAT:
-			return (int) ((IRFloat) a).asFloat();
-
-		case DOUBLE:
-			return (int) ((IRDouble) a).asDouble();
-
-		case INT:
-			return ((IRInteger) a).asInteger();
-
-		case LONG:
-			return (int) ((IRLong) a).asLong();
-
-		case STRING:
-			return Integer.valueOf(RulpUtil.asString(a).asString());
-
-		default:
-			throw new RException("Can't convert to integer: " + a);
-		}
 	}
 
 }

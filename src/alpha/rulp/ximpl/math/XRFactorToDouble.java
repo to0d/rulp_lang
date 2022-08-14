@@ -16,8 +16,8 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.utils.MathUtil;
 import alpha.rulp.utils.RulpFactory;
+import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorToDouble extends AbsAtomFactorAdapter implements IRFactor {
@@ -38,6 +38,6 @@ public class XRFactorToDouble extends AbsAtomFactorAdapter implements IRFactor {
 			return obj;
 		}
 
-		return RulpFactory.createDouble(MathUtil.toDouble(obj));
+		return RulpFactory.createDouble(RulpUtil.toDouble(obj));
 	}
 }
