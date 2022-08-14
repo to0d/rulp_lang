@@ -1,8 +1,9 @@
-
 (defun fun (?v)
     (loop 
-        (return ?x)
-        (return ?x)
+        (do
+            (return ?v)
+            (return ?v)
+        )
     )
 )[opt-ero]
 ;=>

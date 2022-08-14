@@ -891,6 +891,10 @@ public class RulpUtil {
 
 	public static IRList buildListOfString(List<String> strlist) throws RException {
 
+		if (strlist == null || strlist.isEmpty()) {
+			return RulpFactory.createList();
+		}
+
 		ArrayList<IRObject> objList = new ArrayList<>();
 		for (String str : strlist) {
 			objList.add(RulpFactory.createString(str));

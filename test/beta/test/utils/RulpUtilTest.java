@@ -91,10 +91,12 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.utils.RulpFactory;
@@ -155,6 +157,57 @@ public class RulpUtilTest extends RulpTestBase {
 	}
 
 	@Test
+	void test_buildListOfString_1() {
+
+		_setup();
+
+		try {
+			List<String> list = null;
+			assertEquals("'()", "" + RulpUtil.buildListOfString(list));
+			assertEquals("'()", "" + RulpUtil.buildListOfString(new ArrayList<>()));
+			assertEquals("'(\"a\")", "" + RulpUtil.buildListOfString(RulpUtil.toList("a")));
+			assertEquals("'(\"a\" \"b\")", "" + RulpUtil.buildListOfString(RulpUtil.toList("a", "b")));
+		} catch (RException e) {
+			fail(e.toString());
+		}
+	}
+
+	@Test
+	void test_buildListOfString_2() {
+
+		_setup();
+
+		try {
+			String[] list = null;
+			String[] list2 = new String[0];
+			String[] list3 = new String[2];
+			list3[0] = "a";
+			list3[1] = "b";
+
+			assertEquals("'()", "" + RulpUtil.buildListOfString(list));
+			assertEquals("'()", "" + RulpUtil.buildListOfString(list2));
+			assertEquals("'(\"a\" \"b\")", "" + RulpUtil.buildListOfString(list3));
+		} catch (RException e) {
+			fail(e.toString());
+		}
+	}
+
+	@Test
+	void test_compare_1() {
+
+		_setup();
+
+		try {
+			assertEquals(0, RulpUtil.compare(null, null));
+			assertEquals(0, RulpUtil.compare(null, O_Nil));
+			assertEquals(0, RulpUtil.compare(O_Nil, O_Nil));
+			assertEquals(0, RulpUtil.compare(O_True, O_True));
+		} catch (RException e) {
+			fail(e.toString());
+		}
+	}
+
+	@Test
 	void test_isEqual_1() {
 
 		_setup();
@@ -172,7 +225,26 @@ public class RulpUtilTest extends RulpTestBase {
 	}
 
 	@Test
+	void test_subList_1() {
+
+		_setup();
+
+		try {
+			IRList list = RulpFactory.createList(RulpFactory.createAtom("a"), RulpFactory.createAtom("b"),
+					RulpFactory.createAtom("c"));
+			assertEquals("[]", "" + RulpUtil.subList(list, 0, 0));
+			assertEquals("[a, b, c]", "" + RulpUtil.subList(list, 0, 3));
+
+		} catch (RException e) {
+
+			fail(e.toString());
+		}
+	}
+
+	@Test
 	void test_toAtom_1() {
+
+		_setup();
 
 		assertEquals(O_Nil, RulpUtil.toAtom(null));
 		assertEquals(O_EMPTY, RulpUtil.toAtom(""));
@@ -216,10 +288,75 @@ public class RulpUtilTest extends RulpTestBase {
 		assertEquals(O_RETURN, RulpUtil.toAtom(F_RETURN));
 		assertEquals(O_QUESTION_LIST, RulpUtil.toAtom(A_QUESTION_LIST));
 		assertEquals(O_B_AND, RulpUtil.toAtom(F_B_AND));
+		assertEquals("abc", "" + RulpUtil.toAtom("abc"));
+	}
+
+	@Test
+	void test_toBoolean_1() {
+
+		_setup();
 
 		try {
-			assertEquals("abc", RulpUtil.toString(RulpUtil.toAtom("abc")));
+			assertEquals(false, RulpUtil.toBoolean(O_Nil));
+			assertEquals(true, RulpUtil.toBoolean(O_True));
+			assertEquals(false, RulpUtil.toBoolean(O_False));
 		} catch (RException e) {
+			fail(e.toString());
+		}
+
+		try {
+			RulpUtil.toBoolean(O_INT_0);
+			fail("should fail");
+		} catch (RException e) {
+			assertEquals("alpha.rulp.lang.RException: Not support type: 0", e.toString());
+		}
+	}
+
+	@Test
+	void test_toDoExpr_1() {
+
+		_setup();
+
+		try {
+			IRList list = RulpFactory.createList(RulpFactory.createExpression(RulpFactory.createAtom("a")),
+					RulpFactory.createExpression(RulpFactory.createAtom("b")));
+			assertEquals("(do (a) (b))", "" + RulpUtil.toDoExpr(list.iterator()));
+		} catch (RException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+
+	@Test
+	void test_toDoExpr_2() {
+
+		_setup();
+
+		try {
+
+			ArrayList<IRObject> list = new ArrayList<>();
+			list.add(RulpFactory.createExpression(RulpFactory.createAtom("a")));
+			list.add(RulpFactory.createExpression(RulpFactory.createAtom("b")));
+			assertEquals("(do (a) (b))", "" + RulpUtil.toDoExpr(list.iterator()));
+		} catch (RException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+
+	@Test
+	void test_toDoExpr_3() {
+
+		_setup();
+
+		try {
+
+			ArrayList<IRObject> list = new ArrayList<>();
+			list.add(RulpFactory.createExpression(RulpFactory.createAtom("a")));
+			list.add(RulpFactory.createExpression(RulpFactory.createAtom("b")));
+			assertEquals("(do (a) (b))", "" + RulpUtil.toDoExpr(list));
+		} catch (RException e) {
+			e.printStackTrace();
 			fail(e.toString());
 		}
 	}
@@ -237,7 +374,7 @@ public class RulpUtilTest extends RulpTestBase {
 							.toString());
 
 		} catch (RException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			fail(e.toString());
 		}
 
@@ -256,7 +393,7 @@ public class RulpUtilTest extends RulpTestBase {
 							.toString());
 
 		} catch (RException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			fail(e.toString());
 		}
 
@@ -326,41 +463,5 @@ public class RulpUtilTest extends RulpTestBase {
 			return _toUniqString_2(input);
 		});
 
-	}
-
-	@Test
-	void test_compare_1() {
-
-		_setup();
-
-		try {
-			assertEquals(0, RulpUtil.compare(null, null));
-			assertEquals(0, RulpUtil.compare(null, O_Nil));
-			assertEquals(0, RulpUtil.compare(O_Nil, O_Nil));
-			assertEquals(0, RulpUtil.compare(O_True, O_True));
-		} catch (RException e) {
-			fail(e.toString());
-		}
-	}
-
-	@Test
-	void test_toBoolean_1() {
-
-		_setup();
-
-		try {
-			assertEquals(false, RulpUtil.toBoolean(O_Nil));
-			assertEquals(true, RulpUtil.toBoolean(O_True));
-			assertEquals(false, RulpUtil.toBoolean(O_False));
-		} catch (RException e) {
-			fail(e.toString());
-		}
-
-		try {
-			RulpUtil.toBoolean(O_INT_0);
-			fail("should fail");
-		} catch (RException e) {
-			assertEquals("alpha.rulp.lang.RException: Not support type: 0", e.toString());
-		}
 	}
 }

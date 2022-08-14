@@ -1,6 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.F_BREAK;
 import static alpha.rulp.lang.Constant.F_B_AND;
 import static alpha.rulp.lang.Constant.F_B_OR;
@@ -11,7 +11,13 @@ import static alpha.rulp.lang.Constant.F_LOOP;
 import static alpha.rulp.lang.Constant.F_O_ADD;
 import static alpha.rulp.lang.Constant.F_O_BY;
 import static alpha.rulp.lang.Constant.F_O_DIV;
+import static alpha.rulp.lang.Constant.F_O_EQ;
+import static alpha.rulp.lang.Constant.F_O_GE;
+import static alpha.rulp.lang.Constant.F_O_GT;
+import static alpha.rulp.lang.Constant.F_O_LE;
+import static alpha.rulp.lang.Constant.F_O_LT;
 import static alpha.rulp.lang.Constant.F_O_MOD;
+import static alpha.rulp.lang.Constant.F_O_NE;
 import static alpha.rulp.lang.Constant.F_O_POWER;
 import static alpha.rulp.lang.Constant.F_O_SUB;
 import static alpha.rulp.lang.Constant.F_RETURN;
