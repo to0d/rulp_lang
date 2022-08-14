@@ -1,0 +1,6 @@
+OUT: 100
+OUT: 1000
+ERR: alpha.rulp.lang.RException: Not support type: 1.0
+ERR: alpha.rulp.lang.RException: Not support type: 100.0D
+ERR: alpha.rulp.lang.RException: Not support type: abc
+ERR: alpha.rulp.lang.RException: Not support type: abc

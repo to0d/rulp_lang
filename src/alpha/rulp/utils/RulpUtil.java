@@ -2331,6 +2331,10 @@ public class RulpUtil {
 
 	public static RRelationalOperator toRelationalOperator(String name) {
 
+		if (name == null) {
+			return null;
+		}
+
 		switch (name) {
 		case F_EQUAL:
 		case F_O_EQ:

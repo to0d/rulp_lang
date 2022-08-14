@@ -1,7 +1,7 @@
 package beta.test.utils;
 
 import static alpha.rulp.lang.Constant.A_ARRAY;
-import static alpha.rulp.lang.Constant.A_ATOM;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.A_BLOB;
 import static alpha.rulp.lang.Constant.A_BOOL;
 import static alpha.rulp.lang.Constant.A_CLASS;
@@ -99,6 +99,7 @@ import org.junit.jupiter.api.Test;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
+import alpha.rulp.lang.RRelationalOperator;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpTestBase;
 import alpha.rulp.utils.RulpUtil;
@@ -118,6 +119,13 @@ public class RulpUtilTest extends RulpTestBase {
 		}
 
 		return RulpUtil.toString(RulpFactory.createList(rst));
+	}
+
+	String _toLong(String input) throws RException {
+
+		List<IRObject> rst = _getParser().parse(input);
+		assertTrue(rst.size() == 1);
+		return "" + RulpUtil.toLong(rst.get(0));
 	}
 
 	String _toUniqString_1(String input) throws RException {
@@ -242,6 +250,30 @@ public class RulpUtilTest extends RulpTestBase {
 	}
 
 	@Test
+	void test_toArray2_1() {
+
+		_setup();
+
+		int nums[] = new int[2];
+		nums[0] = 1;
+		nums[1] = 2;
+
+		assertEquals("[1, 2]", "" + RulpUtil.toArray2(nums));
+	}
+
+	@Test
+	void test_toArray2_2() {
+
+		_setup();
+
+		String str[] = new String[2];
+		str[0] = "a";
+		str[1] = "b";
+
+		assertEquals("[a, b]", "" + RulpUtil.toArray2(str));
+	}
+
+	@Test
 	void test_toAtom_1() {
 
 		_setup();
@@ -339,7 +371,7 @@ public class RulpUtilTest extends RulpTestBase {
 			list.add(RulpFactory.createExpression(RulpFactory.createAtom("b")));
 			assertEquals("(do (a) (b))", "" + RulpUtil.toDoExpr(list.iterator()));
 		} catch (RException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			fail(e.toString());
 		}
 	}
@@ -355,6 +387,22 @@ public class RulpUtilTest extends RulpTestBase {
 			list.add(RulpFactory.createExpression(RulpFactory.createAtom("a")));
 			list.add(RulpFactory.createExpression(RulpFactory.createAtom("b")));
 			assertEquals("(do (a) (b))", "" + RulpUtil.toDoExpr(list));
+		} catch (RException e) {
+//			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+
+	@Test
+	void test_toExpr_1() {
+
+		_setup();
+
+		try {
+			ArrayList<IRObject> list = new ArrayList<>();
+			list.add(RulpFactory.createAtom("a"));
+			list.add(RulpFactory.createAtom("b"));
+			assertEquals("(x a b)", "" + RulpUtil.toExpr(RulpFactory.createAtom("x"), list));
 		} catch (RException e) {
 			e.printStackTrace();
 			fail(e.toString());
@@ -409,6 +457,33 @@ public class RulpUtilTest extends RulpTestBase {
 	}
 
 	@Test
+	void test_toLong_1() {
+
+		_setup();
+
+		_test((input) -> {
+			return _toLong(input);
+		});
+
+	}
+
+	@Test
+	void test_toRelationalOperator_1() {
+
+		_setup();
+
+		assertEquals(RRelationalOperator.EQ, RulpUtil.toRelationalOperator(F_EQUAL));
+		assertEquals(RRelationalOperator.EQ, RulpUtil.toRelationalOperator(F_O_EQ));
+		assertEquals(RRelationalOperator.NE, RulpUtil.toRelationalOperator(F_NOT_EQUAL));
+		assertEquals(RRelationalOperator.NE, RulpUtil.toRelationalOperator(F_O_NE));
+		assertEquals(RRelationalOperator.GE, RulpUtil.toRelationalOperator(F_O_GE));
+		assertEquals(RRelationalOperator.GT, RulpUtil.toRelationalOperator(F_O_GT));
+		assertEquals(RRelationalOperator.LE, RulpUtil.toRelationalOperator(F_O_LE));
+		assertEquals(RRelationalOperator.LT, RulpUtil.toRelationalOperator(F_O_LT));
+		assertEquals(null, RulpUtil.toRelationalOperator(""));
+	}
+
+	@Test
 	void test_toString_1() {
 
 		_setup();
@@ -429,6 +504,38 @@ public class RulpUtilTest extends RulpTestBase {
 			return _test_toString(input);
 		});
 
+	}
+
+	@Test
+	void test_toStringList_1() {
+
+		_setup();
+
+		try {
+			ArrayList<IRObject> list = new ArrayList<>();
+			list.add(RulpFactory.createAtom("a"));
+			list.add(RulpFactory.createString("b"));
+			assertEquals("[a, b]", "" + RulpUtil.toStringList(list));
+		} catch (RException e) {
+//			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+
+	@Test
+	void test_toStringList_2() {
+
+		_setup();
+
+		try {
+			ArrayList<IRObject> list = new ArrayList<>();
+			list.add(RulpFactory.createInteger(1));
+			RulpUtil.toStringList(list);
+			fail("should fail");
+		} catch (RException e) {
+//			e.printStackTrace();
+			assertEquals("alpha.rulp.lang.RException: Can't conver to string list: 1", e.toString());
+		}
 	}
 
 	@Test

@@ -7,42 +7,42 @@ import alpha.rulp.utils.RulpTestBase;
 public class TestOptimizeTCO extends RulpTestBase {
 
 	@Test
-	public void test_tco_1() {
+	void test_tco_1() {
 
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	public void test_tco_2_overflow_a() {
+	void test_tco_2_overflow_a() {
 
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	public void test_tco_2_overflow_b() {
+	void test_tco_2_overflow_b() {
 
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	public void test_tco_3_return() {
+	void test_tco_3_return() {
 
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	public void test_tco_4_if() {
+	void test_tco_4_if() {
 
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	public void test_tco_5_multi() {
+	void test_tco_5_multi() {
 
 		_setup();
 		_run_script();
@@ -53,34 +53,34 @@ public class TestOptimizeTCO extends RulpTestBase {
 	}
 
 	@Test
-	public void test_tco_6_recursion_cycle() {
+	void test_tco_6_recursion_cycle() {
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	public void test_tco_7_str() {
-
-		_setup();
-		_run_script();
-	}
-
-	@Test
-	public void test_tco_8_no_op() {
+	void test_tco_7_str() {
 
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	public void test_tco_9_infinite_recursion_detected() {
+	void test_tco_8_no_op() {
 
 		_setup();
 		_run_script();
 	}
 
 	@Test
-	public void test_tco_a_reduct_by_0() {
+	void test_tco_9_infinite_recursion_detected() {
+
+		_setup();
+		_run_script();
+	}
+
+	@Test
+	void test_tco_a_reduct_by_0() {
 
 		_setup();
 		_run_script();
