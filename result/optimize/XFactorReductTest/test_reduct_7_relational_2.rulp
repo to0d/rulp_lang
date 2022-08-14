@@ -1,39 +1,35 @@
-(defvar ?a 1)
-(defvar ?b 2)
-;=>
-
-(reduct (= ?a ?a))
+(reduct (= a a))
 ;=>true
 
-(reduct (= ?a ?b))
+(reduct (= a b))
 ;=>
 
-(reduct (!= ?a ?a))
+(reduct (!= a a))
 ;=>false
 
-(reduct (!= ?a ?b))
+(reduct (!= a b))
 ;=>
 
-(reduct (> ?a ?b))
+(reduct (> a b))
 ;=>
 
-(reduct (> ?a ?a))
+(reduct (> a a))
+;=>false
+
+(reduct (< a a))
+;=>false
+
+(reduct (< a b))
 ;=>
 
-(reduct (< ?a ?a))
+(reduct (>= a a))
+;=>true
+
+(reduct (>= a b))
 ;=>
 
-(reduct (< ?a ?b))
-;=>
+(reduct (<= a a))
+;=>true
 
-(reduct (>= ?a ?a))
-;=>
-
-(reduct (>= ?a ?b))
-;=>
-
-(reduct (<= ?a ?a))
-;=>
-
-(reduct (<= ?a ?b))
+(reduct (<= a b))
 ;=>

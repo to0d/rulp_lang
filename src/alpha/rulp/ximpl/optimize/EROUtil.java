@@ -1,6 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.F_BREAK;
 import static alpha.rulp.lang.Constant.F_B_AND;
 import static alpha.rulp.lang.Constant.F_B_OR;
@@ -691,6 +691,74 @@ public class EROUtil {
 
 	}
 
+	static class RelationalUtil {
+
+		static boolean isSameOperand(List<IRObject> rebuildList) throws RException {
+			return rebuildList.size() == 3
+					&& _toUniqString(rebuildList.get(1)).equals(_toUniqString(rebuildList.get(2)));
+		}
+
+		public static IRObject rebuildEqual(List<IRObject> rebuildList) throws RException {
+
+			// (= a a)
+			if (isSameOperand(rebuildList)) {
+				return RulpFactory.createBoolean(true);
+			}
+
+			return null;
+		}
+
+		public static IRObject rebuildNotEqual(List<IRObject> rebuildList) throws RException {
+
+			// (!= a a)
+			if (isSameOperand(rebuildList)) {
+				return RulpFactory.createBoolean(false);
+			}
+
+			return null;
+		}
+
+		public static IRObject rebuildBigger(List<IRObject> rebuildList) throws RException {
+
+			// (> a a)
+			if (isSameOperand(rebuildList)) {
+				return RulpFactory.createBoolean(false);
+			}
+
+			return null;
+		}
+
+		public static IRObject rebuildSmaller(List<IRObject> rebuildList) throws RException {
+
+			// (< a a)
+			if (isSameOperand(rebuildList)) {
+				return RulpFactory.createBoolean(false);
+			}
+
+			return null;
+		}
+
+		public static IRObject rebuildBiggerOrEqual(List<IRObject> rebuildList) throws RException {
+
+			// (>= a a)
+			if (isSameOperand(rebuildList)) {
+				return RulpFactory.createBoolean(true);
+			}
+
+			return null;
+		}
+
+		public static IRObject rebuildSmallerOrEqual(List<IRObject> rebuildList) throws RException {
+
+			// (<= a a)
+			if (isSameOperand(rebuildList)) {
+				return RulpFactory.createBoolean(true);
+			}
+
+			return null;
+		}
+	}
+
 	static class BoolUtil {
 
 		private static int _rebuildAnd(List<IRObject> list, int fromIndex, int toIndex) throws RException {
@@ -1229,6 +1297,30 @@ public class EROUtil {
 
 			case F_B_OR:
 				rebuildObj = BoolUtil.rebuildOr(rebuildList);
+				break;
+
+			case F_O_EQ:
+				rebuildObj = RelationalUtil.rebuildEqual(rebuildList);
+				break;
+
+			case F_O_NE:
+				rebuildObj = RelationalUtil.rebuildNotEqual(rebuildList);
+				break;
+
+			case F_O_GT:
+				rebuildObj = RelationalUtil.rebuildBigger(rebuildList);
+				break;
+
+			case F_O_LT:
+				rebuildObj = RelationalUtil.rebuildSmaller(rebuildList);
+				break;
+
+			case F_O_GE:
+				rebuildObj = RelationalUtil.rebuildBiggerOrEqual(rebuildList);
+				break;
+
+			case F_O_LE:
+				rebuildObj = RelationalUtil.rebuildSmallerOrEqual(rebuildList);
 				break;
 
 			default:
