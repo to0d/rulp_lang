@@ -847,6 +847,61 @@ public class EROUtil {
 		return RulpUtil.asConstant(value).getValue();
 	}
 
+	private static IRObject _expandDoExpr(IRObject obj) throws RException {
+
+		if (obj == null || !RulpUtil.isExpr(obj, A_DO)) {
+			return obj;
+		}
+
+		IRExpr expr = (IRExpr) obj;
+		int size = expr.size();
+
+		ArrayList<IRObject> newList = null;
+		int remove = 0;
+
+		for (int i = 1; i < size; ++i) {
+
+			IRObject ex = expr.get(i);
+			if (ex == null || RulpUtil.isEmptyExpr(ex)) {
+				++remove;
+				continue;
+			}
+
+			IRObject ey = _expandDoExpr(ex);
+			if (ex == ey) {
+				if (newList != null) {
+					newList.add(ex);
+				}
+				continue;
+			}
+
+			if (newList == null) {
+				newList = new ArrayList<>();
+				for (int j = 0; j < i; ++j) {
+					newList.add(expr.get(j));
+				}
+			}
+
+			if (RulpUtil.isExpr(ey, A_DO)) {
+				RulpUtil.addAll(newList, RulpUtil.asExpression(ey).listIterator(1));
+			} else {
+				newList.add(ey);
+			}
+		}
+
+		if (newList == null) {
+
+			// no valid expr
+			if (remove > 0) {
+				return OptUtil.asExpr(null);
+			}
+
+			return obj;
+		}
+
+		return RulpFactory.createExpression(newList);
+	}
+
 	private static int _expandExpr(List<IRObject> list, int fromIndex, int toIndex, String name) throws RException {
 
 		int endIndex = toIndex;
@@ -922,6 +977,24 @@ public class EROUtil {
 		}
 
 		if (!OptUtil.isConstValue(expr.listIterator(1))) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private static boolean _isTypeOf(List<IRObject> list, int fromIndex, int toIndex, RType... types) {
+
+		NEXT: for (int i = fromIndex; i < toIndex; ++i) {
+
+			IRObject obj = list.get(i);
+			RType type = obj.getType();
+			for (RType t : types) {
+				if (t == type) {
+					continue NEXT;
+				}
+			}
+
 			return false;
 		}
 
@@ -1134,24 +1207,6 @@ public class EROUtil {
 		return null;
 	}
 
-	private static boolean _isTypeOf(List<IRObject> list, int fromIndex, int toIndex, RType... types) {
-
-		NEXT: for (int i = fromIndex; i < toIndex; ++i) {
-
-			IRObject obj = list.get(i);
-			RType type = obj.getType();
-			for (RType t : types) {
-				if (t == type) {
-					continue NEXT;
-				}
-			}
-
-			return false;
-		}
-
-		return true;
-	}
-
 	private static IRObject _rebuildDefun(List<IRObject> rebuildList) throws RException {
 
 		IRExpr funBody = null;
@@ -1169,7 +1224,7 @@ public class EROUtil {
 	}
 
 	// (do () (b action))
-	private static IRObject _rebuildDo(List<IRObject> rebuildList) throws RException {
+	private static IRExpr _rebuildDo(List<IRObject> rebuildList) throws RException {
 
 		int size = rebuildList.size();
 		int pos = _removeEmptyExpr(rebuildList, 1);
@@ -1193,7 +1248,31 @@ public class EROUtil {
 	}
 
 	private static IRExpr _rebuildFuncBody(IRExpr expr) throws RException {
-		return _removeExprAfterReturn(expr);
+		return _removeExprAfterReturn(RulpUtil.asExpression(_expandDoExpr(expr)));
+	}
+
+	private static IRObject _rebuildFuncBody(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		IRExpr newBody = _rebuildFuncBody(expr);
+		if (newBody != null) {
+			expr = newBody;
+			_incComputeCount();
+		}
+
+		ERO ero = new ERO();
+		ero.setInputExpr(expr);
+
+		if (!_rebuild(ero, interpreter, frame)) {
+			return ero.outputObj == null ? expr : ero.outputObj;
+		}
+
+		if (ero.outputObj != null) {
+			return ero.outputObj;
+		}
+
+		IRObject rst = interpreter.compute(frame, expr);
+		_incComputeCount();
+		return rst;
 	}
 
 	// (if true A B) or (if false A B)
@@ -1305,6 +1384,60 @@ public class EROUtil {
 
 					return RuntimeUtil.rebuild(doExpr, replaceMap);
 				}
+
+				IRObject doExprObj = rebuild(RulpUtil.toDoExpr(XRFactorLoop.getLoop2DoList(expr)), interpreter, frame);
+				if (RulpUtil.isEmptyExpr(doExprObj)) {
+					return OptUtil.asExpr(null);
+				}
+
+				// has return statement in do expr
+				if (doExprObj.getType() == RType.EXPR) {
+
+					doExprObj = _expandDoExpr(doExprObj);
+
+					IRExpr returnExpr = null;
+
+					if (RulpUtil.isExpr(doExprObj, A_DO)) {
+
+						int returnIndex = -1;
+
+						IRExpr doExpr = RulpUtil.asExpression(doExprObj);
+						NEXT_STMT: for (int i = 1; i < doExpr.size(); ++i) {
+							if (RulpUtil.isExpr(doExpr.get(i), F_RETURN)) {
+								returnIndex = i;
+								break NEXT_STMT;
+							}
+						}
+
+						if (returnIndex != -1) {
+
+							if (1 == returnIndex) {
+								returnExpr = (IRExpr) doExpr.get(1);
+
+							} else {
+
+								List<IRObject> doStmts = new ArrayList<>();
+								for (int i = 1; i <= returnIndex; ++i) {
+									doStmts.add(doExpr.get(i));
+								}
+								returnExpr = RulpUtil.toDoExpr(doStmts);
+							}
+						}
+
+					} // if is do expr
+					else if (RulpUtil.isExpr(doExprObj, F_RETURN)) {
+						returnExpr = (IRExpr) doExprObj;
+					}
+
+					if (returnExpr != null) {
+
+						Map<String, IRObject> replaceMap = new HashMap<>();
+						String indexName = RulpUtil.asAtom(XRFactorLoop.getLoop2IndexObject(expr)).getName();
+						replaceMap.put(indexName, fromObj);
+						return RuntimeUtil.rebuild(returnExpr, replaceMap);
+					}
+				}
+
 			}
 		}
 
@@ -1331,6 +1464,55 @@ public class EROUtil {
 			// empty expr found
 			if (pos != size) {
 				return RulpFactory.createExpression(rebuildList.subList(0, pos));
+			}
+
+			IRObject doExprObj = rebuild(RulpUtil.toDoExpr(XRFactorLoop.getLoop3DoList(expr)), interpreter, frame);
+			if (RulpUtil.isEmptyExpr(doExprObj)) {
+				return OptUtil.asExpr(null);
+			}
+
+			// has return statement in do expr
+			if (doExprObj.getType() == RType.EXPR) {
+
+				doExprObj = _expandDoExpr(doExprObj);
+
+				IRExpr returnExpr = null;
+
+				if (RulpUtil.isExpr(doExprObj, A_DO)) {
+
+					int returnIndex = -1;
+
+					IRExpr doExpr = RulpUtil.asExpression(doExprObj);
+					NEXT_STMT: for (int i = 1; i < doExpr.size(); ++i) {
+						if (RulpUtil.isExpr(doExpr.get(i), F_RETURN)) {
+							returnIndex = i;
+							break NEXT_STMT;
+						}
+					}
+
+					if (returnIndex != -1) {
+
+						if (1 == returnIndex) {
+							returnExpr = (IRExpr) doExpr.get(1);
+
+						} else {
+
+							List<IRObject> doStmts = new ArrayList<>();
+							for (int i = 1; i <= returnIndex; ++i) {
+								doStmts.add(doExpr.get(i));
+							}
+							returnExpr = RulpUtil.toDoExpr(doStmts);
+						}
+					}
+
+				} // if is do expr
+				else if (RulpUtil.isExpr(doExprObj, F_RETURN)) {
+					returnExpr = (IRExpr) doExprObj;
+				}
+
+				if (returnExpr != null) {
+					return returnExpr;
+				}
 			}
 		}
 
@@ -1572,25 +1754,11 @@ public class EROUtil {
 
 		rebuildCount.getAndIncrement();
 
-		IRExpr newBody = _rebuildFuncBody(expr);
-		if (newBody != null) {
-			expr = newBody;
-			_incComputeCount();
+		IRObject rst = _rebuildFuncBody(expr, interpreter, frame);
+		if (rst != expr && rst.getType() == RType.EXPR) {
+			rst = _rebuildFuncBody((IRExpr) rst, interpreter, frame);
 		}
 
-		ERO ero = new ERO();
-		ero.setInputExpr(expr);
-
-		if (!_rebuild(ero, interpreter, frame)) {
-			return ero.outputObj == null ? expr : ero.outputObj;
-		}
-
-		if (ero.outputObj != null) {
-			return ero.outputObj;
-		}
-
-		IRObject rst = interpreter.compute(frame, expr);
-		_incComputeCount();
 		return rst;
 	}
 

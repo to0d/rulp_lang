@@ -1364,6 +1364,15 @@ public class RulpUtil {
 		return obj.getType() == RType.ATOM && ((IRAtom) obj).getName().equals(name);
 	}
 
+	public static boolean isEmptyExpr(IRObject obj) throws RException {
+
+		if (obj.getType() != RType.EXPR) {
+			return false;
+		}
+
+		return ((IRExpr) obj).size() == 0;
+	}
+
 	public static boolean isEqual(List<String> a, List<String> b) {
 
 		if (a == null && b == null) {

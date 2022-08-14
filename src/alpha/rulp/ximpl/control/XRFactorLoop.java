@@ -43,8 +43,16 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 		return args.get(4);
 	}
 
+	public static IRObject getLoop2IndexObject(IRList args) throws RException {
+		return args.get(2);
+	}
+
 	public static IRObject getLoop2ToObject(IRList args) throws RException {
 		return args.get(6);
+	}
+
+	public static IRIterator<? extends IRObject> getLoop3DoList(IRList args) throws RException {
+		return args.listIterator(1);
 	}
 
 	public static IRObject getLoop4ByObject(IRList args) throws RException {
@@ -130,7 +138,7 @@ public class XRFactorLoop extends AbsAtomFactorAdapter implements IRFactor {
 
 		// (loop for x from 1 to 3 do ...)
 
-		String indexName = RulpUtil.asAtom(args.get(2)).getName();
+		String indexName = RulpUtil.asAtom(getLoop2IndexObject(args)).getName();
 		int fromIndex = MathUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop2FromObject(args))));
 		int toIndex = MathUtil.toInt(RulpUtil.asInteger(interpreter.compute(loopFrame, getLoop2ToObject(args))));
 

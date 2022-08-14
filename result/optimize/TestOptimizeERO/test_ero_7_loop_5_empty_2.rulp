@@ -1,8 +1,7 @@
-
 (defun fun (?v)
     (loop
-        (if (2 > 1)
-            (return ?x)
+        (if (> 2 1)
+            (return ?v)
         )
     )
 
@@ -17,7 +16,7 @@
 ;=>'(opt-ero)
 
 (fun 5)
-;=>2
+;=>
 
 (opt-status)
 ;=>
