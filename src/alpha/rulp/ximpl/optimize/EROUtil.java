@@ -193,7 +193,41 @@ public class EROUtil {
 				}
 			}
 
+			if (size == -1) {
+				size = toIndex - fromIndex;
+			}
+
 			// (* a (power a 2)) ==> (* 1 (power a 3))
+			NEXT_ATOM: for (int i = 0; i < (size - 1); ++i) {
+
+				IRObject ex = list.get(fromIndex + i);
+				if (!RulpUtil.isAtom(ex)) {
+					continue;
+				}
+
+				String atomName = RulpUtil.asAtom(ex).getName();
+				for (int j = i + 1; i < size; ++i) {
+
+					IRObject ey = list.get(fromIndex + j);
+					if (RulpUtil.isExpr(ey, F_O_POWER)) {
+
+						// (power a 2)
+						IRExpr powerExpr = (IRExpr) ey;
+						if (powerExpr.size() == 3 && RulpUtil.isAtom(powerExpr.get(1), atomName)
+								&& OptUtil.isConstNumber(powerExpr.get(2))) {
+
+							IRExpr newExpr = RulpFactory.createExpression(powerExpr.get(0), powerExpr.get(1),
+									MathUtil.computeArithmeticExpression(RArithmeticOperator.ADD, powerExpr.get(2),
+											RulpFactory.createInteger(1)));
+
+							list.set(fromIndex + i, RulpFactory.createInteger(1));
+							list.set(fromIndex + j, newExpr);
+							update++;
+							continue NEXT_ATOM;
+						}
+					}
+				}
+			}
 
 			return update == 0 ? -1 : size;
 		}
