@@ -1,6 +1,7 @@
 OUT: 100
 OUT: 1000
-ERR: alpha.rulp.lang.RException: Not support type: 1.0
-ERR: alpha.rulp.lang.RException: Not support type: 100.0D
-ERR: alpha.rulp.lang.RException: Not support type: abc
-ERR: alpha.rulp.lang.RException: Not support type: abc
+OUT: 1
+OUT: 100
+OUT: 123
+ERR: alpha.rulp.lang.RException: Can't convert to long: abc
+ERR: java.lang.NumberFormatException: For input string: "abc"

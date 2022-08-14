@@ -201,8 +201,8 @@ public class MathUtil {
 
 		case LONG: {
 
-			long av = MathUtil.toLong(a);
-			long bv = MathUtil.toLong(b);
+			long av = RulpUtil.toLong(a);
+			long bv = RulpUtil.toLong(b);
 
 			switch (op) {
 			case ADD:
@@ -381,8 +381,8 @@ public class MathUtil {
 
 		case LONG: {
 
-			long av = MathUtil.toLong(a);
-			long bv = MathUtil.toLong(b);
+			long av = RulpUtil.toLong(a);
+			long bv = RulpUtil.toLong(b);
 
 			switch (op) {
 
@@ -467,7 +467,7 @@ public class MathUtil {
 
 		case INT:
 		case LONG:
-			return toLong(a) != 0;
+			return RulpUtil.toLong(a) != 0;
 
 		default:
 			throw new RException(String.format("Not support type: value=%s, type=%s", a.toString(), a.getType()));
@@ -538,29 +538,6 @@ public class MathUtil {
 
 		default:
 			throw new RException("Can't convert to integer: " + a);
-		}
-	}
-
-	public static long toLong(IRObject a) throws RException {
-
-		switch (a.getType()) {
-		case FLOAT:
-			return (long) ((IRFloat) a).asFloat();
-
-		case DOUBLE:
-			return (long) ((IRDouble) a).asDouble();
-
-		case INT:
-			return ((IRInteger) a).asInteger();
-
-		case LONG:
-			return ((IRLong) a).asLong();
-
-		case STRING:
-			return Long.valueOf(RulpUtil.asString(a).asString());
-
-		default:
-			throw new RException("Can't convert to long: " + a);
 		}
 	}
 

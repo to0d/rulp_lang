@@ -1,7 +1,7 @@
 package beta.test.utils;
 
 import static alpha.rulp.lang.Constant.A_ARRAY;
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_ATOM;
 import static alpha.rulp.lang.Constant.A_BLOB;
 import static alpha.rulp.lang.Constant.A_BOOL;
 import static alpha.rulp.lang.Constant.A_CLASS;
@@ -39,6 +39,14 @@ import static alpha.rulp.lang.Constant.A_THREAD_UNSAFE;
 import static alpha.rulp.lang.Constant.A_VAR;
 import static alpha.rulp.lang.Constant.F_B_AND;
 import static alpha.rulp.lang.Constant.F_COMPUTE;
+import static alpha.rulp.lang.Constant.F_EQUAL;
+import static alpha.rulp.lang.Constant.F_NOT_EQUAL;
+import static alpha.rulp.lang.Constant.F_O_EQ;
+import static alpha.rulp.lang.Constant.F_O_GE;
+import static alpha.rulp.lang.Constant.F_O_GT;
+import static alpha.rulp.lang.Constant.F_O_LE;
+import static alpha.rulp.lang.Constant.F_O_LT;
+import static alpha.rulp.lang.Constant.F_O_NE;
 import static alpha.rulp.lang.Constant.F_RETURN;
 import static alpha.rulp.lang.Constant.O_ADD;
 import static alpha.rulp.lang.Constant.O_B_AND;

@@ -8,16 +8,11 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import alpha.rulp.lang.IRObject;
-import alpha.rulp.lang.RException;
 import alpha.rulp.utils.FileUtil;
-import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpTestBase;
-import alpha.rulp.utils.RulpUtil;
 
 public class FileUtilTest extends RulpTestBase {
 

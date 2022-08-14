@@ -1,2 +1,8 @@
 (type-of $(random))
 ;=>
+
+(random 1)
+;err
+
+(>= (random) 0)
+;=>

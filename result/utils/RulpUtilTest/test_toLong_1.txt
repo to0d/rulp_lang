@@ -2,5 +2,6 @@ INP: 100
 INP: 1000L
 INP: 1.0
 INP: 100d
+INP: "123"
 INP: abc
 INP: "abc"

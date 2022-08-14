@@ -1,3 +1,15 @@
 (type-of $(random-int))
 ;=>int
 
+(random-int 1 2)
+;err:
+Invalid parameters: (random-int 1 2)
+at (random-int 1 2) ; main-2
+;eof
+
+(>= (random-int) 0)
+;=>true
+
+(>= (random-int 10) 0)
+;=>true
+

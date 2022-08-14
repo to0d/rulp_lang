@@ -463,7 +463,7 @@ public class RulpTestBase {
 
 					try {
 						output = IT_PRE_OUT + action.test(input);
-					} catch (RException | IOException e) {
+					} catch (Exception e) {
 						output = IT_PRE_ERR + e.toString();
 					}
 
@@ -489,7 +489,7 @@ public class RulpTestBase {
 
 					try {
 						output = IT_PRE_OUT + action.test(input);
-					} catch (RException | IOException e) {
+					} catch (Exception e) {
 						output = IT_PRE_ERR + e.toString();
 					}
 

@@ -1071,8 +1071,8 @@ public class RulpUtil {
 
 		case LONG: {
 
-			long av = MathUtil.toLong(a);
-			long bv = MathUtil.toLong(b);
+			long av = RulpUtil.toLong(a);
+			long bv = RulpUtil.toLong(b);
 
 			if (av > bv) {
 				return 1;
@@ -2304,13 +2304,23 @@ public class RulpUtil {
 	public static long toLong(IRObject a) throws RException {
 
 		switch (a.getType()) {
+		case FLOAT:
+			return (long) ((IRFloat) a).asFloat();
+
+		case DOUBLE:
+			return (long) ((IRDouble) a).asDouble();
+
 		case INT:
 			return ((IRInteger) a).asInteger();
+
 		case LONG:
 			return ((IRLong) a).asLong();
 
+		case STRING:
+			return Long.valueOf(RulpUtil.asString(a).asString());
+
 		default:
-			throw new RException(String.format("Not support type: %s", a.toString()));
+			throw new RException("Can't convert to long: " + a);
 		}
 	}
 

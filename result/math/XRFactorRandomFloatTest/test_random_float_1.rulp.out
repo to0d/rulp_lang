@@ -1,0 +1,12 @@
+(type-of $(random-float))
+;=>float
+
+(random-float 1)
+;err:
+Invalid parameters: (random-float 1)
+at (random-float 1) ; main-2
+;eof
+
+(>= (random-float) 0.0)
+;=>true
+
