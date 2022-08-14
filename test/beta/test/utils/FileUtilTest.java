@@ -8,13 +8,26 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
+import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.RException;
 import alpha.rulp.utils.FileUtil;
+import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpTestBase;
+import alpha.rulp.utils.RulpUtil;
 
 public class FileUtilTest extends RulpTestBase {
+
+	String _getFilePreName(String input) {
+		return FileUtil.getFilePreName(input);
+	}
+
+	String _getFileSubffix(String input) {
+		return FileUtil.getFileSubffix(input);
+	}
 
 	@Test
 	void test_copyByChannel() {
@@ -48,7 +61,7 @@ public class FileUtilTest extends RulpTestBase {
 			assertTrue(new File(cpyFilePath).exists());
 
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			fail(e.toString());
 		}
 
@@ -74,7 +87,7 @@ public class FileUtilTest extends RulpTestBase {
 			out.println("line1");
 			out.println("line2");
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			fail(e.toString());
 		}
 
@@ -88,6 +101,28 @@ public class FileUtilTest extends RulpTestBase {
 	}
 
 	@Test
+	void test_getFilePreName_2() {
+
+		_setup();
+
+		_test((input) -> {
+			return _getFilePreName(input);
+		});
+
+	}
+
+	@Test
+	void test_getFileSubffix_2() {
+
+		_setup();
+
+		_test((input) -> {
+			return _getFileSubffix(input);
+		});
+
+	}
+
+	@Test
 	void test_isAbsPath() {
 
 		_setup();
@@ -95,6 +130,14 @@ public class FileUtilTest extends RulpTestBase {
 		assertFalse(FileUtil.isAbsPath(""));
 		assertFalse(FileUtil.isAbsPath(null));
 		assertTrue(FileUtil.isAbsPath("C:\\"));
+	}
+
+	@Test
+	void test_isExistFile_2() {
+
+		assertFalse(FileUtil.isExistFile(null, null));
+		assertFalse(FileUtil.isExistFile(".", "not_exist"));
+		assertTrue(FileUtil.isExistFile(".", ".project"));
 	}
 
 	@Test
@@ -182,7 +225,7 @@ public class FileUtilTest extends RulpTestBase {
 			out.println("line1");
 			out.println("line2");
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			fail(e.toString());
 		}
 
@@ -191,7 +234,7 @@ public class FileUtilTest extends RulpTestBase {
 			out.println("line1");
 			out.println("line2");
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			fail(e.toString());
 		}
 
@@ -231,11 +274,18 @@ public class FileUtilTest extends RulpTestBase {
 	}
 
 	@Test
+	void test_toValidLinuxPath() {
+
+		_setup();
+
+		assertEquals("C:\\data\\itool\\rulp_lang", FileUtil.toValidLinuxPath("", false));
+	}
+
+	@Test
 	void test_toValidPath() {
 
 		_setup();
 		assertEquals("C:\\data\\itool\\rulp_lang\\", FileUtil.toValidPath(""));
 		assertEquals("C:\\data\\itool\\rulp_lang\\", FileUtil.toValidPath(null));
 	}
-
 }

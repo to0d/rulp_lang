@@ -507,6 +507,20 @@ public class RulpUtilTest extends RulpTestBase {
 	}
 
 	@Test
+	void test_toString_3() {
+
+		_setup();
+
+		try {
+			IRList list = RulpFactory.createList(RulpFactory.createAtom("a"), RulpFactory.createAtom("b"));
+			assertEquals("a b", RulpUtil.toString(list.iterator()));
+		} catch (RException e) {
+//			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+
+	@Test
 	void test_toStringList_1() {
 
 		_setup();
