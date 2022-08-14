@@ -193,6 +193,8 @@ public class EROUtil {
 				}
 			}
 
+			// (* a (power a 2)) ==> (* 1 (power a 3))
+
 			return update == 0 ? -1 : size;
 		}
 
@@ -550,17 +552,18 @@ public class EROUtil {
 				return OptUtil.asExpr(null);
 			}
 
-			// (power a) ==> a
-			if (size == 2) {
-				return rebuildList.get(1);
-			}
-
 			switch (op) {
 			case SUB:
 				size = _rebuildSub(rebuildList, 1, size);
 				break;
 
 			case POWER:
+
+				// (power a) ==> a
+				if (size == 2) {
+					return rebuildList.get(1);
+				}
+
 				size = _rebuildPower(rebuildList, 1, size);
 				break;
 
@@ -1165,6 +1168,25 @@ public class EROUtil {
 		return false;
 	}
 
+	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value
+	private static IRObject _rebuild(IRList expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		ERO ero = new ERO();
+		ero.setInputExpr(expr);
+
+		if (!_rebuild(ero, interpreter, frame)) {
+			return ero.outputObj == null ? expr : ero.outputObj;
+		}
+
+		if (ero.outputObj != null) {
+			return ero.outputObj;
+		}
+
+		IRObject rst = interpreter.compute(frame, expr);
+		_incComputeCount();
+		return rst;
+	}
+
 	// (case a (a action) (b action))
 	private static IRObject _rebuildCase(List<IRObject> rebuildList) throws RException {
 
@@ -1729,24 +1751,15 @@ public class EROUtil {
 		return rebuildCount.get();
 	}
 
-	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value
 	public static IRObject rebuild(IRList expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		rebuildCount.getAndIncrement();
 
-		ERO ero = new ERO();
-		ero.setInputExpr(expr);
-
-		if (!_rebuild(ero, interpreter, frame)) {
-			return ero.outputObj == null ? expr : ero.outputObj;
+		IRObject rst = _rebuild(expr, interpreter, frame);
+		if (rst != expr && rst.getType() == RType.EXPR) {
+			rst = _rebuild((IRExpr) rst, interpreter, frame);
 		}
 
-		if (ero.outputObj != null) {
-			return ero.outputObj;
-		}
-
-		IRObject rst = interpreter.compute(frame, expr);
-		_incComputeCount();
 		return rst;
 	}
 
