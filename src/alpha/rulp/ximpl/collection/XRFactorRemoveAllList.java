@@ -11,9 +11,11 @@ package alpha.rulp.ximpl.collection;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
@@ -26,53 +28,65 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorRemove extends AbsAtomFactorAdapter implements IRFactor {
+public class XRFactorRemoveAllList extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorRemove(String factorName) {
+	public XRFactorRemoveAllList(String factorName) {
 		super(factorName);
 	}
 
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() < 3) {
+		if (args.size() != 3) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		Map<String, List<IRObject>> uniqMap = new HashMap<>();
-		ArrayList<IRObject> rstList = new ArrayList<>();
+		IRList list1 = RulpUtil.asList(interpreter.compute(frame, args.get(1)));
+		if (list1.isEmpty()) {
+			return list1;
+		}
 
-		IRList list = RulpUtil.asList(interpreter.compute(frame, args.get(1)));
+		IRList list2 = RulpUtil.asList(interpreter.compute(frame, args.get(2)));
+		if (list2.isEmpty()) {
+			return list1;
+		}
+
+		Set<String> removedNameSet = new HashSet<>();
 		{
-			IRIterator<? extends IRObject> it = list.iterator();
+			IRIterator<? extends IRObject> it = list2.iterator();
 			while (it.hasNext()) {
-
-				IRObject obj = it.next();
-				rstList.add(obj);
-
-				String uniqName = RulpUtil.toUniqString(obj);
-				List<IRObject> uniqList = uniqMap.get(uniqName);
-				if (uniqList == null) {
-					uniqList = new LinkedList<>();
-					uniqMap.put(uniqName, uniqList);
-				}
-
-				uniqList.add(obj);
+				removedNameSet.add(RulpUtil.toUniqString(it.next()));
 			}
 		}
 
-		IRIterator<? extends IRObject> it = args.listIterator(2);
-		while (it.hasNext()) {
+		ArrayList<IRObject> rstList = null;
+		int size = list1.size();
+		int deleteCount = 0;
+		for (int i = 0; i < size; ++i) {
 
-			IRObject obj = it.next();
-			String uniqName = RulpUtil.toUniqString(obj);
+			IRObject obj = list1.get(i);
 
-			List<IRObject> uniqList = uniqMap.get(uniqName);
-			if (uniqList == null) {
-				continue;
+			// remove
+			if (removedNameSet.contains(RulpUtil.toUniqString(obj))) {
+				if (rstList == null) {
+					rstList = new ArrayList<>();
+					for (int j = 0; j < i; ++j) {
+						rstList.add(list1.get(j));
+					}
+				}
+
+				deleteCount++;
 			}
+			// keep
+			else {
+				if (rstList != null) {
+					rstList.add(obj);
+				}
+			}
+		}
 
-			rstList.removeAll(uniqList);
+		if (deleteCount == 0) {
+			return list1;
 		}
 
 		return RulpFactory.createList(rstList);

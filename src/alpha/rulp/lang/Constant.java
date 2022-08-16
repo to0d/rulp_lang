@@ -433,7 +433,7 @@ public interface Constant {
 
 	String F_REF = "ref";
 
-	String F_REMOVE = "remove";
+	String F_REMOVE_ALL_LIST = "remove-all-list";
 
 	String F_RETURN = "return";
 

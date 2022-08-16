@@ -2,13 +2,13 @@ id=0, name=root, lvl=0, ref=0/0, entry=212, subject=root
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?os.version          : -232     0        1    var        10.0 : type=string  
-?os.name             : -231     0        1    var        Windows 10 : type=string
-?path.separator      : -230     0        1    var        ; : type=string     
-?file.separator      : -229     0        1    var        \ : type=string     
-?user.dir            : -228     0        1    var        C:\data\itool\rulp_lang : type=string
-?user.name           : -227     0        1    var        921511672 : type=string
-?user.home           : -226     0        1    var        C:\Users\YANLIU : type=string
+?os.version          : -234     0        1    var        10.0 : type=string  
+?os.name             : -233     0        1    var        Windows 10 : type=string
+?path.separator      : -232     0        1    var        ; : type=string     
+?file.separator      : -231     0        1    var        \ : type=string     
+?user.dir            : -230     0        1    var        C:\data\itool\rulp_lang : type=string
+?user.name           : -229     0        1    var        921511672 : type=string
+?user.home           : -228     0        1    var        C:\Users\YANLIU : type=string
 rulp-object-count    : -207     0        0    factor     rulp-object-count   
 is-debug-active      : -206     0        0    factor     is-debug-active     
 enddbg               : -205     0        0    factor     enddbg              
@@ -42,7 +42,7 @@ sort-list            : -178     0        0    factor     sort-list
 uniq                 : -177     0        0    factor     uniq                
 union                : -176     0        0    factor     union               
 join                 : -175     0        0    factor     join                
-remove               : -174     0        0    factor     remove              
+remove-all-list      : -174     0        0    factor     remove-all-list     
 add-list-to-list     : -173     0        0    factor     add-list-to-list    
 get-of-list          : -172     0        0    factor     get-of-list         
 foreach              : -171     0        0    factor     foreach             

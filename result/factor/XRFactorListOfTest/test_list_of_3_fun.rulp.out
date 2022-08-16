@@ -176,7 +176,7 @@ root::random-int
 root::read-line
 root::reduct
 root::ref
-root::remove
+root::remove-all-list
 root::return
 root::return-type-of
 root::reverse
@@ -269,6 +269,8 @@ system::index-of
 system::is-empty
 system::length-of
 system::println
+system::remove
+system::remove-all
 system::root
 system::size-of
 system::system

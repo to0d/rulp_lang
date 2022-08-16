@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import alpha.rulp.utils.RulpTestBase;
 
-class XRFactorRemoveTest extends RulpTestBase {
+class TestRemove extends RulpTestBase {
 
 	@Test
-	void test_remove_1_atom() {
+	void test_remove_list_1_atom() {
 		_setup();
 		_run_script();
 	}

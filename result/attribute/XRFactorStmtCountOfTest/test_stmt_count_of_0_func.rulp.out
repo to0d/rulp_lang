@@ -34,6 +34,8 @@ obj=index-of            , type=func    , stmt-count=42
 obj=is-empty            , type=func    , stmt-count=9
 obj=length-of           , type=func    , stmt-count=4
 obj=println             , type=func    , stmt-count=2
+obj=remove              , type=func    , stmt-count=4
+obj=remove-all          , type=func    , stmt-count=4
 obj=size-of             , type=func    , stmt-count=4
 obj=to-array            , type=func    , stmt-count=6
 obj=to-list             , type=func    , stmt-count=4

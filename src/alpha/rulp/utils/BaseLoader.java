@@ -46,7 +46,7 @@ import alpha.rulp.ximpl.collection.XRFactorForeach;
 import alpha.rulp.ximpl.collection.XRFactorGetOfArray;
 import alpha.rulp.ximpl.collection.XRFactorGetOfList;
 import alpha.rulp.ximpl.collection.XRFactorJoin;
-import alpha.rulp.ximpl.collection.XRFactorRemove;
+import alpha.rulp.ximpl.collection.XRFactorRemoveAllList;
 import alpha.rulp.ximpl.collection.XRFactorReverse;
 import alpha.rulp.ximpl.collection.XRFactorSizeOfArray;
 import alpha.rulp.ximpl.collection.XRFactorSizeOfList;
@@ -385,7 +385,7 @@ public class BaseLoader implements IRObjectLoader {
 		RulpUtil.addFrameObject(frame, new XRFactorGetOfList(F_GET_OF_LIST));
 		// RulpUtil.addFrameObject(rootFrame, new XRFactorAddToList(F_ADD_TO_LIST));
 		RulpUtil.addFrameObject(frame, new XRFactorAddListToList(F_ADD_LIST_TO_LIST));
-		RulpUtil.addFrameObject(frame, new XRFactorRemove(F_REMOVE));
+		RulpUtil.addFrameObject(frame, new XRFactorRemoveAllList(F_REMOVE_ALL_LIST));
 		RulpUtil.addFrameObject(frame, new XRFactorJoin(F_JOIN));
 		RulpUtil.addFrameObject(frame, new XRFactorUnion(F_UNION));
 		RulpUtil.addFrameObject(frame, new XRFactorUniq(F_UNIQ));

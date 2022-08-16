@@ -112,7 +112,7 @@
 (add-attribute power                 stable)
 (add-attribute property-of           stable)
 (add-attribute ref                   stable)
-(add-attribute remove                stable)
+(add-attribute remove-all-list       stable)
 (add-attribute return                stable)
 (add-attribute reverse               stable)
 (add-attribute seta                  stable)
@@ -252,6 +252,9 @@
     )    
     (return ?pos)
 )
+
+(defun remove ((?l list) ?e0) (return (remove-all-list ?l '(?e0))))
+(defun remove-all ((?l1 list) (?l2 list)) (return (remove-all-list ?l1 ?l2)))
 
 ;****************************************************;
 ; Array tools

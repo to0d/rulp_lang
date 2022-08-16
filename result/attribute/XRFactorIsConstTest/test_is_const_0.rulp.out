@@ -148,7 +148,7 @@ obj=random-int          , type=factor
 obj=read-line           , type=factor
 obj=reduct              , type=factor
 obj=ref                 , type=factor
-obj=remove              , type=factor
+obj=remove-all-list     , type=factor
 obj=return              , type=factor
 obj=return-type-of      , type=factor
 obj=reverse             , type=factor
@@ -229,6 +229,8 @@ obj=~                   , type=factor
 obj=add-all             , type=func
 obj=cmp                 , type=func
 obj=index-of            , type=func
+obj=remove              , type=func
+obj=remove-all          , type=func
 obj=to-array            , type=func
 
 ;eof

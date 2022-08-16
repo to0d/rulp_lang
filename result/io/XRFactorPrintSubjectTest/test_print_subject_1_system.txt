@@ -1,8 +1,10 @@
-id=1, name=system, lvl=1, ref=0/0, entry=20, pid=0(root), subject=system
+id=1, name=system, lvl=1, ref=0/0, entry=22, pid=0(root), subject=system
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-use                  : -225     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=frame@system
+use                  : -227     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=frame@system
+remove-all           : -226     1        1    func       (remove-all list list) : frame=frame@system
+remove               : -225     1        1    func       (remove list nil) : frame=frame@system
 index-of             : -224     1        1    func       (index-of nil list) : frame=frame@system
 get                  : -223     1        1    funcList   '((get array int int) (get array int) (get list int)) : frame=null, type=list
                                          1    func       (get list int) : frame=frame@system

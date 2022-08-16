@@ -114,7 +114,7 @@ obj=private             , type=atom
 obj=property-of         , type=factor
 obj=public              , type=atom
 obj=ref                 , type=factor
-obj=remove              , type=factor
+obj=remove-all-list     , type=factor
 obj=return              , type=factor
 obj=reverse             , type=factor
 obj=seta                , type=factor
@@ -176,6 +176,8 @@ obj=equal               , type=func
 obj=get                 , type=func
 obj=is-empty            , type=func
 obj=length-of           , type=func
+obj=remove              , type=func
+obj=remove-all          , type=func
 obj=size-of             , type=func
 obj=to-array            , type=func
 obj=to-list             , type=func
