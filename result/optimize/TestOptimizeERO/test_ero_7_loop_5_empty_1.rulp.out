@@ -13,7 +13,7 @@
 ;=>nil
 ;out:
 (defun fun (?v)
-    (return 1)
+    (return[stable] 1)
 )[opt-ero]
 
 ;eof

@@ -12,9 +12,9 @@
 ;out:
 (defun fun (?v)
     (if[stable] (<=[atom stable] ?v 0)
-        (return 1)
+        (return[stable] 1)
     )
-    (return (* ?v (fun (- ?v 1))))
+    (return[stable] (*[atom return-type=1 stable] ?v (fun (-[atom return-type=1 stable] ?v 1))))
 )[opt-ero]
 
 ;eof

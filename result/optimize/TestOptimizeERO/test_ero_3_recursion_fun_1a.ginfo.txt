@@ -71,7 +71,7 @@ Object create count:
         atom:         1606            0         1606
       string:           45            0           45
         list:           14            1           13
-        expr:          750            6          744
+        expr:          763            6          757
          var:           27           12           15
         func:           76            0           76
     template:            1            0            1

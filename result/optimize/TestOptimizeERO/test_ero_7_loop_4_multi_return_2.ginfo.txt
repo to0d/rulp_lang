@@ -15,7 +15,7 @@ Optimize info:
 ==========================================================================================================================
       Name: Status
 --------------------------------------------------------------------------------------------------------------------------
-       ERO: rebuild=1, compute=2
+       ERO: rebuild=2, compute=2
        CCO: rebuild=0, expr=0, call=0, cache=0, reuse=0
        TCO: rebuild=0, expr=0, call=0, node=0, compute=0, level=0, stack=0
        LCO: rebuild=0, arg=0, pass=0, hit=0
@@ -65,8 +65,8 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1606            0         1606
-      string:           46            0           46
+        atom:         1601            0         1601
+      string:           45            0           45
         list:           14            1           13
         expr:          739            2          737
          var:           19            4           15
@@ -120,7 +120,7 @@ print-list           : 17       2        3    funcList   '((print-list list) (pr
 to-valid-path        : 18       2        2    func       (to-valid-path string) : frame=frame@main
 day-is-bigger-than   : 19       2        2    func       (day-is-bigger-than string string) : frame=frame@main
 day-is-smaller-than  : 20       2        2    func       (day-is-smaller-than string string) : frame=frame@main
-?script-path         : 21       2        2    var        result\optimize\TestOptimizeERO\test_ero_7_loop_6.rulp : type=string
+?script-path         : 21       2        2    var        result\optimize\TestOptimizeERO\test_ero_7_loop_4_multi_return_2.rulp : type=string
 script_out           : 22       2        2    macro      script_out          
 _ginfo               : 23       2        3    funcList   '((_ginfo string) (_ginfo)) : frame=null, type=list
                                          2    func       (_ginfo) : frame=frame@main
@@ -134,7 +134,7 @@ id=3, name=_$fun$__ginfo, lvl=3, ref=1/2, entry=1, pid=2(main), subject=_$fun$__
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?rv                  : 30       3        1    var        result\optimize\TestOptimizeERO\test_ero_7_loop_6 : type=string
+?rv                  : 30       3        1    var        result\optimize\TestOptimizeERO\test_ero_7_loop_4_multi_return_2 : type=string
 ==========================================================================================================================
 
 Root var list: total=5

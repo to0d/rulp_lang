@@ -1175,69 +1175,81 @@ public class EROUtil {
 		List<IRObject> rebuildList = new ArrayList<>();
 		ERO childCC0 = new ERO();
 
-		int childReBuild = 0;
-		int childUpdate = 0;
+		int rebuildCount = 0;
+
+//		int childReBuild = 0;
+//		int childUpdate = 0;
 
 		for (int i = 0; i < size; ++i) {
 
 			IRObject ex = i == 0 ? e0 : expr.get(i);
-			boolean reBuild = false;
+//			boolean reBuild = false;
 
 			if (ex.getType() == RType.EXPR) {
 
 				childCC0.setInputExpr((IRExpr) ex);
-				reBuild = _rebuild(childCC0, interpreter, frame);
+//				reBuild = _rebuild(childCC0, interpreter, frame);
 
-				if (reBuild) {
+				if (_rebuild(childCC0, interpreter, frame) || childCC0.outputObj != null) {
 					rebuildList.add(childCC0.outputObj);
-				} else if (childCC0.outputObj != null) {
-					rebuildList.add(childCC0.outputObj);
-					childUpdate++;
+					rebuildCount++;
 				} else {
 					rebuildList.add(ex);
 				}
 
+//				if (reBuild) {
+//					rebuildList.add(childCC0.outputObj);
+//				} else if (childCC0.outputObj != null) {
+//					rebuildList.add(childCC0.outputObj);
+//					rebuildCount++;
+//				} else {
+//					rebuildList.add(ex);
+//				}
+
 			} else {
 
 				if (i == 0 && OptUtil.isAtomFactor(ex)) {
-					reBuild = true;
+					rebuildCount++;
 				} else {
-					reBuild = OptUtil.isConstValue(ex);
+//					reBuild = OptUtil.isConstValue(ex);
+					if (OptUtil.isConstValue(ex)) {
+						rebuildCount++;
+					}
 				}
 
 				rebuildList.add(ex);
 			}
 
-			if (reBuild) {
-				childReBuild++;
-			}
+//			if (reBuild) {
+//				childReBuild++;
+//			}
 		}
 
-		// No child rebuild, return directly
-		if (childReBuild == 0 && childUpdate == 0) {
-			return false;
-		}
-
-		// All child rebuild, return
-		if (childReBuild == size) {
-			return true;
-		}
-
-		int rebuildCount = 0;
+//		// No child rebuild, return directly
+//		if (childReBuild == 0 && childUpdate == 0) {
+//			return false;
+//		}
+//
+//		// All child rebuild, return
+//		if (childReBuild == size) {
+//			return true;
+//		}
 
 		// part rebuild
-		for (int i = 0; i < size; ++i) {
+		if (rebuildCount > 0) {
+			for (int i = 0; i < size; ++i) {
 
-			IRObject newObj = rebuildList.get(i);
+				IRObject newObj = rebuildList.get(i);
 
-			// Need rebuild element
-			if (newObj == null) {
+				// Need rebuild element
+				if (newObj == null) {
 
-				// Replace element with cc0 factor
-				newObj = interpreter.compute(frame, expr.get(i));
-				rebuildList.set(i, newObj);
-				rebuildCount++;
-				_incComputeCount();
+					// Replace element with cc0 factor
+					newObj = interpreter.compute(frame, expr.get(i));
+					rebuildList.set(i, newObj);
+					rebuildCount++;
+					_incComputeCount();
+				}
 			}
 		}
 
@@ -1339,7 +1351,7 @@ public class EROUtil {
 			}
 		}
 
-		if (rebuildCount > 0 || childUpdate > 0) {
+		if (rebuildCount > 0) {
 			cc0.outputObj = RulpFactory.createExpression(rebuildList);
 		}
 
