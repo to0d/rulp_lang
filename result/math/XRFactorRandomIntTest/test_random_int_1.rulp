@@ -4,8 +4,8 @@
 (random-int 1 2)
 ;err
 
-(>= (random-int) 0)
+(>= (random-int) -2147483648)
 ;=>
 
-(>= (random-int 10) 0)
+(>= (random-int 10) -2147483648)
 ;=>

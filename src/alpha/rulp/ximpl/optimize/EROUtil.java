@@ -1127,6 +1127,48 @@ public class EROUtil {
 		computeCount.getAndIncrement();
 	}
 
+	private static IRObject _removeMultiReturn(IRObject obj) throws RException {
+
+		if (obj.getType() != RType.EXPR) {
+			return null;
+		}
+
+		if (RulpUtil.isExpr(obj, F_RETURN)) {
+			return obj;
+		}
+
+		obj = _expandDoExpr(obj);
+		if (!RulpUtil.isExpr(obj, A_DO)) {
+			return null;
+		}
+
+		int returnIndex = -1;
+		IRExpr doExpr = RulpUtil.asExpression(obj);
+		NEXT_STMT: for (int i = 1; i < doExpr.size(); ++i) {
+			if (RulpUtil.isExpr(doExpr.get(i), F_RETURN)) {
+				returnIndex = i;
+				break NEXT_STMT;
+			}
+		}
+
+		switch (returnIndex) {
+		case -1:
+			return null;
+
+		case 1:
+			return (IRExpr) doExpr.get(1);
+
+		default:
+
+			List<IRObject> doStmts = new ArrayList<>();
+			for (int i = 1; i <= returnIndex; ++i) {
+				doStmts.add(doExpr.get(i));
+			}
+
+			return RulpUtil.toDoExpr(doStmts);
+		}
+	}
+
 	private static boolean _isEROExpr(IRObject e0, IRList expr, IRFrame frame) throws RException {
 
 		if (!OptUtil.isAtomFactor(e0)) {
@@ -1545,10 +1587,16 @@ public class EROUtil {
 
 		} else {
 
-			// (if condition do expr1 expr2 expr3 ...)
-			if (rebuildList.size() >= 4 && RulpUtil.isAtom(rebuildList.get(2), A_DO)) {
+			// (if (condition) do expr1 expr2 expr3 ...)
+//			if (rebuildList.size() >= 4 && RulpUtil.isAtom(rebuildList.get(2), A_DO)) {
+//
+//			}
+		}
 
-			}
+		// (if condition same-expr same-expr)
+		if (rebuildList.size() == 4 && !RulpUtil.isAtom(rebuildList.get(2), A_DO)
+				&& _toUniqString(rebuildList.get(2)).equals(_toUniqString(rebuildList.get(3)))) {
+			return rebuildList.get(2);
 		}
 
 		return null;
@@ -1602,53 +1650,61 @@ public class EROUtil {
 					return OptUtil.asExpr(null);
 				}
 
-				// has return statement in do expr
-				if (doExprObj.getType() == RType.EXPR) {
-
-					doExprObj = _expandDoExpr(doExprObj);
-
-					IRExpr returnExpr = null;
-
-					if (RulpUtil.isExpr(doExprObj, A_DO)) {
-
-						int returnIndex = -1;
-
-						IRExpr doExpr = RulpUtil.asExpression(doExprObj);
-						NEXT_STMT: for (int i = 1; i < doExpr.size(); ++i) {
-							if (RulpUtil.isExpr(doExpr.get(i), F_RETURN)) {
-								returnIndex = i;
-								break NEXT_STMT;
-							}
-						}
-
-						if (returnIndex != -1) {
-
-							if (1 == returnIndex) {
-								returnExpr = (IRExpr) doExpr.get(1);
-
-							} else {
-
-								List<IRObject> doStmts = new ArrayList<>();
-								for (int i = 1; i <= returnIndex; ++i) {
-									doStmts.add(doExpr.get(i));
-								}
-								returnExpr = RulpUtil.toDoExpr(doStmts);
-							}
-						}
-
-					} // if is do expr
-					else if (RulpUtil.isExpr(doExprObj, F_RETURN)) {
-						returnExpr = (IRExpr) doExprObj;
-					}
-
-					if (returnExpr != null) {
-
-						Map<String, IRObject> replaceMap = new HashMap<>();
-						String indexName = RulpUtil.asAtom(XRFactorLoop.getLoop2IndexObject(expr)).getName();
-						replaceMap.put(indexName, fromObj);
-						return RuntimeUtil.rebuild(returnExpr, replaceMap);
-					}
+				IRObject newObj = _removeMultiReturn(doExprObj);
+				if (newObj != null) {
+					Map<String, IRObject> replaceMap = new HashMap<>();
+					String indexName = RulpUtil.asAtom(XRFactorLoop.getLoop2IndexObject(expr)).getName();
+					replaceMap.put(indexName, fromObj);
+					return RuntimeUtil.rebuild(newObj, replaceMap);
 				}
+
+//				// has return statement in do expr
+//				if (doExprObj.getType() == RType.EXPR) {
+//
+//					doExprObj = _expandDoExpr(doExprObj);
+//
+//					IRExpr returnExpr = null;
+//
+//					if (RulpUtil.isExpr(doExprObj, A_DO)) {
+//
+//						int returnIndex = -1;
+//
+//						IRExpr doExpr = RulpUtil.asExpression(doExprObj);
+//						NEXT_STMT: for (int i = 1; i < doExpr.size(); ++i) {
+//							if (RulpUtil.isExpr(doExpr.get(i), F_RETURN)) {
+//								returnIndex = i;
+//								break NEXT_STMT;
+//							}
+//						}
+//
+//						if (returnIndex != -1) {
+//
+//							if (1 == returnIndex) {
+//								returnExpr = (IRExpr) doExpr.get(1);
+//
+//							} else {
+//
+//								List<IRObject> doStmts = new ArrayList<>();
+//								for (int i = 1; i <= returnIndex; ++i) {
+//									doStmts.add(doExpr.get(i));
+//								}
+//								returnExpr = RulpUtil.toDoExpr(doStmts);
+//							}
+//						}
+//
+//					} // if is do expr
+//					else if (RulpUtil.isExpr(doExprObj, F_RETURN)) {
+//						returnExpr = (IRExpr) doExprObj;
+//					}
+//
+//					if (returnExpr != null) {
+//
+//						Map<String, IRObject> replaceMap = new HashMap<>();
+//						String indexName = RulpUtil.asAtom(XRFactorLoop.getLoop2IndexObject(expr)).getName();
+//						replaceMap.put(indexName, fromObj);
+//						return RuntimeUtil.rebuild(returnExpr, replaceMap);
+//					}
+//				}
 
 			}
 		}
@@ -1683,49 +1739,54 @@ public class EROUtil {
 				return OptUtil.asExpr(null);
 			}
 
-			// has return statement in do expr
-			if (doExprObj.getType() == RType.EXPR) {
-
-				doExprObj = _expandDoExpr(doExprObj);
-
-				IRExpr returnExpr = null;
-
-				if (RulpUtil.isExpr(doExprObj, A_DO)) {
-
-					int returnIndex = -1;
-
-					IRExpr doExpr = RulpUtil.asExpression(doExprObj);
-					NEXT_STMT: for (int i = 1; i < doExpr.size(); ++i) {
-						if (RulpUtil.isExpr(doExpr.get(i), F_RETURN)) {
-							returnIndex = i;
-							break NEXT_STMT;
-						}
-					}
-
-					if (returnIndex != -1) {
-
-						if (1 == returnIndex) {
-							returnExpr = (IRExpr) doExpr.get(1);
-
-						} else {
-
-							List<IRObject> doStmts = new ArrayList<>();
-							for (int i = 1; i <= returnIndex; ++i) {
-								doStmts.add(doExpr.get(i));
-							}
-							returnExpr = RulpUtil.toDoExpr(doStmts);
-						}
-					}
-
-				} // if is do expr
-				else if (RulpUtil.isExpr(doExprObj, F_RETURN)) {
-					returnExpr = (IRExpr) doExprObj;
-				}
-
-				if (returnExpr != null) {
-					return returnExpr;
-				}
+			IRObject newObj = _removeMultiReturn(doExprObj);
+			if (newObj != null) {
+				return newObj;
 			}
+
+//			// has return statement in do expr
+//			if (doExprObj.getType() == RType.EXPR) {
+//
+//				doExprObj = _expandDoExpr(doExprObj);
+//
+//				IRExpr returnExpr = null;
+//
+//				if (RulpUtil.isExpr(doExprObj, A_DO)) {
+//
+//					int returnIndex = -1;
+//
+//					IRExpr doExpr = RulpUtil.asExpression(doExprObj);
+//					NEXT_STMT: for (int i = 1; i < doExpr.size(); ++i) {
+//						if (RulpUtil.isExpr(doExpr.get(i), F_RETURN)) {
+//							returnIndex = i;
+//							break NEXT_STMT;
+//						}
+//					}
+//
+//					if (returnIndex != -1) {
+//
+//						if (1 == returnIndex) {
+//							returnExpr = (IRExpr) doExpr.get(1);
+//
+//						} else {
+//
+//							List<IRObject> doStmts = new ArrayList<>();
+//							for (int i = 1; i <= returnIndex; ++i) {
+//								doStmts.add(doExpr.get(i));
+//							}
+//							returnExpr = RulpUtil.toDoExpr(doStmts);
+//						}
+//					}
+//
+//				} // if is do expr
+//				else if (RulpUtil.isExpr(doExprObj, F_RETURN)) {
+//					returnExpr = (IRExpr) doExprObj;
+//				}
+//
+//				if (returnExpr != null) {
+//					return returnExpr;
+//				}
+//			}
 		}
 
 		// (loop for x from 3 to 1 by 1 do ...

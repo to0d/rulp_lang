@@ -68,6 +68,14 @@ class TestOptimizeERO extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	void test_ero_4_if_3_multi_return_3() {
+
+		_setup();
+		_run_script();
+	}
+
 
 	@Test
 	void test_ero_5_case_1() {

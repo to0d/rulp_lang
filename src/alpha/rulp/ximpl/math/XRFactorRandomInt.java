@@ -34,7 +34,6 @@ public class XRFactorRandomInt extends AbsAtomFactorAdapter implements IRFactor 
 			return RulpFactory.createInteger(MathUtil.random_int());
 
 		case 2:
-
 			int bound = RulpUtil.asInteger(interpreter.compute(frame, args.get(1))).asInteger();
 			return RulpFactory.createInteger(MathUtil.random_int(bound));
 
