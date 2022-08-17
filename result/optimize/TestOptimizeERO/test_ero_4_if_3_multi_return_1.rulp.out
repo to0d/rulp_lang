@@ -20,7 +20,6 @@
 (defun fun (?v)
     (if[stable] (<=[atom stable] ?v 0) do
         (return[stable] 0)
-        (return[stable] 0)
     )
     (return[stable] 1)
 )[opt-ero]
@@ -36,7 +35,7 @@
 ==========================================================================================================================
       Name: Status
 --------------------------------------------------------------------------------------------------------------------------
-       ERO: rebuild=1, compute=1
+       ERO: rebuild=1, compute=3
        CCO: rebuild=0, expr=0, call=0, cache=0, reuse=0
        TCO: rebuild=0, expr=0, call=0, node=0, compute=0, level=0, stack=0
        LCO: rebuild=0, arg=0, pass=0, hit=0
