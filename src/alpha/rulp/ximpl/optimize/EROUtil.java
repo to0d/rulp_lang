@@ -35,8 +35,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
+import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RArithmeticOperator;
@@ -697,74 +699,6 @@ public class EROUtil {
 
 	}
 
-	static class RelationalUtil {
-
-		static boolean isSameOperand(List<IRObject> rebuildList) throws RException {
-			return rebuildList.size() == 3
-					&& _toUniqString(rebuildList.get(1)).equals(_toUniqString(rebuildList.get(2)));
-		}
-
-		public static IRObject rebuildEqual(List<IRObject> rebuildList) throws RException {
-
-			// (= a a)
-			if (isSameOperand(rebuildList)) {
-				return RulpFactory.createBoolean(true);
-			}
-
-			return null;
-		}
-
-		public static IRObject rebuildNotEqual(List<IRObject> rebuildList) throws RException {
-
-			// (!= a a)
-			if (isSameOperand(rebuildList)) {
-				return RulpFactory.createBoolean(false);
-			}
-
-			return null;
-		}
-
-		public static IRObject rebuildBigger(List<IRObject> rebuildList) throws RException {
-
-			// (> a a)
-			if (isSameOperand(rebuildList)) {
-				return RulpFactory.createBoolean(false);
-			}
-
-			return null;
-		}
-
-		public static IRObject rebuildSmaller(List<IRObject> rebuildList) throws RException {
-
-			// (< a a)
-			if (isSameOperand(rebuildList)) {
-				return RulpFactory.createBoolean(false);
-			}
-
-			return null;
-		}
-
-		public static IRObject rebuildBiggerOrEqual(List<IRObject> rebuildList) throws RException {
-
-			// (>= a a)
-			if (isSameOperand(rebuildList)) {
-				return RulpFactory.createBoolean(true);
-			}
-
-			return null;
-		}
-
-		public static IRObject rebuildSmallerOrEqual(List<IRObject> rebuildList) throws RException {
-
-			// (<= a a)
-			if (isSameOperand(rebuildList)) {
-				return RulpFactory.createBoolean(true);
-			}
-
-			return null;
-		}
-	}
-
 	static class BoolUtil {
 
 		private static int _rebuildAnd(List<IRObject> list, int fromIndex, int toIndex) throws RException {
@@ -950,6 +884,74 @@ public class EROUtil {
 		}
 	}
 
+	static class RelationalUtil {
+
+		static boolean isSameOperand(List<IRObject> rebuildList) throws RException {
+			return rebuildList.size() == 3
+					&& _toUniqString(rebuildList.get(1)).equals(_toUniqString(rebuildList.get(2)));
+		}
+
+		public static IRObject rebuildBigger(List<IRObject> rebuildList) throws RException {
+
+			// (> a a)
+			if (isSameOperand(rebuildList)) {
+				return RulpFactory.createBoolean(false);
+			}
+
+			return null;
+		}
+
+		public static IRObject rebuildBiggerOrEqual(List<IRObject> rebuildList) throws RException {
+
+			// (>= a a)
+			if (isSameOperand(rebuildList)) {
+				return RulpFactory.createBoolean(true);
+			}
+
+			return null;
+		}
+
+		public static IRObject rebuildEqual(List<IRObject> rebuildList) throws RException {
+
+			// (= a a)
+			if (isSameOperand(rebuildList)) {
+				return RulpFactory.createBoolean(true);
+			}
+
+			return null;
+		}
+
+		public static IRObject rebuildNotEqual(List<IRObject> rebuildList) throws RException {
+
+			// (!= a a)
+			if (isSameOperand(rebuildList)) {
+				return RulpFactory.createBoolean(false);
+			}
+
+			return null;
+		}
+
+		public static IRObject rebuildSmaller(List<IRObject> rebuildList) throws RException {
+
+			// (< a a)
+			if (isSameOperand(rebuildList)) {
+				return RulpFactory.createBoolean(false);
+			}
+
+			return null;
+		}
+
+		public static IRObject rebuildSmallerOrEqual(List<IRObject> rebuildList) throws RException {
+
+			// (<= a a)
+			if (isSameOperand(rebuildList)) {
+				return RulpFactory.createBoolean(true);
+			}
+
+			return null;
+		}
+	}
+
 	static class UniqElement {
 		int count = 0;
 		IRObject element;
@@ -1127,48 +1129,6 @@ public class EROUtil {
 		computeCount.getAndIncrement();
 	}
 
-	private static IRObject _removeMultiReturn(IRObject obj) throws RException {
-
-		if (obj.getType() != RType.EXPR) {
-			return null;
-		}
-
-		if (RulpUtil.isExpr(obj, F_RETURN)) {
-			return obj;
-		}
-
-		obj = _expandDoExpr(obj);
-		if (!RulpUtil.isExpr(obj, A_DO)) {
-			return null;
-		}
-
-		int returnIndex = -1;
-		IRExpr doExpr = RulpUtil.asExpression(obj);
-		NEXT_STMT: for (int i = 1; i < doExpr.size(); ++i) {
-			if (RulpUtil.isExpr(doExpr.get(i), F_RETURN)) {
-				returnIndex = i;
-				break NEXT_STMT;
-			}
-		}
-
-		switch (returnIndex) {
-		case -1:
-			return null;
-
-		case 1:
-			return (IRExpr) doExpr.get(1);
-
-		default:
-
-			List<IRObject> doStmts = new ArrayList<>();
-			for (int i = 1; i <= returnIndex; ++i) {
-				doStmts.add(doExpr.get(i));
-			}
-
-			return RulpUtil.toDoExpr(doStmts);
-		}
-	}
-
 	private static boolean _isEROExpr(IRObject e0, IRList expr, IRFrame frame) throws RException {
 
 		if (!OptUtil.isAtomFactor(e0)) {
@@ -1219,18 +1179,13 @@ public class EROUtil {
 
 		int rebuildCount = 0;
 
-//		int childReBuild = 0;
-//		int childUpdate = 0;
-
 		for (int i = 0; i < size; ++i) {
 
 			IRObject ex = i == 0 ? e0 : expr.get(i);
-//			boolean reBuild = false;
 
 			if (ex.getType() == RType.EXPR) {
 
 				childCC0.setInputExpr((IRExpr) ex);
-//				reBuild = _rebuild(childCC0, interpreter, frame);
 
 				if (_rebuild(childCC0, interpreter, frame) || childCC0.outputObj != null) {
 					rebuildList.add(childCC0.outputObj);
@@ -1239,22 +1194,19 @@ public class EROUtil {
 					rebuildList.add(ex);
 				}
 
-//				if (reBuild) {
-//					rebuildList.add(childCC0.outputObj);
-//				} else if (childCC0.outputObj != null) {
-//					rebuildList.add(childCC0.outputObj);
-//					rebuildCount++;
-//				} else {
-//					rebuildList.add(ex);
-//				}
-
 			} else {
 
 				if (i == 0 && OptUtil.isAtomFactor(ex)) {
 					rebuildCount++;
+
+				} else if (OptUtil.isConstValue(ex)) {
+					rebuildCount++;
+
 				} else {
-//					reBuild = OptUtil.isConstValue(ex);
-					if (OptUtil.isConstValue(ex)) {
+
+					IRObject value = _valueOf(ex, frame);
+					if (value != null) {
+						ex = value;
 						rebuildCount++;
 					}
 				}
@@ -1262,20 +1214,7 @@ public class EROUtil {
 				rebuildList.add(ex);
 			}
 
-//			if (reBuild) {
-//				childReBuild++;
-//			}
 		}
-
-//		// No child rebuild, return directly
-//		if (childReBuild == 0 && childUpdate == 0) {
-//			return false;
-//		}
-//
-//		// All child rebuild, return
-//		if (childReBuild == size) {
-//			return true;
-//		}
 
 		// part rebuild
 		if (rebuildCount > 0) {
@@ -1899,6 +1838,48 @@ public class EROUtil {
 		return null;
 	}
 
+	private static IRObject _removeMultiReturn(IRObject obj) throws RException {
+
+		if (obj.getType() != RType.EXPR) {
+			return null;
+		}
+
+		if (RulpUtil.isExpr(obj, F_RETURN)) {
+			return obj;
+		}
+
+		obj = _expandDoExpr(obj);
+		if (!RulpUtil.isExpr(obj, A_DO)) {
+			return null;
+		}
+
+		int returnIndex = -1;
+		IRExpr doExpr = RulpUtil.asExpression(obj);
+		NEXT_STMT: for (int i = 1; i < doExpr.size(); ++i) {
+			if (RulpUtil.isExpr(doExpr.get(i), F_RETURN)) {
+				returnIndex = i;
+				break NEXT_STMT;
+			}
+		}
+
+		switch (returnIndex) {
+		case -1:
+			return null;
+
+		case 1:
+			return (IRExpr) doExpr.get(1);
+
+		default:
+
+			List<IRObject> doStmts = new ArrayList<>();
+			for (int i = 1; i <= returnIndex; ++i) {
+				doStmts.add(doExpr.get(i));
+			}
+
+			return RulpUtil.toDoExpr(doStmts);
+		}
+	}
+
 	private static <T> void _set(List<T> list, int index, T obj) {
 
 		if (index >= list.size()) {
@@ -1912,6 +1893,36 @@ public class EROUtil {
 
 	private static String _toUniqString(IRObject obj) throws RException {
 		return RulpUtil.toString(obj);
+	}
+
+	private static IRObject _valueOf(IRObject obj, IRFrame frame) throws RException {
+
+		if (obj != null) {
+
+			switch (obj.getType()) {
+			case ATOM:
+				IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, ((IRAtom) obj).getName());
+				if (entry == null) {
+					return null;
+				}
+
+				IRObject val = entry.getObject();
+				if (val == obj || val.getType() == RType.ATOM) {
+					return null;
+				}
+
+				return _valueOf(val, frame);
+
+			case CONSTANT:
+				return RulpUtil.asConstant(obj).getValue();
+
+			default:
+
+			}
+
+		}
+
+		return null;
 	}
 
 	public static int getComputeCount() {

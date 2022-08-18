@@ -1,0 +1,6 @@
+(defconst c 1)
+;=>c
+
+(reduct (+ c 1))
+;=>2
+
