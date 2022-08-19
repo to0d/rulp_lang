@@ -61,6 +61,8 @@ public class EROUtil {
 		private static int _rebuildAdd(List<IRObject> list, int fromIndex, int toIndex) throws RException {
 
 			int update = 0;
+
+			// expand: (+ a (+ b c)) ==> (+ a b c)
 			int endIndex = _expandExpr(list, fromIndex, toIndex, F_O_ADD);
 			if (endIndex != -1) {
 				++update;
@@ -219,6 +221,8 @@ public class EROUtil {
 		private static int _rebuildBy(List<IRObject> list, int fromIndex, int toIndex) throws RException {
 
 			int update = 0;
+
+			// expand: (* a (* b c)) ==> (* a b c)
 			int endIndex = _expandExpr(list, fromIndex, toIndex, F_O_BY);
 			if (endIndex != -1) {
 				++update;
@@ -487,6 +491,86 @@ public class EROUtil {
 
 			int size = toIndex - fromIndex;
 
+			// (- (+ x c1 c2) c3 x c4) == > (- (+ 0 c1 c2) c3 0 c4)
+			if (size > 1) {
+
+				IRObject e0 = list.get(fromIndex);
+
+				if (RulpUtil.isExpr(e0, F_O_ADD)) {
+
+					IRExpr e0Expr = (IRExpr) e0;
+					ArrayList<String> e0UniqList = new ArrayList<>();
+					int e0Size = e0Expr.size() - 1;
+					int update = 0;
+					FIND_MATCH: for (int i = fromIndex + 1; i < toIndex; ++i) {
+
+						IRObject ey = list.get(i);
+						String eyUniq = _toUniqString(ey);
+
+						for (int j = 0; j < e0Size; ++j) {
+
+							String exUniq = null;
+							if (j < e0UniqList.size()) {
+								exUniq = e0UniqList.get(j);
+							} else {
+								exUniq = _toUniqString(e0Expr.get(j + 1));
+								e0UniqList.add(exUniq);
+							}
+
+							// exUniq is null means it was reduced before
+							if (exUniq != null && exUniq.equals(eyUniq)) {
+								list.set(i, O_INT_0);
+								e0UniqList.set(j, null);
+								update++;
+								continue FIND_MATCH;
+							}
+						}
+					}
+
+					if (update > 0) {
+
+						int nullCount = 0;
+						for (String uniq : e0UniqList) {
+							if (uniq == null) {
+								nullCount++;
+							}
+						}
+
+						if (e0Size == nullCount) {
+							list.set(fromIndex, O_INT_0);
+
+						} else if ((nullCount + 1) == e0Size) {
+
+							IRObject leftObj = null;
+							for (int j = 0; j < e0Size; ++j) {
+								if (j < e0UniqList.size() && e0UniqList.get(j) == null) {
+									continue;
+								}
+
+								leftObj = e0Expr.get(j + 1);
+								break;
+							}
+							list.set(fromIndex, leftObj);
+
+						} else {
+
+							ArrayList<IRObject> newList = new ArrayList<>();
+							newList.add(e0Expr.get(0));
+							for (int j = 0; j < e0Size; ++j) {
+								if (j < e0UniqList.size() && e0UniqList.get(j) == null) {
+									continue;
+								}
+								newList.add(e0Expr.get(j + 1));
+								break;
+							}
+
+							list.set(fromIndex, RulpFactory.createExpression(newList));
+						}
+					}
+				}
+			}
+
+			// (- a b a) ==> (- 0 b)
 			if (size > 1) {
 
 				IRObject e0 = list.get(fromIndex);
@@ -513,7 +597,6 @@ public class EROUtil {
 						size--;
 					}
 				}
-
 			}
 
 			int size2 = _rebuildSubDivPower(list, fromIndex, fromIndex + size, RArithmeticOperator.SUB);
@@ -885,6 +968,47 @@ public class EROUtil {
 		}
 	}
 
+	static class FakeFrame {
+
+		private Map<String, IRObject> constValueMap = null;
+
+		private FakeFrame parent = null;
+
+		public FakeFrame() {
+			super();
+			constValueMap = new HashMap<>();
+		}
+
+		public FakeFrame(FakeFrame parent) {
+			super();
+			this.parent = parent;
+		}
+
+		private Map<String, IRObject> _getConstMap() {
+
+			if (constValueMap == null) {
+				constValueMap = new HashMap<>();
+				if (parent != null) {
+					constValueMap.putAll(parent._getConstMap());
+				}
+			}
+
+			return constValueMap;
+		}
+
+		public void addConst(String name, IRObject value) {
+			_getConstMap().put(name, value);
+		}
+
+		public IRObject getConstValue(String name) {
+			return _getConstMap().get(name);
+		}
+
+		public FakeFrame newBranch() {
+			return new FakeFrame(this);
+		}
+	}
+
 	static class RelationalUtil {
 
 		static boolean isSameOperand(List<IRObject> rebuildList) throws RException {
@@ -1067,7 +1191,6 @@ public class EROUtil {
 		int endIndex = toIndex;
 		int update = 0;
 
-		// expand: (+ a (+ b c)) ==> (+ a b c)
 		for (int i = fromIndex; i < toIndex; ++i) {
 
 			IRObject obj = list.get(i);
@@ -1445,142 +1568,6 @@ public class EROUtil {
 		return _removeExprAfterReturn(RulpUtil.asExpression(_expandDoExpr(expr)));
 	}
 
-	private static IRExpr _rebuildPrecompute(IRExpr expr) throws RException {
-		return (IRExpr) _rebuildPrecompute(expr, new FakeFrame());
-	}
-
-	static class FakeFrame {
-
-		public FakeFrame() {
-			super();
-			constValueMap = new HashMap<>();
-		}
-
-		public FakeFrame newBranch() {
-			return new FakeFrame(this);
-		}
-
-		private Map<String, IRObject> constValueMap = null;
-
-		private FakeFrame parent = null;
-
-		public FakeFrame(FakeFrame parent) {
-			super();
-			this.parent = parent;
-		}
-
-		public void addConst(String name, IRObject value) {
-			_getConstMap().put(name, value);
-		}
-
-		private Map<String, IRObject> _getConstMap() {
-
-			if (constValueMap == null) {
-				constValueMap = new HashMap<>();
-				if (parent != null) {
-					constValueMap.putAll(parent._getConstMap());
-				}
-			}
-
-			return constValueMap;
-		}
-
-		public IRObject getConstValue(String name) {
-			return _getConstMap().get(name);
-		}
-	}
-
-	private static IRObject _rebuildPrecompute(IRObject obj, FakeFrame frame) throws RException {
-
-		if (obj == null) {
-			return obj;
-		}
-
-		IRObject _v;
-
-		switch (obj.getType()) {
-		case ATOM:
-			_v = frame.getConstValue(RulpUtil.asAtom(obj).getName());
-			if (_v != null) {
-				return _v;
-			}
-			break;
-
-		case CONSTANT:
-			_v = frame.getConstValue(RulpUtil.asConstant(obj).getName());
-			if (_v != null) {
-				return _v;
-			}
-			break;
-
-		case EXPR:
-			
-			IRExpr expr = (IRExpr) obj;
-			if (expr.size() <= 1) {
-				return obj;
-			}
-
-			IRObject e0 = expr.get(0);
-			int fromIndex = 0;
-			int size = expr.size();
-
-			if (e0.getType() == RType.ATOM || e0.getType() == RType.FACTOR) {
-
-				fromIndex = 1;
-
-				switch (e0.asString()) {
-				case F_DEF_CONST:
-					if (size == 3 && expr.get(1).getType() == RType.ATOM && OptUtil.isConstValue(expr.get(2))) {
-						frame.addConst(RulpUtil.asAtom(expr.get(1)).getName(), expr.get(2));
-						return OptUtil.asExpr(null);
-					}
-					break;
-
-				case F_DEFVAR:
-				case F_DEFUN:
-					return obj;
-
-				default:
-
-					if (OptUtil.isNewFrameFactor(e0)) {
-						frame = frame.newBranch();
-					}
-				}
-			}
-
-			ArrayList<IRObject> newElements = null;
-			for (; fromIndex < size; ++fromIndex) {
-
-				IRObject ex = expr.get(fromIndex);
-				IRObject ey = _rebuildPrecompute(ex, frame);
-
-				if (ey != ex) {
-					if (newElements == null) {
-						newElements = new ArrayList<>();
-						for (int i = 0; i < fromIndex; ++i) {
-							newElements.add(expr.get(i));
-						}
-					}
-					newElements.add(ey);
-				} else {
-					if (newElements != null) {
-						newElements.add(ex);
-					}
-				}
-			}
-
-			if (newElements != null) {
-				return RulpFactory.createExpression(newElements);
-			}
-
-			break;
-
-		default:
-		}
-
-		return obj;
-	}
-
 	private static IRObject _rebuildFuncBody(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		IRExpr newBody = _rebuildFuncBody(expr);
@@ -1833,6 +1820,107 @@ public class EROUtil {
 		}
 
 		return null;
+	}
+
+	private static IRExpr _rebuildPrecompute(IRExpr expr) throws RException {
+		return (IRExpr) _rebuildPrecompute(expr, new FakeFrame());
+	}
+
+	private static IRObject _rebuildPrecompute(IRObject obj, FakeFrame frame) throws RException {
+
+		if (obj == null) {
+			return obj;
+		}
+
+		IRObject _v;
+
+		switch (obj.getType()) {
+		case ATOM:
+			_v = frame.getConstValue(RulpUtil.asAtom(obj).getName());
+			if (_v != null) {
+				return _v;
+			}
+			break;
+
+		case CONSTANT:
+			_v = frame.getConstValue(RulpUtil.asConstant(obj).getName());
+			if (_v != null) {
+				return _v;
+			}
+			break;
+
+		case EXPR:
+
+			IRExpr expr = (IRExpr) obj;
+			if (expr.size() <= 1) {
+				return obj;
+			}
+
+			IRObject e0 = expr.get(0);
+			int fromIndex = 0;
+			int size = expr.size();
+
+//			boolean tryExpand = true;
+//			String 
+
+			if (e0.getType() == RType.ATOM || e0.getType() == RType.FACTOR) {
+
+				fromIndex = 1;
+
+				switch (e0.asString()) {
+				case F_DEF_CONST:
+					if (size == 3 && expr.get(1).getType() == RType.ATOM && OptUtil.isConstValue(expr.get(2))) {
+						frame.addConst(RulpUtil.asAtom(expr.get(1)).getName(), expr.get(2));
+						return OptUtil.asExpr(null);
+					}
+					break;
+
+				case F_DEFVAR:
+				case F_DEFUN:
+					return obj;
+
+//				case F_O_ADD:
+//				case F_O_SUB:
+
+				default:
+
+					if (OptUtil.isNewFrameFactor(e0)) {
+						frame = frame.newBranch();
+					}
+				}
+			}
+
+			ArrayList<IRObject> newElements = null;
+			for (; fromIndex < size; ++fromIndex) {
+
+				IRObject ex = expr.get(fromIndex);
+				IRObject ey = _rebuildPrecompute(ex, frame);
+
+				if (ey != ex) {
+					if (newElements == null) {
+						newElements = new ArrayList<>();
+						for (int i = 0; i < fromIndex; ++i) {
+							newElements.add(expr.get(i));
+						}
+					}
+					newElements.add(ey);
+				} else {
+					if (newElements != null) {
+						newElements.add(ex);
+					}
+				}
+			}
+
+			if (newElements != null) {
+				return RulpFactory.createExpression(newElements);
+			}
+
+			break;
+
+		default:
+		}
+
+		return obj;
 	}
 
 	private static int _rebuildSameElement(List<IRObject> list, int fromIndex, int toIndex, RArithmeticOperator op)
