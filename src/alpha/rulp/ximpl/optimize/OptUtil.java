@@ -36,6 +36,7 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
+import alpha.rulp.ximpl.attribute.StableUtil;
 
 public class OptUtil {
 
@@ -239,10 +240,6 @@ public class OptUtil {
 	}
 
 	public static void listReturnObject(IRExpr expr, ArrayList<IRObject> exprList) throws RException {
-
-//		if (expr == null) {
-//			System.out.println();
-//		}
 
 		IRObject e0 = expr.get(0);
 		if (e0.getType() != RType.ATOM && e0.getType() != RType.FACTOR) {

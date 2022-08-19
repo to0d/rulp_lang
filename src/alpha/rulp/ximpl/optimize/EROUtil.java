@@ -1,6 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.*;
 import static alpha.rulp.lang.Constant.F_BREAK;
 import static alpha.rulp.lang.Constant.F_B_AND;
 import static alpha.rulp.lang.Constant.F_B_OR;
@@ -31,6 +31,7 @@ import static alpha.rulp.lang.Constant.O_True;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -1340,7 +1341,7 @@ public class EROUtil {
 	}
 
 	// (Op A1 A2 ... Ak), Op is CC0 factor, Ak is const value and return const value
-	private static IRObject _rebuild(IRList expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+	private static IRObject _rebuild(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		ERO ero = new ERO();
 		ero.setInputExpr(expr);
@@ -1442,6 +1443,142 @@ public class EROUtil {
 
 	private static IRExpr _rebuildFuncBody(IRExpr expr) throws RException {
 		return _removeExprAfterReturn(RulpUtil.asExpression(_expandDoExpr(expr)));
+	}
+
+	private static IRExpr _rebuildPrecompute(IRExpr expr) throws RException {
+		return (IRExpr) _rebuildPrecompute(expr, new FakeFrame());
+	}
+
+	static class FakeFrame {
+
+		public FakeFrame() {
+			super();
+			constValueMap = new HashMap<>();
+		}
+
+		public FakeFrame newBranch() {
+			return new FakeFrame(this);
+		}
+
+		private Map<String, IRObject> constValueMap = null;
+
+		private FakeFrame parent = null;
+
+		public FakeFrame(FakeFrame parent) {
+			super();
+			this.parent = parent;
+		}
+
+		public void addConst(String name, IRObject value) {
+			_getConstMap().put(name, value);
+		}
+
+		private Map<String, IRObject> _getConstMap() {
+
+			if (constValueMap == null) {
+				constValueMap = new HashMap<>();
+				if (parent != null) {
+					constValueMap.putAll(parent._getConstMap());
+				}
+			}
+
+			return constValueMap;
+		}
+
+		public IRObject getConstValue(String name) {
+			return _getConstMap().get(name);
+		}
+	}
+
+	private static IRObject _rebuildPrecompute(IRObject obj, FakeFrame frame) throws RException {
+
+		if (obj == null) {
+			return obj;
+		}
+
+		IRObject _v;
+
+		switch (obj.getType()) {
+		case ATOM:
+			_v = frame.getConstValue(RulpUtil.asAtom(obj).getName());
+			if (_v != null) {
+				return _v;
+			}
+			break;
+
+		case CONSTANT:
+			_v = frame.getConstValue(RulpUtil.asConstant(obj).getName());
+			if (_v != null) {
+				return _v;
+			}
+			break;
+
+		case EXPR:
+			
+			IRExpr expr = (IRExpr) obj;
+			if (expr.size() <= 1) {
+				return obj;
+			}
+
+			IRObject e0 = expr.get(0);
+			int fromIndex = 0;
+			int size = expr.size();
+
+			if (e0.getType() == RType.ATOM || e0.getType() == RType.FACTOR) {
+
+				fromIndex = 1;
+
+				switch (e0.asString()) {
+				case F_DEF_CONST:
+					if (size == 3 && expr.get(1).getType() == RType.ATOM && OptUtil.isConstValue(expr.get(2))) {
+						frame.addConst(RulpUtil.asAtom(expr.get(1)).getName(), expr.get(2));
+						return OptUtil.asExpr(null);
+					}
+					break;
+
+				case F_DEFVAR:
+				case F_DEFUN:
+					return obj;
+
+				default:
+
+					if (OptUtil.isNewFrameFactor(e0)) {
+						frame = frame.newBranch();
+					}
+				}
+			}
+
+			ArrayList<IRObject> newElements = null;
+			for (; fromIndex < size; ++fromIndex) {
+
+				IRObject ex = expr.get(fromIndex);
+				IRObject ey = _rebuildPrecompute(ex, frame);
+
+				if (ey != ex) {
+					if (newElements == null) {
+						newElements = new ArrayList<>();
+						for (int i = 0; i < fromIndex; ++i) {
+							newElements.add(expr.get(i));
+						}
+					}
+					newElements.add(ey);
+				} else {
+					if (newElements != null) {
+						newElements.add(ex);
+					}
+				}
+			}
+
+			if (newElements != null) {
+				return RulpFactory.createExpression(newElements);
+			}
+
+			break;
+
+		default:
+		}
+
+		return obj;
 	}
 
 	private static IRObject _rebuildFuncBody(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
@@ -1933,9 +2070,11 @@ public class EROUtil {
 		return rebuildCount.get();
 	}
 
-	public static IRObject rebuild(IRList expr, IRInterpreter interpreter, IRFrame frame) throws RException {
+	public static IRObject rebuild(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		rebuildCount.getAndIncrement();
+
+		expr = _rebuildPrecompute(expr);
 
 		IRObject rst = _rebuild(expr, interpreter, frame);
 		if (rst != expr && rst.getType() == RType.EXPR) {
@@ -1948,6 +2087,8 @@ public class EROUtil {
 	public static IRObject rebuildFuncBody(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		rebuildCount.getAndIncrement();
+
+		expr = _rebuildPrecompute(expr);
 
 		IRObject rst = _rebuildFuncBody(expr, interpreter, frame);
 		if (rst != expr && rst.getType() == RType.EXPR) {
