@@ -56,7 +56,6 @@ import static alpha.rulp.lang.Constant.O_EMPTY;
 import static alpha.rulp.lang.Constant.O_EQ;
 import static alpha.rulp.lang.Constant.O_False;
 import static alpha.rulp.lang.Constant.O_Final;
-import static alpha.rulp.lang.Constant.O_INT_0;
 import static alpha.rulp.lang.Constant.O_LAMBDA;
 import static alpha.rulp.lang.Constant.O_Nil;
 import static alpha.rulp.lang.Constant.O_OPT_CCO;

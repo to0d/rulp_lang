@@ -36,7 +36,6 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
-import alpha.rulp.ximpl.attribute.StableUtil;
 
 public class OptUtil {
 

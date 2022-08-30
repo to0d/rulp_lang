@@ -1,11 +1,13 @@
 package alpha.rulp.ximpl.optimize;
 
-import static alpha.rulp.lang.Constant.*;
+import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.F_BREAK;
 import static alpha.rulp.lang.Constant.F_B_AND;
 import static alpha.rulp.lang.Constant.F_B_OR;
 import static alpha.rulp.lang.Constant.F_CASE;
 import static alpha.rulp.lang.Constant.F_DEFUN;
+import static alpha.rulp.lang.Constant.F_DEFVAR;
+import static alpha.rulp.lang.Constant.F_DEF_CONST;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_LOOP;
 import static alpha.rulp.lang.Constant.F_O_ADD;
@@ -31,7 +33,6 @@ import static alpha.rulp.lang.Constant.O_True;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
