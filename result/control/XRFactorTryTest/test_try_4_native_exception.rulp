@@ -1,0 +1,5 @@
+(try 
+    (bad_factor)
+    (catch ?e (print ?e))
+)
+;=>

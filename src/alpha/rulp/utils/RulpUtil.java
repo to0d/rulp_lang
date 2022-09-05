@@ -44,6 +44,7 @@ import alpha.rulp.lang.IRString;
 import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RAccessType;
+import alpha.rulp.lang.RError;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RRelationalOperator;
 import alpha.rulp.lang.RType;
@@ -66,6 +67,44 @@ import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 import alpha.rulp.ximpl.rclass.XRFactorNew;
 
 public class RulpUtil {
+
+	public static boolean handle_error(IRError err, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		String errId = err.getId().getName();
+
+		String handleName = C_HANDLE + errId;
+		String valueName = errId;
+
+		IRFrameEntry handlEntry = frame.getEntry(handleName);
+		if (handlEntry == null) {
+
+			handlEntry = frame.getEntry(C_HANDLE_ANY);
+			if (handlEntry == null) {
+				return false;
+			}
+
+			valueName = RulpUtil.asAtom(frame.getEntry(C_ERROR_DEFAULT).getObject()).getName();
+		}
+
+		IRExpr catchExpr = RulpUtil.asExpression(handlEntry.getObject());
+		frame.setEntry(valueName, err);
+
+		IRIterator<? extends IRObject> iter = catchExpr.listIterator(2);
+		while (iter.hasNext()) {
+			interpreter.compute(frame, iter.next());
+		}
+
+		return true;
+	}
+
+	public static void throw_error(IRInterpreter interpreter, IRFrame frame, IRAtom errId, IRObject errValue,
+			IRObject fromObject) throws RException {
+
+		IRError err = RulpFactory.createError(interpreter, errId, errValue);
+		if (!handle_error(err, interpreter, frame)) {
+			throw new RError(frame, fromObject, err);
+		}
+	}
 
 	public interface EqualAble<T> {
 		public boolean isEqualTo(T another);

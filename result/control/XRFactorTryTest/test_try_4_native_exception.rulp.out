@@ -1,0 +1,9 @@
+(try 
+    (bad_factor)
+    (catch ?e (print ?e))
+)
+;=>nil
+;out:
+error: e1, nil
+;eof
+

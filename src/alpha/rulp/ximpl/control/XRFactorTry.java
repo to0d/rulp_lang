@@ -102,7 +102,7 @@ public class XRFactorTry extends AbsAtomFactorAdapter implements IRFactor {
 
 		} catch (RError err) {
 
-			if (XRFactorThrow.handle(err.getError(), interpreter, tryFrame)) {
+			if (RulpUtil.handle_error(err.getError(), interpreter, tryFrame)) {
 				return O_Nil;
 			}
 
