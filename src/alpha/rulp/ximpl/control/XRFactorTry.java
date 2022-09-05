@@ -94,19 +94,22 @@ public class XRFactorTry extends AbsAtomFactorAdapter implements IRFactor {
 				throw new RException("no catch expr: " + args);
 			}
 
+			IRObject rst = O_Nil;
+
 			for (int i = 1; i <= stmtEnd; ++i) {
-				interpreter.compute(tryFrame, args.get(i));
+				rst = interpreter.compute(tryFrame, args.get(i));
 			}
 
-			return O_Nil;
+			return rst;
 
 		} catch (RError err) {
 
-			if (RulpUtil.handle_error(err.getError(), interpreter, tryFrame)) {
-				return O_Nil;
+			IRObject rst = RulpUtil.handle_error(err.getError(), interpreter, tryFrame);
+			if (rst == null) {
+				throw err;
 			}
 
-			throw err;
+			return rst;
 
 		} finally {
 

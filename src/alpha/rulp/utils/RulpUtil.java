@@ -68,7 +68,7 @@ import alpha.rulp.ximpl.rclass.XRFactorNew;
 
 public class RulpUtil {
 
-	public static boolean handle_error(IRError err, IRInterpreter interpreter, IRFrame frame) throws RException {
+	public static IRObject handle_error(IRError err, IRInterpreter interpreter, IRFrame frame) throws RException {
 
 		String errId = err.getId().getName();
 
@@ -80,7 +80,7 @@ public class RulpUtil {
 
 			handlEntry = frame.getEntry(C_HANDLE_ANY);
 			if (handlEntry == null) {
-				return false;
+				return null;
 			}
 
 			valueName = RulpUtil.asAtom(frame.getEntry(C_ERROR_DEFAULT).getObject()).getName();
@@ -89,21 +89,25 @@ public class RulpUtil {
 		IRExpr catchExpr = RulpUtil.asExpression(handlEntry.getObject());
 		frame.setEntry(valueName, err);
 
+		IRObject rst = null;
 		IRIterator<? extends IRObject> iter = catchExpr.listIterator(2);
 		while (iter.hasNext()) {
-			interpreter.compute(frame, iter.next());
+			rst = interpreter.compute(frame, iter.next());
 		}
 
-		return true;
+		return rst;
 	}
 
-	public static void throw_error(IRInterpreter interpreter, IRFrame frame, IRAtom errId, IRObject errValue,
+	public static IRObject throw_error(IRInterpreter interpreter, IRFrame frame, IRAtom errId, IRObject errValue,
 			IRObject fromObject) throws RException {
 
 		IRError err = RulpFactory.createError(interpreter, errId, errValue);
-		if (!handle_error(err, interpreter, frame)) {
+		IRObject rst = handle_error(err, interpreter, frame);
+		if (rst == null) {
 			throw new RError(frame, fromObject, err);
 		}
+
+		return rst;
 	}
 
 	public interface EqualAble<T> {

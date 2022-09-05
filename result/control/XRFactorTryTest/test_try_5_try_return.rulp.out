@@ -1,0 +1,12 @@
+(try 
+    (if (> 2 3) 
+        (throw e1 "msg1") 
+        (throw e2 "msg2")) 
+
+    (catch ?e (print ?e) (+ 1 2))
+)
+;=>3
+;out:
+error: e2, msg2
+;eof
+

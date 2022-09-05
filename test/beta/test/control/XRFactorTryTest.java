@@ -48,8 +48,7 @@ class XRFactorTryTest extends RulpTestBase {
 
 				@Override
 				public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
-					RulpUtil.throw_error(interpreter, frame, RulpFactory.createAtom("e1"), O_Nil, this);
-					return O_Nil;
+					return RulpUtil.throw_error(interpreter, frame, RulpFactory.createAtom("e1"), O_Nil, this);
 				}
 
 			});
@@ -59,6 +58,12 @@ class XRFactorTryTest extends RulpTestBase {
 			fail(e.toString());
 		}
 
+		_run_script();
+	}
+
+	@Test
+	void test_try_5_try_return() {
+		_setup();
 		_run_script();
 	}
 }

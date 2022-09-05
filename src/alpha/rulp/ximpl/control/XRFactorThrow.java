@@ -9,8 +9,6 @@
 
 package alpha.rulp.ximpl.control;
 
-import static alpha.rulp.lang.Constant.O_Nil;
-
 import alpha.rulp.lang.IRAtom;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
@@ -40,9 +38,7 @@ public class XRFactorThrow extends AbsAtomFactorAdapter implements IRFactor {
 			errValue = interpreter.compute(frame, args.get(2));
 		}
 
-		RulpUtil.throw_error(interpreter, frame, errId, errValue, this);
-
-		return O_Nil;
+		return RulpUtil.throw_error(interpreter, frame, errId, errValue, this);
 	}
 
 }
