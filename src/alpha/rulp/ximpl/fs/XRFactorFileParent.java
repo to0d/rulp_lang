@@ -17,13 +17,14 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
+import alpha.rulp.utils.FileUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorFileMkdirs extends AbsAtomFactorAdapter implements IRFactor {
+public class XRFactorFileParent extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorFileMkdirs(String factorName) {
+	public XRFactorFileParent(String factorName) {
 		super(factorName);
 	}
 
@@ -36,7 +37,7 @@ public class XRFactorFileMkdirs extends AbsAtomFactorAdapter implements IRFactor
 
 		String path = RulpUtil.asString(interpreter.compute(frame, args.get(1))).asString();
 
-		return RulpFactory.createBoolean(new File(path).mkdirs());
+		return RulpFactory.createString(FileUtil.toValidPath(new File(path).getParent()));
 	}
 
 }

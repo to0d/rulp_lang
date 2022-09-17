@@ -26,8 +26,8 @@ mbr=?os.name, mbr-property='(public), mbr-attribute='(), obj=?os.name, obj-type=
 mbr=?os.version, mbr-property='(public), mbr-attribute='(), obj=?os.version, obj-type=var, obj-attribute='(), var-value="10.0"
 mbr=?path.separator, mbr-property='(public), mbr-attribute='(), obj=?path.separator, obj-type=var, obj-attribute='(), var-value=";"
 mbr=?user.dir, mbr-property='(public), mbr-attribute='(), obj=?user.dir, obj-type=var, obj-attribute='(), var-value="C:\data\itoolulp_lang"
-mbr=?user.home, mbr-property='(public), mbr-attribute='(), obj=?user.home, obj-type=var, obj-attribute='(), var-value="C:\Users\YANLIU"
-mbr=?user.name, mbr-property='(public), mbr-attribute='(), obj=?user.name, obj-type=var, obj-attribute='(), var-value="921511672"
+mbr=?user.home, mbr-property='(public), mbr-attribute='(), obj=?user.home, obj-type=var, obj-attribute='(), var-value="C:\Users\to0d"
+mbr=?user.name, mbr-property='(public), mbr-attribute='(), obj=?user.name, obj-type=var, obj-attribute='(), var-value="to0d"
 mbr=^, mbr-property='(public), mbr-attribute='(), obj=^, obj-type=factor, obj-attribute='(atom stable)
 mbr=access, mbr-property='(public), mbr-attribute='(), obj=access, obj-type=factor, obj-attribute='(stable)
 mbr=add-array-to-list, mbr-property='(public), mbr-attribute='(), obj=add-array-to-list, obj-type=factor, obj-attribute='(stable)
@@ -81,6 +81,7 @@ mbr=file-exist, mbr-property='(public), mbr-attribute='(), obj=file-exist, obj-t
 mbr=file-is-folder, mbr-property='(public), mbr-attribute='(), obj=file-is-folder, obj-type=factor, obj-attribute='()
 mbr=file-list, mbr-property='(public), mbr-attribute='(), obj=file-list, obj-type=factor, obj-attribute='()
 mbr=file-mkdirs, mbr-property='(public), mbr-attribute='(), obj=file-mkdirs, obj-type=factor, obj-attribute='()
+mbr=file-parent, mbr-property='(public), mbr-attribute='(), obj=file-parent, obj-type=factor, obj-attribute='()
 mbr=final, mbr-property='(public), mbr-attribute='(), obj=final, obj-type=atom, obj-attribute='()
 mbr=float, mbr-property='(public), mbr-attribute='(), obj=float, obj-type=atom, obj-attribute='()
 mbr=foreach, mbr-property='(public), mbr-attribute='(), obj=foreach, obj-type=factor, obj-attribute='(stable)

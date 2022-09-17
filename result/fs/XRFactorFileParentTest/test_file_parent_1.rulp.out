@@ -1,0 +1,6 @@
+(file-parent "result\\fs\\XRFactorFileIsFolderTest")
+;=>"result\\fs\\"
+
+(file-parent "result\\fs\\XRFactorFileIsFolderTest\\test_file_exist_1.rulp")
+;=>"result\\fs\\XRFactorFileIsFolderTest\\"
+

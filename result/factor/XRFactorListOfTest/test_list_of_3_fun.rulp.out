@@ -110,6 +110,7 @@ root::file-exist
 root::file-is-folder
 root::file-list
 root::file-mkdirs
+root::file-parent
 root::final
 root::float
 root::foreach
