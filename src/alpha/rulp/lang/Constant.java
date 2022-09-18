@@ -59,8 +59,6 @@ public interface Constant {
 
 	String A_FRAME = "frame";
 
-	String A_ITERATOR = "iterator";
-
 	String A_FROM = "from";
 
 	String A_FUN_PRE = "_$fun$_";
@@ -72,6 +70,8 @@ public interface Constant {
 	String A_INTEGER = "int";
 
 	String A_INTO = "into";
+
+	String A_ITERATOR = "iterator";
 
 	String A_LAMBDA = "lambda";
 
@@ -291,9 +291,9 @@ public interface Constant {
 
 	String F_FILE_LIST = "file-list";
 
-	String F_FILE_PARENT = "file-parent";
-
 	String F_FILE_MKDIRS = "file-mkdirs";
+
+	String F_FILE_PARENT = "file-parent";
 
 	String F_FOR = "for";
 
@@ -310,6 +310,8 @@ public interface Constant {
 	String F_GET_OF_LIST = "get-of-list";
 
 	String F_HAS_MBR = "has-member";
+
+	String F_HAS_MORE = "has-more";
 
 	String F_IF = "if";
 
@@ -335,9 +337,9 @@ public interface Constant {
 
 	String F_LIST_OF = "list-of";
 
-	String F_LOAD = "load";
-
 //	String F_LOAD_JAR = "load-jar";
+
+	String F_LOAD = "load";
 
 	String F_LOAD_CLASS = "load-class";
 
@@ -348,6 +350,8 @@ public interface Constant {
 	String F_MAKE_BLOB = "make-blob";
 
 	String F_MAKE_LIST = "make-list";
+
+	String F_MAKE_LIST_ITERATOR = "make-list-Iterator";
 
 	String F_MAKE_STRING = "make-string";
 
@@ -360,6 +364,8 @@ public interface Constant {
 	String F_NAME_OF = "name-of";
 
 	String F_NEW = "new";
+
+	String F_NEXT = "next";
 
 	String F_NOT_EQUAL = "not-equal";
 
@@ -487,13 +493,13 @@ public interface Constant {
 
 	String F_STR_LENGTH = "str-length";
 
+//	String F_STR_SPLIT_LINE = "str-split-line";
+
 	String F_STR_MATCH = "str-match";
 
 	String F_STR_REPLACE = "str-replace";
 
 	String F_STR_SPLIT = "str-split";
-
-//	String F_STR_SPLIT_LINE = "str-split-line";
 
 	String F_STR_START_WITH = "str-start-with";
 
@@ -504,7 +510,7 @@ public interface Constant {
 	String F_STR_TRIM_HEAD = "str-trim-head";
 
 	String F_STR_TRIM_TAIL = "str-trim-tail";
-
+	
 	String F_STR_UPPER = "str-upper";
 
 	String F_STRCAT = "strcat";
@@ -735,13 +741,13 @@ public interface Constant {
 
 	IRAtom T_Frame = RulpFactory.createAtom(A_FRAME);
 
-	IRAtom T_Iterator = RulpFactory.createAtom(A_ITERATOR);
-
 	IRAtom T_Func = RulpFactory.createAtom(A_FUNCTION);
 
 	IRAtom T_Instance = RulpFactory.createAtom(A_INSTANCE);
 
 	IRAtom T_Int = RulpFactory.createAtom(A_INTEGER);
+
+	IRAtom T_Iterator = RulpFactory.createAtom(A_ITERATOR);
 
 	IRAtom T_List = RulpFactory.createAtom(A_LIST);
 

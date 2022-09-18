@@ -806,6 +806,19 @@ public class RulpUtil {
 		return (IRInteger) obj;
 	}
 
+	public static IRObjectIterator asIterator(IRObject obj) throws RException {
+
+		if (obj == null) {
+			throw new RException("null iterator: " + obj);
+		}
+
+		if (obj.getType() != RType.ITERATOR) {
+			throw new RException("Can't convert to iterator: " + obj);
+		}
+
+		return (IRObjectIterator) obj;
+	}
+
 	public static IRList asList(IRObject obj) throws RException {
 
 		if (obj == null) {

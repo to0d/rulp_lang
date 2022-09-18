@@ -123,6 +123,7 @@ root::get-attribute
 root::get-of-array
 root::get-of-list
 root::has-member
+root::has-more
 root::if
 root::instance
 root::int
@@ -145,6 +146,7 @@ root::macro
 root::make-array
 root::make-blob
 root::make-list
+root::make-list-Iterator
 root::make-string
 root::member
 root::name-of
@@ -152,6 +154,7 @@ root::namespace
 root::nan
 root::native
 root::new
+root::next
 root::nil
 root::noclass
 root::not

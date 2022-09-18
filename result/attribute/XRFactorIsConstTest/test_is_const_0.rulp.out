@@ -96,6 +96,7 @@ obj=get-attribute       , type=factor
 obj=get-of-array        , type=factor
 obj=get-of-list         , type=factor
 obj=has-member          , type=factor
+obj=has-more            , type=factor
 obj=if                  , type=factor
 obj=instance            , type=atom
 obj=int                 , type=atom
@@ -118,12 +119,14 @@ obj=macro               , type=atom
 obj=make-array          , type=factor
 obj=make-blob           , type=factor
 obj=make-list           , type=factor
+obj=make-list-Iterator  , type=factor
 obj=make-string         , type=factor
 obj=member              , type=atom
 obj=name-of             , type=factor
 obj=nan                 , type=atom
 obj=native              , type=atom
 obj=new                 , type=factor
+obj=next                , type=factor
 obj=nil                 , type=nil
 obj=noclass             , type=class
 obj=not                 , type=factor

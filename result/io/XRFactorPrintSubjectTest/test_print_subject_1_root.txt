@@ -1,94 +1,97 @@
-id=0, name=root, lvl=0, ref=0/0, entry=213, subject=root
+id=0, name=root, lvl=0, ref=0/0, entry=216, subject=root
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-?os.version          : -235     0        1    var        10.0 : type=string  
-?os.name             : -234     0        1    var        Windows 10 : type=string
-?path.separator      : -233     0        1    var        ; : type=string     
-?file.separator      : -232     0        1    var        \ : type=string     
-?user.dir            : -231     0        1    var        C:\data\itool\rulp_lang : type=string
-?user.name           : -230     0        1    var        921511672 : type=string
-?user.home           : -229     0        1    var        C:\Users\YANLIU : type=string
-rulp-object-count    : -208     0        0    factor     rulp-object-count   
-is-debug-active      : -207     0        0    factor     is-debug-active     
-enddbg               : -206     0        0    factor     enddbg              
-strdbg               : -205     0        0    factor     strdbg              
-runtime-call-count   : -204     0        0    factor     runtime-call-count  
-sys-set-property     : -203     0        0    factor     sys-set-property    
-sys-os-type          : -202     0        0    factor     sys-os-type         
-sys-free-memory      : -201     0        0    factor     sys-free-memory     
-sys-total-memory     : -200     0        0    factor     sys-total-memory    
-sys-gc               : -199     0        0    factor     sys-gc              
-random-double        : -198     0        0    factor     random-double       
-random-float         : -197     0        0    factor     random-float        
-random-int           : -196     0        0    factor     random-int          
-random               : -195     0        0    factor     random              
-day-of-week          : -194     0        0    factor     day-of-week         
-sys-time             : -193     0        0    factor     sys-time            
-day-number           : -192     0        0    factor     day-number          
-date                 : -191     0        0    factor     date                
-do-p                 : -190     0        0    factor     do-p                
-sleep                : -189     0        0    factor     sleep               
-to-const             : -188     0        0    factor     to-const            
-to-vary              : -187     0        0    factor     to-vary             
-seta                 : -186     0        0    factor     seta                
-add-array-to-list    : -185     0        0    factor     add-array-to-list   
-add-list-to-array    : -184     0        0    factor     add-list-to-array   
-to-nonamed-list      : -183     0        0    factor     to-nonamed-list     
-to-named-list        : -182     0        0    factor     to-named-list       
-get-of-array         : -181     0        0    factor     get-of-array        
-reverse              : -180     0        0    factor     reverse             
-sort-list            : -179     0        0    factor     sort-list           
-uniq                 : -178     0        0    factor     uniq                
-union                : -177     0        0    factor     union               
-join                 : -176     0        0    factor     join                
-remove-all-list      : -175     0        0    factor     remove-all-list     
-add-list-to-list     : -174     0        0    factor     add-list-to-list    
-get-of-list          : -173     0        0    factor     get-of-list         
-foreach              : -172     0        0    factor     foreach             
-try                  : -171     0        0    factor     try                 
-error-value          : -170     0        0    factor     error-value         
-throw                : -169     0        0    factor     throw               
-case                 : -168     0        0    factor     case                
-do                   : -167     0        0    factor     do                  
-break                : -166     0        0    factor     break               
-continue             : -165     0        0    factor     continue            
-return               : -164     0        0    factor     return              
-loop                 : -163     0        0    factor     loop                
-when                 : -162     0        0    factor     when                
-if                   : -161     0        0    factor     if                  
-lambda               : -160     0        0    factor     lambda              
-let                  : -159     0        0    factor     let                 
-cc                   : -158     0        0    factor     cc                  
-reduct               : -157     0        0    factor     reduct              
-is-thread-safe       : -156     0        0    factor     is-thread-safe      
-is-stable            : -155     0        0    factor     is-stable           
-list-function-in-return : -154     0        0    factor     list-function-in-return
-opt-status           : -153     0        0    factor     opt-status          
-deftemplate          : -152     0        0    factor     deftemplate         
-defun                : -151     0        0    factor     defun               
-defmacro             : -150     0        0    factor     defmacro            
-can-cast             : -149     0        0    factor     can-cast            
-cmp_def              : -148     0        0    factor     cmp_def             
-<=                   : -147     0        0    factor     <=                  
->=                   : -146     0        0    factor     >=                  
-<                    : -145     0        0    factor     <                   
->                    : -144     0        0    factor     >                   
-!=                   : -143     0        0    factor     !=                  
-=                    : -142     0        0    factor     =                   
-or                   : -141     0        0    factor     or                  
-and                  : -140     0        0    factor     and                 
-not                  : -139     0        0    factor     not                 
-~                    : -138     0        0    factor     ~                   
-^                    : -137     0        0    factor     ^                   
-|                    : -136     0        0    factor     |                   
-&                    : -135     0        0    factor     &                   
-power                : -134     0        0    factor     power               
-%                    : -133     0        0    factor     %                   
-/                    : -132     0        0    factor     /                   
-*                    : -131     0        0    factor     *                   
--                    : -130     0        0    factor     -                   
-+                    : -129     0        0    factor     +                   
+?os.version          : -238     0        1    var        10.0 : type=string  
+?os.name             : -237     0        1    var        Windows 10 : type=string
+?path.separator      : -236     0        1    var        ; : type=string     
+?file.separator      : -235     0        1    var        \ : type=string     
+?user.dir            : -234     0        1    var        C:\data\itool\rulp_lang : type=string
+?user.name           : -233     0        1    var        921511672 : type=string
+?user.home           : -232     0        1    var        C:\Users\YANLIU : type=string
+rulp-object-count    : -211     0        0    factor     rulp-object-count   
+is-debug-active      : -210     0        0    factor     is-debug-active     
+enddbg               : -209     0        0    factor     enddbg              
+strdbg               : -208     0        0    factor     strdbg              
+runtime-call-count   : -207     0        0    factor     runtime-call-count  
+sys-set-property     : -206     0        0    factor     sys-set-property    
+sys-os-type          : -205     0        0    factor     sys-os-type         
+sys-free-memory      : -204     0        0    factor     sys-free-memory     
+sys-total-memory     : -203     0        0    factor     sys-total-memory    
+sys-gc               : -202     0        0    factor     sys-gc              
+random-double        : -201     0        0    factor     random-double       
+random-float         : -200     0        0    factor     random-float        
+random-int           : -199     0        0    factor     random-int          
+random               : -198     0        0    factor     random              
+day-of-week          : -197     0        0    factor     day-of-week         
+sys-time             : -196     0        0    factor     sys-time            
+day-number           : -195     0        0    factor     day-number          
+date                 : -194     0        0    factor     date                
+do-p                 : -193     0        0    factor     do-p                
+sleep                : -192     0        0    factor     sleep               
+to-const             : -191     0        0    factor     to-const            
+to-vary              : -190     0        0    factor     to-vary             
+seta                 : -189     0        0    factor     seta                
+add-array-to-list    : -188     0        0    factor     add-array-to-list   
+add-list-to-array    : -187     0        0    factor     add-list-to-array   
+to-nonamed-list      : -186     0        0    factor     to-nonamed-list     
+to-named-list        : -185     0        0    factor     to-named-list       
+get-of-array         : -184     0        0    factor     get-of-array        
+reverse              : -183     0        0    factor     reverse             
+sort-list            : -182     0        0    factor     sort-list           
+uniq                 : -181     0        0    factor     uniq                
+union                : -180     0        0    factor     union               
+join                 : -179     0        0    factor     join                
+remove-all-list      : -178     0        0    factor     remove-all-list     
+add-list-to-list     : -177     0        0    factor     add-list-to-list    
+get-of-list          : -176     0        0    factor     get-of-list         
+foreach              : -175     0        0    factor     foreach             
+try                  : -174     0        0    factor     try                 
+error-value          : -173     0        0    factor     error-value         
+throw                : -172     0        0    factor     throw               
+case                 : -171     0        0    factor     case                
+do                   : -170     0        0    factor     do                  
+break                : -169     0        0    factor     break               
+continue             : -168     0        0    factor     continue            
+return               : -167     0        0    factor     return              
+loop                 : -166     0        0    factor     loop                
+when                 : -165     0        0    factor     when                
+if                   : -164     0        0    factor     if                  
+lambda               : -163     0        0    factor     lambda              
+let                  : -162     0        0    factor     let                 
+cc                   : -161     0        0    factor     cc                  
+reduct               : -160     0        0    factor     reduct              
+is-thread-safe       : -159     0        0    factor     is-thread-safe      
+is-stable            : -158     0        0    factor     is-stable           
+list-function-in-return : -157     0        0    factor     list-function-in-return
+opt-status           : -156     0        0    factor     opt-status          
+deftemplate          : -155     0        0    factor     deftemplate         
+defun                : -154     0        0    factor     defun               
+defmacro             : -153     0        0    factor     defmacro            
+can-cast             : -152     0        0    factor     can-cast            
+cmp_def              : -151     0        0    factor     cmp_def             
+<=                   : -150     0        0    factor     <=                  
+>=                   : -149     0        0    factor     >=                  
+<                    : -148     0        0    factor     <                   
+>                    : -147     0        0    factor     >                   
+!=                   : -146     0        0    factor     !=                  
+=                    : -145     0        0    factor     =                   
+or                   : -144     0        0    factor     or                  
+and                  : -143     0        0    factor     and                 
+not                  : -142     0        0    factor     not                 
+~                    : -141     0        0    factor     ~                   
+^                    : -140     0        0    factor     ^                   
+|                    : -139     0        0    factor     |                   
+&                    : -138     0        0    factor     &                   
+power                : -137     0        0    factor     power               
+%                    : -136     0        0    factor     %                   
+/                    : -135     0        0    factor     /                   
+*                    : -134     0        0    factor     *                   
+-                    : -133     0        0    factor     -                   
++                    : -132     0        0    factor     +                   
+next                 : -131     0        0    factor     next                
+has-more             : -130     0        0    factor     has-more            
+make-list-Iterator   : -129     0        0    factor     make-list-Iterator  
 str-upper            : -128     0        0    factor     str-upper           
 str-replace          : -127     0        0    factor     str-replace         
 str-split            : -126     0        0    factor     str-split           

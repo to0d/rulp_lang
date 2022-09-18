@@ -46,6 +46,7 @@ import alpha.rulp.lang.IRLong;
 import alpha.rulp.lang.IRMember;
 import alpha.rulp.lang.IRNative;
 import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.IRObjectIterator;
 import alpha.rulp.lang.IRParaAttr;
 import alpha.rulp.lang.IRString;
 import alpha.rulp.lang.IRSubject;
@@ -74,6 +75,7 @@ import alpha.rulp.ximpl.error.XRError;
 import alpha.rulp.ximpl.function.XRFunction;
 import alpha.rulp.ximpl.function.XRFunctionLambda;
 import alpha.rulp.ximpl.function.XRFunctionList;
+import alpha.rulp.ximpl.iterator.XRObjectIteratorListWrapper;
 import alpha.rulp.ximpl.lang.XRAtom;
 import alpha.rulp.ximpl.lang.XRBoolean;
 import alpha.rulp.ximpl.lang.XRConst;
@@ -468,6 +470,11 @@ public final class RulpFactory {
 		return new XRListIterator(iter, RType.LIST, null);
 	}
 
+	public static IRObjectIterator createListIterator(IRList list) throws RException {
+		RType.ITERATOR.incCreateCount();
+		return new XRObjectIteratorListWrapper(list);
+	}
+
 	public static IRList createListOfString(Collection<String> elements) {
 
 		if (elements == null || elements.isEmpty()) {
@@ -516,6 +523,11 @@ public final class RulpFactory {
 		return new XRListIteratorR(iter, RType.LIST, name);
 	}
 
+	public static IRList createNamedList(String name, IRObject... elements) throws RException {
+		RType.LIST.incCreateCount();
+		return new XRListConst(elements, RType.LIST, name, false);
+	}
+
 	public static IRList createNamedList(String name, Iterator<? extends IRObject> iter) throws RException {
 
 		if (name != null && name.length() == 0) {
@@ -529,11 +541,6 @@ public final class RulpFactory {
 
 		RType.LIST.incCreateCount();
 		return new XRListIterator(iter, RType.LIST, name);
-	}
-
-	public static IRList createNamedList(String name, IRObject... elements) throws RException {
-		RType.LIST.incCreateCount();
-		return new XRListConst(elements, RType.LIST, name, false);
 	}
 
 	public static IRNameSpace createNameSpace(String name, IRClass rclass, IRFrame frame) throws RException {
@@ -609,10 +616,6 @@ public final class RulpFactory {
 		return new XRTemplate(templateName, defineFrame);
 	}
 
-	public static IRThreadContext createThreadContext() {
-		return new XRThreadContext();
-	}
-
 //	public static IRClass createNoClass() {
 //		IRClass noClass = new XRDefClass(A_NOCLASS);
 //		try {
@@ -622,6 +625,10 @@ public final class RulpFactory {
 //		}
 //		return noClass;
 //	}
+
+	public static IRThreadContext createThreadContext() {
+		return new XRThreadContext();
+	}
 
 	public static IRTokener createTokener() {
 		return new XRTokener();

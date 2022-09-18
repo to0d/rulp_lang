@@ -1,4 +1,4 @@
-package alpha.rulp.ximpl.lang;
+package alpha.rulp.ximpl.iterator;
 
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -6,6 +6,7 @@ import alpha.rulp.lang.IRObjectIterator;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.lang.AbsRefObject;
 
 public class XRObjectIteratorListWrapper extends AbsRefObject implements IRObjectIterator {
 
