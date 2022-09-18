@@ -1,0 +1,45 @@
+(defvar ?i (make-list-Iterator '(a b c)))
+;=>&?i
+
+?i
+;=>''(a)
+
+(has-next ?i)
+;=>true
+
+(next ?i)
+;=>a
+
+?i
+;=>''(b)
+
+(has-next ?i)
+;=>true
+
+(next ?i)
+;=>b
+
+?i
+;=>''(c)
+
+(has-next ?i)
+;=>true
+
+(next ?i)
+;=>c
+
+?i
+;=>''()
+
+(has-next ?i)
+;=>false
+
+(next ?i)
+;err:
+Iterator out of space: pos=3, size=3
+at (next ?i) ; main-2
+;eof
+
+?i
+;=>''()
+

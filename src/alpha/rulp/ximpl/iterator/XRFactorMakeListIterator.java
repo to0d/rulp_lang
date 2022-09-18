@@ -32,7 +32,9 @@ public class XRFactorMakeListIterator extends AbsAtomFactorAdapter implements IR
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		return RulpFactory.createListIterator(RulpUtil.asList(args.get(1)));
+		IRObject obj = interpreter.compute(frame, args.get(1));
+
+		return RulpFactory.createListIterator(RulpUtil.asList(obj));
 	}
 
 }

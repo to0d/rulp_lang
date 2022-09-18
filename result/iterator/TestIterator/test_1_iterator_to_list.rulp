@@ -1,0 +1,2 @@
+(to-list (make-list-Iterator '(a b c)))
+;=>

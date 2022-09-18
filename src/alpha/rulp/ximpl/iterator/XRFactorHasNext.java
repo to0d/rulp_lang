@@ -19,9 +19,9 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorHasMore extends AbsAtomFactorAdapter implements IRFactor {
+public class XRFactorHasNext extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorHasMore(String factorName) {
+	public XRFactorHasNext(String factorName) {
 		super(factorName);
 	}
 
@@ -32,7 +32,9 @@ public class XRFactorHasMore extends AbsAtomFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		return RulpFactory.createBoolean(RulpUtil.asIterator(args.get(1)).hasNext());
+		IRObject obj = interpreter.compute(frame, args.get(1));
+
+		return RulpFactory.createBoolean(RulpUtil.asIterator(obj).hasNext());
 	}
 
 }

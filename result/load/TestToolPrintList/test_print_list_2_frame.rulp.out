@@ -90,7 +90,7 @@ root::get-attribute
 root::get-of-array
 root::get-of-list
 root::has-member
-root::has-more
+root::has-next
 root::if
 root::instance
 root::int
@@ -99,6 +99,7 @@ root::is-debug-active
 root::is-recursive
 root::is-stable
 root::is-thread-safe
+root::iterator
 root::join
 root::lambda
 root::let

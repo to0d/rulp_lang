@@ -120,7 +120,7 @@ import alpha.rulp.ximpl.io.XRFactorReadLine;
 import alpha.rulp.ximpl.io.XRFactorRun;
 import alpha.rulp.ximpl.io.XRFactorSaveTxtFile;
 import alpha.rulp.ximpl.io.XRFactorTrace;
-import alpha.rulp.ximpl.iterator.XRFactorHasMore;
+import alpha.rulp.ximpl.iterator.XRFactorHasNext;
 import alpha.rulp.ximpl.iterator.XRFactorMakeListIterator;
 import alpha.rulp.ximpl.iterator.XRFactorNext;
 import alpha.rulp.ximpl.math.XRFactorArithmetic;
@@ -220,6 +220,7 @@ public class BaseLoader implements IRObjectLoader {
 		RulpUtil.addFrameObject(frame, T_Native);
 		RulpUtil.addFrameObject(frame, T_Member);
 		RulpUtil.addFrameObject(frame, T_Frame);
+		RulpUtil.addFrameObject(frame, T_Iterator);
 
 		RulpUtil.addFrameObject(frame, new XRFactorNameOf(F_NAME_OF));
 		RulpUtil.addFrameObject(frame, new XRFactorTypeOf(F_TYPE_OF));
@@ -329,7 +330,7 @@ public class BaseLoader implements IRObjectLoader {
 
 		// Iterator
 		RulpUtil.addFrameObject(frame, new XRFactorMakeListIterator(F_MAKE_LIST_ITERATOR));
-		RulpUtil.addFrameObject(frame, new XRFactorHasMore(F_HAS_MORE));
+		RulpUtil.addFrameObject(frame, new XRFactorHasNext(F_HAS_NEXT));
 		RulpUtil.addFrameObject(frame, new XRFactorNext(F_NEXT));
 
 		// Arithmetic

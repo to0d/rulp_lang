@@ -272,6 +272,20 @@
 (defun get ((?arr array) (?i1 int) (?i2 int)) (return (get-of-array ?arr ?i1 ?i2)))
 
 ;****************************************************;
+; Iterator tools
+;****************************************************;
+(defun to-list  ((?it iterator)) 
+    (defvar ?arr (make-array))
+    (loop 
+        (if (not (has-next ?it))
+            (break)
+        )
+        (add ?arr (next ?it))
+    )
+    (return (to-list ?arr))
+)
+
+;****************************************************;
 ; Namespace tools
 ;****************************************************;
 (deftemplate use ((namespace atom) (?ns namespace))

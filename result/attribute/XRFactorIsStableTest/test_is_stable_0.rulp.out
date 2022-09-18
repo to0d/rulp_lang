@@ -89,6 +89,7 @@ obj=if                  , type=factor
 obj=instance            , type=atom
 obj=int                 , type=atom
 obj=is-const            , type=factor
+obj=iterator            , type=atom
 obj=join                , type=factor
 obj=lambda              , type=factor
 obj=let                 , type=factor
@@ -180,7 +181,6 @@ obj=remove              , type=func
 obj=remove-all          , type=func
 obj=size-of             , type=func
 obj=to-array            , type=func
-obj=to-list             , type=func
 
 ;eof
 

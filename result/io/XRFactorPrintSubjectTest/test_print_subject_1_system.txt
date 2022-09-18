@@ -2,38 +2,39 @@ id=1, name=system, lvl=1, ref=0/0, entry=22, pid=0(root), subject=system
 ==========================================================================================================================
 Name(alias)          : EntryId  FrameId  Ref  Type       Value               
 --------------------------------------------------------------------------------------------------------------------------
-use                  : -231     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=frame@system
-remove-all           : -230     1        1    func       (remove-all list list) : frame=frame@system
-remove               : -229     1        1    func       (remove list nil) : frame=frame@system
-index-of             : -228     1        1    func       (index-of nil list) : frame=frame@system
-get                  : -227     1        1    funcList   '((get array int int) (get array int) (get list int)) : frame=null, type=list
+use                  : -232     1        1    template   (use '('(namespace) '(? type#namespace)) '('(namespace) '(? frame)) '('(namespace class) '(?))) : frame=frame@system
+remove-all           : -231     1        1    func       (remove-all list list) : frame=frame@system
+remove               : -230     1        1    func       (remove list nil) : frame=frame@system
+index-of             : -229     1        1    func       (index-of nil list) : frame=frame@system
+get                  : -228     1        1    funcList   '((get array int int) (get array int) (get list int)) : frame=null, type=list
                                          1    func       (get list int) : frame=frame@system
                                          1    func       (get array int) : frame=frame@system
                                          1    func       (get array int int) : frame=frame@system
-add-all              : -226     1        1    func       (add-all list list) : frame=frame@system
-add                  : -225     1        1    funcList   '((add array nil nil nil) (add array nil nil) (add array nil) (add list nil nil nil) (add list nil nil) (add list nil)) : frame=null, type=list
+add-all              : -227     1        1    func       (add-all list list) : frame=frame@system
+add                  : -226     1        1    funcList   '((add array nil nil nil) (add array nil nil) (add array nil) (add list nil nil nil) (add list nil nil) (add list nil)) : frame=null, type=list
                                          1    func       (add list nil) : frame=frame@system
                                          1    func       (add list nil nil) : frame=frame@system
                                          1    func       (add list nil nil nil) : frame=frame@system
                                          1    func       (add array nil) : frame=frame@system
                                          1    func       (add array nil nil) : frame=frame@system
                                          1    func       (add array nil nil nil) : frame=frame@system
-to-array             : -224     1        1    func       (to-array list) : frame=frame@system
-to-list              : -223     1        1    funcList   '((to-list array) (to-list list)) : frame=null, type=list
+to-array             : -225     1        1    func       (to-array list) : frame=frame@system
+to-list              : -224     1        1    funcList   '((to-list array) (to-list iterator) (to-list list)) : frame=null, type=list
                                          1    func       (to-list list) : frame=frame@system
                                          1    func       (to-list array) : frame=frame@system
-is-empty             : -222     1        1    funcList   '((is-empty array) (is-empty list)) : frame=null, type=list
+                                         1    func       (to-list iterator) : frame=frame@system
+is-empty             : -223     1        1    funcList   '((is-empty array) (is-empty list)) : frame=null, type=list
                                          2    func       (is-empty list) : frame=frame@system
                                          2    func       (is-empty array) : frame=frame@system
-size-of              : -221     1        1    funcList   '((size-of array int) (size-of array) (size-of list)) : frame=null, type=list
+size-of              : -222     1        1    funcList   '((size-of array int) (size-of array) (size-of list)) : frame=null, type=list
                                          1    func       (size-of list) : frame=frame@system
                                          1    func       (size-of array) : frame=frame@system
                                          1    func       (size-of array int) : frame=frame@system
-?load-script         : -220     1        1    var        '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp") : type=list
-?load-jar            : -219     1        1    var        '() : type=list     
-?load-class          : -218     1        1    var        '() : type=list     
-?path                : -217     1        1    var        '() : type=list     
-println              : -216     1        1    funcList   '((println nil nil nil nil nil nil nil nil nil) (println nil nil nil nil nil nil nil nil) (println nil nil nil nil nil nil nil) (println nil nil nil nil nil nil) (println nil nil nil nil nil) (println nil nil nil nil) (println nil nil nil) (println nil nil) (println nil) (println)) : frame=null, type=list
+?load-script         : -221     1        1    var        '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp") : type=list
+?load-jar            : -220     1        1    var        '() : type=list     
+?load-class          : -219     1        1    var        '() : type=list     
+?path                : -218     1        1    var        '() : type=list     
+println              : -217     1        1    funcList   '((println nil nil nil nil nil nil nil nil nil) (println nil nil nil nil nil nil nil nil) (println nil nil nil nil nil nil nil) (println nil nil nil nil nil nil) (println nil nil nil nil nil) (println nil nil nil nil) (println nil nil nil) (println nil nil) (println nil) (println)) : frame=null, type=list
                                          1    func       (println) : frame=frame@system
                                          1    func       (println nil) : frame=frame@system
                                          1    func       (println nil nil) : frame=frame@system
@@ -44,14 +45,14 @@ println              : -216     1        1    funcList   '((println nil nil nil 
                                          1    func       (println nil nil nil nil nil nil nil) : frame=frame@system
                                          1    func       (println nil nil nil nil nil nil nil nil) : frame=frame@system
                                          1    func       (println nil nil nil nil nil nil nil nil nil) : frame=frame@system
-cmp                  : -215     1        1    func       (cmp nil nil) : frame=frame@system
-equal                : -214     1        1    funcList   '((equal nil nil) (equal string string)) : frame=null, type=list
+cmp                  : -216     1        1    func       (cmp nil nil) : frame=frame@system
+equal                : -215     1        1    funcList   '((equal nil nil) (equal string string)) : frame=null, type=list
                                          1    func       (equal nil nil) : frame=frame@system
                                          1    func       (equal string string) : frame=frame@system
-length-of            : -213     1        1    funcList   '((length-of blob) (length-of string)) : frame=null, type=list
+length-of            : -214     1        1    funcList   '((length-of blob) (length-of string)) : frame=null, type=list
                                          1    func       (length-of string) : frame=frame@system
                                          1    func       (length-of blob) : frame=frame@system
-?trace               : -212     1        1    var        false : type=bool   
+?trace               : -213     1        1    var        false : type=bool   
 system               : -3       1        0    frame      frame@system        
 root                 : -2       1        0    frame      frame@root          
 ==========================================================================================================================

@@ -31,7 +31,9 @@ public class XRFactorNext extends AbsAtomFactorAdapter implements IRFactor {
 			throw new RException("Invalid parameters: " + args);
 		}
 
-		return RulpUtil.asIterator(args.get(1)).next();
+		IRObject obj = interpreter.compute(frame, args.get(1));
+
+		return RulpUtil.asIterator(obj).next();
 	}
 
 }

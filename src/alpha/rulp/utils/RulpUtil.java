@@ -2055,6 +2055,9 @@ public class RulpUtil {
 		case A_LIST:
 			return T_List;
 
+		case A_ITERATOR:
+			return T_Iterator;
+
 		case A_MACRO:
 			return T_Macro;
 

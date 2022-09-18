@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      248
+           Interpreter call id:      249
     Interpreter call level/max:        4       10
                Frame max level:        5
                   Frame max id:        8
@@ -25,30 +25,30 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      293
+    factor:      294
       func:        5
   template:        3
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=248, row=28, column=63(4), value-max=21, value-unit=2^x
+Callable stats info: callId=249, row=28, column=63(4), value-max=20, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         333333333333333333333333333333333333333333333333334333333634455 max=28, unit=2^x
+   Frame    RType  Count  Ref Object                         333333333333333333333333333333333333333333333333334333333633546 max=28, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
     root   factor    178    0 add-attribute                   1333333333333333333333333333333333333333333331                
-    root   factor     60    0 defun                                                                        3333 333331612   
-    root   factor      9    0 defvar                                                                           3      111  2
-    root   factor      6    0 value-of                                                                                  132 
+    root   factor     61    0 defun                                                                        3333 333332622   
+    root   factor      9    0 defvar                                                                           3      1 2  2
+    root   factor      6    0 value-of                                                                                   33 
     root   factor      6    0 alias                          33                                                             
     root   factor      5    0 defmacro                                                                                4     
-    root   factor      4    0 return                                                                                     121
+    root   factor      4    0 return                                                                                     112
     root   factor      4    0 make-list                                                                        3            
-  system template      3    1 use                                                                                       111 
-    root   factor      3    0 frame-of                                                                                  111 
-    root   factor      3    0 deftemplate                                                                            3      
-    root   factor      3    0 add_search_frame                                                                          111 
+  system template      3    1 use                                                                                        21 
+    root   factor      3    0 frame-of                                                                                   21 
+    root   factor      3    0 deftemplate                                                                            21     
+    root   factor      3    0 add_search_frame                                                                           21 
     root   factor      2    0 new                                                                                      2    
-    main   member      2    1 namespace@ns1::f1                                                                          11 
+    main   member      2    1 namespace@ns1::f1                                                                          1 1
     root   factor      1    0 str-substr                                                                                   1
     root   factor      1    0 str-last-index-of                                                                            1
     root   factor      1    0 setq                                                                                         1
@@ -69,19 +69,19 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1618            0         1618
+        atom:         1639            0         1639
       string:           45            0           45
         list:           13            0           13
-        expr:          750            7          743
+        expr:          765            7          758
          var:           26            9           17
-        func:           77            0           77
+        func:           78            0           78
     template:            1            0            1
        macro:            5            0            5
     instance:            2            0            2
       member:           11            0           11
        frame:           11            8            3
  interpreter:            1            0
-  frameEntry:          281            0
+  frameEntry:          282            0
       lambda:            0            0
 ==========================================================================================================================
 

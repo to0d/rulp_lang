@@ -96,7 +96,7 @@ obj=get-attribute       , type=factor
 obj=get-of-array        , type=factor
 obj=get-of-list         , type=factor
 obj=has-member          , type=factor
-obj=has-more            , type=factor
+obj=has-next            , type=factor
 obj=if                  , type=factor
 obj=instance            , type=atom
 obj=int                 , type=atom
@@ -105,6 +105,7 @@ obj=is-debug-active     , type=factor
 obj=is-recursive        , type=factor
 obj=is-stable           , type=factor
 obj=is-thread-safe      , type=factor
+obj=iterator            , type=atom
 obj=join                , type=factor
 obj=lambda              , type=factor
 obj=let                 , type=factor

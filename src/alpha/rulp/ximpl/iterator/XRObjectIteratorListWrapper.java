@@ -55,6 +55,11 @@ public class XRObjectIteratorListWrapper extends AbsRefObject implements IRObjec
 
 	@Override
 	public IRObject next() throws RException {
+
+		if (pos >= size) {
+			throw new RException(String.format("Iterator out of space: pos=%d, size=%d", pos, size));
+		}
+
 		return list.get(pos++);
 	}
 

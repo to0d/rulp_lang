@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      240
+           Interpreter call id:      241
     Interpreter call level/max:        4       10
                Frame max level:        5
                   Frame max id:        7
@@ -25,27 +25,27 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      284
+    factor:      285
       func:        2
   template:        4
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=240, row=26, column=61(4), value-max=21, value-unit=2^x
+Callable stats info: callId=241, row=26, column=61(4), value-max=20, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         3333333333333333333333333333333333333333333333333343333336355 max=28, unit=2^x
+   Frame    RType  Count  Ref Object                         3333333333333333333333333333333333333333333333333343333336356 max=28, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
     root   factor    178    0 add-attribute                   1333333333333333333333333333333333333333333331              
-    root   factor     58    0 defun                                                                        3333 33333161  
+    root   factor     59    0 defun                                                                        3333 33333262  
     root   factor      7    0 defvar                                                                           3      1  2
     root   factor      6    0 alias                          33                                                           
-    root   factor      5    0 deftemplate                                                                            3 2  
+    root   factor      5    0 deftemplate                                                                            2111 
     root   factor      5    0 defmacro                                                                                4   
-    root   factor      4    0 value-of                                                                                  3 
+    root   factor      4    0 value-of                                                                                  22
     root   factor      4    0 make-list                                                                        3          
-    root   factor      3    0 print                                                                                     3 
-    root   factor      3    0 +                                                                                         21
-    main   member      2    1 namespace@ns1::ask                                                                        2 
+    root   factor      3    0 print                                                                                     21
+    root   factor      3    0 +                                                                                         12
+    main   member      2    1 namespace@ns1::ask                                                                        11
     main template      2    1 ask                                                                                       2 
     root   factor      1    0 str-substr                                                                                 1
     root   factor      1    0 str-last-index-of                                                                          1
@@ -67,19 +67,19 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1618            0         1618
+        atom:         1639            0         1639
       string:           49            0           49
         list:           13            0           13
-        expr:          751            4          747
+        expr:          766            4          762
          var:           23            9           14
-        func:           77            0           77
+        func:           78            0           78
     template:            3            0            3
        macro:            5            0            5
     instance:            1            0            1
       member:            6            0            6
        frame:            7            5            2
  interpreter:            1            0
-  frameEntry:          273            0
+  frameEntry:          274            0
       lambda:            0            0
 ==========================================================================================================================
 

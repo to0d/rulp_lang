@@ -1,0 +1,41 @@
+(defvar ?i (make-list-Iterator '(a b c)))
+;=>
+
+?i
+;=>
+
+(has-next ?i)
+;=>
+
+(next ?i)
+;=>
+
+?i
+;=>
+
+(has-next ?i)
+;=>
+
+(next ?i)
+;=>
+
+?i
+;=>
+
+(has-next ?i)
+;=>
+
+(next ?i)
+;=>
+
+?i
+;=>
+
+(has-next ?i)
+;=>
+
+(next ?i)
+;err
+
+?i
+;=>

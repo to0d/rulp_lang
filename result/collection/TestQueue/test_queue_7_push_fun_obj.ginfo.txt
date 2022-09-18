@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      237
+           Interpreter call id:      238
     Interpreter call level/max:        0        7
                Frame max level:        5
                   Frame max id:        8
@@ -25,27 +25,27 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      281
+    factor:      282
       func:        7
 ==========================================================================================================================
 
-Callable stats info: callId=237, row=23, column=60(4), value-max=21, value-unit=2^x
+Callable stats info: callId=238, row=23, column=60(4), value-max=20, value-unit=2^x
 ==========================================================================================================================
    Frame    RType  Count  Ref Object                         333333333333333333333333333333333333333333333333334333333655 max=28, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
     root   factor    178    0 add-attribute                   1333333333333333333333333333333333333333333331             
-    root   factor     63    0 defun                                                                        3333 33333164 
+    root   factor     64    0 defun                                                                        3333 33333264 
     root   factor      6    0 alias                          33                                                          
     root   factor      5    0 defvar                                                                           3      1  
     root   factor      5    0 defmacro                                                                                4  
     root   factor      4    0 make-list                                                                        3         
-    root   factor      3    0 deftemplate                                                                            3   
+    root   factor      3    0 deftemplate                                                                            21  
     root   factor      2    0 return                                                                                    2
-    main   member      2    1 queue@q1::push                                                                           11
-    main   member      2    1 queue::_queue_push_back                                                                  11
+    main   member      2    1 queue@q1::push                                                                            2
+    main   member      2    1 queue::_queue_push_back                                                                   2
     root   factor      2    0 print                                                                                     2
     root   factor      2    0 load                                                                                    11 
-    root   factor      2    0 lambda                                                                                   11
+    root   factor      2    0 lambda                                                                                    2
     main funcList      1    2 to-list                                                                                   1
     root   factor      1    0 setq                                                                                     1 
     main   member      1    1 queue@q1::to-list                                                                         1
@@ -62,12 +62,12 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1740            0         1740
+        atom:         1761            0         1761
       string:           51            0           51
         list:           15            0           15
-        expr:          814            6          808
+        expr:          829            6          823
          var:           22            6           16
-        func:          105            0          105
+        func:          106            0          106
     template:            1            0            1
        macro:            5            0            5
     instance:            2            0            2
@@ -75,7 +75,7 @@ Object create count:
       member:           57            0           57
        frame:           12           10            2
  interpreter:            1            0
-  frameEntry:          276            0
+  frameEntry:          277            0
       lambda:            5            0
 ==========================================================================================================================
 
@@ -138,9 +138,10 @@ get                  : 27       2        2    funcList   '((get array int int) (
                                          2    func       (get array int int) : frame=frame@system
                                          1    func       (get type#queue int) : frame=frame@main
 clear                : 28       2        2    func       (clear type#queue) : frame=frame@main
-to-list              : 29       2        2    funcList   '((to-list array) (to-list list) (to-list type#queue)) : frame=null, type=list
+to-list              : 29       2        2    funcList   '((to-list array) (to-list iterator) (to-list list) (to-list type#queue)) : frame=null, type=list
                                          2    func       (to-list list) : frame=frame@system
                                          2    func       (to-list array) : frame=frame@system
+                                         2    func       (to-list iterator) : frame=frame@system
                                          1    func       (to-list type#queue) : frame=frame@main
 q1                   : 31       2        1    instance   queue@q1            
 ==========================================================================================================================

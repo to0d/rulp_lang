@@ -311,7 +311,7 @@ public interface Constant {
 
 	String F_HAS_MBR = "has-member";
 
-	String F_HAS_MORE = "has-more";
+	String F_HAS_NEXT = "has-next";
 
 	String F_IF = "if";
 

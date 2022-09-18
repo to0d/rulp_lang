@@ -9,6 +9,7 @@ import static alpha.rulp.lang.Constant.T_Double;
 import static alpha.rulp.lang.Constant.T_Float;
 import static alpha.rulp.lang.Constant.T_Func;
 import static alpha.rulp.lang.Constant.T_Int;
+import static alpha.rulp.lang.Constant.T_Iterator;
 import static alpha.rulp.lang.Constant.T_List;
 import static alpha.rulp.lang.Constant.T_Long;
 import static alpha.rulp.lang.Constant.T_Member;
@@ -279,6 +280,9 @@ public class ReturnTypeUtil {
 
 		case LIST:
 			return T_List;
+
+		case ITERATOR:
+			return T_Iterator;
 
 		case ARRAY:
 			return T_Array;
