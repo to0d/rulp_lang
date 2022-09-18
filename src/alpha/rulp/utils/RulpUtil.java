@@ -68,48 +68,6 @@ import alpha.rulp.ximpl.rclass.XRFactorNew;
 
 public class RulpUtil {
 
-	public static IRObject handle_error(IRError err, IRInterpreter interpreter, IRFrame frame) throws RException {
-
-		String errId = err.getId().getName();
-
-		String handleName = C_HANDLE + errId;
-		String valueName = errId;
-
-		IRFrameEntry handlEntry = frame.getEntry(handleName);
-		if (handlEntry == null) {
-
-			handlEntry = frame.getEntry(C_HANDLE_ANY);
-			if (handlEntry == null) {
-				return null;
-			}
-
-			valueName = RulpUtil.asAtom(frame.getEntry(C_ERROR_DEFAULT).getObject()).getName();
-		}
-
-		IRExpr catchExpr = RulpUtil.asExpression(handlEntry.getObject());
-		frame.setEntry(valueName, err);
-
-		IRObject rst = null;
-		IRIterator<? extends IRObject> iter = catchExpr.listIterator(2);
-		while (iter.hasNext()) {
-			rst = interpreter.compute(frame, iter.next());
-		}
-
-		return rst;
-	}
-
-	public static IRObject throw_error(IRInterpreter interpreter, IRFrame frame, IRAtom errId, IRObject errValue,
-			IRObject fromObject) throws RException {
-
-		IRError err = RulpFactory.createError(interpreter, errId, errValue);
-		IRObject rst = handle_error(err, interpreter, frame);
-		if (rst == null) {
-			throw new RError(frame, fromObject, err);
-		}
-
-		return rst;
-	}
-
 	public interface EqualAble<T> {
 		public boolean isEqualTo(T another);
 	}
@@ -524,14 +482,14 @@ public class RulpUtil {
 		return sb.toString();
 	}
 
-	public static void addAll(Collection<IRObject> l1, IRIterator<? extends IRObject> it) throws RException {
+	public static void addAll(Collection<IRObject> l1, IRList l2) throws RException {
+		addAll(l1, l2.iterator());
+	}
+
+	public static <T extends IRObject> void addAll(Collection<T> l1, IRIterator<? extends T> it) throws RException {
 		while (it.hasNext()) {
 			l1.add(it.next());
 		}
-	}
-
-	public static void addAll(Collection<IRObject> l1, IRList l2) throws RException {
-		addAll(l1, l2.iterator());
 	}
 
 	public static void addAll(IRList list, IRIterator<? extends IRObject> it) throws RException {
@@ -1270,17 +1228,6 @@ public class RulpUtil {
 		}
 	}
 
-//	public static void expectFactorParameterType(List<IRObject> args, RType type) throws RException {
-//
-//		for (int i = 1; i < args.size(); ++i) {
-//			IRObject arg = args.get(i);
-//			if (arg.getType() != type) {
-//				throw new RException(
-//						String.format("the type of arg %d is not %s: %s", 1, type.toString(), args.get(1)));
-//			}
-//		}
-//	}
-
 	public static IRClass findClass(IRObject obj, IRFrame frame) throws RException {
 
 		switch (obj.getType()) {
@@ -1304,6 +1251,33 @@ public class RulpUtil {
 		}
 	}
 
+	public static String formatAttribute(IRObject obj) throws RException {
+		StringBuffer sb = new StringBuffer();
+		_formatAttrList(sb, obj);
+		return sb.toString();
+	}
+
+//	public static void expectFactorParameterType(List<IRObject> args, RType type) throws RException {
+//
+//		for (int i = 1; i < args.size(); ++i) {
+//			IRObject arg = args.get(i);
+//			if (arg.getType() != type) {
+//				throw new RException(
+//						String.format("the type of arg %d is not %s: %s", 1, type.toString(), args.get(1)));
+//			}
+//		}
+//	}
+
+	public static IRAtom getObjectType(IRObject valObj) throws RException {
+
+		IRAtom valAtom = RType.toObject(valObj.getType());
+		if (valAtom == T_Instance) {
+			valAtom = RulpUtil.asInstance(valObj).getRClass().getClassTypeAtom();
+		}
+
+		return valAtom;
+	}
+
 //	public static RType compare_type(IRObject obj) throws RException {
 //
 //		RType type = _compare_obj(obj).getType();
@@ -1322,22 +1296,6 @@ public class RulpUtil {
 //			return null;
 //		}
 //	}
-
-	public static String formatAttribute(IRObject obj) throws RException {
-		StringBuffer sb = new StringBuffer();
-		_formatAttrList(sb, obj);
-		return sb.toString();
-	}
-
-	public static IRAtom getObjectType(IRObject valObj) throws RException {
-
-		IRAtom valAtom = RType.toObject(valObj.getType());
-		if (valAtom == T_Instance) {
-			valAtom = RulpUtil.asInstance(valObj).getRClass().getClassTypeAtom();
-		}
-
-		return valAtom;
-	}
 
 	public static String getSpaceLine(int len) {
 
@@ -1373,6 +1331,36 @@ public class RulpUtil {
 		}
 
 		return RulpUtil.asVar(entryValue).getValue();
+	}
+
+	public static IRObject handle_error(IRError err, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		String errId = err.getId().getName();
+
+		String handleName = C_HANDLE + errId;
+		String valueName = errId;
+
+		IRFrameEntry handlEntry = frame.getEntry(handleName);
+		if (handlEntry == null) {
+
+			handlEntry = frame.getEntry(C_HANDLE_ANY);
+			if (handlEntry == null) {
+				return null;
+			}
+
+			valueName = RulpUtil.asAtom(frame.getEntry(C_ERROR_DEFAULT).getObject()).getName();
+		}
+
+		IRExpr catchExpr = RulpUtil.asExpression(handlEntry.getObject());
+		frame.setEntry(valueName, err);
+
+		IRObject rst = null;
+		IRIterator<? extends IRObject> iter = catchExpr.listIterator(2);
+		while (iter.hasNext()) {
+			rst = interpreter.compute(frame, iter.next());
+		}
+
+		return rst;
 	}
 
 	public static void incRef(IRObject obj) throws RException {
@@ -1566,16 +1554,6 @@ public class RulpUtil {
 		return (P_STATIC & mbr.getProperty()) != 0;
 	}
 
-//	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
-//
-//		IRObject nsObj = frame.getObject(A_USING_NS);
-//		if (nsObj == null) {
-//			return null;
-//		}
-//
-//		return RulpUtil.asSubject(nsObj);
-//	}
-
 	public static boolean isPureAtomList(IRObject obj) throws RException {
 
 		RType type = obj.getType();
@@ -1592,6 +1570,16 @@ public class RulpUtil {
 
 		return true;
 	}
+
+//	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
+//
+//		IRObject nsObj = frame.getObject(A_USING_NS);
+//		if (nsObj == null) {
+//			return null;
+//		}
+//
+//		return RulpUtil.asSubject(nsObj);
+//	}
 
 	public static boolean isTrace(IRFrame frame) throws RException {
 		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_TRACE)).asBoolean();
@@ -1725,42 +1713,6 @@ public class RulpUtil {
 		return getObjectType(obj) == typeAtom;
 	}
 
-//	public static boolean isPureAtomPairList(IRObject obj) throws RException {
-//
-//		RType type = obj.getType();
-//		if (type != RType.LIST && type != RType.EXPR) {
-//			return false;
-//		}
-//
-//		IRIterator<? extends IRObject> iter = ((IRList) obj).iterator();
-//		while (iter.hasNext()) {
-//
-//			IRObject element = iter.next();
-//
-//			if (element.getType() == RType.ATOM) {
-//				continue;
-//			} else {
-//
-//			}
-//
-//			if (!isPureAtomList(element) || ((IRList) element).size() != 2) {
-//				return false;
-//			}
-//		}
-//
-//		return true;
-//	}
-
-//	public static boolean isQuote(IRObject obj) {
-//
-//		if (obj.getType() == RType.ATOM) {
-//			String name = ((IRAtom) obj).getName();
-//			return name.equals("'") || name.equalsIgnoreCase("quote");
-//		} else {
-//			return false;
-//		}
-//	}
-
 	public static String nameOf(IRObject obj, IRFrame frame) throws RException {
 
 		if (obj == null) {
@@ -1812,6 +1764,42 @@ public class RulpUtil {
 			return null;
 		}
 	}
+
+//	public static boolean isPureAtomPairList(IRObject obj) throws RException {
+//
+//		RType type = obj.getType();
+//		if (type != RType.LIST && type != RType.EXPR) {
+//			return false;
+//		}
+//
+//		IRIterator<? extends IRObject> iter = ((IRList) obj).iterator();
+//		while (iter.hasNext()) {
+//
+//			IRObject element = iter.next();
+//
+//			if (element.getType() == RType.ATOM) {
+//				continue;
+//			} else {
+//
+//			}
+//
+//			if (!isPureAtomList(element) || ((IRList) element).size() != 2) {
+//				return false;
+//			}
+//		}
+//
+//		return true;
+//	}
+
+//	public static boolean isQuote(IRObject obj) {
+//
+//		if (obj.getType() == RType.ATOM) {
+//			String name = ((IRAtom) obj).getName();
+//			return name.equals("'") || name.equalsIgnoreCase("quote");
+//		} else {
+//			return false;
+//		}
+//	}
 
 	public static IRInstance newInstance(String className, String instanceName, IRInterpreter interpreter,
 			IRFrame frame) throws RException {
@@ -1953,6 +1941,18 @@ public class RulpUtil {
 		}
 
 		return list;
+	}
+
+	public static IRObject throw_error(IRInterpreter interpreter, IRFrame frame, IRAtom errId, IRObject errValue,
+			IRObject fromObject) throws RException {
+
+		IRError err = RulpFactory.createError(interpreter, errId, errValue);
+		IRObject rst = handle_error(err, interpreter, frame);
+		if (rst == null) {
+			throw new RError(frame, fromObject, err);
+		}
+
+		return rst;
 	}
 
 	public static List<IRObject> toArray(IRList list) throws RException {
