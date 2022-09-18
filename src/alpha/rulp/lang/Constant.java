@@ -59,6 +59,8 @@ public interface Constant {
 
 	String A_FRAME = "frame";
 
+	String A_ITERATOR = "iterator";
+
 	String A_FROM = "from";
 
 	String A_FUN_PRE = "_$fun$_";
@@ -732,6 +734,8 @@ public interface Constant {
 	IRAtom T_Float = RulpFactory.createAtom(A_FLOAT);
 
 	IRAtom T_Frame = RulpFactory.createAtom(A_FRAME);
+
+	IRAtom T_Iterator = RulpFactory.createAtom(A_ITERATOR);
 
 	IRAtom T_Func = RulpFactory.createAtom(A_FUNCTION);
 

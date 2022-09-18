@@ -23,6 +23,7 @@ import static alpha.rulp.lang.Constant.A_FRAME;
 import static alpha.rulp.lang.Constant.A_FUNCTION;
 import static alpha.rulp.lang.Constant.A_INSTANCE;
 import static alpha.rulp.lang.Constant.A_INTEGER;
+import static alpha.rulp.lang.Constant.A_ITERATOR;
 import static alpha.rulp.lang.Constant.A_LIST;
 import static alpha.rulp.lang.Constant.A_LONG;
 import static alpha.rulp.lang.Constant.A_MACRO;
@@ -48,6 +49,7 @@ import static alpha.rulp.lang.Constant.T_Frame;
 import static alpha.rulp.lang.Constant.T_Func;
 import static alpha.rulp.lang.Constant.T_Instance;
 import static alpha.rulp.lang.Constant.T_Int;
+import static alpha.rulp.lang.Constant.T_Iterator;
 import static alpha.rulp.lang.Constant.T_List;
 import static alpha.rulp.lang.Constant.T_Long;
 import static alpha.rulp.lang.Constant.T_Macro;
@@ -83,12 +85,13 @@ public enum RType {
 	CLASS(19, A_CLASS), //
 	NATIVE(20, A_NATIVE), //
 	MEMBER(21, A_MEMBER), //
-	FRAME(22, A_FRAME); //
+	FRAME(22, A_FRAME), //
+	ITERATOR(23, A_ITERATOR);//
 
 	public static final RType ALL_RTYPE[] = { NIL, ATOM, BOOL, INT, LONG, FLOAT, DOUBLE, STRING, BLOB, LIST, EXPR,
-			ARRAY, VAR, CONSTANT, FACTOR, FUNC, TEMPLATE, MACRO, INSTANCE, CLASS, NATIVE, MEMBER, FRAME };
+			ARRAY, VAR, CONSTANT, FACTOR, FUNC, TEMPLATE, MACRO, INSTANCE, CLASS, NATIVE, MEMBER, FRAME, ITERATOR };
 
-	public static final int TYPE_NUM = 23;
+	public static final int TYPE_NUM = 24;
 
 	public static IRAtom toObject(RType type) {
 
@@ -161,6 +164,9 @@ public enum RType {
 
 		case TEMPLATE:
 			return T_Template;
+
+		case ITERATOR:
+			return T_Iterator;
 
 		default:
 			return O_Nan;
@@ -238,6 +244,9 @@ public enum RType {
 
 		case A_TEMPLATE:
 			return TEMPLATE;
+
+		case A_ITERATOR:
+			return ITERATOR;
 
 		default:
 			return null;

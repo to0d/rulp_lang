@@ -40,6 +40,7 @@ import alpha.rulp.lang.IRMap;
 import alpha.rulp.lang.IRMember;
 import alpha.rulp.lang.IRNative;
 import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.IRObjectIterator;
 import alpha.rulp.lang.IRString;
 import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.IRVar;
@@ -432,6 +433,15 @@ public class RulpUtil {
 			_toString(sb, mbr.getSubject(), formater, attr);
 			sb.append("::");
 			sb.append(mbr.getName());
+			break;
+
+		case ITERATOR:
+			IRObjectIterator it = (IRObjectIterator) obj;
+			sb.append("''(");
+			if (it.hasNext()) {
+				_toString(sb, it.peek(), formater, attr);
+			}
+			sb.append(")");
 			break;
 
 		default:

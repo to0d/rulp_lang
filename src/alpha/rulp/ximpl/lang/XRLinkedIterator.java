@@ -16,9 +16,11 @@ import alpha.rulp.runtime.IRIterator;
 
 public class XRLinkedIterator<T> implements IRIterator<T> {
 
-	private final Iterator<Iterator<T>> listIterator;
 	private Iterator<T> headIterator = null;
+
 	private boolean isEnd = false;
+
+	private final Iterator<Iterator<T>> listIterator;
 
 	public XRLinkedIterator(Iterator<Iterator<T>> listIterator) {
 		super();
