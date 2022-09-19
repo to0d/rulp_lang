@@ -75,7 +75,9 @@ import alpha.rulp.ximpl.error.XRError;
 import alpha.rulp.ximpl.function.XRFunction;
 import alpha.rulp.ximpl.function.XRFunctionLambda;
 import alpha.rulp.ximpl.function.XRFunctionList;
+import alpha.rulp.ximpl.iterator.XRObjectIteratorIteratorWrapper;
 import alpha.rulp.ximpl.iterator.XRObjectIteratorListWrapper;
+import alpha.rulp.ximpl.iterator.XRObjectIteratorRIteratorWrapper;
 import alpha.rulp.ximpl.lang.XRAtom;
 import alpha.rulp.ximpl.lang.XRBoolean;
 import alpha.rulp.ximpl.lang.XRConst;
@@ -470,9 +472,19 @@ public final class RulpFactory {
 		return new XRListIterator(iter, RType.LIST, null);
 	}
 
-	public static IRObjectIterator createListIterator(IRList list) throws RException {
+	public static IRObjectIterator createObjectIterator(IRList list) throws RException {
 		RType.ITERATOR.incCreateCount();
 		return new XRObjectIteratorListWrapper(list);
+	}
+
+	public static IRObjectIterator createObjectIterator(Iterator<? extends IRObject> iterator) throws RException {
+		RType.ITERATOR.incCreateCount();
+		return new XRObjectIteratorIteratorWrapper(iterator);
+	}
+
+	public static IRObjectIterator createObjectIterator(IRIterator<? extends IRObject> iterator) throws RException {
+		RType.ITERATOR.incCreateCount();
+		return new XRObjectIteratorRIteratorWrapper(iterator);
 	}
 
 	public static IRList createListOfString(Collection<String> elements) {

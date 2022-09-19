@@ -34,7 +34,7 @@ public class XRFactorMakeListIterator extends AbsAtomFactorAdapter implements IR
 
 		IRObject obj = interpreter.compute(frame, args.get(1));
 
-		return RulpFactory.createListIterator(RulpUtil.asList(obj));
+		return RulpFactory.createObjectIterator(RulpUtil.asList(obj));
 	}
 
 }
