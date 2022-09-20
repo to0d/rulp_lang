@@ -3,18 +3,13 @@ package alpha.rulp.ximpl.iterator;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRObjectIterator;
 import alpha.rulp.lang.RException;
-import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRIterator;
-import alpha.rulp.utils.RulpUtil;
-import alpha.rulp.ximpl.lang.AbsRefObject;
 
-public class XRObjectIteratorRIteratorWrapper extends AbsRefObject implements IRObjectIterator {
+public class XRObjectIteratorRIteratorWrapper extends AbsRefObjectIterator implements IRObjectIterator {
 
 	private IRIterator<? extends IRObject> iterator;
 
 	private IRObject topObject;
-
-	private boolean close = false;
 
 	public XRObjectIteratorRIteratorWrapper(IRIterator<? extends IRObject> iterator) {
 		super();
@@ -22,37 +17,18 @@ public class XRObjectIteratorRIteratorWrapper extends AbsRefObject implements IR
 	}
 
 	@Override
-	public String asString() {
-
-		try {
-			return RulpUtil.toString(this);
-		} catch (RException e) {
-			e.printStackTrace();
-			return e.toString();
-		}
+	protected void _close() throws RException {
+		topObject = null;
+		iterator = null;
 	}
 
 	@Override
-	public RType getType() {
-		return RType.ITERATOR;
-	}
-
-	@Override
-	public boolean hasNext() throws RException {
-
-		if (close) {
-			return false;
-		}
-
+	protected boolean _hasNext() throws RException {
 		return topObject != null || iterator.hasNext();
 	}
 
 	@Override
-	public IRObject next() throws RException {
-
-		if (close) {
-			return null;
-		}
+	protected IRObject _next() throws RException {
 
 		if (topObject != null) {
 			return topObject;
@@ -62,11 +38,7 @@ public class XRObjectIteratorRIteratorWrapper extends AbsRefObject implements IR
 	}
 
 	@Override
-	public IRObject peek() throws RException {
-
-		if (close) {
-			return null;
-		}
+	protected IRObject _peek() throws RException {
 
 		if (topObject == null) {
 			if (iterator.hasNext()) {
@@ -75,13 +47,5 @@ public class XRObjectIteratorRIteratorWrapper extends AbsRefObject implements IR
 		}
 
 		return topObject;
-	}
-
-	@Override
-	public void close() throws RException {
-		
-		topObject = null;
-		iterator = null;
-		close = true;
 	}
 }
