@@ -79,7 +79,6 @@ root::cc
 root::class
 root::class-of
 root::clone
-root::close
 root::cmp_def
 root::compute
 root::constant
