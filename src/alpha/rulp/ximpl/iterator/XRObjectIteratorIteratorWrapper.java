@@ -15,6 +15,8 @@ public class XRObjectIteratorIteratorWrapper extends AbsRefObject implements IRO
 
 	private IRObject topObject;
 
+	private boolean close = false;
+
 	public XRObjectIteratorIteratorWrapper(Iterator<? extends IRObject> iterator) {
 		super();
 		this.iterator = iterator;
@@ -38,11 +40,20 @@ public class XRObjectIteratorIteratorWrapper extends AbsRefObject implements IRO
 
 	@Override
 	public boolean hasNext() throws RException {
+
+		if (close) {
+			return false;
+		}
+
 		return topObject != null || iterator.hasNext();
 	}
 
 	@Override
 	public IRObject next() throws RException {
+
+		if (close) {
+			return null;
+		}
 
 		if (topObject != null) {
 			return topObject;
@@ -54,6 +65,10 @@ public class XRObjectIteratorIteratorWrapper extends AbsRefObject implements IRO
 	@Override
 	public IRObject peek() throws RException {
 
+		if (close) {
+			return null;
+		}
+
 		if (topObject == null) {
 			if (iterator.hasNext()) {
 				topObject = iterator.next();
@@ -61,6 +76,13 @@ public class XRObjectIteratorIteratorWrapper extends AbsRefObject implements IRO
 		}
 
 		return topObject;
+	}
+
+	@Override
+	public void close() throws RException {
+		topObject = null;
+		iterator = null;
+		close = true;
 	}
 
 }

@@ -237,6 +237,8 @@ public interface Constant {
 
 	String F_CLONE = "clone";
 
+	String F_CLOSE = "close";
+
 	String F_CMP = "cmp";
 
 	String F_CMP_DEF = F_CMP + "_def";
@@ -335,9 +337,9 @@ public interface Constant {
 
 	String F_LIST_FUNC_IN_RETURN = "list-function-in-return";
 
-	String F_LIST_OF = "list-of";
-
 //	String F_LOAD_JAR = "load-jar";
+
+	String F_LIST_OF = "list-of";
 
 	String F_LOAD = "load";
 
@@ -364,7 +366,7 @@ public interface Constant {
 	String F_NAME_OF = "name-of";
 
 	String F_NEW = "new";
-
+	
 	String F_NEXT = "next";
 
 	String F_NOT_EQUAL = "not-equal";

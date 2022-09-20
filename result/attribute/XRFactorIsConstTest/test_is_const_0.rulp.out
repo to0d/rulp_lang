@@ -52,6 +52,7 @@ obj=cc                  , type=factor
 obj=class               , type=atom
 obj=class-of            , type=factor
 obj=clone               , type=factor
+obj=close               , type=factor
 obj=cmp_def             , type=factor
 obj=compute             , type=factor
 obj=constant            , type=atom

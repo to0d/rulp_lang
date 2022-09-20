@@ -7,4 +7,6 @@ public interface IRObjectIterator extends IRObject {
 	public IRObject next() throws RException;
 
 	public IRObject peek() throws RException;
+
+	public void close() throws RException;
 }

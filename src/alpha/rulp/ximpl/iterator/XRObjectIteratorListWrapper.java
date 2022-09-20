@@ -10,6 +10,8 @@ import alpha.rulp.ximpl.lang.AbsRefObject;
 
 public class XRObjectIteratorListWrapper extends AbsRefObject implements IRObjectIterator {
 
+	private boolean close = false;
+
 	private IRList list;
 
 	private int pos = 0;
@@ -44,17 +46,41 @@ public class XRObjectIteratorListWrapper extends AbsRefObject implements IRObjec
 	}
 
 	@Override
+	public void close() throws RException {
+
+		if (!close) {
+
+			if (list != null) {
+				RulpUtil.decRef(list);
+				list = null;
+			}
+
+			close = true;
+
+		}
+	}
+
+	@Override
 	public RType getType() {
 		return RType.ITERATOR;
 	}
 
 	@Override
 	public boolean hasNext() throws RException {
+
+		if (close) {
+			return false;
+		}
+
 		return pos < size;
 	}
 
 	@Override
 	public IRObject next() throws RException {
+
+		if (close) {
+			return null;
+		}
 
 		if (pos >= size) {
 			throw new RException(String.format("Iterator out of space: pos=%d, size=%d", pos, size));
@@ -65,6 +91,11 @@ public class XRObjectIteratorListWrapper extends AbsRefObject implements IRObjec
 
 	@Override
 	public IRObject peek() throws RException {
+
+		if (close) {
+			return null;
+		}
+
 		return list.get(pos);
 	}
 
