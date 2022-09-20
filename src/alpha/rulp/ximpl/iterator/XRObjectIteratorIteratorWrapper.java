@@ -18,18 +18,13 @@ public class XRObjectIteratorIteratorWrapper extends AbsRefObjectIterator implem
 	}
 
 	@Override
-	protected void _close() throws RException {
-		topObject = null;
-		iterator = null;
-	}
-
-	@Override
-	protected boolean _hasNext() throws RException {
+	public boolean hasNext() throws RException {
 		return topObject != null || iterator.hasNext();
 	}
 
 	@Override
-	protected IRObject _next() throws RException {
+	public IRObject next() throws RException {
+
 		if (topObject != null) {
 			return topObject;
 		}
@@ -38,7 +33,8 @@ public class XRObjectIteratorIteratorWrapper extends AbsRefObjectIterator implem
 	}
 
 	@Override
-	protected IRObject _peek() throws RException {
+	public IRObject peek() throws RException {
+
 		if (topObject == null) {
 			if (iterator.hasNext()) {
 				topObject = iterator.next();

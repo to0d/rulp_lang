@@ -8,5 +8,4 @@ public interface IRObjectIterator extends IRObject {
 
 	public IRObject peek() throws RException;
 
-	public void close() throws RException;
 }

@@ -22,16 +22,6 @@ public class XRObjectIteratorListWrapper extends AbsRefObjectIterator implements
 	}
 
 	@Override
-	protected void _close() throws RException {
-
-		if (list != null) {
-			RulpUtil.decRef(list);
-			list = null;
-		}
-
-	}
-
-	@Override
 	protected void _delete() throws RException {
 		if (list != null) {
 			RulpUtil.decRef(list);
@@ -41,12 +31,12 @@ public class XRObjectIteratorListWrapper extends AbsRefObjectIterator implements
 	}
 
 	@Override
-	protected boolean _hasNext() throws RException {
+	public boolean hasNext() throws RException {
 		return pos < size;
 	}
 
 	@Override
-	protected IRObject _next() throws RException {
+	public IRObject next() throws RException {
 		if (pos >= size) {
 			throw new RException(String.format("Iterator out of space: pos=%d, size=%d", pos, size));
 		}
@@ -55,7 +45,7 @@ public class XRObjectIteratorListWrapper extends AbsRefObjectIterator implements
 	}
 
 	@Override
-	protected IRObject _peek() throws RException {
+	public IRObject peek() throws RException {
 		return list.get(pos);
 	}
 
