@@ -502,10 +502,65 @@ public class RulpUtil {
 		}
 	}
 
+	public static IRArray addAll(IRArray array, IRList list) throws RException {
+
+		if (array.isConst()) {
+			throw new RException("Can't add const vary: " + array);
+		}
+
+		if (!list.isEmpty()) {
+			IRIterator<? extends IRObject> it = list.iterator();
+			while (it.hasNext()) {
+				array.add(it.next());
+			}
+		}
+
+		return array;
+	}
+
+	public static IRList addAll(IRList list, IRArray array) throws RException {
+
+		if (array.isEmpty()) {
+			return list;
+		}
+
+		ArrayList<IRObject> rstList = new ArrayList<>();
+		RulpUtil.addAll(rstList, list);
+
+		int size = array.size();
+		for (int i = 0; i < size; ++i) {
+			IRObject obj = array.get(i);
+			if (obj == null) {
+				obj = O_Nil;
+			}
+
+			rstList.add(obj);
+		}
+
+		return RulpFactory.createList(rstList);
+	}
+
 	public static void addAll(IRList list, IRIterator<? extends IRObject> it) throws RException {
 		while (it.hasNext()) {
 			list.add(it.next());
 		}
+	}
+
+	public static IRList addAll(IRList l1, IRList l2) throws RException {
+
+		if (l2.isEmpty()) {
+			return l1;
+		}
+
+		if (l1.isEmpty()) {
+			return l2;
+		}
+
+		ArrayList<IRObject> rstList = new ArrayList<>();
+		RulpUtil.addAll(rstList, l1);
+		RulpUtil.addAll(rstList, l2);
+
+		return RulpFactory.createList(rstList);
 	}
 
 	public static void addFactor(IRFrame frame, String factorName, IRFactorBody factorBody) throws RException {
@@ -2413,32 +2468,62 @@ public class RulpUtil {
 		return list;
 	}
 
-	public static IRList toList(String name, IRList list, IRFrame frame) throws RException {
+	public static IRList toList(String name, IRArray array) throws RException {
 
-		// remove list name
-		if (name == null || name.trim().isEmpty()) {
-
-			if (list.getNamedName() == null) {
-				return list;
-			}
-
-			return RulpFactory.createList(list.iterator());
-
-		} else {
-
-			if (list.getNamedName() != null && name.equals(list.getNamedName())) {
-				return list;
-			}
-
-			if (!AttrUtil.isConst(list, frame)) {
-				IRList varList = RulpFactory.createVaryNamedList(name);
-				RulpUtil.addAll(varList, list.iterator());
-				return varList;
-			}
-
-			return RulpFactory.createNamedList(name, list.iterator());
+		if (array.isEmpty()) {
+			return RulpFactory.emptyConstList();
 		}
 
+		ArrayList<IRObject> rstList = new ArrayList<>();
+
+		int size = array.size();
+		for (int i = 0; i < size; ++i) {
+			IRObject obj = array.get(i);
+			if (obj == null) {
+				obj = O_Nil;
+			}
+			rstList.add(obj);
+		}
+
+		return RulpFactory.createNamedList(name, rstList);
+	}
+
+	public static IRList toList(String name, IRObject listObj, IRFrame frame) throws RException {
+
+		switch (listObj.getType()) {
+		case ARRAY:
+			return toList(name, RulpUtil.asArray(listObj));
+
+		case LIST:
+			IRList list = RulpUtil.asList(listObj);
+			// remove list name
+			if (name == null || name.trim().isEmpty()) {
+
+				if (list.getNamedName() == null) {
+					return list;
+				}
+
+				return RulpFactory.createList(list.iterator());
+
+			} else {
+
+				if (list.getNamedName() != null && name.equals(list.getNamedName())) {
+					return list;
+				}
+
+				if (!AttrUtil.isConst(list, frame)) {
+					IRList varList = RulpFactory.createVaryNamedList(name);
+					RulpUtil.addAll(varList, list.iterator());
+					return varList;
+				}
+
+				return RulpFactory.createNamedList(name, list.iterator());
+			}
+
+		default:
+			throw new RException("Can't convert to list: " + listObj);
+
+		}
 	}
 
 	public static IRList toList(String name, IRObject[] elements) throws RException {
@@ -2497,7 +2582,7 @@ public class RulpUtil {
 		}
 	}
 
-	public static IRList toNamedList(IRObject nameObj, IRList list, IRFrame frame) throws RException {
+	public static IRList toNamedList(IRObject nameObj, IRObject listObj, IRFrame frame) throws RException {
 
 		String name = null;
 		switch (nameObj.getType()) {
@@ -2513,7 +2598,7 @@ public class RulpUtil {
 			throw new RException(String.format("Invalid name object type<%s>: %s", "" + nameObj.getType(), nameObj));
 		}
 
-		return toList(name, list, frame);
+		return toList(name, listObj, frame);
 	}
 
 	public static String toOneLine(List<String> lines) {

@@ -1,0 +1,2 @@
+(to-named-list x (to-array '(a b c)))
+;=>

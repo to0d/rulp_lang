@@ -7,23 +7,21 @@
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-package alpha.rulp.ximpl.collection;
+package alpha.rulp.ximpl.array;
 
-import java.util.ArrayList;
-
+import alpha.rulp.lang.IRArray;
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
-public class XRFactorAddListToList extends AbsAtomFactorAdapter implements IRFactor {
+public class XRFactorAddArrayToList extends AbsAtomFactorAdapter implements IRFactor {
 
-	public XRFactorAddListToList(String factorName) {
+	public XRFactorAddArrayToList(String factorName) {
 		super(factorName);
 	}
 
@@ -35,21 +33,9 @@ public class XRFactorAddListToList extends AbsAtomFactorAdapter implements IRFac
 		}
 
 		IRList l1 = RulpUtil.asList(interpreter.compute(frame, args.get(1)));
-		IRList l2 = RulpUtil.asList(interpreter.compute(frame, args.get(2)));
+		IRArray arr2 = RulpUtil.asArray(interpreter.compute(frame, args.get(2)));
 
-		if (l2.isEmpty()) {
-			return l1;
-		}
-
-		if (l1.isEmpty()) {
-			return l2;
-		}
-
-		ArrayList<IRObject> rstList = new ArrayList<>();
-		RulpUtil.addAll(rstList, l1);
-		RulpUtil.addAll(rstList, l2);
-
-		return RulpFactory.createList(rstList);
+		return RulpUtil.addAll(l1, arr2);
 	}
 
 }

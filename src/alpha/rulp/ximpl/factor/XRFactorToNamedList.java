@@ -30,10 +30,8 @@ public class XRFactorToNamedList extends AbsAtomFactorAdapter implements IRFacto
 			throw new RException("invalid parameters: " + args);
 		}
 
-		IRObject nameObj = interpreter.compute(frame, args.get(1));
-		IRList list = RulpUtil.asList(interpreter.compute(frame, args.get(2)));
-
-		return RulpUtil.toNamedList(nameObj, list, frame);
+		return RulpUtil.toNamedList(interpreter.compute(frame, args.get(1)), interpreter.compute(frame, args.get(2)),
+				frame);
 	}
 
 }
