@@ -7,7 +7,7 @@
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-package alpha.rulp.ximpl.factor;
+package alpha.rulp.ximpl.macro;
 
 import java.util.List;
 
@@ -20,6 +20,7 @@ import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRMacro;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
+import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
 
 public class XRFactorDefMacro extends AbsAtomFactorAdapter implements IRFactor {
 

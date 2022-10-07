@@ -7,7 +7,7 @@
 /* This is free software, and you are welcome to     */
 /* redistribute it under certain conditions.         */
 
-package alpha.rulp.ximpl.lang;
+package alpha.rulp.ximpl.macro;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -23,7 +23,7 @@ import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
 import alpha.rulp.runtime.IRMacro;
-import alpha.rulp.utils.RuntimeUtil;
+import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.runtime.AbsRefCallableAdapter;
 
 public class XRMacro extends AbsRefCallableAdapter implements IRMacro {
@@ -63,7 +63,7 @@ public class XRMacro extends AbsRefCallableAdapter implements IRMacro {
 			}
 		}
 
-		return intepreter.compute(frame, RuntimeUtil.rebuild(macroBody, macroMap));
+		return intepreter.compute(frame, RulpUtil.rebuild(macroBody, macroMap));
 	}
 
 	@Override

@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import alpha.rulp.lang.IRArray;
 import alpha.rulp.lang.IRAtom;
@@ -1019,7 +1020,7 @@ public class RulpUtil {
 
 		case LIST:
 		case EXPR:
-			return RuntimeUtil.rebuild(obj, new HashMap<>());
+			return RulpUtil.rebuild(obj, new HashMap<>());
 
 		case CLASS:
 		case MEMBER:
@@ -1366,17 +1367,6 @@ public class RulpUtil {
 		return line;
 	}
 
-//	public static void expectFactorParameterType(List<IRObject> args, RType type) throws RException {
-//
-//		for (int i = 1; i < args.size(); ++i) {
-//			IRObject arg = args.get(i);
-//			if (arg.getType() != type) {
-//				throw new RException(
-//						String.format("the type of arg %d is not %s: %s", 1, type.toString(), args.get(1)));
-//			}
-//		}
-//	}
-
 	public static IRObject getVarValue(IRFrame frame, String varName) throws RException {
 
 		IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, varName);
@@ -1392,22 +1382,14 @@ public class RulpUtil {
 		return RulpUtil.asVar(entryValue).getValue();
 	}
 
-//	public static RType compare_type(IRObject obj) throws RException {
+//	public static void expectFactorParameterType(List<IRObject> args, RType type) throws RException {
 //
-//		RType type = _compare_obj(obj).getType();
-//
-//		switch (type) {
-//		case ATOM:
-//		case BOOL:
-//		case DOUBLE:
-//		case FLOAT:
-//		case INT:
-//		case LONG:
-//		case STRING:
-//			return type;
-//
-//		default:
-//			return null;
+//		for (int i = 1; i < args.size(); ++i) {
+//			IRObject arg = args.get(i);
+//			if (arg.getType() != type) {
+//				throw new RException(
+//						String.format("the type of arg %d is not %s: %s", 1, type.toString(), args.get(1)));
+//			}
 //		}
 //	}
 
@@ -1440,6 +1422,25 @@ public class RulpUtil {
 
 		return rst;
 	}
+
+//	public static RType compare_type(IRObject obj) throws RException {
+//
+//		RType type = _compare_obj(obj).getType();
+//
+//		switch (type) {
+//		case ATOM:
+//		case BOOL:
+//		case DOUBLE:
+//		case FLOAT:
+//		case INT:
+//		case LONG:
+//		case STRING:
+//			return type;
+//
+//		default:
+//			return null;
+//		}
+//	}
 
 	public static void incRef(IRObject obj) throws RException {
 
@@ -1657,16 +1658,6 @@ public class RulpUtil {
 		return isTrace(interpreter.getMainFrame());
 	}
 
-//	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
-//
-//		IRObject nsObj = frame.getObject(A_USING_NS);
-//		if (nsObj == null) {
-//			return null;
-//		}
-//
-//		return RulpUtil.asSubject(nsObj);
-//	}
-
 	public static boolean isValidRulpStmt(String line) {
 
 		try {
@@ -1689,6 +1680,16 @@ public class RulpUtil {
 			return false;
 		}
 	}
+
+//	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
+//
+//		IRObject nsObj = frame.getObject(A_USING_NS);
+//		if (nsObj == null) {
+//			return null;
+//		}
+//
+//		return RulpUtil.asSubject(nsObj);
+//	}
 
 	public static boolean isValueAtom(IRObject obj) {
 		return obj.getType() == RType.ATOM && !isVarName(((IRAtom) obj).getName());
@@ -1850,6 +1851,82 @@ public class RulpUtil {
 		return XRFactorNew.newInstance(
 				RulpFactory.createList(O_New, RulpFactory.createAtom(className), RulpFactory.createAtom(instanceName)),
 				interpreter, frame);
+	}
+
+	public static IRObject rebuild(IRObject obj, Map<String, IRObject> replaceMap) throws RException {
+
+		if (obj == null) {
+			return obj;
+		}
+
+		switch (obj.getType()) {
+		case ATOM: {
+			IRAtom atom = (IRAtom) obj;
+			IRObject var = replaceMap.get(atom.getName());
+			return var == null ? obj : var;
+		}
+
+		case EXPR:
+		case LIST:
+
+			ArrayList<IRObject> newList = new ArrayList<>();
+			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
+			while (it.hasNext()) {
+				newList.add(rebuild(it.next(), replaceMap));
+			}
+
+			if (obj.getType() == RType.LIST) {
+
+				String name = ((IRList) obj).getNamedName();
+				if (name != null) {
+
+					IRObject replaceObj = replaceMap.get(name);
+					if (replaceObj != null) {
+						switch (replaceObj.getType()) {
+						case ATOM:
+							name = RulpUtil.asAtom(replaceObj).getName();
+							break;
+
+						default:
+							throw new RException("Can't replace list name: " + obj);
+						}
+					}
+				}
+
+				return RulpUtil.toList(name, newList);
+			}
+
+			IRExpr expr = (IRExpr) obj;
+			return expr.isEarly() ? RulpFactory.createExpressionEarly(newList) : RulpFactory.createExpression(newList);
+
+		case MEMBER:
+
+			IRMember mbr = (IRMember) obj;
+			if (mbr.getValue() == null) {
+
+				boolean update = false;
+
+				IRObject sub = mbr.getSubject();
+				String mbrName = mbr.getName();
+
+				if (sub.getType() == RType.ATOM) {
+					IRObject var = replaceMap.get(((IRAtom) sub).getName());
+					if (var != null) {
+						sub = var;
+						update = true;
+					}
+				}
+
+				if (update) {
+					return RulpFactory.createMember(sub, mbrName, null);
+				}
+			}
+
+			return obj;
+
+		default:
+			return obj;
+		}
 	}
 
 	public static void registerNameSpaceLoader(IRInterpreter interpreter, IRFrame frame, String nsName,

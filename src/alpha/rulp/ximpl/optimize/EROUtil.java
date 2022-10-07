@@ -1719,7 +1719,7 @@ public class EROUtil {
 					Map<String, IRObject> replaceMap = new HashMap<>();
 					replaceMap.put(RulpUtil.asAtom(expr.get(2)).getName(), fromObj);
 
-					return RuntimeUtil.rebuild(doExpr, replaceMap);
+					return RulpUtil.rebuild(doExpr, replaceMap);
 				}
 
 				IRObject doExprObj = rebuild(RulpUtil.toDoExpr(XRFactorLoop.getLoop2DoList(expr)), interpreter, frame);
@@ -1732,7 +1732,7 @@ public class EROUtil {
 					Map<String, IRObject> replaceMap = new HashMap<>();
 					String indexName = RulpUtil.asAtom(XRFactorLoop.getLoop2IndexObject(expr)).getName();
 					replaceMap.put(indexName, fromObj);
-					return RuntimeUtil.rebuild(newObj, replaceMap);
+					return RulpUtil.rebuild(newObj, replaceMap);
 				}
 			}
 		}
@@ -1803,7 +1803,7 @@ public class EROUtil {
 					IRExpr doExpr = RulpUtil.toDoExpr(doActions);
 					Map<String, IRObject> replaceMap = new HashMap<>();
 					replaceMap.put(RulpUtil.asAtom(expr.get(2)).getName(), fromObj);
-					return RuntimeUtil.rebuild(doExpr, replaceMap);
+					return RulpUtil.rebuild(doExpr, replaceMap);
 				}
 
 				int byValue = RulpUtil.asInteger(byObj).asInteger();
