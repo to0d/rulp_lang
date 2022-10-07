@@ -31,6 +31,7 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
+import alpha.rulp.runtime.IRFrameLoader;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRListener1;
 import alpha.rulp.runtime.IRNameSpace;
@@ -60,6 +61,8 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 	protected Map<String, IRFrameEntry> entryMap = null;
 
 	protected int frameId;
+
+	protected IRFrameLoader frameLoader = null;
 
 	protected String frameName;
 
@@ -108,6 +111,7 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 
 		IRFrameEntry entry = (entryMap == null ? null : entryMap.get(name));
 		if (entry == null) {
+
 			switch (name) {
 			case A_LOCAL:
 				entry = _insertEntry(A_LOCAL, this);
@@ -119,7 +123,14 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 					RulpUtil.incRef(parentFrame);
 				}
 				break;
+
 			default:
+				if (frameLoader != null) {
+					IRObject obj = frameLoader.load(name);
+					if (obj != null) {
+						entry = _insertEntry(name, obj);
+					}
+				}
 			}
 		}
 
@@ -241,6 +252,7 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 		if (entryNode == null) {
 
 			IRFrameEntry localEntry = _findLocalEntry(name);
+
 			if (localEntry == null) {
 
 				if (parentFrame != null) {
@@ -524,6 +536,11 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 
 	public void setFrameId(int frameId) {
 		this.frameId = frameId;
+	}
+
+	@Override
+	public void setFrameLoader(IRFrameLoader frameLoader) {
+		this.frameLoader = frameLoader;
 	}
 
 	public void setFrameName(String frameName) {

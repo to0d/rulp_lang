@@ -11,6 +11,7 @@ package alpha.rulp.lang;
 
 import java.util.List;
 
+import alpha.rulp.runtime.IRFrameLoader;
 import alpha.rulp.runtime.IRListener1;
 import alpha.rulp.runtime.IRThreadContext;
 
@@ -49,6 +50,8 @@ public interface IRFrame extends IRObject, IRSubject {
 	public void setEntry(String name, IRObject obj) throws RException;
 
 	public void setEntryAliasName(IRFrameEntry entry, String aliasName) throws RException;
+
+	public void setFrameLoader(IRFrameLoader frameLoader);
 
 	public void setThreadContext(IRThreadContext context);
 

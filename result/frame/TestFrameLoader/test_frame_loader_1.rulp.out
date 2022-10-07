@@ -1,0 +1,9 @@
+(frame-of v1)
+;=>main
+
+v1
+;=>1
+
+(_ginfo)
+;=>nil
+
