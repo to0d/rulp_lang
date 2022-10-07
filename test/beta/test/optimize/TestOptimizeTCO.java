@@ -54,6 +54,9 @@ public class TestOptimizeTCO extends RulpTestBase {
 
 	@Test
 	void test_tco_6_recursion_cycle() {
+
+		// should fail
+
 		_setup();
 		_run_script();
 	}
@@ -74,6 +77,8 @@ public class TestOptimizeTCO extends RulpTestBase {
 
 	@Test
 	void test_tco_9_infinite_recursion_detected() {
+
+		// should fail
 
 		_setup();
 		_run_script();

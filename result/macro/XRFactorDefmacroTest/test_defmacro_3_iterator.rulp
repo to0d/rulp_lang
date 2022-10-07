@@ -1,0 +1,7 @@
+(defmacro m1 (?n1 ?v1 ?v2) 
+    (println ?n1:'(?v1 ?v2))
+)
+;=>
+
+(m1 n1 a $(make-list-Iterator '(b c)))
+;=>

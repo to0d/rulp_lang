@@ -17,4 +17,10 @@ class XRFactorDefmacroTest extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
+	
+	@Test
+	void test_defmacro_3_iterator() {
+		_setup();
+		_run_script();
+	}
 }

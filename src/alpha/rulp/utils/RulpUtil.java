@@ -19,7 +19,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import alpha.rulp.lang.IRArray;
 import alpha.rulp.lang.IRAtom;
@@ -1020,7 +1019,7 @@ public class RulpUtil {
 
 		case LIST:
 		case EXPR:
-			return RulpUtil.rebuild(obj, new HashMap<>());
+			return RuntimeUtil.rebuild(obj, new HashMap<>());
 
 		case CLASS:
 		case MEMBER:
@@ -1851,82 +1850,6 @@ public class RulpUtil {
 		return XRFactorNew.newInstance(
 				RulpFactory.createList(O_New, RulpFactory.createAtom(className), RulpFactory.createAtom(instanceName)),
 				interpreter, frame);
-	}
-
-	public static IRObject rebuild(IRObject obj, Map<String, IRObject> replaceMap) throws RException {
-
-		if (obj == null) {
-			return obj;
-		}
-
-		switch (obj.getType()) {
-		case ATOM: {
-			IRAtom atom = (IRAtom) obj;
-			IRObject var = replaceMap.get(atom.getName());
-			return var == null ? obj : var;
-		}
-
-		case EXPR:
-		case LIST:
-
-			ArrayList<IRObject> newList = new ArrayList<>();
-			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
-			while (it.hasNext()) {
-				newList.add(rebuild(it.next(), replaceMap));
-			}
-
-			if (obj.getType() == RType.LIST) {
-
-				String name = ((IRList) obj).getNamedName();
-				if (name != null) {
-
-					IRObject replaceObj = replaceMap.get(name);
-					if (replaceObj != null) {
-						switch (replaceObj.getType()) {
-						case ATOM:
-							name = RulpUtil.asAtom(replaceObj).getName();
-							break;
-
-						default:
-							throw new RException("Can't replace list name: " + obj);
-						}
-					}
-				}
-
-				return RulpUtil.toList(name, newList);
-			}
-
-			IRExpr expr = (IRExpr) obj;
-			return expr.isEarly() ? RulpFactory.createExpressionEarly(newList) : RulpFactory.createExpression(newList);
-
-		case MEMBER:
-
-			IRMember mbr = (IRMember) obj;
-			if (mbr.getValue() == null) {
-
-				boolean update = false;
-
-				IRObject sub = mbr.getSubject();
-				String mbrName = mbr.getName();
-
-				if (sub.getType() == RType.ATOM) {
-					IRObject var = replaceMap.get(((IRAtom) sub).getName());
-					if (var != null) {
-						sub = var;
-						update = true;
-					}
-				}
-
-				if (update) {
-					return RulpFactory.createMember(sub, mbrName, null);
-				}
-			}
-
-			return obj;
-
-		default:
-			return obj;
-		}
 	}
 
 	public static void registerNameSpaceLoader(IRInterpreter interpreter, IRFrame frame, String nsName,

@@ -30,6 +30,8 @@ class XFactorReductTest extends RulpTestBase {
 	@Test
 	void test_reduct_3_logical_2_var() {
 
+		// should fail
+
 		_setup();
 		_run_script();
 	}
@@ -37,12 +39,16 @@ class XFactorReductTest extends RulpTestBase {
 	@Test
 	void test_reduct_4_multi_1_unchanged_var() {
 
+		// should fail
+
 		_setup();
 		_run_script();
 	}
 
 	@Test
 	void test_reduct_4_multi_2_div_var() {
+
+		// should fail
 
 		_setup();
 		_run_script();
@@ -58,12 +64,16 @@ class XFactorReductTest extends RulpTestBase {
 	@Test
 	void test_reduct_5_expr_var_2() {
 
+		// should fail
+
 		_setup();
 		_run_script();
 	}
 
 	@Test
 	void test_reduct_5_expr_var_3() {
+
+		// should fail
 
 		_setup();
 		_run_script();
@@ -104,7 +114,7 @@ class XFactorReductTest extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
-	
+
 	@Test
 	void test_reduct_6_and_0() {
 		_setup();

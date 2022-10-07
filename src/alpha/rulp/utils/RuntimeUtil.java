@@ -26,6 +26,7 @@ import alpha.rulp.lang.IRFrameEntry;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRMember;
 import alpha.rulp.lang.IRObject;
+import alpha.rulp.lang.IRObjectIterator;
 import alpha.rulp.lang.IRParaAttr;
 import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.IRVar;
@@ -365,6 +366,7 @@ public final class RuntimeUtil {
 			case FUNC:
 			case FRAME:
 			case ARRAY:
+			case ITERATOR:
 				return obj;
 
 			case VAR: {
@@ -883,6 +885,93 @@ public final class RuntimeUtil {
 //		}
 
 		return null;
+	}
+
+	public static IRObject rebuild(IRObject obj, Map<String, IRObject> replaceMap) throws RException {
+
+		if (obj == null) {
+			return obj;
+		}
+
+		switch (obj.getType()) {
+		case ATOM: {
+			IRAtom atom = (IRAtom) obj;
+			IRObject var = replaceMap.get(atom.getName());
+			return var == null ? obj : var;
+		}
+
+		case EXPR:
+		case LIST:
+
+			ArrayList<IRObject> newList = new ArrayList<>();
+			IRIterator<? extends IRObject> it = ((IRList) obj).iterator();
+			while (it.hasNext()) {
+
+				IRObject newElement = rebuild(it.next(), replaceMap);
+				if (newElement.getType() == RType.ITERATOR) {
+
+					IRObjectIterator newIterator = RulpUtil.asIterator(newElement);
+					while (newIterator.hasNext()) {
+						newList.add(newIterator.next());
+					}
+
+				} else {
+					newList.add(newElement);
+				}
+			}
+
+			if (obj.getType() == RType.LIST) {
+
+				String name = ((IRList) obj).getNamedName();
+				if (name != null) {
+
+					IRObject replaceObj = replaceMap.get(name);
+					if (replaceObj != null) {
+						switch (replaceObj.getType()) {
+						case ATOM:
+							name = RulpUtil.asAtom(replaceObj).getName();
+							break;
+
+						default:
+							throw new RException("Can't replace list name: " + obj);
+						}
+					}
+				}
+
+				return RulpUtil.toList(name, newList);
+			}
+
+			IRExpr expr = (IRExpr) obj;
+			return expr.isEarly() ? RulpFactory.createExpressionEarly(newList) : RulpFactory.createExpression(newList);
+
+		case MEMBER:
+
+			IRMember mbr = (IRMember) obj;
+			if (mbr.getValue() == null) {
+
+				boolean update = false;
+
+				IRObject sub = mbr.getSubject();
+				String mbrName = mbr.getName();
+
+				if (sub.getType() == RType.ATOM) {
+					IRObject var = replaceMap.get(((IRAtom) sub).getName());
+					if (var != null) {
+						sub = var;
+						update = true;
+					}
+				}
+
+				if (update) {
+					return RulpFactory.createMember(sub, mbrName, null);
+				}
+			}
+
+			return obj;
+
+		default:
+			return obj;
+		}
 	}
 
 //	public static IRInstance newInstance(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {

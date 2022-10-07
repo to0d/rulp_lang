@@ -61,21 +61,20 @@ class TestOptimizeERO extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
-	
+
 	@Test
 	void test_ero_4_if_3_multi_return_2() {
 
 		_setup();
 		_run_script();
 	}
-	
+
 	@Test
 	void test_ero_4_if_3_multi_return_3() {
 
 		_setup();
 		_run_script();
 	}
-
 
 	@Test
 	void test_ero_5_case_1() {
@@ -139,21 +138,21 @@ class TestOptimizeERO extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
-	
+
 	@Test
 	void test_ero_7_loop_6() {
 
 		_setup();
 		_run_script();
 	}
-	
+
 	@Test
 	void test_ero_7_loop_7() {
 
 		_setup();
 		_run_script();
 	}
-	
+
 	@Test
 	void test_ero_7_loop_8() {
 
@@ -170,6 +169,8 @@ class TestOptimizeERO extends RulpTestBase {
 
 	@Test
 	void test_ero_8_infinite_loop_detected_recursion() {
+
+		// should fail
 
 		_setup();
 		_run_script();
