@@ -15,8 +15,6 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.utils.AttrUtil;
-import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 
 public class XRFactorToNamedList extends AbsAtomFactorAdapter implements IRFactor {
@@ -35,31 +33,7 @@ public class XRFactorToNamedList extends AbsAtomFactorAdapter implements IRFacto
 		IRObject nameObj = interpreter.compute(frame, args.get(1));
 		IRList list = RulpUtil.asList(interpreter.compute(frame, args.get(2)));
 
-		String name = null;
-		switch (nameObj.getType()) {
-		case ATOM:
-			name = RulpUtil.asAtom(nameObj).getName();
-			break;
-
-		case STRING:
-			name = RulpUtil.asString(nameObj).asString();
-			break;
-
-		default:
-			throw new RException(String.format("Invalid name object type<%s>: %s", "" + nameObj.getType(), nameObj));
-		}
-
-		if (list.getNamedName() != null && name.equals(list.getNamedName())) {
-			return list;
-		}
-
-		if (!AttrUtil.isConst(list, frame)) {
-			IRList varList = RulpFactory.createVaryNamedList(name);
-			RulpUtil.addAll(varList, list.iterator());
-			return varList;
-		}
-
-		return RulpFactory.createNamedList(name, list.iterator());
+		return RulpUtil.toNamedList(nameObj, list, frame);
 	}
 
 }

@@ -15,7 +15,6 @@ import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.RException;
 import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRInterpreter;
-import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 
 public class XRFactorToNoNamedList extends AbsAtomFactorAdapter implements IRFactor {
@@ -32,11 +31,8 @@ public class XRFactorToNoNamedList extends AbsAtomFactorAdapter implements IRFac
 		}
 
 		IRList list = RulpUtil.asList(interpreter.compute(frame, args.get(1)));
-		if (list.getNamedName() != null) {
-			list = RulpFactory.createList(list.iterator());
-		}
 
-		return list;
+		return RulpUtil.toList(null, list, frame);
 	}
 
 }

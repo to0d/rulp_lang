@@ -1280,17 +1280,6 @@ public class RulpUtil {
 		return sb.toString();
 	}
 
-//	public static void expectFactorParameterType(List<IRObject> args, RType type) throws RException {
-//
-//		for (int i = 1; i < args.size(); ++i) {
-//			IRObject arg = args.get(i);
-//			if (arg.getType() != type) {
-//				throw new RException(
-//						String.format("the type of arg %d is not %s: %s", 1, type.toString(), args.get(1)));
-//			}
-//		}
-//	}
-
 	public static IRAtom getObjectType(IRObject valObj) throws RException {
 
 		IRAtom valAtom = RType.toObject(valObj.getType());
@@ -1300,25 +1289,6 @@ public class RulpUtil {
 
 		return valAtom;
 	}
-
-//	public static RType compare_type(IRObject obj) throws RException {
-//
-//		RType type = _compare_obj(obj).getType();
-//
-//		switch (type) {
-//		case ATOM:
-//		case BOOL:
-//		case DOUBLE:
-//		case FLOAT:
-//		case INT:
-//		case LONG:
-//		case STRING:
-//			return type;
-//
-//		default:
-//			return null;
-//		}
-//	}
 
 	public static String getSpaceLine(int len) {
 
@@ -1341,6 +1311,17 @@ public class RulpUtil {
 		return line;
 	}
 
+//	public static void expectFactorParameterType(List<IRObject> args, RType type) throws RException {
+//
+//		for (int i = 1; i < args.size(); ++i) {
+//			IRObject arg = args.get(i);
+//			if (arg.getType() != type) {
+//				throw new RException(
+//						String.format("the type of arg %d is not %s: %s", 1, type.toString(), args.get(1)));
+//			}
+//		}
+//	}
+
 	public static IRObject getVarValue(IRFrame frame, String varName) throws RException {
 
 		IRFrameEntry entry = RuntimeUtil.lookupFrameEntry(frame, varName);
@@ -1355,6 +1336,25 @@ public class RulpUtil {
 
 		return RulpUtil.asVar(entryValue).getValue();
 	}
+
+//	public static RType compare_type(IRObject obj) throws RException {
+//
+//		RType type = _compare_obj(obj).getType();
+//
+//		switch (type) {
+//		case ATOM:
+//		case BOOL:
+//		case DOUBLE:
+//		case FLOAT:
+//		case INT:
+//		case LONG:
+//		case STRING:
+//			return type;
+//
+//		default:
+//			return null;
+//		}
+//	}
 
 	public static IRObject handle_error(IRError err, IRInterpreter interpreter, IRFrame frame) throws RException {
 
@@ -1594,6 +1594,14 @@ public class RulpUtil {
 		return true;
 	}
 
+	public static boolean isTrace(IRFrame frame) throws RException {
+		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_TRACE)).asBoolean();
+	}
+
+	public static boolean isTrace(IRInterpreter interpreter) throws RException {
+		return isTrace(interpreter.getMainFrame());
+	}
+
 //	public static IRSubject getUsingNameSpace(IRFrame frame) throws RException {
 //
 //		IRObject nsObj = frame.getObject(A_USING_NS);
@@ -1603,14 +1611,6 @@ public class RulpUtil {
 //
 //		return RulpUtil.asSubject(nsObj);
 //	}
-
-	public static boolean isTrace(IRFrame frame) throws RException {
-		return RulpUtil.asBoolean(RulpUtil.getVarValue(frame, A_TRACE)).asBoolean();
-	}
-
-	public static boolean isTrace(IRInterpreter interpreter) throws RException {
-		return isTrace(interpreter.getMainFrame());
-	}
 
 	public static boolean isValidRulpStmt(String line) {
 
@@ -1788,6 +1788,34 @@ public class RulpUtil {
 		}
 	}
 
+	public static IRInstance newInstance(String className, String instanceName, IRInterpreter interpreter,
+			IRFrame frame) throws RException {
+
+		// (new class name)
+		return XRFactorNew.newInstance(
+				RulpFactory.createList(O_New, RulpFactory.createAtom(className), RulpFactory.createAtom(instanceName)),
+				interpreter, frame);
+	}
+
+	public static void registerNameSpaceLoader(IRInterpreter interpreter, IRFrame frame, String nsName,
+			IRObjectLoader loader) throws RException {
+
+		if (nsName == null || (nsName = nsName.trim()).isEmpty() || nsName.startsWith("/")) {
+			throw new RException("invalid namespace name: " + nsName);
+		}
+
+		IRInstance instance = RulpUtil.newInstance(A_NAMESPACE, nsName, interpreter, frame);
+
+		instance.addLoader((sub) -> {
+			try {
+				LoadUtil.loadClass(loader, interpreter, sub.getSubjectFrame());
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RException(e.toString());
+			}
+		});
+	}
+
 //	public static boolean isPureAtomPairList(IRObject obj) throws RException {
 //
 //		RType type = obj.getType();
@@ -1823,34 +1851,6 @@ public class RulpUtil {
 //			return false;
 //		}
 //	}
-
-	public static IRInstance newInstance(String className, String instanceName, IRInterpreter interpreter,
-			IRFrame frame) throws RException {
-
-		// (new class name)
-		return XRFactorNew.newInstance(
-				RulpFactory.createList(O_New, RulpFactory.createAtom(className), RulpFactory.createAtom(instanceName)),
-				interpreter, frame);
-	}
-
-	public static void registerNameSpaceLoader(IRInterpreter interpreter, IRFrame frame, String nsName,
-			IRObjectLoader loader) throws RException {
-
-		if (nsName == null || (nsName = nsName.trim()).isEmpty() || nsName.startsWith("/")) {
-			throw new RException("invalid namespace name: " + nsName);
-		}
-
-		IRInstance instance = RulpUtil.newInstance(A_NAMESPACE, nsName, interpreter, frame);
-
-		instance.addLoader((sub) -> {
-			try {
-				LoadUtil.loadClass(loader, interpreter, sub.getSubjectFrame());
-			} catch (IOException e) {
-				e.printStackTrace();
-				throw new RException(e.toString());
-			}
-		});
-	}
 
 	public static void saveObjList(List<IRObject> list, IRObject obj) throws RException {
 		list.add(obj);
@@ -2413,6 +2413,34 @@ public class RulpUtil {
 		return list;
 	}
 
+	public static IRList toList(String name, IRList list, IRFrame frame) throws RException {
+
+		// remove list name
+		if (name == null || name.trim().isEmpty()) {
+
+			if (list.getNamedName() == null) {
+				return list;
+			}
+
+			return RulpFactory.createList(list.iterator());
+
+		} else {
+
+			if (list.getNamedName() != null && name.equals(list.getNamedName())) {
+				return list;
+			}
+
+			if (!AttrUtil.isConst(list, frame)) {
+				IRList varList = RulpFactory.createVaryNamedList(name);
+				RulpUtil.addAll(varList, list.iterator());
+				return varList;
+			}
+
+			return RulpFactory.createNamedList(name, list.iterator());
+		}
+
+	}
+
 	public static IRList toList(String name, IRObject[] elements) throws RException {
 
 		if (name == null)
@@ -2467,6 +2495,25 @@ public class RulpUtil {
 		default:
 			throw new RException("Can't convert to long: " + a);
 		}
+	}
+
+	public static IRList toNamedList(IRObject nameObj, IRList list, IRFrame frame) throws RException {
+
+		String name = null;
+		switch (nameObj.getType()) {
+		case ATOM:
+			name = RulpUtil.asAtom(nameObj).getName();
+			break;
+
+		case STRING:
+			name = RulpUtil.asString(nameObj).asString();
+			break;
+
+		default:
+			throw new RException(String.format("Invalid name object type<%s>: %s", "" + nameObj.getType(), nameObj));
+		}
+
+		return toList(name, list, frame);
 	}
 
 	public static String toOneLine(List<String> lines) {
