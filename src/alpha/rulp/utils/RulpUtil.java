@@ -2511,7 +2511,7 @@ public class RulpUtil {
 					return list;
 				}
 
-				if (!AttrUtil.isConst(list, frame)) {
+				if (frame != null && !AttrUtil.isConst(list, frame)) {
 					IRList varList = RulpFactory.createVaryNamedList(name);
 					RulpUtil.addAll(varList, list.iterator());
 					return varList;
@@ -2585,17 +2585,22 @@ public class RulpUtil {
 	public static IRList toNamedList(IRObject nameObj, IRObject listObj, IRFrame frame) throws RException {
 
 		String name = null;
-		switch (nameObj.getType()) {
-		case ATOM:
-			name = RulpUtil.asAtom(nameObj).getName();
-			break;
 
-		case STRING:
-			name = RulpUtil.asString(nameObj).asString();
-			break;
+		if (nameObj != null) {
+			
+			switch (nameObj.getType()) {
+			case ATOM:
+				name = RulpUtil.asAtom(nameObj).getName();
+				break;
 
-		default:
-			throw new RException(String.format("Invalid name object type<%s>: %s", "" + nameObj.getType(), nameObj));
+			case STRING:
+				name = RulpUtil.asString(nameObj).asString();
+				break;
+
+			default:
+				throw new RException(
+						String.format("Invalid name object type<%s>: %s", "" + nameObj.getType(), nameObj));
+			}
 		}
 
 		return toList(name, listObj, frame);
