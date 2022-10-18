@@ -69,7 +69,7 @@ public abstract class AbsRInstance extends AbsRSubject implements IRInstance {
 
 		// Instance local member
 		IRMember objMbr = super.getMember(name);
-		if (objMbr == null) {
+		if (objMbr == null && rClass != null) {
 			objMbr = SubjectUtil.getClassMember(this, rClass, name);
 			if (objMbr != null) {
 				this.setMember(name, objMbr);
