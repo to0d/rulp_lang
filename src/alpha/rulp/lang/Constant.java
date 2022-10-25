@@ -317,6 +317,8 @@ public interface Constant {
 
 	String F_IN = "in";
 
+	String F_INIT = "init";
+
 	String F_IS_CONST = "is-const";
 
 	String F_IS_DEBUG_ACTIBE = "is-debug-active";
@@ -333,9 +335,9 @@ public interface Constant {
 
 	String F_LET = "let";
 
-	String F_LIST_FUNC_IN_RETURN = "list-function-in-return";
-
 //	String F_LOAD_JAR = "load-jar";
+
+	String F_LIST_FUNC_IN_RETURN = "list-function-in-return";
 
 	String F_LIST_OF = "list-of";
 
@@ -354,8 +356,6 @@ public interface Constant {
 	String F_MAKE_LIST_ITERATOR = "make-list-Iterator";
 
 	String F_MAKE_STRING = "make-string";
-
-	String F_MBR_INIT = "init";
 
 	String F_MBR_THIS = "this";
 
