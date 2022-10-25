@@ -1,7 +1,7 @@
 package alpha.rulp.ximpl.rclass;
 
 import static alpha.rulp.lang.Constant.F_INIT;
-import static alpha.rulp.lang.Constant.F_MBR_UNINIT;
+import static alpha.rulp.lang.Constant.F_UNINIT;
 
 import java.util.ArrayList;
 
@@ -29,7 +29,7 @@ public class XRDefInstance extends AbsRInstance {
 		/******************************************/
 		// Check ~init parameters
 		/******************************************/
-		IRMember member = getMember(F_MBR_UNINIT);
+		IRMember member = getMember(F_UNINIT);
 		if (member != null) {
 
 			ArrayList<IRObject> initArgs = new ArrayList<>();

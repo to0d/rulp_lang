@@ -359,8 +359,6 @@ public interface Constant {
 
 	String F_MBR_THIS = "this";
 
-	String F_MBR_UNINIT = "~init";
-
 	String F_NAME_OF = "name-of";
 
 	String F_NEW = "new";
@@ -493,9 +491,9 @@ public interface Constant {
 
 	String F_STR_LENGTH = "str-length";
 
-//	String F_STR_SPLIT_LINE = "str-split-line";
-
 	String F_STR_MATCH = "str-match";
+
+//	String F_STR_SPLIT_LINE = "str-split-line";
 
 	String F_STR_REPLACE = "str-replace";
 
@@ -566,6 +564,8 @@ public interface Constant {
 	String F_TRY = "try";
 
 	String F_TYPE_OF = "type-of";
+
+	String F_UNINIT = "~init";
 
 	String F_UNION = "union";
 
