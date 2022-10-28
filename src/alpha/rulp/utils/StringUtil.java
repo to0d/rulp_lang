@@ -63,10 +63,12 @@ import static alpha.rulp.string.Constant.CN_CHAR_UNAME_8;
 import static alpha.rulp.string.Constant.CN_CHAR_UNAME_9;
 import static alpha.rulp.string.Constant.EN_SEPARATION_DOT;
 
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Stack;
 
 import alpha.rulp.lang.RException;
 import alpha.rulp.string.CharCaster;
@@ -464,6 +466,61 @@ public class StringUtil {
 		return sb == null ? value : sb.toString();
 	}
 
+	public static String simplifyLinuxPath(String path) {
+		return simplifyPath(path, '/');
+	}
+
+	public static String simplifyPath(String path) {
+		return simplifyPath(path, File.separatorChar);
+	}
+
+	public static String simplifyPath(String path, final char separator) {
+
+		if (path.trim().isEmpty()) {
+			return "";
+		}
+
+		Stack<String> pathStack = new Stack<>();
+		int i = 0;
+		int size = path.length();
+		char c;
+
+		while (i < size) {
+
+			while (i < size && separator == (c = path.charAt(i))) {
+				++i;
+			}
+
+			StringBuilder sb = new StringBuilder();
+			while (i < size && separator != (c = path.charAt(i))) {
+				sb.append(c);
+				++i;
+			}
+
+			String s = sb.toString();
+
+			switch (s) {
+			case "":
+			case ".": // nothing to do
+				break;
+			case "..":
+				if (!pathStack.isEmpty()) {
+					pathStack.pop();
+				}
+				break;
+			default:
+				pathStack.push(s);
+			}
+		}
+
+		String newPath = "";
+		while (!pathStack.isEmpty()) {
+			newPath = separator + pathStack.pop() + newPath;
+		}
+
+		return newPath.isEmpty() ? "" + separator : newPath;
+	}
+
 	public static String smartSort(List<String> elements, boolean simpleMode) throws RException {
 		return CharMatch.smartSort(elements, simpleMode);
 	}
@@ -603,4 +660,5 @@ public class StringUtil {
 
 		return line.substring(0, pos + 1);
 	}
+
 }

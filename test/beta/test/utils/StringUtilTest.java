@@ -79,6 +79,16 @@ public class StringUtilTest extends RulpTestBase {
 	}
 
 	@Test
+	void test_chinese_toString_0() {
+
+		_setup();
+
+		assertEquals("零", ChineseWord.toString(0));
+		assertEquals("一", ChineseWord.toString(1L));
+		assertEquals("一千二百三十四", ChineseWord.toString(1234));
+	}
+
+	@Test
 	void test_getCharType_1() {
 
 		_setup();
@@ -112,16 +122,6 @@ public class StringUtilTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_chinese_toString_0() {
-
-		_setup();
-
-		assertEquals("零", ChineseWord.toString(0));
-		assertEquals("一", ChineseWord.toString(1L));
-		assertEquals("一千二百三十四", ChineseWord.toString(1234));
-	}
-
-	@Test
 	void test_parseChineseNumber_1() {
 
 		_setup();
@@ -151,6 +151,23 @@ public class StringUtilTest extends RulpTestBase {
 		_test((input) -> {
 			return _removeEscape(input);
 		});
+	}
+
+	@Test
+	void test_simplifyPath() {
+
+		assertEquals("", StringUtil.simplifyPath(""));
+		assertEquals("/ab", StringUtil.simplifyLinuxPath("/ab"));
+		assertEquals("/", StringUtil.simplifyLinuxPath("/"));
+		assertEquals("/c", StringUtil.simplifyLinuxPath("/a/./b/../../c/"));
+		assertEquals("/x", StringUtil.simplifyLinuxPath("/////x"));
+		assertEquals("/x/y", StringUtil.simplifyLinuxPath("/x//////y"));
+		assertEquals("/y", StringUtil.simplifyLinuxPath("/x/../y"));
+		assertEquals("/", StringUtil.simplifyLinuxPath("/x/../../"));
+		assertEquals("/", StringUtil.simplifyLinuxPath("/.."));
+		assertEquals("/e/f/g",
+				StringUtil.simplifyLinuxPath("/a/./b///../c/../././../d/..//../e/./f/./g/././//.//h///././/..///"));
+		assertEquals("/y\\\\ \\\\ ", StringUtil.simplifyLinuxPath("/x/../y\\\\ \\\\ "));
 	}
 
 	@Test

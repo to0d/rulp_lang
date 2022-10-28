@@ -176,4 +176,10 @@ class TestOptimizeERO extends RulpTestBase {
 		_run_script();
 	}
 
+	@Test
+	void test_ero_9_lt_1_lt000105_map() {
+
+		_setup();
+		_run_script();
+	}
 }
