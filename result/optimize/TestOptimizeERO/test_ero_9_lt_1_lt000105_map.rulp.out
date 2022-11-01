@@ -1,0 +1,27 @@
+(load "map")
+;=>nil
+
+(defun twoSum ((?nums list) (?target int))
+
+    (defvar ?n (size-of ?nums))
+    (new map _map)
+
+    (loop for ?i from 0 to (- ?n 1) do
+
+        (defvar ?v (get ?nums ?i))
+        
+        (if (_map::has-key ?v) 
+            (return '((_map::get ?v) ?i))
+        )
+        
+        (_map::put (- ?target ?v) ?i)
+    )
+    
+    (return '())
+
+)[opt-full]
+;err:
+Can't convert to subject: _map
+at (defun twoSum ((?nums list) (?target int)) (defvar ?n (size-of ?nums)) (new m... ; main-2
+;eof
+

@@ -1,0 +1,26 @@
+(load "tool")
+;=>nil
+
+(load "limits")
+;=>nil
+
+(println int_max)
+;=>nil
+;out:
+2147483647
+
+;eof
+
+(println int_min)
+;=>nil
+;out:
+-2147483648
+
+;eof
+
+(+ int_max 1)
+;=>-2147483648
+
+(- int_min 1)
+;=>2147483647
+

@@ -361,7 +361,7 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
 		IRObject entryObj = entry.getObject();
 		if (entryObj.getType() != RType.FUNC) {
-			throw new RException("Duplicated entry found: " + funName);
+			throw new RException(String.format("Can't overide object: obj=%s, type=%s", entryObj, entryObj.getType()));
 		}
 
 		IRFunction oldFunc = RulpUtil.asFunction(entryObj);

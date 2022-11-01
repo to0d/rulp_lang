@@ -1,0 +1,8 @@
+(defun reverse ((?x int))
+    (return 0)
+)
+;err:
+Duplicated entry found: reverse
+at (defun reverse ((?x int)) (return 0)) ; main-2
+;eof
+

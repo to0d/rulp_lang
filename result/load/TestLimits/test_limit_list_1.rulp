@@ -1,0 +1,8 @@
+(load "tool")
+;=>
+
+(load "limits")
+;=>
+
+(print-list main constant)
+;=>

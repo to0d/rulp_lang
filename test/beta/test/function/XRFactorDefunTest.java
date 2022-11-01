@@ -88,6 +88,14 @@ class XRFactorDefunTest extends RulpTestBase {
 	}
 
 	@Test
+	void test_fun_3_overload_factor_1() {
+
+		_setup();
+		_run_script();
+
+	}
+
+	@Test
 	void test_fun_3_overload_null_arg() {
 
 		_setup();
@@ -156,5 +164,4 @@ class XRFactorDefunTest extends RulpTestBase {
 		_setup();
 		_run_script();
 	}
-
 }

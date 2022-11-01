@@ -1,0 +1,8 @@
+(defun reverse ((?x int))
+    (return 0)
+)
+;err:
+Can't overide object: obj=reverse, type=FACTOR
+at (defun reverse ((?x int)) (return 0)) ; main-2
+;eof
+
