@@ -1,0 +1,52 @@
+(load tool)
+;=>nil
+
+(defvar ?var1)
+;=>&?var1
+
+(print-list main var)
+;=>nil
+;out:
+mbr=?script-path, mbr-property='(public), mbr-attribute='(), obj=?script-path, obj-type=var, obj-attribute='(), var-value="resultclass\XRFactorDeleteTest\test_delete_2_in_macro_do_body.rulp"
+mbr=?var1, mbr-property='(public), mbr-attribute='(), obj=?var1, obj-type=var, obj-attribute='(), var-value="nil"
+
+;eof
+
+(defmacro ?m1 ()
+    (setq ?var1 1)
+    (delete ?var1)
+)
+;=>?m1
+
+(?m1)
+;err:
+unable to delete: obj ?var1 not found, frame=frame@do
+at (delete ?var1) ; do-5
+at (do (setq ?var1 1) (delete ?var1)) ; main-2
+at (?m1) ; main-2
+;eof
+
+(print-list main var)
+;=>nil
+;out:
+mbr=?script-path, mbr-property='(public), mbr-attribute='(), obj=?script-path, obj-type=var, obj-attribute='(), var-value="resultclass\XRFactorDeleteTest\test_delete_2_in_macro_do_body.rulp"
+mbr=?var1, mbr-property='(public), mbr-attribute='(), obj=?var1, obj-type=var, obj-attribute='(), var-value="1"
+
+;eof
+
+(defmacro ?m2 ()
+    (setq ?var1 1)
+    (delete ?var1 main)
+)
+;=>?m2
+
+(?m2)
+;=>nil
+
+(print-list main var)
+;=>nil
+;out:
+mbr=?script-path, mbr-property='(public), mbr-attribute='(), obj=?script-path, obj-type=var, obj-attribute='(), var-value="resultclass\XRFactorDeleteTest\test_delete_2_in_macro_do_body.rulp"
+
+;eof
+

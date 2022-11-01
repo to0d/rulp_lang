@@ -1,0 +1,14 @@
+(load tool)
+;=>
+
+(defvar ?var1)
+;=>
+
+(print-list main var)
+;=>
+
+(delete ?var1)
+;=>
+
+(print-list main var)
+;=>

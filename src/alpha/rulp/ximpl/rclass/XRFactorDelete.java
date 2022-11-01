@@ -31,15 +31,19 @@ public class XRFactorDelete extends AbsAtomFactorAdapter implements IRFactor {
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() != 2) {
+		if (args.size() != 2 && args.size() != 3) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
 		String entryName = RulpUtil.asAtom(args.get(1)).getName();
 
+		if (args.size() >= 3) {
+			frame = RulpUtil.asFrame(interpreter.compute(frame, args.get(2)));
+		}
+
 		IRFrameEntry oldEntry = frame.removeEntry(entryName);
 		if (oldEntry == null) {
-			throw new RException(String.format("unable to delete: obj %s not found", entryName));
+			throw new RException(String.format("unable to delete: obj %s not found, frame=%s", entryName, frame));
 		}
 
 		IRObject obj = oldEntry.getObject();

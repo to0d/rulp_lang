@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import alpha.rulp.utils.RulpTestBase;
 
-class XRFactorNewTest extends RulpTestBase {
+class XRFactorDeleteTest extends RulpTestBase {
 
 	@Test
-	void test_new_1_err_duplicate_obj() {
+	void test_delete_1_remove_var() {
 
 		_setup();
 		_run_script();
@@ -15,7 +15,7 @@ class XRFactorNewTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_new_2_no_instance_name() {
+	void test_delete_2_in_macro_do_body() {
 
 		_setup();
 		_run_script();

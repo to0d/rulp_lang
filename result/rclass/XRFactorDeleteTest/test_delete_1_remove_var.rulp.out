@@ -1,0 +1,24 @@
+(load tool)
+;=>nil
+
+(defvar ?var1)
+;=>&?var1
+
+(print-list main var)
+;=>nil
+;out:
+mbr=?script-path, mbr-property='(public), mbr-attribute='(), obj=?script-path, obj-type=var, obj-attribute='(), var-value="resultclass\XRFactorDeleteTest\test_delete_1_remove_var.rulp"
+mbr=?var1, mbr-property='(public), mbr-attribute='(), obj=?var1, obj-type=var, obj-attribute='(), var-value="nil"
+
+;eof
+
+(delete ?var1)
+;=>nil
+
+(print-list main var)
+;=>nil
+;out:
+mbr=?script-path, mbr-property='(public), mbr-attribute='(), obj=?script-path, obj-type=var, obj-attribute='(), var-value="resultclass\XRFactorDeleteTest\test_delete_1_remove_var.rulp"
+
+;eof
+

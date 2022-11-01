@@ -1,0 +1,32 @@
+(load tool)
+;=>
+
+(defvar ?var1)
+;=>
+
+(print-list main var)
+;=>
+
+(defmacro ?m1 ()
+    (setq ?var1 1)
+    (delete ?var1)
+)
+;=>
+
+(?m1)
+;err
+
+(print-list main var)
+;=>
+
+(defmacro ?m2 ()
+    (setq ?var1 1)
+    (delete ?var1 main)
+)
+;=>
+
+(?m2)
+;=>
+
+(print-list main var)
+;=>

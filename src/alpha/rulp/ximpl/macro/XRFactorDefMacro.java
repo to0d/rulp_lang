@@ -31,7 +31,7 @@ public class XRFactorDefMacro extends AbsAtomFactorAdapter implements IRFactor {
 	@Override
 	public IRObject compute(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
 
-		if (args.size() != 4) {
+		if (args.size() < 4) {
 			throw new RException("Invalid parameters: " + args);
 		}
 
@@ -40,7 +40,12 @@ public class XRFactorDefMacro extends AbsAtomFactorAdapter implements IRFactor {
 
 		IRObject nameObj = args.get(1);
 		IRObject paraObj = args.get(2);
-		IRObject bodyObj = args.get(3);
+		IRObject bodyObj = null;
+		if (args.size() == 4) {
+			bodyObj = args.get(3);
+		} else {
+			bodyObj = RulpUtil.toDoExpr(args.listIterator(3));
+		}
 
 		/*****************************************************/
 		// Macro will always be defined at top frame (root/syste/main)

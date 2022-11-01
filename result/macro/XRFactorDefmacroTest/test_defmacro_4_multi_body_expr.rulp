@@ -1,0 +1,14 @@
+(defvar ?v)
+;=>
+(defmacro ?m1 () 
+    (setq ?v 1)
+    (setq ?v 2)
+)
+;=>
+
+(?m1)
+;=>
+
+?v
+;=>
+

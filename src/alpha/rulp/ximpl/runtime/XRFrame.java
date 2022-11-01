@@ -472,6 +472,10 @@ public class XRFrame extends AbsRefObject implements IRFrame, IRNameSpace {
 	@Override
 	public synchronized IRFrameEntry removeEntry(String name) throws RException {
 
+		if (entryMap == null) {
+			return null;
+		}
+
 		IRFrameEntry entry = entryMap.remove(name);
 
 		if (_nodeCatchMap != null) {
