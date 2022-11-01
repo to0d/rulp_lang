@@ -4,7 +4,7 @@
 (defun twoSum ((?nums list) (?target int))
 
     (defvar ?n (size-of ?nums))
-    (new map _map)
+    (def map _map)
 
     (loop for ?i from 0 to (- ?n 1) do
 

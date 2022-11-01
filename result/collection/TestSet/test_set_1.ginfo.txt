@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      253
+           Interpreter call id:      254
     Interpreter call level/max:        0        4
                Frame max level:        5
                   Frame max id:        6
@@ -25,33 +25,33 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      302
+    factor:      303
       func:       18
 ==========================================================================================================================
 
-Callable stats info: callId=253, row=22, column=64(4), value-max=20, value-unit=2^x
+Callable stats info: callId=254, row=22, column=64(4), value-max=20, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         3333333333333333333333333333333333333333333333333343333336555554 max=28, unit=2^x
+   Frame    RType  Count  Ref Object                         3333333333333333333333333333333333333333333333333344333336555555 max=28, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor    178    0 add-attribute                   1333333333333333333333333333333333333333333331                 
-    root   factor     63    0 defun                                                                        3333 33333264     
-    root   factor     13    0 return                                                                                    23332
+    root   factor    178    0 add-attribute                    333333333333333333333333333333333333333333332                 
+    root   factor     63    0 defun                                                                        2333133333364     
+    root   factor     13    0 return                                                                                    13333
     main   member      8    1 set@set1::has                                                                              2222
     main   member      8    1 set::_set_has                                                                              2222
-    root   factor      6    0 alias                          33                                                              
-    main   member      5    1 set@set1::size-of                                                                         2111 
-    main   member      5    1 set::_set_size_of                                                                         2111 
-    root   factor      5    0 defvar                                                                           3      1      
-    root   factor      5    0 defmacro                                                                                4      
+    root   factor      7    0 alias                          33                                                              
+    main   member      5    1 set@set1::size-of                                                                         11111
+    main   member      5    1 set::_set_size_of                                                                         11111
+    root   factor      5    0 defvar                                                                           31     1      
+    root   factor      5    0 defmacro                                                                                31     
     main   member      4    1 set@set1::add                                                                             1111 
     main   member      4    1 set::_set_add                                                                             1111 
-    root   factor      4    0 make-list                                                                        3             
-    root   factor      3    0 deftemplate                                                                            21      
+    root   factor      4    0 make-list                                                                        31            
+    root   factor      3    0 deftemplate                                                                            12      
     root   factor      2    0 load                                                                                    11     
-    root   factor      1    0 setq                                                                                     1     
-    main   member      1    1 set@set1::init                                                                           1     
-    main   member      1    1 set::_set_init                                                                           1     
-    root   factor      1    0 new                                                                                      1     
+    root   factor      1    0 setq                                                                                      1    
+    main   member      1    1 set@set1::init                                                                            1    
+    main   member      1    1 set::_set_init                                                                            1    
+    root   factor      1    0 new                                                                                       1    
     root   factor      1    0 name-of                                                                                   1    
     root   factor      1    0 load-class                                                                               1     
     root   factor      1    0 defclass                                                                                 1     
@@ -61,10 +61,10 @@ Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1710            0         1710
+        atom:         1713            0         1713
       string:           51            0           51
         list:           17            0           17
-        expr:          814           18          796
+        expr:          815           18          797
          var:           28           12           16
         func:           93            0           93
     template:            1            0            1

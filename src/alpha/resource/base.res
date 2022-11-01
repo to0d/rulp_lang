@@ -7,6 +7,7 @@
 (alias string STRING)
 (alias list LIST)
 (alias expr EXPRESSION)
+(alias new def)
 
 ;****************************************************;
 ; Optimize attribute 

@@ -4,7 +4,7 @@ Total runtime info:
 ==========================================================================================================================
                           Name:     info
 --------------------------------------------------------------------------------------------------------------------------
-           Interpreter call id:      239
+           Interpreter call id:      240
     Interpreter call level/max:        4       52
                Frame max level:       33
                   Frame max id:       34
@@ -25,59 +25,59 @@ Expression compute count:
 ==========================================================================================================================
      RType:    Count
 --------------------------------------------------------------------------------------------------------------------------
-    factor:      679
+    factor:      680
       func:       12
      macro:        1
 ==========================================================================================================================
 
-Callable stats info: callId=239, row=33, column=60(4), value-max=87, value-unit=2^x
+Callable stats info: callId=240, row=33, column=61(4), value-max=87, value-unit=2^x
 ==========================================================================================================================
-   Frame    RType  Count  Ref Object                         3333333333333333333333333333333333333333333333333343333336X6 max=405, unit=2^x
+   Frame    RType  Count  Ref Object                         33333333333333333333333333333333333333333333333333443333363X5 max=405, unit=2^x
 --------------------------------------------------------------------------------------------------------------------------
-    root   factor    178    0 add-attribute                   1333333333333333333333333333333333333333333331             
-    root   factor     88    0 setq                                                                                     81
-    root   factor     60    0 if                                                                                       71
-    root   factor     60    0 defun                                                                        3333 33333263 
-    root   factor     49    0 <=                                                                                       7 
-    root   factor     30    0 +                                                                                        61
-    root   factor     29    0 power                                                                                    6 
-    root   factor     29    0 /                                                                                        6 
-    root   factor     29    0 %                                                                                        6 
-    root   factor     27    0 defvar                                                                           3      162
-    root   factor     12    0 return                                                                                   51
-    root   factor     11    0 do                                                                                       51
-    root   factor     10    0 try                                                                                      5 
-    root   factor     10    0 loop                                                                                     5 
-    main     func     10    1 (isHappy int)                                                                            5 
-    root   factor     10    0 break                                                                                    5 
-    root   factor     10    0 =                                                                                        5 
-    root   factor      6    0 alias                          33                                                          
-    root   factor      5    0 defmacro                                                                                4  
-    root   factor      4    0 make-list                                                                        3         
-    root   factor      3    0 deftemplate                                                                            21  
-    root   factor      1    0 str-substr                                                                                1
-    root   factor      1    0 str-last-index-of                                                                         1
-    main    macro      1    2 script_out                                                                                1
-    root   factor      1    0 print-impl                                                                                1
-    root   factor      1    0 print-global-info                                                                         1
-    root   factor      1    0 out-to-file                                                                               1
-    root   factor      1    0 opt-status                                                                                1
-    root   factor      1    0 load                                                                                    1  
-    main     func      1    2 (file-prename string)                                                                     1
-    root   factor      1    0 attribute-of                                                                              1
-    main funcList      1    3 _ginfo                                                                                    1
-    root   factor      1    0 !=                                                                                        1
+    root   factor    178    0 add-attribute                    333333333333333333333333333333333333333333332              
+    root   factor     88    0 setq                                                                                      81
+    root   factor     60    0 if                                                                                        71
+    root   factor     60    0 defun                                                                        2333133333363  
+    root   factor     49    0 <=                                                                                        7 
+    root   factor     30    0 +                                                                                         61
+    root   factor     29    0 power                                                                                     6 
+    root   factor     29    0 /                                                                                         6 
+    root   factor     29    0 %                                                                                         6 
+    root   factor     27    0 defvar                                                                           31     1 62
+    root   factor     12    0 return                                                                                    51
+    root   factor     11    0 do                                                                                        51
+    root   factor     10    0 try                                                                                       5 
+    root   factor     10    0 loop                                                                                      5 
+    main     func     10    1 (isHappy int)                                                                             5 
+    root   factor     10    0 break                                                                                     5 
+    root   factor     10    0 =                                                                                         5 
+    root   factor      7    0 alias                          33                                                           
+    root   factor      5    0 defmacro                                                                                31  
+    root   factor      4    0 make-list                                                                        31         
+    root   factor      3    0 deftemplate                                                                            12   
+    root   factor      1    0 str-substr                                                                                 1
+    root   factor      1    0 str-last-index-of                                                                          1
+    main    macro      1    2 script_out                                                                                 1
+    root   factor      1    0 print-impl                                                                                1 
+    root   factor      1    0 print-global-info                                                                          1
+    root   factor      1    0 out-to-file                                                                                1
+    root   factor      1    0 opt-status                                                                                1 
+    root   factor      1    0 load                                                                                    1   
+    main     func      1    2 (file-prename string)                                                                      1
+    root   factor      1    0 attribute-of                                                                              1 
+    main funcList      1    3 _ginfo                                                                                     1
+    root   factor      1    0 !=                                                                                         1
 ==========================================================================================================================
 
 Object create count:
 ==========================================================================================================================
        RType:       Create       Delete        Exist
 --------------------------------------------------------------------------------------------------------------------------
-        atom:         1655            0         1655
+        atom:         1658            0         1658
          int:           18            0           18
       string:           45            0           45
         list:           14            1           13
-        expr:          798           11          787
+        expr:          799           11          788
          var:           57           42           15
         func:           77            0           77
     template:            1            0            1

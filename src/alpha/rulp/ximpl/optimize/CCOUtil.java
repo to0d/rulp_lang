@@ -191,8 +191,7 @@ public class CCOUtil {
 			return true;
 		}
 
-		IRObject e0 = RulpUtil.lookup(expr.get(0), interpreter, frame);
-
+		IRObject e0 = EROUtil.lookup(expr.get(0), interpreter, frame);
 		if (OptUtil.isNewFrameFactor(e0)) {
 			nameSet = nameSet.newBranch();
 		}

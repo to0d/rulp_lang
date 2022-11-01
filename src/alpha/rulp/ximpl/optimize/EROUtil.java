@@ -1293,7 +1293,7 @@ public class EROUtil {
 			return true;
 		}
 
-		IRObject e0 = RulpUtil.lookup(expr.get(0), interpreter, frame);
+		IRObject e0 = EROUtil.lookup(expr.get(0), interpreter, frame);
 		if (_isEROExpr(e0, expr, frame)) {
 			return true;
 		}
@@ -1803,7 +1803,7 @@ public class EROUtil {
 					IRExpr doExpr = RulpUtil.toDoExpr(doActions);
 					Map<String, IRObject> replaceMap = new HashMap<>();
 					replaceMap.put(RulpUtil.asAtom(expr.get(2)).getName(), fromObj);
-					
+
 					return RuntimeUtil.rebuild(doExpr, replaceMap);
 				}
 
@@ -2158,6 +2158,15 @@ public class EROUtil {
 
 	public static int getRebuildCount() {
 		return rebuildCount.get();
+	}
+
+	public static IRObject lookup(IRObject obj, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		if (obj.getType() == RType.ATOM) {
+			obj = RulpUtil.lookup(obj, interpreter, frame);
+		}
+
+		return obj;
 	}
 
 	public static IRObject rebuild(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {
