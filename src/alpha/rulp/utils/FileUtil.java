@@ -98,7 +98,7 @@ public class FileUtil {
 			out.println(line);
 			writeBytes += line.length();
 		}
-		
+
 		incIOWriteFileCount();
 		incIOWriteFileBytes(writeBytes);
 	}
@@ -211,6 +211,12 @@ public class FileUtil {
 
 	public static int getIOWriteFileCount() {
 		return ioWriteCount.get();
+	}
+
+	public static long getLastModifiedTime(String filePath) {
+
+		File file = new File(filePath);
+		return file.exists() ? file.lastModified() : 0;
 	}
 
 	public static void incIOReadFileBytes(long byteNum) {

@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 
 import alpha.rulp.utils.FileUtil;
 import alpha.rulp.utils.RulpTestBase;
+import alpha.rulp.utils.SystemUtil;
+import alpha.rulp.utils.SystemUtil.OSType;
 
 public class FileUtilTest extends RulpTestBase {
 
@@ -282,5 +284,85 @@ public class FileUtilTest extends RulpTestBase {
 		_setup();
 		assertEquals("C:\\data\\itool\\rulp_lang\\", FileUtil.toValidPath(""));
 		assertEquals("C:\\data\\itool\\rulp_lang\\", FileUtil.toValidPath(null));
+	}
+
+	@Test
+	void test_getLastModifiedTime() {
+
+		_setup();
+
+		String testRootPath = null;
+		String testFilePath = null;
+
+		if (SystemUtil.getOSType() == OSType.Win) {
+
+			testRootPath = "C:\\tmp\\cpp_FileUtilityTest_testGetLastModifiedTime";
+			testFilePath = testRootPath + "\\File1";
+		} else {
+			testRootPath = "/tmp/test/cpp_FileUtilityTest_testGetLastModifiedTime";
+			testFilePath = testRootPath + "/File1";
+		}
+
+		File testRoot = new File(testRootPath);
+		if (!testRoot.exists()) {
+			assertTrue(testRoot.mkdirs());
+		}
+
+		File testFile = new File(testFilePath);
+		if (testFile.exists()) {
+			assertTrue(testFile.delete());
+		}
+
+		try {
+
+			long t1 = FileUtil.getLastModifiedTime(testRootPath);
+
+			if (SystemUtil.getOSType() == OSType.Win) {
+				Thread.sleep(5);
+			} else {
+				// Linux vm does not support millisecond
+				Thread.sleep(1000);
+			}
+
+			long t2 = FileUtil.getLastModifiedTime(testRootPath);
+			assertEquals(t1, t2);
+
+			assertTrue(testFile.createNewFile());
+			long t3 = FileUtil.getLastModifiedTime(testRootPath);
+			assertTrue(t3 > t1);
+
+			long t4 = FileUtil.getLastModifiedTime(testFilePath);
+
+			if (SystemUtil.getOSType() == OSType.Win) {
+				Thread.sleep(5);
+			} else {
+
+				// Linux vm does not support millisecond
+				Thread.sleep(1000);
+			}
+
+			long t5 = FileUtil.getLastModifiedTime(testFilePath);
+			assertEquals(t4, t5);
+
+			PrintStream outputFile = new PrintStream(testFilePath);
+			outputFile.print("Test");
+			outputFile.close();
+
+			if (SystemUtil.getOSType() == OSType.Win) {
+				Thread.sleep(5);
+			} else {
+
+				// Linux vm does not support millisecond
+				Thread.sleep(1000);
+			}
+
+			long t6 = FileUtil.getLastModifiedTime(testFilePath);
+			assertTrue(t6 > t5);
+
+		} catch (Exception e) {
+			fail(e.toString());
+		}
+
+		FileUtil.deleteFile(new File(testRootPath));
 	}
 }
