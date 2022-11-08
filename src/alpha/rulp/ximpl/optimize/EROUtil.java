@@ -1,6 +1,7 @@
 package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.A_DO;
+import static alpha.rulp.lang.Constant.A_OPT_ERO;
 import static alpha.rulp.lang.Constant.F_BREAK;
 import static alpha.rulp.lang.Constant.F_B_AND;
 import static alpha.rulp.lang.Constant.F_B_OR;
@@ -48,6 +49,7 @@ import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
+import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.MathUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
@@ -2181,6 +2183,42 @@ public class EROUtil {
 		}
 
 		return rst;
+	}
+
+	public static IRList rebuildDefun(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		IRExpr funBody = null;
+
+		// (defun fun (?v) (body))
+		if (args.size() == 4) {
+			funBody = RulpUtil.asExpression(args.get(3));
+
+		}
+		// (defun fun (?v) (do body))
+		else if (args.size() > 4) {
+			funBody = RulpUtil.toDoExpr(args.listIterator(3));
+		}
+		// not support
+		else {
+
+			// remove opt attribute
+			AttrUtil.removeAttribute(args, A_OPT_ERO);
+			return args;
+		}
+
+		IRExpr newBody = OptUtil.asExpr(rebuildFuncBody(funBody, interpreter, frame));
+
+		// not update
+		if (newBody == funBody) {
+			// remove opt attribute
+			AttrUtil.removeAttribute(args, A_OPT_ERO);
+			return args;
+		}
+
+		IRList newExpr = RulpFactory.createExpression(args.get(0), args.get(1), args.get(2), newBody);
+		AttrUtil.copyAttributes(args, newExpr);
+
+		return newExpr;
 	}
 
 	public static IRObject rebuildFuncBody(IRExpr expr, IRInterpreter interpreter, IRFrame frame) throws RException {

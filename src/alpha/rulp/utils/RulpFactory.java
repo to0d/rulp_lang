@@ -11,6 +11,8 @@ package alpha.rulp.utils;
 
 import static alpha.rulp.lang.Constant.A_MAIN;
 import static alpha.rulp.lang.Constant.A_NIL;
+import static alpha.rulp.lang.Constant.A_OPT_CCO;
+import static alpha.rulp.lang.Constant.A_OPT_ERO;
 import static alpha.rulp.lang.Constant.A_OPT_TCO;
 import static alpha.rulp.lang.Constant.A_ROOT;
 import static alpha.rulp.lang.Constant.A_SYSTEM;
@@ -99,6 +101,8 @@ import alpha.rulp.ximpl.lang.XRString;
 import alpha.rulp.ximpl.lang.XRVar;
 import alpha.rulp.ximpl.macro.XRMacro;
 import alpha.rulp.ximpl.namespace.XRNameSpace;
+import alpha.rulp.ximpl.optimize.CCOUtil;
+import alpha.rulp.ximpl.optimize.EROUtil;
 import alpha.rulp.ximpl.optimize.TCOUtil;
 import alpha.rulp.ximpl.rclass.XRDefClass;
 import alpha.rulp.ximpl.rclass.XRDefInstance;
@@ -440,6 +444,16 @@ public final class RulpFactory {
 		RulpUtil.asFactor(RuntimeUtil.lookupFrameEntry(mainFrame, F_DEFUN).getValue())
 				.registerBeforeAnnotationBuilder(A_OPT_TCO, (_args, _interpreter, _frame) -> {
 					return TCOUtil.rebuildDefun(_args, _interpreter, _frame);
+				});
+
+		RulpUtil.asFactor(RuntimeUtil.lookupFrameEntry(mainFrame, F_DEFUN).getValue())
+				.registerBeforeAnnotationBuilder(A_OPT_ERO, (_args, _interpreter, _frame) -> {
+					return EROUtil.rebuildDefun(_args, _interpreter, _frame);
+				});
+
+		RulpUtil.asFactor(RuntimeUtil.lookupFrameEntry(mainFrame, F_DEFUN).getValue())
+				.registerBeforeAnnotationBuilder(A_OPT_CCO, (_args, _interpreter, _frame) -> {
+					return CCOUtil.rebuildDefun(_args, _interpreter, _frame);
 				});
 
 		return interpreter;

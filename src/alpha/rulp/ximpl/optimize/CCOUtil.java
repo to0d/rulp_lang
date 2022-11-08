@@ -1,5 +1,6 @@
 package alpha.rulp.ximpl.optimize;
 
+import static alpha.rulp.lang.Constant.A_OPT_CCO;
 import static alpha.rulp.lang.Constant.A_OPT_ID;
 
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import alpha.rulp.lang.IRExpr;
 import alpha.rulp.lang.IRFrame;
+import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
 import alpha.rulp.lang.IRParaAttr;
 import alpha.rulp.lang.RException;
@@ -20,6 +22,7 @@ import alpha.rulp.utils.AttrUtil;
 import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.ximpl.attribute.StmtCountUtil;
+import alpha.rulp.ximpl.function.XRFactorDefun;
 
 // (Compute Cache Optimization)
 public class CCOUtil {
@@ -89,6 +92,45 @@ public class CCOUtil {
 		ccoUtil._rebuildCC2(cc0, nameSet);
 
 		return cc0.outputExpr == null ? expr : cc0.outputExpr;
+	}
+
+	public static IRList rebuildDefun(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		IRExpr funBody = null;
+
+		// (defun fun (?v) (body))
+		if (args.size() == 4) {
+			funBody = RulpUtil.asExpression(args.get(3));
+
+		}
+		// (defun fun (?v) (do body))
+		else if (args.size() > 4) {
+			funBody = RulpUtil.toDoExpr(args.listIterator(3));
+		}
+		// not support
+		else {
+
+			// remove opt attribute
+			AttrUtil.removeAttribute(args, A_OPT_CCO);
+			return args;
+		}
+
+		String funName = args.get(1).asString();
+		List<IRParaAttr> paraAttrs = XRFactorDefun.buildAttrList(args.get(2), interpreter, frame);
+
+		IRExpr newBody = OptUtil.asExpr(rebuild(funBody, paraAttrs, funName, interpreter, frame));
+
+		// not update
+		if (newBody == funBody) {
+			// remove opt attribute
+			AttrUtil.removeAttribute(args, A_OPT_CCO);
+			return args;
+		}
+
+		IRList newExpr = RulpFactory.createExpression(args.get(0), args.get(1), args.get(2), newBody);
+		AttrUtil.copyAttributes(args, newExpr);
+
+		return newExpr;
 	}
 
 	// (Op A1 A2 ... Ak), Op is Stable functions, Ak const value, or local

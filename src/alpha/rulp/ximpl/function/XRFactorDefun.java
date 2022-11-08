@@ -312,11 +312,13 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 					break;
 
 				case A_OPT_ERO:
-					update = _optCC0(opt);
+//					update = _optCC0(opt);
+					update = true;
 					break;
 
 				case A_OPT_CCO:
-					update = _optCC2(opt);
+//					update = _optCC2(opt);
+					update = true;
 					break;
 
 				case A_OPT_LCO:
