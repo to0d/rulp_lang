@@ -11,8 +11,10 @@ package alpha.rulp.utils;
 
 import static alpha.rulp.lang.Constant.A_MAIN;
 import static alpha.rulp.lang.Constant.A_NIL;
+import static alpha.rulp.lang.Constant.A_OPT_TCO;
 import static alpha.rulp.lang.Constant.A_ROOT;
 import static alpha.rulp.lang.Constant.A_SYSTEM;
+import static alpha.rulp.lang.Constant.F_DEFUN;
 import static alpha.rulp.lang.Constant.I_FRAME_MAIN_ID;
 import static alpha.rulp.lang.Constant.I_FRAME_ROOT_ID;
 import static alpha.rulp.lang.Constant.I_FRAME_SYSTEM_ID;
@@ -97,6 +99,7 @@ import alpha.rulp.ximpl.lang.XRString;
 import alpha.rulp.ximpl.lang.XRVar;
 import alpha.rulp.ximpl.macro.XRMacro;
 import alpha.rulp.ximpl.namespace.XRNameSpace;
+import alpha.rulp.ximpl.optimize.TCOUtil;
 import alpha.rulp.ximpl.rclass.XRDefClass;
 import alpha.rulp.ximpl.rclass.XRDefInstance;
 import alpha.rulp.ximpl.rclass.XRMember;
@@ -433,6 +436,11 @@ public final class RulpFactory {
 		for (IRObjectLoader loader : rulpLoaders) {
 			LoadUtil.loadClass(loader, interpreter, systemFrame);
 		}
+
+		RulpUtil.asFactor(RuntimeUtil.lookupFrameEntry(mainFrame, F_DEFUN).getValue())
+				.registerBeforeAnnotationBuilder(A_OPT_TCO, (_args, _interpreter, _frame) -> {
+					return TCOUtil.rebuildDefun(_args, _interpreter, _frame);
+				});
 
 		return interpreter;
 	}

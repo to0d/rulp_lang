@@ -2,6 +2,7 @@ package alpha.rulp.ximpl.optimize;
 
 import static alpha.rulp.lang.Constant.A_DO;
 import static alpha.rulp.lang.Constant.A_OPT_ID;
+import static alpha.rulp.lang.Constant.A_OPT_TCO;
 import static alpha.rulp.lang.Constant.F_IF;
 import static alpha.rulp.lang.Constant.F_O_BY;
 import static alpha.rulp.lang.Constant.F_RETURN;
@@ -585,6 +586,49 @@ public class TCOUtil {
 		default:
 			return obj;
 		}
+	}
+
+	public static IRList rebuildDefun(IRList args, IRInterpreter interpreter, IRFrame frame) throws RException {
+
+		IRExpr funBody = null;
+
+		// (defun fun (?v) (body))
+		if (args.size() == 4) {
+			funBody = RulpUtil.asExpression(args.get(3));
+
+		}
+		// (defun fun (?v) (do body))
+		else if (args.size() > 4) {
+			funBody = RulpUtil.toDoExpr(args.listIterator(3));
+		}
+		// not support
+		else {
+
+			// remove opt attribute
+			AttrUtil.removeAttribute(args, A_OPT_TCO);
+			return args;
+		}
+
+		String funName = args.get(1).asString();
+		if (!TCOUtil.listFunctionInReturn(funBody, frame).contains(funName)) {
+			// remove opt attribute
+			AttrUtil.removeAttribute(args, A_OPT_TCO);
+			return args;
+		}
+
+		IRExpr newBody = rebuild(funBody, frame);
+
+		// not update
+		if (newBody == funBody) {
+			// remove opt attribute
+			AttrUtil.removeAttribute(args, A_OPT_TCO);
+			return args;
+		}
+
+		IRList newExpr = RulpFactory.createExpression(args.get(0), args.get(1), args.get(2), newBody);
+		AttrUtil.copyAttributes(args, newExpr);
+
+		return newExpr;
 	}
 
 	public static IRExpr rebuild(IRExpr expr, IRFrame frame) throws RException {

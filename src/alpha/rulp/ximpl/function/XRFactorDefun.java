@@ -307,7 +307,8 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
 				switch (attr) {
 				case A_OPT_TCO:
-					update = _optTCO(opt);
+//					update = _optTCO(opt);
+					update = true;
 					break;
 
 				case A_OPT_ERO:

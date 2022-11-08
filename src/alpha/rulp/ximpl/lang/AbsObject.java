@@ -57,6 +57,10 @@ public abstract class AbsObject implements IRObject {
 		return _attributeKeyList;
 	}
 
+	public Map<String, IRObject> getAttributeMap() {
+		return attributeMap;
+	}
+
 	public IRObject getAttributeValue(String key) throws RException {
 
 		if (attributeMap == null) {

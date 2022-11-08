@@ -530,8 +530,8 @@ public final class RuntimeUtil {
 		/**************************************************/
 		// Compute before caller
 		/**************************************************/
-		if (callObject.hasBeforeAnnotationBuilder() && AttrUtil.hasAttributeList(callObject)) {
-			for (String attr : AttrUtil.getAttributeKeyList(callObject)) {
+		if (callObject.hasBeforeAnnotationBuilder() && AttrUtil.hasAttributeList(args)) {
+			for (String attr : AttrUtil.getAttributeKeyList(args)) {
 				IRAnnotationBuilder builder = callObject.getBeforeAnnotationBuilder(attr);
 				if (builder != null) {
 					args = builder.build(args, interpreter, frame);

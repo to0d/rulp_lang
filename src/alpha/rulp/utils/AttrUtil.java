@@ -4,6 +4,8 @@ import static alpha.rulp.lang.Constant.A_RECURSIVE;
 import static alpha.rulp.lang.Constant.A_THREAD_UNSAFE;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import alpha.rulp.lang.IRArray;
 import alpha.rulp.lang.IRClass;
@@ -46,6 +48,17 @@ public class AttrUtil {
 
 	public static boolean containAttribute(IRObject obj, String attr) {
 		return ((AbsObject) obj).containAttribute(attr);
+	}
+
+	public static void copyAttributes(IRObject fromObj, IRObject toObj) throws RException {
+
+		Map<String, IRObject> fromMap = ((AbsObject) fromObj).getAttributeMap();
+		if (fromMap != null && !fromMap.isEmpty()) {
+			for (Entry<String, IRObject> e : fromMap.entrySet()) {
+				setAttribute(toObj, e.getKey(), e.getValue());
+			}
+		}
+
 	}
 
 	public static List<String> getAttributeKeyList(IRObject obj) {
