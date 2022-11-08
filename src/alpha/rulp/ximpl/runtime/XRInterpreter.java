@@ -78,7 +78,7 @@ public class XRInterpreter implements IRInterpreter {
 
 	protected AtomicInteger callId = new AtomicInteger(0);
 
-	private IRDebugger debugger = null;
+	protected IRDebugger debugger = null;
 
 	protected BufferedReader defaultInput = null;
 

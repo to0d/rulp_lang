@@ -1416,7 +1416,7 @@ public class RulpUtil {
 		IRObject rst = null;
 		IRIterator<? extends IRObject> iter = catchExpr.listIterator(2);
 		while (iter.hasNext()) {
-			rst = interpreter.compute(frame, iter.next());
+			rst = RuntimeUtil.compute(iter.next(), interpreter, frame);
 		}
 
 		return rst;
@@ -2587,7 +2587,7 @@ public class RulpUtil {
 		String name = null;
 
 		if (nameObj != null) {
-			
+
 			switch (nameObj.getType()) {
 			case ATOM:
 				name = RulpUtil.asAtom(nameObj).getName();

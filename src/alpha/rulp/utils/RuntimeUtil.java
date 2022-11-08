@@ -32,6 +32,7 @@ import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
+import alpha.rulp.runtime.IRAnnotationBuilder;
 import alpha.rulp.runtime.IRCallable;
 import alpha.rulp.runtime.IRDebugger;
 import alpha.rulp.runtime.IRFunction;
@@ -488,7 +489,9 @@ public final class RuntimeUtil {
 		_checkFrame(frame);
 		_checkObject(callObject);
 
-		/* Check early expression */
+		/**************************************************/
+		// Check early expression
+		/**************************************************/
 		{
 			int size = args.size();
 			int firstEarlyIndex = -1;
@@ -524,6 +527,21 @@ public final class RuntimeUtil {
 
 		callObject.incCallCount(getCallStatsId(), interpreter.getCallId());
 
+		/**************************************************/
+		// Compute before caller
+		/**************************************************/
+		if (callObject.hasBeforeAnnotationBuilder() && AttrUtil.hasAttributeList(callObject)) {
+			for (String attr : AttrUtil.getAttributeKeyList(callObject)) {
+				IRAnnotationBuilder builder = callObject.getBeforeAnnotationBuilder(attr);
+				if (builder != null) {
+					args = builder.build(args, interpreter, frame);
+				}
+			}
+		}
+
+		/**************************************************/
+		// Compute
+		/**************************************************/
 		if (AttrUtil.isThreadSafe(callObject, frame)) {
 			return callObject.compute(args, interpreter, frame);
 
@@ -587,6 +605,7 @@ public final class RuntimeUtil {
 
 					return computeExpr(o2, expr, interpreter, frame);
 				}
+
 			case TEMPLATE:
 				exprComputeTemplateCount.getAndIncrement();
 				return RuntimeUtil.computeCallable((IRCallable) e0, expr, interpreter, frame);

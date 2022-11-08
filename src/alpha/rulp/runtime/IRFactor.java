@@ -14,5 +14,5 @@ import alpha.rulp.lang.IRObject;
 public interface IRFactor extends IRObject, IRCallable {
 
 	public String getName();
-
+	
 }

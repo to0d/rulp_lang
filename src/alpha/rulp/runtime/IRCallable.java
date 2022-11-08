@@ -9,6 +9,8 @@
 
 package alpha.rulp.runtime;
 
+import java.util.List;
+
 import alpha.rulp.lang.IRFrame;
 import alpha.rulp.lang.IRList;
 import alpha.rulp.lang.IRObject;
@@ -26,4 +28,12 @@ public interface IRCallable extends IRObject {
 	public boolean isDebug();
 
 	public void setDebug(boolean debug);
+
+	public IRAnnotationBuilder getBeforeAnnotationBuilder(String attr);
+
+	public boolean hasBeforeAnnotationBuilder();
+
+	public List<String> listBeforeAnnotationBuilderAttr();
+
+	public void registerBeforeAnnotationBuilder(String attr, IRAnnotationBuilder builder);
 }
