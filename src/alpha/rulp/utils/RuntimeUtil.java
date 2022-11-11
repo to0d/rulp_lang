@@ -531,12 +531,28 @@ public final class RuntimeUtil {
 		// Compute before annotation
 		/**************************************************/
 		if (callObject.hasBeforeAnnotation() && AttrUtil.hasAttributeList(args)) {
-			for (String attr : AttrUtil.getAttributeKeyList(args)) {
+
+			List<String> lastAttrList = AttrUtil.getAttributeKeyList(args);
+			List<String> attrList = new ArrayList<>(lastAttrList);
+			for (int i = 0; i < attrList.size(); ++i) {
+
+				String attr = attrList.get(i);
 				IRBeforeAnnotation anno = callObject.getBeforeAnnotation(attr);
-				if (anno != null) {
-					args = anno.build(args, interpreter, frame);
+				if (anno == null) {
+					continue;
+				}
+
+				args = anno.build(args, interpreter, frame);
+				List<String> newAttrList = AttrUtil.getAttributeKeyList(args);
+				if (newAttrList != lastAttrList) {
+					for (String newAttr : newAttrList) {
+						if (!attrList.contains(newAttr)) {
+							attrList.add(newAttr);
+						}
+					}
 				}
 			}
+
 		}
 
 		IRObject rst;
