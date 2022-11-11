@@ -133,9 +133,6 @@ import alpha.rulp.ximpl.math.XRFactorToFloat;
 import alpha.rulp.ximpl.math.XRFactorToInteger;
 import alpha.rulp.ximpl.math.XRFactorToLong;
 import alpha.rulp.ximpl.namespace.XRNameSpaceClass;
-import alpha.rulp.ximpl.optimize.XFactorReduct;
-import alpha.rulp.ximpl.optimize.XRFactorCC;
-import alpha.rulp.ximpl.optimize.XRFactorListFunctionInReturn;
 import alpha.rulp.ximpl.optimize.XRFactorOptStatus;
 import alpha.rulp.ximpl.optimize.XRFactorPrintImpl;
 import alpha.rulp.ximpl.rclass.XRFactorAccess;
@@ -366,11 +363,9 @@ public class BaseLoader implements IRObjectLoader {
 		RulpUtil.addFrameObject(frame, new XRFactorDefun(F_DEFUN));
 		RulpUtil.addFrameObject(frame, new XRFactorDefTemplate(F_DEFTEMPLATE));
 		RulpUtil.addFrameObject(frame, new XRFactorOptStatus(F_OPT_STATUS));
-		RulpUtil.addFrameObject(frame, new XRFactorListFunctionInReturn(F_LIST_FUNC_IN_RETURN));
+
 		RulpUtil.addFrameObject(frame, new XRFactorIsStable(F_IS_STABLE));
 		RulpUtil.addFrameObject(frame, new XRFactorIsThreadSafe(F_IS_THREAD_SAFE));
-		RulpUtil.addFrameObject(frame, new XFactorReduct(F_Reduct));
-		RulpUtil.addFrameObject(frame, new XRFactorCC(F_CC));
 
 		// Lambda
 		RulpUtil.addFrameObject(frame, new XRFactorLet(F_LET));

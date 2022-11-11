@@ -42,7 +42,6 @@ root::bool
 root::break
 root::can-cast
 root::case
-root::cc
 root::class
 root::class-of
 root::clone
@@ -104,7 +103,6 @@ root::join
 root::lambda
 root::let
 root::list
-root::list-function-in-return
 root::list-of
 root::load
 root::load-class
@@ -146,7 +144,6 @@ root::random-double
 root::random-float
 root::random-int
 root::read-line
-root::reduct
 root::ref
 root::remove-all-list
 root::return

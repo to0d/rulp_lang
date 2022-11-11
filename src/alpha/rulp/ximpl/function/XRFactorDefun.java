@@ -10,14 +10,10 @@
 package alpha.rulp.ximpl.function;
 
 //import static alpha.rulp.lang.Constant.A_OPT_CC3;
-import static alpha.rulp.lang.Constant.A_OPT_CCO;
-import static alpha.rulp.lang.Constant.A_OPT_ERO;
-import static alpha.rulp.lang.Constant.A_OPT_FULL;
+//import static alpha.rulp.lang.Constant.A_OPT_FULL;
 import static alpha.rulp.lang.Constant.A_OPT_LCO;
-import static alpha.rulp.lang.Constant.A_OPT_TCO;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -45,11 +41,7 @@ import alpha.rulp.utils.RulpFactory;
 import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.SubjectUtil;
 import alpha.rulp.ximpl.factor.AbsAtomFactorAdapter;
-import alpha.rulp.ximpl.optimize.CCOUtil;
-import alpha.rulp.ximpl.optimize.EROUtil;
 import alpha.rulp.ximpl.optimize.LCOUtil;
-import alpha.rulp.ximpl.optimize.OptUtil;
-import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
@@ -62,63 +54,25 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 		List<IRParaAttr> paraAttrs;
 	}
 
-	static int _getOptOrder(String optName) {
-
-		switch (optName) {
-		case A_OPT_ERO:
-			return 0;
-
-		case A_OPT_CCO:
-			return 2;
-
-		case A_OPT_TCO:
-			return 4;
-
-		default:
-			return -1;
-		}
-	}
-
-	private static boolean _optCC0(OPT opt) throws RException {
-
-		IRObject rst = EROUtil.rebuildFuncBody(opt.funBody, opt.interpreter, opt.frame);
-		if (rst == opt.funBody) {
-			return false;
-		}
-
-		opt.funBody = OptUtil.asExpr(rst);
-		return true;
-	}
-
-	private static boolean _optCC2(OPT opt) throws RException {
-
-		IRExpr newExpr = CCOUtil.rebuild(opt.funBody, opt.paraAttrs, opt.funName, opt.interpreter, opt.frame);
-		if (newExpr == opt.funBody) {
-			return false;
-		}
-
-		opt.funBody = newExpr;
-		return true;
-	}
+//	static int _getOptOrder(String optName) {
+//
+//		switch (optName) {
+//		case A_OPT_ERO:
+//			return 0;
+//
+//		case A_OPT_CCO:
+//			return 2;
+//
+//		case A_OPT_TCO:
+//			return 4;
+//
+//		default:
+//			return -1;
+//		}
+//	}
 
 	private static boolean _optLCO(OPT opt) throws RException {
 		return LCOUtil.rebuild(opt.paraAttrs);
-	}
-
-	private static boolean _optTCO(OPT opt) throws RException {
-
-		if (!TCOUtil.listFunctionInReturn(opt.funBody, opt.frame).contains(opt.funName)) {
-			return false;
-		}
-
-		// recursive function call in return expression
-		IRExpr newExpr = TCOUtil.rebuild(opt.funBody, opt.frame);
-		if (newExpr == opt.funBody) {
-			return false;
-		}
-
-		opt.funBody = newExpr;
-		return true;
 	}
 
 	public static List<IRParaAttr> buildAttrList(IRObject paraObj, IRInterpreter interpreter, IRFrame frame)
@@ -251,42 +205,31 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
 			attrList = new ArrayList<>();
 
-			Set<String> uniqOptAttributeSet = new HashSet<>();
-			for (String attr : AttrUtil.getAttributeKeyList(args)) {
+//			Set<String> uniqOptAttributeSet = new HashSet<>();
+//			for (String attr : AttrUtil.getAttributeKeyList(args)) {
+//
+//				switch (attr) {
+//
+//				case A_OPT_LCO:
+//					uniqOptAttributeSet.add(A_OPT_LCO);
+//					break;
+//
+//				case A_OPT_FULL:
+//					uniqOptAttributeSet.add(A_OPT_ERO);
+//					uniqOptAttributeSet.add(A_OPT_CCO);
+//					uniqOptAttributeSet.add(A_OPT_LCO);
+//					uniqOptAttributeSet.add(A_OPT_TCO);
+//					break;
+//
+//				}
+//			}
 
-				switch (attr) {
-				case A_OPT_TCO:
-					uniqOptAttributeSet.add(A_OPT_TCO);
-					break;
+//			ArrayList<String> uniqOptAttributeList = new ArrayList<>(uniqOptAttributeSet);
+//			Collections.sort(uniqOptAttributeList, (n1, n2) -> {
+//				return _getOptOrder(n1) - _getOptOrder(n2);
+//			});
 
-				case A_OPT_ERO:
-					uniqOptAttributeSet.add(A_OPT_ERO);
-					break;
-
-				case A_OPT_CCO:
-					uniqOptAttributeSet.add(A_OPT_CCO);
-					break;
-
-				case A_OPT_LCO:
-					uniqOptAttributeSet.add(A_OPT_LCO);
-					break;
-
-				case A_OPT_FULL:
-					uniqOptAttributeSet.add(A_OPT_ERO);
-					uniqOptAttributeSet.add(A_OPT_CCO);
-					uniqOptAttributeSet.add(A_OPT_LCO);
-					uniqOptAttributeSet.add(A_OPT_TCO);
-					break;
-
-				}
-			}
-
-			ArrayList<String> uniqOptAttributeList = new ArrayList<>(uniqOptAttributeSet);
-			Collections.sort(uniqOptAttributeList, (n1, n2) -> {
-				return _getOptOrder(n1) - _getOptOrder(n2);
-			});
-
-			int optSize = uniqOptAttributeList.size();
+//			int optSize = uniqOptAttributeList.size();
 			int optIndex = 0;
 			OPT opt = new OPT();
 
@@ -299,34 +242,35 @@ public class XRFactorDefun extends AbsAtomFactorAdapter implements IRFactor {
 
 			int optCount = 0;
 
-			while (optIndex < optSize) {
+			for (String attr : AttrUtil.getAttributeKeyList(args)) {
 
-				String attr = uniqOptAttributeList.get(optIndex++);
+//				String attr = uniqOptAttributeList.get(optIndex++);
 
 				boolean update = false;
 
 				switch (attr) {
-				case A_OPT_TCO:
-//					update = _optTCO(opt);
-					update = true;
-					break;
-
-				case A_OPT_ERO:
-//					update = _optCC0(opt);
-					update = true;
-					break;
-
-				case A_OPT_CCO:
-//					update = _optCC2(opt);
-					update = true;
-					break;
+//				case A_OPT_TCO:
+////					update = _optTCO(opt);
+//					update = true;
+//					break;
+//
+//				case A_OPT_ERO:
+////					update = _optCC0(opt);
+//					update = true;
+//					break;
+//
+//				case A_OPT_CCO:
+////					update = _optCC2(opt);
+//					update = true;
+//					break;
 
 				case A_OPT_LCO:
 					update = _optLCO(opt);
 					break;
 
 				default:
-					throw new RException("unknown attr: " + attr);
+					update = true;
+//					throw new RException("unknown attr: " + attr);
 				}
 
 				if (update) {

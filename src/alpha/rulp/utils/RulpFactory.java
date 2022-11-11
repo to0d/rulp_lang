@@ -11,12 +11,8 @@ package alpha.rulp.utils;
 
 import static alpha.rulp.lang.Constant.A_MAIN;
 import static alpha.rulp.lang.Constant.A_NIL;
-import static alpha.rulp.lang.Constant.A_OPT_CCO;
-import static alpha.rulp.lang.Constant.A_OPT_ERO;
-import static alpha.rulp.lang.Constant.A_OPT_TCO;
 import static alpha.rulp.lang.Constant.A_ROOT;
 import static alpha.rulp.lang.Constant.A_SYSTEM;
-import static alpha.rulp.lang.Constant.F_DEFUN;
 import static alpha.rulp.lang.Constant.I_FRAME_MAIN_ID;
 import static alpha.rulp.lang.Constant.I_FRAME_ROOT_ID;
 import static alpha.rulp.lang.Constant.I_FRAME_SYSTEM_ID;
@@ -57,7 +53,6 @@ import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
-import alpha.rulp.runtime.IRCallable;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRFunctionList;
 import alpha.rulp.runtime.IRInterpreter;
@@ -102,9 +97,6 @@ import alpha.rulp.ximpl.lang.XRString;
 import alpha.rulp.ximpl.lang.XRVar;
 import alpha.rulp.ximpl.macro.XRMacro;
 import alpha.rulp.ximpl.namespace.XRNameSpace;
-import alpha.rulp.ximpl.optimize.CCOUtil;
-import alpha.rulp.ximpl.optimize.EROUtil;
-import alpha.rulp.ximpl.optimize.TCOUtil;
 import alpha.rulp.ximpl.rclass.XRDefClass;
 import alpha.rulp.ximpl.rclass.XRDefInstance;
 import alpha.rulp.ximpl.rclass.XRMember;
@@ -441,41 +433,6 @@ public final class RulpFactory {
 		for (IRObjectLoader loader : rulpLoaders) {
 			LoadUtil.loadClass(loader, interpreter, systemFrame);
 		}
-
-		RulpUtil.asFactor(RuntimeUtil.lookupFrameEntry(mainFrame, F_DEFUN).getValue())
-				.registerBeforeAnnotation(A_OPT_TCO, (_args, _interpreter, _frame) -> {
-					return TCOUtil.rebuildDefun(_args, _interpreter, _frame);
-				});
-
-		RulpUtil.asFactor(RuntimeUtil.lookupFrameEntry(mainFrame, F_DEFUN).getValue())
-				.registerBeforeAnnotation(A_OPT_ERO, (_args, _interpreter, _frame) -> {
-					return EROUtil.rebuildDefun(_args, _interpreter, _frame);
-				});
-
-		RulpUtil.asFactor(RuntimeUtil.lookupFrameEntry(mainFrame, F_DEFUN).getValue())
-				.registerBeforeAnnotation(A_OPT_CCO, (_args, _interpreter, _frame) -> {
-					return CCOUtil.rebuildDefun(_args, _interpreter, _frame);
-				});
-
-		RulpUtil.asFactor(RuntimeUtil.lookupFrameEntry(mainFrame, F_DEFUN).getValue())
-				.registerAfterAnnotation(A_OPT_TCO, (_rst, _interpreter, _frame) -> {
-
-					if (_rst instanceof IRCallable) {
-
-						IRCallable _fun = (IRCallable) _rst;
-
-						_fun.registerAfterAnnotation(A_OPT_TCO, (_rst2, _interpreter2, _frame2) -> {
-
-							if (_rst2.getType() == RType.EXPR && AttrUtil.containAttribute(_rst2, A_OPT_TCO)) {
-								_rst2 = TCOUtil.computeTCO((IRExpr) _rst2, _interpreter2, _frame2);
-							}
-
-							return _rst2;
-						});
-					}
-
-					return _rst;
-				});
 
 		return interpreter;
 	}

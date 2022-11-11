@@ -1,7 +1,0 @@
-(defun fun1 (?v)
-    (if (> ?v 0)
-        (return (+ 1 (fun1 ?v))))
-    (return 1)
-)[opt-ero]
-;=>fun1
-

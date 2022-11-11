@@ -111,17 +111,11 @@ public interface Constant {
 
 	String A_NOCLASS = "noclass";
 
-	String A_OPT_CCO = "opt-cco";
-
-	String A_OPT_ERO = "opt-ero";
-
-	String A_OPT_FULL = "opt-full";
+//	String A_OPT_FULL = "opt-full";
 
 	String A_OPT_ID = "opt-id";
 
 	String A_OPT_LCO = "opt-lco";
-
-	String A_OPT_TCO = "opt-tco";
 
 //	String A_NULL = "null";
 
@@ -229,10 +223,6 @@ public interface Constant {
 
 	String F_CASE = "case";
 
-	String F_CC = "cc";
-
-	String F_CC2 = "cc2";
-
 	String F_CLASS_OF = "class-of";
 
 	String F_CLONE = "clone";
@@ -337,8 +327,6 @@ public interface Constant {
 
 //	String F_LOAD_JAR = "load-jar";
 
-	String F_LIST_FUNC_IN_RETURN = "list-function-in-return";
-
 	String F_LIST_OF = "list-of";
 
 	String F_LOAD = "load";
@@ -436,8 +424,6 @@ public interface Constant {
 	String F_RANDOM_INT = "random-int";
 
 	String F_READ_LINE = "read-line";
-
-	String F_Reduct = "reduct";
 
 	String F_REF = "ref";
 
@@ -673,13 +659,7 @@ public interface Constant {
 
 	IRAtom O_NOT = RulpFactory.createAtom(F_O_NOT);
 
-	IRAtom O_OPT_CCO = RulpFactory.createAtom(A_OPT_CCO);
-
-	IRAtom O_OPT_ERO = RulpFactory.createAtom(A_OPT_ERO);
-
 	IRAtom O_OPT_ID = RulpFactory.createAtom(A_OPT_ID);
-
-	IRAtom O_OPT_TCO = RulpFactory.createAtom(A_OPT_TCO);
 
 	IRAtom O_OR = RulpFactory.createAtom(F_O_OR);
 

@@ -1,2 +1,0 @@
-(reduct (- a b c b b))
-;=>

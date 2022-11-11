@@ -1,5 +1,0 @@
-(reduct (/ a b b b))
-;=>
-
-(reduct (/ a b c b))
-;=>

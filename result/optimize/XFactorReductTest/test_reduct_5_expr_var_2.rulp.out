@@ -1,6 +1,0 @@
-(reduct (- (+ a b) a))
-;=>b
-
-(reduct (+ (+ a b) (- a b)))
-;=>(+ a b (- a b))
-

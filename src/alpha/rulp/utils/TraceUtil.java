@@ -27,10 +27,7 @@ import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRTemplate;
 import alpha.rulp.runtime.IRThreadContext;
-import alpha.rulp.ximpl.optimize.CCOUtil;
-import alpha.rulp.ximpl.optimize.EROUtil;
 import alpha.rulp.ximpl.optimize.LCOUtil;
-import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public class TraceUtil {
 
@@ -128,13 +125,28 @@ public class TraceUtil {
 
 	}
 
+	public interface IROptInfoTracer {
+		public String printInfo(IRInterpreter interpreter) throws RException;
+	}
+
+	static Map<String, IROptInfoTracer> optTracerMap = new HashMap<>();
+
+	static List<String> optTracerNameList = new ArrayList<>();
+
+//	private static StaticVar varTrace = new StaticVar(A_TRACE, O_False);
+
 	static final String SEP_LINE1 = "==========================================================================================================================\n";
 
 	static final String SEP_LINE2 = "--------------------------------------------------------------------------------------------------------------------------\n";
 
 	static final String SEP_LINE3 = "..........................................................................................................................\n";
 
-//	private static StaticVar varTrace = new StaticVar(A_TRACE, O_False);
+	static {
+		registerOptInfoTracer("LCO", (_interpreter) -> {
+			return String.format("rebuild=%d, arg=%d, pass=%d, hit=%d", LCOUtil.getRebuildCount(),
+					LCOUtil.getArgCount(), LCOUtil.getPassCount(), LCOUtil.getHitCount());
+		});
+	}
 
 	private static String _getEntryAliasName(IRFrameEntry entry) {
 
@@ -228,6 +240,14 @@ public class TraceUtil {
 		sb.append(SEP_LINE1);
 		sb.append("\n");
 	}
+
+//	public static void init(IRFrame frame) throws RException {
+//		varTrace.init(frame);
+//	}
+//
+//	public static boolean isTrace() throws RException {
+//		return varTrace.getBoolValue();
+//	}
 
 	private static void _printCallerAnnotation(StringBuffer sb, IRInterpreter interpreter) throws RException {
 
@@ -363,14 +383,6 @@ public class TraceUtil {
 		sb.append("\n");
 
 	}
-
-//	public static void init(IRFrame frame) throws RException {
-//		varTrace.init(frame);
-//	}
-//
-//	public static boolean isTrace() throws RException {
-//		return varTrace.getBoolValue();
-//	}
 
 	private static String _toRefString(IRObject obj) throws RException {
 
@@ -783,19 +795,21 @@ public class TraceUtil {
 
 	public static void printOptimizeInfo(StringBuffer sb, IRInterpreter interpreter) throws RException {
 
+		if (optTracerNameList == null) {
+			return;
+		}
+
 		sb.append(SEP_LINE1);
 		sb.append(String.format("%10s: %s\n", "Name", "Status"));
 		sb.append(SEP_LINE2);
-		sb.append(String.format("%10s: rebuild=%d, compute=%d\n", "ERO", EROUtil.getRebuildCount(),
-				EROUtil.getComputeCount()));
-		sb.append(String.format("%10s: rebuild=%d, expr=%d, call=%d, cache=%d, reuse=%d\n", "CCO",
-				CCOUtil.getCC2RebuildCount(), CCOUtil.getCC2ExprCount(), CCOUtil.getCC2CallCount(),
-				CCOUtil.getCC2CacheCount(), CCOUtil.getCC2ReuseCount()));
-		sb.append(String.format("%10s: rebuild=%d, expr=%d, call=%d, node=%d, compute=%d, level=%d, stack=%d\n", "TCO",
-				TCOUtil.getRebuildCount(), TCOUtil.getExprCount(), TCOUtil.getCallCount(), TCOUtil.getNodeCount(),
-				TCOUtil.getComputeCount(), TCOUtil.getMaxLevelCount(), TCOUtil.getMaxStackSize()));
-		sb.append(String.format("%10s: rebuild=%d, arg=%d, pass=%d, hit=%d\n", "LCO", LCOUtil.getRebuildCount(),
-				LCOUtil.getArgCount(), LCOUtil.getPassCount(), LCOUtil.getHitCount()));
+
+		if (optTracerNameList != null) {
+			for (String name : optTracerNameList) {
+				IROptInfoTracer tracer = optTracerMap.get(name);
+				sb.append(String.format("%10s: %s\n", name, tracer.printInfo(interpreter)));
+			}
+		}
+
 		sb.append(SEP_LINE1);
 
 	}
@@ -855,6 +869,16 @@ public class TraceUtil {
 		sb.append(SEP_LINE1);
 
 		return sb.toString();
+	}
+
+	static void registerOptInfoTracer(String name, IROptInfoTracer tracer) {
+
+		if (optTracerNameList.contains(name)) {
+			return;
+		}
+
+		optTracerNameList.add(name);
+		optTracerMap.put(name, tracer);
 	}
 
 }

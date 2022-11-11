@@ -1,8 +1,0 @@
-(reduct (* (power a 2) a))
-;=>(power a 3)
-
-(reduct (* a (power a 2)))
-;=>(power a 3)
-
-(reduct (* (* a 1) (* a a)))
-;=>(power a 3)

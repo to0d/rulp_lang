@@ -1,2 +1,0 @@
-(reduct (* (* a b) (* b a)))
-;=>(* (power a 2) (power b 2))

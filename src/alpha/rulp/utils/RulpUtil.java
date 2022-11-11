@@ -2176,14 +2176,14 @@ public class RulpUtil {
 		case A_THREAD_UNSAFE:
 			return O_THREAD_UNSAFE;
 
-		case A_OPT_CCO:
-			return O_OPT_CCO;
-
-		case A_OPT_ERO:
-			return O_OPT_ERO;
-
-		case A_OPT_TCO:
-			return O_OPT_TCO;
+//		case A_OPT_CCO:
+//			return O_OPT_CCO;
+//
+//		case A_OPT_ERO:
+//			return O_OPT_ERO;
+//
+//		case A_OPT_TCO:
+//			return O_OPT_TCO;
 
 		case A_RETURN_TYPE:
 			return O_RETURN_TYPE;

@@ -3,7 +3,6 @@ package alpha.rulp.utils;
 import static alpha.rulp.lang.Constant.A_LOCAL;
 import static alpha.rulp.lang.Constant.A_NOCLASS;
 import static alpha.rulp.lang.Constant.A_OPT_LCO;
-import static alpha.rulp.lang.Constant.A_OPT_TCO;
 import static alpha.rulp.lang.Constant.A_PARENT;
 import static alpha.rulp.lang.Constant.A_TRACE;
 import static alpha.rulp.lang.Constant.O_False;
@@ -44,7 +43,6 @@ import alpha.rulp.runtime.IRThreadContext;
 import alpha.rulp.ximpl.attribute.ReturnTypeUtil;
 import alpha.rulp.ximpl.error.RUnmatchParaException;
 import alpha.rulp.ximpl.optimize.LCOUtil;
-import alpha.rulp.ximpl.optimize.TCOUtil;
 
 public final class RuntimeUtil {
 

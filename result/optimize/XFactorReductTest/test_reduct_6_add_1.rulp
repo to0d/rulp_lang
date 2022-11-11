@@ -1,5 +1,0 @@
-(reduct (+ a a a))
-;=>(* 3 a)
-
-(reduct (+ b (fun1) (fun1) b (fun1)))
-;=>(+ (* 2 b) (* 3 (fun1)))

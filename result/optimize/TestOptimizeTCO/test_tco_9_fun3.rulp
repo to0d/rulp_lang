@@ -1,7 +1,0 @@
-;; fun1(n) = n / fun1(n-1)
-(defun fun3 (?v) 
-    (do 
-        (if (<= ?v 0)(return 1))
-        (return (/ ?v (fun3 (- ?v 1))))
-    )
-)

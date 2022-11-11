@@ -48,7 +48,6 @@ obj=bool                , type=atom
 obj=break               , type=factor
 obj=can-cast            , type=factor
 obj=case                , type=factor
-obj=cc                  , type=factor
 obj=class               , type=atom
 obj=class-of            , type=factor
 obj=clone               , type=factor
@@ -110,7 +109,6 @@ obj=join                , type=factor
 obj=lambda              , type=factor
 obj=let                 , type=factor
 obj=list                , type=atom
-obj=list-function-in-return, type=factor
 obj=list-of             , type=factor
 obj=load                , type=factor
 obj=load-class          , type=factor
@@ -151,7 +149,6 @@ obj=random-double       , type=factor
 obj=random-float        , type=factor
 obj=random-int          , type=factor
 obj=read-line           , type=factor
-obj=reduct              , type=factor
 obj=ref                 , type=factor
 obj=remove-all-list     , type=factor
 obj=return              , type=factor
