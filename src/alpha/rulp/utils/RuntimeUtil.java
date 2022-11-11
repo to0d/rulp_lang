@@ -32,9 +32,11 @@ import alpha.rulp.lang.IRSubject;
 import alpha.rulp.lang.IRVar;
 import alpha.rulp.lang.RException;
 import alpha.rulp.lang.RType;
-import alpha.rulp.runtime.IRAnnotationBuilder;
+import alpha.rulp.runtime.IRAfterAnnotation;
+import alpha.rulp.runtime.IRBeforeAnnotation;
 import alpha.rulp.runtime.IRCallable;
 import alpha.rulp.runtime.IRDebugger;
+import alpha.rulp.runtime.IRFactor;
 import alpha.rulp.runtime.IRFunction;
 import alpha.rulp.runtime.IRInterpreter;
 import alpha.rulp.runtime.IRIterator;
@@ -528,28 +530,32 @@ public final class RuntimeUtil {
 		callObject.incCallCount(getCallStatsId(), interpreter.getCallId());
 
 		/**************************************************/
-		// Compute before caller
+		// Compute before annotation
 		/**************************************************/
-		if (callObject.hasBeforeAnnotationBuilder() && AttrUtil.hasAttributeList(args)) {
+		if (callObject.hasBeforeAnnotation() && AttrUtil.hasAttributeList(args)) {
 			for (String attr : AttrUtil.getAttributeKeyList(args)) {
-				IRAnnotationBuilder builder = callObject.getBeforeAnnotationBuilder(attr);
-				if (builder != null) {
-					args = builder.build(args, interpreter, frame);
+				IRBeforeAnnotation anno = callObject.getBeforeAnnotation(attr);
+				if (anno != null) {
+					args = anno.build(args, interpreter, frame);
 				}
 			}
 		}
+
+		IRObject rst;
 
 		/**************************************************/
 		// Compute
 		/**************************************************/
 		if (AttrUtil.isThreadSafe(callObject, frame)) {
-			return callObject.compute(args, interpreter, frame);
+			rst = callObject.compute(args, interpreter, frame);
 
 		} else {
 			synchronized (callObject) {
-				return callObject.compute(args, interpreter, frame);
+				rst = callObject.compute(args, interpreter, frame);
 			}
 		}
+
+		return rst;
 	}
 
 	public static IRObject computeExpr(IRObject e0, IRList expr, IRInterpreter interpreter, IRFrame frame)
@@ -569,7 +575,25 @@ public final class RuntimeUtil {
 			switch (e0.getType()) {
 			case FACTOR:
 				exprComputeFactorCount.getAndIncrement();
-				return RuntimeUtil.computeCallable((IRCallable) e0, expr, interpreter, frame);
+
+			{
+				IRFactor factor = (IRFactor) e0;
+				IRObject rst = RuntimeUtil.computeCallable(factor, expr, interpreter, frame);
+
+				/**************************************************/
+				// Compute Afters annotation
+				/**************************************************/
+				if (factor.hasAfterAnnotation() && AttrUtil.hasAttributeList(rst)) {
+					for (String attr : AttrUtil.getAttributeKeyList(rst)) {
+						IRAfterAnnotation anno = factor.getAfterAnnotation(attr);
+						if (anno != null) {
+							rst = anno.build(rst, interpreter, frame);
+						}
+					}
+				}
+
+				return rst;
+			}
 
 			case MACRO:
 				exprComputeMacroCount.getAndIncrement();
@@ -584,8 +608,18 @@ public final class RuntimeUtil {
 					IRObject rst = RuntimeUtil.computeFun(func, expr, interpreter, frame);
 					if (rst == null) {
 						return O_Nil;
-					} else if (rst.getType() == RType.EXPR && AttrUtil.containAttribute(rst, A_OPT_TCO)) {
-						rst = TCOUtil.computeTCO((IRExpr) rst, interpreter, frame);
+					}
+
+					/**************************************************/
+					// Compute Afters annotation
+					/**************************************************/
+					if (func.hasAfterAnnotation() && AttrUtil.hasAttributeList(rst)) {
+						for (String attr : AttrUtil.getAttributeKeyList(rst)) {
+							IRAfterAnnotation anno = func.getAfterAnnotation(attr);
+							if (anno != null) {
+								rst = anno.build(rst, interpreter, frame);
+							}
+						}
 					}
 
 					return rst;

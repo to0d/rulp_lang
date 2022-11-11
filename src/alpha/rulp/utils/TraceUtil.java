@@ -229,8 +229,7 @@ public class TraceUtil {
 		sb.append("\n");
 	}
 
-	private static void _printCallerBeforeAnnotationBuilder(StringBuffer sb, IRInterpreter interpreter)
-			throws RException {
+	private static void _printCallerAnnotation(StringBuffer sb, IRInterpreter interpreter) throws RException {
 
 		List<IRFrame> allFrames = new ArrayList<>();
 		allFrames.add(interpreter.getMainFrame().getParentFrame().getParentFrame());
@@ -248,7 +247,7 @@ public class TraceUtil {
 				IRObject obj = entry.getValue();
 				if (obj instanceof IRCallable) {
 					IRCallable callObj = (IRCallable) obj;
-					if (callObj.hasBeforeAnnotationBuilder()) {
+					if (callObj.hasBeforeAnnotation() || callObj.hasAfterAnnotation()) {
 						if (frameEntries == null) {
 							frameEntries = new ArrayList<>();
 						}
@@ -270,10 +269,10 @@ public class TraceUtil {
 				IRCallable callObj = (IRCallable) entry.getObject();
 
 				if (!outputHead) {
-					sb.append("Caller before annotation builders:\n");
+					sb.append("Caller annotation:\n");
 					sb.append(SEP_LINE1);
 					sb.append(String.format("%-20s : %-8s %-8s %-10s %s\n", "Name(alias)", "EntryId", "FrameId", "Type",
-							"BeforeAnnotation"));
+							"Annotation"));
 					sb.append(SEP_LINE2);
 					outputHead = true;
 				}
@@ -281,9 +280,20 @@ public class TraceUtil {
 				String name = _getEntryAliasName(entry);
 				IRFrame entryFrame = entry.getFrame();
 
+				String out = "";
+				if (callObj.hasBeforeAnnotation()) {
+					out += "before: " + callObj.listBeforeAnnotationAttr();
+				}
+
+				if (callObj.hasAfterAnnotation()) {
+					if (!out.isEmpty()) {
+						out += ", ";
+					}
+					out += "after: " + callObj.listAfterAnnotationAttr();
+				}
+
 				sb.append(String.format("%-20s : %-8d %-8s %-10s %s\n", name, entry.getEntryId(),
-						entryFrame == null ? -1 : entryFrame.getFrameId(), _toTypeString(callObj),
-						"" + callObj.listBeforeAnnotationBuilderAttr()));
+						entryFrame == null ? -1 : entryFrame.getFrameId(), _toTypeString(callObj), out));
 			}
 		}
 
@@ -671,7 +681,7 @@ public class TraceUtil {
 		/***********************************************/
 		// Annotation Builders
 		/***********************************************/
-		_printCallerBeforeAnnotationBuilder(sb, interpreter);
+		_printCallerAnnotation(sb, interpreter);
 
 		/***********************************************/
 		// object create count

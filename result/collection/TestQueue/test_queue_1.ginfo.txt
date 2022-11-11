@@ -75,11 +75,11 @@ Callable stats info: callId=269, row=40, column=34(8), value-max=23, value-unit=
     main     func      1    2 (clear type#queue)                                              1
 ==========================================================================================================================
 
-Caller before annotation builders:
+Caller annotation:
 ==========================================================================================================================
-Name(alias)          : EntryId  FrameId  Type       BeforeAnnotation
+Name(alias)          : EntryId  FrameId  Type       Annotation
 --------------------------------------------------------------------------------------------------------------------------
-defun                : -155     0        factor     [opt-cco, opt-ero, opt-tco]
+defun                : -155     0        factor     before: [opt-cco, opt-ero, opt-tco], after: [opt-tco]
 ==========================================================================================================================
 
 Object create count:

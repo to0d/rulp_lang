@@ -8,16 +8,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import alpha.rulp.runtime.IRAnnotationBuilder;
+import alpha.rulp.runtime.IRAfterAnnotation;
+import alpha.rulp.runtime.IRBeforeAnnotation;
 import alpha.rulp.runtime.IRCallable;
 import alpha.rulp.utils.DeCounter;
 import alpha.rulp.ximpl.lang.AbsAtomObject;
 
 public abstract class AbsAtomCallableAdapter extends AbsAtomObject implements IRCallable {
 
-	private List<String> _beforeAnnotationBuildeAttrList = null;
+	private List<String> _afterAnnotationAttrList = null;
 
-	private Map<String, IRAnnotationBuilder> beforeAnnotationBuildeMap = null;
+	private List<String> _beforeAnnotationAttrList = null;
+
+	private Map<String, IRAfterAnnotation> afterAnnotationMap = null;
+
+	private Map<String, IRBeforeAnnotation> beforeAnnotationMap = null;
 
 	private DeCounter callCounter = new DeCounter(MAX_COUNTER_SIZE);
 
@@ -25,13 +30,22 @@ public abstract class AbsAtomCallableAdapter extends AbsAtomObject implements IR
 
 	private int statsId = -1;
 
-	public IRAnnotationBuilder getBeforeAnnotationBuilder(String attr) {
-		
-		if (beforeAnnotationBuildeMap == null) {
+	public IRAfterAnnotation getAfterAnnotation(String attr) {
+
+		if (afterAnnotationMap == null) {
 			return null;
 		}
 
-		return beforeAnnotationBuildeMap.get(attr);
+		return afterAnnotationMap.get(attr);
+	}
+
+	public IRBeforeAnnotation getBeforeAnnotation(String attr) {
+
+		if (beforeAnnotationMap == null) {
+			return null;
+		}
+
+		return beforeAnnotationMap.get(attr);
 	}
 
 	@Override
@@ -45,8 +59,12 @@ public abstract class AbsAtomCallableAdapter extends AbsAtomObject implements IR
 		return callCounter;
 	}
 
-	public boolean hasBeforeAnnotationBuilder() {
-		return beforeAnnotationBuildeMap != null && !beforeAnnotationBuildeMap.isEmpty();
+	public boolean hasAfterAnnotation() {
+		return afterAnnotationMap != null && !afterAnnotationMap.isEmpty();
+	}
+
+	public boolean hasBeforeAnnotation() {
+		return beforeAnnotationMap != null && !beforeAnnotationMap.isEmpty();
 	}
 
 	@Override
@@ -65,27 +83,52 @@ public abstract class AbsAtomCallableAdapter extends AbsAtomObject implements IR
 		return debug;
 	}
 
-	public List<String> listBeforeAnnotationBuilderAttr() {
-		if (_beforeAnnotationBuildeAttrList == null) {
-			if (!hasBeforeAnnotationBuilder()) {
-				_beforeAnnotationBuildeAttrList = Collections.emptyList();
+	public List<String> listAfterAnnotationAttr() {
+
+		if (_afterAnnotationAttrList == null) {
+			if (!hasAfterAnnotation()) {
+				_afterAnnotationAttrList = Collections.emptyList();
 			} else {
-				_beforeAnnotationBuildeAttrList = new ArrayList<>(beforeAnnotationBuildeMap.keySet());
-				Collections.sort(_beforeAnnotationBuildeAttrList);
+				_afterAnnotationAttrList = new ArrayList<>(afterAnnotationMap.keySet());
+				Collections.sort(_afterAnnotationAttrList);
 			}
 		}
 
-		return _beforeAnnotationBuildeAttrList;
+		return _afterAnnotationAttrList;
 	}
 
-	public void registerBeforeAnnotationBuilder(String attr, IRAnnotationBuilder builder) {
+	public List<String> listBeforeAnnotationAttr() {
 
-		if (beforeAnnotationBuildeMap == null) {
-			beforeAnnotationBuildeMap = new HashMap<>();
+		if (_beforeAnnotationAttrList == null) {
+			if (!hasBeforeAnnotation()) {
+				_beforeAnnotationAttrList = Collections.emptyList();
+			} else {
+				_beforeAnnotationAttrList = new ArrayList<>(beforeAnnotationMap.keySet());
+				Collections.sort(_beforeAnnotationAttrList);
+			}
 		}
 
-		beforeAnnotationBuildeMap.put(attr, builder);
-		_beforeAnnotationBuildeAttrList = null;
+		return _beforeAnnotationAttrList;
+	}
+
+	public void registerAfterAnnotation(String attr, IRAfterAnnotation anno) {
+
+		if (afterAnnotationMap == null) {
+			afterAnnotationMap = new HashMap<>();
+		}
+
+		afterAnnotationMap.put(attr, anno);
+		_afterAnnotationAttrList = null;
+	}
+
+	public void registerBeforeAnnotation(String attr, IRBeforeAnnotation anno) {
+
+		if (beforeAnnotationMap == null) {
+			beforeAnnotationMap = new HashMap<>();
+		}
+
+		beforeAnnotationMap.put(attr, anno);
+		_beforeAnnotationAttrList = null;
 	}
 
 	@Override

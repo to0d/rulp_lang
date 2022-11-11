@@ -64,11 +64,12 @@ Callable stats info: callId=245, row=28, column=62(4), value-max=84147, value-un
     root   factor      1    0 !=                                                                                          1
 ==========================================================================================================================
 
-Caller before annotation builders:
+Caller annotation:
 ==========================================================================================================================
-Name(alias)          : EntryId  FrameId  Type       BeforeAnnotation
+Name(alias)          : EntryId  FrameId  Type       Annotation
 --------------------------------------------------------------------------------------------------------------------------
-defun                : -155     0        factor     [opt-cco, opt-ero, opt-tco]
+defun                : -155     0        factor     before: [opt-cco, opt-ero, opt-tco], after: [opt-tco]
+fun2                 : 24       2        func       after: [opt-tco]
 ==========================================================================================================================
 
 Object create count:

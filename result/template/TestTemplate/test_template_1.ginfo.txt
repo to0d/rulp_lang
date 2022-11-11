@@ -42,11 +42,11 @@ Callable stats info: callId=231, row=7, column=58(4), value-max=4, value-unit=2^
     main template      2    1 f1                                                                                      2
 ==========================================================================================================================
 
-Caller before annotation builders:
+Caller annotation:
 ==========================================================================================================================
-Name(alias)          : EntryId  FrameId  Type       BeforeAnnotation
+Name(alias)          : EntryId  FrameId  Type       Annotation
 --------------------------------------------------------------------------------------------------------------------------
-defun                : -155     0        factor     [opt-cco, opt-ero, opt-tco]
+defun                : -155     0        factor     before: [opt-cco, opt-ero, opt-tco], after: [opt-tco]
 ==========================================================================================================================
 
 Object create count:
