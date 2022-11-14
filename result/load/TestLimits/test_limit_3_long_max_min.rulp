@@ -1,0 +1,17 @@
+(load "tool")
+;=>
+
+(load "limits")
+;=>
+
+(println long_max)
+;=>
+
+(println long_min)
+;=>
+
+(+ long_max 1)
+;=>
+
+(- long_min 1)
+;=>

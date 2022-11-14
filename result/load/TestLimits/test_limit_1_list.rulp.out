@@ -9,6 +9,8 @@
 ;out:
 mbr=int_max, mbr-property='(public), mbr-attribute='(), obj=nil, obj-type=constant, obj-attribute='()
 mbr=int_min, mbr-property='(public), mbr-attribute='(), obj=nil, obj-type=constant, obj-attribute='()
+mbr=long_max, mbr-property='(public), mbr-attribute='(), obj=nil, obj-type=constant, obj-attribute='()
+mbr=long_min, mbr-property='(public), mbr-attribute='(), obj=nil, obj-type=constant, obj-attribute='()
 
 ;eof
 
