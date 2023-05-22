@@ -193,7 +193,7 @@ Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
 ?load-class          : '("alpha.rulp.ximpl.collection.XRQueue$Loader")
 ?load-jar            : '()
-?load-script         : '("C:\\data\\rs\\load\\tool.rulp" "C:\\data\\rs\\load\\test/itest.rulp" "C:\\data\\rs\\load\\queue.rulp" "C:\\data\\rs\\load\\stack.rulp")
+?load-script         : '("C:\\data\\note\\inote\\load\\tool.rulp" "C:\\data\\project\\rs\\load\\test/itest.rulp" "C:\\data\\note\\inote\\load\\queue.rulp" "C:\\data\\note\\inote\\load\\stack.rulp")
 ?path                : '()
 ?trace               : false
 ==========================================================================================================================

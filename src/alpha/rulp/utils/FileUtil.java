@@ -175,6 +175,17 @@ public class FileUtil {
 		}
 	}
 
+	public static String getFileName(String path) {
+
+		String fileName = path;
+		int pos = path.lastIndexOf(File.separatorChar);
+		if (pos != -1) {
+			fileName = path.substring(pos+1).trim();
+		}
+
+		return fileName;
+	}
+	
 	public static String getFilePreName(String fileName) {
 
 		String filePreName = fileName;

@@ -18,10 +18,14 @@ import alpha.rulp.utils.SystemUtil.OSType;
 
 public class FileUtilTest extends RulpTestBase {
 
+	String _getFileName(String input) {
+		return FileUtil.getFileName(input);
+	}
+
 	String _getFilePreName(String input) {
 		return FileUtil.getFilePreName(input);
 	}
-
+	
 	String _getFileSubffix(String input) {
 		return FileUtil.getFileSubffix(input);
 	}
@@ -98,7 +102,7 @@ public class FileUtilTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_getFilePreName_2() {
+	void test_getFilePreName() {
 
 		_setup();
 
@@ -109,7 +113,7 @@ public class FileUtilTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_getFileSubffix_2() {
+	void test_getFileSubffix() {
 
 		_setup();
 
@@ -117,6 +121,86 @@ public class FileUtilTest extends RulpTestBase {
 			return _getFileSubffix(input);
 		});
 
+	}
+
+	@Test
+	void test_getLastModifiedTime() {
+
+		_setup();
+
+		String testRootPath = null;
+		String testFilePath = null;
+
+		if (SystemUtil.getOSType() == OSType.Win) {
+
+			testRootPath = "C:\\tmp\\cpp_FileUtilityTest_testGetLastModifiedTime";
+			testFilePath = testRootPath + "\\File1";
+		} else {
+			testRootPath = "/tmp/test/cpp_FileUtilityTest_testGetLastModifiedTime";
+			testFilePath = testRootPath + "/File1";
+		}
+
+		File testRoot = new File(testRootPath);
+		if (!testRoot.exists()) {
+			assertTrue(testRoot.mkdirs());
+		}
+
+		File testFile = new File(testFilePath);
+		if (testFile.exists()) {
+			assertTrue(testFile.delete());
+		}
+
+		try {
+
+			long t1 = FileUtil.getLastModifiedTime(testRootPath);
+
+			if (SystemUtil.getOSType() == OSType.Win) {
+				Thread.sleep(5);
+			} else {
+				// Linux vm does not support millisecond
+				Thread.sleep(1000);
+			}
+
+			long t2 = FileUtil.getLastModifiedTime(testRootPath);
+			assertEquals(t1, t2);
+
+			assertTrue(testFile.createNewFile());
+			long t3 = FileUtil.getLastModifiedTime(testRootPath);
+			assertTrue(t3 > t1);
+
+			long t4 = FileUtil.getLastModifiedTime(testFilePath);
+
+			if (SystemUtil.getOSType() == OSType.Win) {
+				Thread.sleep(5);
+			} else {
+
+				// Linux vm does not support millisecond
+				Thread.sleep(1000);
+			}
+
+			long t5 = FileUtil.getLastModifiedTime(testFilePath);
+			assertEquals(t4, t5);
+
+			PrintStream outputFile = new PrintStream(testFilePath);
+			outputFile.print("Test");
+			outputFile.close();
+
+			if (SystemUtil.getOSType() == OSType.Win) {
+				Thread.sleep(5);
+			} else {
+
+				// Linux vm does not support millisecond
+				Thread.sleep(1000);
+			}
+
+			long t6 = FileUtil.getLastModifiedTime(testFilePath);
+			assertTrue(t6 > t5);
+
+		} catch (Exception e) {
+			fail(e.toString());
+		}
+
+		FileUtil.deleteFile(new File(testRootPath));
 	}
 
 	@Test
@@ -130,7 +214,7 @@ public class FileUtilTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_isExistFile_2() {
+	void test_isExistFile() {
 
 		assertFalse(FileUtil.isExistFile(null, null));
 		assertFalse(FileUtil.isExistFile(".", "not_exist"));
@@ -284,85 +368,5 @@ public class FileUtilTest extends RulpTestBase {
 		_setup();
 		assertEquals("C:\\data\\itool\\rulp_lang\\", FileUtil.toValidPath(""));
 		assertEquals("C:\\data\\itool\\rulp_lang\\", FileUtil.toValidPath(null));
-	}
-
-	@Test
-	void test_getLastModifiedTime() {
-
-		_setup();
-
-		String testRootPath = null;
-		String testFilePath = null;
-
-		if (SystemUtil.getOSType() == OSType.Win) {
-
-			testRootPath = "C:\\tmp\\cpp_FileUtilityTest_testGetLastModifiedTime";
-			testFilePath = testRootPath + "\\File1";
-		} else {
-			testRootPath = "/tmp/test/cpp_FileUtilityTest_testGetLastModifiedTime";
-			testFilePath = testRootPath + "/File1";
-		}
-
-		File testRoot = new File(testRootPath);
-		if (!testRoot.exists()) {
-			assertTrue(testRoot.mkdirs());
-		}
-
-		File testFile = new File(testFilePath);
-		if (testFile.exists()) {
-			assertTrue(testFile.delete());
-		}
-
-		try {
-
-			long t1 = FileUtil.getLastModifiedTime(testRootPath);
-
-			if (SystemUtil.getOSType() == OSType.Win) {
-				Thread.sleep(5);
-			} else {
-				// Linux vm does not support millisecond
-				Thread.sleep(1000);
-			}
-
-			long t2 = FileUtil.getLastModifiedTime(testRootPath);
-			assertEquals(t1, t2);
-
-			assertTrue(testFile.createNewFile());
-			long t3 = FileUtil.getLastModifiedTime(testRootPath);
-			assertTrue(t3 > t1);
-
-			long t4 = FileUtil.getLastModifiedTime(testFilePath);
-
-			if (SystemUtil.getOSType() == OSType.Win) {
-				Thread.sleep(5);
-			} else {
-
-				// Linux vm does not support millisecond
-				Thread.sleep(1000);
-			}
-
-			long t5 = FileUtil.getLastModifiedTime(testFilePath);
-			assertEquals(t4, t5);
-
-			PrintStream outputFile = new PrintStream(testFilePath);
-			outputFile.print("Test");
-			outputFile.close();
-
-			if (SystemUtil.getOSType() == OSType.Win) {
-				Thread.sleep(5);
-			} else {
-
-				// Linux vm does not support millisecond
-				Thread.sleep(1000);
-			}
-
-			long t6 = FileUtil.getLastModifiedTime(testFilePath);
-			assertTrue(t6 > t5);
-
-		} catch (Exception e) {
-			fail(e.toString());
-		}
-
-		FileUtil.deleteFile(new File(testRootPath));
 	}
 }

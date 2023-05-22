@@ -230,7 +230,12 @@ mbr=~, mbr-property='(public), mbr-attribute='(), obj=~, obj-type=factor, obj-at
 ;out:
 mbr=?load-class, mbr-property='(public), mbr-attribute='(), obj=?load-class, obj-type=var, obj-attribute='(), var-value="'(alpha.rulp.ximpl.collection.XRMap$Loader alpha.rulp.ximpl.collection.XRQueue$Loader alpha.rulp.ximpl.collection.XRSet$Loader)"
 mbr=?load-jar, mbr-property='(public), mbr-attribute='(), obj=?load-jar, obj-type=var, obj-attribute='(), var-value="'()"
-mbr=?load-script, mbr-property='(public), mbr-attribute='(), obj=?load-script, obj-type=var, obj-attribute='(), var-value="'(C:\datas\load\tool.rulp C:\datas\load\test/itest.rulp C:\datas\load\map.rulp C:\datas\load\queue.rulp C:\datas\load\set.rulp C:\datas\load\stack.rulp)"
+mbr=?load-script, mbr-property='(public), mbr-attribute='(), obj=?load-script, obj-type=var, obj-attribute='(), var-value="'(C:\data
+ote\inote\load\tool.rulp C:\data\projects\load\test/itest.rulp C:\data
+ote\inote\load\map.rulp C:\data
+ote\inote\load\queue.rulp C:\data
+ote\inote\load\set.rulp C:\data
+ote\inote\load\stack.rulp)"
 mbr=?path, mbr-property='(public), mbr-attribute='(), obj=?path, obj-type=var, obj-attribute='(), var-value="'()"
 mbr=?trace, mbr-property='(public), mbr-attribute='(), obj=?trace, obj-type=var, obj-attribute='(), var-value="false"
 mbr=add, mbr-property='(public), mbr-attribute='(), obj='((add array nil nil nil) (add array nil nil) (add array nil) (add list nil nil nil) (add list nil nil) (add list nil)), obj-type=func, obj-attribute='()
