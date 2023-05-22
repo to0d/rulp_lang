@@ -21,6 +21,10 @@ public class FileUtilTest extends RulpTestBase {
 	String _getFileName(String input) {
 		return FileUtil.getFileName(input);
 	}
+	
+	String _getFileParent(String input) {
+		return FileUtil.getFileParent(input);
+	}
 
 	String _getFilePreName(String input) {
 		return FileUtil.getFilePreName(input);
@@ -119,6 +123,17 @@ public class FileUtilTest extends RulpTestBase {
 
 		_test((input) -> {
 			return _getFileSubffix(input);
+		});
+
+	}
+	
+	@Test
+	void test_getFileParent() {
+
+		_setup();
+
+		_test((input) -> {
+			return _getFileParent(input);
 		});
 
 	}

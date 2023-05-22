@@ -177,17 +177,30 @@ public class FileUtil {
 
 	public static String getFileName(String path) {
 
-		String fileName = path;
 		int pos = path.lastIndexOf(File.separatorChar);
-		if (pos != -1) {
-			if (pos == (path.length() - 1)) {
-				return getFileName(path.substring(0, pos));
-			}
-			
-			fileName = path.substring(pos + 1).trim();
+		if (pos == -1) {
+			return path;
 		}
 
-		return fileName;
+		if (pos == (path.length() - 1)) {
+			return getFileName(path.substring(0, pos));
+		}
+
+		return path.substring(pos + 1).trim();
+	}
+
+	public static String getFileParent(String path) {
+
+		int pos = path.lastIndexOf(File.separatorChar);
+		if (pos == -1) {
+			return "";
+		}
+
+		if (pos == (path.length() - 1)) {
+			return getFileParent(path.substring(0, pos));
+		}
+
+		return path.substring(0, pos).trim();
 	}
 
 	public static String getFilePreName(String fileName) {
