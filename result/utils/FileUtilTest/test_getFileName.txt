@@ -1,0 +1,3 @@
+INP: C:\data\abc
+INP: C:\data\abc\
+INP: C:\data\a bc 

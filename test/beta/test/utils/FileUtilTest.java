@@ -122,6 +122,17 @@ public class FileUtilTest extends RulpTestBase {
 		});
 
 	}
+	
+	@Test
+	void test_getFileName() {
+
+		_setup();
+
+		_test((input) -> {
+			return _getFileName(input);
+		});
+
+	}
 
 	@Test
 	void test_getLastModifiedTime() {

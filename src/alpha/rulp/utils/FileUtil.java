@@ -180,12 +180,16 @@ public class FileUtil {
 		String fileName = path;
 		int pos = path.lastIndexOf(File.separatorChar);
 		if (pos != -1) {
-			fileName = path.substring(pos+1).trim();
+			if (pos == (path.length() - 1)) {
+				return getFileName(path.substring(0, pos));
+			}
+			
+			fileName = path.substring(pos + 1).trim();
 		}
 
 		return fileName;
 	}
-	
+
 	public static String getFilePreName(String fileName) {
 
 		String filePreName = fileName;
