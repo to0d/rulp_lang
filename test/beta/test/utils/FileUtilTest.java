@@ -11,6 +11,7 @@ import java.io.PrintStream;
 
 import org.junit.jupiter.api.Test;
 
+import alpha.rulp.lang.RException;
 import alpha.rulp.utils.FileUtil;
 import alpha.rulp.utils.RulpTestBase;
 import alpha.rulp.utils.SystemUtil;
@@ -21,7 +22,7 @@ public class FileUtilTest extends RulpTestBase {
 	String _getFileName(String input) {
 		return FileUtil.getFileName(input);
 	}
-	
+
 	String _getFileParent(String input) {
 		return FileUtil.getFileParent(input);
 	}
@@ -29,7 +30,7 @@ public class FileUtilTest extends RulpTestBase {
 	String _getFilePreName(String input) {
 		return FileUtil.getFilePreName(input);
 	}
-	
+
 	String _getFileSubffix(String input) {
 		return FileUtil.getFileSubffix(input);
 	}
@@ -106,6 +107,28 @@ public class FileUtilTest extends RulpTestBase {
 	}
 
 	@Test
+	void test_getFileName() {
+
+		_setup();
+
+		_test((input) -> {
+			return _getFileName(input);
+		});
+
+	}
+
+	@Test
+	void test_getFileParent() {
+
+		_setup();
+
+		_test((input) -> {
+			return _getFileParent(input);
+		});
+
+	}
+
+	@Test
 	void test_getFilePreName() {
 
 		_setup();
@@ -123,28 +146,6 @@ public class FileUtilTest extends RulpTestBase {
 
 		_test((input) -> {
 			return _getFileSubffix(input);
-		});
-
-	}
-	
-	@Test
-	void test_getFileParent() {
-
-		_setup();
-
-		_test((input) -> {
-			return _getFileParent(input);
-		});
-
-	}
-	
-	@Test
-	void test_getFileName() {
-
-		_setup();
-
-		_test((input) -> {
-			return _getFileName(input);
 		});
 
 	}
@@ -227,6 +228,32 @@ public class FileUtilTest extends RulpTestBase {
 		}
 
 		FileUtil.deleteFile(new File(testRootPath));
+	}
+	
+	@Test
+	void test_getMd5HashCode() {
+
+		_setup();
+
+		try {
+			assertEquals("e1da21f57f70e92a19a1cacbdae6d6ee", FileUtil.getMd5HashCode(".project"));
+		} catch (IOException | RException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+
+	@Test
+	void test_getMd5HashCode32() {
+
+		_setup();
+
+		try {
+			assertEquals("e1da21f57f70e92a19a1cacbdae6d6ee", FileUtil.getMd5HashCode32(".project"));
+		} catch (IOException | RException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
 	}
 
 	@Test
