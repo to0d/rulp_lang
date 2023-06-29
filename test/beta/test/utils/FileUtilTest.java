@@ -35,6 +35,10 @@ public class FileUtilTest extends RulpTestBase {
 		return FileUtil.getFileSubffix(input);
 	}
 
+	String _getLocalHtmlFolder(String input) {
+		return FileUtil.getLocalHtmlFolder(input);
+	}
+
 	@Test
 	void test_copyByChannel() {
 
@@ -229,7 +233,18 @@ public class FileUtilTest extends RulpTestBase {
 
 		FileUtil.deleteFile(new File(testRootPath));
 	}
-	
+
+	@Test
+	void test_getLocalHtmlFolder() {
+
+		_setup();
+
+		_test((input) -> {
+			return _getLocalHtmlFolder(input);
+		});
+
+	}
+
 	@Test
 	void test_getMd5HashCode() {
 

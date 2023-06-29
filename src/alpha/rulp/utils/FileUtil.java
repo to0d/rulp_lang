@@ -12,7 +12,6 @@ package alpha.rulp.utils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -73,6 +72,16 @@ public class FileUtil {
 				_copyFileTo(f, dstFile, null);
 			}
 		}
+	}
+
+	private static String _toValidFolderPath(String path) {
+
+		path = path.trim();
+		if (path.endsWith(File.separator)) {
+			path = path.substring(1, path.length() - 1);
+		}
+
+		return path;
 	}
 
 	public static void appendTxtFile(String outPath, Collection<String> content) throws IOException {
@@ -253,6 +262,10 @@ public class FileUtil {
 		return file.exists() ? file.lastModified() : 0;
 	}
 
+	public static String getLocalHtmlFolder(String htmlPath) {
+		return FileUtil.getFilePreName(htmlPath) + "_files";
+	}
+
 	public static String getMd5HashCode(InputStream fis) throws IOException, RException {
 		try {
 			MessageDigest md = MessageDigest.getInstance("MD5");
@@ -311,6 +324,30 @@ public class FileUtil {
 
 	public static String getMd5HashCode32(String filePath) throws IOException, RException {
 		return getMd5HashCode32(new FileInputStream(filePath));
+	}
+
+	public static String getPathName(String path) {
+
+		path = _toValidFolderPath(path);
+
+		int pos = path.lastIndexOf(File.separatorChar);
+		if (pos == -1) {
+			return path;
+		}
+
+		return path.substring(pos + 1);
+	}
+
+	public static String getPathParent(String path) {
+
+		path = _toValidFolderPath(path);
+
+		int pos = path.lastIndexOf(File.separatorChar);
+		if (pos == -1) {
+			return path;
+		}
+
+		return _toValidFolderPath(path.substring(0, pos));
 	}
 
 	public static void incIOReadFileBytes(long byteNum) {

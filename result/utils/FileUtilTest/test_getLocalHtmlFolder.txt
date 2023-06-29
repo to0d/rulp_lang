@@ -1,0 +1,4 @@
+INP: abc
+INP: C:\data\abc\1.html
+INP: C:\data\abc\2.htm
+INP: C:\data\a bc\3.xx
