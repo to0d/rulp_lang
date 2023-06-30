@@ -9,6 +9,9 @@
 
 package alpha.rulp.utils;
 
+import static alpha.rulp.string.Constant.EN_CHAR_ENTER;
+import static alpha.rulp.string.Constant.EN_CHAR_NEWLINE;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -285,6 +288,43 @@ public class FileUtil {
 			e.printStackTrace();
 			throw new RException(e.toString());
 		}
+	}
+
+	public static String getMd5HashCode(List<String> lines) throws RException {
+
+		try {
+
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			for (String line : lines) {
+
+				if (line == null || line.isEmpty())
+					continue;
+
+				byte[] bytes = line.getBytes();
+				int length = bytes.length;
+
+				for (; length > 0; --length) {
+					byte b = bytes[length - 1];
+					if (b != EN_CHAR_ENTER && b != EN_CHAR_NEWLINE) {
+						break;
+					}
+				}
+
+				if (length == 0)
+					continue;
+
+				md.update(bytes, 0, length);
+			}
+
+			byte[] md5Bytes = md.digest();
+			BigInteger bigInt = new BigInteger(1, md5Bytes);
+			return bigInt.toString(16);
+
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			throw new RException(e.toString());
+		}
+
 	}
 
 	public static String getMd5HashCode(String filePath) throws IOException, RException {

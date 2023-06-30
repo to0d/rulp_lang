@@ -2,6 +2,7 @@ package beta.test.utils;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import alpha.rulp.lang.RException;
 import alpha.rulp.utils.FileUtil;
 import alpha.rulp.utils.RulpTestBase;
+import alpha.rulp.utils.RulpUtil;
 import alpha.rulp.utils.SystemUtil;
 import alpha.rulp.utils.SystemUtil.OSType;
 
@@ -259,13 +261,36 @@ public class FileUtilTest extends RulpTestBase {
 	}
 
 	@Test
-	void test_getMd5HashCode32() {
+	void test_getMd5HashCode2() {
 
 		_setup();
 
 		try {
 			assertEquals("e1da21f57f70e92a19a1cacbdae6d6ee", FileUtil.getMd5HashCode32(".project"));
 		} catch (IOException | RException e) {
+			e.printStackTrace();
+			fail(e.toString());
+		}
+	}
+
+	@Test
+	void test_getMd5HashCode3() {
+
+		_setup();
+
+		String line1 = "abc";
+		String line2 = "abc\n";
+		String line3 = "abc\r";
+
+		assertNotEquals(line1, line2);
+		assertNotEquals(line1, line3);
+		assertNotEquals(line2, line3);
+
+		try {
+			assertEquals("900150983cd24fb0d6963f7d28e17f72", FileUtil.getMd5HashCode(RulpUtil.toList(line1)));
+			assertEquals("900150983cd24fb0d6963f7d28e17f72", FileUtil.getMd5HashCode(RulpUtil.toList(line2)));
+			assertEquals("900150983cd24fb0d6963f7d28e17f72", FileUtil.getMd5HashCode(RulpUtil.toList(line3)));
+		} catch (RException e) {
 			e.printStackTrace();
 			fail(e.toString());
 		}
