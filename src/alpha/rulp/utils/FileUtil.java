@@ -232,6 +232,20 @@ public class FileUtil {
 		return filePreName;
 	}
 
+	public static long getFileSize(String path) {
+
+		File file = new File(path);
+		if (!file.exists()) {
+			return 0;
+		}
+
+		if (!file.isFile()) {
+			return 0;
+		}
+
+		return file.length();
+	}
+
 	public static String getFileSubffix(String fileName) {
 
 		String fileSubffix = null;
