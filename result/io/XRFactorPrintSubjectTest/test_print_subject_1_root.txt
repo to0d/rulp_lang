@@ -7,8 +7,8 @@ Name(alias)          : EntryId  FrameId  Ref  Type       Value
 ?path.separator      : -234     0        1    var        ; : type=string     
 ?file.separator      : -233     0        1    var        \ : type=string     
 ?user.dir            : -232     0        1    var        C:\data\itool\rulp_lang : type=string
-?user.name           : -231     0        1    var        to0d : type=string  
-?user.home           : -230     0        1    var        C:\Users\to0d : type=string
+?user.name           : -231     0        1    var        123 : type=string   
+?user.home           : -230     0        1    var        C:\Users\123 : type=string
 rulp-object-count    : -209     0        0    factor     rulp-object-count   
 is-debug-active      : -208     0        0    factor     is-debug-active     
 enddbg               : -207     0        0    factor     enddbg              
