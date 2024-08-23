@@ -188,7 +188,7 @@ Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
 ?load-class          : '("alpha.rulp.ximpl.collection.XRSet$Loader")
 ?load-jar            : '()
-?load-script         : '("C:\\data\\note\\inote\\load\\tool.rulp" "C:\\data\\project\\rs\\load\\test/itest.rulp" "C:\\data\\note\\inote\\load\\set.rulp")
+?load-script         : '("C:\\data\\note\\inote\\load\\tool.rulp" "test/itest.rulp" "C:\\data\\note\\inote\\load\\set.rulp")
 ?path                : '()
 ?trace               : false
 ==========================================================================================================================

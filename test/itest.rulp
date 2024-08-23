@@ -1,0 +1,26 @@
+(load "tool")
+
+;****************************************************;
+; Test tools
+;****************************************************;
+
+(defvar ?script-path nil)
+(defmacro script_out (?expr ?sub_name)
+    (out-to-file
+        (+ (file-prename ?script-path) ?sub_name)
+        ?expr
+    )
+)
+
+(defun _ginfo ()
+    (script_out (print-global-info) ".ginfo.txt")
+)
+
+(defun _ginfo ((?n string))
+    (defvar ?new_name ".ginfo.txt")
+    (if (> (length-of ?n) 0)
+        (setq ?new_name (+ "_" ?n ?new_name))
+    )
+
+    (script_out (print-global-info) ?new_name)
+)

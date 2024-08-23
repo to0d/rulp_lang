@@ -30,7 +30,7 @@ size-of              : -219     1        1    funcList   '((size-of array int) (
                                          1    func       (size-of list) : frame=frame@system
                                          1    func       (size-of array) : frame=frame@system
                                          1    func       (size-of array int) : frame=frame@system
-?load-script         : -218     1        1    var        '("C:\\data\\note\\inote\\load\\tool.rulp" "C:\\data\\project\\rs\\load\\test/itest.rulp") : type=list
+?load-script         : -218     1        1    var        '("C:\\data\\note\\inote\\load\\tool.rulp" "test/itest.rulp") : type=list
 ?load-jar            : -217     1        1    var        '() : type=list     
 ?load-class          : -216     1        1    var        '() : type=list     
 ?path                : -215     1        1    var        '() : type=list     

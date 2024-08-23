@@ -231,7 +231,7 @@ mbr=~, mbr-property='(public), mbr-attribute='(), obj=~, obj-type=factor, obj-at
 mbr=?load-class, mbr-property='(public), mbr-attribute='(), obj=?load-class, obj-type=var, obj-attribute='(), var-value="'(alpha.rulp.ximpl.collection.XRMap$Loader alpha.rulp.ximpl.collection.XRQueue$Loader alpha.rulp.ximpl.collection.XRSet$Loader)"
 mbr=?load-jar, mbr-property='(public), mbr-attribute='(), obj=?load-jar, obj-type=var, obj-attribute='(), var-value="'()"
 mbr=?load-script, mbr-property='(public), mbr-attribute='(), obj=?load-script, obj-type=var, obj-attribute='(), var-value="'(C:\data
-ote\inote\load\tool.rulp C:\data\projects\load\test/itest.rulp C:\data
+ote\inote\load\tool.rulp test/itest.rulp C:\data
 ote\inote\load\map.rulp C:\data
 ote\inote\load\queue.rulp C:\data
 ote\inote\load\set.rulp C:\data

@@ -113,7 +113,7 @@ Var                  : Value
 --------------------------------------------------------------------------------------------------------------------------
 ?load-class          : '()
 ?load-jar            : '()
-?load-script         : '("C:\\data\\note\\inote\\load\\tool.rulp" "C:\\data\\project\\rs\\load\\test/itest.rulp" "load/load1.rulp")
+?load-script         : '("C:\\data\\note\\inote\\load\\tool.rulp" "test/itest.rulp" "load/load1.rulp")
 ?path                : '()
 ?trace               : false
 ==========================================================================================================================
