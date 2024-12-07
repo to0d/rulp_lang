@@ -253,7 +253,7 @@ public class FileUtilTest extends RulpTestBase {
 		_setup();
 
 		try {
-			assertEquals("e1da21f57f70e92a19a1cacbdae6d6ee", FileUtil.getMd5HashCode(".project"));
+			assertEquals("270c84e760043dc0ba14695261662127", FileUtil.getMd5HashCode(".project"));
 		} catch (IOException | RException e) {
 			e.printStackTrace();
 			fail(e.toString());
@@ -266,7 +266,7 @@ public class FileUtilTest extends RulpTestBase {
 		_setup();
 
 		try {
-			assertEquals("e1da21f57f70e92a19a1cacbdae6d6ee", FileUtil.getMd5HashCode32(".project"));
+			assertEquals("270c84e760043dc0ba14695261662127", FileUtil.getMd5HashCode32(".project"));
 		} catch (IOException | RException e) {
 			e.printStackTrace();
 			fail(e.toString());
